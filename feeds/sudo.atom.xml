@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - sudo</title><link href="/" rel="alternate"></link><link href="feeds/sudo.atom.xml" rel="self"></link><id>/</id><updated>2015-07-18T20:04:00+10:00</updated><entry><title>Should we use "sudo" for day-to-day activities?</title><link href="2015/07/18/should-we-use-sudo-for-day-to-day-activities/" rel="alternate"></link><published>2015-07-18T20:04:00+10:00</published><updated>2015-07-18T20:04:00+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:None,2015-07-18:2015/07/18/should-we-use-sudo-for-day-to-day-activities/</id><summary type="html">&lt;p&gt;None of the systems I administer or supervise have &lt;code&gt;sudo&lt;/code&gt; installed and every
+time I answer a question on how to do privileged work on these systems (i.e. do
+tasks that require administrator privileges) with a proposal to SSH under the
+privileged account directly to do such a work whoever asked the question start
+to blabber how insecure that is, that one should use &lt;code&gt;sudo&lt;/code&gt; and that nobody
+should ever login directly as root.  I've spent quite some time explaining the
+misconception behind so-called "secure way to access systems through sudo", so
+I decided to write up an article …&lt;/p&gt;</summary><content type="html">&lt;p&gt;None of the systems I administer or supervise have &lt;code&gt;sudo&lt;/code&gt; installed and every
+time I answer a question on how to do privileged work on these systems (i.e. do
+tasks that require administrator privileges) with a proposal to SSH under the
+privileged account directly to do such a work whoever asked the question start
+to blabber how insecure that is, that one should use &lt;code&gt;sudo&lt;/code&gt; and that nobody
+should ever login directly as root.  I've spent quite some time explaining the
+misconception behind so-called "secure way to access systems through sudo", so
+I decided to write up an article that describes the issues of using that
+approach and why using &lt;code&gt;sudo&lt;/code&gt; is actually less secure than a direct SSH access.&lt;/p&gt;
+&lt;h2&gt;History&lt;/h2&gt;
+&lt;p&gt;The following is based on my personal recollection of the history around early
+90’s with some reference to documents I could quickly find.  Unfortunately, this
+is one of the topics that is not so easy to reconstruct in full detail.
+Although there may be minor inaccuracies the outlined view on the history
+should be very close to the true events that took place.  Many years ago (but
+not that far in the past) system administrators were using &lt;code&gt;telnet&lt;/code&gt; and &lt;code&gt;rsh&lt;/code&gt; to
+access and administer their servers.  Networks were simpler and traffic sniffing
+techniques were common.  Therefore, it was very easy to eavesdrop on a root
+account login and to automate the task of gathering the credentials.  To
+mitigate the issue to some extent the following approach was proposed:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;login as a non-privileged account first;&lt;/li&gt;
+&lt;li&gt;do some stuff;&lt;/li&gt;
+&lt;li&gt;if you need privileged account access (e.g. root) switch to it using &lt;code&gt;su&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The idea behind this proposal was that such a sequence makes it harder for a
+traffic listener to catch root’s credentials on the wire due to the login
+sequence mixed in to the stream of other activities the systems administrator
+was doing before escalating their account to the privileged user.&lt;/p&gt;
+&lt;p&gt;At approximately the same time discussions started in regard to the dangers
+of working as root, that people were tending to work as root for prolonged
+periods of time performing tasks that do not require escalated privileges
+without proper justification for that behaviour.  As the result of these
+discussions the &lt;code&gt;sudo&lt;/code&gt; utility was born.  The utility allowed to bind root
+privileges to a restricted set of commands and maintained access controls
+through its configuration file in order to allow or deny access to the defined
+functionality to specific users/groups.  This allowed systems administrators to
+delegate some of the privileged routines to less privileged user/groups. (See
+more on the &lt;a href="https://www.sudo.ws/sudo/history.html"&gt;history of sudo&lt;/a&gt; if you are interested).&lt;/p&gt;
+&lt;p&gt;Somewhere in early 90’s the two approaches were merged, so the approach became:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;login a a non-privileged account and do your every day tasks;&lt;/li&gt;
+&lt;li&gt;once a privileged operation is required execute it through &lt;code&gt;sudo&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Although it seems like a minor optimisation, in fact, this introduced a major
+security issue: previously, the attacker should have needed to listen for
+traffic in attempt to figure out when the victim is executing &lt;code&gt;su&lt;/code&gt; and is
+providing root's password, but now they did not need to do anything except of
+capturing user's password at the beginning of the session (the same problem the
+"su-after-normal-login" approach was trying to solve just reappeared :) ) since
+once you know user's password you can use &lt;code&gt;sudo&lt;/code&gt; which authenticates you with
+&lt;em&gt;user's&lt;/em&gt; password!&lt;/p&gt;
+&lt;p&gt;In 1995, &lt;a href="https://en.wikipedia.org/wiki/Tatu_Yl%C3%B6nen"&gt;Tatu Ylönen&lt;/a&gt; as a response to the issues related to exchanging the
+credentials over non-protected, easily sniffable networks released his first
+implementation of the SSH protocol as freeware to the public.  Over the next
+five years SSH was adopted worldwide and it eventually replaced
+&lt;code&gt;telnet&lt;/code&gt;/&lt;code&gt;rlogin&lt;/code&gt;/&lt;code&gt;rsh&lt;/code&gt; for the remote access and management activities in the most
+places.&lt;/p&gt;
+&lt;p&gt;However, due to inertia the recommended approach of logging in as a
+non-privileged account and escalating privileges later somehow survived, is
+still followed, and often people don’t even try to analyse and see the flaws of
+the approach.&lt;/p&gt;
+&lt;h2&gt;People are saying "sudo" is good. Is it true?&lt;/h2&gt;
+&lt;p&gt;^(or looking critically into some common misconceptions re: "sudo")^&lt;/p&gt;
+&lt;p&gt;So let’s look at the most commonly used "pros" in favour of using &lt;code&gt;sudo&lt;/code&gt;. For
+example, &lt;a href="https://help.ubuntu.com/community/RootSudo"&gt;Ubuntu’s community help page&lt;/a&gt; provides a nice, aggregated list of
+benefits provided by &lt;code&gt;sudo&lt;/code&gt; usage in their default installation. Let’s walk
+through all of them and see if they are real benefits at all:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;The installer has fewer questions to ask.&lt;/p&gt;
+&lt;p&gt;This is a very questionable "benefit" to the end user since this implies
+ that the system would do more stuff with escalated privileges behind the
+ scenes without the user even knowing it. From the security standpoint it
+ just silently expands the attack surface.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Users don't have to remember an extra password for occasional use (i.e.
+     the root password). If they did, they'd be likely to forget it (or record
+     it unsafely, allowing anyone to easily crack into their system).&lt;/p&gt;
+&lt;p&gt;This is another hard to comprehend "benefit". Given that we now have SSH
+ and the recommended best practice is to use SSH keys instead of passwords
+ &lt;code&gt;sudo&lt;/code&gt; requires users to memorise yet another password. Moreover, the
+ argument in regard to users’ likely behaviour is purely speculative and
+ assumptive - to the same extent we can assume that password policies make
+ it hard for users to memorise their passwords and they would be likely to
+ forget the password (or record it unsafely, …). The truth is that the key
+ based authentication solves the issue of the requirement to have multiple
+ passwords for multiple accounts. There is one place where the discussed
+ "benefit" is actually applicable — local console access (no key
+ authentication there, usually), however even there the best practice would
+ be to login directly as root on the virtual console if there is such a
+ need (the reason for that is quite complicated and in short could be
+ described as the following: there are multiple checks and assumptions in
+ the kernel code and the accompanying C library on allocating a terminal,
+ spawning a process, etc. for root over the same actions performed for a
+ non-privileged user).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;It avoids the "I can do anything" interactive login by default. You will
+     be prompted for a password before major changes can happen, which should
+     make you think about the consequences of what you are doing.&lt;/p&gt;
+&lt;p&gt;This statement also assumes that for some reason people would prefer to
+ always login as root and do all of their work under that account.  In
+ reality users are so used to prefix almost any failed command with &lt;code&gt;sudo&lt;/code&gt;
+ that this "benefit" can be considered as the quite opposite item against
+ &lt;code&gt;sudo&lt;/code&gt;.  On a properly configured environment you explicitly need to login
+ as the privileged account to do functions that require privileges.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;sudo adds a log entry of the command(s) run (in /var/log/auth.log). If you
+     mess up, you can go back and see what commands were run.&lt;/p&gt;
+&lt;p&gt;This statement is also somewhat true, but it does not defend the &lt;code&gt;sudo&lt;/code&gt;
+ usage. A proper auditing subsystem is what keeps audit logs no matter how
+ activity was performed. Logging of executed commands for user's history
+ reasons is the job for the shell. The ability of logging is so limited in
+ &lt;code&gt;sudo&lt;/code&gt; that it cannot be used for anything except a substitute for the
+ shell history (just imagine the following scenario: a user executes &lt;code&gt;sudo
+ less /var/log/messages&lt;/code&gt;, then types "!" followed by the Enter/Return key -
+ the user effectively now in the root shell and what &lt;code&gt;sudo&lt;/code&gt; will log into
+ its logs has nothing to do with what user actually did).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;On a server, every cracker trying to brute-force their way in will know it
+     has an account named root and will try that first. What they don't know is
+     what the usernames of your other users are. Since the root account
+     password is locked, this attack becomes essentially meaningless, since
+     there is no password to crack or guess in the first place.&lt;/p&gt;
+&lt;p&gt;This is such a weak attempt to bring host security into the play that it’s
+ hard to comment on it. First, use SSH keys and disable the password
+ authentication on the server - this (and not some security through
+ obscurity) will defend the system from the brute force attacks.  Second,
+ protect your remote access entry points with properly configured firewall
+ and allow remote access from a defined list of locations (i.e. whitelist)
+ - this will shrink the possible attack surface on the SSH service.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Allows easy transfer for admin rights by adding and removing users from
+     groups. When you use a single root password, the only way to de-authorize
+     users is to change the root password.&lt;/p&gt;
+&lt;p&gt;This is an interesting one: half of the statement is true, another is
+ misleading.  The true part is that you can easily delegate privileged
+ operations using &lt;code&gt;sudo&lt;/code&gt;.  The misleading part is that the alternative is
+ to use a single root password.  The truth is that nobody is limited by a
+ single root account: you can create as many as you want and each of them
+ could have their own distinct password (e.g. &lt;code&gt;useradd -om -o 0 -g 0 -s
+ /bin/sh new_root&lt;/code&gt; and &lt;code&gt;passwd new_root&lt;/code&gt;, but please don’t set password and
+ lock the account instead with &lt;code&gt;usermod -L new_root&lt;/code&gt; since we are using
+ keys, remember?). This approach also provides additional accountability
+ since users will have separate shell histories, their login attempts will
+ be clearly logged under separate names, etc.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;sudo can be setup with a much more fine-grained security policy.&lt;/p&gt;
+&lt;p&gt;Another half-truth in the list of "benefits". The statement is incomplete
+ and lacks the part it is comparing the functionality to.  If we are
+ comparing a legacy Unix access control system with &lt;code&gt;sudo&lt;/code&gt;, then yes &lt;code&gt;sudo&lt;/code&gt;
+ is much more configurable. If we compare &lt;code&gt;sudo&lt;/code&gt; with, say, SELinux or
+ GRsecurity’s RBAC - &lt;code&gt;sudo&lt;/code&gt; will lose since both have much more
+ fine-grained security controls than &lt;code&gt;sudo&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The root account password does not need to be shared with everybody who
+     needs to perform some type of administrative task(s) on the system (see
+     the previous bullet).&lt;/p&gt;
+&lt;p&gt;As with item #6 this statement assumes for some obscure reason that there
+ can be just a single root account in the system.  Therefore, the result of
+ such a logical exercise is also questionable since it is based on a wrong
+ assumption.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The authentication automatically expires after a short time (which can be
+     set to as little as desired or 0); so if you walk away from the terminal
+     after running commands as root using sudo, you will not be leaving a root
+     terminal open indefinitely.&lt;/p&gt;
+&lt;p&gt;This statement also compares &lt;code&gt;sudo&lt;/code&gt; with something reader cannot compare
+ to.  Moreover, it mixes up two logically unrelated things: the credentials
+ expiration and terminal security.  While it is great that &lt;code&gt;sudo&lt;/code&gt; implements
+ the former, the latter is usually addressed by entirely different means:
+ starting with auto-logout functionality, lock screen, physical security,
+ etc.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Well, we can continue to critically assess other common statements in regard to
+&lt;code&gt;sudo&lt;/code&gt; made mostly by people who do not have any strong InfoSec background, but
+it would be a waste of time for the readers. You can always raise a question
+regarding some particular claim and/or assumption related to &lt;code&gt;sudo&lt;/code&gt; and if it
+is interesting I would add it (and the corresponding response) to this article.&lt;/p&gt;
+&lt;h2&gt;What is the problem with the &lt;code&gt;sudo&lt;/code&gt; approach?&lt;/h2&gt;
+&lt;p&gt;Well, there are several in fact. The most pressing issue is that the usage of
+&lt;code&gt;sudo&lt;/code&gt; (or &lt;code&gt;su&lt;/code&gt;, or any other utility that has its SUID bit set) is crossing
+the security boundary from the less privileged account to the more privileged
+account. This opens doors (or widens the attack surface) to privilege
+escalation techniques. In plain English it makes the non-privileged account to
+be essentially equal to the privileged one, let me explain by a fairly simple
+example:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;imagine if you are a developer and you work on a server under your
+     non-privileged account;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;as a part of your daily routine you need to download some third party
+     package and install it (we are going to leave out all the security
+     complexities involved with such an activity like verifying signatures,
+     using a separate instance to prepare a package for deployment, etc.);&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;the installation of the package usually requires executing some third
+     party code under your non-privileged account. This code was not written by
+     you and there is a high chance that you did not read/verify the foreign
+     code line by line in order to ensure that it does not do anything
+     malicious since this would be quite time consuming, would require a lot of
+     effort, and your team has more important priorities than this (remember,
+     this is an example based on situations you would encounter in the real
+     world, which is by no means perfect);&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;it happens, that that particular third party was compromised and some
+     malicious code has been injected into the package installation routines;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;after the execution of the installation routine (and the malicious code
+     for that matter) your &lt;code&gt;~/.bashrc&lt;/code&gt; (for example) is modified in such a way
+     that each time you login it starts up a key logger or some other kind of
+     remotely controllable piece of software that talks back to its master;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;So far we just got an issue localised to this non-privileged account only (with
+a possibility to spread across the entire fleet of servers that non-privileged
+account has access to in case of the NFS mounted home directories). Is this
+bad? Yes, it is since it may disrupt this particular project, steal reachable
+sensitive information, could be used as a trampoline to jump start further
+research and exploitation of other vulnerable resources. Is it critically bad?
+Not necessarily. If the systems are built properly with host-based security in
+mind, if the proper privilege separation techniques are used throughput the
+company infrastructure, etc. the impact is localised and with proper monitoring
+systems it would be detected eventually and investigated (keep in mind that it
+is really hard for a non-privileged account to hide their activities from more
+privileged processes).&lt;/p&gt;
+&lt;p&gt;Now, let’s add &lt;code&gt;sudo&lt;/code&gt; to the mix, e.g. suddenly the developer decided to
+install an additional library package into the system. So, what would happen
+next? You guessed it: the developer would need to type in their password to
+convince &lt;code&gt;sudo&lt;/code&gt; that they are "allowed" to do such a privileged thing as
+installing a system package, the malicious software installed by the attacker
+would happily intercept that and send it back to its master.&lt;/p&gt;
+&lt;p&gt;From this point on, the attacker has the account password of the account where
+their software runs and which they control. The attacker can now utilise &lt;code&gt;sudo&lt;/code&gt;
+powers at their will. The security impact would be ranging from "high" to
+"extreme" depending on how committed the attackers are.&lt;/p&gt;
+&lt;p&gt;Following the logic, why would we want to introduce an additional complexity
+that does not address the issue it was supposed to address, which is "to limit
+exposure of the root account"?&lt;/p&gt;
+&lt;h2&gt;The "light" side of ‘sudo’. Is there one?&lt;/h2&gt;
+&lt;p&gt;So, is &lt;code&gt;sudo&lt;/code&gt; any good for anything? Actually, yes, it is. All in all, &lt;code&gt;sudo&lt;/code&gt;
+is a tool that attracts a lot of attention from the security researchers and
+auditors, its codebase got numerous peer reviews and the functionality the tool
+provides can be used for good. The following scenarios come to my mind right
+away:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;On a SELinux enabled system it seems that &lt;code&gt;sudo&lt;/code&gt; is the only properly
+   implemented and reliable way to assume a different SELinux role. All other
+   mechanisms are either lacking in the functionality or just do it half way
+   leaving some artefacts behind;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Unless some effort is put into tweaking the way PAM (Pluggable
+   Authentication Modules, an authentication framework used on Linux, Solaris,
+   and some other Unix-like systems) authenticates users on LDAP enabled
+   systems there is no easy way to have two separate accounts (a privileged and
+   a non-privileged account) for the same LDAP user. This could be addressed
+   administratively (e.g. by defining additional privileged users in LDAP) or
+   technically by implementing account names’ prefixes. However, if there are
+   budgetary and/or time constraints to implement the proper security framework
+   &lt;code&gt;sudo&lt;/code&gt; with a quite restricted configuration would be an acceptable
+   compromise.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Unfortunately, personally, I failed to find any other justified applications of
+&lt;code&gt;sudo&lt;/code&gt; in a secure environment and would be happy to get some feedback if you
+have something in mind worth including into the list above.&lt;/p&gt;
+&lt;h2&gt;How can we improve the security of our systems in relation to the &lt;code&gt;sudo&lt;/code&gt; usage?&lt;/h2&gt;
+&lt;p&gt;OK, so we got to the point where we are standing near a crossroad and we kind
+of established that excessive usage of ‘sudo’ is a bad thing (for
+security-paranoid readers - read: "almost any usage of ‘sudo’ except for
+changing SELinux roles on a SELinux-enabled system is a bad thing"). So, what
+is the alternative way of doing things? Well, there is a complex approach on
+addressing and minimising the privilege escalation risks and roughly it can be
+summarised as follows:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;apply the &lt;a href="https://en.wikipedia.org/wiki/Principle_of_least_privilege"&gt;least privilege principle&lt;/a&gt; to everything, e.g. if you need to
+    work on the content, the account you use to log into the remote server
+    should be allowed to do just that. This sounds a bit extreme, so we may
+    re-phrase it as follows: each account should be provided the least number
+    of required privileges to do the day-to-day tasks under that account and
+    should not be used for any activities outside the defined set of
+    activities. Again, if you include "becoming root" into the list of defined
+    activities it would kind of defeat the purpose.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;there should be a defined list of accounts which are allowed to do
+    system-wide modifications (e.g. privileged accounts), these accounts must
+    be used for these activities only (system updates, installing new software,
+    modifying system-wide configuration);&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;privileged accounts during their activities should not cross the security
+    boundary with the less privileged accounts. This is needed to avoid attacks
+    from the less privileged accounts toward more privileged (e.g. process
+    hijacking, file races, etc.). Unfortunately, this point is a bit confusing
+    without a proper explanation, but in a nutshell it means that root should
+    not touch anything writable by the less privileged account (examples of the
+    bad and insecure behaviour include: changing directory to a directory
+    writable by non-root, executing scripts from a directory writable by
+    non-root accounts or scripts that are writable by non-root, copying a
+    file/directory from/to a directory writable by non-root accounts, etc.);&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;if possible (and this is highly recommended) privileged accounts should be
+    accessed from the trusted and secure machines. It is really hard to define
+    what the "trusted and secure machine" is, but generally it should be
+    assumed that it is a laptop or a desktop station that is used entirely for
+    the work purposes (no free time surfing on the leisure sites and stuff :) ),
+    that proper firewall rules and protection techniques were used to secure
+    the machine, and that the operator is security-minded and does everything
+    they can to ensure integrity and security of their machine and software
+    installed on it.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I would be really happy to answer any question in regard to this article and
+provide any possible help in making our everyday system level activities more
+secure, so do not hesitate to contact me.&lt;/p&gt;</content><category term="sudo"></category><category term="sudo"></category><category term="console"></category><category term="bastion"></category></entry></feed>

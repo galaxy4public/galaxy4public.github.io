@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"><channel><title>Mind Drops - (GalaxyMaster)</title><link>/</link><description></description><lastBuildDate>Thu, 06 Aug 2015 10:00:00 +1000</lastBuildDate><item><title>Transparent SSH host-jumping (Advanced)</title><link>2015/08/06/transparent-ssh-host-jumping-advanced/</link><description>&lt;p&gt;In this brief article I am going to describe how I resolved a nagging issue I
+had with setting up access to hosts which are not directly reachable, but where
+you need to forward your connection through an intermediate host.&lt;/p&gt;
+&lt;p&gt;&lt;a href="2010/12/10/ssh-port-forwarding-intermediate/"&gt;Previously&lt;/a&gt;, I was using local SSH port-forwarding technique (although I
+was configuring the hosts I connect to in the &lt;code&gt;~/.ssh/config&lt;/code&gt; file instead of
+using the command-line options). However, this approach turned out to be quite
+inconvenient since every time I wanted to connect to a new host (and, possibly,
+through a new intermediate host) I had to edit my …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">(GalaxyMaster)</dc:creator><pubDate>Thu, 06 Aug 2015 10:00:00 +1000</pubDate><guid isPermaLink="false">tag:None,2015-08-06:2015/08/06/transparent-ssh-host-jumping-advanced/</guid><category>ssh</category></item><item><title>Should we use "sudo" for day-to-day activities?</title><link>2015/07/18/should-we-use-sudo-for-day-to-day-activities/</link><description>&lt;p&gt;None of the systems I administer or supervise have &lt;code&gt;sudo&lt;/code&gt; installed and every
+time I answer a question on how to do privileged work on these systems (i.e. do
+tasks that require administrator privileges) with a proposal to SSH under the
+privileged account directly to do such a work whoever asked the question start
+to blabber how insecure that is, that one should use &lt;code&gt;sudo&lt;/code&gt; and that nobody
+should ever login directly as root.  I've spent quite some time explaining the
+misconception behind so-called "secure way to access systems through sudo", so
+I decided to write up an article …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">(GalaxyMaster)</dc:creator><pubDate>Sat, 18 Jul 2015 20:04:00 +1000</pubDate><guid isPermaLink="false">tag:None,2015-07-18:2015/07/18/should-we-use-sudo-for-day-to-day-activities/</guid><category>sudo</category><category>sudo</category><category>console</category><category>bastion</category></item><item><title>SSH port-forwarding (Intermediate)</title><link>2010/12/10/ssh-port-forwarding-intermediate/</link><description>&lt;p&gt;In my previous blog entry I described some basic functionality of SSH in terms
+of port-forwarding. Now it's time for a little bit more complex stuff.&lt;/p&gt;
+&lt;p&gt;In this article I will highlight:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;(forward) piercing of a firewall (getting access to resources behind it);&lt;/li&gt;
+&lt;li&gt;dynamic port-forwarding (AKA proxy);&lt;/li&gt;
+&lt;li&gt;(reverse) piercing of a firewall (exposing your local services on the remote side).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Forward firewall piercing&lt;/h2&gt;
+&lt;p&gt;Let's start with the forward firewall piercing, since it is the easiest and was
+somewhat already described in my previous blog entry on this topic. Now,
+imagine that you already have SSH access to some host which …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">(GalaxyMaster)</dc:creator><pubDate>Fri, 10 Dec 2010 10:00:00 +1100</pubDate><guid isPermaLink="false">tag:None,2010-12-10:2010/12/10/ssh-port-forwarding-intermediate/</guid><category>ssh</category></item><item><title>SSH port-forwarding (Basic)</title><link>2010/11/29/ssh-port-forwarding-basic/</link><description>&lt;p&gt;An introduction into the world of SSH port-forwarding and how to leverage it to access resources in private subnets&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">(GalaxyMaster)</dc:creator><pubDate>Mon, 29 Nov 2010 10:00:00 +1100</pubDate><guid isPermaLink="false">tag:None,2010-11-29:2010/11/29/ssh-port-forwarding-basic/</guid><category>ssh</category><category>ssh</category><category>console</category><category>bastion</category></item><item><title>HOWTO: VMware Player as a remote console (VNC)</title><link>2010/11/24/howto-vmware-player-as-a-remote-console-vnc/</link><description>&lt;p&gt;Turning VMware Player into a non-privileged VNC client to access VMware VMs from a Linux-based PC&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">(GalaxyMaster)</dc:creator><pubDate>Wed, 24 Nov 2010 10:00:00 +1100</pubDate><guid isPermaLink="false">tag:None,2010-11-24:2010/11/24/howto-vmware-player-as-a-remote-console-vnc/</guid><category>hacking</category></item></channel></rss>

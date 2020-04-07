@@ -1,0 +1,319 @@
+html {
+	box-sizing: border-box;
+}
+
+*, *:before, *:after {
+	box-sizing: inherit;
+}
+
+body {
+	line-height: 1.75em;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 400;
+	color: #565656;
+	background: #e8e8e8 url(../images/body-bg.jpg);
+	display: -moz-flex;
+	display: -webkit-flex;
+	display: -ms-flex;
+	display: flex;
+}
+
+.toggle {
+	display: none;
+	z-index: 10002;
+	position: fixed;
+	top: 0.5rem;
+	left: 1rem;
+	width: 3.125rem;
+	height: 1.875rem;
+	color: white;
+	background: #c94663;
+	font-family: FontAwesome;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 0.875rem;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	line-height: 1.875rem;
+	border-radius: 0.3125rem;
+	text-decoration: none;
+}
+
+.toggle:before {
+	content: '\f0c9';
+	display: block;
+	position: absolute;
+	width: 3.125rem;
+	text-align: center;
+	box-shadow: inset 0px 0px 0px 1px rgba(255, 255, 255, 0.15), 0 0.025em 0.15em 0em rgba(0, 0, 0, 0.25);
+	text-shadow: -1px -1px 0px rgba(0, 0, 0, 0.5);
+}
+
+#sidebar {
+	position: relative;
+	z-index: 10000;
+	left: 0;
+	width: 14rem;
+	height: 100vh;
+	padding: 1.2rem;
+	color: rgba(255, 255, 255, 0.55);
+	background: #364050;
+	-moz-order: -1;
+	-webkit-order: -1;
+	-ms-order: -1;
+	order: -1;
+	-moz-flex-shrink: 0;
+	-webkit-flex-shrink: 0;
+	-ms-flex-shrink: 0;
+	flex-shrink: 0;
+	box-shadow: inset -0.1em 0 0.35em 0 rgba(0, 0, 0, 0.15), 0 0 1em 0.5em rgba(0, 0, 0, 0.5);
+	text-shadow: -1px -1px 0px rgba(0, 0, 0, 0.5);
+}
+
+#logo img {
+	display: block;
+	width: inherit;
+	border-radius: 50%;
+}
+
+.box.shadow {
+	display: block;
+	position: relative;
+	width: 100%;
+}
+
+.box.shadow:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	box-shadow: inset 0px 0px 0.5rem rgba(0, 0, 0, 0.5);
+	border-radius: 50%;
+}
+
+.box.shadow picture {
+	width: 100%;
+}
+
+#sidebar section, #sidebar nav {
+	position: relative;
+	margin: 1.8rem 0 0 0;
+	font-size: 0.9rem;
+}
+
+#sidebar section:before, #sidebar nav:before {
+	content: '';
+	display: block;
+	height: 0.4rem;
+	border-top: solid 1px;
+	border-bottom: solid 1px;
+	border-color: rgba(0, 0, 0, 0.25);
+	margin: 0 0 1.8rem 0;
+	box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 0.075), 0px 1px 0px 0px rgba(255, 255, 255, 0.075);
+}
+
+.box.search form {
+	position: relative;
+}
+
+.box.search form:before {
+	content: '\f002';
+	display: inline-block;
+	position: absolute;
+	z-index: 1;
+	top: 0.28125rem;
+	right: 0.5625rem;
+	color: #c8ccce;
+	font-family: FontAwesome;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 1.125rem;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1);
+	-moz-transform: scale(-1, 1);
+	-webkit-transform: scale(-1, 1);
+	-ms-transform: scale(-1, 1);
+	transform: scale(-1, 1);
+	text-shadow: none;
+	text-decoration: none;
+}
+
+.box.search form label {
+	color: rgba(255, 255, 255, 0.78)
+}
+
+#sidebar form input, #sidebar form select, #sidebar form textarea {
+	border: 0;
+}
+
+.box.search form input {
+	position: relative;
+	padding-right: 2.125rem;
+	color: #565656;
+	font-family: 'Source Sans Pro', sans-serif;
+}
+
+.box.search form input::placeholder,
+.box.search form input::-ms-input-placeholder,
+.box.search form input:-ms-input-placeholder {
+	color: #c8cccc;
+}
+
+#nav ul {
+	padding-left: 0;
+	font-size: 1.35rem;
+}
+
+#nav li:first-child {
+	border: 0;
+	box-shadow: none;
+	padding-top: 0;
+}
+
+#nav li {
+	border-top: solid 1px rgba(0, 0, 0, 0.25);
+	box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 0.075);
+	padding: 0.675rem 0 0.675rem;
+}
+
+#nav li.current a {
+    background-color: rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.05), inset 0 0 0.3375rem 0 rgba(0, 0, 0, 0.25);
+    font-weight: 700;
+    color: white;
+}
+
+#nav li a {
+    display: block;
+    padding: 0.54rem 1.35rem 0.54rem 1.35rem;
+    text-decoration: none;
+    border-radius: 0.54rem;
+    outline: 0;
+    -moz-transition: background-color .25s ease-in-out, color .25s ease-in-out;
+    -webkit-transition: background-color .25s ease-in-out, color .25s ease-in-out;
+    -ms-transition: background-color .25s ease-in-out, color .25s ease-in-out;
+    transition: background-color .25s ease-in-out, color .25s ease-in-out;
+}
+
+#sidebar header {
+	margin: 0 0 1.125rem 0;
+}
+
+#sidebar a {
+	color: #d4dde0;
+}
+
+#sidebar strong, #sidebar b {
+	color: #fff;
+}
+
+#sidebar h2, #sidebar h3, #sidebar h4, #sidebar h5, #sidebar h6 {
+	color: #fff;
+}
+
+.box.text-style1 .inner {
+	position: relative;
+	background-color: rgba(0, 0, 0, 0.15);
+	border-radius: 0.4em;
+	padding: 1.25em;
+	box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.05), inset 0 0 0.25em 0 rgba(0, 0, 0, 0.25);
+}
+
+ul#copyright {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: inherit;
+	padding-top: 2rem;
+	text-align: center;
+	line-height: 1em;
+	background: linear-gradient(to bottom, transparent -0.75rem, #364050, #364050);
+}
+
+ul#copyright li {
+	font-size: small;
+}
+
+ul#copyright li:first-child {
+	font-size: inherit;
+}
+
+div#content {
+	margin: 0.75rem 3rem 0.75rem 7rem;
+	min-width: 56rem;
+	min-width: calc(100% - 24rem);
+	background-color: whitesmoke;
+	box-shadow: inset 0 0 0.5em 0 rgba(0, 0, 0, 0.5),
+		-0.1em 0 0.25em 0 rgba(0, 0, 0, 0.25),
+		1em 1em 0.25em -0.5em rgba(0, 0, 0, 0.25);
+}
+
+div#content .inner {
+	margin: 3em 5em 8em;
+}
+
+.pagination {
+	z-index: 100;
+	width: 100%;
+	background: aliceblue;
+}
+
+@supports(position: sticky) {
+	.pagination {
+		position: sticky;
+		bottom: 0;
+	}
+}
+
+.pagination .button.previous {
+	line-height: 0;
+	text-indent: -9999px;
+}
+
+.pagination .button.previous::after{
+	content: '<';
+	display: block;
+	line-height: initial;
+	text-indent: 0;
+}
+
+.offscreen {
+	position: absolute;
+	left: -1000rem;
+	top: auto;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form select,
+form textarea {
+	border-radius: 0.4rem;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	-ms-appearance: none;
+	appearance: none;
+	border: solid 1px #ddd;
+	padding: 0.5rem 0.75rem;
+	width: 100%;
+	line-height: 1.25rem;
+}
+
+input, textarea, select {
+	font-size: 12pt;
+}
+
+section > :last-child,
+section > .inner > :last-child,
+section:last-child,
+article > :last-child,
+article > .inner > :last-child,
+article:last-child {
+	margin-bottom: 0;
+}

@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - ssh</title><link href="/" rel="alternate"></link><link href="feeds/ssh.atom.xml" rel="self"></link><id>/</id><updated>2015-08-06T10:00:00+10:00</updated><entry><title>Transparent SSH host-jumping (Advanced)</title><link href="2015/08/06/transparent-ssh-host-jumping-advanced/" rel="alternate"></link><published>2015-08-06T10:00:00+10:00</published><updated>2015-08-06T10:00:00+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:None,2015-08-06:2015/08/06/transparent-ssh-host-jumping-advanced/</id><summary type="html">&lt;p&gt;In this brief article I am going to describe how I resolved a nagging issue I
+had with setting up access to hosts which are not directly reachable, but where
+you need to forward your connection through an intermediate host.&lt;/p&gt;
+&lt;p&gt;&lt;a href="2010/12/10/ssh-port-forwarding-intermediate/"&gt;Previously&lt;/a&gt;, I was using local SSH port-forwarding technique (although I
+was configuring the hosts I connect to in the &lt;code&gt;~/.ssh/config&lt;/code&gt; file instead of
+using the command-line options). However, this approach turned out to be quite
+inconvenient since every time I wanted to connect to a new host (and, possibly,
+through a new intermediate host) I had to edit my …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this brief article I am going to describe how I resolved a nagging issue I
+had with setting up access to hosts which are not directly reachable, but where
+you need to forward your connection through an intermediate host.&lt;/p&gt;
+&lt;p&gt;&lt;a href="2010/12/10/ssh-port-forwarding-intermediate/"&gt;Previously&lt;/a&gt;, I was using local SSH port-forwarding technique (although I
+was configuring the hosts I connect to in the &lt;code&gt;~/.ssh/config&lt;/code&gt; file instead of
+using the command-line options). However, this approach turned out to be quite
+inconvenient since every time I wanted to connect to a new host (and, possibly,
+through a new intermediate host) I had to edit my SSH configuration file and
+add something like the following:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config linenums"&gt;Host intermediate
+    HostName 192.168.1.1
+    HostKeyAlias intermediate
+    LocalForward 10001 target:22
+
+Host target
+    HostName 127.0.0.1
+    HostKeyAlias target
+    Port 10001&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;The inconvenience came from two things:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;My &lt;code&gt;~/.ssh/config&lt;/code&gt; file was growing uncontrollably;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Each time I needed to connect to the target host through the intermediate
+     host I had to open two sessions with one of them being idle most of the
+     time.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;After a while I stumbled upon an article describing quite a generic way to
+tunnel through an intermediate host and found the approach quite convenient for
+the day-to-day use. So, I have added the following block into my &lt;code&gt;~/.ssh/config&lt;/code&gt;
+file just before the &lt;code&gt;Host *&lt;/code&gt; section:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;Host */*
+    ProxyCommand ssh $(dirname %h) -W $(basename %h):%p&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;From that point on, I could connect to the target host via the intermediate one
+by simply executing the following command:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ ssh user@intemediate/target&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;The configuration with the &lt;code&gt;ProxyCommand&lt;/code&gt; directive was spawning two &lt;code&gt;ssh&lt;/code&gt;
+processes with one connected to the intermediate host in the background and the
+other proxied through the intermediate host and connected to the target running
+in the foreground, so from my point of view I had just one terminal session
+open. The configuration allowed to chain as many hosts as I wanted, e.g.:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ ssh user@hostA/hostB/hostC/hostD&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;The above would result in three &lt;code&gt;ssh&lt;/code&gt; processes running in the background (the
+first connected to hostA, the second connected to hostB proxied through hostA,
+and the third connected to hostC proxied through hostB) and one foreground
+process which was connected to hostD proxied via hostC. This is great and quite
+flexible to use, however, this approach has a number of limitations:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;you cannot specify different ports for different hosts in the chain&lt;/li&gt;
+&lt;li&gt;neither can you use different login names for different hosts in the chain&lt;/li&gt;
+&lt;li&gt;establishing connection to different chains sharing a part of the chain
+    would not reuse already established connections, i.e. slow connection time&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Personally, I am using the same login name and the same ports on hosts I am
+accessing, so the first two items were not an issue for me, but the last one
+was irritating enough and I decided to figure out whether it is possible to
+optimise it. After a bit of reading the documentation and a few attempts I came
+up with the following configuration block in my &lt;code&gt;~/.ssh/config&lt;/code&gt; file (remember,
+this block should be placed &lt;em&gt;before&lt;/em&gt; the &lt;code&gt;Host *&lt;/code&gt; one):&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config linenums"&gt;Host */*
+    ControlMaster auto
+    ControlPath   ~/.ssh/.sessions/%r@%h:%p
+    ProxyCommand /bin/sh -c 'mkdir -p -m700 ~/.ssh/.sessions/&amp;quot;%r@$(dirname %h)&amp;quot; &amp;amp;&amp;amp; exec ssh -o &amp;quot;ControlMaster auto&amp;quot; -o &amp;quot;ControlPath   ~/.ssh/.sessions/%r@$(dirname %h):%p&amp;quot; -o &amp;quot;ControlPersist 120s&amp;quot; -l %r -p %p $(dirname %h) -W $(basename %h):%p'&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;Let's review it line by line, so the logic is clear:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;Host */*&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;This host definition block would catch any host specified on the &lt;code&gt;ssh&lt;/code&gt; command
+line when the host name matches the "*/*" pattern, so "ssh hostA/hostB/hostC"
+will be matched as "hostA/hostB" being the first part before "/" and "hostC" as
+the second part after "/". Due to a recursive call to &lt;code&gt;ssh&lt;/code&gt; (see below) this
+block will be recursively applied to all hosts in the specified chain.&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;    ControlMaster auto&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;This directive instructs &lt;code&gt;ssh&lt;/code&gt; to try to reuse the existing control channel to
+communicate with the remote host and if such a channel does not exist then it
+will be created and further connections to the same remote host would benefit
+from a speedup provided by tthe already established connection.&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;    ControlPath ~/.ssh/.sessions/%r@%h:%p&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;This directive provides &lt;code&gt;ssh&lt;/code&gt; with the location of the control channel socket
+file. The socket file should be unique for each remote host and since we are
+reusing the existing connection and skipping the authentication the socket file
+should be tagged with the corresponding login name, this is why we are using %r
+(remote login name), %h (the remote host name), and %p (the remote port) as
+part of the file name. Please note that due to our usage of "/" as a host
+separator in the chain the path constructed here will have a subdirectory
+defined in the middle of the %h expansion. &lt;code&gt;ssh&lt;/code&gt; would not automatically create
+that subdirectory, so it is something we need to address (see below)&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;    ProxyCommand …&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;This is the heart of the whole block. I am starting this proxy command with
+&lt;code&gt;/bin/sh -c '…'&lt;/code&gt; since &lt;code&gt;ssh&lt;/code&gt; is &lt;code&gt;exec()&lt;/code&gt;uting the specified command (this
+replaces the spawned shell and makes it impossible to conditionally chain
+commands), therefore I am using the shell binary as the proxy command to get
+the ability to script my logic. Then I am creating the required directory
+structure for the control channels under &lt;code&gt;~/.ssh/.sessions&lt;/code&gt; (note the &lt;code&gt;-p&lt;/code&gt;
+argument to &lt;code&gt;mkdir&lt;/code&gt;, this will create all the missing parts of the specified
+tree, but also would silence &lt;code&gt;mkdir&lt;/code&gt; in case all of the directories already
+exist). It is worth to mention that with this &lt;code&gt;mkdir&lt;/code&gt; command I am creating the
+subdirectory for the &lt;code&gt;ControlPath&lt;/code&gt; defined for the enclosing &lt;code&gt;Host */*&lt;/code&gt; block.&lt;/p&gt;
+&lt;p&gt;The second part of the command line is conditionally executing &lt;code&gt;ssh&lt;/code&gt; if &lt;code&gt;mkdir&lt;/code&gt;
+did not report any issues. It is good to execute &lt;code&gt;ssh&lt;/code&gt; here since we do not
+need a redundant shell hanging around in the process tree. In this recursive
+&lt;code&gt;ssh&lt;/code&gt; call we explicitly specify that we also need multiplexing of the control
+channels created by the parent connections (they are "parent" since this is the
+connection that established first and which enables access to the hosts further
+down the specified chain) as well as we explicitly specify the location of the
+control channel (note that since it is a parrent connection we are stripping
+the rest of host names from the &lt;code&gt;%h&lt;/code&gt; macro using &lt;code&gt;dirname&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Finally, the third explicitly specified directive is &lt;code&gt;ControlPersist&lt;/code&gt; which is
+set to &lt;code&gt;120s&lt;/code&gt;. This directive instructs &lt;code&gt;ssh&lt;/code&gt; to stay in the background and
+maintain the control channel in case we decide to reuse it, but if no activity
+on the control channel is detected for 2 minutes the &lt;code&gt;ssh&lt;/code&gt; process would
+terminate. Without this directive the moment you close the connection which was
+the master connection all dependent connections would also be closed, e.g. if
+you have two sessions: one to &lt;code&gt;hostA/hostB&lt;/code&gt; and the other to &lt;code&gt;hostA/hostC&lt;/code&gt;, the
+moment you closed the first connection the second one will be immediately
+terminated if you do not have the &lt;code&gt;ControlPersist&lt;/code&gt; configured.&lt;/p&gt;
+&lt;p&gt;The rest of the &lt;code&gt;ssh&lt;/code&gt; arguments is obvious: we connect to the first host in the
+provided host chain (we are extracting that part with &lt;code&gt;dirname %h&lt;/code&gt;) and we are
+proxying stdin/stdout to the last host in the supplied chain with the &lt;code&gt;-W&lt;/code&gt;
+option.&lt;/p&gt;
+&lt;p&gt;Basically, the control flow when you do &lt;code&gt;ssh user@hostA/hostB/hostC&lt;/code&gt; is the
+following:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;ssh&lt;/code&gt; matches the &lt;code&gt;*/*&lt;/code&gt; pattern against the provided host name
+     (&lt;code&gt;hostA/hostB/hostC&lt;/code&gt;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;ssh&lt;/code&gt; tries to reuse the control channel by attempting to open the
+     &lt;code&gt;~/.ssh/.sessions/user@hostA/hostB/hostC:22&lt;/code&gt; socket, if successful the
+     connection is established and the command prompt is displayed to the
+     calling user, otherwise the execution continues&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;ssh&lt;/code&gt; executes the defined &lt;code&gt;ProxyCommand&lt;/code&gt; command&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;the first part of the command creates &lt;code&gt;~/.ssh/.sessions/hostA/hostB&lt;/code&gt; if it
+     is not there&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;the second part executes &lt;code&gt;ssh … -o "ControlPath
+     ~/.ssh/.sessions/user@hostA/hostB:22" … hostA/hostB -W hostC:22&lt;/code&gt; (this
+     will initiate another round of the above steps, but with a shorter chain
+     and it will be recursive until there is just a single host left, e.g. when
+     we ascend to &lt;code&gt;hostA&lt;/code&gt; as the host to connect to)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;now, with connected stdin/stdout to port 22 on &lt;code&gt;hostC&lt;/code&gt; (in the last
+     iteration) &lt;code&gt;ssh&lt;/code&gt; performs the authentication against &lt;code&gt;hostC&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;if authentication is successful &lt;code&gt;ssh&lt;/code&gt; creates the
+     &lt;code&gt;~/.ssh/.sessions/user@hostA/hostB/hostC:22&lt;/code&gt; control channel socket and
+     becomes the master of that control channel&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;a command prompt is displayed to the calling user&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;I hope this little trick will save you some time and will make your life
+easier. :)&lt;/p&gt;</content><category term="ssh"></category></entry><entry><title>SSH port-forwarding (Intermediate)</title><link href="2010/12/10/ssh-port-forwarding-intermediate/" rel="alternate"></link><published>2010-12-10T10:00:00+11:00</published><updated>2010-12-10T10:00:00+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:None,2010-12-10:2010/12/10/ssh-port-forwarding-intermediate/</id><summary type="html">&lt;p&gt;In my previous blog entry I described some basic functionality of SSH in terms
+of port-forwarding. Now it's time for a little bit more complex stuff.&lt;/p&gt;
+&lt;p&gt;In this article I will highlight:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;(forward) piercing of a firewall (getting access to resources behind it);&lt;/li&gt;
+&lt;li&gt;dynamic port-forwarding (AKA proxy);&lt;/li&gt;
+&lt;li&gt;(reverse) piercing of a firewall (exposing your local services on the remote side).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Forward firewall piercing&lt;/h2&gt;
+&lt;p&gt;Let's start with the forward firewall piercing, since it is the easiest and was
+somewhat already described in my previous blog entry on this topic. Now,
+imagine that you already have SSH access to some host which …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In my previous blog entry I described some basic functionality of SSH in terms
+of port-forwarding. Now it's time for a little bit more complex stuff.&lt;/p&gt;
+&lt;p&gt;In this article I will highlight:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;(forward) piercing of a firewall (getting access to resources behind it);&lt;/li&gt;
+&lt;li&gt;dynamic port-forwarding (AKA proxy);&lt;/li&gt;
+&lt;li&gt;(reverse) piercing of a firewall (exposing your local services on the remote side).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Forward firewall piercing&lt;/h2&gt;
+&lt;p&gt;Let's start with the forward firewall piercing, since it is the easiest and was
+somewhat already described in my previous blog entry on this topic. Now,
+imagine that you already have SSH access to some host which is multi-home
+connected (e.g. the host is connected to more than one network). Let's also
+assume that the host is a firewall and is masquerading other hosts in the
+internal network and is translating just a handful set of ports to the servers
+(looks familiar, doesn't it? :) ). In other words, we are speaking of a
+standard firewall/NAT router.&lt;/p&gt;
+&lt;p&gt;Now, how can you access port 12345 on host behind the firewall given that this
+port is not "exported" by the NAT on the firewall? This is quite simple. Open a
+terminal window on your local computer and type the following:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;ssh -L12345:192.168.1.2:12345 joe@firewall.domain.tld&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;From now on, as long as your SSH session is up and running you will be able to
+reach &lt;code&gt;192.168.1.2:12345&lt;/code&gt; by connecting to &lt;code&gt;localhost:12345&lt;/code&gt; (i.e. the &lt;code&gt;12345&lt;/code&gt;
+port on your local computer). Indeed, for this to work you need SSH access
+anywhere inside the protected network (not necessarily on the firewall itself)
+and if the firewall blocks any SSH access, you are out of luck.&lt;/p&gt;
+&lt;h2&gt;Dynamic port-forwarding&lt;/h2&gt;
+&lt;p&gt;There are at least two usage patterns where I find SSH's ability to forward
+requests to many ports useful:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;I need to connect to different services (possibly on different hosts) inside
+  the protected network (as per the configuration described above) and I don't
+  want to specify all of them on the command line;&lt;/li&gt;
+&lt;li&gt;I need to access some resource which is Geo-protected (e.g. allows access
+  from a particular part of the world), e.g. want to watch US Netflix being
+  physically in Australia&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In both cases, you use the following SSH command in your terminal window:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;ssh -D3128 joe@relay.domain.tld&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;As long as you SSH session is active, you can use port &lt;code&gt;3128&lt;/code&gt; on your local
+machine as SOCKS4/SOCKS5 proxy (e.g. you can configure proxy settings in your
+browser to use &lt;code&gt;localhost:3128&lt;/code&gt;) and browse the Net through your SSH connection,
+and all your requests will look like they are coming from &lt;code&gt;relay.domain.tld&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;There are many uses for this: for example, some payment processors won't allow
+you to pay for goods if you are trying to pay through them from some countries
+even if you are a legitimate user, another use case is when you are concerned
+re: your privacy -- you can conceal your actual location by building a chain of
+SSH tunnels and access the desired web site through this chain :) .&lt;/p&gt;
+&lt;h2&gt;Reverse firewall piercing&lt;/h2&gt;
+&lt;p&gt;Finally, what if you are behind a very strict firewall that limits almost
+everything, but you need to provide some services to the outside world from
+your computer (e.g. sharing your access to company's confidential information
+to folks from WikiLeaks... just kidding :) )?&lt;/p&gt;
+&lt;p&gt;To achieve this you need to have an SSH account somewhere in the Net -- just
+Google for "free ssh account" and you will surely find one for yourself).&lt;/p&gt;
+&lt;p&gt;Now, when you have the account, you can execute the following on your local
+computer (which is inside that highly secure network :) ):&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;ssh -R:60000:127.0.0.1:22 joe@friendly.domain.tld&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;The above command will setup such a configuration that connecting on port &lt;code&gt;60000&lt;/code&gt;
+at &lt;code&gt;friendly.domain.tld&lt;/code&gt; will forward traffic to your local machine's port 22
+(which is behind a firewall) -- this will work as long as your SSH session to
+the &lt;code&gt;friendly.domain.tld&lt;/code&gt; is active.  Unfortunately, there are several pitfalls
+in this approach, but they are all resolvable.&lt;/p&gt;
+&lt;p&gt;Firstly, you need to ensure that &lt;code&gt;friendly.domain.tld&lt;/code&gt; is using a recent version
+of SSH daemon, otherwise you will be limited to bind only to the loopback
+interface on the remote host.&lt;/p&gt;
+&lt;p&gt;Secondly, even if they are using a recent version of the SSH daemon, they can
+disallow such binding (e.g. setting "GatewayPorts no" in &lt;code&gt;/etc/ssh/sshd_config&lt;/code&gt;),
+and, again, you will be restricted to the loopback interface only.&lt;/p&gt;
+&lt;p&gt;Finally, you need to find such a friendly host which allows you to connect to
+the bound ports from the outside (many public ones have a firewall rule
+preventing such access in order to prevent abuses of their services).&lt;/p&gt;
+&lt;p&gt;All in all, the best option to try this is to have your own host somewhere (e.g.
+purchase a small virtual environment from some hosting provider or create an
+instance on AWS EC2), then you will be able to configure the remote side the
+way you want it!&lt;/p&gt;
+&lt;p&gt;Anyway, even if you fail to find a host that allows you to expose your service
+to the public, you still should be able to access it yourself -- using the
+forward firewall piercing technique described at the beginning of this post:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;# from your home computer
+ssh -L60000:127.0.0.1:60000 joe@friendly.domain.tld&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;Once it is done your computer in the highly secure network should be reachable
+via SSH on your &lt;code&gt;localhost:60000&lt;/code&gt;, e.g.&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;ssh -p6000 my_account@localhost&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;Where &lt;code&gt;my_account&lt;/code&gt; is a user allowed to SSH into your computer in the highly
+secure network.&lt;/p&gt;</content><category term="ssh"></category></entry><entry><title>SSH port-forwarding (Basic)</title><link href="2010/11/29/ssh-port-forwarding-basic/" rel="alternate"></link><published>2010-11-29T10:00:00+11:00</published><updated>2010-11-29T10:00:00+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:None,2010-11-29:2010/11/29/ssh-port-forwarding-basic/</id><summary type="html">&lt;p&gt;An introduction into the world of SSH port-forwarding and how to leverage it to access resources in private subnets&lt;/p&gt;</summary><content type="html">&lt;p&gt;I think all of you are using SSH in your daily routines. However, do you use
+its full potential? Today's topic is the SSH port-forwarding feature and how
+it can be use to achieve some interesting configurations.&lt;/p&gt;
+&lt;p&gt;I'm sure most of you are aware of the feature, but how many of you are using
+it? Personally, I'm a bit obsessed with it and have found numerous cases where
+this feature of SSH is a real life saver.&lt;/p&gt;
+&lt;p&gt;Let's start with simple things and imagine that you have a server where you
+are running MySQL (as a backend for your website) and that you are not
+comfortable to work with MySQL neither through the MySQL command line interface
+nor through a web-interace like phpMyAdmin. Instead you prefer to use, say,
+MySQL WorkBench or something similar running on your local computer.&lt;/p&gt;
+&lt;p&gt;How one could do this? Well, I've seen a lot that people tend to configure the
+MySQL server to listen on a public interface (i.e. an interface that is
+reachable from the Internet), then access it from their computer directly.
+It's not that bad if you have a static IP assigned to your computer and you
+added a firewall rule protecting the MySQL port on the server to be reachable
+from your IP address only, but what if you are behind some kind of NAT and the
+same IP address is shared among others in your network? What if you don't have
+a static IP and the dynamic IP range assigned by your ISP is too broad?
+Overall, I personally don't like running MySQL on a public interface since
+there were publicly known security vulnerabilities in the MySQL binary
+protocol, and I can assure you there will be more discovered over the time.&lt;/p&gt;
+&lt;p&gt;So, what should we do to access our remote database securely and conveniently?
+Run the MySQL server on 127.0.0.1:3306 (well, if your web server is located on
+another machine, you may want to bind MySQL to some internal interface -- the
+network that links your servers only, e.g. 192.168.1.1:3306), and then use the
+SSH port-forwarding feature to setup a tunnel between your remote database and
+your local computer:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;ssh -L3306:127.0.0.1:3306 user@server&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;Here, &lt;code&gt;-L3306:127.0.0.1:3306&lt;/code&gt; says that we want &lt;code&gt;127.0.0.1:3306&lt;/code&gt; to be "mapped"
+to our local host to port &lt;code&gt;3306&lt;/code&gt;. While the SSH session is active any packet
+sent to &lt;code&gt;localhost:3306&lt;/code&gt; (on your computer) will be forwarded over the SSH
+encrypted channel to the remote server and then will be fed to remote's
+&lt;code&gt;127.0.0.1:3306&lt;/code&gt;.  This means that as long as your SSH session is alive you
+will be able to work with the remote MySQL server like it's running on your
+local computer and you can use any MySQL tools locally.&lt;/p&gt;
+&lt;p&gt;Well, the above command was given for Linux, Mac OSX, and other Unix-based
+systems. For Windows, you can use PuTTY to achive the same. I found the
+following &lt;a href="https://www.akadia.com/services/ssh_putty.html"&gt;instructions for PuTTY&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;OK, this is not a new topic and it was described many times here and there on
+the Internet, but I decided to write this article as a foundation for my
+further articles on this topic which will cover more advanced usage of the SSH
+port-forwarding feature. For example, I intend to document a configuration of
+the MySQL replication setup between two servers located at two different data
+centres where each server is a part of a server farm protected by a firewall.&lt;/p&gt;</content><category term="ssh"></category><category term="ssh"></category><category term="console"></category><category term="bastion"></category></entry></feed>

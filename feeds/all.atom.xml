@@ -1,0 +1,1168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops</title><link href="/" rel="alternate"></link><link href="feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2015-08-06T10:00:00+10:00</updated><entry><title>Transparent SSH host-jumping (Advanced)</title><link href="2015/08/06/transparent-ssh-host-jumping-advanced/" rel="alternate"></link><published>2015-08-06T10:00:00+10:00</published><updated>2015-08-06T10:00:00+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:None,2015-08-06:2015/08/06/transparent-ssh-host-jumping-advanced/</id><summary type="html">&lt;p&gt;In this brief article I am going to describe how I resolved a nagging issue I
+had with setting up access to hosts which are not directly reachable, but where
+you need to forward your connection through an intermediate host.&lt;/p&gt;
+&lt;p&gt;&lt;a href="2010/12/10/ssh-port-forwarding-intermediate/"&gt;Previously&lt;/a&gt;, I was using local SSH port-forwarding technique (although I
+was configuring the hosts I connect to in the &lt;code&gt;~/.ssh/config&lt;/code&gt; file instead of
+using the command-line options). However, this approach turned out to be quite
+inconvenient since every time I wanted to connect to a new host (and, possibly,
+through a new intermediate host) I had to edit my …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this brief article I am going to describe how I resolved a nagging issue I
+had with setting up access to hosts which are not directly reachable, but where
+you need to forward your connection through an intermediate host.&lt;/p&gt;
+&lt;p&gt;&lt;a href="2010/12/10/ssh-port-forwarding-intermediate/"&gt;Previously&lt;/a&gt;, I was using local SSH port-forwarding technique (although I
+was configuring the hosts I connect to in the &lt;code&gt;~/.ssh/config&lt;/code&gt; file instead of
+using the command-line options). However, this approach turned out to be quite
+inconvenient since every time I wanted to connect to a new host (and, possibly,
+through a new intermediate host) I had to edit my SSH configuration file and
+add something like the following:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config linenums"&gt;Host intermediate
+    HostName 192.168.1.1
+    HostKeyAlias intermediate
+    LocalForward 10001 target:22
+
+Host target
+    HostName 127.0.0.1
+    HostKeyAlias target
+    Port 10001&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;The inconvenience came from two things:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;My &lt;code&gt;~/.ssh/config&lt;/code&gt; file was growing uncontrollably;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Each time I needed to connect to the target host through the intermediate
+     host I had to open two sessions with one of them being idle most of the
+     time.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;After a while I stumbled upon an article describing quite a generic way to
+tunnel through an intermediate host and found the approach quite convenient for
+the day-to-day use. So, I have added the following block into my &lt;code&gt;~/.ssh/config&lt;/code&gt;
+file just before the &lt;code&gt;Host *&lt;/code&gt; section:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;Host */*
+    ProxyCommand ssh $(dirname %h) -W $(basename %h):%p&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;From that point on, I could connect to the target host via the intermediate one
+by simply executing the following command:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ ssh user@intemediate/target&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;The configuration with the &lt;code&gt;ProxyCommand&lt;/code&gt; directive was spawning two &lt;code&gt;ssh&lt;/code&gt;
+processes with one connected to the intermediate host in the background and the
+other proxied through the intermediate host and connected to the target running
+in the foreground, so from my point of view I had just one terminal session
+open. The configuration allowed to chain as many hosts as I wanted, e.g.:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ ssh user@hostA/hostB/hostC/hostD&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;The above would result in three &lt;code&gt;ssh&lt;/code&gt; processes running in the background (the
+first connected to hostA, the second connected to hostB proxied through hostA,
+and the third connected to hostC proxied through hostB) and one foreground
+process which was connected to hostD proxied via hostC. This is great and quite
+flexible to use, however, this approach has a number of limitations:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;you cannot specify different ports for different hosts in the chain&lt;/li&gt;
+&lt;li&gt;neither can you use different login names for different hosts in the chain&lt;/li&gt;
+&lt;li&gt;establishing connection to different chains sharing a part of the chain
+    would not reuse already established connections, i.e. slow connection time&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Personally, I am using the same login name and the same ports on hosts I am
+accessing, so the first two items were not an issue for me, but the last one
+was irritating enough and I decided to figure out whether it is possible to
+optimise it. After a bit of reading the documentation and a few attempts I came
+up with the following configuration block in my &lt;code&gt;~/.ssh/config&lt;/code&gt; file (remember,
+this block should be placed &lt;em&gt;before&lt;/em&gt; the &lt;code&gt;Host *&lt;/code&gt; one):&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config linenums"&gt;Host */*
+    ControlMaster auto
+    ControlPath   ~/.ssh/.sessions/%r@%h:%p
+    ProxyCommand /bin/sh -c 'mkdir -p -m700 ~/.ssh/.sessions/&amp;quot;%r@$(dirname %h)&amp;quot; &amp;amp;&amp;amp; exec ssh -o &amp;quot;ControlMaster auto&amp;quot; -o &amp;quot;ControlPath   ~/.ssh/.sessions/%r@$(dirname %h):%p&amp;quot; -o &amp;quot;ControlPersist 120s&amp;quot; -l %r -p %p $(dirname %h) -W $(basename %h):%p'&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;Let's review it line by line, so the logic is clear:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;Host */*&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;This host definition block would catch any host specified on the &lt;code&gt;ssh&lt;/code&gt; command
+line when the host name matches the "*/*" pattern, so "ssh hostA/hostB/hostC"
+will be matched as "hostA/hostB" being the first part before "/" and "hostC" as
+the second part after "/". Due to a recursive call to &lt;code&gt;ssh&lt;/code&gt; (see below) this
+block will be recursively applied to all hosts in the specified chain.&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;    ControlMaster auto&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;This directive instructs &lt;code&gt;ssh&lt;/code&gt; to try to reuse the existing control channel to
+communicate with the remote host and if such a channel does not exist then it
+will be created and further connections to the same remote host would benefit
+from a speedup provided by tthe already established connection.&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;    ControlPath ~/.ssh/.sessions/%r@%h:%p&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;This directive provides &lt;code&gt;ssh&lt;/code&gt; with the location of the control channel socket
+file. The socket file should be unique for each remote host and since we are
+reusing the existing connection and skipping the authentication the socket file
+should be tagged with the corresponding login name, this is why we are using %r
+(remote login name), %h (the remote host name), and %p (the remote port) as
+part of the file name. Please note that due to our usage of "/" as a host
+separator in the chain the path constructed here will have a subdirectory
+defined in the middle of the %h expansion. &lt;code&gt;ssh&lt;/code&gt; would not automatically create
+that subdirectory, so it is something we need to address (see below)&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;    ProxyCommand …&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;This is the heart of the whole block. I am starting this proxy command with
+&lt;code&gt;/bin/sh -c '…'&lt;/code&gt; since &lt;code&gt;ssh&lt;/code&gt; is &lt;code&gt;exec()&lt;/code&gt;uting the specified command (this
+replaces the spawned shell and makes it impossible to conditionally chain
+commands), therefore I am using the shell binary as the proxy command to get
+the ability to script my logic. Then I am creating the required directory
+structure for the control channels under &lt;code&gt;~/.ssh/.sessions&lt;/code&gt; (note the &lt;code&gt;-p&lt;/code&gt;
+argument to &lt;code&gt;mkdir&lt;/code&gt;, this will create all the missing parts of the specified
+tree, but also would silence &lt;code&gt;mkdir&lt;/code&gt; in case all of the directories already
+exist). It is worth to mention that with this &lt;code&gt;mkdir&lt;/code&gt; command I am creating the
+subdirectory for the &lt;code&gt;ControlPath&lt;/code&gt; defined for the enclosing &lt;code&gt;Host */*&lt;/code&gt; block.&lt;/p&gt;
+&lt;p&gt;The second part of the command line is conditionally executing &lt;code&gt;ssh&lt;/code&gt; if &lt;code&gt;mkdir&lt;/code&gt;
+did not report any issues. It is good to execute &lt;code&gt;ssh&lt;/code&gt; here since we do not
+need a redundant shell hanging around in the process tree. In this recursive
+&lt;code&gt;ssh&lt;/code&gt; call we explicitly specify that we also need multiplexing of the control
+channels created by the parent connections (they are "parent" since this is the
+connection that established first and which enables access to the hosts further
+down the specified chain) as well as we explicitly specify the location of the
+control channel (note that since it is a parrent connection we are stripping
+the rest of host names from the &lt;code&gt;%h&lt;/code&gt; macro using &lt;code&gt;dirname&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Finally, the third explicitly specified directive is &lt;code&gt;ControlPersist&lt;/code&gt; which is
+set to &lt;code&gt;120s&lt;/code&gt;. This directive instructs &lt;code&gt;ssh&lt;/code&gt; to stay in the background and
+maintain the control channel in case we decide to reuse it, but if no activity
+on the control channel is detected for 2 minutes the &lt;code&gt;ssh&lt;/code&gt; process would
+terminate. Without this directive the moment you close the connection which was
+the master connection all dependent connections would also be closed, e.g. if
+you have two sessions: one to &lt;code&gt;hostA/hostB&lt;/code&gt; and the other to &lt;code&gt;hostA/hostC&lt;/code&gt;, the
+moment you closed the first connection the second one will be immediately
+terminated if you do not have the &lt;code&gt;ControlPersist&lt;/code&gt; configured.&lt;/p&gt;
+&lt;p&gt;The rest of the &lt;code&gt;ssh&lt;/code&gt; arguments is obvious: we connect to the first host in the
+provided host chain (we are extracting that part with &lt;code&gt;dirname %h&lt;/code&gt;) and we are
+proxying stdin/stdout to the last host in the supplied chain with the &lt;code&gt;-W&lt;/code&gt;
+option.&lt;/p&gt;
+&lt;p&gt;Basically, the control flow when you do &lt;code&gt;ssh user@hostA/hostB/hostC&lt;/code&gt; is the
+following:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;ssh&lt;/code&gt; matches the &lt;code&gt;*/*&lt;/code&gt; pattern against the provided host name
+     (&lt;code&gt;hostA/hostB/hostC&lt;/code&gt;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;ssh&lt;/code&gt; tries to reuse the control channel by attempting to open the
+     &lt;code&gt;~/.ssh/.sessions/user@hostA/hostB/hostC:22&lt;/code&gt; socket, if successful the
+     connection is established and the command prompt is displayed to the
+     calling user, otherwise the execution continues&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;ssh&lt;/code&gt; executes the defined &lt;code&gt;ProxyCommand&lt;/code&gt; command&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;the first part of the command creates &lt;code&gt;~/.ssh/.sessions/hostA/hostB&lt;/code&gt; if it
+     is not there&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;the second part executes &lt;code&gt;ssh … -o "ControlPath
+     ~/.ssh/.sessions/user@hostA/hostB:22" … hostA/hostB -W hostC:22&lt;/code&gt; (this
+     will initiate another round of the above steps, but with a shorter chain
+     and it will be recursive until there is just a single host left, e.g. when
+     we ascend to &lt;code&gt;hostA&lt;/code&gt; as the host to connect to)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;now, with connected stdin/stdout to port 22 on &lt;code&gt;hostC&lt;/code&gt; (in the last
+     iteration) &lt;code&gt;ssh&lt;/code&gt; performs the authentication against &lt;code&gt;hostC&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;if authentication is successful &lt;code&gt;ssh&lt;/code&gt; creates the
+     &lt;code&gt;~/.ssh/.sessions/user@hostA/hostB/hostC:22&lt;/code&gt; control channel socket and
+     becomes the master of that control channel&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;a command prompt is displayed to the calling user&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;I hope this little trick will save you some time and will make your life
+easier. :)&lt;/p&gt;</content><category term="ssh"></category></entry><entry><title>Should we use "sudo" for day-to-day activities?</title><link href="2015/07/18/should-we-use-sudo-for-day-to-day-activities/" rel="alternate"></link><published>2015-07-18T20:04:00+10:00</published><updated>2015-07-18T20:04:00+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:None,2015-07-18:2015/07/18/should-we-use-sudo-for-day-to-day-activities/</id><summary type="html">&lt;p&gt;None of the systems I administer or supervise have &lt;code&gt;sudo&lt;/code&gt; installed and every
+time I answer a question on how to do privileged work on these systems (i.e. do
+tasks that require administrator privileges) with a proposal to SSH under the
+privileged account directly to do such a work whoever asked the question start
+to blabber how insecure that is, that one should use &lt;code&gt;sudo&lt;/code&gt; and that nobody
+should ever login directly as root.  I've spent quite some time explaining the
+misconception behind so-called "secure way to access systems through sudo", so
+I decided to write up an article …&lt;/p&gt;</summary><content type="html">&lt;p&gt;None of the systems I administer or supervise have &lt;code&gt;sudo&lt;/code&gt; installed and every
+time I answer a question on how to do privileged work on these systems (i.e. do
+tasks that require administrator privileges) with a proposal to SSH under the
+privileged account directly to do such a work whoever asked the question start
+to blabber how insecure that is, that one should use &lt;code&gt;sudo&lt;/code&gt; and that nobody
+should ever login directly as root.  I've spent quite some time explaining the
+misconception behind so-called "secure way to access systems through sudo", so
+I decided to write up an article that describes the issues of using that
+approach and why using &lt;code&gt;sudo&lt;/code&gt; is actually less secure than a direct SSH access.&lt;/p&gt;
+&lt;h2&gt;History&lt;/h2&gt;
+&lt;p&gt;The following is based on my personal recollection of the history around early
+90’s with some reference to documents I could quickly find.  Unfortunately, this
+is one of the topics that is not so easy to reconstruct in full detail.
+Although there may be minor inaccuracies the outlined view on the history
+should be very close to the true events that took place.  Many years ago (but
+not that far in the past) system administrators were using &lt;code&gt;telnet&lt;/code&gt; and &lt;code&gt;rsh&lt;/code&gt; to
+access and administer their servers.  Networks were simpler and traffic sniffing
+techniques were common.  Therefore, it was very easy to eavesdrop on a root
+account login and to automate the task of gathering the credentials.  To
+mitigate the issue to some extent the following approach was proposed:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;login as a non-privileged account first;&lt;/li&gt;
+&lt;li&gt;do some stuff;&lt;/li&gt;
+&lt;li&gt;if you need privileged account access (e.g. root) switch to it using &lt;code&gt;su&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The idea behind this proposal was that such a sequence makes it harder for a
+traffic listener to catch root’s credentials on the wire due to the login
+sequence mixed in to the stream of other activities the systems administrator
+was doing before escalating their account to the privileged user.&lt;/p&gt;
+&lt;p&gt;At approximately the same time discussions started in regard to the dangers
+of working as root, that people were tending to work as root for prolonged
+periods of time performing tasks that do not require escalated privileges
+without proper justification for that behaviour.  As the result of these
+discussions the &lt;code&gt;sudo&lt;/code&gt; utility was born.  The utility allowed to bind root
+privileges to a restricted set of commands and maintained access controls
+through its configuration file in order to allow or deny access to the defined
+functionality to specific users/groups.  This allowed systems administrators to
+delegate some of the privileged routines to less privileged user/groups. (See
+more on the &lt;a href="https://www.sudo.ws/sudo/history.html"&gt;history of sudo&lt;/a&gt; if you are interested).&lt;/p&gt;
+&lt;p&gt;Somewhere in early 90’s the two approaches were merged, so the approach became:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;login a a non-privileged account and do your every day tasks;&lt;/li&gt;
+&lt;li&gt;once a privileged operation is required execute it through &lt;code&gt;sudo&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Although it seems like a minor optimisation, in fact, this introduced a major
+security issue: previously, the attacker should have needed to listen for
+traffic in attempt to figure out when the victim is executing &lt;code&gt;su&lt;/code&gt; and is
+providing root's password, but now they did not need to do anything except of
+capturing user's password at the beginning of the session (the same problem the
+"su-after-normal-login" approach was trying to solve just reappeared :) ) since
+once you know user's password you can use &lt;code&gt;sudo&lt;/code&gt; which authenticates you with
+&lt;em&gt;user's&lt;/em&gt; password!&lt;/p&gt;
+&lt;p&gt;In 1995, &lt;a href="https://en.wikipedia.org/wiki/Tatu_Yl%C3%B6nen"&gt;Tatu Ylönen&lt;/a&gt; as a response to the issues related to exchanging the
+credentials over non-protected, easily sniffable networks released his first
+implementation of the SSH protocol as freeware to the public.  Over the next
+five years SSH was adopted worldwide and it eventually replaced
+&lt;code&gt;telnet&lt;/code&gt;/&lt;code&gt;rlogin&lt;/code&gt;/&lt;code&gt;rsh&lt;/code&gt; for the remote access and management activities in the most
+places.&lt;/p&gt;
+&lt;p&gt;However, due to inertia the recommended approach of logging in as a
+non-privileged account and escalating privileges later somehow survived, is
+still followed, and often people don’t even try to analyse and see the flaws of
+the approach.&lt;/p&gt;
+&lt;h2&gt;People are saying "sudo" is good. Is it true?&lt;/h2&gt;
+&lt;p&gt;^(or looking critically into some common misconceptions re: "sudo")^&lt;/p&gt;
+&lt;p&gt;So let’s look at the most commonly used "pros" in favour of using &lt;code&gt;sudo&lt;/code&gt;. For
+example, &lt;a href="https://help.ubuntu.com/community/RootSudo"&gt;Ubuntu’s community help page&lt;/a&gt; provides a nice, aggregated list of
+benefits provided by &lt;code&gt;sudo&lt;/code&gt; usage in their default installation. Let’s walk
+through all of them and see if they are real benefits at all:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;The installer has fewer questions to ask.&lt;/p&gt;
+&lt;p&gt;This is a very questionable "benefit" to the end user since this implies
+ that the system would do more stuff with escalated privileges behind the
+ scenes without the user even knowing it. From the security standpoint it
+ just silently expands the attack surface.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Users don't have to remember an extra password for occasional use (i.e.
+     the root password). If they did, they'd be likely to forget it (or record
+     it unsafely, allowing anyone to easily crack into their system).&lt;/p&gt;
+&lt;p&gt;This is another hard to comprehend "benefit". Given that we now have SSH
+ and the recommended best practice is to use SSH keys instead of passwords
+ &lt;code&gt;sudo&lt;/code&gt; requires users to memorise yet another password. Moreover, the
+ argument in regard to users’ likely behaviour is purely speculative and
+ assumptive - to the same extent we can assume that password policies make
+ it hard for users to memorise their passwords and they would be likely to
+ forget the password (or record it unsafely, …). The truth is that the key
+ based authentication solves the issue of the requirement to have multiple
+ passwords for multiple accounts. There is one place where the discussed
+ "benefit" is actually applicable — local console access (no key
+ authentication there, usually), however even there the best practice would
+ be to login directly as root on the virtual console if there is such a
+ need (the reason for that is quite complicated and in short could be
+ described as the following: there are multiple checks and assumptions in
+ the kernel code and the accompanying C library on allocating a terminal,
+ spawning a process, etc. for root over the same actions performed for a
+ non-privileged user).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;It avoids the "I can do anything" interactive login by default. You will
+     be prompted for a password before major changes can happen, which should
+     make you think about the consequences of what you are doing.&lt;/p&gt;
+&lt;p&gt;This statement also assumes that for some reason people would prefer to
+ always login as root and do all of their work under that account.  In
+ reality users are so used to prefix almost any failed command with &lt;code&gt;sudo&lt;/code&gt;
+ that this "benefit" can be considered as the quite opposite item against
+ &lt;code&gt;sudo&lt;/code&gt;.  On a properly configured environment you explicitly need to login
+ as the privileged account to do functions that require privileges.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;sudo adds a log entry of the command(s) run (in /var/log/auth.log). If you
+     mess up, you can go back and see what commands were run.&lt;/p&gt;
+&lt;p&gt;This statement is also somewhat true, but it does not defend the &lt;code&gt;sudo&lt;/code&gt;
+ usage. A proper auditing subsystem is what keeps audit logs no matter how
+ activity was performed. Logging of executed commands for user's history
+ reasons is the job for the shell. The ability of logging is so limited in
+ &lt;code&gt;sudo&lt;/code&gt; that it cannot be used for anything except a substitute for the
+ shell history (just imagine the following scenario: a user executes &lt;code&gt;sudo
+ less /var/log/messages&lt;/code&gt;, then types "!" followed by the Enter/Return key -
+ the user effectively now in the root shell and what &lt;code&gt;sudo&lt;/code&gt; will log into
+ its logs has nothing to do with what user actually did).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;On a server, every cracker trying to brute-force their way in will know it
+     has an account named root and will try that first. What they don't know is
+     what the usernames of your other users are. Since the root account
+     password is locked, this attack becomes essentially meaningless, since
+     there is no password to crack or guess in the first place.&lt;/p&gt;
+&lt;p&gt;This is such a weak attempt to bring host security into the play that it’s
+ hard to comment on it. First, use SSH keys and disable the password
+ authentication on the server - this (and not some security through
+ obscurity) will defend the system from the brute force attacks.  Second,
+ protect your remote access entry points with properly configured firewall
+ and allow remote access from a defined list of locations (i.e. whitelist)
+ - this will shrink the possible attack surface on the SSH service.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Allows easy transfer for admin rights by adding and removing users from
+     groups. When you use a single root password, the only way to de-authorize
+     users is to change the root password.&lt;/p&gt;
+&lt;p&gt;This is an interesting one: half of the statement is true, another is
+ misleading.  The true part is that you can easily delegate privileged
+ operations using &lt;code&gt;sudo&lt;/code&gt;.  The misleading part is that the alternative is
+ to use a single root password.  The truth is that nobody is limited by a
+ single root account: you can create as many as you want and each of them
+ could have their own distinct password (e.g. &lt;code&gt;useradd -om -o 0 -g 0 -s
+ /bin/sh new_root&lt;/code&gt; and &lt;code&gt;passwd new_root&lt;/code&gt;, but please don’t set password and
+ lock the account instead with &lt;code&gt;usermod -L new_root&lt;/code&gt; since we are using
+ keys, remember?). This approach also provides additional accountability
+ since users will have separate shell histories, their login attempts will
+ be clearly logged under separate names, etc.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;sudo can be setup with a much more fine-grained security policy.&lt;/p&gt;
+&lt;p&gt;Another half-truth in the list of "benefits". The statement is incomplete
+ and lacks the part it is comparing the functionality to.  If we are
+ comparing a legacy Unix access control system with &lt;code&gt;sudo&lt;/code&gt;, then yes &lt;code&gt;sudo&lt;/code&gt;
+ is much more configurable. If we compare &lt;code&gt;sudo&lt;/code&gt; with, say, SELinux or
+ GRsecurity’s RBAC - &lt;code&gt;sudo&lt;/code&gt; will lose since both have much more
+ fine-grained security controls than &lt;code&gt;sudo&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The root account password does not need to be shared with everybody who
+     needs to perform some type of administrative task(s) on the system (see
+     the previous bullet).&lt;/p&gt;
+&lt;p&gt;As with item #6 this statement assumes for some obscure reason that there
+ can be just a single root account in the system.  Therefore, the result of
+ such a logical exercise is also questionable since it is based on a wrong
+ assumption.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The authentication automatically expires after a short time (which can be
+     set to as little as desired or 0); so if you walk away from the terminal
+     after running commands as root using sudo, you will not be leaving a root
+     terminal open indefinitely.&lt;/p&gt;
+&lt;p&gt;This statement also compares &lt;code&gt;sudo&lt;/code&gt; with something reader cannot compare
+ to.  Moreover, it mixes up two logically unrelated things: the credentials
+ expiration and terminal security.  While it is great that &lt;code&gt;sudo&lt;/code&gt; implements
+ the former, the latter is usually addressed by entirely different means:
+ starting with auto-logout functionality, lock screen, physical security,
+ etc.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Well, we can continue to critically assess other common statements in regard to
+&lt;code&gt;sudo&lt;/code&gt; made mostly by people who do not have any strong InfoSec background, but
+it would be a waste of time for the readers. You can always raise a question
+regarding some particular claim and/or assumption related to &lt;code&gt;sudo&lt;/code&gt; and if it
+is interesting I would add it (and the corresponding response) to this article.&lt;/p&gt;
+&lt;h2&gt;What is the problem with the &lt;code&gt;sudo&lt;/code&gt; approach?&lt;/h2&gt;
+&lt;p&gt;Well, there are several in fact. The most pressing issue is that the usage of
+&lt;code&gt;sudo&lt;/code&gt; (or &lt;code&gt;su&lt;/code&gt;, or any other utility that has its SUID bit set) is crossing
+the security boundary from the less privileged account to the more privileged
+account. This opens doors (or widens the attack surface) to privilege
+escalation techniques. In plain English it makes the non-privileged account to
+be essentially equal to the privileged one, let me explain by a fairly simple
+example:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;imagine if you are a developer and you work on a server under your
+     non-privileged account;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;as a part of your daily routine you need to download some third party
+     package and install it (we are going to leave out all the security
+     complexities involved with such an activity like verifying signatures,
+     using a separate instance to prepare a package for deployment, etc.);&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;the installation of the package usually requires executing some third
+     party code under your non-privileged account. This code was not written by
+     you and there is a high chance that you did not read/verify the foreign
+     code line by line in order to ensure that it does not do anything
+     malicious since this would be quite time consuming, would require a lot of
+     effort, and your team has more important priorities than this (remember,
+     this is an example based on situations you would encounter in the real
+     world, which is by no means perfect);&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;it happens, that that particular third party was compromised and some
+     malicious code has been injected into the package installation routines;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;after the execution of the installation routine (and the malicious code
+     for that matter) your &lt;code&gt;~/.bashrc&lt;/code&gt; (for example) is modified in such a way
+     that each time you login it starts up a key logger or some other kind of
+     remotely controllable piece of software that talks back to its master;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;So far we just got an issue localised to this non-privileged account only (with
+a possibility to spread across the entire fleet of servers that non-privileged
+account has access to in case of the NFS mounted home directories). Is this
+bad? Yes, it is since it may disrupt this particular project, steal reachable
+sensitive information, could be used as a trampoline to jump start further
+research and exploitation of other vulnerable resources. Is it critically bad?
+Not necessarily. If the systems are built properly with host-based security in
+mind, if the proper privilege separation techniques are used throughput the
+company infrastructure, etc. the impact is localised and with proper monitoring
+systems it would be detected eventually and investigated (keep in mind that it
+is really hard for a non-privileged account to hide their activities from more
+privileged processes).&lt;/p&gt;
+&lt;p&gt;Now, let’s add &lt;code&gt;sudo&lt;/code&gt; to the mix, e.g. suddenly the developer decided to
+install an additional library package into the system. So, what would happen
+next? You guessed it: the developer would need to type in their password to
+convince &lt;code&gt;sudo&lt;/code&gt; that they are "allowed" to do such a privileged thing as
+installing a system package, the malicious software installed by the attacker
+would happily intercept that and send it back to its master.&lt;/p&gt;
+&lt;p&gt;From this point on, the attacker has the account password of the account where
+their software runs and which they control. The attacker can now utilise &lt;code&gt;sudo&lt;/code&gt;
+powers at their will. The security impact would be ranging from "high" to
+"extreme" depending on how committed the attackers are.&lt;/p&gt;
+&lt;p&gt;Following the logic, why would we want to introduce an additional complexity
+that does not address the issue it was supposed to address, which is "to limit
+exposure of the root account"?&lt;/p&gt;
+&lt;h2&gt;The "light" side of ‘sudo’. Is there one?&lt;/h2&gt;
+&lt;p&gt;So, is &lt;code&gt;sudo&lt;/code&gt; any good for anything? Actually, yes, it is. All in all, &lt;code&gt;sudo&lt;/code&gt;
+is a tool that attracts a lot of attention from the security researchers and
+auditors, its codebase got numerous peer reviews and the functionality the tool
+provides can be used for good. The following scenarios come to my mind right
+away:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;On a SELinux enabled system it seems that &lt;code&gt;sudo&lt;/code&gt; is the only properly
+   implemented and reliable way to assume a different SELinux role. All other
+   mechanisms are either lacking in the functionality or just do it half way
+   leaving some artefacts behind;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Unless some effort is put into tweaking the way PAM (Pluggable
+   Authentication Modules, an authentication framework used on Linux, Solaris,
+   and some other Unix-like systems) authenticates users on LDAP enabled
+   systems there is no easy way to have two separate accounts (a privileged and
+   a non-privileged account) for the same LDAP user. This could be addressed
+   administratively (e.g. by defining additional privileged users in LDAP) or
+   technically by implementing account names’ prefixes. However, if there are
+   budgetary and/or time constraints to implement the proper security framework
+   &lt;code&gt;sudo&lt;/code&gt; with a quite restricted configuration would be an acceptable
+   compromise.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Unfortunately, personally, I failed to find any other justified applications of
+&lt;code&gt;sudo&lt;/code&gt; in a secure environment and would be happy to get some feedback if you
+have something in mind worth including into the list above.&lt;/p&gt;
+&lt;h2&gt;How can we improve the security of our systems in relation to the &lt;code&gt;sudo&lt;/code&gt; usage?&lt;/h2&gt;
+&lt;p&gt;OK, so we got to the point where we are standing near a crossroad and we kind
+of established that excessive usage of ‘sudo’ is a bad thing (for
+security-paranoid readers - read: "almost any usage of ‘sudo’ except for
+changing SELinux roles on a SELinux-enabled system is a bad thing"). So, what
+is the alternative way of doing things? Well, there is a complex approach on
+addressing and minimising the privilege escalation risks and roughly it can be
+summarised as follows:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;apply the &lt;a href="https://en.wikipedia.org/wiki/Principle_of_least_privilege"&gt;least privilege principle&lt;/a&gt; to everything, e.g. if you need to
+    work on the content, the account you use to log into the remote server
+    should be allowed to do just that. This sounds a bit extreme, so we may
+    re-phrase it as follows: each account should be provided the least number
+    of required privileges to do the day-to-day tasks under that account and
+    should not be used for any activities outside the defined set of
+    activities. Again, if you include "becoming root" into the list of defined
+    activities it would kind of defeat the purpose.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;there should be a defined list of accounts which are allowed to do
+    system-wide modifications (e.g. privileged accounts), these accounts must
+    be used for these activities only (system updates, installing new software,
+    modifying system-wide configuration);&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;privileged accounts during their activities should not cross the security
+    boundary with the less privileged accounts. This is needed to avoid attacks
+    from the less privileged accounts toward more privileged (e.g. process
+    hijacking, file races, etc.). Unfortunately, this point is a bit confusing
+    without a proper explanation, but in a nutshell it means that root should
+    not touch anything writable by the less privileged account (examples of the
+    bad and insecure behaviour include: changing directory to a directory
+    writable by non-root, executing scripts from a directory writable by
+    non-root accounts or scripts that are writable by non-root, copying a
+    file/directory from/to a directory writable by non-root accounts, etc.);&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;if possible (and this is highly recommended) privileged accounts should be
+    accessed from the trusted and secure machines. It is really hard to define
+    what the "trusted and secure machine" is, but generally it should be
+    assumed that it is a laptop or a desktop station that is used entirely for
+    the work purposes (no free time surfing on the leisure sites and stuff :) ),
+    that proper firewall rules and protection techniques were used to secure
+    the machine, and that the operator is security-minded and does everything
+    they can to ensure integrity and security of their machine and software
+    installed on it.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I would be really happy to answer any question in regard to this article and
+provide any possible help in making our everyday system level activities more
+secure, so do not hesitate to contact me.&lt;/p&gt;</content><category term="sudo"></category><category term="sudo"></category><category term="console"></category><category term="bastion"></category></entry><entry><title>SSH port-forwarding (Intermediate)</title><link href="2010/12/10/ssh-port-forwarding-intermediate/" rel="alternate"></link><published>2010-12-10T10:00:00+11:00</published><updated>2010-12-10T10:00:00+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:None,2010-12-10:2010/12/10/ssh-port-forwarding-intermediate/</id><summary type="html">&lt;p&gt;In my previous blog entry I described some basic functionality of SSH in terms
+of port-forwarding. Now it's time for a little bit more complex stuff.&lt;/p&gt;
+&lt;p&gt;In this article I will highlight:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;(forward) piercing of a firewall (getting access to resources behind it);&lt;/li&gt;
+&lt;li&gt;dynamic port-forwarding (AKA proxy);&lt;/li&gt;
+&lt;li&gt;(reverse) piercing of a firewall (exposing your local services on the remote side).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Forward firewall piercing&lt;/h2&gt;
+&lt;p&gt;Let's start with the forward firewall piercing, since it is the easiest and was
+somewhat already described in my previous blog entry on this topic. Now,
+imagine that you already have SSH access to some host which …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In my previous blog entry I described some basic functionality of SSH in terms
+of port-forwarding. Now it's time for a little bit more complex stuff.&lt;/p&gt;
+&lt;p&gt;In this article I will highlight:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;(forward) piercing of a firewall (getting access to resources behind it);&lt;/li&gt;
+&lt;li&gt;dynamic port-forwarding (AKA proxy);&lt;/li&gt;
+&lt;li&gt;(reverse) piercing of a firewall (exposing your local services on the remote side).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Forward firewall piercing&lt;/h2&gt;
+&lt;p&gt;Let's start with the forward firewall piercing, since it is the easiest and was
+somewhat already described in my previous blog entry on this topic. Now,
+imagine that you already have SSH access to some host which is multi-home
+connected (e.g. the host is connected to more than one network). Let's also
+assume that the host is a firewall and is masquerading other hosts in the
+internal network and is translating just a handful set of ports to the servers
+(looks familiar, doesn't it? :) ). In other words, we are speaking of a
+standard firewall/NAT router.&lt;/p&gt;
+&lt;p&gt;Now, how can you access port 12345 on host behind the firewall given that this
+port is not "exported" by the NAT on the firewall? This is quite simple. Open a
+terminal window on your local computer and type the following:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;ssh -L12345:192.168.1.2:12345 joe@firewall.domain.tld&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;From now on, as long as your SSH session is up and running you will be able to
+reach &lt;code&gt;192.168.1.2:12345&lt;/code&gt; by connecting to &lt;code&gt;localhost:12345&lt;/code&gt; (i.e. the &lt;code&gt;12345&lt;/code&gt;
+port on your local computer). Indeed, for this to work you need SSH access
+anywhere inside the protected network (not necessarily on the firewall itself)
+and if the firewall blocks any SSH access, you are out of luck.&lt;/p&gt;
+&lt;h2&gt;Dynamic port-forwarding&lt;/h2&gt;
+&lt;p&gt;There are at least two usage patterns where I find SSH's ability to forward
+requests to many ports useful:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;I need to connect to different services (possibly on different hosts) inside
+  the protected network (as per the configuration described above) and I don't
+  want to specify all of them on the command line;&lt;/li&gt;
+&lt;li&gt;I need to access some resource which is Geo-protected (e.g. allows access
+  from a particular part of the world), e.g. want to watch US Netflix being
+  physically in Australia&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In both cases, you use the following SSH command in your terminal window:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;ssh -D3128 joe@relay.domain.tld&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;As long as you SSH session is active, you can use port &lt;code&gt;3128&lt;/code&gt; on your local
+machine as SOCKS4/SOCKS5 proxy (e.g. you can configure proxy settings in your
+browser to use &lt;code&gt;localhost:3128&lt;/code&gt;) and browse the Net through your SSH connection,
+and all your requests will look like they are coming from &lt;code&gt;relay.domain.tld&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;There are many uses for this: for example, some payment processors won't allow
+you to pay for goods if you are trying to pay through them from some countries
+even if you are a legitimate user, another use case is when you are concerned
+re: your privacy -- you can conceal your actual location by building a chain of
+SSH tunnels and access the desired web site through this chain :) .&lt;/p&gt;
+&lt;h2&gt;Reverse firewall piercing&lt;/h2&gt;
+&lt;p&gt;Finally, what if you are behind a very strict firewall that limits almost
+everything, but you need to provide some services to the outside world from
+your computer (e.g. sharing your access to company's confidential information
+to folks from WikiLeaks... just kidding :) )?&lt;/p&gt;
+&lt;p&gt;To achieve this you need to have an SSH account somewhere in the Net -- just
+Google for "free ssh account" and you will surely find one for yourself).&lt;/p&gt;
+&lt;p&gt;Now, when you have the account, you can execute the following on your local
+computer (which is inside that highly secure network :) ):&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;ssh -R:60000:127.0.0.1:22 joe@friendly.domain.tld&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;The above command will setup such a configuration that connecting on port &lt;code&gt;60000&lt;/code&gt;
+at &lt;code&gt;friendly.domain.tld&lt;/code&gt; will forward traffic to your local machine's port 22
+(which is behind a firewall) -- this will work as long as your SSH session to
+the &lt;code&gt;friendly.domain.tld&lt;/code&gt; is active.  Unfortunately, there are several pitfalls
+in this approach, but they are all resolvable.&lt;/p&gt;
+&lt;p&gt;Firstly, you need to ensure that &lt;code&gt;friendly.domain.tld&lt;/code&gt; is using a recent version
+of SSH daemon, otherwise you will be limited to bind only to the loopback
+interface on the remote host.&lt;/p&gt;
+&lt;p&gt;Secondly, even if they are using a recent version of the SSH daemon, they can
+disallow such binding (e.g. setting "GatewayPorts no" in &lt;code&gt;/etc/ssh/sshd_config&lt;/code&gt;),
+and, again, you will be restricted to the loopback interface only.&lt;/p&gt;
+&lt;p&gt;Finally, you need to find such a friendly host which allows you to connect to
+the bound ports from the outside (many public ones have a firewall rule
+preventing such access in order to prevent abuses of their services).&lt;/p&gt;
+&lt;p&gt;All in all, the best option to try this is to have your own host somewhere (e.g.
+purchase a small virtual environment from some hosting provider or create an
+instance on AWS EC2), then you will be able to configure the remote side the
+way you want it!&lt;/p&gt;
+&lt;p&gt;Anyway, even if you fail to find a host that allows you to expose your service
+to the public, you still should be able to access it yourself -- using the
+forward firewall piercing technique described at the beginning of this post:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;# from your home computer
+ssh -L60000:127.0.0.1:60000 joe@friendly.domain.tld&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;Once it is done your computer in the highly secure network should be reachable
+via SSH on your &lt;code&gt;localhost:60000&lt;/code&gt;, e.g.&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;ssh -p6000 my_account@localhost&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;Where &lt;code&gt;my_account&lt;/code&gt; is a user allowed to SSH into your computer in the highly
+secure network.&lt;/p&gt;</content><category term="ssh"></category></entry><entry><title>SSH port-forwarding (Basic)</title><link href="2010/11/29/ssh-port-forwarding-basic/" rel="alternate"></link><published>2010-11-29T10:00:00+11:00</published><updated>2010-11-29T10:00:00+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:None,2010-11-29:2010/11/29/ssh-port-forwarding-basic/</id><summary type="html">&lt;p&gt;An introduction into the world of SSH port-forwarding and how to leverage it to access resources in private subnets&lt;/p&gt;</summary><content type="html">&lt;p&gt;I think all of you are using SSH in your daily routines. However, do you use
+its full potential? Today's topic is the SSH port-forwarding feature and how
+it can be use to achieve some interesting configurations.&lt;/p&gt;
+&lt;p&gt;I'm sure most of you are aware of the feature, but how many of you are using
+it? Personally, I'm a bit obsessed with it and have found numerous cases where
+this feature of SSH is a real life saver.&lt;/p&gt;
+&lt;p&gt;Let's start with simple things and imagine that you have a server where you
+are running MySQL (as a backend for your website) and that you are not
+comfortable to work with MySQL neither through the MySQL command line interface
+nor through a web-interace like phpMyAdmin. Instead you prefer to use, say,
+MySQL WorkBench or something similar running on your local computer.&lt;/p&gt;
+&lt;p&gt;How one could do this? Well, I've seen a lot that people tend to configure the
+MySQL server to listen on a public interface (i.e. an interface that is
+reachable from the Internet), then access it from their computer directly.
+It's not that bad if you have a static IP assigned to your computer and you
+added a firewall rule protecting the MySQL port on the server to be reachable
+from your IP address only, but what if you are behind some kind of NAT and the
+same IP address is shared among others in your network? What if you don't have
+a static IP and the dynamic IP range assigned by your ISP is too broad?
+Overall, I personally don't like running MySQL on a public interface since
+there were publicly known security vulnerabilities in the MySQL binary
+protocol, and I can assure you there will be more discovered over the time.&lt;/p&gt;
+&lt;p&gt;So, what should we do to access our remote database securely and conveniently?
+Run the MySQL server on 127.0.0.1:3306 (well, if your web server is located on
+another machine, you may want to bind MySQL to some internal interface -- the
+network that links your servers only, e.g. 192.168.1.1:3306), and then use the
+SSH port-forwarding feature to setup a tunnel between your remote database and
+your local computer:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;ssh -L3306:127.0.0.1:3306 user@server&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;Here, &lt;code&gt;-L3306:127.0.0.1:3306&lt;/code&gt; says that we want &lt;code&gt;127.0.0.1:3306&lt;/code&gt; to be "mapped"
+to our local host to port &lt;code&gt;3306&lt;/code&gt;. While the SSH session is active any packet
+sent to &lt;code&gt;localhost:3306&lt;/code&gt; (on your computer) will be forwarded over the SSH
+encrypted channel to the remote server and then will be fed to remote's
+&lt;code&gt;127.0.0.1:3306&lt;/code&gt;.  This means that as long as your SSH session is alive you
+will be able to work with the remote MySQL server like it's running on your
+local computer and you can use any MySQL tools locally.&lt;/p&gt;
+&lt;p&gt;Well, the above command was given for Linux, Mac OSX, and other Unix-based
+systems. For Windows, you can use PuTTY to achive the same. I found the
+following &lt;a href="https://www.akadia.com/services/ssh_putty.html"&gt;instructions for PuTTY&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;OK, this is not a new topic and it was described many times here and there on
+the Internet, but I decided to write this article as a foundation for my
+further articles on this topic which will cover more advanced usage of the SSH
+port-forwarding feature. For example, I intend to document a configuration of
+the MySQL replication setup between two servers located at two different data
+centres where each server is a part of a server farm protected by a firewall.&lt;/p&gt;</content><category term="ssh"></category><category term="ssh"></category><category term="console"></category><category term="bastion"></category></entry><entry><title>HOWTO: VMware Player as a remote console (VNC)</title><link href="2010/11/24/howto-vmware-player-as-a-remote-console-vnc/" rel="alternate"></link><published>2010-11-24T10:00:00+11:00</published><updated>2010-11-24T10:00:00+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:None,2010-11-24:2010/11/24/howto-vmware-player-as-a-remote-console-vnc/</id><summary type="html">&lt;p&gt;Turning VMware Player into a non-privileged VNC client to access VMware VMs from a Linux-based PC&lt;/p&gt;</summary><content type="html">&lt;p&gt;Since I am doing a lot of remote systems administration tasks due to the nature
+of my IT consulting work and since I am also running Linux on all my computers
+I was looking for a native way how to get a remote console to VMware VMs from
+linux.&lt;/p&gt;
+&lt;p&gt;After some searching I found that &lt;a href="http://www.vmware.com/go/downloadplayer/"&gt;VMware Player&lt;/a&gt; (which has native binaries for
+Linux) can be used as a VNC client to get to VMs consoles. However, once I have
+downloaded VMware Player's bundle and was faced with its requirement to run the
+installation script as root I became quite unhappy with an idea of running some
+proprietary software on my machine as root, especially after looking into the
+bundle and the way the installation script was written. Moreover, there was no
+need for other parts of &lt;a href="http://www.vmware.com/go/downloadplayer/"&gt;VMware Player&lt;/a&gt; -- I just wanted to have a small tool to
+be able to hook the remote consoles up under my lovely Linux environment.
+Therefore, I decided to take a challenge and to tweak the installation so it
+will be possible to install the whole thing as a non-privileged user. Another
+sub-goal was to strip the installation further down and prepare a small package
+with only components needed for remote console sessions.&lt;/p&gt;
+&lt;p&gt;If you are not concerned about security (and integrity) of your system, e.g.
+you are fine with the re-installation of the whole system, then it will be
+cheaper to just install the &lt;a href="http://www.vmware.com/go/downloadplayer/"&gt;VMware Player&lt;/a&gt; under the root account. In this case
+you don't need to read any further since what I am describing below is for
+those brave hearts who value their systems and who do not want to give a chance
+to mess their systems up by running low-quality custom installation scripts as
+root.&lt;/p&gt;
+&lt;p&gt;Well, if you are still reading, then I hope that my research on this topic and
+the how-to I have spent considerable time to come up with is worth something
+and will be of some help to you.&lt;/p&gt;
+&lt;p&gt;Our starting point is a Linux-based system (it does not matter what
+distribution you are running, but I did everything on a customised &lt;a href="https://en.altlinux.org/"&gt;ALT Linux&lt;/a&gt;'s
+RPM-based distribution) running on an x86 compatible hardware (mine was 32-bit,
+but I see no issues with 64-bit ones).&lt;/p&gt;
+&lt;p&gt;The first step is to download &lt;a href="http://www.vmware.com/go/downloadplayer/"&gt;VMware Player&lt;/a&gt; for your architecture, set proper
+permissions on the downloaded file, and then extract the payload as follows
+(you need to ensure that you have at least 40MB of free space on &lt;code&gt;/tmp&lt;/code&gt;, BTW):&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ chmod 0700 ./VMware-Player-3.1.3.324285.i386.bundle
+$ ./VMware-Player-3.1.3-324285.i386.bundle --console -x $(pwd)/vmplayer
+Extracting VMware Installer...done.
+No protocol specified
+No protocol specified
+$ ls -l vmplayer
+total 20
+drwxr-xr-x  8 vmware vmware 4096 Nov 23 09:01 vmware-installer
+drwxr-xr-x  4 vmware vmware 4096 Nov 23 09:01 vmware-ovftool
+drwxr-xr-x  5 vmware vmware 4096 Nov 23 09:01 vmware-player
+drwxr-xr-x 11 vmware vmware 4096 Nov 23 09:01 vmware-player-app
+drwxr-xr-x  3 vmware vmware 4096 Nov 23 09:01 vmware-player-setup&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;So far so good. We now have the whole bundle unacked into the specified
+directory and we are interested in just two subdirectories: &lt;code&gt;vmware-player&lt;/code&gt; and
+&lt;code&gt;vmware-player-app&lt;/code&gt;, the rest is not related to the functionality we are
+looking for.&lt;/p&gt;
+&lt;p&gt;Now, let's pick up all parts from which we will build our future "VMware remote
+console" tool. To make it easier create a dedicated subdirectory, e.g.
+&lt;code&gt;vmrconsole&lt;/code&gt;, with the following structure:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ mkdir -m700 ~/vmrconsole
+$ mkdir -m700 ~/vmrconsole/{bin,etc,lib,share}
+$ ls -l ~/vmrconsole
+total 12
+drwx------ 2 vmware vmware 4096 Nov 24 01:21 bin
+drwx------ 2 vmware vmware 4096 Nov 24 01:21 etc
+drwx------ 2 vmware vmware 4096 Nov 24 01:21 lib
+drwx------ 2 vmware vmware 4096 Nov 24 01:21 share&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;From now on we are going to populate these directories with files from the
+unpacked bundle.&lt;/p&gt;
+&lt;p&gt;The first file we are interested in is &lt;code&gt;appLoader&lt;/code&gt; -- this is the primary
+executable by the way, we need to copy it to our bin directory and then try to
+run it:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ cp ~/vmplayer/vmware-player-app/lib/bin/appLoader ~/vmrconsole/bin/
+$ chmod 0700 ~/vmrconsole/bin/appLoader
+$ ln -s appLoader ~/vmrconsole/bin/vmplayer
+$ ~/vmrconsole/bin/vmplayer 
+$ echo $?
+255
+$&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;Huh, this is not very informative, is it? The binary silently exits with error
+code of 255. Well, you may get other errors at this stage if you don't have all
+the required shared libraries installed on you system -- however I doubt it
+since the requirements of this binary are pretty reasonable: glibc and zlib.&lt;/p&gt;
+&lt;p&gt;OK, let's take a peek inside and figure out what is going on (originally I used
+strace with logging to a file, but to keep this article reasonable short I am
+highlighting important things only):&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ strace -f -eopen ~/vmrconsole/bin/vmplayer 2&amp;gt;&amp;amp;1 | tail -2
+open(&amp;quot;/etc/localtime&amp;quot;, O_RDONLY)        = 6
+open(&amp;quot;/etc/vmware/config&amp;quot;, O_RDONLY|O_LARGEFILE) = -1 EACCES (Permission denied)&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;It looks that vmplayer wants to access a global config file and does not try to
+look for an alternative, home directory based one. Well, this is understandable
+since VMware folks did not expect it to be run as a non-privileged process, but
+we need to deal with this somehow. What are our options here? The simpliest
+option I could think of at the moment is to substitute the hardcoded absolute
+path inside the binary with something relative:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ strings ~/vmrconsole/bin/appLoader | fgrep /etc/vmware | uniq -c
+      1 /etc/vmware/config
+      1 /etc/vmware/icu
+      1 /etc/vmware/ssl/rui.crt
+      1 /etc/vmware/ssl/rui.key
+      1 /etc/vmware/ssl/dh512.pem
+      1 /etc/vmware/ssl/dh1024.pem
+$ sed -i 's,/etc/vmware,..//////etc,g' ~/vmrconsole/bin/appLoader&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;The trick here is to substitute one string with another of the same length (we
+are modifying a binary so we do not want to mess offsets up) and luckily enough
+we can use whatever number of slashes we want -- they all are considered as a
+single separator nevertheless. OK, we could have used a hex editor and could
+have terminated strings with a NULL byte, but the point is that the approach I
+took is the quickest and is working well. Let's run the modified binary through
+strace again, but this time we need to be prepared for the changed behaviour:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ cd ~/vmrconsole/bin/
+$ touch ../etc/config
+$ strace -f -emkdir,lstat,open,write ./vmplayer 2&amp;gt;&amp;amp;1 | tail -12
+mkdir(&amp;quot;/tmp/.private/vmware/vmware-vmplayer&amp;quot;, 0700) = -1 EEXIST (File exists)
+open(&amp;quot;/tmp/.private/vmware/vmware-vmplayer/appLoader-9245.log&amp;quot;, O_RDWR|O_CREAT|O_APPEND|O_LARGEFILE, 0644) = 5
+open(&amp;quot;/etc/localtime&amp;quot;, O_RDONLY)        = 6
+write(5, &amp;quot;Nov 24 01:53:09.824: app-3077760&amp;quot;..., 121) = 121
+write(5, &amp;quot;Nov 24 01:53:09.824: app-3077760&amp;quot;..., 60) = 60
+write(5, &amp;quot;Nov 24 01:53:09.824: app-3077760&amp;quot;..., 71) = 71
+write(5, &amp;quot;Nov 24 01:53:09.824: app-3077760&amp;quot;..., 57) = 57
+write(5, &amp;quot;\&amp;quot;\n&amp;quot;, 2)                     = 2
+write(5, &amp;quot;Nov 24 01:53:09.825: app-3077760&amp;quot;..., 82) = 82
+open(&amp;quot;..//////etc/config&amp;quot;, O_RDONLY|O_LARGEFILE) = 6
+write(5, &amp;quot;Nov 24 01:53:09.825: app-3077760&amp;quot;..., 89) = 89
+write(5, &amp;quot;Nov 24 01:53:09.825: app-3077760&amp;quot;..., 73) = 73&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;Looks better, does not it? Our binary found the config file and was able to
+open it, however it still produces no output, but it reports something to a log
+file:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ tail -7 /tmp/.private/vmware/vmware-vmplayer/appLoader-9245.log
+Nov 24 01:53:09.824: app-3077760704| Log for VMware Workstation pid=9245 version=7.1.3 build=build-324285 option=Release
+Nov 24 01:53:09.824: app-3077760704| The process is 32-bit.
+Nov 24 01:53:09.824: app-3077760704| Host codepage=utf8 encoding=UTF-8
+Nov 24 01:53:09.824: app-3077760704| Calling: &amp;quot;./vmplayer&amp;quot;
+Nov 24 01:53:09.825: app-3077760704| Using configuration file ..//////etc/config.
+Nov 24 01:53:09.825: app-3077760704| libdir entry was not present in ..//////etc/config.
+Nov 24 01:53:09.825: app-3077760704| Unable to lookup library directory.&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;I do not know much about VMware Players config file but according to the log
+message it wants some variable called &lt;code&gt;libdir&lt;/code&gt; and this variable should point
+to the library directory, so let's introduce such a variable and try to execute
+the binary again:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ echo 'libdir = ..' &amp;gt;&amp;gt; ../etc/config
+$ strace -f -emkdir,lstat,open,write ./vmplayer 2&amp;gt;&amp;amp;1 | tail -4
+write(5, &amp;quot;LOG NOT INITIALIZED | LoadLibrar&amp;quot;..., 73) = 73
+open(&amp;quot;../lib/libvmplayer.so/libvmplayer.so&amp;quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
+write(5, &amp;quot;LOG NOT INITIALIZED | Error load&amp;quot;..., 153) = 153
+write(5, &amp;quot;LOG NOT INITIALIZED | Could not &amp;quot;..., 74) = 74&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;I hope you have noticed that I have used a relative path for the library
+directory in the config file and this means that we always should run the
+binary with its directory being the current working directory. This is a bit
+inconvenient, but we will solve this with a wrapper script later. Right now, we
+need to get it working and we see that it tried to dynamically load some
+library from the library directory. OK, let's search for this library in the
+unpacked bundle directory and copy the library file over to our tree:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ find ~/vmplayer -name libvmplayer.so
+/home/vmware/vmplayer/vmware-player-app/lib/lib/libvmplayer.so
+/home/vmware/vmplayer/vmware-player-app/lib/lib/libvmplayer.so/libvmplayer.so
+$ cp -a ~/vmplayer/vmware-player-app/lib/lib/libvmplayer.so ~/vmrconsole/lib/
+$ ldd ~/vmrconsole/lib/libvmplayer.so/libvmplayer.so | fgrep 'not found'
+ libview.so.2 =&amp;gt; not found
+ libcds.so =&amp;gt; not found
+ libvmwarebase.so.0 =&amp;gt; not found
+ libvmwareui.so.0 =&amp;gt; not found
+ libgvmomi.so.0 =&amp;gt; not found&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;The last command showed that &lt;code&gt;libvmplayer.so&lt;/code&gt; depends on some libraries and
+that their locations are currently unknown to the system. In order to solve
+this there are two things we need to do:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;We need to tell the system where it should search for the libraries;&lt;/li&gt;
+&lt;li&gt;We need to locate these libraries and put them into a directory where the
+   system will find them.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;To accomplish the first thing we need to create a wrapper script around
+vmplayer and use this script for fine-tuning later. Here is the very basic
+script for this purpose (created as &lt;code&gt;~/vmrconsole/bin/loader.sh&lt;/code&gt;:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;#!/bin/bash
+
+# We must run vmplayer from the directory it resides in since all
+# relative paths are solved from there.
+ORIG_NAME=&amp;quot;${BASH_SOURCE##*/}&amp;quot;
+ABS_NAME=$(readlink -e $BASH_SOURCE) || exit 1
+VMW_BINDIR=&amp;quot;${ABS_NAME%/*}&amp;quot;
+VMW_LIBDIR=&amp;quot;$VMW_BINDIR/../lib&amp;quot;
+
+# check that directories exist, if not notify the user
+if [ ! -d &amp;quot;$VMW_BINDIR&amp;quot; ]; then
+    echo &amp;quot;ERROR: cannot determine the directory where this script resides!&amp;quot; &amp;gt;&amp;amp;2
+    exit 1
+fi
+
+# preserve the current working directory
+OLD_PWD=&amp;quot;$PWD&amp;quot;
+
+if ! cd &amp;quot;$VMW_LIBDIR&amp;quot; &amp;gt;/dev/null 2&amp;gt;&amp;amp;1 ; then
+    echo &amp;quot;ERROR: the '$VMW_LIBDIR' directory does not exist!&amp;quot; &amp;gt;&amp;amp;2
+    exit 1
+fi
+
+# resolve the library directory path (to get rid off ../ inside of it)
+VMW_LIBDIR=$(pwd -P 2&amp;gt;/dev/null)
+if [ $? -ne 0 -o ! -d &amp;quot;$VMW_LIBDIR&amp;quot; ]; then
+    echo &amp;quot;ERROR: could not resolve the '$VMW_LIBDIR' directory path!&amp;quot; &amp;gt;&amp;amp;2
+    exit 1
+fi
+
+# return back since it possible that we were called as ./vmrconsole
+if ! cd &amp;quot;$OLD_PWD&amp;quot; &amp;gt;/dev/null 2&amp;gt;&amp;amp;1 ; then
+    echo &amp;quot;ERROR: could not return to the original '$OLD_PWD' directory!&amp;quot; &amp;gt;&amp;amp;2
+    exit 1
+fi
+
+# we don't need the following variable anymore
+unset OLD_PWD
+
+# change the current directory to $VMW_BINDIR
+if ! cd &amp;quot;$VMW_BINDIR&amp;quot; &amp;gt;/dev/null 2&amp;gt;&amp;amp;1 ; then
+    echo &amp;quot;ERROR: failed to change directory to '$VMW_BINDIR'!&amp;quot; &amp;gt;&amp;amp;2
+    exit 1
+fi
+
+# set the library search path so the dynamic linker will be able
+# to locate locally installed libraries.
+LD_LIBRARY_PATH=&amp;quot;$VMW_LIBDIR${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}&amp;quot;
+export LD_LIBRARY_PATH
+
+# execute the real binary and pass the supplied arguments to it
+exec -a &amp;quot;$ORIG_NAME&amp;quot; ./appLoader &amp;quot;$@&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;This wrapper script should not be called directly, instead we need to create a
+symbolic link to this wrapper, e.g. for vmplayer the following should be
+performed:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ ln -sf loader.sh ~/vmrconsole/bin/vmplayer&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;Since our vmplayer is not a full scale VMware Player I suggest to create
+another small wrapper script and name it &lt;code&gt;vmrconsole&lt;/code&gt;:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ cat ~/vmrconsole/bin/vmrconsole
+#!/bin/bash
+ABS_NAME=$(readlink -e $BASH_SOURCE) || exit 1
+BINDIR=&amp;quot;${ABS_NAME%/*}&amp;quot;
+exec &amp;quot;$BINDIR/vmplayer&amp;quot; -h &amp;quot;$@&amp;quot;
+$ chmod 0700 ~/vmrconsole/bin/vmrconsole&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;Now we need to populate our library directory with the needed libraries. It is
+a bit tricky to describe since on different systems you will likely end up with
+different sets of libraries inside our local directory. For example, on my
+system I have quite a few of the libraries installed from the distribution
+repositories and these versions of libraries are fresher and with many bug
+fixes in comparison to the VMWare provided ones.&lt;/p&gt;
+&lt;p&gt;Anyway, the general approach to install missing libraries is the following --
+we start with the libraries we determined as missing during our &lt;code&gt;ldd
+~/vmrconsole/lib/libvmplayer.so/libvmplayer.so | fgrep 'not found'&lt;/code&gt; step (we
+need to locate and copy them over to our library directory):&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ ldd ~/vmrconsole/lib/libvmplayer.so/libvmplayer.so | fgrep 'not found' | awk '{ print $1; }' | xargs -i find ~/vmplayer -type f -name '{}' -execdir cp -avL '{}' ~/vmrconsole/lib/ \;
+`libview.so.2' -&amp;gt; `/home/vmware/vmrconsole/lib/libview.so.2'
+`libcds.so' -&amp;gt; `/home/vmware/vmrconsole/lib/libcds.so'
+`libvmwarebase.so.0' -&amp;gt; `/home/vmware/vmrconsole/lib/libvmwarebase.so.0'
+`libvmwareui.so.0' -&amp;gt; `/home/vmware/vmrconsole/lib/libvmwareui.so.0'
+`libgvmomi.so.0' -&amp;gt; `/home/vmware/vmrconsole/lib/libgvmomi.so.0'&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;Once this is done we need to follow the following loop until there is no output
+from the command listed below (in fact, on my system this step was not needed
+since I had all dependencies in place already, but it is harmless to execute
+this command anyway):&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ LD_LIBRARY_PATH=~/vmrconsole/lib ldd ~/vmrconsole/lib/* 2&amp;gt;/dev/null | fgrep 'not found' | awk '{ print $1; }' | xargs -i find ~/vmplayer -type f -name '{}' -execdir cp -avL '{}' ~/vmrconsole/lib/ \;&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;If we try to access any remote VM's console it will be clear that some parts
+are still missing:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ vmrconsole 192.168.70.31
+Failed to open file '/usr/lib/vmware/share/pixmaps/progress.png': No such file or directory
+Failed to open file '/usr/lib/vmware/share/pixmaps/eula.png': No such file or directory
+Failed to open file '/usr/lib/vmware/share/pixmaps/stream-spinner.png': No such file or directory
+Failed to open file '/usr/lib/vmware/share/pixmaps/stream-spinner-stopped.png': No such file or directory
+SSLLoadSharedLibrary: Failed to load library libcrypto.so.0.9.8:/home/vmplayer/vmrconsole/bin/libdir/lib/libcrypto.so.0.9.8/libcrypto.so.0.9.8: cannot open shared object file: No such file or directory&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;&lt;code&gt;strace&lt;/code&gt; is our best friend here, just run the command through &lt;code&gt;strace&lt;/code&gt;,
+examine the log file, and fix stuff properly:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ strace -f -eopen -o ~/strace.log vmrconsole 192.168.70.31 &amp;gt;/dev/null 2&amp;gt;&amp;amp;1
+$ less -n ~/strace.log
+$ cd ~/vmrconsole/lib
+$ fgrep -lr /vmware *
+libcds.so
+libgvmomi.so.0
+libvmplayer.so/libvmplayer.so
+libvmwarebase.so.0
+libvmwareui.so.0
+$ strings libcds.so | fgrep /vmware
+/etc/vmware/bootstrap
+/etc/vmware-installer/bootstrap
+/etc/vmware-installer/database
+$ sed -i 's,/etc/vmware/,..//////etc/,' libcds.so 
+$ sed -i 's,/etc/vmware-installer/,..//////etc/installer/,' libcds.so 
+$ strings libgvmomi.so.0 | fgrep /vmware
+/etc/vmware/hostd/proxy.xml
+/etc/vmware/icu
+/etc/vmware/ssl/rui.crt
+/etc/vmware/ssl/rui.key
+/etc/vmware/ssl/dh512.pem
+/etc/vmware/ssl/dh1024.pem
+$ sed -i 's,/etc/vmware/,..//////etc/,g' libgvmomi.so.0
+$ strings libvmplayer.so/libvmplayer.so | fgrep /vmware
+/usr/lib/vmware
+bin/vmware-vmrc-daemon
+$ strings libvmwarebase.so.0 | fgrep /vmware
+/etc/vmware/config
+/usr/lib/vmware
+/etc/vmware/icu
+/etc/vmware/CVP
+vmauthd/vmware-authd
+/usr/sbin/vmware-authd
+/var/run/vmware/authd_
+/var/run/vmware
+/etc/vmware/ssl/rui.crt
+/etc/vmware/ssl/rui.key
+/etc/vmware/ssl/dh512.pem
+/etc/vmware/ssl/dh1024.pem
+/var/run/vmware/usbarbitrator-socket
+/usr/lib/vmware/settings
+/usr/lib/vmware/config
+bin/vmware-vmx
+bin/vmware-vmx-debug
+bin/vmware-vmx-stats
+%s/vmware-speedtest-%d.tmp
+/etc/vmware/vmware-ace/host.vmpl
+/etc/vmware/vmware-ace/host-update.vmpl
+/etc/vmware
+$ sed -i 's,/etc/vmware/,..//////etc/,g' libvmwarebase.so.0 
+$ sed -i 's,/etc/vmware,..//////etc,g' libvmwarebase.so.0 
+$ sed -i 's,/usr/lib/vmware/,..//////////etc/,g' libvmwarebase.so.0 
+$ sed -i 's,/var/run/vmware,..//////var/run,g' libvmwarebase.so.0 
+$ strings libvmwareui.so.0 | fgrep /usr/lib/vmware
+/usr/lib/vmware
+$ strings libvmwareui.so.0 | fgrep /var/run/vmware
+/var/run/vmware/fuse/%Lu.info
+$ sed -i 's,/var/run/vmware,..//////var/run,g' libvmwareui.so.0&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;Ufff, we did a lot of binary patching -- luckily, VMware binaries and libraries
+are not calculating their checksums. Now, we need to put all this stuff we have
+seen in the &lt;code&gt;strings&lt;/code&gt; output and during the execution of the program in place (in
+accordance to our new relative paths):&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ find ~/vmplayer -name icu
+/home/vmware/vmplayer/vmware-player-app/lib/icu
+$ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/icu ~/vmrconsole/etc/
+$ mkdir -m700 ~/vmrconsole/etc/ssl
+$ find ~/vmplayer -name CVP
+$ mkdir -m700 ~/vmrconsole/var
+$ mkdir -m700 ~/vmrconsole/var/run
+$ find ~/vmplayer -name pixmaps
+/home/vmware/vmplayer/vmware-player/lib/share/pixmaps
+/home/vmware/vmplayer/vmware-player-app/lib/share/pixmaps
+$ mkdir -m700 ~/vmrconsole/share/pixmaps
+$ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/share/pixmaps/* ~/vmrconsole/share/pixmaps/
+$ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/share/EULA.txt ~/vmrconsole/share/
+$ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/share/*.ui ~/vmrconsole/share/
+$ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/share/icons ~/vmrconsole/share/&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;At this stage we should be able to launch the vmplayer program via our wrapper
+script (I am launching it on a remote machine through SSH, but here I am
+describing how it should look on the local console):&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ ~/vmrconsole/bin/vmplayer&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;&lt;img alt="VMware Player: main window" class="figure" src="images/howto-vmware-player-as-remote-console-01.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;So far so good, but we need to resolve the issue with the OpenSSL library
+dependency. To resolve the issue we need to create symbolic links from our
+local library directory to the system-wide version of the OpenSSL library:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ ln -s /usr/lib/libcrypto.so.0.9.8 ~/vmrconsole/lib/
+$ ln -s /usr/lib/libssl.so.0.9.8 ~/vmrconsole/lib/
+$ ls -ld ~/vmrconsole/lib/lib*.so.0.9.8 
+lrwxrwxrwx 1 vmware vmware 27 Nov 24 05:27 /home/vmware/vmrconsole/lib/libcrypto.so.0.9.8 -&amp;gt; /usr/lib/libcrypto.so.0.9.8
+lrwxrwxrwx 1 vmware vmware 27 Nov 24 05:27 /home/vmware/vmrconsole/lib/libssl.so.0.9.8 -&amp;gt; /usr/lib/libssl.so.0.9.8&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;Let's try to connect to remote VM's console again:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ vmrconsole 192.168.70.31&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;&lt;img alt="VMware Player: credentials window" class="figure" src="images/howto-vmware-player-as-remote-console-02.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="VMware Player: MKS error message" class="figure" src="images/howto-vmware-player-as-remote-console-03.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;Well, this error message does not say much except that we are not getting our
+console :). If we check the log file directory we would see there is a file
+called &lt;code&gt;player-XXXXX.log&lt;/code&gt; (where XXXXX is the PID of the VMware Player that
+produced this log file). Inside the log file we may see some interesting parts
+like the following (I have included only those messages which are related to our
+task):&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-syslog"&gt;Nov 24 03:40:42.002: player| CDS error: Cannot locate VMIS, bootstrap file /etc/vmware-installer/bootstrap unavailable!
+Nov 24 03:40:42.072: player| Unable to launch vmplayer-daemon: File does not exist.
+Nov 24 03:40:42.072: player| Unable to find /home/vmplayer/bin/vmware-unity-helper in attempt to launch daemon.
+Nov 24 03:41:04.630: player| Player dispatch: Opening VM while not connected to the daemon.
+Nov 24 03:41:05.437: player| ConnectMksClient - calling VMClient_ConnectMksClientEx
+Nov 24 03:41:05.437: player| VMClient_ConnectMksClientEx - trying local socket connection
+Nov 24 03:41:05.444: player| Cnx_Connect: Returning false because CnxConnectAuthd failed
+Nov 24 03:41:05.444: player| Cnx_Connect: Error message: Connection terminated by server
+Nov 24 03:41:05.444: player| VMClient_ConnectMksClientEx - trying remote socket connection
+Nov 24 03:41:05.611: player| VMClient_ConnectMksClientEx - connecting the MKS client
+Nov 24 03:41:05.616: player| vmdbPipe_Streams: Couldn't read
+Nov 24 03:41:15.941: player| Gdk: losing last reference to undestroyed window&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;From the messages quoted above it is quite clear that the program is trying to
+launch some helper binaries/daemons in the background and to delegate the
+actual remote console task to them. You can &lt;code&gt;strace&lt;/code&gt;/&lt;code&gt;ltrace&lt;/code&gt; the whole thing,
+review the resulting logs and you will find that it tries to execute two helper
+binaries: &lt;code&gt;vmware-authd&lt;/code&gt; and &lt;code&gt;vmware-remotemks&lt;/code&gt;, the latter is the remote
+console engine, while the former is some kind of an authentication daemon and I
+do not think it is needed for our purposes. I am not going to describe in
+details how I arrived at the following (it is all clear once you have studied
+the &lt;code&gt;strace&lt;/code&gt;/&lt;code&gt;ltrace&lt;/code&gt; log files):&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ find ~/vmplayer -name vmware-authd -o -name vmware-remotemks
+/home/vmware/vmplayer/vmware-player-app/lib/bin/vmware-remotemks
+/home/vmware/vmplayer/vmware-player-app/sbin/vmware-authd
+$ mkdir -m700 ~/vmrconsole/vmauthd
+$ ln -s `which true` ~/vmrconsole/vmauthd/vmware-authd
+$ ls -ld ~/vmrconsole/vmauthd/vmware-authd
+lrwxrwxrwx 1 vmware vmware 9 Nov 24 04:15 /home/vmware/vmrconsole/vmauthd/vmware-authd -&amp;gt; /bin/true
+$ cp -aL ~/vmplayer/vmware-player-app/lib/bin/vmware-remotemks ~/vmrconsole/bin/
+$ chmod 0700 ~/vmrconsole/bin/vmware-remotemks
+$ strings ~/vmrconsole/bin/vmware-remotemks | fgrep /vmware
+/usr/lib/vmware
+/etc/vmware/config
+/etc/vmware/icu
+/etc/vmware/ssl/rui.crt
+/etc/vmware/ssl/rui.key
+/etc/vmware/ssl/dh512.pem
+/etc/vmware/ssl/dh1024.pem
+/etc/vmware/CVP
+vmauthd/vmware-authd
+/usr/sbin/vmware-authd
+/var/run/vmware/authd_
+/var/run/vmware
+$ sed -i 's,/var/run/vmware,..//////var/run,g' ~/vmrconsole/bin/vmware-remotemks
+$ sed -i 's,/etc/vmware/,..//////etc/,g' ~/vmrconsole/bin/vmware-remotemks&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;Another attempt:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ vmrconsole 192.168.70.31&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;&lt;img alt="VMware Player: hints messages" class="figure" src="images/howto-vmware-player-as-remote-console-04.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;Ouch, we are presented by a bunch of hints (your mileage may vary since it
+depends on the environment), but you surely will see the hint/error message
+presented on the above screenshot.&lt;/p&gt;
+&lt;p&gt;This is not a showstopper if you are an English-only user - just click on the
+OK button and you should be able to work with the console, however I think it
+is just a right thing to do to fix this little bugger:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ find ~/vmplayer -iname xkeymap
+/home/vmware/vmplayer/vmware-player-app/lib/xkeymap
+$ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/xkeymap ~/vmrconsole/
+$ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/vnckeymap ~/vmrconsole/
+$ vmrconsole 192.168.70.31&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;&lt;img alt="VMware Player: remote console window" class="figure" src="images/howto-vmware-player-as-remote-console-05.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;We are almost done! At least we achieved the goal we set at the beginning of
+this article.&lt;/p&gt;
+&lt;p&gt;Now, it is time to ensure that all file/directory permissions are strict enough
+and to create a tarball, then place it somewhere so we will be able to use our
+new tool when the right time comes:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ cd ~/vmrconsole
+$ find . -type d -execdir chmod 0700 '{}' \;
+$ find . -type f -execdir chmod 0600 '{}' \;
+$ chmod 0700 bin/*
+$ cd
+$ mv vmrconsole vmrconsole-3.1.3.324285
+$ tar cjpf ~/vmrconsole-3.1.3.324285.i386.tar.bz2 vmrconsole-3.1.3.324285
+$ ls -lh vmrconsole-3.1.3.324285.i386.tar.bz2 
+-rw-r--r-- 1 vmware vmware 13M Nov 24 07:06 vmrconsole-3.1.3.324285.i386.tar.bz2&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;P.S. Oh, boy, it takes 2 hours to investigate and to come up with a solution,
+then 8 hours to write an article to describe steps to reproduce! I hope that
+somebody has found this article useful and I would appreciate any comments.&lt;/p&gt;</content><category term="hacking"></category></entry></feed>
