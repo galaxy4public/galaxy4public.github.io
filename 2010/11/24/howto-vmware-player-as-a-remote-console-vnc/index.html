@@ -26,7 +26,7 @@
 		<script src="/theme/js/loader.js" defer></script>
 		<link rel="icon" type="image/png" href="/images/galaxy.png">
 
-		<link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/css/article.css" />
+		<link rel="stylesheet" type="text/css" href="/theme/css/article.css" />
 	</head>
 	<body>
 		<input type="checkbox" id="menu-toggle" />
@@ -474,7 +474,7 @@ describing how it should look on the local console):</p>
 <pre class="highlight"><code class="language-shell">$ ~/vmrconsole/bin/vmplayer</code></pre>
 
 
-<p><img alt="VMware Player: main window" class="figure" src="http://localhost:8000/images/howto-vmware-player-as-remote-console-01.jpg"></p>
+<p><img alt="VMware Player: main window" class="figure" src="https://dmitry.khlebnikov.net/images/howto-vmware-player-as-remote-console-01.jpg"></p>
 <p>So far so good, but we need to resolve the issue with the OpenSSL library
 dependency. To resolve the issue we need to create symbolic links from our
 local library directory to the system-wide version of the OpenSSL library:</p>
@@ -489,8 +489,8 @@ lrwxrwxrwx 1 vmware vmware 27 Nov 24 05:27 /home/vmware/vmrconsole/lib/libssl.so
 <pre class="highlight"><code class="language-shell">$ vmrconsole 192.168.70.31</code></pre>
 
 
-<p><img alt="VMware Player: credentials window" class="figure" src="http://localhost:8000/images/howto-vmware-player-as-remote-console-02.jpg"></p>
-<p><img alt="VMware Player: MKS error message" class="figure" src="http://localhost:8000/images/howto-vmware-player-as-remote-console-03.jpg"></p>
+<p><img alt="VMware Player: credentials window" class="figure" src="https://dmitry.khlebnikov.net/images/howto-vmware-player-as-remote-console-02.jpg"></p>
+<p><img alt="VMware Player: MKS error message" class="figure" src="https://dmitry.khlebnikov.net/images/howto-vmware-player-as-remote-console-03.jpg"></p>
 <p>Well, this error message does not say much except that we are not getting our
 console :). If we check the log file directory we would see there is a file
 called <code>player-XXXXX.log</code> (where XXXXX is the PID of the VMware Player that
@@ -550,7 +550,7 @@ $ sed -i 's,/etc/vmware/,..//////etc/,g' ~/vmrconsole/bin/vmware-remotemks</code
 <pre class="highlight"><code class="language-shell">$ vmrconsole 192.168.70.31</code></pre>
 
 
-<p><img alt="VMware Player: hints messages" class="figure" src="http://localhost:8000/images/howto-vmware-player-as-remote-console-04.jpg"></p>
+<p><img alt="VMware Player: hints messages" class="figure" src="https://dmitry.khlebnikov.net/images/howto-vmware-player-as-remote-console-04.jpg"></p>
 <p>Ouch, we are presented by a bunch of hints (your mileage may vary since it
 depends on the environment), but you surely will see the hint/error message
 presented on the above screenshot.</p>
@@ -564,7 +564,7 @@ $ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/vnckeymap ~/vmrconsole/
 $ vmrconsole 192.168.70.31</code></pre>
 
 
-<p><img alt="VMware Player: remote console window" class="figure" src="http://localhost:8000/images/howto-vmware-player-as-remote-console-05.jpg"></p>
+<p><img alt="VMware Player: remote console window" class="figure" src="https://dmitry.khlebnikov.net/images/howto-vmware-player-as-remote-console-05.jpg"></p>
 <p>We are almost done! At least we achieved the goal we set at the beginning of
 this article.</p>
 <p>Now, it is time to ensure that all file/directory permissions are strict enough
@@ -589,7 +589,7 @@ somebody has found this article useful and I would appreciate any comments.</p>
 					<footer>
 						Offloaded on
 						<time datetime="2010-11-24 10:00:00+11:00">Wed, 24/11/2010 at 10:00 (+1100)</time>
-						<span class="category-tag"><a href="http://localhost:8000/category/hacking">hacking</a></span>
+						<span class="category-tag"><a href="/category/hacking">hacking</a></span>
 					</footer>				</article>
 			</div>
 		</div>

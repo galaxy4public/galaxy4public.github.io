@@ -26,7 +26,7 @@
 		<script src="/theme/js/loader.js" defer></script>
 		<link rel="icon" type="image/png" href="/images/galaxy.png">
 
-		<link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/css/article.css" />
+		<link rel="stylesheet" type="text/css" href="/theme/css/article.css" />
 		<meta name="tags" content="nginx" />
 		<meta name="tags" content="patch" />
 	</head>
@@ -97,7 +97,7 @@
 							<li><a href="#" class="icon fa-facebook">?</a></li>
 						</ul>
 					</div>
-					<p>Recently, I wrote about <a href="http://localhost:8000/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/">the dynamic resolution of upstream servers</a> in
+					<p>Recently, I wrote about <a href="https://dmitry.khlebnikov.net/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/">the dynamic resolution of upstream servers</a> in
 nginx which was achieved by quite an intrusive patch to the core nginx module.
 The patch was invented a while ago and was working very well up until recent
 nginx versions were released.</p>
@@ -468,7 +468,7 @@ Connection closed by foreign host.</code></pre>
 <p>Works as expected :).</p>
 <p>There is one thing one needs to be aware of: when I started to work on this I
 discovered that <code>systemd-socket-proxyd</code> had a hard-coded limit for the number
-of connections set to 256 (I <a href="http://localhost:8000/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/">introduced the <code>-c</code> parameter</a> to
+of connections set to 256 (I <a href="https://dmitry.khlebnikov.net/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/">introduced the <code>-c</code> parameter</a> to
 <code>systemd-socket-proxyd</code>, so one could dynamically set the limit, however it
 would take some time until this change is propagated to all major distros).</p>
 <p>Also, it is worth it to mention that the provided configuration is not
@@ -479,21 +479,21 @@ so if this is the case I would advise to run a local DNS caching service (e.g.
 					<ul class="tags">
 						<li class="tag">
 							<div>
-								<a href="http://localhost:8000/tag/nginx/" class="tag name">nginx</a>
+								<a href="/tag/nginx/" class="tag name">nginx</a>
 							</div>
-							<a href="http://localhost:8000/tag/nginx/" class="tag count">2</a>
+							<a href="/tag/nginx/" class="tag count">2</a>
 						</li>
 						<li class="tag">
 							<div>
-								<a href="http://localhost:8000/tag/patch/" class="tag name">patch</a>
+								<a href="/tag/patch/" class="tag name">patch</a>
 							</div>
-							<a href="http://localhost:8000/tag/patch/" class="tag count">2</a>
+							<a href="/tag/patch/" class="tag count">2</a>
 						</li>
 					</ul>
 					<footer>
 						Offloaded on
 						<time datetime="2017-01-13 10:00:00+11:00">Fri, 13/01/2017 at 10:00 (+1100)</time>
-						<span class="category-tag"><a href="http://localhost:8000/category/hacking">hacking</a></span>
+						<span class="category-tag"><a href="/category/hacking">hacking</a></span>
 					</footer>				</article>
 			</div>
 		</div>
