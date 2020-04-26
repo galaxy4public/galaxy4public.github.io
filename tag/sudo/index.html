@@ -2,83 +2,151 @@
 <html lang="en">
 	<head>
 		<title>Mind Drops</title>
+		<meta http-eqiv="Service-Worker-Allowed" content="/" />
+		<meta name="theme-color" content="#535353" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta name="apple-mobile-web-app-title" content="Mind Drops">
+		<link rel="apple-touch-icon" href="/theme/images/icons/mind-drops-192x192.png">
 		<meta charset="utf-8" />
-		<meta name="description" content="../..">
+		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="manifest" type="text/json" href="/manifest.json" />
-		<link rel="stylesheet" type="text/css" href="../../theme/css/reset.css" />
-		<link rel="stylesheet" type="text/css" href="../../theme/css/font-awesome.min.css" />
-		<link rel="stylesheet" type="text/css" href="../../theme/css/open-fonts.css" />
-		<link rel="stylesheet" type="text/css" href="../../theme/css/base.css" />
-		<link rel="stylesheet" type="text/css" href="../../theme/css/pygment.css" />
-		<link rel="stylesheet" type="text/css" href="../../theme/css/prism.css" defer />
-		<link rel="icon" type="image/png" href="../../images/pelly.png">
+		<link rel="preload" as="style" href="/theme/css/reset.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Icons.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Exo2.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Oswald.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/DancingScript.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/FiraCode.css" />
+		<link rel="preload" as="style" href="/theme/css/base.css" />
+		<link rel="preload" as="script" href="/theme/js/persistence.js" />
+		<link rel="preload" as="script" href="/theme/js/visited.js" />
+		<link rel="preload" as="script" href="/theme/js/service.js" />
+		<script src="/theme/js/loader.js" defer></script>
+		<link rel="icon" type="image/png" href="/images/galaxy.png">
 	</head>
 	<body>
+		<input type="checkbox" id="menu-toggle" />
+		<label for="menu-toggle" class="icon menu"></label>
+		<aside id="sidebar">
+			<!-- Logo -->
+			<div id="logo" class="box shadow">
+				<picture>
+					<source srcset="/images/galaxy.png.webp" type="image/webp">
+					<img src="/images/galaxy.png" alt="Logo">
+				</picture>
+			</div>
 
-		<!-- Sidebar -->
-		<div>
-			<a href="#sidebar" class="toggle"></a>
-			<aside id="sidebar">
-				<!-- Logo -->
-				<div id="logo" class="box shadow">
-					<picture>
-						<source srcset="../../images/galaxy.png.webp" type="image/webp">
-						<img src="../../images/galaxy.png" alt="Logo">
-					</picture>
-				</div>
+			<!-- Search -->
+			<section class="box search">
+				<form name="google search" class="icon search" method="get" action="/search">
+					<label for="search" class="offscreen">Search</label>
+					<input id="search" type="text" class="text" name="q" placeholder="Search" />
+				</form>
+			</section>
 
-				<!-- Search -->
-				<section class="box search">
-					<form method="post" action="#">
-						<label for="search" class="offscreen">Search</label>
-						<input id="search" type="text" class="text" name="search" placeholder="Search" />
-					</form>
-				</section>
-
-				<!-- Nav -->
-				<nav id="nav">
-					<ul>
-						<li class="current"><a href="#">Latest Post</a></li>
-						<li><a href="#">Archives</a></li>
-						<li><a href="#">About Me</a></li>
-						<li><a href="#">Contact Me</a></li>
-					</ul>
-				</nav>
-
-				<!-- Text -->
-				<section class="box text-style1">
-					<div class="inner">
-						<p>
-							<strong>Mind Drops:</strong>: A place to unload all these assorted bits.
-						</p>
-					</div>
-				</section>
-
-				<!-- Copyright -->
-				<ul id="copyright">
-					<li>&copy; Openwall Pty Ltd 2020 </li>
-					<li><a href="#">Terms &amp; Conditions</a></li>
+			<!-- Nav -->
+			<nav id="nav">
+				<ul>
+					<li class="icon home">
+						<a href="/">Home</a>
+					</li>
+					<li class="icon user-agent">
+						<a href="/about">About</a>
+					</li>
+					<li class="icon paper-plane">
+						<a href="/contact">Contact</a>
+					</li>
 				</ul>
-			</aside>
-		</div>
+			</nav>
+
+			<!-- Text -->
+			<section class="box text-style1">
+				<div class="inner">
+					<p>
+						<strong>Mind Drops:</strong>: A place to unload all these assorted bits.
+					</p>
+				</div>
+			</section>
+
+			<!-- Copyright -->
+			<ul id="copyright">
+				<li>&copy; Openwall Pty Ltd 2020 </li>
+				<li><a href="#">Terms &amp; Conditions</a></li>
+			</ul>
+		</aside>
 
 		<!-- Content -->
 		<div id="content">
 			<div class="inner">
-<!-- 
--% block content %}
--% endblock content %}
- -->
+	<div class="page-title">
+		<h1>sudo</h1>
+	</div>
+				<article id="should-we-use-sudo-for-day-to-day-activities" class="box post post-excerpt">
+								<header>
+									<h1><a href="http://localhost:8000/2015/07/18/should-we-use-sudo-for-day-to-day-activities/">Should we use "sudo" for day-to-day activities?</a></h1>
+								</header>
+								<div class="info">
+									<span class="date">
+										<span class="day">18</span>
+										<span class="month"><a href="http://localhost:8000/2015/07/">Jul<span class="month full">y</span></a></span>
+										<span class="year"><a href="http://localhost:8000/2015/">2015</a></span>
+									</span>
+									<ul class="stats">
+										<li><a href="#" class="icon comment">256</a></li>
+										<li><a href="#" class="icon heart">128</a></li>
+										<li><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="icon twitter" data-tweet-id="1251580744557711367">1 </a></li>
+										<li><a href="#" class="icon facebook">5</a></li>
+									</ul>
+								</div>
+								<!-- Here we rely on the fact that Pelican always closes summary with '</p>' -->
+								<div class="summary"><div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#history">History</a></li>
+<li><a href="#people-are-saying-sudo-is-good-is-it-true">People are saying &ldquo;sudo&rdquo; is good. Is it true?</a></li>
+<li><a href="#what-is-the-problem-with-the-sudo-approach">What is the problem with the &ldquo;sudo&rdquo; approach?</a></li>
+<li><a href="#the-light-side-of-sudo-is-there-one">The light side of &ldquo;sudo&rdquo;. Is there one?</a></li>
+<li><a href="#how-can-we-improve-the-security-of-our-systems-in-relation-to-the-sudo-usage">How can we improve the security of our systems in relation to the &ldquo;sudo&rdquo; usage?</a></li>
+</ul>
+</div>
+<p>None of the systems I administer or supervise have <code>sudo</code> installed with the
+SUID bit set.</p>
+<p>Every time I answer a question on how to do privileged work on these systems
+(i.e. do tasks that require administrator privileges) with a proposal to SSH
+under the privileged account directly to do such a work, whoever asked <span class="truncated"></span>
+									<span class="readmore">…
+										<a href="http://localhost:8000/2015/07/18/should-we-use-sudo-for-day-to-day-activities/#continue" class="icon fa-forward">read
+											<span class="readtime">time 15 min.</span>
+										</a>
+									</span>
+								</div>
+					<ul class="tags">
+						<li class="tag">
+							<div>
+								<a href="http://localhost:8000/tag/sudo/" class="tag name">sudo</a>
+							</div>
+							<a href="http://localhost:8000/tag/sudo/" class="tag count">1</a>
+						</li>
+						<li class="tag">
+							<div>
+								<a href="http://localhost:8000/tag/console/" class="tag name">console</a>
+							</div>
+							<a href="http://localhost:8000/tag/console/" class="tag count">7</a>
+						</li>
+					</ul>
+					<footer>
+						Offloaded on
+						<time datetime="2015-07-18 20:04:00+10:00">Sat, 18/07/2015 at 20:04 (+1000)</time>
+						<span class="category-tag"><a href="http://localhost:8000/category/sudo">sudo</a></span>
+					</footer>				</article>
 			</div>
 		</div>
 
-		<!-- Scripts -->
-		<script src="../../theme/js/clipboard/clipboard.js"></script>
-		<script src="../../theme/js/prism/prism.js"></script>
-
+		<!--
+		<script src="/theme/js/clipboard/clipboard.js"></script>
 		<div id="titleBar">
 			<span class="title">Mind Drops</span>
 		</div>
+		-->
 	</body>
 </html>

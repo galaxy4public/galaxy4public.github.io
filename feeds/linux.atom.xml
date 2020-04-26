@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - linux</title><link href="http://localhost:8000/" rel="alternate"></link><link href="http://localhost:8000/feeds/linux.atom.xml" rel="self"></link><id>http://localhost:8000/</id><updated>2016-05-22T12:00:00+10:00</updated><entry><title>Raspberry Pi 3 toolchain on CentOS 7</title><link href="http://localhost:8000/2016/05/22/raspberry-pi-3-toolchain-on-centos-7/" rel="alternate"></link><published>2016-05-22T12:00:00+10:00</published><updated>2016-05-22T12:00:00+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:localhost,2016-05-22:/2016/05/22/raspberry-pi-3-toolchain-on-centos-7/</id><summary type="html">&lt;p&gt;I heard a lot about Raspberry Pi boards but until now I had no need nor time to
+work with one.&lt;/p&gt;
+&lt;p&gt;However, recently I purchased a Dodge Journey R/T and found that although I
+love the car I am so disappointed with its software and hard-wired logic that I
+decided to experiment a bit and fix the most annoying things.&lt;/p&gt;
+&lt;p&gt;Since almost everything inside the car is talking over the CAN bus I needed
+some kind of a enclave inside the car where I could run my code and
+inject/intercept CAN messages.&lt;/p&gt;
+&lt;p&gt;I looked around and found that &lt;span class="truncated"&gt;&lt;/span&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;I heard a lot about Raspberry Pi boards but until now I had no need nor time to
+work with one.&lt;/p&gt;
+&lt;p&gt;However, recently I purchased a Dodge Journey R/T and found that although I
+love the car I am so disappointed with its software and hard-wired logic that I
+decided to experiment a bit and fix the most annoying things.&lt;/p&gt;
+&lt;p&gt;Since almost everything inside the car is talking over the CAN bus I needed
+some kind of a enclave inside the car where I could run my code and
+inject/intercept CAN messages.&lt;/p&gt;
+&lt;p&gt;I looked around and found that I can build the desired appliance using
+Raspberry Pi 3 (Model B) + PiCAN 2 HAT board.&lt;/p&gt;
+&lt;p&gt;Once the hardware was delivered to my home the time came to start building the
+software side of things. My distribution of choice for this project became
+CentOS 7 (userland), however, building stuff on the Raspberry Pi itself was a
+painful and long process, so I needed a proper toolchain to be able to utilise
+much more powerful hardware and do builds quicker.&lt;/p&gt;
+&lt;p&gt;The following is a session dump (with some notes) on how I built my toolchain
+on an AWS EC2 instance which was running a minimal CentOS 7 as its OS.&lt;/p&gt;
+&lt;p&gt;I spawned an EC2 instance (you need at least 8GB of free space there to be able
+to build the toolchain), logged in, and ensured that my system is up to date
+(and update it if it was not):&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;# yum -y update
+Loaded plugins: at-exit, fastestmirror, post-transaction-actions
+Loading mirror speeds from cached hostfile
+ * base: mirror.domain.tld
+ * extras: mirror.domain.tld
+ * updates: mirror.domain.tld
+No packages marked for update&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;The easiest way to build a toolchain is to use the crosstool-ng project, so I
+went ahead and downloaded the latest version with the corresponding GPG
+signature, verified the signature (although the verification was very
+superficial since Bryan Hundven is not in my Web of Trust and the crosstool-ng
+website was not providing an HTTPS page to confirm the fingerprint of the key),
+and unpacked the sources:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;# yum -y install bison bzip2 flex gcc gcc-c++ glibc-static gperf help2man libstdc++-static libtool make ncurses-devel texinfo wget
+# useradd -m build
+# su - build
+$ wget -q 'http://crosstool-ng.org/download/crosstool-ng/crosstool-ng-1.22.0.tar.xz'
+$ wget -q 'http://crosstool-ng.org/download/crosstool-ng/crosstool-ng-1.22.0.tar.xz.sig'
+$ gpg --recv-keys 35B871D1 --keyserver pgp.surfnet.nl
+gpg: &amp;quot;--keyserver&amp;quot; not a key ID: skipping
+gpg: &amp;quot;pgp.surfnet.nl&amp;quot; not a key ID: skipping
+gpg: requesting key 35B871D1 from hkp server keys.gnupg.net
+gpg: /home/build/.gnupg/trustdb.gpg: trustdb created
+gpg: key 35B871D1: public key &amp;quot;Bryan Hundven &amp;quot; imported
+gpg: Total number processed: 1
+gpg:               imported: 1  (RSA: 1)
+$ gpg --verify crosstool-ng-1.22.0.tar.xz.sig
+gpg: Signature made Fri Nov 20 13:09:26 2015 UTC using RSA key ID 35B871D1
+gpg: Good signature from &amp;quot;Bryan Hundven &amp;quot;
+gpg:                 aka &amp;quot;Bryan Hundven &amp;quot;
+gpg:                 aka &amp;quot;Bryan Hundven &amp;quot;
+gpg:                 aka &amp;quot;Bryan Hundven &amp;quot;
+gpg:                 aka &amp;quot;[jpeg image of size 3080]&amp;quot;
+gpg:                 aka &amp;quot;[jpeg image of size 16246]&amp;quot;
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: 561E D9B6 2095 88ED 23C6  8329 CAD7 C8FC 35B8 71D1
+$ tar xJSf crosstool-ng-1.22.0.tar.xz
+$ rm crosstool-ng-1.22.0.tar.xz*&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;The next step was to prepare the environment for the crosstool-ng build process:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;$ cd crosstool-ng
+$ /configure --prefix=$HOME/ct-ng
+checking build system type... x86_64-pc-linux-gnu
+[skipped]
+configure: creating ./config.status
+config.status: creating Makefile
+$ make
+  SED    'ct-ng'
+[skipped]
+  SED    'docs/ct-ng.1'
+  GZIP   'docs/ct-ng.1.gz'
+$ make install
+  GEN    'config/configure.in'
+[skipped]&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;For auto-completion, do not forget to install &lt;code&gt;ct-ng.comp&lt;/code&gt; into your &lt;code&gt;bash&lt;/code&gt;
+completion directory (usually &lt;code&gt;/etc/bash_completion.d/&lt;/code&gt;)&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;$ export PATH=$HOME/ct-ng/bin:$PATH
+$ cd&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;Once the above was done we are ready to actually configure and build our toolchain:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;$ mkdir ~/builddir
+$ cd ~/builddir
+$ ct-ng menuconfig&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;I was quite happy with the defaults and the only changes I made were the
+following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Paths and misc options -&amp;gt; Try features marked as EXPERIMENTAL -&amp;gt; check&lt;/p&gt;
+&lt;p&gt;You may skip this but I prefer to see all available options when I go
+through the list of configurable parameters, hence I enabled this;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Target options -&amp;gt; Target Architecture -&amp;gt; arm&lt;/p&gt;
+&lt;p&gt;My board is Raspberry Pi 3 (Model B) which runs on ARMv8 Cortex-A53, yours
+may be different but most likely it is also ARM based :)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Target options -&amp;gt; Bitness -&amp;gt; 64-bit&lt;/p&gt;
+&lt;p&gt;There is actually almost no point in building a 64-bit version when you are
+running on such a limited device as Raspberry, but at the time I was
+writing this blog post I was building the AArch64 version of the toolchain.
+I would recommend to stick with the 32-bit version of the toolchain if you
+do not have any specific requirements for the 64-bit one;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Target options -&amp;gt; Architecture level -&amp;gt; armv8-a&lt;/p&gt;
+&lt;p&gt;Since my only target was Raspberry Pi 3 (Model B) and the toolchain was
+created for the personal use I did additional optimisation for my board.&lt;/p&gt;
+&lt;p&gt;If you are not sure or if you want a toolchain that would produce more
+compatible code for a range of ARM devices, then leave this setting at its
+default, i.e. blank&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Target options -&amp;gt; Emit assembly for CPU -&amp;gt; cortex-a53&lt;/p&gt;
+&lt;p&gt;Actually, this supersedes the previous option since it is more explicit. If
+you are not optimising for a specific hardware, then leave it at the default
+setting (which is blank).&lt;/p&gt;
+&lt;p&gt;Also, there are more optimisations, e.g. you can specify that FPU for this
+board is neon-fp-armv8, etc. but to keep it simple I decided not to
+showcase that.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Toolchain options -&amp;gt; Tuple&amp;rsquo;s vendor string -&amp;gt; rpi3&lt;/p&gt;
+&lt;p&gt;This is optional but I like my toolchain to be as descriptive as possible,
+e.g. with this setting binaries will be prefixed with
+&lt;code&gt;aarch64-rpi3-linux-gnueabi-&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Operating System -&amp;gt; Target OS -&amp;gt; linux&lt;/p&gt;
+&lt;p&gt;It is essential to set this to &amp;ldquo;linux&amp;rdquo; otherwise &lt;code&gt;crosstool-ng&lt;/code&gt; will assume
+that you are building a toolchain for a bare-bone hardware and the produced
+binaries would not be properly linked to work with the OS on the board&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Once we are comfortable with the configuration of the future toolchain we exit
+the configuration menu (saving the changes) and launch the build process (it
+would take approximately an hour on AWS t2.small instance):&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;configuration written to .config
+
+*** End of the configuration.
+*** Execute 'ct-ng build' to start the build or try 'ct-ng help'.
+
+$ ct-ng build
+[INFO ]  Performing some trivial sanity checks
+[INFO ]  Build started 20160522.070915
+[skipped]
+[INFO ]  Build completed at 20160522.080629
+[INFO ]  (elapsed: 57:14.18)
+[INFO ]  Finishing installation (may take a few seconds)...
+[57:15] /&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;Seems that our Raspberry Pi 3 toolchain is ready to be used. Let&amp;rsquo;s compile
+something and see how it goes:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;$ export PATH=$HOME/x-tools/aarch64-rpi3-linux-gnueabi/bin:$PATH
+$ aarch64-rpi3-linux-gnueabi-gcc --version
+aarch64-rpi3-linux-gnueabi-gcc (crosstool-NG crosstool-ng-1.22.0) 5.2.0
+Copyright (C) 2015 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+$ printf '#include \nint main(){printf(&amp;quot;Hello\\n&amp;quot;); return 0;}\n' &amp;gt; sample.c
+$ aarch64-rpi3-linux-gnueabi-gcc -o sample sample.c
+$ ls -l sample
+-rwxr-xr-x. 1 build build 7672 May 22 08:19 sample
+$ file sample
+sample: ELF 64-bit LSB executable, ARM aarch64, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 4.3.0, not stripped
+$&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;Well, it is time to build some awesome stuff for Raspberry Pi 3, I guess, but
+this will be in another post. :)&lt;/p&gt;</content><category term="linux"></category><category term="console"></category><category term="howto"></category><category term="linux"></category><category term="raspberry pi"></category></entry><entry><title>Building a firewall? Simple and easy!</title><link href="http://localhost:8000/2016/05/22/building-a-firewall-simple-and-easy/" rel="alternate"></link><published>2016-05-22T10:00:00+10:00</published><updated>2016-05-22T10:00:00+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:localhost,2016-05-22:/2016/05/22/building-a-firewall-simple-and-easy/</id><summary type="html">&lt;p&gt;I strive for simplicity since I am a strong believer that achieving a goal with
+the most simplest solution looks elegant, proves that you have deep knowledge
+on the subject, and overall is beautiful by itself.  Additionally to this, a
+simple solution is easier to comprehend and to audit, hence it is much easier
+to ensure the security of such a solution.&lt;/p&gt;
+&lt;p&gt;Over the last decade I stumbled upon numerous complicated firewalls erected on
+the NAT boxes with tens (sometimes, hundreds!) of rules describing the traffic
+flows and punched holes for some edge cases.  Every time I wondered what kind &lt;span class="truncated"&gt;&lt;/span&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;I strive for simplicity since I am a strong believer that achieving a goal with
+the most simplest solution looks elegant, proves that you have deep knowledge
+on the subject, and overall is beautiful by itself.  Additionally to this, a
+simple solution is easier to comprehend and to audit, hence it is much easier
+to ensure the security of such a solution.&lt;/p&gt;
+&lt;p&gt;Over the last decade I stumbled upon numerous complicated firewalls erected on
+the NAT boxes with tens (sometimes, hundreds!) of rules describing the traffic
+flows and punched holes for some edge cases.  Every time I wondered what kind
+of a bug has bitten the person who composed such a convoluted ruleset that is a
+nightmare to manage.&lt;/p&gt;
+&lt;p&gt;In 99% of the cases I was able to come up with a ruleset of usually less than
+20 rules for the whole firewall to achieve exactly the same result.  So, in
+this article I will explain my approach on building firewalls that are easy to
+support and to understand.&lt;/p&gt;
+&lt;p&gt;Before you dive into optimising (or creating) your firewall there are some
+things you need to have a clear understanding of:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Networking&lt;/p&gt;
+&lt;p&gt;You do not need to be an expert or a guru, but you should know fundamentals
+about the protocols, standards, and internals of the networking related to
+the area you are going to secure with the firewall.&lt;/p&gt;
+&lt;p&gt;When you are in doubt, do not rely on an assumption: use search engines and
+locate the corresponding RFC, standard, and/or any other authoritative
+source of information documenting the protocol you are working with.&lt;/p&gt;
+&lt;p&gt;It is impossible to know everything, but the common fallacy is that people
+often create things based on wrong assumptions when it was a couple of
+clicks away to research and understand the subject.  I have seen so many
+times when people are &amp;ldquo;designing&amp;rdquo; their firewalls without a slightest clue
+in regard to the standards covering interoperability of the hosts in the IP
+network.&lt;/p&gt;
+&lt;p&gt;For example, you can easily spot these &amp;ldquo;creations&amp;rdquo; if you look at the
+ruleset and see that there is a rule that drops ICMP packets
+unconditionally (or do not define any rules dealing with ICMP when the
+default policy is &amp;ldquo;deny&amp;rdquo;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Traffic flows&lt;/p&gt;
+&lt;p&gt;Think of a firewall as a filter that manages traffic flows (Figure 1 shows
+a good visual representation of how traffic passes through the Linux
+netfilter subsystem).&lt;/p&gt;
+&lt;p&gt;Before you can make a decision in regard to whether to allow or deny
+something you must know what your are dealing with and what outcome you
+want to achieve.&lt;/p&gt;
+&lt;p&gt;It would tremendously help you later if you could simply draw a diagram of
+your network and overlay it with a layer documenting the inbound and
+outbound flows of each node on the diagram.  Such a &amp;ldquo;data flow&amp;rdquo; diagram is
+supposed to be a part of any solution documentation involving network
+infrastructure, but in reality most of the enterprises (at least the ones I
+worked with) simply forget to generate one.&lt;/p&gt;
+&lt;p&gt;On such a diagram you would be able to see straight away what kind of
+legitimate traffic is going to cross your firewall and what traffic is not
+supposed to reach your firewall at all.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Goals&lt;/p&gt;
+&lt;p&gt;This may sound obvious, but one of the most important things is to know
+exactly what you are trying to achieve.  You are not building a firewall for
+the sake of building a firewall, are you?&lt;/p&gt;
+&lt;p&gt;Frankly speaking, there are just a handful number of scenarios for creating
+a firewall (I fail to come up with more than five at this point) and all of
+them are very simple.&lt;/p&gt;
+&lt;p&gt;If your network provides any services to the external network (e.g.
+Internet) there are just two options I can think of:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Allow external entities to access services on defined public endpoints
+   (an inbound flow) and allow unrestricted outbound traffic from your
+   network to the external one (an outbound flow);&lt;/li&gt;
+&lt;li&gt;Allow external entities to access services on defined public endpoints
+   and restrict outbound traffic from your network to a defined set of
+   external endpoints.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;If your network does not provide any services to the external network and
+only consumes resources from it, I see only two options:&lt;/p&gt;
+&lt;ol start="3"&gt;
+&lt;li&gt;Disallow any access from the external entities to your resources, but
+   allow your network to access the external endpoints and receive
+   responses from there;&lt;/li&gt;
+&lt;li&gt;The same as above, but restrict the outbound traffic to a selected set
+   of the external endpoints.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The fifth scenario is the one I personally do not use and is the blacklist
+approach:&lt;/p&gt;
+&lt;ol start="5"&gt;
+&lt;li&gt;allow everything in each direction and block communication for the
+   specific endpoints only (be they external and/or internal).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Tools&lt;/p&gt;
+&lt;p&gt;Last, but not least, is the requirement to know the corresponding toolset
+you are going to utilise to achieve your goals.&lt;/p&gt;
+&lt;p&gt;There are numerous high-level frameworks which are supposed to make systems
+administrator&amp;rsquo;s life easier (e.g.  RHEL/CentOS/Fedora are using firewalld
+on top of iptables), however, personally I prefer to work with iptables
+directly (thus, my systems do not have firewalld installed).&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Before you start implementing the rules it often helps to describe your
+firewall ruleset in simple sentences, e.g.:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;deny any incoming traffic to our network through the firewall unless it is
+     explicitly allowed by the rules;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;allow any outbound traffic from our network through the firewall unless it
+     is explicitly denied by the rules;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;deny any forwarding of traffic through the firewall unless it is
+     explicitly allowed by the rules;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;allow anyone on the Internet to connect to the webserver on ports 80/tcp
+     and 443/tcp;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;allow our office to connect to the firewall via SSH on port 22/tcp;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;allow traffic from our network to pass the firewall toward the Internet;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;allow the back channel traffic from the resources on the Internet to our
+     network;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;…&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;And then research how each of these sentences can be implemented using the
+configuration language of the tool.  The point here is that you need to take
+one step at a time and translate the logic exactly so you do not deviate from
+your goals &amp;ndash; you will be able to optimise the result at a later stage.&lt;/p&gt;
+&lt;p&gt;Well, it is time for a real world example, I guess.  The following snippet is
+used as the skeleton for the iptables ruleset on systems I manage (this snippet
+assumes that 192.168.0.0/16 is the internal network and that the ruleset is
+installed on the NAT instance which is a gateway to the Internet):&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-iptables"&gt;*filter
+:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+-A INPUT -m state --state INVALID -j DROP
+# If it was already established pass bits through
+-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+# Allow for the local traffic
+-A INPUT -i lo -j ACCEPT
+# Let's MTU discovery and other network management to work properly
+-A INPUT -p icmp -m icmp --icmp-type any -j ACCEPT
+# Allow remote SSH logins on the specified port (should be &amp;lt;1024 and would require sshd re-configuration if the port is not standard)
+-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT
+# Allow DHCP client to get its information
+-A INPUT -i eth0 -p udp -m state --state NEW -m udp --sport 67:68 --dport 67:68 -j ACCEPT
+
+# Reject anything that we did not specifically allow above
+-A INPUT -j REJECT --reject-with icmp-host-prohibited
+
+# This is a NAT box, so we accept packets from our network designated to the world, but reject any other forwarding attempts.
+-A FORWARD -i eth0 -s 192.168.0.0/22 ! -d 192.168.0.0/22 -j ACCEPT
+-A FORWARD -i eth0 ! -s 192.168.0.0/22 -d 192.168.0.0/22 -j ACCEPT
+# If there is a MTU mismatch between the NAT box and hosts behind it we want to allow ICMP for the MTU discovery
+-A FORWARD -i eth0 -p icmp -m icmp --icmp-type any -s 192.168.0.0/22 -d 192.168.0.0/22 -j ACCEPT
+# We may be interested in anything that is rejected in this chain, so let's log it
+-A FORWARD -j LOG
+
+# We do not allow to forward anything else
+-A FORWARD -j REJECT --reject-with icmp-host-prohibited
+COMMIT
+
+*nat
+:POSTROUTING ACCEPT [0:0]
+-A POSTROUTING -s 192.168.0.0/22 ! -d 192.168.0.0/22 -j MASQUERADE
+COMMIT&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;There are a few things to note:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;default policies for INPUT and FORWARD are set to ACCEPT while the last
+    rule in each chain is set to REJECT.  The reason for this is that the
+    default policy can be either ACCEPT or DROP with the latter silently
+    dropping packets.  Dropping packets makes it hard to investigate network
+    issues, hence I prefer REJECT instead.&lt;/li&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;if you need to open more ports the best place to insert your rules would be
+    between SSH and DHCP rules in the INPUT chain&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;if you are setting up a firewall on the server (so no traffic forwarding is
+    needed) you may want to either drop all rules from the FORWARD chain and
+    set the default policy for that chain to DROP, or you can simply leave the
+    last two rules (LOG and REJECT) in the chain removing the rest.  Also, the
+    nat table is not needed on the servers, so should be omitted.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;the above ruleset is not strict enough in regard to filtering ICMP traffic
+    and allows all types of ICMP, perhaps it could be further tightened to
+    allow only ICMP types 0 (reply), 3 (destination unreachable), 8 (request),
+    11 (time exceeded), and 30 (traceroute) to pass through the firewall.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;So, here you have it a solid firewall ruleset consisting of just 13 rules.&lt;/p&gt;</content><category term="linux"></category><category term="console"></category><category term="howto"></category><category term="iptables"></category><category term="linux"></category><category term="security"></category></entry></feed>

@@ -1,0 +1,162 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<title>Mind Drops</title>
+		<meta http-eqiv="Service-Worker-Allowed" content="/" />
+		<meta name="theme-color" content="#535353" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta name="apple-mobile-web-app-title" content="Mind Drops">
+		<link rel="apple-touch-icon" href="/theme/images/icons/mind-drops-192x192.png">
+		<meta charset="utf-8" />
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="manifest" type="text/json" href="/manifest.json" />
+		<link rel="preload" as="style" href="/theme/css/reset.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Icons.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Exo2.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Oswald.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/DancingScript.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/FiraCode.css" />
+		<link rel="preload" as="style" href="/theme/css/base.css" />
+		<link rel="preload" as="script" href="/theme/js/persistence.js" />
+		<link rel="preload" as="script" href="/theme/js/visited.js" />
+		<link rel="preload" as="script" href="/theme/js/service.js" />
+		<script src="/theme/js/loader.js" defer></script>
+		<link rel="icon" type="image/png" href="/images/galaxy.png">
+
+		<link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/css/article.css" />
+		<meta name="tags" content="nginx" />
+		<meta name="tags" content="patch" />
+	</head>
+	<body>
+		<input type="checkbox" id="menu-toggle" />
+		<label for="menu-toggle" class="icon menu"></label>
+		<aside id="sidebar">
+			<!-- Logo -->
+			<div id="logo" class="box shadow">
+				<picture>
+					<source srcset="/images/galaxy.png.webp" type="image/webp">
+					<img src="/images/galaxy.png" alt="Logo">
+				</picture>
+			</div>
+
+			<!-- Search -->
+			<section class="box search">
+				<form name="google search" class="icon search" method="get" action="/search">
+					<label for="search" class="offscreen">Search</label>
+					<input id="search" type="text" class="text" name="q" placeholder="Search" />
+				</form>
+			</section>
+
+			<!-- Nav -->
+			<nav id="nav">
+				<ul>
+					<li class="icon home">
+						<a href="/">Home</a>
+					</li>
+					<li class="icon user-agent">
+						<a href="/about">About</a>
+					</li>
+					<li class="icon paper-plane">
+						<a href="/contact">Contact</a>
+					</li>
+				</ul>
+			</nav>
+
+			<!-- Text -->
+			<section class="box text-style1">
+				<div class="inner">
+					<p>
+						<strong>Mind Drops:</strong>: A place to unload all these assorted bits.
+					</p>
+				</div>
+			</section>
+
+			<!-- Copyright -->
+			<ul id="copyright">
+				<li>&copy; Openwall Pty Ltd 2020 </li>
+				<li><a href="#">Terms &amp; Conditions</a></li>
+			</ul>
+		</aside>
+
+		<!-- Content -->
+		<div id="content">
+			<div class="inner">
+				<article id="dynamic-resolution-of-upstream-servers-in-nginx" class="box post">
+					<header>
+						<h1><a name="top">Dynamic resolution of upstream servers in nginx</a></h1>
+					</header>
+					<div class="info">
+						<span class="date"><span class="day">20</span> <span class="month">Sep<span>tember</span></span> <span class="year">2016</span></span>
+						<ul class="stats">
+							<li><a href="#" class="icon fa-comment">?</a></li>
+							<li><a href="#" class="icon fa-heart">?</a></li>
+							<li><a href="#" class="icon fa-twitter">?</a></li>
+							<li><a href="#" class="icon fa-facebook">?</a></li>
+						</ul>
+					</div>
+					<p>UPDATE: This approach was superseded by the <a href="http://localhost:8000/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/">proxying through
+systemd-socket-proxyd</a> approach.</p>
+<p>Many of my clients are running application stacks consisting of nginx plus some
+kind of scripting engine behind it (be it PHP, Ruby, or something else).</p>
+<p>The architecture I designed for this kind of workload involves at least two
+load balancers:</p>
+<ul>
+<li>an external, frontend load balancer that serves the web requests from
+    visitors; and</li>
+<li>an internal, backend load balancer that distributes load between the
+    backends.</li>
+</ul>
+<p>Everything looks great when you implement this using &ldquo;in-house&rdquo; infrastructure
+where you control most of the networking aspects.</p>
+<p>However, the tendency is that most enterprises are moving to the cloud
+providers and with that we lose some control.</p>
+<p>Specifically, often the cloud providers define their load-balancers as
+auto-scaling entities that change their IP addresses depending on the
+scale-in/out activity.</p>
+<p>Unfortunately, the community version of nginx does not know how to dynamically
+resolve the specified upstream servers (such a functionality is available from
+the nginx commercial subscription only), so I spent a couple of evenings to
+implement the desired functionality as a <a href="https://github.com/galaxy4public/nginx-upstream-resolve" title="A patch to introduce the dynamic resolution of the upstream servers">patch</a>.</p>
+<p>The <a href="https://github.com/galaxy4public/nginx-upstream-resolve" title="A patch to introduce the dynamic resolution of the upstream servers">patch</a> implements the dynamic DNS resolution of the specified upstream
+servers in the upstream compatible way: we are re-using the very same &ldquo;resolve&rdquo;
+keyword on the server line as the commercial version of nginx does ensuring
+that if you ever decide to switch to the commercial subscription you would not
+need to change your configs.</p>
+<p>The <a href="https://github.com/galaxy4public/nginx-upstream-resolve" title="A patch to introduce the dynamic resolution of the upstream servers">patch</a> was originally created for nginx 0.8.6 and was used in
+production for the last couple of years. The work on the patch was sponsored by
+<a href="https://openwall.com.au">Openwall (Australia)</a> and <a href="https://withriley.com">Data Solutions
+Group</a>.</p>
+<p>Enjoy! :)</p>
+					<ul class="tags">
+						<li class="tag">
+							<div>
+								<a href="http://localhost:8000/tag/nginx/" class="tag name">nginx</a>
+							</div>
+							<a href="http://localhost:8000/tag/nginx/" class="tag count">2</a>
+						</li>
+						<li class="tag">
+							<div>
+								<a href="http://localhost:8000/tag/patch/" class="tag name">patch</a>
+							</div>
+							<a href="http://localhost:8000/tag/patch/" class="tag count">2</a>
+						</li>
+					</ul>
+					<footer>
+						Offloaded on
+						<time datetime="2016-09-20 10:00:00+10:00">Tue, 20/09/2016 at 10:00 (+1000)</time>
+						<span class="category-tag"><a href="http://localhost:8000/category/hacking">hacking</a></span>
+					</footer>				</article>
+			</div>
+		</div>
+
+		<!--
+		<script src="/theme/js/clipboard/clipboard.js"></script>
+		<div id="titleBar">
+			<span class="title">Mind Drops</span>
+		</div>
+		-->
+	</body>
+</html>

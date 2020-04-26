@@ -2,87 +2,182 @@
 <html lang="en">
 	<head>
 		<title>Mind Drops</title>
+		<meta http-eqiv="Service-Worker-Allowed" content="/" />
+		<meta name="theme-color" content="#535353" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta name="apple-mobile-web-app-title" content="Mind Drops">
+		<link rel="apple-touch-icon" href="/theme/images/icons/mind-drops-192x192.png">
 		<meta charset="utf-8" />
-		<meta name="description" content="../../../..">
+		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="manifest" type="text/json" href="/manifest.json" />
-		<link rel="stylesheet" type="text/css" href="../../../../theme/css/reset.css" />
-		<link rel="stylesheet" type="text/css" href="../../../../theme/css/font-awesome.min.css" />
-		<link rel="stylesheet" type="text/css" href="../../../../theme/css/open-fonts.css" />
-		<link rel="stylesheet" type="text/css" href="../../../../theme/css/base.css" />
-		<link rel="stylesheet" type="text/css" href="../../../../theme/css/pygment.css" />
-		<link rel="stylesheet" type="text/css" href="../../../../theme/css/prism.css" defer />
-		<link rel="icon" type="image/png" href="../../../../images/pelly.png">
+		<link rel="preload" as="style" href="/theme/css/reset.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Icons.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Exo2.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Oswald.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/DancingScript.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/FiraCode.css" />
+		<link rel="preload" as="style" href="/theme/css/base.css" />
+		<link rel="preload" as="script" href="/theme/js/persistence.js" />
+		<link rel="preload" as="script" href="/theme/js/visited.js" />
+		<link rel="preload" as="script" href="/theme/js/service.js" />
+		<script src="/theme/js/loader.js" defer></script>
+		<link rel="icon" type="image/png" href="/images/galaxy.png">
 
+		<link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/css/article.css" />
 		<meta name="tags" content="ssh" />
 		<meta name="tags" content="console" />
 		<meta name="tags" content="bastion" />
 	</head>
 	<body>
+		<input type="checkbox" id="menu-toggle" />
+		<label for="menu-toggle" class="icon menu"></label>
+		<aside id="sidebar">
+			<!-- Logo -->
+			<div id="logo" class="box shadow">
+				<picture>
+					<source srcset="/images/galaxy.png.webp" type="image/webp">
+					<img src="/images/galaxy.png" alt="Logo">
+				</picture>
+			</div>
 
-		<!-- Sidebar -->
-		<div>
-			<a href="#sidebar" class="toggle"></a>
-			<aside id="sidebar">
-				<!-- Logo -->
-				<div id="logo" class="box shadow">
-					<picture>
-						<source srcset="../../../../images/galaxy.png.webp" type="image/webp">
-						<img src="../../../../images/galaxy.png" alt="Logo">
-					</picture>
-				</div>
+			<!-- Search -->
+			<section class="box search">
+				<form name="google search" class="icon search" method="get" action="/search">
+					<label for="search" class="offscreen">Search</label>
+					<input id="search" type="text" class="text" name="q" placeholder="Search" />
+				</form>
+			</section>
 
-				<!-- Search -->
-				<section class="box search">
-					<form method="post" action="#">
-						<label for="search" class="offscreen">Search</label>
-						<input id="search" type="text" class="text" name="search" placeholder="Search" />
-					</form>
-				</section>
-
-				<!-- Nav -->
-				<nav id="nav">
-					<ul>
-						<li class="current"><a href="#">Latest Post</a></li>
-						<li><a href="#">Archives</a></li>
-						<li><a href="#">About Me</a></li>
-						<li><a href="#">Contact Me</a></li>
-					</ul>
-				</nav>
-
-				<!-- Text -->
-				<section class="box text-style1">
-					<div class="inner">
-						<p>
-							<strong>Mind Drops:</strong>: A place to unload all these assorted bits.
-						</p>
-					</div>
-				</section>
-
-				<!-- Copyright -->
-				<ul id="copyright">
-					<li>&copy; Openwall Pty Ltd 2020 </li>
-					<li><a href="#">Terms &amp; Conditions</a></li>
+			<!-- Nav -->
+			<nav id="nav">
+				<ul>
+					<li class="icon home">
+						<a href="/">Home</a>
+					</li>
+					<li class="icon user-agent">
+						<a href="/about">About</a>
+					</li>
+					<li class="icon paper-plane">
+						<a href="/contact">Contact</a>
+					</li>
 				</ul>
-			</aside>
-		</div>
+			</nav>
+
+			<!-- Text -->
+			<section class="box text-style1">
+				<div class="inner">
+					<p>
+						<strong>Mind Drops:</strong>: A place to unload all these assorted bits.
+					</p>
+				</div>
+			</section>
+
+			<!-- Copyright -->
+			<ul id="copyright">
+				<li>&copy; Openwall Pty Ltd 2020 </li>
+				<li><a href="#">Terms &amp; Conditions</a></li>
+			</ul>
+		</aside>
 
 		<!-- Content -->
 		<div id="content">
 			<div class="inner">
-<!-- 
--% block content %}
--% endblock content %}
- -->
+				<article id="ssh-port-forwarding-basic" class="box post">
+					<header>
+						<h1><a name="top">SSH port-forwarding (Basic)</a></h1>
+					</header>
+					<div class="info">
+						<span class="date"><span class="day">29</span> <span class="month">Nov<span>ember</span></span> <span class="year">2010</span></span>
+						<ul class="stats">
+							<li><a href="#" class="icon fa-comment">?</a></li>
+							<li><a href="#" class="icon fa-heart">?</a></li>
+							<li><a href="#" class="icon fa-twitter">?</a></li>
+							<li><a href="#" class="icon fa-facebook">?</a></li>
+						</ul>
+					</div>
+					<p>I think all of you are using SSH in your daily routines. However, do you use
+its full potential? Today&rsquo;s topic is the SSH port-forwarding feature and how
+it can be use to achieve some interesting configurations.</p>
+<p>I&rsquo;m sure most of you are aware of the feature, but how many of you are using
+it? Personally, I&rsquo;m a bit obsessed with it and have found numerous cases where
+this feature of SSH is a real life saver.</p>
+<p>Let&rsquo;s start with simple things and imagine that you have a server where you
+are running MySQL (as a backend for your website) and that you are not
+comfortable to work with MySQL neither through the MySQL command line interface
+nor through a web-interace like phpMyAdmin. Instead you prefer to use, say,
+MySQL WorkBench or something similar running on your local computer.</p>
+<p>How one could do this? Well, I&rsquo;ve seen a lot that people tend to configure the
+MySQL server to listen on a public interface (i.e. an interface that is
+reachable from the Internet), then access it from their computer directly.
+It&rsquo;s not that bad if you have a static <abbr title="Internet Protocol">IP</abbr> assigned to your computer and you
+added a firewall rule protecting the MySQL port on the server to be reachable
+from your <abbr title="Internet Protocol">IP</abbr> address only, but what if you are behind some kind of NAT and the
+same <abbr title="Internet Protocol">IP</abbr> address is shared among others in your network? What if you don&rsquo;t have
+a static <abbr title="Internet Protocol">IP</abbr> and the dynamic <abbr title="Internet Protocol">IP</abbr> range assigned by your ISP is too broad?
+Overall, I personally don&rsquo;t like running MySQL on a public interface since
+there were publicly known security vulnerabilities in the MySQL binary
+protocol, and I can assure you there will be more discovered over the time.</p>
+<p>So, what should we do to access our remote database securely and conveniently?
+Run the MySQL server on 127.0.0.1:3306 (well, if your web server is located on
+another machine, you may want to bind MySQL to some internal interface &ndash; the
+network that links your servers only, e.g. 192.168.1.1:3306), and then use the
+SSH port-forwarding feature to setup a tunnel between your remote database and
+your local computer:</p>
+<pre class="highlight"><code class="language-bash">ssh -L3306:127.0.0.1:3306 user@server</code></pre>
+
+
+<p>Here, <code>-L3306:127.0.0.1:3306</code> says that we want <code>127.0.0.1:3306</code> to be &ldquo;mapped&rdquo;
+to our local host to port <code>3306</code>. While the SSH session is active any packet
+sent to <code>localhost:3306</code> (on your computer) will be forwarded over the SSH
+encrypted channel to the remote server and then will be fed to remote&rsquo;s
+<code>127.0.0.1:3306</code>.  This means that as long as your SSH session is alive you
+will be able to work with the remote MySQL server like it&rsquo;s running on your
+local computer and you can use any MySQL tools locally.</p>
+<p>Well, the above command was given for Linux, Mac OSX, and other Unix-based
+systems. For Windows, you can use PuTTY to achive the same. I found the
+following <a href="https://www.akadia.com/services/ssh_putty.html">instructions for PuTTY</a>.</p>
+<p>OK, this is not a new topic and it was described many times here and there on
+the Internet, but I decided to write this article as a foundation for my
+further articles on this topic which will cover more advanced usage of the SSH
+port-forwarding feature. For example, I intend to document a configuration of
+the MySQL replication setup between two servers located at two different data
+centres where each server is a part of a server farm protected by a firewall.</p>
+					<ul class="tags">
+						<li class="tag">
+							<div>
+								<a href="http://localhost:8000/tag/ssh/" class="tag name">ssh</a>
+							</div>
+							<a href="http://localhost:8000/tag/ssh/" class="tag count">4</a>
+						</li>
+						<li class="tag">
+							<div>
+								<a href="http://localhost:8000/tag/console/" class="tag name">console</a>
+							</div>
+							<a href="http://localhost:8000/tag/console/" class="tag count">7</a>
+						</li>
+						<li class="tag">
+							<div>
+								<a href="http://localhost:8000/tag/bastion/" class="tag name">bastion</a>
+							</div>
+							<a href="http://localhost:8000/tag/bastion/" class="tag count">1</a>
+						</li>
+					</ul>
+					<footer>
+						Offloaded on
+						<time datetime="2010-11-29 10:00:00+11:00">Mon, 29/11/2010 at 10:00 (+1100)</time>
+						<span class="category-tag"><a href="http://localhost:8000/category/ssh">ssh</a></span>
+					</footer>				</article>
 			</div>
 		</div>
 
-		<!-- Scripts -->
-		<script src="../../../../theme/js/clipboard/clipboard.js"></script>
-		<script src="../../../../theme/js/prism/prism.js"></script>
-
+		<!--
+		<script src="/theme/js/clipboard/clipboard.js"></script>
 		<div id="titleBar">
 			<span class="title">Mind Drops</span>
 		</div>
+		-->
 	</body>
 </html>

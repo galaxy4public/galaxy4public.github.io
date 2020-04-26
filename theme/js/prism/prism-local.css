@@ -1,0 +1,43 @@
+pre[class*="language-"] {
+	z-index: 0;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+	word-break: break-word;
+	font-size: 0.75em;
+}
+
+pre[class*="language-"],
+code[class*="language-"] {
+	font-family: 'Fira Code', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+}
+
+@supports (font-variation-settings: normal) {
+	pre[class*="language-"],
+	code[class*="language-"] {
+		/*
+		 * ss01 - sans-serif 'r'
+		 * ss02 - horisontal bar, e.g. >= and <=
+		 * ss03 - traditional &
+		 * ss04 - lightweight dollar
+		 * ss05 - traditional @
+		 * ss06 - regexp matching (=~ and != replaced by single glyph)
+		 * zero - dot inside 0 instead of cross
+		 * onum - old style digits
+		 */ 
+		font-feature-settings: "ss05";
+
+	}
+}
+
+pre[class*="language-"]:before,
+pre[class*="language-"]:after {
+	bottom: 0.75em;
+}
+
+code[class*="language-"] {
+	font-size: inherit;
+}
+
+div.code-toolbar > .toolbar {
+	z-index: 1;
+}

@@ -1,0 +1,154 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<title>Mind Drops - Search Results</title>
+		<meta http-eqiv="Service-Worker-Allowed" content="/" />
+		<meta name="theme-color" content="#535353" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta name="apple-mobile-web-app-title" content="Mind Drops">
+		<link rel="apple-touch-icon" href="/theme/images/icons/mind-drops-192x192.png">
+		<meta charset="utf-8" />
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="manifest" type="text/json" href="/manifest.json" />
+		<link rel="preload" as="style" href="/theme/css/reset.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Icons.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Exo2.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Oswald.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/DancingScript.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/FiraCode.css" />
+		<link rel="preload" as="style" href="/theme/css/base.css" />
+		<link rel="preload" as="script" href="/theme/js/persistence.js" />
+		<link rel="preload" as="script" href="/theme/js/visited.js" />
+		<link rel="preload" as="script" href="/theme/js/service.js" />
+		<script src="/theme/js/loader.js" defer></script>
+		<link rel="icon" type="image/png" href="/images/galaxy.png">
+
+		<link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/css/search.css" />
+		<script defer src="https://cse.google.com/cse.js?cx=005305758315431243651:leqbp5helyl"></script>
+		<script>
+			const resultsReadyCustomStylesCallback = function(name, q, promos, results, resultsDiv)
+			{
+				var cssId = 'CseCustomCss';
+				if (!document.getElementById(cssId))
+				{
+					var head  = document.getElementsByTagName('head')[0];
+					var link  = document.createElement('link');
+					link.id   = cssId;
+					link.rel  = 'stylesheet';
+					link.type = 'text/css';
+					link.href = 'http://localhost:8000/theme/css/cse_custom.css';
+					link.media = 'all';
+					head.appendChild(link);
+				}
+			};
+
+			window.__gcse || (window.__gcse = {});
+			window.__gcse.searchCallbacks = {
+				web: {
+					ready: resultsReadyCustomStylesCallback,
+				},
+			};
+		</script>
+	</head>
+	<body>
+		<input type="checkbox" id="menu-toggle" />
+		<label for="menu-toggle" class="icon menu"></label>
+		<aside id="sidebar">
+			<!-- Logo -->
+			<div id="logo" class="box shadow">
+				<picture>
+					<source srcset="/images/galaxy.png.webp" type="image/webp">
+					<img src="/images/galaxy.png" alt="Logo">
+				</picture>
+			</div>
+
+			<!-- Search -->
+			<section class="box search">
+				<form name="google search" class="icon search" method="get" action="/search">
+					<label for="search" class="offscreen">Search</label>
+					<input id="search" type="text" class="text" name="q" placeholder="Search" />
+				</form>
+			</section>
+
+			<!-- Nav -->
+			<nav id="nav">
+				<ul>
+					<li class="icon home">
+						<a href="/">Home</a>
+					</li>
+					<li class="icon user-agent">
+						<a href="/about">About</a>
+					</li>
+					<li class="icon paper-plane">
+						<a href="/contact">Contact</a>
+					</li>
+				</ul>
+			</nav>
+
+			<!-- Text -->
+			<section class="box text-style1">
+				<div class="inner">
+					<p>
+						<strong>Mind Drops:</strong>: A place to unload all these assorted bits.
+					</p>
+				</div>
+			</section>
+
+			<!-- Copyright -->
+			<ul id="copyright">
+				<li>&copy; Openwall Pty Ltd 2020 </li>
+				<li><a href="#">Terms &amp; Conditions</a></li>
+			</ul>
+		</aside>
+
+		<!-- Content -->
+		<div id="content">
+			<div class="inner">
+				<section class="box search">	
+					<header>
+						<h1>Search</h1>
+						<h2>Search</h2>
+						<h3>Search</h3>
+						<h4>Search</h4>
+						<h5>Search</h5>
+						<h6>Search</h6>
+						<p>This is a paragraph that is used to estimate the normal font size relative to the headers</p>
+					</header>
+					<form name="google search" method="get" action="/search">
+						<label for="search_long" class="offscreen">Search field on the top of the search page</label>
+						<input id="search_long" type="text" class="text" name="q" placeholder="Enter your search parameters here ..." />
+					</form>
+					<script>
+						function hrefValue(k)
+						{
+							h = window.location.search.substring(1);
+							p = h.split("&");
+
+							for (i=0; i<p.length; i++)
+							{
+								kv = p[i].split("=");
+								if (kv[0] == k)
+									return decodeURI(kv[1].replace(/\+/g, '%20'));
+							}
+							return '';
+						};
+						document.getElementById('search').value = document.getElementById('search_long').value = hrefValue('q');
+					</script>
+				</section>
+				<section class="box search-results">
+					<div class="gcse-searchresults-only" data-linkTarget="_top" data-personalizedAds="false"></div>
+				</section>
+			</div>
+		</div>
+
+		<!--
+		<script src="/theme/js/clipboard/clipboard.js"></script>
+		<div id="titleBar">
+			<span class="title">Mind Drops</span>
+		</div>
+		-->
+	</body>
+</html>

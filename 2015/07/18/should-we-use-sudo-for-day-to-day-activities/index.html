@@ -2,87 +2,507 @@
 <html lang="en">
 	<head>
 		<title>Mind Drops</title>
+		<meta http-eqiv="Service-Worker-Allowed" content="/" />
+		<meta name="theme-color" content="#535353" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta name="apple-mobile-web-app-title" content="Mind Drops">
+		<link rel="apple-touch-icon" href="/theme/images/icons/mind-drops-192x192.png">
 		<meta charset="utf-8" />
-		<meta name="description" content="../../../..">
+		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="manifest" type="text/json" href="/manifest.json" />
-		<link rel="stylesheet" type="text/css" href="../../../../theme/css/reset.css" />
-		<link rel="stylesheet" type="text/css" href="../../../../theme/css/font-awesome.min.css" />
-		<link rel="stylesheet" type="text/css" href="../../../../theme/css/open-fonts.css" />
-		<link rel="stylesheet" type="text/css" href="../../../../theme/css/base.css" />
-		<link rel="stylesheet" type="text/css" href="../../../../theme/css/pygment.css" />
-		<link rel="stylesheet" type="text/css" href="../../../../theme/css/prism.css" defer />
-		<link rel="icon" type="image/png" href="../../../../images/pelly.png">
+		<link rel="preload" as="style" href="/theme/css/reset.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Icons.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Exo2.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Oswald.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/DancingScript.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/FiraCode.css" />
+		<link rel="preload" as="style" href="/theme/css/base.css" />
+		<link rel="preload" as="script" href="/theme/js/persistence.js" />
+		<link rel="preload" as="script" href="/theme/js/visited.js" />
+		<link rel="preload" as="script" href="/theme/js/service.js" />
+		<script src="/theme/js/loader.js" defer></script>
+		<link rel="icon" type="image/png" href="/images/galaxy.png">
 
+		<link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/css/article.css" />
 		<meta name="tags" content="sudo" />
 		<meta name="tags" content="console" />
-		<meta name="tags" content="bastion" />
 	</head>
 	<body>
+		<input type="checkbox" id="menu-toggle" />
+		<label for="menu-toggle" class="icon menu"></label>
+		<aside id="sidebar">
+			<!-- Logo -->
+			<div id="logo" class="box shadow">
+				<picture>
+					<source srcset="/images/galaxy.png.webp" type="image/webp">
+					<img src="/images/galaxy.png" alt="Logo">
+				</picture>
+			</div>
 
-		<!-- Sidebar -->
-		<div>
-			<a href="#sidebar" class="toggle"></a>
-			<aside id="sidebar">
-				<!-- Logo -->
-				<div id="logo" class="box shadow">
-					<picture>
-						<source srcset="../../../../images/galaxy.png.webp" type="image/webp">
-						<img src="../../../../images/galaxy.png" alt="Logo">
-					</picture>
-				</div>
+			<!-- Search -->
+			<section class="box search">
+				<form name="google search" class="icon search" method="get" action="/search">
+					<label for="search" class="offscreen">Search</label>
+					<input id="search" type="text" class="text" name="q" placeholder="Search" />
+				</form>
+			</section>
 
-				<!-- Search -->
-				<section class="box search">
-					<form method="post" action="#">
-						<label for="search" class="offscreen">Search</label>
-						<input id="search" type="text" class="text" name="search" placeholder="Search" />
-					</form>
-				</section>
-
-				<!-- Nav -->
-				<nav id="nav">
-					<ul>
-						<li class="current"><a href="#">Latest Post</a></li>
-						<li><a href="#">Archives</a></li>
-						<li><a href="#">About Me</a></li>
-						<li><a href="#">Contact Me</a></li>
-					</ul>
-				</nav>
-
-				<!-- Text -->
-				<section class="box text-style1">
-					<div class="inner">
-						<p>
-							<strong>Mind Drops:</strong>: A place to unload all these assorted bits.
-						</p>
-					</div>
-				</section>
-
-				<!-- Copyright -->
-				<ul id="copyright">
-					<li>&copy; Openwall Pty Ltd 2020 </li>
-					<li><a href="#">Terms &amp; Conditions</a></li>
+			<!-- Nav -->
+			<nav id="nav">
+				<ul>
+					<li class="icon home">
+						<a href="/">Home</a>
+					</li>
+					<li class="icon user-agent">
+						<a href="/about">About</a>
+					</li>
+					<li class="icon paper-plane">
+						<a href="/contact">Contact</a>
+					</li>
 				</ul>
-			</aside>
-		</div>
+			</nav>
+
+			<!-- Text -->
+			<section class="box text-style1">
+				<div class="inner">
+					<p>
+						<strong>Mind Drops:</strong>: A place to unload all these assorted bits.
+					</p>
+				</div>
+			</section>
+
+			<!-- Copyright -->
+			<ul id="copyright">
+				<li>&copy; Openwall Pty Ltd 2020 </li>
+				<li><a href="#">Terms &amp; Conditions</a></li>
+			</ul>
+		</aside>
 
 		<!-- Content -->
 		<div id="content">
 			<div class="inner">
-<!-- 
--% block content %}
--% endblock content %}
- -->
+				<article id="should-we-use-sudo-for-day-to-day-activities" class="box post">
+					<header>
+						<h1><a name="top">Should we use "sudo" for day-to-day activities?</a></h1>
+					</header>
+					<div class="info">
+						<span class="date"><span class="day">18</span> <span class="month">Jul<span>y</span></span> <span class="year">2015</span></span>
+						<ul class="stats">
+							<li><a href="#" class="icon fa-comment">?</a></li>
+							<li><a href="#" class="icon fa-heart">?</a></li>
+							<li><a href="#" class="icon fa-twitter">?</a></li>
+							<li><a href="#" class="icon fa-facebook">?</a></li>
+						</ul>
+					</div>
+					<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#history">History</a></li>
+<li><a href="#people-are-saying-sudo-is-good-is-it-true">People are saying &ldquo;sudo&rdquo; is good. Is it true?</a></li>
+<li><a href="#what-is-the-problem-with-the-sudo-approach">What is the problem with the &ldquo;sudo&rdquo; approach?</a></li>
+<li><a href="#the-light-side-of-sudo-is-there-one">The light side of &ldquo;sudo&rdquo;. Is there one?</a></li>
+<li><a href="#how-can-we-improve-the-security-of-our-systems-in-relation-to-the-sudo-usage">How can we improve the security of our systems in relation to the &ldquo;sudo&rdquo; usage?</a></li>
+</ul>
+</div>
+<p>None of the systems I administer or supervise have <code>sudo</code> installed with the
+SUID bit set.</p>
+<p>Every time I answer a question on how to do privileged work on these systems
+(i.e. do tasks that require administrator privileges) with a proposal to SSH
+under the privileged account directly to do such a work, whoever asked the
+question starts to blabber how insecure that is, that one should use <code>sudo</code>,
+and that nobody should ever login directly as root.</p>
+<p>I have spent quite some time explaining the misconception behind so-called
+&ldquo;secure way to access systems through sudo&rdquo;, so I decided to write up an
+article that describes the issues of using that approach and why using <code>sudo</code>
+is actually <em>less secure</em> than a direct SSH access.</p>
+<h2 id="history">History</h2>
+<p>The following is based on my personal recollection of the history around early
+90’s with some references to documents I could quickly find.  Unfortunately, this
+is one of the topics that is not so easy to reconstruct in full detail.
+Although there may be minor inaccuracies, the outlined view on the history
+should be very close to the true events that took place.</p>
+<p>Many years ago (but not that far in the past) system administrators were using
+<code>telnet</code> and <code>rsh</code> to access and administer their servers.  Networks were
+simpler and traffic sniffing techniques were common.  Therefore, it was very
+easy to eavesdrop on a root account login and to automate the task of gathering
+the credentials.  To mitigate the issue to some extent the following approach
+was proposed:</p>
+<ol>
+<li>login as a non-privileged account first;</li>
+<li>do some stuff;</li>
+<li>if you need privileged account access (e.g. root) switch to it using <code>su</code>.</li>
+</ol>
+<p>The idea behind this proposal was that such a sequence makes it harder for a
+traffic listener to catch root’s credentials on the wire due to the login
+sequence mixed in to the stream of other activities the systems administrator
+was doing before escalating their account to the privileged user.</p>
+<p>At approximately the same time discussions started in regard to the dangers
+of working as root, that people were tending to work as root for prolonged
+periods of time performing tasks that did not require escalated privileges
+without proper justification for that behaviour.  As the result of these
+discussions the <code>sudo</code> utility was born.  The utility allowed to bind root
+privileges to a restricted set of commands and maintained access controls
+through its configuration file in order to allow or deny access to the defined
+functionality to specific users/groups.  This allowed systems administrators to
+delegate some of the privileged routines to less privileged user/groups. (See
+more on the <a href="https://www.sudo.ws/sudo/history.html">history of sudo</a> if you are interested).</p>
+<p>Somewhere in early 90’s the two approaches were merged, so the approach became:</p>
+<ol>
+<li>login as a non-privileged account and do your every day tasks;</li>
+<li>once a privileged operation is required execute it through <code>sudo</code>.</li>
+</ol>
+<p>Although it seems like a minor optimisation, in fact, this introduced a <em>major
+security issue</em>: previously, the attacker should have needed to listen for
+traffic in attempt to figure out when the victim is executing <code>su</code> and is
+providing root&rsquo;s password, but now they did not need to do anything except of
+capturing user&rsquo;s password at the beginning of the session (the same problem the
+&ldquo;su-after-normal-login&rdquo; approach was trying to solve just reappeared :) ) since
+once you know user&rsquo;s password you can use <code>sudo</code> which authenticates you with
+<em>user&rsquo;s</em> password!</p>
+<p>In 1995, <a href="https://en.wikipedia.org/wiki/Tatu_Yl%C3%B6nen">Tatu Ylönen</a> as a response to the issues related to exchanging the
+credentials over non-protected, easily sniffable networks released his first
+implementation of the SSH protocol as freeware to the public.  Over the next
+five years SSH was adopted worldwide and it eventually replaced
+<code>telnet</code>/<code>rlogin</code>/<code>rsh</code> for the remote access and management activities in most
+places around the globe.</p>
+<p>However, due to inertia the recommended approach of logging in as a
+non-privileged account and escalating privileges later somehow survived, is
+still followed, and often people don’t even try to analyse and see the flaws of
+the approach.</p>
+<h2 id="people-are-saying-sudo-is-good-is-it-true">People are saying &ldquo;sudo&rdquo; is good. Is it true?</h2>
+<p><sup>(or looking critically into some common misconceptions re: &ldquo;sudo&rdquo;)</sup></p>
+<p>So let’s look at the most commonly used &ldquo;pros&rdquo; in favour of using <code>sudo</code>. For
+example, <a href="https://help.ubuntu.com/community/RootSudo">Ubuntu’s community help page</a> provides a nice, aggregated list of
+benefits provided by <code>sudo</code> usage in their default installation. Let’s walk
+through all of them and see if they are real benefits at all:</p>
+<ol>
+<li>
+<p>The installer has fewer questions to ask.</p>
+<p>This is a very questionable &ldquo;benefit&rdquo; to the end user since it implies
+ that the system would do more stuff with escalated privileges behind the
+ scenes without the user even knowing it. From the security standpoint it
+ just silently expands the attack surface.</p>
+</li>
+<li>
+<p>Users don&rsquo;t have to remember an extra password for occasional use (i.e.
+     the root password). If they did, they&rsquo;d be likely to forget it (or record
+     it unsafely, allowing anyone to easily crack into their system).</p>
+<p>This is another hard to comprehend &ldquo;benefit&rdquo;. Given that we now have SSH
+ and the recommended best practice is to use SSH keys instead of passwords,
+ <code>sudo</code> requires users to memorise yet another password.</p>
+<p>Moreover, the argument in regard to users’ likely behaviour is purely
+ speculative and assumptive — to the same extent we can assume that
+ password policies make it hard for users to memorise their passwords and
+ they would be likely to forget the password (or record it unsafely, …).</p>
+<p>The truth is, the key based authentication solves the issue of the
+ requirement to have multiple passwords for multiple accounts.</p>
+<p>There is one place, however, where the discussed &ldquo;benefit&rdquo; is actually
+ applicable — local console access (no key authentication there, usually),
+ but even there the best practice would be to login directly as root on
+ the virtual console if there is such a need (the reason for that is
+ quite complicated and in short could be described as the following: there
+ are multiple checks and assumptions in the kernel code and the
+ accompanying C library on allocating a terminal, spawning a process, etc.
+ for root over the same actions performed for a non-privileged user).</p>
+</li>
+<li>
+<p>It avoids the &ldquo;I can do anything&rdquo; interactive login by default. You will
+     be prompted for a password before major changes can happen, which should
+     make you think about the consequences of what you are doing.</p>
+<p>This statement also assumes that for some reason people would prefer to
+ always login as root and do all of their work under that account.</p>
+<p>In reality users are so used to prefix almost any failed command with
+ <code>sudo</code> that this &ldquo;benefit&rdquo; can be considered as the quite opposite item,
+ against <code>sudo</code>.</p>
+<p>On a properly configured environment you explicitly need to login as the
+ privileged account to do functions that require privileges.</p>
+</li>
+<li>
+<p>sudo adds a log entry of the command(s) run (in /var/log/auth.log). If you
+     mess up, you can go back and see what commands were run.</p>
+<p>This statement is also somewhat true, but it does not defend the <code>sudo</code>
+ usage. A proper auditing subsystem is what keeps audit logs no matter how
+ activity was performed. Logging of executed commands for user&rsquo;s history
+ reasons is the job for the shell.</p>
+<p>The ability of logging is so limited in <code>sudo</code> that it cannot be used for
+ anything except a substitute for the shell history. Just imagine the
+ following scenario — a user executes:</p>
+<pre class="highlight"><code class="language-shell">sudo less /var/log/messages</code></pre>
+
+
+<p>and then types &ldquo;!&rdquo; followed by the Enter/Return key — the user effectively
+ now in the root shell and what <code>sudo</code> will log into its logs has nothing
+ to do with what user actually did.</p>
+<p>Instead of relying on <code>sudo</code>&lsquo;s logging abilities, one should configure
+ <code>auditd</code> and send events to a centralised log aggregator to get audit logs
+ that can be trusted.</p>
+</li>
+<li>
+<p>On a server, every cracker trying to brute-force their way in will know it
+     has an account named root and will try that first. What they don&rsquo;t know is
+     what the usernames of your other users are. Since the root account
+     password is locked, this attack becomes essentially meaningless, since
+     there is no password to crack or guess in the first place.</p>
+<p>This is such a weak attempt to bring host security into the play that it
+ is hard to comment on it without dropping a tear :).</p>
+<p>First, use SSH keys and disable the password authentication on the server
+ — this (and not some security through obscurity) will defend the system
+ from the brute force attacks.</p>
+<p>Second, protect your remote access entry points with properly configured
+ firewall and allow remote access from a defined list of locations only
+ (i.e. whitelist authorised locations) — this will shrink the possible
+ attack surface of the SSH service considerably.</p>
+</li>
+<li>
+<p>Allows easy transfer for admin rights by adding and removing users from
+     groups. When you use a single root password, the only way to de-authorize
+     users is to change the root password.</p>
+<p>This is an interesting one: half of the statement is true, another is
+ misleading.</p>
+<p>The true part is that you can easily delegate privileged operations using
+ <code>sudo</code>.  All in all, it was the primary goal and requirement of the tool
+ creation to provide access delegation.</p>
+<p>The misleading part is that the alternative is to use a single root
+ account/password.  The truth is that nobody is limited by a single root
+ account: you can create as many as you want and each of them could have
+ their own distinct password, e.g.</p>
+<pre class="highlight"><code class="language-bash">useradd -om -o 0 -g 0 -s /bin/sh new_root
+passwd new_root</code></pre>
+
+
+<p>Better yet, do not set the password and lock the account instead with
+ <code>usermod -L new_root</code> since we are using keys, remember?</p>
+<p>This approach also provides additional accountability since users will
+ have separate shell histories, their login attempts will be clearly logged
+ under separate names, etc.</p>
+</li>
+<li>
+<p>sudo can be setup with a much more fine-grained security policy.</p>
+<p>Another half-truth in the list of &ldquo;benefits&rdquo;. The statement is incomplete
+ and lacks the part it is comparing the functionality to.  If we are
+ comparing a legacy Unix access control system with <code>sudo</code>, then yes <code>sudo</code>
+ is much more configurable. If we compare <code>sudo</code> with, say, SELinux or
+ GRsecurity’s RBAC — <code>sudo</code> will lose since both have much more
+ fine-grained security controls than <code>sudo</code>.</p>
+</li>
+<li>
+<p>The root account password does not need to be shared with everybody who
+     needs to perform some type of administrative task(s) on the system (see
+     the previous bullet).</p>
+<p>As with item #6 this statement assumes for some obscure reason that there
+ can be just a single root account in the system.  Therefore, the result of
+ such a logical exercise is also questionable since it is based on a wrong
+ assumption.</p>
+</li>
+<li>
+<p>The authentication automatically expires after a short time (which can be
+     set to as little as desired or 0); so if you walk away from the terminal
+     after running commands as root using sudo, you will not be leaving a root
+     terminal open indefinitely.</p>
+<p>This statement also compares <code>sudo</code> with something reader cannot compare
+ to.  Moreover, it mixes up two logically unrelated things: the credentials
+ expiration and terminal security.  While it is great that <code>sudo</code> implements
+ the former, the latter is usually addressed by entirely different means:
+ starting with auto-logout functionality, lock screen, physical security,
+ etc.</p>
+</li>
+</ol>
+<p>Well, we can continue to critically assess other common statements in regard to
+<code>sudo</code> made mostly by people who do not have any strong Information Security
+background, but it would be a waste of time for the readers.</p>
+<p>You can always raise a question regarding some particular claim and/or
+assumption related to <code>sudo</code> and if it is interesting I would add it (and the
+corresponding response) to this article.</p>
+<h2 id="what-is-the-problem-with-the-sudo-approach">What is the problem with the &ldquo;sudo&rdquo; approach?</h2>
+<p>Well, there are several in fact. The most pressing issue is that the usage of
+<code>sudo</code> (or <code>su</code>, or any other utility that has its SUID bit set) is crossing
+the security boundary from the less privileged account to the more privileged
+account. This opens doors (or widens the attack surface) to privilege
+escalation techniques. In plain English it makes the non-privileged account to
+be essentially equal to the privileged one, let me explain by a fairly simple
+example:</p>
+<ol>
+<li>
+<p>imagine if you are a developer and you work on a server under your
+     non-privileged account;</p>
+</li>
+<li>
+<p>as a part of your daily routine you need to download some third party
+     package and install it (we are going to leave out all the security
+     complexities involved with such an activity like verifying signatures,
+     using a separate instance to prepare a package for deployment, etc.);</p>
+</li>
+<li>
+<p>the installation of the package usually requires executing some third
+     party code under your non-privileged account. This code was not written by
+     you and there is a high chance that you did not read/verify the foreign
+     code line by line in order to ensure that it does not do anything
+     malicious since this would be quite time consuming, would require a lot of
+     effort, and your team has more important priorities than this (remember,
+     this is an example based on situations you would encounter in the real
+     world, which is by no means perfect);</p>
+</li>
+<li>
+<p>it happens, that that particular third party was compromised and some
+     malicious code has been injected into the package installation routines;</p>
+</li>
+<li>
+<p>after the execution of the installation routine (and the malicious code
+     for that matter) your <code>~/.bashrc</code> (for example) is modified in such a way
+     that each time you login it starts up a key logger or some other kind of
+     remotely controllable piece of software that talks back to its master;</p>
+</li>
+</ol>
+<p>So far we just got an issue localised to this non-privileged account only (with
+a possibility to spread across the entire fleet of servers that non-privileged
+account has access to in case of the NFS mounted home directories). Is this
+bad? Yes, it is since it may disrupt this particular project, steal reachable
+sensitive information, could be used as a trampoline to jump start further
+research and exploitation of other vulnerable resources. Is it critically bad?
+Not necessarily. If the systems are built properly with host-based security in
+mind, if the proper privilege separation techniques are used throughput the
+company infrastructure, etc. the impact is localised and with proper monitoring
+systems it would be detected eventually and investigated (keep in mind that it
+is really hard for a non-privileged account to hide their activities from more
+privileged processes).</p>
+<p>Now, let’s add <code>sudo</code> to the mix, e.g. suddenly the developer decided to
+install an additional library package into the system. So, what would happen
+next? You guessed it: the developer would need to type in their password to
+convince <code>sudo</code> that they are &ldquo;allowed&rdquo; to do such a privileged thing as
+installing a system package, the malicious software installed by the attacker
+would happily intercept that and send it back to its master.</p>
+<p>From this point on, the attacker has the account password of the account where
+their software runs and which they control. The attacker can now utilise <code>sudo</code>
+powers at their will. The security impact would be ranging from &ldquo;high&rdquo; to
+&ldquo;extreme&rdquo; depending on how committed the attackers are.</p>
+<p>Following the logic, why would we want to introduce an additional complexity
+that does not address the issue it was supposed to address, which is &ldquo;to limit
+exposure of the root account&rdquo;?</p>
+<h2 id="the-light-side-of-sudo-is-there-one">The <em>light</em> side of &ldquo;sudo&rdquo;. Is there one?</h2>
+<p>So, is <code>sudo</code> any good for anything? Actually, yes, it is. All in all, <code>sudo</code>
+is a tool that attracts a lot of attention from the security researchers and
+auditors, its codebase got numerous peer reviews and the functionality the tool
+provides can be used for good. The following scenarios come to my mind right
+away:</p>
+<ul>
+<li>
+<p>On a SELinux enabled system it seems that <code>sudo</code> is the only properly
+   implemented and reliable way to assume a different SELinux role. All other
+   mechanisms are either lacking in the functionality or just do it half way
+   leaving some artefacts behind;</p>
+</li>
+<li>
+<p>Unless some effort is put into tweaking the way PAM (Pluggable
+   Authentication Modules, an authentication framework used on Linux, Solaris,
+   and some other Unix-like systems) authenticates users on LDAP enabled
+   systems there is no easy way to have two separate accounts (a privileged and
+   a non-privileged account) for the same LDAP user. This could be addressed
+   administratively (e.g. by defining additional privileged users in LDAP) or
+   technically by implementing account names’ prefixes. However, if there are
+   budgetary and/or time constraints to implement the proper security framework
+   <code>sudo</code> with a quite restricted configuration would be an acceptable
+   compromise.</p>
+</li>
+</ul>
+<p>Unfortunately, personally, I failed to find any other justified applications of
+<code>sudo</code> in a secure environment and would be happy to get some feedback if you
+have something in mind worth including into the list above.</p>
+<h2 id="how-can-we-improve-the-security-of-our-systems-in-relation-to-the-sudo-usage">How can we improve the security of our systems in relation to the &ldquo;sudo&rdquo; usage?</h2>
+<p>OK, so we got to the point where we are standing at a crossroad and we kind
+of established that excessive usage of <code>sudo</code> is a bad thing (for
+security-paranoid readers - read: &ldquo;almost any usage of <code>sudo</code> except for
+changing SELinux roles on a SELinux-enabled system is a bad thing&rdquo;). So, what
+is the alternative way of doing things? Well, there is a complex approach on
+addressing and minimising the privilege escalation risks and roughly it can be
+summarised as follows:</p>
+<ul>
+<li>
+<p>apply the <a href="https://en.wikipedia.org/wiki/Principle_of_least_privilege">least privilege principle</a> to everything</p>
+<p>For example, if you need to work on content, the account you use to log
+into the remote server should be allowed to do just that. This sounds a bit
+extreme, so we may re-phrase it as follows:</p>
+<blockquote>
+<p><a name="quote-least-privilege" href="#quote-least-privilege"></a>
+Each account should be provided the least number of required privileges
+to do specific tasks under that account and should not be used for
+anything else outside the defined set of activities.</p>
+</blockquote>
+<p>Again, if you include &ldquo;becoming root&rdquo; into the list of defined activities
+it would kind of defeat the purpose, so please resist this temptation. :)</p>
+</li>
+<li>
+<p>there should be a defined list of accounts which are allowed to do
+    system-wide modifications (e.g. privileged accounts)</p>
+<p>In line with the previous bullet point, these accounts must be used for
+these activities only (system updates, installing new software, modifying
+system-wide configuration).  The expectation is that the privileged
+accounts are used on occasion only;</p>
+</li>
+<li>
+<p>privileged accounts during their activities should not cross the security
+    boundary with the less privileged accounts.</p>
+<p>This is needed to avoid attacks from the less privileged accounts toward
+more privileged (e.g. process hijacking, file races, etc.). Unfortunately,
+this point is a bit confusing without a proper explanation that may take
+several blog posts to be fully covered, but in a nutshell it means that
+root should not touch anything writable by the less privileged account.
+Some examples of the bad and insecure behaviour include:</p>
+<ul>
+<li>changing directory to a directory writable by non-root,</li>
+<li>executing scripts from a directory writable by non-root accounts or
+    scripts that are writable by non-root,</li>
+<li>copying a file/directory from/to a directory writable by non-root
+    accounts,</li>
+<li>and so on.</li>
+</ul>
+</li>
+<li>
+<p>if possible (and this is <em>highly</em> recommended) privileged accounts should be
+    accessed from the trusted and secure machines.</p>
+<p>It is really hard to define what the &ldquo;trusted and secure machine&rdquo; is, but
+generally it should be assumed</p>
+<ul>
+<li>that it is a laptop or a desktop station that is used entirely for the
+    work purposes (no free time surfing on the leisure sites and stuff :) ),</li>
+<li>that proper firewall rules and protection techniques were used to secure
+    the machine, and</li>
+<li>that the operator is security-minded and does everything they can to
+     ensure integrity and security of their machine and software installed
+     on it.</li>
+</ul>
+</li>
+</ul>
+<p>I would be really happy to answer any question in regard to this article and
+provide any possible help in making our everyday system level activities more
+secure, so do not hesitate to comment or <a href="/contact">contact me</a>.</p>
+					<ul class="tags">
+						<li class="tag">
+							<div>
+								<a href="http://localhost:8000/tag/sudo/" class="tag name">sudo</a>
+							</div>
+							<a href="http://localhost:8000/tag/sudo/" class="tag count">1</a>
+						</li>
+						<li class="tag">
+							<div>
+								<a href="http://localhost:8000/tag/console/" class="tag name">console</a>
+							</div>
+							<a href="http://localhost:8000/tag/console/" class="tag count">7</a>
+						</li>
+					</ul>
+					<footer>
+						Offloaded on
+						<time datetime="2015-07-18 20:04:00+10:00">Sat, 18/07/2015 at 20:04 (+1000)</time>
+						<span class="category-tag"><a href="http://localhost:8000/category/sudo">sudo</a></span>
+					</footer>				</article>
 			</div>
 		</div>
 
-		<!-- Scripts -->
-		<script src="../../../../theme/js/clipboard/clipboard.js"></script>
-		<script src="../../../../theme/js/prism/prism.js"></script>
-
+		<!--
+		<script src="/theme/js/clipboard/clipboard.js"></script>
 		<div id="titleBar">
 			<span class="title">Mind Drops</span>
 		</div>
+		-->
 	</body>
 </html>

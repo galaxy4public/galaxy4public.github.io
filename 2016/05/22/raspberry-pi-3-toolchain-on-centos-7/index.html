@@ -1,0 +1,324 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<title>Mind Drops</title>
+		<meta http-eqiv="Service-Worker-Allowed" content="/" />
+		<meta name="theme-color" content="#535353" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta name="apple-mobile-web-app-title" content="Mind Drops">
+		<link rel="apple-touch-icon" href="/theme/images/icons/mind-drops-192x192.png">
+		<meta charset="utf-8" />
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="manifest" type="text/json" href="/manifest.json" />
+		<link rel="preload" as="style" href="/theme/css/reset.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Icons.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Exo2.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Oswald.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/DancingScript.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/FiraCode.css" />
+		<link rel="preload" as="style" href="/theme/css/base.css" />
+		<link rel="preload" as="script" href="/theme/js/persistence.js" />
+		<link rel="preload" as="script" href="/theme/js/visited.js" />
+		<link rel="preload" as="script" href="/theme/js/service.js" />
+		<script src="/theme/js/loader.js" defer></script>
+		<link rel="icon" type="image/png" href="/images/galaxy.png">
+
+		<link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/css/article.css" />
+		<meta name="tags" content="console" />
+		<meta name="tags" content="howto" />
+		<meta name="tags" content="linux" />
+		<meta name="tags" content="raspberry pi" />
+	</head>
+	<body>
+		<input type="checkbox" id="menu-toggle" />
+		<label for="menu-toggle" class="icon menu"></label>
+		<aside id="sidebar">
+			<!-- Logo -->
+			<div id="logo" class="box shadow">
+				<picture>
+					<source srcset="/images/galaxy.png.webp" type="image/webp">
+					<img src="/images/galaxy.png" alt="Logo">
+				</picture>
+			</div>
+
+			<!-- Search -->
+			<section class="box search">
+				<form name="google search" class="icon search" method="get" action="/search">
+					<label for="search" class="offscreen">Search</label>
+					<input id="search" type="text" class="text" name="q" placeholder="Search" />
+				</form>
+			</section>
+
+			<!-- Nav -->
+			<nav id="nav">
+				<ul>
+					<li class="icon home">
+						<a href="/">Home</a>
+					</li>
+					<li class="icon user-agent">
+						<a href="/about">About</a>
+					</li>
+					<li class="icon paper-plane">
+						<a href="/contact">Contact</a>
+					</li>
+				</ul>
+			</nav>
+
+			<!-- Text -->
+			<section class="box text-style1">
+				<div class="inner">
+					<p>
+						<strong>Mind Drops:</strong>: A place to unload all these assorted bits.
+					</p>
+				</div>
+			</section>
+
+			<!-- Copyright -->
+			<ul id="copyright">
+				<li>&copy; Openwall Pty Ltd 2020 </li>
+				<li><a href="#">Terms &amp; Conditions</a></li>
+			</ul>
+		</aside>
+
+		<!-- Content -->
+		<div id="content">
+			<div class="inner">
+				<article id="raspberry-pi-3-toolchain-on-centos-7" class="box post">
+					<header>
+						<h1><a name="top">Raspberry Pi 3 toolchain on CentOS 7</a></h1>
+					</header>
+					<div class="info">
+						<span class="date"><span class="day">22</span> <span class="month">May<span></span></span> <span class="year">2016</span></span>
+						<ul class="stats">
+							<li><a href="#" class="icon fa-comment">?</a></li>
+							<li><a href="#" class="icon fa-heart">?</a></li>
+							<li><a href="#" class="icon fa-twitter">?</a></li>
+							<li><a href="#" class="icon fa-facebook">?</a></li>
+						</ul>
+					</div>
+					<p>I heard a lot about Raspberry Pi boards but until now I had no need nor time to
+work with one.</p>
+<p>However, recently I purchased a Dodge Journey R/T and found that although I
+love the car I am so disappointed with its software and hard-wired logic that I
+decided to experiment a bit and fix the most annoying things.</p>
+<p>Since almost everything inside the car is talking over the CAN bus I needed
+some kind of a enclave inside the car where I could run my code and
+inject/intercept CAN messages.</p>
+<p>I looked around and found that I can build the desired appliance using
+Raspberry Pi 3 (Model B) + PiCAN 2 HAT board.</p>
+<p>Once the hardware was delivered to my home the time came to start building the
+software side of things. My distribution of choice for this project became
+CentOS 7 (userland), however, building stuff on the Raspberry Pi itself was a
+painful and long process, so I needed a proper toolchain to be able to utilise
+much more powerful hardware and do builds quicker.</p>
+<p>The following is a session dump (with some notes) on how I built my toolchain
+on an AWS EC2 instance which was running a minimal CentOS 7 as its OS.</p>
+<p>I spawned an EC2 instance (you need at least 8GB of free space there to be able
+to build the toolchain), logged in, and ensured that my system is up to date
+(and update it if it was not):</p>
+<pre class="highlight"><code class="language-bash"># yum -y update
+Loaded plugins: at-exit, fastestmirror, post-transaction-actions
+Loading mirror speeds from cached hostfile
+ * base: mirror.domain.tld
+ * extras: mirror.domain.tld
+ * updates: mirror.domain.tld
+No packages marked for update</code></pre>
+
+
+<p>The easiest way to build a toolchain is to use the crosstool-ng project, so I
+went ahead and downloaded the latest version with the corresponding GPG
+signature, verified the signature (although the verification was very
+superficial since Bryan Hundven is not in my Web of Trust and the crosstool-ng
+website was not providing an HTTPS page to confirm the fingerprint of the key),
+and unpacked the sources:</p>
+<pre class="highlight"><code class="language-bash"># yum -y install bison bzip2 flex gcc gcc-c++ glibc-static gperf help2man libstdc++-static libtool make ncurses-devel texinfo wget
+# useradd -m build
+# su - build
+$ wget -q 'http://crosstool-ng.org/download/crosstool-ng/crosstool-ng-1.22.0.tar.xz'
+$ wget -q 'http://crosstool-ng.org/download/crosstool-ng/crosstool-ng-1.22.0.tar.xz.sig'
+$ gpg --recv-keys 35B871D1 --keyserver pgp.surfnet.nl
+gpg: &quot;--keyserver&quot; not a key ID: skipping
+gpg: &quot;pgp.surfnet.nl&quot; not a key ID: skipping
+gpg: requesting key 35B871D1 from hkp server keys.gnupg.net
+gpg: /home/build/.gnupg/trustdb.gpg: trustdb created
+gpg: key 35B871D1: public key &quot;Bryan Hundven &quot; imported
+gpg: Total number processed: 1
+gpg:               imported: 1  (RSA: 1)
+$ gpg --verify crosstool-ng-1.22.0.tar.xz.sig
+gpg: Signature made Fri Nov 20 13:09:26 2015 UTC using RSA key ID 35B871D1
+gpg: Good signature from &quot;Bryan Hundven &quot;
+gpg:                 aka &quot;Bryan Hundven &quot;
+gpg:                 aka &quot;Bryan Hundven &quot;
+gpg:                 aka &quot;Bryan Hundven &quot;
+gpg:                 aka &quot;[jpeg image of size 3080]&quot;
+gpg:                 aka &quot;[jpeg image of size 16246]&quot;
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: 561E D9B6 2095 88ED 23C6  8329 CAD7 C8FC 35B8 71D1
+$ tar xJSf crosstool-ng-1.22.0.tar.xz
+$ rm crosstool-ng-1.22.0.tar.xz*</code></pre>
+
+
+<p>The next step was to prepare the environment for the crosstool-ng build process:</p>
+<pre class="highlight"><code class="language-bash">$ cd crosstool-ng
+$ /configure --prefix=$HOME/ct-ng
+checking build system type... x86_64-pc-linux-gnu
+[skipped]
+configure: creating ./config.status
+config.status: creating Makefile
+$ make
+  SED    'ct-ng'
+[skipped]
+  SED    'docs/ct-ng.1'
+  GZIP   'docs/ct-ng.1.gz'
+$ make install
+  GEN    'config/configure.in'
+[skipped]</code></pre>
+
+
+<p>For auto-completion, do not forget to install <code>ct-ng.comp</code> into your <code>bash</code>
+completion directory (usually <code>/etc/bash_completion.d/</code>)</p>
+<pre class="highlight"><code class="language-bash">$ export PATH=$HOME/ct-ng/bin:$PATH
+$ cd</code></pre>
+
+
+<p>Once the above was done we are ready to actually configure and build our toolchain:</p>
+<pre class="highlight"><code class="language-bash">$ mkdir ~/builddir
+$ cd ~/builddir
+$ ct-ng menuconfig</code></pre>
+
+
+<p>I was quite happy with the defaults and the only changes I made were the
+following:</p>
+<ul>
+<li>
+<p>Paths and misc options -&gt; Try features marked as EXPERIMENTAL -&gt; check</p>
+<p>You may skip this but I prefer to see all available options when I go
+through the list of configurable parameters, hence I enabled this;</p>
+</li>
+<li>
+<p>Target options -&gt; Target Architecture -&gt; arm</p>
+<p>My board is Raspberry Pi 3 (Model B) which runs on ARMv8 Cortex-A53, yours
+may be different but most likely it is also ARM based :)</p>
+</li>
+<li>
+<p>Target options -&gt; Bitness -&gt; 64-bit</p>
+<p>There is actually almost no point in building a 64-bit version when you are
+running on such a limited device as Raspberry, but at the time I was
+writing this blog post I was building the AArch64 version of the toolchain.
+I would recommend to stick with the 32-bit version of the toolchain if you
+do not have any specific requirements for the 64-bit one;</p>
+</li>
+<li>
+<p>Target options -&gt; Architecture level -&gt; armv8-a</p>
+<p>Since my only target was Raspberry Pi 3 (Model B) and the toolchain was
+created for the personal use I did additional optimisation for my board.</p>
+<p>If you are not sure or if you want a toolchain that would produce more
+compatible code for a range of ARM devices, then leave this setting at its
+default, i.e. blank</p>
+</li>
+<li>
+<p>Target options -&gt; Emit assembly for CPU -&gt; cortex-a53</p>
+<p>Actually, this supersedes the previous option since it is more explicit. If
+you are not optimising for a specific hardware, then leave it at the default
+setting (which is blank).</p>
+<p>Also, there are more optimisations, e.g. you can specify that FPU for this
+board is neon-fp-armv8, etc. but to keep it simple I decided not to
+showcase that.</p>
+</li>
+<li>
+<p>Toolchain options -&gt; Tuple&rsquo;s vendor string -&gt; rpi3</p>
+<p>This is optional but I like my toolchain to be as descriptive as possible,
+e.g. with this setting binaries will be prefixed with
+<code>aarch64-rpi3-linux-gnueabi-</code></p>
+</li>
+<li>
+<p>Operating System -&gt; Target OS -&gt; linux</p>
+<p>It is essential to set this to &ldquo;linux&rdquo; otherwise <code>crosstool-ng</code> will assume
+that you are building a toolchain for a bare-bone hardware and the produced
+binaries would not be properly linked to work with the OS on the board</p>
+</li>
+</ul>
+<p>Once we are comfortable with the configuration of the future toolchain we exit
+the configuration menu (saving the changes) and launch the build process (it
+would take approximately an hour on AWS t2.small instance):</p>
+<pre class="highlight"><code class="language-bash">configuration written to .config
+
+*** End of the configuration.
+*** Execute 'ct-ng build' to start the build or try 'ct-ng help'.
+
+$ ct-ng build
+[INFO ]  Performing some trivial sanity checks
+[INFO ]  Build started 20160522.070915
+[skipped]
+[INFO ]  Build completed at 20160522.080629
+[INFO ]  (elapsed: 57:14.18)
+[INFO ]  Finishing installation (may take a few seconds)...
+[57:15] /</code></pre>
+
+
+<p>Seems that our Raspberry Pi 3 toolchain is ready to be used. Let&rsquo;s compile
+something and see how it goes:</p>
+<pre class="highlight"><code class="language-bash">$ export PATH=$HOME/x-tools/aarch64-rpi3-linux-gnueabi/bin:$PATH
+$ aarch64-rpi3-linux-gnueabi-gcc --version
+aarch64-rpi3-linux-gnueabi-gcc (crosstool-NG crosstool-ng-1.22.0) 5.2.0
+Copyright (C) 2015 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+$ printf '#include \nint main(){printf(&quot;Hello\\n&quot;); return 0;}\n' &gt; sample.c
+$ aarch64-rpi3-linux-gnueabi-gcc -o sample sample.c
+$ ls -l sample
+-rwxr-xr-x. 1 build build 7672 May 22 08:19 sample
+$ file sample
+sample: ELF 64-bit LSB executable, ARM aarch64, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 4.3.0, not stripped
+$</code></pre>
+
+
+<p>Well, it is time to build some awesome stuff for Raspberry Pi 3, I guess, but
+this will be in another post. :)</p>
+					<ul class="tags">
+						<li class="tag">
+							<div>
+								<a href="http://localhost:8000/tag/console/" class="tag name">console</a>
+							</div>
+							<a href="http://localhost:8000/tag/console/" class="tag count">7</a>
+						</li>
+						<li class="tag">
+							<div>
+								<a href="http://localhost:8000/tag/howto/" class="tag name">howto</a>
+							</div>
+							<a href="http://localhost:8000/tag/howto/" class="tag count">4</a>
+						</li>
+						<li class="tag">
+							<div>
+								<a href="http://localhost:8000/tag/linux/" class="tag name">linux</a>
+							</div>
+							<a href="http://localhost:8000/tag/linux/" class="tag count">2</a>
+						</li>
+						<li class="tag">
+							<div>
+								<a href="http://localhost:8000/tag/raspberry-pi/" class="tag name">raspberry pi</a>
+							</div>
+							<a href="http://localhost:8000/tag/raspberry-pi/" class="tag count">1</a>
+						</li>
+					</ul>
+					<footer>
+						Offloaded on
+						<time datetime="2016-05-22 12:00:00+10:00">Sun, 22/05/2016 at 12:00 (+1000)</time>
+						<span class="category-tag"><a href="http://localhost:8000/category/linux">linux</a></span>
+					</footer>				</article>
+			</div>
+		</div>
+
+		<!--
+		<script src="/theme/js/clipboard/clipboard.js"></script>
+		<div id="titleBar">
+			<span class="title">Mind Drops</span>
+		</div>
+		-->
+	</body>
+</html>

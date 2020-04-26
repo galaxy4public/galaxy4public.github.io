@@ -31,12 +31,12 @@
 			}
 		};
 
-		script.src = 'https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js';
+		script.src = 'https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js';
 		head.appendChild(script);
 	}
 
 	Prism.plugins.toolbar.registerButton('copy-to-clipboard', function (env) {
-		var linkCopy = document.createElement('a');
+		var linkCopy = document.createElement('button');
 		linkCopy.textContent = 'Copy';
 
 		if (!ClipboardJS) {

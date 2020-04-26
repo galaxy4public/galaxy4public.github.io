@@ -1,0 +1,229 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<title>Mind Drops</title>
+		<meta http-eqiv="Service-Worker-Allowed" content="/" />
+		<meta name="theme-color" content="#535353" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta name="apple-mobile-web-app-title" content="Mind Drops">
+		<link rel="apple-touch-icon" href="/theme/images/icons/mind-drops-192x192.png">
+		<meta charset="utf-8" />
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="manifest" type="text/json" href="/manifest.json" />
+		<link rel="preload" as="style" href="/theme/css/reset.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Icons.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Exo2.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Oswald.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/DancingScript.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/FiraCode.css" />
+		<link rel="preload" as="style" href="/theme/css/base.css" />
+		<link rel="preload" as="script" href="/theme/js/persistence.js" />
+		<link rel="preload" as="script" href="/theme/js/visited.js" />
+		<link rel="preload" as="script" href="/theme/js/service.js" />
+		<script src="/theme/js/loader.js" defer></script>
+		<link rel="icon" type="image/png" href="/images/galaxy.png">
+
+		<link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/css/article.css" />
+		<meta name="tags" content="console" />
+		<meta name="tags" content="ssh" />
+		<meta name="tags" content="howto" />
+	</head>
+	<body>
+		<input type="checkbox" id="menu-toggle" />
+		<label for="menu-toggle" class="icon menu"></label>
+		<aside id="sidebar">
+			<!-- Logo -->
+			<div id="logo" class="box shadow">
+				<picture>
+					<source srcset="/images/galaxy.png.webp" type="image/webp">
+					<img src="/images/galaxy.png" alt="Logo">
+				</picture>
+			</div>
+
+			<!-- Search -->
+			<section class="box search">
+				<form name="google search" class="icon search" method="get" action="/search">
+					<label for="search" class="offscreen">Search</label>
+					<input id="search" type="text" class="text" name="q" placeholder="Search" />
+				</form>
+			</section>
+
+			<!-- Nav -->
+			<nav id="nav">
+				<ul>
+					<li class="icon home">
+						<a href="/">Home</a>
+					</li>
+					<li class="icon user-agent">
+						<a href="/about">About</a>
+					</li>
+					<li class="icon paper-plane">
+						<a href="/contact">Contact</a>
+					</li>
+				</ul>
+			</nav>
+
+			<!-- Text -->
+			<section class="box text-style1">
+				<div class="inner">
+					<p>
+						<strong>Mind Drops:</strong>: A place to unload all these assorted bits.
+					</p>
+				</div>
+			</section>
+
+			<!-- Copyright -->
+			<ul id="copyright">
+				<li>&copy; Openwall Pty Ltd 2020 </li>
+				<li><a href="#">Terms &amp; Conditions</a></li>
+			</ul>
+		</aside>
+
+		<!-- Content -->
+		<div id="content">
+			<div class="inner">
+				<article id="transparent-ssh-host-jumping-expert" class="box post">
+					<header>
+						<h1><a name="top">Transparent SSH host-jumping (Expert)</a></h1>
+					</header>
+					<div class="info">
+						<span class="date"><span class="day">26</span> <span class="month">Jul<span>y</span></span> <span class="year">2016</span></span>
+						<ul class="stats">
+							<li><a href="#" class="icon fa-comment">?</a></li>
+							<li><a href="#" class="icon fa-heart">?</a></li>
+							<li><a href="#" class="icon fa-twitter">?</a></li>
+							<li><a href="#" class="icon fa-facebook">?</a></li>
+						</ul>
+					</div>
+					<p>A while ago in the <a href="http://localhost:8000/2015/08/06/transparent-ssh-host-jumping-advanced/">Transparent SSH host-jumping (Advanced)</a> post I
+described a technique on how one could jump quite effortlessly through a chain
+of intermediate hosts. However, there was a catch: the user names and ports
+across the whole chain should be the same and there was no easy way to change
+that.</p>
+<p>Given that I <a href="http://localhost:8000/2016/07/25/ssh-interactive-proxycommand/">recently</a> paid quite a lot of attention to the ProxyCommand
+directive I decided to look into the implementation of the helper script that
+will allow one to tweak parameters for the hosts in the chain.</p>
+<p>You can read the <a href="http://localhost:8000/2015/08/06/transparent-ssh-host-jumping-advanced/">original</a> post for the details of how this host-jumping
+technique works, here I am only going to provide the proxy script and the
+corresponding ssh config parameter block to use the script.</p>
+<p>The goal was to support the following syntax:</p>
+<pre class="highlight"><code class="language-bash">$ ssh default_user@userA^hostA/userB^hostB:port/hostC</code></pre>
+
+
+<p>It was a little challenge to come up with the character for identifying the
+user part for intermediate hosts:</p>
+<ul>
+<li><code>@</code> - cannot be used since SSH parses the command line before providing the
+    string to the ProxyCommand script</li>
+<li><code>%</code> - cannot be used since SSH was thinking that I&rsquo;m trying to do an
+    expansion of the internal SSH variable</li>
+<li><code>!</code>, <code>$</code>, <code>(</code>, <code>)</code>, and <code>&amp;</code> - are all shell unfriendly</li>
+</ul>
+<p>So I decided on the <code>^</code> character as a delimiter.</p>
+<p>In the proposed command above the &ldquo;default_user&rdquo; is the user name we ultimately
+want to use for logging into the last host in the chain (it happens that this
+user name will be used for any host in the chain where no alternative name is
+provided).</p>
+<p>Each host in the chain could also be provided with the relevant port or, if the
+port is omitted, it will use the global port configuration (usually 22/tcp but
+can be changed with the <code>-p</code> argument to ssh).  The script is a bit not optimised
+(bash is really slow on string processing, but I decided to stick with pure
+bash where it was possible):</p>
+<pre class="highlight"><code class="language-bash">#!/bin/bash
+set -eu -o pipefail
+exec 10&lt;&amp;0 11&gt;&amp;1 0&lt;&amp;2 1&gt;&amp;2
+DEFAULT_USER=&quot;$1&quot;
+DEFAULT_PORT=&quot;$3&quot;
+HOST_CHAIN=&quot;$2&quot;
+HOST_NEXT=&quot;${HOST_CHAIN%%/*}&quot;
+HOST_USER=&quot;${HOST_NEXT%%^*}&quot;
+[ &quot;$HOST_USER&quot; == &quot;$HOST_NEXT&quot; ] &amp;&amp; HOST_USER=&quot;$DEFAULT_USER&quot; ||:
+HOST_PORT=&quot;${HOST_NEXT##*:}&quot;
+[ &quot;$HOST_PORT&quot; == &quot;$HOST_NEXT&quot; ] &amp;&amp; HOST_PORT=&quot;$DEFAULT_PORT&quot; ||:
+TARGET_HOST=&quot;${HOST_CHAIN##*/}&quot;
+TARGET_PORT=&quot;${TARGET_HOST##*:}&quot;
+TARGET_HOST=&quot;${TARGET_HOST%:*}&quot;
+[ &quot;$TARGET_PORT&quot; == &quot;$TARGET_HOST&quot; ] &amp;&amp; TARGET_PORT=&quot;$DEFAULT_PORT&quot; ||:
+TARGET_HOST=&quot;${TARGET_HOST#*^}&quot;
+HOST_NEXT=&quot;${HOST_NEXT#*^}&quot;
+HOST_NEXT=&quot;${HOST_NEXT%:*}&quot;
+HOST_CHAIN=&quot;${HOST_CHAIN%/*}&quot;
+[ &quot;$HOST_CHAIN&quot; == &quot;${HOST_CHAIN#*/}&quot; ] &amp;&amp; HOST_CHAIN= || HOST_CHAIN=&quot;${HOST_CHAIN#*/}&quot;
+HOST_CHAIN=&quot;$HOST_NEXT${HOST_CHAIN:+/$HOST_CHAIN}&quot;
+
+if [ ! -d &quot;$HOME/.ssh/.sessions&quot; ]; then
+    echo &quot;Creating the sessions directory&quot; &gt;&amp;2
+    mkdir -m700 &quot;$HOME/.ssh/.sessions&quot;
+fi
+
+CONTROL_SOCKET=$(printf &quot;$HOST_USER@HOST_CHAIN:$HOST_PORT\n&quot; | shasum | cut -f1 -d' ')
+
+exec 0&lt;&amp;10 1&gt;&amp;11
+exec ssh \
+    -o &quot;ControlMaster auto&quot; \
+    -o &quot;ControlPath ~/.ssh/.sessions/$CONTROL_SOCKET&quot; \
+    -o &quot;ControlPersist 120s&quot; \
+    -l &quot;$HOST_USER&quot; \
+    -p &quot;$HOST_PORT&quot; \
+    &quot;$HOST_CHAIN&quot; \
+    -W &quot;$TARGET_HOST&quot;:&quot;$TARGET_PORT&quot;</code></pre>
+
+
+<p>The above is a proof of the concept and it &ldquo;works for me&rdquo; :). I am using it
+every day when I need to access boxes behind a bastion host. Your mileage may
+vary and you are free to create your own version of the script that would
+perform better (I would be really glad if a version of such a script could be
+shared with me).</p>
+<p>The corresponding configuration block in the ssh config file looks as follows:</p>
+<pre class="highlight"><code class="language-ssh_config">Host */*
+    # if you uncomment ControlPath you also need to uncomment ControlMaster
+    #ControlMaster auto
+    # For OpenSSH &lt; 6.7 you may uncomment the following, but long chains will fail:
+    #ControlPath   ~/.ssh/.sessions/%r@%h:%p
+    # For OpenSSH &gt;= 6.7 you should uncomment the following:
+    #ControlPath   ~/.ssh/.sessions/%C
+    ProxyCommand ~/bin/ssh-helper.sh %r %h %p</code></pre>
+
+
+<p>Well, this is a bit messy since OpenSSH introduced the <code>%C</code> macro in version 6.7
+and without <code>%C</code> the ControlPath string gets too long for OpenSSH to create a
+socket on the filesystem for long chains of hosts.</p>
+					<ul class="tags">
+						<li class="tag">
+							<div>
+								<a href="http://localhost:8000/tag/console/" class="tag name">console</a>
+							</div>
+							<a href="http://localhost:8000/tag/console/" class="tag count">7</a>
+						</li>
+						<li class="tag">
+							<div>
+								<a href="http://localhost:8000/tag/ssh/" class="tag name">ssh</a>
+							</div>
+							<a href="http://localhost:8000/tag/ssh/" class="tag count">4</a>
+						</li>
+						<li class="tag">
+							<div>
+								<a href="http://localhost:8000/tag/howto/" class="tag name">howto</a>
+							</div>
+							<a href="http://localhost:8000/tag/howto/" class="tag count">4</a>
+						</li>
+					</ul>
+					<footer>
+						Offloaded on
+						<time datetime="2016-07-26 10:00:00+10:00">Tue, 26/07/2016 at 10:00 (+1000)</time>
+						<span class="category-tag"><a href="http://localhost:8000/category/ssh">ssh</a></span>
+					</footer>				</article>
+			</div>
+		</div>
+
+		<!--
+		<script src="/theme/js/clipboard/clipboard.js"></script>
+		<div id="titleBar">
+			<span class="title">Mind Drops</span>
+		</div>
+		-->
+	</body>
+</html>

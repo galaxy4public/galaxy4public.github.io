@@ -1,27 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>Mind Drops - (GalaxyMaster)</title><link>/</link><description></description><lastBuildDate>Thu, 06 Aug 2015 10:00:00 +1000</lastBuildDate><item><title>Transparent SSH host-jumping (Advanced)</title><link>2015/08/06/transparent-ssh-host-jumping-advanced/</link><description>&lt;p&gt;In this brief article I am going to describe how I resolved a nagging issue I
+<rss version="2.0"><channel><title>Mind Drops - (GalaxyMaster)</title><link>http://localhost:8000/</link><description></description><lastBuildDate>Fri, 13 Jan 2017 10:00:00 +1100</lastBuildDate><item><title>nginx + a backend with a dynamic IP (e.g. AWS ELB)</title><link>http://localhost:8000/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/</link><description>&lt;p&gt;Recently, I wrote about &lt;a href="http://localhost:8000/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/"&gt;the dynamic resolution of upstream servers&lt;/a&gt; in
+nginx which was achieved by quite an intrusive patch to the core nginx module.
+The patch was invented a while ago and was working very well up until recent
+nginx versions were released.&lt;/p&gt;
+&lt;p&gt;With the release of nginx 1.10 it was noticed that the patch crashes some
+workers under heavy load and this was unacceptable for the production load,
+hence a new approach was implemented.&lt;/p&gt;
+&lt;p&gt;The beauty of the new solution is that it is non-intrusive and works with any
+services that communicate via sockets.&lt;/p&gt;
+&lt;p&gt;In a nutshell &lt;span class="truncated"&gt;&lt;/span&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">(GalaxyMaster)</dc:creator><pubDate>Fri, 13 Jan 2017 10:00:00 +1100</pubDate><guid isPermaLink="false">tag:localhost,2017-01-13:/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/</guid><category>hacking</category><category>nginx</category><category>patch</category></item><item><title>Dynamic resolution of upstream servers in nginx</title><link>http://localhost:8000/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/</link><description>&lt;p&gt;UPDATE: This approach was superseded by the &lt;a href="http://localhost:8000/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/"&gt;proxying through
+systemd-socket-proxyd&lt;/a&gt; approach.&lt;/p&gt;
+&lt;p&gt;Many of my clients are running application stacks consisting of nginx plus some
+kind of scripting engine behind it (be it PHP, Ruby, or something else).&lt;/p&gt;
+&lt;p&gt;The architecture I designed for this kind of workload involves at least two
+load balancers:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;an external, frontend load balancer that serves the web requests from
+    visitors; and&lt;/li&gt;
+&lt;li&gt;an internal, backend load balancer that distributes load between the
+    backends.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Everything looks great when you implement this using &amp;ldquo;in-house&amp;rdquo; infrastructure
+where you control most of the networking aspects.&lt;/p&gt;
+&lt;p&gt;However, the tendency is that most &lt;span class="truncated"&gt;&lt;/span&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">(GalaxyMaster)</dc:creator><pubDate>Tue, 20 Sep 2016 10:00:00 +1000</pubDate><guid isPermaLink="false">tag:localhost,2016-09-20:/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/</guid><category>hacking</category><category>nginx</category><category>patch</category></item><item><title>Transparent SSH host-jumping (Expert)</title><link>http://localhost:8000/2016/07/26/transparent-ssh-host-jumping-expert/</link><description>&lt;p&gt;A while ago in the &lt;a href="http://localhost:8000/2015/08/06/transparent-ssh-host-jumping-advanced/"&gt;Transparent SSH host-jumping (Advanced)&lt;/a&gt; post I
+described a technique on how one could jump quite effortlessly through a chain
+of intermediate hosts. However, there was a catch: the user names and ports
+across the whole chain should be the same and there was no easy way to change
+that.&lt;/p&gt;
+&lt;p&gt;Given that I &lt;a href="http://localhost:8000/2016/07/25/ssh-interactive-proxycommand/"&gt;recently&lt;/a&gt; paid quite a lot of attention to the ProxyCommand
+directive I decided to look into the implementation of the helper script that
+will allow one to tweak parameters for the hosts in the chain.&lt;/p&gt;
+&lt;p&gt;You can read the &lt;a href="http://localhost:8000/2015/08/06/transparent-ssh-host-jumping-advanced/"&gt;original&lt;/a&gt; post for the &lt;span class="truncated"&gt;&lt;/span&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">(GalaxyMaster)</dc:creator><pubDate>Tue, 26 Jul 2016 10:00:00 +1000</pubDate><guid isPermaLink="false">tag:localhost,2016-07-26:/2016/07/26/transparent-ssh-host-jumping-expert/</guid><category>ssh</category><category>console</category><category>ssh</category><category>howto</category></item><item><title>SSH: Interactive ProxyCommand</title><link>http://localhost:8000/2016/07/25/ssh-interactive-proxycommand/</link><description>&lt;p&gt;I was involved in the creation of the &lt;a href="https://github.com/realestate-com-au/sshephalopod"&gt;sshephalopod&lt;/a&gt; project, which was an
+attempt to build an enterprise level authentication framework for SSH
+authentication using the SSH &lt;abbr title="Certificate Authority"&gt;CA&lt;/abbr&gt; feature.&lt;/p&gt;
+&lt;p&gt;The project is based on a wrapper script that signs a user via a &lt;abbr title="Security Assertion Markup Language"&gt;SAML&lt;/abbr&gt; identity
+provider and gets user&amp;rsquo;s public key signed for the further usage.&lt;/p&gt;
+&lt;p&gt;In one of the discussions I pointed out that such a wrapper script is not good
+for the end user experience and I proposed to provide the users with an excerpt
+for their ssh config file, so the functionality of sshephalopod would be &lt;span class="truncated"&gt;&lt;/span&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">(GalaxyMaster)</dc:creator><pubDate>Mon, 25 Jul 2016 10:00:00 +1000</pubDate><guid isPermaLink="false">tag:localhost,2016-07-25:/2016/07/25/ssh-interactive-proxycommand/</guid><category>ssh</category><category>ssh</category><category>console</category></item><item><title>Raspberry Pi 3 toolchain on CentOS 7</title><link>http://localhost:8000/2016/05/22/raspberry-pi-3-toolchain-on-centos-7/</link><description>&lt;p&gt;I heard a lot about Raspberry Pi boards but until now I had no need nor time to
+work with one.&lt;/p&gt;
+&lt;p&gt;However, recently I purchased a Dodge Journey R/T and found that although I
+love the car I am so disappointed with its software and hard-wired logic that I
+decided to experiment a bit and fix the most annoying things.&lt;/p&gt;
+&lt;p&gt;Since almost everything inside the car is talking over the CAN bus I needed
+some kind of a enclave inside the car where I could run my code and
+inject/intercept CAN messages.&lt;/p&gt;
+&lt;p&gt;I looked around and found that &lt;span class="truncated"&gt;&lt;/span&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">(GalaxyMaster)</dc:creator><pubDate>Sun, 22 May 2016 12:00:00 +1000</pubDate><guid isPermaLink="false">tag:localhost,2016-05-22:/2016/05/22/raspberry-pi-3-toolchain-on-centos-7/</guid><category>linux</category><category>console</category><category>howto</category><category>linux</category><category>raspberry pi</category></item><item><title>Building a firewall? Simple and easy!</title><link>http://localhost:8000/2016/05/22/building-a-firewall-simple-and-easy/</link><description>&lt;p&gt;I strive for simplicity since I am a strong believer that achieving a goal with
+the most simplest solution looks elegant, proves that you have deep knowledge
+on the subject, and overall is beautiful by itself.  Additionally to this, a
+simple solution is easier to comprehend and to audit, hence it is much easier
+to ensure the security of such a solution.&lt;/p&gt;
+&lt;p&gt;Over the last decade I stumbled upon numerous complicated firewalls erected on
+the NAT boxes with tens (sometimes, hundreds!) of rules describing the traffic
+flows and punched holes for some edge cases.  Every time I wondered what kind &lt;span class="truncated"&gt;&lt;/span&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">(GalaxyMaster)</dc:creator><pubDate>Sun, 22 May 2016 10:00:00 +1000</pubDate><guid isPermaLink="false">tag:localhost,2016-05-22:/2016/05/22/building-a-firewall-simple-and-easy/</guid><category>linux</category><category>console</category><category>howto</category><category>iptables</category><category>linux</category><category>security</category></item><item><title>Transparent SSH host-jumping (Advanced)</title><link>http://localhost:8000/2015/08/06/transparent-ssh-host-jumping-advanced/</link><description>&lt;p&gt;In this brief article I am going to describe how I resolved a nagging issue I
 had with setting up access to hosts which are not directly reachable, but where
 you need to forward your connection through an intermediate host.&lt;/p&gt;
-&lt;p&gt;&lt;a href="2010/12/10/ssh-port-forwarding-intermediate/"&gt;Previously&lt;/a&gt;, I was using local SSH port-forwarding technique (although I
-was configuring the hosts I connect to in the &lt;code&gt;~/.ssh/config&lt;/code&gt; file instead of
+&lt;p&gt;&lt;a href="http://localhost:8000/2010/12/10/ssh-port-forwarding-intermediate/"&gt;Previously&lt;/a&gt;, I was using the local SSH port-forwarding technique (although I
+was configuring hosts I connect to in the &lt;code&gt;~/.ssh/config&lt;/code&gt; file instead of
 using the command-line options). However, this approach turned out to be quite
 inconvenient since every time I wanted to connect to a new host (and, possibly,
-through a new intermediate host) I had to edit my …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">(GalaxyMaster)</dc:creator><pubDate>Thu, 06 Aug 2015 10:00:00 +1000</pubDate><guid isPermaLink="false">tag:None,2015-08-06:2015/08/06/transparent-ssh-host-jumping-advanced/</guid><category>ssh</category></item><item><title>Should we use "sudo" for day-to-day activities?</title><link>2015/07/18/should-we-use-sudo-for-day-to-day-activities/</link><description>&lt;p&gt;None of the systems I administer or supervise have &lt;code&gt;sudo&lt;/code&gt; installed and every
-time I answer a question on how to do privileged work on these systems (i.e. do
-tasks that require administrator privileges) with a proposal to SSH under the
-privileged account directly to do such a work whoever asked the question start
-to blabber how insecure that is, that one should use &lt;code&gt;sudo&lt;/code&gt; and that nobody
-should ever login directly as root.  I've spent quite some time explaining the
-misconception behind so-called "secure way to access systems through sudo", so
-I decided to write up an article …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">(GalaxyMaster)</dc:creator><pubDate>Sat, 18 Jul 2015 20:04:00 +1000</pubDate><guid isPermaLink="false">tag:None,2015-07-18:2015/07/18/should-we-use-sudo-for-day-to-day-activities/</guid><category>sudo</category><category>sudo</category><category>console</category><category>bastion</category></item><item><title>SSH port-forwarding (Intermediate)</title><link>2010/12/10/ssh-port-forwarding-intermediate/</link><description>&lt;p&gt;In my previous blog entry I described some basic functionality of SSH in terms
-of port-forwarding. Now it's time for a little bit more complex stuff.&lt;/p&gt;
+through a new intermediate host) I had to edit my &lt;span class="truncated"&gt;&lt;/span&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">(GalaxyMaster)</dc:creator><pubDate>Thu, 06 Aug 2015 10:00:00 +1000</pubDate><guid isPermaLink="false">tag:localhost,2015-08-06:/2015/08/06/transparent-ssh-host-jumping-advanced/</guid><category>ssh</category><category>console</category><category>ssh</category><category>howto</category></item><item><title>Should we use "sudo" for day-to-day activities?</title><link>http://localhost:8000/2015/07/18/should-we-use-sudo-for-day-to-day-activities/</link><description>&lt;div class="toc"&gt;&lt;span class="toctitle"&gt;Table of Contents&lt;/span&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#history"&gt;History&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#people-are-saying-sudo-is-good-is-it-true"&gt;People are saying &amp;ldquo;sudo&amp;rdquo; is good. Is it true?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#what-is-the-problem-with-the-sudo-approach"&gt;What is the problem with the &amp;ldquo;sudo&amp;rdquo; approach?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#the-light-side-of-sudo-is-there-one"&gt;The light side of &amp;ldquo;sudo&amp;rdquo;. Is there one?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#how-can-we-improve-the-security-of-our-systems-in-relation-to-the-sudo-usage"&gt;How can we improve the security of our systems in relation to the &amp;ldquo;sudo&amp;rdquo; usage?&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;None of the systems I administer or supervise have &lt;code&gt;sudo&lt;/code&gt; installed with the
+SUID bit set.&lt;/p&gt;
+&lt;p&gt;Every time I answer a question on how to do privileged work on these systems
+(i.e. do tasks that require administrator privileges) with a proposal to SSH
+under the privileged account directly to do such a work, whoever asked &lt;span class="truncated"&gt;&lt;/span&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">(GalaxyMaster)</dc:creator><pubDate>Sat, 18 Jul 2015 20:04:00 +1000</pubDate><guid isPermaLink="false">tag:localhost,2015-07-18:/2015/07/18/should-we-use-sudo-for-day-to-day-activities/</guid><category>sudo</category><category>sudo</category><category>console</category></item><item><title>SSH port-forwarding (Intermediate)</title><link>http://localhost:8000/2010/12/10/ssh-port-forwarding-intermediate/</link><description>&lt;p&gt;In my previous blog entry I described some basic functionality of SSH in terms
+of port-forwarding. Now it&amp;rsquo;s time for a little bit more complex stuff.&lt;/p&gt;
 &lt;p&gt;In this article I will highlight:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;(forward) piercing of a firewall (getting access to resources behind it);&lt;/li&gt;
 &lt;li&gt;dynamic port-forwarding (AKA proxy);&lt;/li&gt;
 &lt;li&gt;(reverse) piercing of a firewall (exposing your local services on the remote side).&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2&gt;Forward firewall piercing&lt;/h2&gt;
-&lt;p&gt;Let's start with the forward firewall piercing, since it is the easiest and was
+&lt;h2 id="forward-firewall-piercing"&gt;Forward firewall piercing&lt;/h2&gt;
+&lt;p&gt;Let&amp;rsquo;s start with the forward firewall piercing, since it is the easiest and was
 somewhat already described in my previous blog entry on this topic. Now,
-imagine that you already have SSH access to some host which …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">(GalaxyMaster)</dc:creator><pubDate>Fri, 10 Dec 2010 10:00:00 +1100</pubDate><guid isPermaLink="false">tag:None,2010-12-10:2010/12/10/ssh-port-forwarding-intermediate/</guid><category>ssh</category></item><item><title>SSH port-forwarding (Basic)</title><link>2010/11/29/ssh-port-forwarding-basic/</link><description>&lt;p&gt;An introduction into the world of SSH port-forwarding and how to leverage it to access resources in private subnets&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">(GalaxyMaster)</dc:creator><pubDate>Mon, 29 Nov 2010 10:00:00 +1100</pubDate><guid isPermaLink="false">tag:None,2010-11-29:2010/11/29/ssh-port-forwarding-basic/</guid><category>ssh</category><category>ssh</category><category>console</category><category>bastion</category></item><item><title>HOWTO: VMware Player as a remote console (VNC)</title><link>2010/11/24/howto-vmware-player-as-a-remote-console-vnc/</link><description>&lt;p&gt;Turning VMware Player into a non-privileged VNC client to access VMware VMs from a Linux-based PC&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">(GalaxyMaster)</dc:creator><pubDate>Wed, 24 Nov 2010 10:00:00 +1100</pubDate><guid isPermaLink="false">tag:None,2010-11-24:2010/11/24/howto-vmware-player-as-a-remote-console-vnc/</guid><category>hacking</category></item></channel></rss>
+imagine that you already have SSH access to some &lt;span class="truncated"&gt;&lt;/span&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">(GalaxyMaster)</dc:creator><pubDate>Fri, 10 Dec 2010 10:00:00 +1100</pubDate><guid isPermaLink="false">tag:localhost,2010-12-10:/2010/12/10/ssh-port-forwarding-intermediate/</guid><category>ssh</category></item><item><title>SSH port-forwarding (Basic)</title><link>http://localhost:8000/2010/11/29/ssh-port-forwarding-basic/</link><description>&lt;p&gt;I think all of you are using SSH in your daily routines. However, do you use
+its full potential? Today&amp;rsquo;s topic is the SSH port-forwarding feature and how
+it can be use to achieve some interesting configurations.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m sure most of you are aware of the feature, but how many of you are using
+it? Personally, I&amp;rsquo;m a bit obsessed with it and have found numerous cases where
+this feature of SSH is a real life saver.&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s start with simple things and imagine that you have a server where you
+are running MySQL (as a &lt;span class="truncated"&gt;&lt;/span&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">(GalaxyMaster)</dc:creator><pubDate>Mon, 29 Nov 2010 10:00:00 +1100</pubDate><guid isPermaLink="false">tag:localhost,2010-11-29:/2010/11/29/ssh-port-forwarding-basic/</guid><category>ssh</category><category>ssh</category><category>console</category><category>bastion</category></item><item><title>HOWTO: VMware Player as a remote console (VNC)</title><link>http://localhost:8000/2010/11/24/howto-vmware-player-as-a-remote-console-vnc/</link><description>&lt;p&gt;Turning VMware Player into a non-privileged VNC client to access VMware VMs from a Linux-based PC&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">(GalaxyMaster)</dc:creator><pubDate>Wed, 24 Nov 2010 10:00:00 +1100</pubDate><guid isPermaLink="false">tag:localhost,2010-11-24:/2010/11/24/howto-vmware-player-as-a-remote-console-vnc/</guid><category>hacking</category></item></channel></rss>

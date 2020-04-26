@@ -1,0 +1,354 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<title>Mind Drops</title>
+		<meta http-eqiv="Service-Worker-Allowed" content="/" />
+		<meta name="theme-color" content="#535353" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta name="apple-mobile-web-app-title" content="Mind Drops">
+		<link rel="apple-touch-icon" href="/theme/images/icons/mind-drops-192x192.png">
+		<meta charset="utf-8" />
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="manifest" type="text/json" href="/manifest.json" />
+		<link rel="preload" as="style" href="/theme/css/reset.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Icons.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Exo2.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Oswald.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/DancingScript.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/FiraCode.css" />
+		<link rel="preload" as="style" href="/theme/css/base.css" />
+		<link rel="preload" as="script" href="/theme/js/persistence.js" />
+		<link rel="preload" as="script" href="/theme/js/visited.js" />
+		<link rel="preload" as="script" href="/theme/js/service.js" />
+		<script src="/theme/js/loader.js" defer></script>
+		<link rel="icon" type="image/png" href="/images/galaxy.png">
+
+		<link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/css/article.css" />
+		<meta name="tags" content="console" />
+		<meta name="tags" content="howto" />
+		<meta name="tags" content="iptables" />
+		<meta name="tags" content="linux" />
+		<meta name="tags" content="security" />
+	</head>
+	<body>
+		<input type="checkbox" id="menu-toggle" />
+		<label for="menu-toggle" class="icon menu"></label>
+		<aside id="sidebar">
+			<!-- Logo -->
+			<div id="logo" class="box shadow">
+				<picture>
+					<source srcset="/images/galaxy.png.webp" type="image/webp">
+					<img src="/images/galaxy.png" alt="Logo">
+				</picture>
+			</div>
+
+			<!-- Search -->
+			<section class="box search">
+				<form name="google search" class="icon search" method="get" action="/search">
+					<label for="search" class="offscreen">Search</label>
+					<input id="search" type="text" class="text" name="q" placeholder="Search" />
+				</form>
+			</section>
+
+			<!-- Nav -->
+			<nav id="nav">
+				<ul>
+					<li class="icon home">
+						<a href="/">Home</a>
+					</li>
+					<li class="icon user-agent">
+						<a href="/about">About</a>
+					</li>
+					<li class="icon paper-plane">
+						<a href="/contact">Contact</a>
+					</li>
+				</ul>
+			</nav>
+
+			<!-- Text -->
+			<section class="box text-style1">
+				<div class="inner">
+					<p>
+						<strong>Mind Drops:</strong>: A place to unload all these assorted bits.
+					</p>
+				</div>
+			</section>
+
+			<!-- Copyright -->
+			<ul id="copyright">
+				<li>&copy; Openwall Pty Ltd 2020 </li>
+				<li><a href="#">Terms &amp; Conditions</a></li>
+			</ul>
+		</aside>
+
+		<!-- Content -->
+		<div id="content">
+			<div class="inner">
+				<article id="building-a-firewall-simple-and-easy" class="box post">
+					<header>
+						<h1><a name="top">Building a firewall? Simple and easy!</a></h1>
+					</header>
+					<div class="info">
+						<span class="date"><span class="day">22</span> <span class="month">May<span></span></span> <span class="year">2016</span></span>
+						<ul class="stats">
+							<li><a href="#" class="icon fa-comment">?</a></li>
+							<li><a href="#" class="icon fa-heart">?</a></li>
+							<li><a href="#" class="icon fa-twitter">?</a></li>
+							<li><a href="#" class="icon fa-facebook">?</a></li>
+						</ul>
+					</div>
+					<p>I strive for simplicity since I am a strong believer that achieving a goal with
+the most simplest solution looks elegant, proves that you have deep knowledge
+on the subject, and overall is beautiful by itself.  Additionally to this, a
+simple solution is easier to comprehend and to audit, hence it is much easier
+to ensure the security of such a solution.</p>
+<p>Over the last decade I stumbled upon numerous complicated firewalls erected on
+the NAT boxes with tens (sometimes, hundreds!) of rules describing the traffic
+flows and punched holes for some edge cases.  Every time I wondered what kind
+of a bug has bitten the person who composed such a convoluted ruleset that is a
+nightmare to manage.</p>
+<p>In 99% of the cases I was able to come up with a ruleset of usually less than
+20 rules for the whole firewall to achieve exactly the same result.  So, in
+this article I will explain my approach on building firewalls that are easy to
+support and to understand.</p>
+<p>Before you dive into optimising (or creating) your firewall there are some
+things you need to have a clear understanding of:</p>
+<ul>
+<li>
+<p>Networking</p>
+<p>You do not need to be an expert or a guru, but you should know fundamentals
+about the protocols, standards, and internals of the networking related to
+the area you are going to secure with the firewall.</p>
+<p>When you are in doubt, do not rely on an assumption: use search engines and
+locate the corresponding RFC, standard, and/or any other authoritative
+source of information documenting the protocol you are working with.</p>
+<p>It is impossible to know everything, but the common fallacy is that people
+often create things based on wrong assumptions when it was a couple of
+clicks away to research and understand the subject.  I have seen so many
+times when people are &ldquo;designing&rdquo; their firewalls without a slightest clue
+in regard to the standards covering interoperability of the hosts in the IP
+network.</p>
+<p>For example, you can easily spot these &ldquo;creations&rdquo; if you look at the
+ruleset and see that there is a rule that drops ICMP packets
+unconditionally (or do not define any rules dealing with ICMP when the
+default policy is &ldquo;deny&rdquo;)</p>
+</li>
+<li>
+<p>Traffic flows</p>
+<p>Think of a firewall as a filter that manages traffic flows (Figure 1 shows
+a good visual representation of how traffic passes through the Linux
+netfilter subsystem).</p>
+<p>Before you can make a decision in regard to whether to allow or deny
+something you must know what your are dealing with and what outcome you
+want to achieve.</p>
+<p>It would tremendously help you later if you could simply draw a diagram of
+your network and overlay it with a layer documenting the inbound and
+outbound flows of each node on the diagram.  Such a &ldquo;data flow&rdquo; diagram is
+supposed to be a part of any solution documentation involving network
+infrastructure, but in reality most of the enterprises (at least the ones I
+worked with) simply forget to generate one.</p>
+<p>On such a diagram you would be able to see straight away what kind of
+legitimate traffic is going to cross your firewall and what traffic is not
+supposed to reach your firewall at all.</p>
+</li>
+<li>
+<p>Goals</p>
+<p>This may sound obvious, but one of the most important things is to know
+exactly what you are trying to achieve.  You are not building a firewall for
+the sake of building a firewall, are you?</p>
+<p>Frankly speaking, there are just a handful number of scenarios for creating
+a firewall (I fail to come up with more than five at this point) and all of
+them are very simple.</p>
+<p>If your network provides any services to the external network (e.g.
+Internet) there are just two options I can think of:</p>
+<ol>
+<li>Allow external entities to access services on defined public endpoints
+   (an inbound flow) and allow unrestricted outbound traffic from your
+   network to the external one (an outbound flow);</li>
+<li>Allow external entities to access services on defined public endpoints
+   and restrict outbound traffic from your network to a defined set of
+   external endpoints.</li>
+</ol>
+<p>If your network does not provide any services to the external network and
+only consumes resources from it, I see only two options:</p>
+<ol start="3">
+<li>Disallow any access from the external entities to your resources, but
+   allow your network to access the external endpoints and receive
+   responses from there;</li>
+<li>The same as above, but restrict the outbound traffic to a selected set
+   of the external endpoints.</li>
+</ol>
+<p>The fifth scenario is the one I personally do not use and is the blacklist
+approach:</p>
+<ol start="5">
+<li>allow everything in each direction and block communication for the
+   specific endpoints only (be they external and/or internal).</li>
+</ol>
+</li>
+<li>
+<p>Tools</p>
+<p>Last, but not least, is the requirement to know the corresponding toolset
+you are going to utilise to achieve your goals.</p>
+<p>There are numerous high-level frameworks which are supposed to make systems
+administrator&rsquo;s life easier (e.g.  RHEL/CentOS/Fedora are using firewalld
+on top of iptables), however, personally I prefer to work with iptables
+directly (thus, my systems do not have firewalld installed).</p>
+</li>
+</ul>
+<p>Before you start implementing the rules it often helps to describe your
+firewall ruleset in simple sentences, e.g.:</p>
+<ol>
+<li>
+<p>deny any incoming traffic to our network through the firewall unless it is
+     explicitly allowed by the rules;</p>
+</li>
+<li>
+<p>allow any outbound traffic from our network through the firewall unless it
+     is explicitly denied by the rules;</p>
+</li>
+<li>
+<p>deny any forwarding of traffic through the firewall unless it is
+     explicitly allowed by the rules;</p>
+</li>
+<li>
+<p>allow anyone on the Internet to connect to the webserver on ports 80/tcp
+     and 443/tcp;</p>
+</li>
+<li>
+<p>allow our office to connect to the firewall via SSH on port 22/tcp;</p>
+</li>
+<li>
+<p>allow traffic from our network to pass the firewall toward the Internet;</p>
+</li>
+<li>
+<p>allow the back channel traffic from the resources on the Internet to our
+     network;</p>
+</li>
+<li>
+<p>…</p>
+</li>
+</ol>
+<p>And then research how each of these sentences can be implemented using the
+configuration language of the tool.  The point here is that you need to take
+one step at a time and translate the logic exactly so you do not deviate from
+your goals &ndash; you will be able to optimise the result at a later stage.</p>
+<p>Well, it is time for a real world example, I guess.  The following snippet is
+used as the skeleton for the iptables ruleset on systems I manage (this snippet
+assumes that 192.168.0.0/16 is the internal network and that the ruleset is
+installed on the NAT instance which is a gateway to the Internet):</p>
+<pre class="highlight"><code class="language-iptables">*filter
+:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+-A INPUT -m state --state INVALID -j DROP
+# If it was already established pass bits through
+-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+# Allow for the local traffic
+-A INPUT -i lo -j ACCEPT
+# Let's MTU discovery and other network management to work properly
+-A INPUT -p icmp -m icmp --icmp-type any -j ACCEPT
+# Allow remote SSH logins on the specified port (should be &lt;1024 and would require sshd re-configuration if the port is not standard)
+-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT
+# Allow DHCP client to get its information
+-A INPUT -i eth0 -p udp -m state --state NEW -m udp --sport 67:68 --dport 67:68 -j ACCEPT
+
+# Reject anything that we did not specifically allow above
+-A INPUT -j REJECT --reject-with icmp-host-prohibited
+
+# This is a NAT box, so we accept packets from our network designated to the world, but reject any other forwarding attempts.
+-A FORWARD -i eth0 -s 192.168.0.0/22 ! -d 192.168.0.0/22 -j ACCEPT
+-A FORWARD -i eth0 ! -s 192.168.0.0/22 -d 192.168.0.0/22 -j ACCEPT
+# If there is a MTU mismatch between the NAT box and hosts behind it we want to allow ICMP for the MTU discovery
+-A FORWARD -i eth0 -p icmp -m icmp --icmp-type any -s 192.168.0.0/22 -d 192.168.0.0/22 -j ACCEPT
+# We may be interested in anything that is rejected in this chain, so let's log it
+-A FORWARD -j LOG
+
+# We do not allow to forward anything else
+-A FORWARD -j REJECT --reject-with icmp-host-prohibited
+COMMIT
+
+*nat
+:POSTROUTING ACCEPT [0:0]
+-A POSTROUTING -s 192.168.0.0/22 ! -d 192.168.0.0/22 -j MASQUERADE
+COMMIT</code></pre>
+
+
+<p>There are a few things to note:</p>
+<ul>
+<li>
+<p>default policies for INPUT and FORWARD are set to ACCEPT while the last
+    rule in each chain is set to REJECT.  The reason for this is that the
+    default policy can be either ACCEPT or DROP with the latter silently
+    dropping packets.  Dropping packets makes it hard to investigate network
+    issues, hence I prefer REJECT instead.</li></p>
+</li>
+<li>
+<p>if you need to open more ports the best place to insert your rules would be
+    between SSH and DHCP rules in the INPUT chain</p>
+</li>
+<li>
+<p>if you are setting up a firewall on the server (so no traffic forwarding is
+    needed) you may want to either drop all rules from the FORWARD chain and
+    set the default policy for that chain to DROP, or you can simply leave the
+    last two rules (LOG and REJECT) in the chain removing the rest.  Also, the
+    nat table is not needed on the servers, so should be omitted.</p>
+</li>
+<li>
+<p>the above ruleset is not strict enough in regard to filtering ICMP traffic
+    and allows all types of ICMP, perhaps it could be further tightened to
+    allow only ICMP types 0 (reply), 3 (destination unreachable), 8 (request),
+    11 (time exceeded), and 30 (traceroute) to pass through the firewall.</p>
+</li>
+</ul>
+<p>So, here you have it a solid firewall ruleset consisting of just 13 rules.</p>
+					<ul class="tags">
+						<li class="tag">
+							<div>
+								<a href="http://localhost:8000/tag/console/" class="tag name">console</a>
+							</div>
+							<a href="http://localhost:8000/tag/console/" class="tag count">7</a>
+						</li>
+						<li class="tag">
+							<div>
+								<a href="http://localhost:8000/tag/howto/" class="tag name">howto</a>
+							</div>
+							<a href="http://localhost:8000/tag/howto/" class="tag count">4</a>
+						</li>
+						<li class="tag">
+							<div>
+								<a href="http://localhost:8000/tag/iptables/" class="tag name">iptables</a>
+							</div>
+							<a href="http://localhost:8000/tag/iptables/" class="tag count">1</a>
+						</li>
+						<li class="tag">
+							<div>
+								<a href="http://localhost:8000/tag/linux/" class="tag name">linux</a>
+							</div>
+							<a href="http://localhost:8000/tag/linux/" class="tag count">2</a>
+						</li>
+						<li class="tag">
+							<div>
+								<a href="http://localhost:8000/tag/security/" class="tag name">security</a>
+							</div>
+							<a href="http://localhost:8000/tag/security/" class="tag count">1</a>
+						</li>
+					</ul>
+					<footer>
+						Offloaded on
+						<time datetime="2016-05-22 10:00:00+10:00">Sun, 22/05/2016 at 10:00 (+1000)</time>
+						<span class="category-tag"><a href="http://localhost:8000/category/linux">linux</a></span>
+					</footer>				</article>
+			</div>
+		</div>
+
+		<!--
+		<script src="/theme/js/clipboard/clipboard.js"></script>
+		<div id="titleBar">
+			<span class="title">Mind Drops</span>
+		</div>
+		-->
+	</body>
+</html>

@@ -2,83 +2,152 @@
 <html lang="en">
 	<head>
 		<title>Mind Drops</title>
+		<meta http-eqiv="Service-Worker-Allowed" content="/" />
+		<meta name="theme-color" content="#535353" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta name="apple-mobile-web-app-title" content="Mind Drops">
+		<link rel="apple-touch-icon" href="/theme/images/icons/mind-drops-192x192.png">
 		<meta charset="utf-8" />
-		<meta name="description" content="../..">
+		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="manifest" type="text/json" href="/manifest.json" />
-		<link rel="stylesheet" type="text/css" href="../../theme/css/reset.css" />
-		<link rel="stylesheet" type="text/css" href="../../theme/css/font-awesome.min.css" />
-		<link rel="stylesheet" type="text/css" href="../../theme/css/open-fonts.css" />
-		<link rel="stylesheet" type="text/css" href="../../theme/css/base.css" />
-		<link rel="stylesheet" type="text/css" href="../../theme/css/pygment.css" />
-		<link rel="stylesheet" type="text/css" href="../../theme/css/prism.css" defer />
-		<link rel="icon" type="image/png" href="../../images/pelly.png">
+		<link rel="preload" as="style" href="/theme/css/reset.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Icons.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Exo2.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Oswald.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/DancingScript.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/FiraCode.css" />
+		<link rel="preload" as="style" href="/theme/css/base.css" />
+		<link rel="preload" as="script" href="/theme/js/persistence.js" />
+		<link rel="preload" as="script" href="/theme/js/visited.js" />
+		<link rel="preload" as="script" href="/theme/js/service.js" />
+		<script src="/theme/js/loader.js" defer></script>
+		<link rel="icon" type="image/png" href="/images/galaxy.png">
 	</head>
 	<body>
+		<input type="checkbox" id="menu-toggle" />
+		<label for="menu-toggle" class="icon menu"></label>
+		<aside id="sidebar">
+			<!-- Logo -->
+			<div id="logo" class="box shadow">
+				<picture>
+					<source srcset="/images/galaxy.png.webp" type="image/webp">
+					<img src="/images/galaxy.png" alt="Logo">
+				</picture>
+			</div>
 
-		<!-- Sidebar -->
-		<div>
-			<a href="#sidebar" class="toggle"></a>
-			<aside id="sidebar">
-				<!-- Logo -->
-				<div id="logo" class="box shadow">
-					<picture>
-						<source srcset="../../images/galaxy.png.webp" type="image/webp">
-						<img src="../../images/galaxy.png" alt="Logo">
-					</picture>
-				</div>
+			<!-- Search -->
+			<section class="box search">
+				<form name="google search" class="icon search" method="get" action="/search">
+					<label for="search" class="offscreen">Search</label>
+					<input id="search" type="text" class="text" name="q" placeholder="Search" />
+				</form>
+			</section>
 
-				<!-- Search -->
-				<section class="box search">
-					<form method="post" action="#">
-						<label for="search" class="offscreen">Search</label>
-						<input id="search" type="text" class="text" name="search" placeholder="Search" />
-					</form>
-				</section>
-
-				<!-- Nav -->
-				<nav id="nav">
-					<ul>
-						<li class="current"><a href="#">Latest Post</a></li>
-						<li><a href="#">Archives</a></li>
-						<li><a href="#">About Me</a></li>
-						<li><a href="#">Contact Me</a></li>
-					</ul>
-				</nav>
-
-				<!-- Text -->
-				<section class="box text-style1">
-					<div class="inner">
-						<p>
-							<strong>Mind Drops:</strong>: A place to unload all these assorted bits.
-						</p>
-					</div>
-				</section>
-
-				<!-- Copyright -->
-				<ul id="copyright">
-					<li>&copy; Openwall Pty Ltd 2020 </li>
-					<li><a href="#">Terms &amp; Conditions</a></li>
+			<!-- Nav -->
+			<nav id="nav">
+				<ul>
+					<li class="icon home">
+						<a href="/">Home</a>
+					</li>
+					<li class="icon user-agent">
+						<a href="/about">About</a>
+					</li>
+					<li class="icon paper-plane">
+						<a href="/contact">Contact</a>
+					</li>
 				</ul>
-			</aside>
-		</div>
+			</nav>
+
+			<!-- Text -->
+			<section class="box text-style1">
+				<div class="inner">
+					<p>
+						<strong>Mind Drops:</strong>: A place to unload all these assorted bits.
+					</p>
+				</div>
+			</section>
+
+			<!-- Copyright -->
+			<ul id="copyright">
+				<li>&copy; Openwall Pty Ltd 2020 </li>
+				<li><a href="#">Terms &amp; Conditions</a></li>
+			</ul>
+		</aside>
 
 		<!-- Content -->
 		<div id="content">
 			<div class="inner">
-<!-- 
--% block content %}
--% endblock content %}
- -->
+	<div class="page-title">
+		<h1>bastion</h1>
+	</div>
+				<article id="ssh-port-forwarding-basic" class="box post post-excerpt">
+								<header>
+									<h1><a href="http://localhost:8000/2010/11/29/ssh-port-forwarding-basic/">SSH port-forwarding (Basic)</a></h1>
+								</header>
+								<div class="info">
+									<span class="date">
+										<span class="day">29</span>
+										<span class="month"><a href="http://localhost:8000/2010/11/">Nov<span class="month full">ember</span></a></span>
+										<span class="year"><a href="http://localhost:8000/2010/">2010</a></span>
+									</span>
+									<ul class="stats">
+										<li><a href="#" class="icon comment">256</a></li>
+										<li><a href="#" class="icon heart">128</a></li>
+										<li><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="icon twitter" data-tweet-id="1251580747447545863">0 </a></li>
+										<li><a href="#" class="icon facebook">5</a></li>
+									</ul>
+								</div>
+								<!-- Here we rely on the fact that Pelican always closes summary with '</p>' -->
+								<div class="summary"><p>I think all of you are using SSH in your daily routines. However, do you use
+its full potential? Today&rsquo;s topic is the SSH port-forwarding feature and how
+it can be use to achieve some interesting configurations.</p>
+<p>I&rsquo;m sure most of you are aware of the feature, but how many of you are using
+it? Personally, I&rsquo;m a bit obsessed with it and have found numerous cases where
+this feature of SSH is a real life saver.</p>
+<p>Let&rsquo;s start with simple things and imagine that you have a server where you
+are running MySQL (as a <span class="truncated"></span>
+									<span class="readmore">…
+										<a href="http://localhost:8000/2010/11/29/ssh-port-forwarding-basic/#continue" class="icon fa-forward">read
+											<span class="readtime">time 2 min.</span>
+										</a>
+									</span>
+								</div>
+					<ul class="tags">
+						<li class="tag">
+							<div>
+								<a href="http://localhost:8000/tag/ssh/" class="tag name">ssh</a>
+							</div>
+							<a href="http://localhost:8000/tag/ssh/" class="tag count">4</a>
+						</li>
+						<li class="tag">
+							<div>
+								<a href="http://localhost:8000/tag/console/" class="tag name">console</a>
+							</div>
+							<a href="http://localhost:8000/tag/console/" class="tag count">7</a>
+						</li>
+						<li class="tag">
+							<div>
+								<a href="http://localhost:8000/tag/bastion/" class="tag name">bastion</a>
+							</div>
+							<a href="http://localhost:8000/tag/bastion/" class="tag count">1</a>
+						</li>
+					</ul>
+					<footer>
+						Offloaded on
+						<time datetime="2010-11-29 10:00:00+11:00">Mon, 29/11/2010 at 10:00 (+1100)</time>
+						<span class="category-tag"><a href="http://localhost:8000/category/ssh">ssh</a></span>
+					</footer>				</article>
 			</div>
 		</div>
 
-		<!-- Scripts -->
-		<script src="../../theme/js/clipboard/clipboard.js"></script>
-		<script src="../../theme/js/prism/prism.js"></script>
-
+		<!--
+		<script src="/theme/js/clipboard/clipboard.js"></script>
 		<div id="titleBar">
 			<span class="title">Mind Drops</span>
 		</div>
+		-->
 	</body>
 </html>

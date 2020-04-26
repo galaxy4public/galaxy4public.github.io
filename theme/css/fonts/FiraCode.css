@@ -1,0 +1,83 @@
+@font-face {
+	font-family: 'Fira Code';
+	font-style: normal;
+	font-weight: 300;
+	font-display: swap;
+	src:
+		local('Fira Code Light'),
+		local('FiraCode-Light'),
+		url(../../fonts/FiraCode/FiraCode-VariableFont_wght.woff2) format('woff2-variations'),
+		url(../../fonts/FiraCode/FiraCode-VariableFont_wght.ttf) format('truetype-variations'),
+		url(../../fonts/FiraCode/FiraCode-Light.woff2) format('woff2'),
+		url(../../fonts/FiraCode/FiraCode-Light.ttf) format('truetype')
+}
+
+@font-face {
+	font-family: 'Fira Code';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src:
+		local('Fira Code Regular'),
+		local('FiraCode-Regular'),
+		url(../../fonts/FiraCode/FiraCode-VariableFont_wght.woff2) format('woff2-variations'),
+		url(../../fonts/FiraCode/FiraCode-VariableFont_wght.ttf) format('truetype-variations'),
+		url(../../fonts/FiraCode/FiraCode-Regular.woff2) format('woff2'),
+		url(../../fonts/FiraCode/FiraCode-Regular.ttf) format('truetype')
+}
+
+@font-face {
+	font-family: 'Fira Code';
+	font-style: normal;
+	font-weight: 450;
+	font-display: swap;
+	src:
+		local('Fira Code Retina'),
+		local('FiraCode-Retina'),
+		url(../../fonts/FiraCode/FiraCode-VariableFont_wght.woff2) format('woff2-variations'),
+		url(../../fonts/FiraCode/FiraCode-VariableFont_wght.ttf) format('truetype-variations'),
+		url(../../fonts/FiraCode/FiraCode-Retina.woff2) format('woff2'),
+		url(../../fonts/FiraCode/FiraCode-Retina.ttf) format('truetype')
+}
+
+@font-face {
+	font-family: 'Fira Code';
+	font-style: normal;
+	font-weight: 500;
+	font-display: swap;
+	src:
+		local('Fira Code Medium'),
+		local('FiraCode-Medium'),
+		url(../../fonts/FiraCode/FiraCode-VariableFont_wght.woff2) format('woff2-variations'),
+		url(../../fonts/FiraCode/FiraCode-VariableFont_wght.ttf) format('truetype-variations'),
+		url(../../fonts/FiraCode/FiraCode-Medium.woff2) format('woff2'),
+		url(../../fonts/FiraCode/FiraCode-Medium.ttf) format('truetype')
+}
+
+@font-face {
+	font-family: 'Fira Code';
+	font-style: normal;
+	font-weight: 600;
+	font-display: swap;
+	src:
+		local('Fira Code SemiBold'),
+		local('FiraCode-SemiBold'),
+		url(../../fonts/FiraCode/FiraCode-VariableFont_wght.woff2) format('woff2-variations'),
+		url(../../fonts/FiraCode/FiraCode-VariableFont_wght.ttf) format('truetype-variations'),
+		url(../../fonts/FiraCode/FiraCode-SemiBold.woff2) format('woff2'),
+		url(../../fonts/FiraCode/FiraCode-SemiBold.ttf) format('truetype')
+}
+
+@font-face {
+	font-family: 'Fira Code';
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src:
+		local('Fira Code Bold'),
+		local('FiraCode-Bold'),
+		url(../../fonts/FiraCode/FiraCode-VariableFont_wght.woff2) format('woff2-variations'),
+		url(../../fonts/FiraCode/FiraCode-VariableFont_wght.ttf) format('truetype-variations'),
+		url(../../fonts/FiraCode/FiraCode-Bold.woff2) format('woff2'),
+		url(../../fonts/FiraCode/FiraCode-Bold.ttf) format('truetype')
+}

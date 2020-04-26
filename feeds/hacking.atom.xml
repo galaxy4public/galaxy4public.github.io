@@ -1,15 +1,448 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - hacking</title><link href="/" rel="alternate"></link><link href="feeds/hacking.atom.xml" rel="self"></link><id>/</id><updated>2010-11-24T10:00:00+11:00</updated><entry><title>HOWTO: VMware Player as a remote console (VNC)</title><link href="2010/11/24/howto-vmware-player-as-a-remote-console-vnc/" rel="alternate"></link><published>2010-11-24T10:00:00+11:00</published><updated>2010-11-24T10:00:00+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:None,2010-11-24:2010/11/24/howto-vmware-player-as-a-remote-console-vnc/</id><summary type="html">&lt;p&gt;Turning VMware Player into a non-privileged VNC client to access VMware VMs from a Linux-based PC&lt;/p&gt;</summary><content type="html">&lt;p&gt;Since I am doing a lot of remote systems administration tasks due to the nature
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - hacking</title><link href="http://localhost:8000/" rel="alternate"></link><link href="http://localhost:8000/feeds/hacking.atom.xml" rel="self"></link><id>http://localhost:8000/</id><updated>2017-01-13T10:00:00+11:00</updated><entry><title>nginx + a backend with a dynamic IP (e.g. AWS ELB)</title><link href="http://localhost:8000/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/" rel="alternate"></link><published>2017-01-13T10:00:00+11:00</published><updated>2017-01-13T10:00:00+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:localhost,2017-01-13:/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/</id><summary type="html">&lt;p&gt;Recently, I wrote about &lt;a href="http://localhost:8000/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/"&gt;the dynamic resolution of upstream servers&lt;/a&gt; in
+nginx which was achieved by quite an intrusive patch to the core nginx module.
+The patch was invented a while ago and was working very well up until recent
+nginx versions were released.&lt;/p&gt;
+&lt;p&gt;With the release of nginx 1.10 it was noticed that the patch crashes some
+workers under heavy load and this was unacceptable for the production load,
+hence a new approach was implemented.&lt;/p&gt;
+&lt;p&gt;The beauty of the new solution is that it is non-intrusive and works with any
+services that communicate via sockets.&lt;/p&gt;
+&lt;p&gt;In a nutshell &lt;span class="truncated"&gt;&lt;/span&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;Recently, I wrote about &lt;a href="http://localhost:8000/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/"&gt;the dynamic resolution of upstream servers&lt;/a&gt; in
+nginx which was achieved by quite an intrusive patch to the core nginx module.
+The patch was invented a while ago and was working very well up until recent
+nginx versions were released.&lt;/p&gt;
+&lt;p&gt;With the release of nginx 1.10 it was noticed that the patch crashes some
+workers under heavy load and this was unacceptable for the production load,
+hence a new approach was implemented.&lt;/p&gt;
+&lt;p&gt;The beauty of the new solution is that it is non-intrusive and works with any
+services that communicate via sockets.&lt;/p&gt;
+&lt;p&gt;In a nutshell, I just looked at the problem from a little bit different angle
+after I defined the requirements:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;nginx needs to delegate the requests to a FastCGI server over a socket&lt;/li&gt;
+&lt;li&gt;we want to work with the standard packages provided by the distribution&lt;/li&gt;
+&lt;li&gt;the FastCGI server could be on a dynamic IP address&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Since we are not allowed to patch the application the only place we can meddle
+with the communication between nginx and the FastCGI server is the socket nginx
+connects to. Therefore, we need some kind of a proxy that would take requests
+from nginx, determine the FastCGI endpoint, and forward the requests to that
+endpoint.&lt;/p&gt;
+&lt;p&gt;Initially, I thought that I would use something like netcat or a similar tool
+for this, but then I found that systemd provides &lt;code&gt;systemd-socket-proxyd&lt;/code&gt; binary
+which fits the purpose perfectly and could be configured to be socket
+activated.&lt;/p&gt;
+&lt;p&gt;Before we dive into the implementation details of this solution, let&amp;rsquo;s describe
+what we are going to do and how:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;nginx will be configured to talk to the locally bound socket - there are
+    two options, actually: either a local TCP socket or a Unix socket&lt;/li&gt;
+&lt;li&gt;a proxy service will be socket activated by a request coming from nginx to
+    that local socket&lt;/li&gt;
+&lt;li&gt;a proxy service should resolve the target and forward the request there&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The nginx part is easy &amp;ndash; we just need to replace the FastCGI server endpoint
+address (in our example below it was &lt;code&gt;remote.php.backend.domain.tld.:9000&lt;/code&gt;)
+with our local socket (we are using a unix socket at
+&lt;code&gt;/run/systemd-socket-proxyd/fastcgi.sock&lt;/code&gt; in this example):&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-nginx"&gt;upstream php {
+    #server remote.php.backend.domain.tld.:9000;
+    server  unix:/run/systemd-socket-proxyd/fastcgi.sock;
+}
+location ~ \.php$ {
+    try_files   $uri = 404;
+    fastcgi_pass    php;
+    fastcgi_index   index.php;
+    include     fastcgi.conf;
+}&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;The next step is to define the socket activated proxy service. This generally
+requires creating two files in &lt;code&gt;/etc/system/systemd&lt;/code&gt; directory: one for the
+socket and the other for the proxy itself. However, in this article we will go
+an extra mile and will define template units so the same configuration could be
+reused to launch multiple proxies using the same base templates.&lt;/p&gt;
+&lt;p&gt;The first template file is for the systemd service which will provide the proxy
+capability:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-systemd"&gt;[Unit]
+Description=&amp;quot;Generic Socket Proxy (%I)&amp;quot;
+Documentation=https://www.freedesktop.org/software/systemd/man/systemd-socket-proxyd.html
+After=network.service
+
+[Service]
+EnvironmentFile=-/etc/sysconfig/systemd-socket-proxyd.%i
+User=nobody
+Group=nobody
+OOMScoreAdjust=-1000
+UMask=077
+ExecStart=/usr/lib/systemd/systemd-socket-proxyd $TARGET
+Restart=on-failure
+PrivateTmp=true
+PrivateDevices=true
+#PrivateUsers=true
+#ProtectSystem=strict
+ProtectSystem=full
+#ProtectKernelTunables=true
+#ProtectControlGroups=true
+#NoNewPrivileges=true
+#ProtectKernelModules=true
+#MemoryDenyWriteExecute=true&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;Depending on the version of your &lt;code&gt;systemd&lt;/code&gt; manager you may be able to uncomment
+more lines than was shown in this example, which was tested on CentOS 7.3.1611.&lt;/p&gt;
+&lt;p&gt;Also, in the example template given above we are using &lt;code&gt;OOMScoreAdjust=-1000&lt;/code&gt; to
+protect this proxy service from being killed in the event the system is
+starving for memory &amp;ndash; this may be something you do not need.&lt;/p&gt;
+&lt;p&gt;The second template file is for the socket unit that would trigger the
+activation of the proxy service when a request arrives on the socket:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-systemd"&gt;[Unit]
+Description=&amp;quot;Socket for Generic Socket Proxy (%I)&amp;quot;
+Documentation=https://www.freedesktop.org/software/systemd/man/systemd-socket-proxyd.html
+
+[Socket]
+ListenStream=/run/systemd-socket-proxyd/%i.sock
+SocketUser=root
+SocketGroup=root
+SocketMode=0660
+DirectoryMode=0711
+
+[Install]
+WantedBy=sockets.target&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;You may notice that the defaults are pretty strict:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;the socket is owned by root and only root is allowed to work with the
+    socket;&lt;/li&gt;
+&lt;li&gt;the directory permissions are set in such a way that the
+    &lt;code&gt;/run/systemd-socket-proxyd&lt;/code&gt; directory file list is not readable by anyone
+    except root.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;These are safe and sane defaults and can be tweaked per instance that was
+instantiated using the template as shown later in this article.&lt;/p&gt;
+&lt;p&gt;Since our goal is to connect nginx to the backend FastCGI service we need to
+ensure that the proxy socket is read/write accessible to nginx&amp;rsquo;es workers, so
+we need to tweak the settings of the socket unit:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-systemd"&gt;[Socket]
+SocketGroup=nginx&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;Note how we extended the template for a specific named instance of the socket
+unit: we defined the &lt;code&gt;systemd-socket-proxyd@fastcgi.socket.d&lt;/code&gt; sub-directory and
+put a drop-in configuration snippet there.&lt;/p&gt;
+&lt;p&gt;Now, to achieve our goal we need to specify the target endpoint for our proxy
+service (the named instance we spawn using the template):&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-systemd"&gt;[Service]
+# Reset the ExecStart, so we could override it
+ExecStart=
+ExecStart=/usr/lib/systemd/systemd-socket-proxyd remote.php.backend.domain.tld.:9000&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;The mechanics behind extending the configuration is the same as for the socket
+unit, but here we overrode the &lt;code&gt;ExecStart&lt;/code&gt; command to specify the target endpoint
+for the proxy.&lt;/p&gt;
+&lt;p&gt;OK, we are done with the configuration of &lt;code&gt;systemd&lt;/code&gt;, so it would be a good time
+to reload the &lt;code&gt;systemd&lt;/code&gt; daemon:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;systemctl daemon-reload&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;If you run a system where SELinux is disabled (why?!) you don&amp;rsquo;t need to do
+anything additional and should be good, but if you are security conscious and
+want to ensure that you follow the least privilege principle, then read on :)&lt;/p&gt;
+&lt;p&gt;Unfortunately, &lt;code&gt;systemd-socket-proxyd&lt;/code&gt; seems not to be used a lot by the
+community (most likely people are just unaware of it) so the tool has no
+dedicated policy attached to it in the targeted SELinux policy. I plan to push
+the change into the SELinux reference policy, but before I do we are going to
+use a custom loadable policy module.&lt;/p&gt;
+&lt;p&gt;To build a module you need the SELinux reference policy development framework
+installed on the instance you are building your policies (it can be the same
+instance you are running your proxy on, but I would advise to use a temporary
+VM for building/compiling policies since the only time you need that
+development stuff is when you are compiling the module from sources).&lt;/p&gt;
+&lt;p&gt;On CentOS, you can install all the necessary bits to build a loadable SELinux
+module by installing the &lt;code&gt;selinux-policy-devel&lt;/code&gt; package using &lt;code&gt;yum&lt;/code&gt;:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;# yum -y install selinux-policy-devel&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;Note, I skipped the output of the command since it does not provide any useful
+information for the purposes of this article.&lt;/p&gt;
+&lt;p&gt;Once the SELinux development framework is installed we can start designing our
+loadable policy for the &lt;code&gt;systemd-socket-proxyd&lt;/code&gt; service.&lt;/p&gt;
+&lt;p&gt;Our policy will consist of two files:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;systemd-socket-proxyd.te&lt;/code&gt; &amp;ndash; the type enforcement ruleset; and&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;systemd-socket-proxyd.fc&lt;/code&gt; &amp;ndash; the file context ruleset.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Eventually, we will need to introduce the corresponding module interface
+support file too, but for the purposes of this article we should be fine with
+the automatically generated one.&lt;/p&gt;
+&lt;p&gt;The content of the systemd-socket-proxy.te file is listed below:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-selinux"&gt;policy_module(systemd-socket-proxyd, 1.0)
+
+## &amp;lt;desc&amp;gt;
+##  &amp;lt;p&amp;gt;
+##  Allow systemd-socket-proxyd to bind any port instead of one labelled
+## with systemd_socket_proxyd_port_t.
+##  &amp;lt;/p&amp;gt;
+## &amp;lt;/desc&amp;gt;
+gen_tunable(systemd_socket_proxyd_bind_any, false)
+
+## &amp;lt;desc&amp;gt;
+## &amp;lt;p&amp;gt;
+## Allow systemd-socket-proxyd to connect to any port instead of
+## labelled ones.
+## &amp;lt;/p&amp;gt;
+## &amp;lt;/desc&amp;gt;
+gen_tunable(systemd_socket_proxyd_connect_any, false)
+
+systemd_domain_template(systemd_socket_proxyd)
+
+type systemd_socket_proxyd_unit_file_t;
+systemd_unit_file(systemd_socket_proxyd_unit_file_t)
+
+sysnet_dns_name_resolve(systemd_socket_proxyd_t)
+
+# resolver
+allow systemd_socket_proxyd_t self:unix_dgram_socket { create getopt setopt sendto read write };
+
+# listener
+type systemd_socket_proxyd_port_t;
+corenet_port(systemd_socket_proxyd_port_t);
+allow systemd_socket_proxyd_t self:tcp_socket accept;
+
+tunable_policy(`!systemd_socket_proxyd_bind_any',`
+ allow systemd_socket_proxyd_t systemd_socket_proxyd_port_t:tcp_socket name_bind;
+')
+
+tunable_policy(`systemd_socket_proxyd_bind_any',`
+ corenet_tcp_bind_all_ports(systemd_socket_proxyd_t)
+')
+
+# target
+tunable_policy(`!systemd_socket_proxyd_connect_any',`
+ allow systemd_socket_proxyd_t port_type:tcp_socket name_connect;
+')
+
+tunable_policy(`systemd_socket_proxyd_connect_any',`
+ corenet_tcp_connect_all_ports(systemd_socket_proxyd_t)
+')
+
+# consumer
+allow daemon systemd_socket_proxyd_t:unix_stream_socket connectto;&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;This is still work in progress, but so far it works at least for my projects.
+Note that there are two SELinux booleans defined which affect the behaviour of
+the policy:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;systemd_socket_proxyd_bind_any&lt;/p&gt;
+&lt;p&gt;allows to bind proxy to any TCP socket if set to true, otherwise the proxy
+would be able to connect to TCP ports labelled with
+&lt;code&gt;systemd_socket_proxyd_port_t&lt;/code&gt;;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;systemd_socket_proxyd_connect_any&lt;/p&gt;
+&lt;p&gt;allows proxy to connect to any target TCP ports if set to true, otherwise
+the target is limited by the ports labelled with
+&lt;code&gt;systemd_socket_proxyd_port_t&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Now, to allow the proper transition into the &lt;code&gt;systemd_socket_proxyd_t&lt;/code&gt; domain we
+need to label the &lt;code&gt;systemd-socket-proxyd&lt;/code&gt; binary with the
+&lt;code&gt;systemd_socket_proxyd_exec_t&lt;/code&gt; label.&lt;/p&gt;
+&lt;p&gt;The content of the systemd-socket-proxy.fc file that implements this behavior
+is as follows:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-selinux"&gt;/(usr/lib|etc)/systemd/system/systemd-socket-proxyd\.service  gen_context(system_u:object_r:systemd_socket_proxyd_unit_file_t,s0)
+/usr/lib/systemd/systemd-socket-proxyd -- gen_context(system_u:object_r:systemd_socket_proxyd_exec_t,s0)&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;At this point, we have everything we need to compile a policy module, so let&amp;rsquo;s
+just do it now:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;[root@localhost ~]# ls -l
+total 8
+-rw-r--r--. 1 root root  235 Jan  5 05:21 systemd-socket-proxyd.fc
+-rw-r--r--. 1 root root 1467 Jan  6 00:10 systemd-socket-proxyd.te
+[root@localhost ~]# make -f /usr/share/selinux/devel/Makefile
+Compiling targeted systemd-socket-proxyd module
+/usr/bin/checkmodule:  loading policy configuration from tmp/systemd-socket-proxyd.tmp
+/usr/bin/checkmodule:  policy configuration loaded
+/usr/bin/checkmodule:  writing binary representation (version 17) to tmp/systemd-socket-proxyd.mod
+Creating targeted systemd-socket-proxyd.pp policy package
+rm tmp/systemd-socket-proxyd.mod tmp/systemd-socket-proxyd.mod.fc
+[root@localhost ~]# semodule -i systemd-socket-proxyd.pp
+[root@localhost ~]# restorecon -v /usr/lib/systemd/systemd-socket-proxyd
+restorecon reset /usr/lib/systemd/systemd-socket-proxyd context system_u:object_r:init_exec_t:s0-&amp;gt;system_u:object_r:systemd_socket_proxyd_exec_t:s0&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;The &lt;code&gt;semodule -i systemd-socket-proxyd.pp&lt;/code&gt; command has actually installed the
+module into the system, but if you were building the module on a different
+instance, then instead of installing the module you just need to grab the
+resulting &lt;code&gt;systemd-socket-proxyd.pp&lt;/code&gt; file and transfer it to the target instance
+where proxy is going to be running and only apply the last two commands
+(&lt;code&gt;semodule -i ...&lt;/code&gt; and &lt;code&gt;restorecon&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;We approached the time when we need to perform the pre-flight checks before
+launching our new service :). First, we need to check whether the file context
+was applied to the &lt;code&gt;systemd-socket-proxyd binary&lt;/code&gt;:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;[root@localhost ~]# ls -ldZ /usr/lib/systemd/systemd-socket-proxyd 
+-rwxr-xr-x. root root system_u:object_r:systemd_socket_proxyd_exec_t:s0 /usr/lib/systemd/systemd-socket-proxyd&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;Looks good! Let&amp;rsquo;s start the socket unit and check the permissions set on the
+socket file:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;[root@localhost ~]# systemctl start systemd-socket-proxyd@fastcgi.socket
+[root@localhost ~]# ls -ldZ /run/systemd-socket-proxyd{,/fastcgi.sock}
+drwx--x--x. root root  system_u:object_r:var_run_t:s0   /run/systemd-socket-proxyd
+srw-rw----. root nginx system_u:object_r:var_run_t:s0   /run/systemd-socket-proxyd/fastcgi.sock&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;This also looks as expected. The next test would be to check that our proxy
+service is running with the desired set of permissions and in the correct
+SELinux domain:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;[root@localhost ~]# socat -v unix-client:/run/systemd-socket-proxyd/fastcgi.sock stdin
+
+&amp;lt; 2017/01/13 00:59:22.987083  length=1 from=0 to=0
+
+[root@localhost ~]# ps uZ -C systemd-socket-proxyd
+LABEL                           USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+system_u:system_r:systemd_socket_proxyd_t:s0 nobody 28643 0.0  0.0 86628 756 ? Ssl  00:59   0:00 /usr/lib/systemd/systemd-socket-proxyd 127.0.0.1:9000
+[root@localhost ~]# cat /proc/28643/status 
+Name: systemd-socket-
+State: S (sleeping)
+Tgid: 28643
+Ngid: 0
+Pid: 28643
+PPid: 1
+TracerPid: 0
+Uid: 99 99 99 99
+Gid: 99 99 99 99
+FDSize: 64
+Groups: 99 
+[truncated]&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;The first &lt;code&gt;socat&lt;/code&gt; command was needed to trigger the socket activation that
+resulted in the &lt;code&gt;systemd-socket-proxyd.service&lt;/code&gt; being launched.&lt;/p&gt;
+&lt;p&gt;The second command confirmed that the service is running under the nobody user
+and within the &lt;code&gt;systemd_socket_proxyd_t&lt;/code&gt; domain.&lt;/p&gt;
+&lt;p&gt;Finally, the third command confirmed that the privileges were properly dropped
+and there is no way the service could regain the escalated privileges back.&lt;/p&gt;
+&lt;p&gt;Looks like we are all, so let&amp;rsquo;s make our changes persistent. To achieve this we
+just need to enable the &lt;code&gt;systemd-socket-proxyd@fastcgi.socket&lt;/code&gt; unit:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;[root@localhost ~]# systemctl enable systemd-socket-proxyd@fastcgi.socket
+Created symlink from /etc/systemd/system/sockets.target.wants/systemd-socket-proxyd@fastcgi.socket to /etc/systemd/system/systemd-socket-proxyd@.socket.
+[root@localhost ~]# systemctl status systemd-socket-proxyd@fastcgi.socket | fgrep Loaded:
+   Loaded: loaded (/etc/systemd/system/systemd-socket-proxyd@.socket; enabled; vendor preset: disabled)&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;Just to show that the configuration is working I set a simple lab up in a VM
+and followed this article with the only exception of the PHP/FPM location which
+I am running on the same VM:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;[root@localhost ~]# cat /usr/share/nginx/html/test.php 
+&amp;lt;?php echo &amp;quot;This is the output from PHP\n&amp;quot; ?&amp;gt;
+[root@localhost ~]# cat /etc/nginx/conf.d/php-upstream.conf 
+upstream php {
+    #server        remote.php.backend.domain.tld.:9000
+    server         unix:/run/systemd-socket-proxyd/fastcgi.sock;
+}
+[root@localhost ~]# cat /etc/nginx/default.d/php.conf 
+location ~ \.php$ {
+    try_files      $uri = 404;
+    fastcgi_pass   php;
+    fastcgi_index  index.php;
+    include        fastcgi.conf;
+}
+[root@localhost ~]# cat /etc/systemd/system/systemd-socket-proxyd@fastcgi.service.d/fastcgi.conf
+[Service]
+# Reset the ExecStart, so we could override it
+ExecStart=
+ExecStart=/usr/lib/systemd/systemd-socket-proxyd 127.0.0.1:9000
+[root@localhost ~]# telnet 0 80
+Trying 0.0.0.0...
+Connected to 0.
+Escape character is '^]'.
+GET /test.php HTTP/1.0
+
+HTTP/1.1 200 OK
+Server: nginx/1.10.2
+Date: Fri, 13 Jan 2017 03:01:16 GMT
+Content-Type: text/html
+Connection: close
+X-Powered-By: PHP/5.4.16
+
+This is the output from PHP
+Connection closed by foreign host.&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;Works as expected :).&lt;/p&gt;
+&lt;p&gt;There is one thing one needs to be aware of: when I started to work on this I
+discovered that &lt;code&gt;systemd-socket-proxyd&lt;/code&gt; had a hard-coded limit for the number
+of connections set to 256 (I &lt;a href="http://localhost:8000/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/"&gt;introduced the &lt;code&gt;-c&lt;/code&gt; parameter&lt;/a&gt; to
+&lt;code&gt;systemd-socket-proxyd&lt;/code&gt;, so one could dynamically set the limit, however it
+would take some time until this change is propagated to all major distros).&lt;/p&gt;
+&lt;p&gt;Also, it is worth it to mention that the provided configuration is not
+efficient if you are using a domain name for the target endpoint for the proxy,
+so if this is the case I would advise to run a local DNS caching service (e.g.
+&lt;code&gt;dnsmasq&lt;/code&gt;) so you would not spend time on the DNS queries.&lt;/p&gt;
+&lt;p&gt;As always, I would appreciate any feedback you may have.&lt;/p&gt;</content><category term="hacking"></category><category term="nginx"></category><category term="patch"></category></entry><entry><title>Dynamic resolution of upstream servers in nginx</title><link href="http://localhost:8000/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/" rel="alternate"></link><published>2016-09-20T10:00:00+10:00</published><updated>2016-09-20T10:00:00+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:localhost,2016-09-20:/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/</id><summary type="html">&lt;p&gt;UPDATE: This approach was superseded by the &lt;a href="http://localhost:8000/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/"&gt;proxying through
+systemd-socket-proxyd&lt;/a&gt; approach.&lt;/p&gt;
+&lt;p&gt;Many of my clients are running application stacks consisting of nginx plus some
+kind of scripting engine behind it (be it PHP, Ruby, or something else).&lt;/p&gt;
+&lt;p&gt;The architecture I designed for this kind of workload involves at least two
+load balancers:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;an external, frontend load balancer that serves the web requests from
+    visitors; and&lt;/li&gt;
+&lt;li&gt;an internal, backend load balancer that distributes load between the
+    backends.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Everything looks great when you implement this using &amp;ldquo;in-house&amp;rdquo; infrastructure
+where you control most of the networking aspects.&lt;/p&gt;
+&lt;p&gt;However, the tendency is that most &lt;span class="truncated"&gt;&lt;/span&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;UPDATE: This approach was superseded by the &lt;a href="http://localhost:8000/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/"&gt;proxying through
+systemd-socket-proxyd&lt;/a&gt; approach.&lt;/p&gt;
+&lt;p&gt;Many of my clients are running application stacks consisting of nginx plus some
+kind of scripting engine behind it (be it PHP, Ruby, or something else).&lt;/p&gt;
+&lt;p&gt;The architecture I designed for this kind of workload involves at least two
+load balancers:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;an external, frontend load balancer that serves the web requests from
+    visitors; and&lt;/li&gt;
+&lt;li&gt;an internal, backend load balancer that distributes load between the
+    backends.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Everything looks great when you implement this using &amp;ldquo;in-house&amp;rdquo; infrastructure
+where you control most of the networking aspects.&lt;/p&gt;
+&lt;p&gt;However, the tendency is that most enterprises are moving to the cloud
+providers and with that we lose some control.&lt;/p&gt;
+&lt;p&gt;Specifically, often the cloud providers define their load-balancers as
+auto-scaling entities that change their IP addresses depending on the
+scale-in/out activity.&lt;/p&gt;
+&lt;p&gt;Unfortunately, the community version of nginx does not know how to dynamically
+resolve the specified upstream servers (such a functionality is available from
+the nginx commercial subscription only), so I spent a couple of evenings to
+implement the desired functionality as a &lt;a href="https://github.com/galaxy4public/nginx-upstream-resolve" title="A patch to introduce the dynamic resolution of the upstream servers"&gt;patch&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The &lt;a href="https://github.com/galaxy4public/nginx-upstream-resolve" title="A patch to introduce the dynamic resolution of the upstream servers"&gt;patch&lt;/a&gt; implements the dynamic DNS resolution of the specified upstream
+servers in the upstream compatible way: we are re-using the very same &amp;ldquo;resolve&amp;rdquo;
+keyword on the server line as the commercial version of nginx does ensuring
+that if you ever decide to switch to the commercial subscription you would not
+need to change your configs.&lt;/p&gt;
+&lt;p&gt;The &lt;a href="https://github.com/galaxy4public/nginx-upstream-resolve" title="A patch to introduce the dynamic resolution of the upstream servers"&gt;patch&lt;/a&gt; was originally created for nginx 0.8.6 and was used in
+production for the last couple of years. The work on the patch was sponsored by
+&lt;a href="https://openwall.com.au"&gt;Openwall (Australia)&lt;/a&gt; and &lt;a href="https://withriley.com"&gt;Data Solutions
+Group&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Enjoy! :)&lt;/p&gt;</content><category term="hacking"></category><category term="nginx"></category><category term="patch"></category></entry><entry><title>HOWTO: VMware Player as a remote console (VNC)</title><link href="http://localhost:8000/2010/11/24/howto-vmware-player-as-a-remote-console-vnc/" rel="alternate"></link><published>2010-11-24T10:00:00+11:00</published><updated>2010-11-24T10:00:00+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:localhost,2010-11-24:/2010/11/24/howto-vmware-player-as-a-remote-console-vnc/</id><summary type="html">&lt;p&gt;Turning VMware Player into a non-privileged VNC client to access VMware VMs from a Linux-based PC&lt;/p&gt;</summary><content type="html">&lt;p&gt;Since I am doing a lot of remote systems administration tasks due to the nature
 of my IT consulting work and since I am also running Linux on all my computers
 I was looking for a native way how to get a remote console to VMware VMs from
 linux.&lt;/p&gt;
 &lt;p&gt;After some searching I found that &lt;a href="http://www.vmware.com/go/downloadplayer/"&gt;VMware Player&lt;/a&gt; (which has native binaries for
 Linux) can be used as a VNC client to get to VMs consoles. However, once I have
-downloaded VMware Player's bundle and was faced with its requirement to run the
+downloaded VMware Player&amp;rsquo;s bundle and was faced with its requirement to run the
 installation script as root I became quite unhappy with an idea of running some
 proprietary software on my machine as root, especially after looking into the
 bundle and the way the installation script was written. Moreover, there was no
-need for other parts of &lt;a href="http://www.vmware.com/go/downloadplayer/"&gt;VMware Player&lt;/a&gt; -- I just wanted to have a small tool to
+need for other parts of &lt;a href="http://www.vmware.com/go/downloadplayer/"&gt;VMware Player&lt;/a&gt; &amp;ndash; I just wanted to have a small tool to
 be able to hook the remote consoles up under my lovely Linux environment.
 Therefore, I decided to take a challenge and to tweak the installation so it
 will be possible to install the whole thing as a non-privileged user. Another
@@ -18,7 +451,7 @@ with only components needed for remote console sessions.&lt;/p&gt;
 &lt;p&gt;If you are not concerned about security (and integrity) of your system, e.g.
 you are fine with the re-installation of the whole system, then it will be
 cheaper to just install the &lt;a href="http://www.vmware.com/go/downloadplayer/"&gt;VMware Player&lt;/a&gt; under the root account. In this case
-you don't need to read any further since what I am describing below is for
+you don&amp;rsquo;t need to read any further since what I am describing below is for
 those brave hearts who value their systems and who do not want to give a chance
 to mess their systems up by running low-quality custom installation scripts as
 root.&lt;/p&gt;
@@ -26,7 +459,7 @@ root.&lt;/p&gt;
 the how-to I have spent considerable time to come up with is worth something
 and will be of some help to you.&lt;/p&gt;
 &lt;p&gt;Our starting point is a Linux-based system (it does not matter what
-distribution you are running, but I did everything on a customised &lt;a href="https://en.altlinux.org/"&gt;ALT Linux&lt;/a&gt;'s
+distribution you are running, but I did everything on a customised &lt;a href="https://en.altlinux.org/"&gt;ALT Linux&lt;/a&gt;&amp;lsquo;s
 RPM-based distribution) running on an x86 compatible hardware (mine was 32-bit,
 but I see no issues with 64-bit ones).&lt;/p&gt;
 &lt;p&gt;The first step is to download &lt;a href="http://www.vmware.com/go/downloadplayer/"&gt;VMware Player&lt;/a&gt; for your architecture, set proper
@@ -50,8 +483,8 @@ drwxr-xr-x  3 vmware vmware 4096 Nov 23 09:01 vmware-player-setup&lt;/code&gt;&l
 directory and we are interested in just two subdirectories: &lt;code&gt;vmware-player&lt;/code&gt; and
 &lt;code&gt;vmware-player-app&lt;/code&gt;, the rest is not related to the functionality we are
 looking for.&lt;/p&gt;
-&lt;p&gt;Now, let's pick up all parts from which we will build our future "VMware remote
-console" tool. To make it easier create a dedicated subdirectory, e.g.
+&lt;p&gt;Now, let&amp;rsquo;s pick up all parts from which we will build our future &amp;ldquo;VMware remote
+console&amp;rdquo; tool. To make it easier create a dedicated subdirectory, e.g.
 &lt;code&gt;vmrconsole&lt;/code&gt;, with the following structure:&lt;/p&gt;
 &lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ mkdir -m700 ~/vmrconsole
 $ mkdir -m700 ~/vmrconsole/{bin,etc,lib,share}
@@ -65,7 +498,7 @@ drwx------ 2 vmware vmware 4096 Nov 24 01:21 share&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;From now on we are going to populate these directories with files from the
 unpacked bundle.&lt;/p&gt;
-&lt;p&gt;The first file we are interested in is &lt;code&gt;appLoader&lt;/code&gt; -- this is the primary
+&lt;p&gt;The first file we are interested in is &lt;code&gt;appLoader&lt;/code&gt; &amp;ndash; this is the primary
 executable by the way, we need to copy it to our bin directory and then try to
 run it:&lt;/p&gt;
 &lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ cp ~/vmplayer/vmware-player-app/lib/bin/appLoader ~/vmrconsole/bin/
@@ -78,10 +511,10 @@ $&lt;/code&gt;&lt;/pre&gt;
 
 
 &lt;p&gt;Huh, this is not very informative, is it? The binary silently exits with error
-code of 255. Well, you may get other errors at this stage if you don't have all
-the required shared libraries installed on you system -- however I doubt it
+code of 255. Well, you may get other errors at this stage if you don&amp;rsquo;t have all
+the required shared libraries installed on you system &amp;ndash; however I doubt it
 since the requirements of this binary are pretty reasonable: glibc and zlib.&lt;/p&gt;
-&lt;p&gt;OK, let's take a peek inside and figure out what is going on (originally I used
+&lt;p&gt;OK, let&amp;rsquo;s take a peek inside and figure out what is going on (originally I used
 strace with logging to a file, but to keep this article reasonable short I am
 highlighting important things only):&lt;/p&gt;
 &lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ strace -f -eopen ~/vmrconsole/bin/vmplayer 2&amp;gt;&amp;amp;1 | tail -2
@@ -107,10 +540,10 @@ $ sed -i 's,/etc/vmware,..//////etc,g' ~/vmrconsole/bin/appLoader&lt;/code&gt;&l
 
 &lt;p&gt;The trick here is to substitute one string with another of the same length (we
 are modifying a binary so we do not want to mess offsets up) and luckily enough
-we can use whatever number of slashes we want -- they all are considered as a
+we can use whatever number of slashes we want &amp;ndash; they all are considered as a
 single separator nevertheless. OK, we could have used a hex editor and could
 have terminated strings with a NULL byte, but the point is that the approach I
-took is the quickest and is working well. Let's run the modified binary through
+took is the quickest and is working well. Let&amp;rsquo;s run the modified binary through
 strace again, but this time we need to be prepared for the changed behaviour:&lt;/p&gt;
 &lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ cd ~/vmrconsole/bin/
 $ touch ../etc/config
@@ -144,7 +577,7 @@ Nov 24 01:53:09.825: app-3077760704| Unable to lookup library directory.&lt;/cod
 
 &lt;p&gt;I do not know much about VMware Players config file but according to the log
 message it wants some variable called &lt;code&gt;libdir&lt;/code&gt; and this variable should point
-to the library directory, so let's introduce such a variable and try to execute
+to the library directory, so let&amp;rsquo;s introduce such a variable and try to execute
 the binary again:&lt;/p&gt;
 &lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ echo 'libdir = ..' &amp;gt;&amp;gt; ../etc/config
 $ strace -f -emkdir,lstat,open,write ./vmplayer 2&amp;gt;&amp;amp;1 | tail -4
@@ -159,7 +592,7 @@ directory in the config file and this means that we always should run the
 binary with its directory being the current working directory. This is a bit
 inconvenient, but we will solve this with a wrapper script later. Right now, we
 need to get it working and we see that it tried to dynamically load some
-library from the library directory. OK, let's search for this library in the
+library from the library directory. OK, let&amp;rsquo;s search for this library in the
 unpacked bundle directory and copy the library file over to our tree:&lt;/p&gt;
 &lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ find ~/vmplayer -name libvmplayer.so
 /home/vmware/vmplayer/vmware-player-app/lib/lib/libvmplayer.so
@@ -260,7 +693,7 @@ different sets of libraries inside our local directory. For example, on my
 system I have quite a few of the libraries installed from the distribution
 repositories and these versions of libraries are fresher and with many bug
 fixes in comparison to the VMWare provided ones.&lt;/p&gt;
-&lt;p&gt;Anyway, the general approach to install missing libraries is the following --
+&lt;p&gt;Anyway, the general approach to install missing libraries is the following &amp;ndash;
 we start with the libraries we determined as missing during our &lt;code&gt;ldd
 ~/vmrconsole/lib/libvmplayer.so/libvmplayer.so | fgrep 'not found'&lt;/code&gt; step (we
 need to locate and copy them over to our library directory):&lt;/p&gt;
@@ -279,7 +712,7 @@ this command anyway):&lt;/p&gt;
 &lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ LD_LIBRARY_PATH=~/vmrconsole/lib ldd ~/vmrconsole/lib/* 2&amp;gt;/dev/null | fgrep 'not found' | awk '{ print $1; }' | xargs -i find ~/vmplayer -type f -name '{}' -execdir cp -avL '{}' ~/vmrconsole/lib/ \;&lt;/code&gt;&lt;/pre&gt;
 
 
-&lt;p&gt;If we try to access any remote VM's console it will be clear that some parts
+&lt;p&gt;If we try to access any remote VM&amp;rsquo;s console it will be clear that some parts
 are still missing:&lt;/p&gt;
 &lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ vmrconsole 192.168.70.31
 Failed to open file '/usr/lib/vmware/share/pixmaps/progress.png': No such file or directory
@@ -351,7 +784,7 @@ $ strings libvmwareui.so.0 | fgrep /var/run/vmware
 $ sed -i 's,/var/run/vmware,..//////var/run,g' libvmwareui.so.0&lt;/code&gt;&lt;/pre&gt;
 
 
-&lt;p&gt;Ufff, we did a lot of binary patching -- luckily, VMware binaries and libraries
+&lt;p&gt;Ufff, we did a lot of binary patching &amp;ndash; luckily, VMware binaries and libraries
 are not calculating their checksums. Now, we need to put all this stuff we have
 seen in the &lt;code&gt;strings&lt;/code&gt; output and during the execution of the program in place (in
 accordance to our new relative paths):&lt;/p&gt;
@@ -378,7 +811,7 @@ describing how it should look on the local console):&lt;/p&gt;
 &lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ ~/vmrconsole/bin/vmplayer&lt;/code&gt;&lt;/pre&gt;
 
 
-&lt;p&gt;&lt;img alt="VMware Player: main window" class="figure" src="images/howto-vmware-player-as-remote-console-01.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="VMware Player: main window" class="figure" src="http://localhost:8000/images/howto-vmware-player-as-remote-console-01.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;So far so good, but we need to resolve the issue with the OpenSSL library
 dependency. To resolve the issue we need to create symbolic links from our
 local library directory to the system-wide version of the OpenSSL library:&lt;/p&gt;
@@ -389,12 +822,12 @@ lrwxrwxrwx 1 vmware vmware 27 Nov 24 05:27 /home/vmware/vmrconsole/lib/libcrypto
 lrwxrwxrwx 1 vmware vmware 27 Nov 24 05:27 /home/vmware/vmrconsole/lib/libssl.so.0.9.8 -&amp;gt; /usr/lib/libssl.so.0.9.8&lt;/code&gt;&lt;/pre&gt;
 
 
-&lt;p&gt;Let's try to connect to remote VM's console again:&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s try to connect to remote VM&amp;rsquo;s console again:&lt;/p&gt;
 &lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ vmrconsole 192.168.70.31&lt;/code&gt;&lt;/pre&gt;
 
 
-&lt;p&gt;&lt;img alt="VMware Player: credentials window" class="figure" src="images/howto-vmware-player-as-remote-console-02.jpg"&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="VMware Player: MKS error message" class="figure" src="images/howto-vmware-player-as-remote-console-03.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="VMware Player: credentials window" class="figure" src="http://localhost:8000/images/howto-vmware-player-as-remote-console-02.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="VMware Player: MKS error message" class="figure" src="http://localhost:8000/images/howto-vmware-player-as-remote-console-03.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;Well, this error message does not say much except that we are not getting our
 console :). If we check the log file directory we would see there is a file
 called &lt;code&gt;player-XXXXX.log&lt;/code&gt; (where XXXXX is the PID of the VMware Player that
@@ -454,7 +887,7 @@ $ sed -i 's,/etc/vmware/,..//////etc/,g' ~/vmrconsole/bin/vmware-remotemks&lt;/c
 &lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ vmrconsole 192.168.70.31&lt;/code&gt;&lt;/pre&gt;
 
 
-&lt;p&gt;&lt;img alt="VMware Player: hints messages" class="figure" src="images/howto-vmware-player-as-remote-console-04.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="VMware Player: hints messages" class="figure" src="http://localhost:8000/images/howto-vmware-player-as-remote-console-04.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;Ouch, we are presented by a bunch of hints (your mileage may vary since it
 depends on the environment), but you surely will see the hint/error message
 presented on the above screenshot.&lt;/p&gt;
@@ -468,7 +901,7 @@ $ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/vnckeymap ~/vmrconsole/
 $ vmrconsole 192.168.70.31&lt;/code&gt;&lt;/pre&gt;
 
 
-&lt;p&gt;&lt;img alt="VMware Player: remote console window" class="figure" src="images/howto-vmware-player-as-remote-console-05.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="VMware Player: remote console window" class="figure" src="http://localhost:8000/images/howto-vmware-player-as-remote-console-05.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;We are almost done! At least we achieved the goal we set at the beginning of
 this article.&lt;/p&gt;
 &lt;p&gt;Now, it is time to ensure that all file/directory permissions are strict enough

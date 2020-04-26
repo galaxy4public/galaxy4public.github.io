@@ -1,0 +1,288 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<title>Mind Drops</title>
+		<meta http-eqiv="Service-Worker-Allowed" content="/" />
+		<meta name="theme-color" content="#535353" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta name="apple-mobile-web-app-title" content="Mind Drops">
+		<link rel="apple-touch-icon" href="/theme/images/icons/mind-drops-192x192.png">
+		<meta charset="utf-8" />
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="manifest" type="text/json" href="/manifest.json" />
+		<link rel="preload" as="style" href="/theme/css/reset.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Icons.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Exo2.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Oswald.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/DancingScript.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/FiraCode.css" />
+		<link rel="preload" as="style" href="/theme/css/base.css" />
+		<link rel="preload" as="script" href="/theme/js/persistence.js" />
+		<link rel="preload" as="script" href="/theme/js/visited.js" />
+		<link rel="preload" as="script" href="/theme/js/service.js" />
+		<script src="/theme/js/loader.js" defer></script>
+		<link rel="icon" type="image/png" href="/images/galaxy.png">
+
+		<link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/css/article.css" />
+		<link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/css/page.css" />
+	</head>
+	<body>
+		<input type="checkbox" id="menu-toggle" />
+		<label for="menu-toggle" class="icon menu"></label>
+		<aside id="sidebar">
+			<!-- Logo -->
+			<div id="logo" class="box shadow">
+				<picture>
+					<source srcset="/images/galaxy.png.webp" type="image/webp">
+					<img src="/images/galaxy.png" alt="Logo">
+				</picture>
+			</div>
+
+			<!-- Search -->
+			<section class="box search">
+				<form name="google search" class="icon search" method="get" action="/search">
+					<label for="search" class="offscreen">Search</label>
+					<input id="search" type="text" class="text" name="q" placeholder="Search" />
+				</form>
+			</section>
+
+			<!-- Nav -->
+			<nav id="nav">
+				<ul>
+					<li class="icon home">
+						<a href="/">Home</a>
+					</li>
+					<li class="icon user-agent current">
+						<a href="/about">About</a>
+					</li>
+					<li class="icon paper-plane">
+						<a href="/contact">Contact</a>
+					</li>
+				</ul>
+			</nav>
+
+			<!-- Text -->
+			<section class="box text-style1">
+				<div class="inner">
+					<p>
+						<strong>Mind Drops:</strong>: A place to unload all these assorted bits.
+					</p>
+				</div>
+			</section>
+
+			<!-- Copyright -->
+			<ul id="copyright">
+				<li>&copy; Openwall Pty Ltd 2020 </li>
+				<li><a href="#">Terms &amp; Conditions</a></li>
+			</ul>
+		</aside>
+
+		<!-- Content -->
+		<div id="content">
+			<div class="inner">
+				<article id="about" class="box post">
+					<header>
+						<h1><a name="top">About</a></h1>
+					</header>
+					<div class="info">
+						<span class="date">
+							<span class="day">25</span>
+							<span class="month"><a href="http://localhost:8000/2020/04/">Apr<span class="month full">il</span></a></span>
+							<span class="year"><a href="http://localhost:8000/2020/">2020</a></span>
+						</span>
+						<ul class="stats">
+							<li><a href="#" class="icon comment">256</a></li>
+							<li><a href="#" class="icon heart">128</a></li>
+							<li><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="icon twitter" data-tweet-id="1254043397850951680">0 </a></li>
+							<li><a href="#" class="icon facebook">5</a></li>
+						</ul>
+					</div>
+					<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#early-life">Early life</a></li>
+<li><a href="#professional-career-russia">Professional Career (Russia)</a></li>
+<li><a href="#professional-career-australia">Professional Career (Australia)</a></li>
+</ul>
+</div>
+<p><img alt="Photo of Dmitry Khlebnikov" class="float-left" src="http://localhost:8000/images/galaxy.png" title="Dmitry D. Khlebnikov, 2020" width="250"></p>
+<p>Dmitry D. Khlebnikov is an independent Information Technology professional who
+helps businesses achieve their objectives without compromise on security.</p>
+<p>Dmitry believes that software engineering should be driven by applying
+principles of science and mathematics to deliver economical yet robust
+solutions to technical problems challenging business objectives.</p>
+<p>Over more than two decades of his professional life, Dmitry acquired deep
+knowledge in multiple domains starting with low level networking, operating
+systems, and principles of modern computing architecture and expanding to
+adjacent areas of Information Technology as user experience design, business
+modelling, etc.</p>
+<p><img alt="MTUCI Logo" class="figure" height="80" src="http://localhost:8000/images/mtuci-logo.png" title="Moscow Technical University of Communications and Informatics">
+Dmitry holds a master&rsquo;s degree in Computer Science from the Moscow Technical
+University of Communications and Informatics (MTUCI) and is a certified
+Software Engineer.</p>
+<h2 id="early-life">Early life</h2>
+<p>Dmitry D. Khlebnikov was born in Moscow, Russia.  His passion for computers was
+ignited by his father who introduced Dmitry to <a href="https://en.wikipedia.org/wiki/ES_PEVM">ES-1840</a>, one of the first
+Soviet clones of IBM PC at the age of nine.  Dmitry was spending all weekends
+at his father&rsquo;s work place just to get an opportunity to play some basic games
+and to explore the technology.</p>
+<p>Seeing the interest his son had in technology and the lack of formal computer
+education programmes in Russia at the time, Dmitry&rsquo;s father seized the
+opportunity to send Dmitry to a summer camp which was sponsored by newly born
+businessmen of Russia to educate teenagers in computer literacy.  A significant
+part of curriculum was concentrated around programming using <a href="https://en.wikipedia.org/wiki/Turbo_Pascal#Version_5.5">Borland Turbo
+Pascal 5.5</a> and to this day Dmitry is confident that it was a pivotal
+milestone in his life.</p>
+<p>The lack of good documentation and scarcity of available software pushed
+Dmitry to discover Russian computer underground and demoscene.  The subculture
+was in its golden age where information sharing was the uniting foundation and
+multiple groups were competing with each other to showcase their superior
+understanding of technology.  At some point at that time, once he was quite
+confident in his assembler, C/C++, and reverse engineering skills, Dmitry
+organised his own group that was focused primarily on releasing save game
+editors and runtime game modifications.</p>
+<p>The downside of such a commitment to underground society was that Dmitry&rsquo;s
+normal &ldquo;social&rdquo; life started to deteriorate: he was expelled from four schools
+and decided not to pursue graduating from high school and focus on improving
+his coding skills instead.</p>
+<p>In 1995, Dmitry discovered IBM OS/2 operating system and for the next three
+years Dmitry was learning all the intricacies of what subjectively was <q>the
+best desktop operating system for a nerd</q> at the time: it was truly object
+oriented (starting with Warp 4.0), was bundled with Java and speech recognition
+software, etc. With new technologies new challenges have arisen, so have the
+opportunities: Dmitry learnt how to reverse engineer multithreaded applications,
+exploit local race condition in a multitasking system, just to name a few.</p>
+<p>Another thing that happened in 1995 in Dmitry&rsquo;s life is the first exposure to
+the Internet via a dial-up connection.  There, Dmitry unearthed a huge world
+of clever people from all around the globe and was obsessed with absorbing as
+much knowledge as he physically could.</p>
+<p>In June of 1998, a friend brought a CD-ROM containing a fresh Linux
+distribution of Red Hat Linux 5.1 (Manhattan) and from that point on Linux
+became Dmitry&rsquo;s primary operating system.  This and the discovery of the
+Open Source community set the future course of Dmitry&rsquo;s life for the next
+couple of decades.</p>
+<h2 id="professional-career-russia">Professional Career (Russia)</h2>
+<p>Dmitry&rsquo;s work career started early, at the age of seventeen, due to dropping
+out of school and living independently from his parents.</p>
+<p>As a minor with the desire to work in IT, Dmitry chose to get some experience
+at his father&rsquo;s company first (one branch of which was designated to import
+laptops and other computer peripherals and retail them).  There was a need to
+research on the new arrivals and provide advice to the sales manager so they
+could better do their job.  It fitted Dmitry&rsquo;s keen interest to learn new
+technology perfectly, since he was getting access to the latest devices on the
+local market and was paid for playing with them.</p>
+<p>Unbeknown to Dmitry, he also learnt how retail business operates, what drives
+it, and the importance of human communication to achieve business targets.</p>
+<p>In October of 1997, Dmitry was hired as a Client Support Manager by an American
+Company (SequoIa Computers).  The company specialised in providing managed
+services to western companies operating in Moscow.  Although it came with a
+stiff learning curve, the position gave the opportunity to work with hardware
+and in places Dmitry could only dream of:</p>
+<ul>
+<li>
+<p>IBM AS/400 and the token ring at the Maersk office</p>
+<p>Since Novell Netware Server was the primary product SequoIa was promoting
+to its clients. Dmitry was tasked to &ldquo;marry&rdquo; two technologies before the
+company would officially give up on the contract.  After several days of
+brainstorming on &ldquo;how to fit the IPX stack and token ring drivers in 640KB
+and yet have some memory to run Windows 3.11&rdquo; a solution was found and
+implemented, thanks for extensive reverse engineering experience Dmitry
+had to that point in time.</p>
+</li>
+<li>
+<p>Apple LocalTalk networking stack at the BP office</p>
+<p>It was a unique experience for a young professional like Dmitry, starting
+with an unusual network configuration &ndash; the client was using Farallon
+EtherWave adapters to build a daisy-chain ethernet based network with no
+hub or concentrator required; learning physical access control systems,
+since the office was equipped with the state of the art physical security
+mechanisms; and, finally, discovering an internal intranet for IT people
+of BP running on the X.25 protocol and connecting all offices worldwide.</p>
+</li>
+<li>
+<p>COMPAQ ProLiant Servers and TCP/IP stack at the Latham &amp; Wattkins office</p>
+<p>That was another emergency call to help out a fellow support manager,
+when the network went down on December 31, so Dmitry was brought in to
+assess an fix the network he never seen before built on the technology
+he was not familiar with.  The story ended with a success after spending
+the New Year night studying the network and locating a part of the damaged
+ethernet cable that was causing extreme collision levels in the rest of the
+network.</p>
+</li>
+</ul>
+<p>Despite being quite happy with the opportunities, after an year of working on
+average 80 hours per week due to high demand, Dmitry burnt out and left the
+company despite the management offering double salary to stay, which was
+extraordinary amount of money for Moscow at the time, let alone for a twenty
+years old.</p>
+<p>After half an year break, Dmitry decided to try to do the same job again.  This
+time with a focus on his mental and physical well-being to avoid the burn out
+situation he experienced before.  He joined quite a big Russian software
+development company, Intellect-Service, whose primary product was an accounting
+software suite, hence they needed quite a big customer support department to
+support the deployment and to maintain the software at clients&rsquo; offices.  Over
+the next fifteen months Dmitry was honing his networking and troubleshooting
+skills.  At the same time the company provided high speed (128Kbps) Internet
+connectivity in their offices, which meant that Dmitry had the opportunity to
+access the net during calm periods of time when he was waiting for the next
+assignment.</p>
+<p>Although trying to negotiate hard, Dmitry only managed to get an entry level
+salary at the new place at first which was attributed to lack of formal
+education.  It took him almost five months to prove his knowledge and skills
+to get an adequate pay rise and the promotion to match his skill set.  To avoid
+such a situation in the future, Dmitry enrolled into the Moscow Technical
+University of Communications and Informatics (and graduated six years later
+with the Master of Computer Science degree).</p>
+<p>In May of 2000, Dmitry together with two partners attempt to start their own
+business: a small Internet Service Provider (ISP) in a remote district just
+outside Moscow.  Dmitry&rsquo;s skills of building networks and architectural
+knowledge were invaluable for the new venture.  The company grew from just
+three people running around, laying cables, and doing all other stuff to a
+workforce of 50+ with more than 1,300 customers in three years.</p>
+<p>As the company grew it required more delegation and management than technical
+excellence, but at that time Dmitry did not possess neither skill, so he sold
+his share to his business partners and continued his pursuit of mastering
+technical skills at one of the established Moscow ISPs (DataForce IP), where he
+found a few people worth learning from.</p>
+<p>At DataForce, Dmitry met <a href="https://en.wikipedia.org/wiki/Solar_Designer">Alexander Peslyak</a> (better known as Solar
+Designer) and realised that they crossed paths multiple times in the virtual
+space of the Russian computer underground community, but this was the first
+time they met face to face.</p>
+<p>Alexander introduced Dmitry to a project under the Openwall Project umbrella
+where an American company wanted to have their own version of a Linux
+distribution based on Openwall GNU/*/Linux, but which should be binary
+compatible with Red Hat Enterprise Linux 4.  Dmitry become the leading
+developer/packager for that time and brought the majority of compatibility changes
+to the codebase which resulted in the release of Openwall GNU/*/Linux 2.0 (and
+the delivery of the custom Linux distribution to the client).</p>
+<p>The work on the Openwall Project demonstrated skills and commitment Dmitry was
+putting in and as the consequence Openwall, Inc. was registered to provide managed
+hosting services to primarily US companies (among other things like security
+consulting, etc.).  Dmitry left DataForce IP and became full time contractor at
+the newly formed company, where he was designing and implementing secure mass
+virtual hosting environments.</p>
+<p>Through Openwall, Inc., Dmitry learnt how to tap into and leverage multiple
+domains of knowledge and be a subject matter expert in a variety of fields,
+since work required him to be an Infrastructure Architect, a Security Expert, a
+Developer, a Systems Administrator, and a Principal Engineer &ndash; often a
+combination of these at the same time. </p>
+<h2 id="professional-career-australia">Professional Career (Australia)</h2>
+<p>In September of 2008, Dmitry with his wife and daughter migrated to Melbourne,
+Australia.</p>
+<p>With the blessings of Alexander to use the Openwall name Dmitry registered an
+Australian branch of the company, Openwall Pty Ltd, and acquired his first
+local client (SMS Central).</p>
+<p>NOTE: this page is still in the process of being written&hellip;</p>
+				</article>
+			</div>
+		</div>
+
+		<!--
+		<script src="/theme/js/clipboard/clipboard.js"></script>
+		<div id="titleBar">
+			<span class="title">Mind Drops</span>
+		</div>
+		-->
+	</body>
+</html>

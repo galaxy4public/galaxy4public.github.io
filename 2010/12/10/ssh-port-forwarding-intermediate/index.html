@@ -2,84 +2,210 @@
 <html lang="en">
 	<head>
 		<title>Mind Drops</title>
+		<meta http-eqiv="Service-Worker-Allowed" content="/" />
+		<meta name="theme-color" content="#535353" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta name="apple-mobile-web-app-title" content="Mind Drops">
+		<link rel="apple-touch-icon" href="/theme/images/icons/mind-drops-192x192.png">
 		<meta charset="utf-8" />
-		<meta name="description" content="../../../..">
+		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="manifest" type="text/json" href="/manifest.json" />
-		<link rel="stylesheet" type="text/css" href="../../../../theme/css/reset.css" />
-		<link rel="stylesheet" type="text/css" href="../../../../theme/css/font-awesome.min.css" />
-		<link rel="stylesheet" type="text/css" href="../../../../theme/css/open-fonts.css" />
-		<link rel="stylesheet" type="text/css" href="../../../../theme/css/base.css" />
-		<link rel="stylesheet" type="text/css" href="../../../../theme/css/pygment.css" />
-		<link rel="stylesheet" type="text/css" href="../../../../theme/css/prism.css" defer />
-		<link rel="icon" type="image/png" href="../../../../images/pelly.png">
+		<link rel="preload" as="style" href="/theme/css/reset.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Icons.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Exo2.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Oswald.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/DancingScript.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/FiraCode.css" />
+		<link rel="preload" as="style" href="/theme/css/base.css" />
+		<link rel="preload" as="script" href="/theme/js/persistence.js" />
+		<link rel="preload" as="script" href="/theme/js/visited.js" />
+		<link rel="preload" as="script" href="/theme/js/service.js" />
+		<script src="/theme/js/loader.js" defer></script>
+		<link rel="icon" type="image/png" href="/images/galaxy.png">
 
+		<link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/css/article.css" />
 	</head>
 	<body>
+		<input type="checkbox" id="menu-toggle" />
+		<label for="menu-toggle" class="icon menu"></label>
+		<aside id="sidebar">
+			<!-- Logo -->
+			<div id="logo" class="box shadow">
+				<picture>
+					<source srcset="/images/galaxy.png.webp" type="image/webp">
+					<img src="/images/galaxy.png" alt="Logo">
+				</picture>
+			</div>
 
-		<!-- Sidebar -->
-		<div>
-			<a href="#sidebar" class="toggle"></a>
-			<aside id="sidebar">
-				<!-- Logo -->
-				<div id="logo" class="box shadow">
-					<picture>
-						<source srcset="../../../../images/galaxy.png.webp" type="image/webp">
-						<img src="../../../../images/galaxy.png" alt="Logo">
-					</picture>
-				</div>
+			<!-- Search -->
+			<section class="box search">
+				<form name="google search" class="icon search" method="get" action="/search">
+					<label for="search" class="offscreen">Search</label>
+					<input id="search" type="text" class="text" name="q" placeholder="Search" />
+				</form>
+			</section>
 
-				<!-- Search -->
-				<section class="box search">
-					<form method="post" action="#">
-						<label for="search" class="offscreen">Search</label>
-						<input id="search" type="text" class="text" name="search" placeholder="Search" />
-					</form>
-				</section>
-
-				<!-- Nav -->
-				<nav id="nav">
-					<ul>
-						<li class="current"><a href="#">Latest Post</a></li>
-						<li><a href="#">Archives</a></li>
-						<li><a href="#">About Me</a></li>
-						<li><a href="#">Contact Me</a></li>
-					</ul>
-				</nav>
-
-				<!-- Text -->
-				<section class="box text-style1">
-					<div class="inner">
-						<p>
-							<strong>Mind Drops:</strong>: A place to unload all these assorted bits.
-						</p>
-					</div>
-				</section>
-
-				<!-- Copyright -->
-				<ul id="copyright">
-					<li>&copy; Openwall Pty Ltd 2020 </li>
-					<li><a href="#">Terms &amp; Conditions</a></li>
+			<!-- Nav -->
+			<nav id="nav">
+				<ul>
+					<li class="icon home">
+						<a href="/">Home</a>
+					</li>
+					<li class="icon user-agent">
+						<a href="/about">About</a>
+					</li>
+					<li class="icon paper-plane">
+						<a href="/contact">Contact</a>
+					</li>
 				</ul>
-			</aside>
-		</div>
+			</nav>
+
+			<!-- Text -->
+			<section class="box text-style1">
+				<div class="inner">
+					<p>
+						<strong>Mind Drops:</strong>: A place to unload all these assorted bits.
+					</p>
+				</div>
+			</section>
+
+			<!-- Copyright -->
+			<ul id="copyright">
+				<li>&copy; Openwall Pty Ltd 2020 </li>
+				<li><a href="#">Terms &amp; Conditions</a></li>
+			</ul>
+		</aside>
 
 		<!-- Content -->
 		<div id="content">
 			<div class="inner">
-<!-- 
--% block content %}
--% endblock content %}
- -->
+				<article id="ssh-port-forwarding-intermediate" class="box post">
+					<header>
+						<h1><a name="top">SSH port-forwarding (Intermediate)</a></h1>
+					</header>
+					<div class="info">
+						<span class="date"><span class="day">10</span> <span class="month">Dec<span>ember</span></span> <span class="year">2010</span></span>
+						<ul class="stats">
+							<li><a href="#" class="icon fa-comment">?</a></li>
+							<li><a href="#" class="icon fa-heart">?</a></li>
+							<li><a href="#" class="icon fa-twitter">?</a></li>
+							<li><a href="#" class="icon fa-facebook">?</a></li>
+						</ul>
+					</div>
+					<p>In my previous blog entry I described some basic functionality of SSH in terms
+of port-forwarding. Now it&rsquo;s time for a little bit more complex stuff.</p>
+<p>In this article I will highlight:</p>
+<ul>
+<li>(forward) piercing of a firewall (getting access to resources behind it);</li>
+<li>dynamic port-forwarding (AKA proxy);</li>
+<li>(reverse) piercing of a firewall (exposing your local services on the remote side).</li>
+</ul>
+<h2 id="forward-firewall-piercing">Forward firewall piercing</h2>
+<p>Let&rsquo;s start with the forward firewall piercing, since it is the easiest and was
+somewhat already described in my previous blog entry on this topic. Now,
+imagine that you already have SSH access to some host which is multi-home
+connected (e.g. the host is connected to more than one network). Let&rsquo;s also
+assume that the host is a firewall and is masquerading other hosts in the
+internal network and is translating just a handful set of ports to the servers
+(looks familiar, doesn&rsquo;t it? :) ). In other words, we are speaking of a
+standard firewall/NAT router.</p>
+<p>Now, how can you access port 12345 on host behind the firewall given that this
+port is not &ldquo;exported&rdquo; by the NAT on the firewall? This is quite simple. Open a
+terminal window on your local computer and type the following:</p>
+<pre class="highlight"><code class="language-bash">ssh -L12345:192.168.1.2:12345 joe@firewall.domain.tld</code></pre>
+
+
+<p>From now on, as long as your SSH session is up and running you will be able to
+reach <code>192.168.1.2:12345</code> by connecting to <code>localhost:12345</code> (i.e. the <code>12345</code>
+port on your local computer). Indeed, for this to work you need SSH access
+anywhere inside the protected network (not necessarily on the firewall itself)
+and if the firewall blocks any SSH access, you are out of luck.</p>
+<h2 id="dynamic-port-forwarding">Dynamic port-forwarding</h2>
+<p>There are at least two usage patterns where I find SSH&rsquo;s ability to forward
+requests to many ports useful:</p>
+<ul>
+<li>I need to connect to different services (possibly on different hosts) inside
+  the protected network (as per the configuration described above) and I don&rsquo;t
+  want to specify all of them on the command line;</li>
+<li>I need to access some resource which is Geo-protected (e.g. allows access
+  from a particular part of the world), e.g. want to watch US Netflix being
+  physically in Australia</li>
+</ul>
+<p>In both cases, you use the following SSH command in your terminal window:</p>
+<pre class="highlight"><code class="language-bash">ssh -D3128 joe@relay.domain.tld</code></pre>
+
+
+<p>As long as you SSH session is active, you can use port <code>3128</code> on your local
+machine as SOCKS4/SOCKS5 proxy (e.g. you can configure proxy settings in your
+browser to use <code>localhost:3128</code>) and browse the Net through your SSH connection,
+and all your requests will look like they are coming from <code>relay.domain.tld</code>.</p>
+<p>There are many uses for this: for example, some payment processors won&rsquo;t allow
+you to pay for goods if you are trying to pay through them from some countries
+even if you are a legitimate user, another use case is when you are concerned
+re: your privacy &ndash; you can conceal your actual location by building a chain of
+SSH tunnels and access the desired web site through this chain :) .</p>
+<h2 id="reverse-firewall-piercing">Reverse firewall piercing</h2>
+<p>Finally, what if you are behind a very strict firewall that limits almost
+everything, but you need to provide some services to the outside world from
+your computer (e.g. sharing your access to company&rsquo;s confidential information
+to folks from WikiLeaks&hellip; just kidding :) )?</p>
+<p>To achieve this you need to have an SSH account somewhere in the Net &ndash; just
+Google for &ldquo;free ssh account&rdquo; and you will surely find one for yourself).</p>
+<p>Now, when you have the account, you can execute the following on your local
+computer (which is inside that highly secure network :) ):</p>
+<pre class="highlight"><code class="language-bash">ssh -R:60000:127.0.0.1:22 joe@friendly.domain.tld</code></pre>
+
+
+<p>The above command will setup such a configuration that connecting on port <code>60000</code>
+at <code>friendly.domain.tld</code> will forward traffic to your local machine&rsquo;s port 22
+(which is behind a firewall) &ndash; this will work as long as your SSH session to
+the <code>friendly.domain.tld</code> is active.  Unfortunately, there are several pitfalls
+in this approach, but they are all resolvable.</p>
+<p>Firstly, you need to ensure that <code>friendly.domain.tld</code> is using a recent version
+of SSH daemon, otherwise you will be limited to bind only to the loopback
+interface on the remote host.</p>
+<p>Secondly, even if they are using a recent version of the SSH daemon, they can
+disallow such binding (e.g. setting &ldquo;GatewayPorts no&rdquo; in <code>/etc/ssh/sshd_config</code>),
+and, again, you will be restricted to the loopback interface only.</p>
+<p>Finally, you need to find such a friendly host which allows you to connect to
+the bound ports from the outside (many public ones have a firewall rule
+preventing such access in order to prevent abuses of their services).</p>
+<p>All in all, the best option to try this is to have your own host somewhere (e.g.
+purchase a small virtual environment from some hosting provider or create an
+instance on AWS EC2), then you will be able to configure the remote side the
+way you want it!</p>
+<p>Anyway, even if you fail to find a host that allows you to expose your service
+to the public, you still should be able to access it yourself &ndash; using the
+forward firewall piercing technique described at the beginning of this post:</p>
+<pre class="highlight"><code class="language-bash"># from your home computer
+ssh -L60000:127.0.0.1:60000 joe@friendly.domain.tld</code></pre>
+
+
+<p>Once it is done your computer in the highly secure network should be reachable
+via SSH on your <code>localhost:60000</code>, e.g.</p>
+<pre class="highlight"><code class="language-bash">ssh -p6000 my_account@localhost</code></pre>
+
+
+<p>Where <code>my_account</code> is a user allowed to SSH into your computer in the highly
+secure network.</p>
+					<ul class="tags">
+					</ul>
+					<footer>
+						Offloaded on
+						<time datetime="2010-12-10 10:00:00+11:00">Fri, 10/12/2010 at 10:00 (+1100)</time>
+						<span class="category-tag"><a href="http://localhost:8000/category/ssh">ssh</a></span>
+					</footer>				</article>
 			</div>
 		</div>
 
-		<!-- Scripts -->
-		<script src="../../../../theme/js/clipboard/clipboard.js"></script>
-		<script src="../../../../theme/js/prism/prism.js"></script>
-
+		<!--
+		<script src="/theme/js/clipboard/clipboard.js"></script>
 		<div id="titleBar">
 			<span class="title">Mind Drops</span>
 		</div>
+		-->
 	</body>
 </html>

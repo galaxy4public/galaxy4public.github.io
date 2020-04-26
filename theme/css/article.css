@@ -1,0 +1,238 @@
+/* CSS for the home page */
+article.box.post {
+	position: relative;
+	margin-bottom: 1.33333em;
+}
+
+article.box.post::after {
+	content: '';
+	display: block;
+	left: -3.33333em;
+	width: 37.33333em; /* should match div#content in base.css * 0.66666 */
+	width: calc(100% + 6.66666em);
+/*
+	border-bottom: 0.25rem groove;
+*/
+	position: relative;
+	height: 0.5em;
+	background: #e8e8e8 url(../images/body-bg.jpg);
+	box-shadow:
+		0em 0em 0.5em 0 rgba(0,0,0,0.5),
+		inset 0em 0.5em 0.25em 0em rgba(0,0,0, 0.25);
+}
+
+article.box.post:last-of-type::after {
+	display: none;
+}
+
+article.box.post header a {
+	color: inherit;
+	text-decoration-color: #c94663;
+}
+
+article.box.post header a:visited {
+	text-decoration-color: #772235;
+}
+
+article.box.post .info {
+	font-size: 1rem; /* sets the scale of the info box */
+	z-index: 100; /* this should be higer than any other content z-index */
+	position: absolute;
+	top: 0;
+	left: -10.5em;
+	width: 5.5em;
+	padding: 1.5em 1em 1.5em 1em;
+	border-top-left-radius: 0.4em;
+	border-bottom-left-radius: 0.4em;
+	box-shadow:
+		0.25em 0 0 0 whitesmoke,
+		0.5em 1em 0.25em -0.5em rgba(0, 0, 0, 0.25);
+	box-shadow:
+		0.25em 0 0 0 var(--light-base),
+		0.5em 1em 0.25em -0.5em rgba(0, 0, 0, 0.25);
+	overflow: hidden;
+	background-color: #fff;
+	border-color: #575757;
+	border-style: solid;
+	border-width: 0.0625em;
+	border-right-color: #e6e6e6;
+	border-right-width: 0.125em;
+}
+
+article.box.post .info .date {
+	position: relative;
+	font-family: 'Open Sans Condensed', sans-serif;
+	font-weight: 400;
+	text-align: center;
+	display: block;
+	font-size: 1.5em;
+	color: #999;
+	padding: 0 0 0.5em 0;
+}
+
+article.box.post .info a{
+	text-decoration: none;
+	color: inherit;
+}
+
+article.box.post .info .date .day {
+	display: block;
+	position: relative;
+	top: 0.75em;
+	margin: 0.25em 0 0 0;
+	font-size: 1.5em;
+	font-weight: 700;
+	color: #1b252a;
+}
+
+article.box.post .info .date .month {
+	position: relative;
+	top: -1.5em;
+	font-weight: 700;
+}
+
+article.box.post .info .date .month.full{
+	display: none;
+}
+
+article.box.post .info .date .year {
+	display: block;
+	margin-top: 0.4em;
+}
+
+article.box.post .info .date + .stats {
+	/* Draw a line only of there is a date above stats */
+	border-top: 1px solid #ddd;
+	padding-top: 1em;
+}
+
+article.box.post .info .stats {
+	padding-top: 0.5em;
+}
+
+article.box.post .info ul.stats {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+article.box.post .info .stats li:hover a {
+	background-color: #f4f4f4;
+	opacity: 1;
+}
+
+article.box.post .info .stats a {
+	position: relative;
+	display: block;
+	font-size: 0.8em;
+	font-weight: 700;
+	line-height: 1em;
+	text-align: right;
+	color: #232323;
+	border-radius: 0.4em;
+	opacity: 0.5;
+	-moz-transition: opacity .25s ease-in-out, background-color .25s ease-in-out;
+	-webkit-transition: opacity .25s ease-in-out, background-color .25s ease-in-out;
+	-ms-transition: opacity .25s ease-in-out, background-color .25s ease-in-out;
+	transition: opacity .25s ease-in-out, background-color .25s ease-in-out;
+	padding: 0.5em 0.3em 0.5em 0;
+}
+
+article.box.post .info .stats a::before {
+	position: absolute;
+	left: 0;
+	font-size: 1.25em;
+	line-height: 0.8em;
+	width: 1em;
+	padding-left: 0.3em;
+	text-align: center;
+	opacity: 0.35;
+}
+
+article.box.post .info .stats li:hover a.icon.comment::before {
+	color: white;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+article.box.post .info .stats li:hover a.icon.heart::before {
+	color: red;
+}
+
+article.box.post .info .stats li:hover a.icon.twitter::before {
+	color: #1da1f2;
+}
+
+article.box.post .info .stats li:hover a.icon.facebook::before {
+	color: #4267b2;
+}
+
+article.box.post .summary{
+	min-height: 6em;	/* This is to avoid info box clashes */
+
+}
+
+article.box.post .tags{
+	margin-top: 0.5em;
+	text-align: right;
+}
+
+article.box.post .readmore{
+
+}
+
+article.box.post footer {
+	font-size: 0.66666em;
+	font-family: 'Fira Code', monospace;
+	font-weight: 100;
+	padding: 1em 0 0.66666em;
+	text-align: right;
+}
+
+span.readmore,
+span.truncated {
+	display: none;
+}
+
+span.truncated + span.readmore {
+	display: inline;
+}
+
+span.readmore {
+	position: relative;
+}
+
+span.readmore > a:before {
+	padding-right: 0.2em;
+}
+
+span.readmore > a {
+	display: inline-block;
+	color: #575757;
+	padding: 0.05em 0.8em;
+	border-radius: 0.8em;
+	border: 0.0524em solid #c94663;
+	font-family: 'Open Sans Condensed', sans-serif;
+	font-weight: 700;
+	font-size: 0.8em;
+	text-decoration: none;
+	-moz-transition: color .25s ease-in-out, background-color .25s ease-in-out;
+	-webkit-transition: color .25s ease-in-out, background-color .25s ease-in-out;
+	-ms-transition: color .25s ease-in-out, background-color .25s ease-in-out;
+	transition: color .25s ease-in-out, background-color .25s ease-in-out;
+}
+
+span.readmore > a[data-visited] {
+	border-color: #772235;
+}
+
+span.readmore > a:hover {
+	background-color: #c94663;
+	color: #fff;
+}
+
+article .readtime {
+}
+
+a[data-visited] > span.readtime {
+	display: none;
+}

@@ -1,0 +1,344 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<title>Mind Drops</title>
+		<meta http-eqiv="Service-Worker-Allowed" content="/" />
+		<meta name="theme-color" content="#535353" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta name="apple-mobile-web-app-title" content="Mind Drops">
+		<link rel="apple-touch-icon" href="/theme/images/icons/mind-drops-192x192.png">
+		<meta charset="utf-8" />
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="manifest" type="text/json" href="/manifest.json" />
+		<link rel="preload" as="style" href="/theme/css/reset.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Icons.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Exo2.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Oswald.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/DancingScript.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/FiraCode.css" />
+		<link rel="preload" as="style" href="/theme/css/base.css" />
+		<link rel="preload" as="script" href="/theme/js/persistence.js" />
+		<link rel="preload" as="script" href="/theme/js/visited.js" />
+		<link rel="preload" as="script" href="/theme/js/service.js" />
+		<script src="/theme/js/loader.js" defer></script>
+		<link rel="icon" type="image/png" href="/images/galaxy.png">
+	</head>
+	<body>
+		<input type="checkbox" id="menu-toggle" />
+		<label for="menu-toggle" class="icon menu"></label>
+		<aside id="sidebar">
+			<!-- Logo -->
+			<div id="logo" class="box shadow">
+				<picture>
+					<source srcset="/images/galaxy.png.webp" type="image/webp">
+					<img src="/images/galaxy.png" alt="Logo">
+				</picture>
+			</div>
+
+			<!-- Search -->
+			<section class="box search">
+				<form name="google search" class="icon search" method="get" action="/search">
+					<label for="search" class="offscreen">Search</label>
+					<input id="search" type="text" class="text" name="q" placeholder="Search" />
+				</form>
+			</section>
+
+			<!-- Nav -->
+			<nav id="nav">
+				<ul>
+					<li class="icon home">
+						<a href="/">Home</a>
+					</li>
+					<li class="icon user-agent">
+						<a href="/about">About</a>
+					</li>
+					<li class="icon paper-plane">
+						<a href="/contact">Contact</a>
+					</li>
+				</ul>
+			</nav>
+
+			<!-- Text -->
+			<section class="box text-style1">
+				<div class="inner">
+					<p>
+						<strong>Mind Drops:</strong>: A place to unload all these assorted bits.
+					</p>
+				</div>
+			</section>
+
+			<!-- Copyright -->
+			<ul id="copyright">
+				<li>&copy; Openwall Pty Ltd 2020 </li>
+				<li><a href="#">Terms &amp; Conditions</a></li>
+			</ul>
+		</aside>
+
+		<!-- Content -->
+		<div id="content">
+			<div class="inner">
+	<div class="page-title">
+		<h1>howto</h1>
+	</div>
+				<article id="transparent-ssh-host-jumping-expert" class="box post post-excerpt">
+								<header>
+									<h1><a href="http://localhost:8000/2016/07/26/transparent-ssh-host-jumping-expert/">Transparent SSH host-jumping (Expert)</a></h1>
+								</header>
+								<div class="info">
+									<span class="date">
+										<span class="day">26</span>
+										<span class="month"><a href="http://localhost:8000/2016/07/">Jul<span class="month full">y</span></a></span>
+										<span class="year"><a href="http://localhost:8000/2016/">2016</a></span>
+									</span>
+									<ul class="stats">
+										<li><a href="#" class="icon comment">256</a></li>
+										<li><a href="#" class="icon heart">128</a></li>
+										<li><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="icon twitter" data-tweet-id="1254350437622312960">0 </a></li>
+										<li><a href="#" class="icon facebook">5</a></li>
+									</ul>
+								</div>
+								<!-- Here we rely on the fact that Pelican always closes summary with '</p>' -->
+								<div class="summary"><p>A while ago in the <a href="http://localhost:8000/2015/08/06/transparent-ssh-host-jumping-advanced/">Transparent SSH host-jumping (Advanced)</a> post I
+described a technique on how one could jump quite effortlessly through a chain
+of intermediate hosts. However, there was a catch: the user names and ports
+across the whole chain should be the same and there was no easy way to change
+that.</p>
+<p>Given that I <a href="http://localhost:8000/2016/07/25/ssh-interactive-proxycommand/">recently</a> paid quite a lot of attention to the ProxyCommand
+directive I decided to look into the implementation of the helper script that
+will allow one to tweak parameters for the hosts in the chain.</p>
+<p>You can read the <a href="http://localhost:8000/2015/08/06/transparent-ssh-host-jumping-advanced/">original</a> post for the <span class="truncated"></span>
+									<span class="readmore">…
+										<a href="http://localhost:8000/2016/07/26/transparent-ssh-host-jumping-expert/#continue" class="icon fa-forward">read
+											<span class="readtime">time 3 min.</span>
+										</a>
+									</span>
+								</div>
+					<ul class="tags">
+						<li class="tag">
+							<div>
+								<a href="http://localhost:8000/tag/console/" class="tag name">console</a>
+							</div>
+							<a href="http://localhost:8000/tag/console/" class="tag count">7</a>
+						</li>
+						<li class="tag">
+							<div>
+								<a href="http://localhost:8000/tag/ssh/" class="tag name">ssh</a>
+							</div>
+							<a href="http://localhost:8000/tag/ssh/" class="tag count">4</a>
+						</li>
+						<li class="tag">
+							<div>
+								<a href="http://localhost:8000/tag/howto/" class="tag name">howto</a>
+							</div>
+							<a href="http://localhost:8000/tag/howto/" class="tag count">4</a>
+						</li>
+					</ul>
+					<footer>
+						Offloaded on
+						<time datetime="2016-07-26 10:00:00+10:00">Tue, 26/07/2016 at 10:00 (+1000)</time>
+						<span class="category-tag"><a href="http://localhost:8000/category/ssh">ssh</a></span>
+					</footer>				</article>
+				<article id="raspberry-pi-3-toolchain-on-centos-7" class="box post post-excerpt">
+								<header>
+									<h1><a href="http://localhost:8000/2016/05/22/raspberry-pi-3-toolchain-on-centos-7/">Raspberry Pi 3 toolchain on CentOS 7</a></h1>
+								</header>
+								<div class="info">
+									<span class="date">
+										<span class="day">22</span>
+										<span class="month"><a href="http://localhost:8000/2016/05/">May<span class="month full"></span></a></span>
+										<span class="year"><a href="http://localhost:8000/2016/">2016</a></span>
+									</span>
+									<ul class="stats">
+										<li><a href="#" class="icon comment">256</a></li>
+										<li><a href="#" class="icon heart">128</a></li>
+										<li><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="icon twitter" data-tweet-id="1253971858791100421">0 </a></li>
+										<li><a href="#" class="icon facebook">5</a></li>
+									</ul>
+								</div>
+								<!-- Here we rely on the fact that Pelican always closes summary with '</p>' -->
+								<div class="summary"><p>I heard a lot about Raspberry Pi boards but until now I had no need nor time to
+work with one.</p>
+<p>However, recently I purchased a Dodge Journey R/T and found that although I
+love the car I am so disappointed with its software and hard-wired logic that I
+decided to experiment a bit and fix the most annoying things.</p>
+<p>Since almost everything inside the car is talking over the CAN bus I needed
+some kind of a enclave inside the car where I could run my code and
+inject/intercept CAN messages.</p>
+<p>I looked around and found that <span class="truncated"></span>
+									<span class="readmore">…
+										<a href="http://localhost:8000/2016/05/22/raspberry-pi-3-toolchain-on-centos-7/#continue" class="icon fa-forward">read
+											<span class="readtime">time 5 min.</span>
+										</a>
+									</span>
+								</div>
+					<ul class="tags">
+						<li class="tag">
+							<div>
+								<a href="http://localhost:8000/tag/console/" class="tag name">console</a>
+							</div>
+							<a href="http://localhost:8000/tag/console/" class="tag count">7</a>
+						</li>
+						<li class="tag">
+							<div>
+								<a href="http://localhost:8000/tag/howto/" class="tag name">howto</a>
+							</div>
+							<a href="http://localhost:8000/tag/howto/" class="tag count">4</a>
+						</li>
+						<li class="tag">
+							<div>
+								<a href="http://localhost:8000/tag/linux/" class="tag name">linux</a>
+							</div>
+							<a href="http://localhost:8000/tag/linux/" class="tag count">2</a>
+						</li>
+						<li class="tag">
+							<div>
+								<a href="http://localhost:8000/tag/raspberry-pi/" class="tag name">raspberry pi</a>
+							</div>
+							<a href="http://localhost:8000/tag/raspberry-pi/" class="tag count">1</a>
+						</li>
+					</ul>
+					<footer>
+						Offloaded on
+						<time datetime="2016-05-22 12:00:00+10:00">Sun, 22/05/2016 at 12:00 (+1000)</time>
+						<span class="category-tag"><a href="http://localhost:8000/category/linux">linux</a></span>
+					</footer>				</article>
+				<article id="building-a-firewall-simple-and-easy" class="box post post-excerpt">
+								<header>
+									<h1><a href="http://localhost:8000/2016/05/22/building-a-firewall-simple-and-easy/">Building a firewall? Simple and easy!</a></h1>
+								</header>
+								<div class="info">
+									<span class="date">
+										<span class="day">22</span>
+										<span class="month"><a href="http://localhost:8000/2016/05/">May<span class="month full"></span></a></span>
+										<span class="year"><a href="http://localhost:8000/2016/">2016</a></span>
+									</span>
+									<ul class="stats">
+										<li><a href="#" class="icon comment">256</a></li>
+										<li><a href="#" class="icon heart">128</a></li>
+										<li><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="icon twitter" data-tweet-id="1253962922218291200">0 </a></li>
+										<li><a href="#" class="icon facebook">5</a></li>
+									</ul>
+								</div>
+								<!-- Here we rely on the fact that Pelican always closes summary with '</p>' -->
+								<div class="summary"><p>I strive for simplicity since I am a strong believer that achieving a goal with
+the most simplest solution looks elegant, proves that you have deep knowledge
+on the subject, and overall is beautiful by itself.  Additionally to this, a
+simple solution is easier to comprehend and to audit, hence it is much easier
+to ensure the security of such a solution.</p>
+<p>Over the last decade I stumbled upon numerous complicated firewalls erected on
+the NAT boxes with tens (sometimes, hundreds!) of rules describing the traffic
+flows and punched holes for some edge cases.  Every time I wondered what kind <span class="truncated"></span>
+									<span class="readmore">…
+										<a href="http://localhost:8000/2016/05/22/building-a-firewall-simple-and-easy/#continue" class="icon fa-forward">read
+											<span class="readtime">time 7 min.</span>
+										</a>
+									</span>
+								</div>
+					<ul class="tags">
+						<li class="tag">
+							<div>
+								<a href="http://localhost:8000/tag/console/" class="tag name">console</a>
+							</div>
+							<a href="http://localhost:8000/tag/console/" class="tag count">7</a>
+						</li>
+						<li class="tag">
+							<div>
+								<a href="http://localhost:8000/tag/howto/" class="tag name">howto</a>
+							</div>
+							<a href="http://localhost:8000/tag/howto/" class="tag count">4</a>
+						</li>
+						<li class="tag">
+							<div>
+								<a href="http://localhost:8000/tag/iptables/" class="tag name">iptables</a>
+							</div>
+							<a href="http://localhost:8000/tag/iptables/" class="tag count">1</a>
+						</li>
+						<li class="tag">
+							<div>
+								<a href="http://localhost:8000/tag/linux/" class="tag name">linux</a>
+							</div>
+							<a href="http://localhost:8000/tag/linux/" class="tag count">2</a>
+						</li>
+						<li class="tag">
+							<div>
+								<a href="http://localhost:8000/tag/security/" class="tag name">security</a>
+							</div>
+							<a href="http://localhost:8000/tag/security/" class="tag count">1</a>
+						</li>
+					</ul>
+					<footer>
+						Offloaded on
+						<time datetime="2016-05-22 10:00:00+10:00">Sun, 22/05/2016 at 10:00 (+1000)</time>
+						<span class="category-tag"><a href="http://localhost:8000/category/linux">linux</a></span>
+					</footer>				</article>
+				<article id="transparent-ssh-host-jumping-advanced" class="box post post-excerpt">
+								<header>
+									<h1><a href="http://localhost:8000/2015/08/06/transparent-ssh-host-jumping-advanced/">Transparent SSH host-jumping (Advanced)</a></h1>
+								</header>
+								<div class="info">
+									<span class="date">
+										<span class="day">06</span>
+										<span class="month"><a href="http://localhost:8000/2015/08/">Aug<span class="month full">ust</span></a></span>
+										<span class="year"><a href="http://localhost:8000/2015/">2015</a></span>
+									</span>
+									<ul class="stats">
+										<li><a href="#" class="icon comment">256</a></li>
+										<li><a href="#" class="icon heart">128</a></li>
+										<li><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="icon twitter" data-tweet-id="1251580743144206336">1 </a></li>
+										<li><a href="#" class="icon facebook">5</a></li>
+									</ul>
+								</div>
+								<!-- Here we rely on the fact that Pelican always closes summary with '</p>' -->
+								<div class="summary"><p>In this brief article I am going to describe how I resolved a nagging issue I
+had with setting up access to hosts which are not directly reachable, but where
+you need to forward your connection through an intermediate host.</p>
+<p><a href="http://localhost:8000/2010/12/10/ssh-port-forwarding-intermediate/">Previously</a>, I was using the local SSH port-forwarding technique (although I
+was configuring hosts I connect to in the <code>~/.ssh/config</code> file instead of
+using the command-line options). However, this approach turned out to be quite
+inconvenient since every time I wanted to connect to a new host (and, possibly,
+through a new intermediate host) I had to edit my <span class="truncated"></span>
+									<span class="readmore">…
+										<a href="http://localhost:8000/2015/08/06/transparent-ssh-host-jumping-advanced/#continue" class="icon fa-forward">read
+											<span class="readtime">time 6 min.</span>
+										</a>
+									</span>
+								</div>
+					<ul class="tags">
+						<li class="tag">
+							<div>
+								<a href="http://localhost:8000/tag/console/" class="tag name">console</a>
+							</div>
+							<a href="http://localhost:8000/tag/console/" class="tag count">7</a>
+						</li>
+						<li class="tag">
+							<div>
+								<a href="http://localhost:8000/tag/ssh/" class="tag name">ssh</a>
+							</div>
+							<a href="http://localhost:8000/tag/ssh/" class="tag count">4</a>
+						</li>
+						<li class="tag">
+							<div>
+								<a href="http://localhost:8000/tag/howto/" class="tag name">howto</a>
+							</div>
+							<a href="http://localhost:8000/tag/howto/" class="tag count">4</a>
+						</li>
+					</ul>
+					<footer>
+						Offloaded on
+						<time datetime="2015-08-06 10:00:00+10:00">Thu, 06/08/2015 at 10:00 (+1000)</time>
+						<span class="category-tag"><a href="http://localhost:8000/category/ssh">ssh</a></span>
+					</footer>				</article>
+			</div>
+		</div>
+
+		<!--
+		<script src="/theme/js/clipboard/clipboard.js"></script>
+		<div id="titleBar">
+			<span class="title">Mind Drops</span>
+		</div>
+		-->
+	</body>
+</html>

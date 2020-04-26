@@ -1,0 +1,263 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<title>Mind Drops</title>
+		<meta http-eqiv="Service-Worker-Allowed" content="/" />
+		<meta name="theme-color" content="#535353" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta name="apple-mobile-web-app-title" content="Mind Drops">
+		<link rel="apple-touch-icon" href="/theme/images/icons/mind-drops-192x192.png">
+		<meta charset="utf-8" />
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="manifest" type="text/json" href="/manifest.json" />
+		<link rel="preload" as="style" href="/theme/css/reset.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Icons.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Exo2.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Oswald.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/DancingScript.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/FiraCode.css" />
+		<link rel="preload" as="style" href="/theme/css/base.css" />
+		<link rel="preload" as="script" href="/theme/js/persistence.js" />
+		<link rel="preload" as="script" href="/theme/js/visited.js" />
+		<link rel="preload" as="script" href="/theme/js/service.js" />
+		<script src="/theme/js/loader.js" defer></script>
+		<link rel="icon" type="image/png" href="/images/galaxy.png">
+
+		<link rel="stylesheet" type="text/css" href="http://localhost:8000/theme/css/article.css" />
+		<meta name="tags" content="ssh" />
+		<meta name="tags" content="console" />
+	</head>
+	<body>
+		<input type="checkbox" id="menu-toggle" />
+		<label for="menu-toggle" class="icon menu"></label>
+		<aside id="sidebar">
+			<!-- Logo -->
+			<div id="logo" class="box shadow">
+				<picture>
+					<source srcset="/images/galaxy.png.webp" type="image/webp">
+					<img src="/images/galaxy.png" alt="Logo">
+				</picture>
+			</div>
+
+			<!-- Search -->
+			<section class="box search">
+				<form name="google search" class="icon search" method="get" action="/search">
+					<label for="search" class="offscreen">Search</label>
+					<input id="search" type="text" class="text" name="q" placeholder="Search" />
+				</form>
+			</section>
+
+			<!-- Nav -->
+			<nav id="nav">
+				<ul>
+					<li class="icon home">
+						<a href="/">Home</a>
+					</li>
+					<li class="icon user-agent">
+						<a href="/about">About</a>
+					</li>
+					<li class="icon paper-plane">
+						<a href="/contact">Contact</a>
+					</li>
+				</ul>
+			</nav>
+
+			<!-- Text -->
+			<section class="box text-style1">
+				<div class="inner">
+					<p>
+						<strong>Mind Drops:</strong>: A place to unload all these assorted bits.
+					</p>
+				</div>
+			</section>
+
+			<!-- Copyright -->
+			<ul id="copyright">
+				<li>&copy; Openwall Pty Ltd 2020 </li>
+				<li><a href="#">Terms &amp; Conditions</a></li>
+			</ul>
+		</aside>
+
+		<!-- Content -->
+		<div id="content">
+			<div class="inner">
+				<article id="ssh-interactive-proxycommand" class="box post">
+					<header>
+						<h1><a name="top">SSH: Interactive ProxyCommand</a></h1>
+					</header>
+					<div class="info">
+						<span class="date"><span class="day">25</span> <span class="month">Jul<span>y</span></span> <span class="year">2016</span></span>
+						<ul class="stats">
+							<li><a href="#" class="icon fa-comment">?</a></li>
+							<li><a href="#" class="icon fa-heart">?</a></li>
+							<li><a href="#" class="icon fa-twitter">?</a></li>
+							<li><a href="#" class="icon fa-facebook">?</a></li>
+						</ul>
+					</div>
+					<p>I was involved in the creation of the <a href="https://github.com/realestate-com-au/sshephalopod">sshephalopod</a> project, which was an
+attempt to build an enterprise level authentication framework for SSH
+authentication using the SSH <abbr title="Certificate Authority">CA</abbr> feature.</p>
+<p>The project is based on a wrapper script that signs a user via a <abbr title="Security Assertion Markup Language">SAML</abbr> identity
+provider and gets user&rsquo;s public key signed for the further usage.</p>
+<p>In one of the discussions I pointed out that such a wrapper script is not good
+for the end user experience and I proposed to provide the users with an excerpt
+for their ssh config file, so the functionality of sshephalopod would be
+transparent to the general usage scenario of the ssh tool.</p>
+<p>The response was that ProxyCommand do not support interactivity. Well, as they
+say: The challenge is accepted :)</p>
+<p>The following is my train of thoughts before I came up with a general solution
+on how to allow an interactive command to be used as the ProxyCommand in the
+ssh config file.</p>
+<p>Before we start solving the problem at hand we need to create a test
+environment, so we would be able to confirm when we reached success. The task
+itself was very simple: we needed a host we could ssh into (an sshd daemon
+running on the local host would be sufficient), then we needed an interactive
+script, and a configuration block for the connection.</p>
+<p>The configuration block is pretty simple (%h expands to localhost and %p
+expands to the port specified on the command line or to &ldquo;22&rdquo; otherwise):</p>
+<pre class="highlight"><code class="language-bash">$ fgrep -A1 'Host localhost' ~/.ssh/config
+Host localhost
+ ProxyCommand ~/bin/interactive.script.sh %h %p</code></pre>
+
+
+<p>Since most of our research is going to be inside the interactive script you
+will see several incarnations of script&rsquo;s body. The very first one was the
+following:</p>
+<pre class="highlight"><code class="language-bash">#!/bin/bash
+exec nc &quot;$1&quot; &quot;$2&quot;</code></pre>
+
+
+<p>At this point we just need to confirm that our test environment works as
+expected &ndash; the ssh session should be proxied through the nc command and we
+should be able to login under our own account via ssh to the localhost (my
+private key was added to the key manager with ssh-add, hence no password prompt
+was displayed):</p>
+<pre class="highlight"><code class="language-bash">$ ssh galaxy@localhost
+Last login: Thu Jul 21 01:30:21 2016
+home:~ galaxy$</code></pre>
+
+
+<p>OK, we confirmed that we can establish a proxied connection and tunnel our ssh
+session through it.</p>
+<p>Each interactive script or program relies on the communication channel with the
+user otherwise it could not be interactive. This channel comprises at least of
+two file descriptors: one for standard input and the other for standard output,
+so let&rsquo;s check what descriptors are available for our script:</p>
+<pre class="highlight"><code class="language-bash">#!/bin/bash
+# on Linux the following line would be much simpler: ls -l /proc/$$/fd/, but
+# on OS X they do not expose the open file descriptors through /proc, so I
+# used &quot;lsof&quot; instead.
+lsof -p $$ &gt;&amp;2
+exec nc &quot;$1&quot; &quot;$2&quot;</code></pre>
+
+
+<p>If we try to connect now we should see something like the following (I am
+writing this article on an OS X machine so I provide the output from OS X,
+however this also works for Linux):</p>
+<pre class="highlight"><code class="language-bash">$ ssh galaxy@localhost
+COMMAND   PID   USER   FD   TYPE             DEVICE  SIZE/OFF     NODE NAME
+bash    45225 galaxy  cwd    DIR                1,2       612   893854 /Users/galaxy/.ssh
+bash    45225 galaxy  txt    REG                1,2    628640  2329236 /bin/bash
+bash    45225 galaxy  txt    REG                1,2    625712 13892061 /usr/lib/dyld
+bash    45225 galaxy  txt    REG                1,2 385393734 13894121 /private/var/run/dyld_shared_cache_x86_64
+bash    45225 galaxy    0   PIPE 0x44d71099589485df     16384          -&gt;0x44d7109951223d0f
+bash    45225 galaxy    1   PIPE 0x44d710995122454f     16384          -&gt;0x44d71099512246af
+bash    45225 galaxy    2u   CHR               16,1  0t631830     9705 /dev/ttys001
+bash    45225 galaxy  255r   REG                1,2       219 15455259 /Users/galaxy/bin/interactive.script.sh
+Last login: Mon Jul 25 17:52:40 2016 from localhost
+home:~ galaxy$</code></pre>
+
+
+<p>We are interested in file descriptors 0 (standard input), 1 (standard output),
+and 2 (standard error). As you can see the standard input and output are part
+of the pipes (presumably linking them to the parent ssh process) and standard
+error is pointing to our terminal session.</p>
+<p>I could have occupied a bit more of the page space showcasing that if you try
+to communicate on standard input and/or output the ssh client will terminate
+since you will be messing with the SSH protocol flow, but I believe you will
+trust me on this :).</p>
+<p>What can we do to interact with the user, yet to preserve the channel with the
+parent ssh process? Well, the answer is quite obvious:</p>
+<ul>
+<li>we have a pointer to the terminal session (file descriptor 2, the standard
+    error, points to the terminal),</li>
+<li>so we just need to save pointers to the pipes&rsquo; ends,</li>
+<li>re-open standard input and output with the terminal before we interact with
+    the user,</li>
+<li>and restore these file descriptors back once we are ready to hand over the
+    ssh session.</li>
+</ul>
+<p>The following version of the script demonstrates the implementation of the
+above logic:</p>
+<pre class="highlight"><code class="language-bash">#!/bin/bash
+exec 10&lt;&amp;0 11&gt;&amp;1 0&lt;&amp;2 1&gt;&amp;2
+# start of the interactive behaviour
+lsof -p $$
+read -p &quot;Type something: &quot; I
+echo &quot;You typed: $I&quot;
+# finish of the interactive behaviour
+exec 0&lt;&amp;10 1&gt;&amp;11
+exec nc &quot;$1&quot; &quot;$2&quot;</code></pre>
+
+
+<p>I think it is time to test it :) :</p>
+<pre class="highlight"><code class="language-bash">$ ssh galaxy@localhost
+COMMAND   PID   USER   FD   TYPE             DEVICE  SIZE/OFF     NODE NAME
+bash    45238 galaxy  cwd    DIR                1,2       612   893854 /Users/galaxy/.ssh
+bash    45238 galaxy  txt    REG                1,2    628640  2329236 /bin/bash
+bash    45238 galaxy  txt    REG                1,2    625712 13892061 /usr/lib/dyld
+bash    45238 galaxy  txt    REG                1,2 385393734 13894121 /private/var/run/dyld_shared_cache_x86_64
+bash    45238 galaxy    0u   CHR               16,1  0t640407     9705 /dev/ttys001
+bash    45238 galaxy    1u   CHR               16,1  0t640407     9705 /dev/ttys001
+bash    45238 galaxy    2u   CHR               16,1  0t640407     9705 /dev/ttys001
+bash    45238 galaxy   10   PIPE 0x44d710995122378f     16384          -&gt;0x44d71099589494ff
+bash    45238 galaxy   11   PIPE 0x44d7109951223d0f     16384          -&gt;0x44d710995122454f
+bash    45238 galaxy  255r   REG                1,2       135 15455285 /Users/galaxy/bin/interactive.script.sh
+Type something: This is a test
+You typed: This is a test
+Last login: Mon Jul 25 17:57:05 2016 from localhost
+home:~ galaxy$ logout
+Connection to localhost closed.</code></pre>
+
+
+<p>Mission accomplished! :)</p>
+<p>I hope this small article would help somebody to design better wrappers around
+SSH. Keep in mind that you could always optimise it further. For example, recent
+versions of OpenSSH support passing of a file descriptor from the ProxyCommand
+script, so if you have a decent netcat tool that supports the &ldquo;-F&rdquo; option
+(fdpass) you could get native performance for the ssh communication link with
+no proxy process hanging around.</p>
+<p>P.S. if you have any questions do not hesitate to comment.</p>
+					<ul class="tags">
+						<li class="tag">
+							<div>
+								<a href="http://localhost:8000/tag/ssh/" class="tag name">ssh</a>
+							</div>
+							<a href="http://localhost:8000/tag/ssh/" class="tag count">4</a>
+						</li>
+						<li class="tag">
+							<div>
+								<a href="http://localhost:8000/tag/console/" class="tag name">console</a>
+							</div>
+							<a href="http://localhost:8000/tag/console/" class="tag count">7</a>
+						</li>
+					</ul>
+					<footer>
+						Offloaded on
+						<time datetime="2016-07-25 10:00:00+10:00">Mon, 25/07/2016 at 10:00 (+1000)</time>
+						<span class="category-tag"><a href="http://localhost:8000/category/ssh">ssh</a></span>
+					</footer>				</article>
+			</div>
+		</div>
+
+		<!--
+		<script src="/theme/js/clipboard/clipboard.js"></script>
+		<div id="titleBar">
+			<span class="title">Mind Drops</span>
+		</div>
+		-->
+	</body>
+</html>
