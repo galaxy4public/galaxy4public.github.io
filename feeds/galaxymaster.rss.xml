@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>Mind Drops - (GalaxyMaster)</title><link>https://dmitry.khlebnikov.net/</link><description></description><lastBuildDate>Tue, 05 May 2020 02:04:16 +1000</lastBuildDate><item><title>nginx + a backend with a dynamic IP (e.g. AWS ELB)</title><link>https://dmitry.khlebnikov.net/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/</link><description>&lt;p&gt;Recently, I wrote about &lt;a href="https://dmitry.khlebnikov.net/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/"&gt;the dynamic resolution of upstream servers&lt;/a&gt; in
+<rss version="2.0"><channel><title>Mind Drops - (GalaxyMaster)</title><link>https://dmitry.khlebnikov.net/</link><description></description><lastBuildDate>Tue, 05 May 2020 02:37:50 +1000</lastBuildDate><item><title>Migrating blog to Pelican</title><link>https://dmitry.khlebnikov.net/2020/05/01/migrating-blog-to-pelican/</link><description>&lt;p&gt;I had my blog site for more than a decade now, but until now I was not putting
+any effort or thoughts into maintaining my audience or promoting the site.  It
+was dormant for nearly a decade and I decided to rejuvenate it and start using
+it a platform I could leverage to share some ideas I think which are worth
+sharing.&lt;/p&gt;
+&lt;p&gt;Before I embarked on the journey of renovating the blog site I needed to set
+some goals and requirements up, so I would be able to assess my progress and
+estimate how much effort is required.  The primary &lt;span class="truncated"&gt;&lt;/span&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">(GalaxyMaster)</dc:creator><pubDate>Fri, 01 May 2020 20:00:00 +1000</pubDate><guid isPermaLink="false">tag:dmitry.khlebnikov.net,2020-05-01:/2020/05/01/migrating-blog-to-pelican/</guid><category>blog</category><category>pelican</category><category>blog</category></item><item><title>nginx + a backend with a dynamic IP (e.g. AWS ELB)</title><link>https://dmitry.khlebnikov.net/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/</link><description>&lt;p&gt;Recently, I wrote about &lt;a href="https://dmitry.khlebnikov.net/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/"&gt;the dynamic resolution of upstream servers&lt;/a&gt; in
 nginx which was achieved by quite an intrusive patch to the core nginx module.
 The patch was invented a while ago and was working very well up until recent
 nginx versions were released.&lt;/p&gt;

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - blog</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"></link><link href="https://dmitry.khlebnikov.net/feeds/blog.atom.xml" rel="self"></link><id>https://dmitry.khlebnikov.net/</id><updated>2020-05-05T02:37:50+10:00</updated><entry><title>Migrating blog to Pelican</title><link href="https://dmitry.khlebnikov.net/2020/05/01/migrating-blog-to-pelican/" rel="alternate"></link><published>2020-05-01T20:00:00+10:00</published><updated>2020-05-05T02:37:50+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-01:/2020/05/01/migrating-blog-to-pelican/</id><summary type="html">&lt;p&gt;I had my blog site for more than a decade now, but until now I was not putting
+any effort or thoughts into maintaining my audience or promoting the site.  It
+was dormant for nearly a decade and I decided to rejuvenate it and start using
+it a platform I could leverage to share some ideas I think which are worth
+sharing.&lt;/p&gt;
+&lt;p&gt;Before I embarked on the journey of renovating the blog site I needed to set
+some goals and requirements up, so I would be able to assess my progress and
+estimate how much effort is required.  The primary &lt;span class="truncated"&gt;&lt;/span&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;I had my blog site for more than a decade now, but until now I was not putting
+any effort or thoughts into maintaining my audience or promoting the site.  It
+was dormant for nearly a decade and I decided to rejuvenate it and start using
+it a platform I could leverage to share some ideas I think which are worth
+sharing.&lt;/p&gt;
+&lt;p&gt;Before I embarked on the journey of renovating the blog site I needed to set
+some goals and requirements up, so I would be able to assess my progress and
+estimate how much effort is required.  The primary goal is already known at
+this point: I need a tool that would allow me to easily share my ideas, grow
+and nurture the audience, and accumulate knowledge in one place over time.&lt;/p&gt;
+&lt;p&gt;I started to be increasingly unhappy with the Blogger platform: they were
+changing things and as the result parts of my blog became defunct, e.g. in 2017
+I lost the comment capability and did not have enough time to investigate and
+fix it, in 2018 my theme became incompatible with the new trends of the
+platform, and so so.&lt;/p&gt;
+&lt;p&gt;Therefore, the first requirement became to self-host my blog site, so I would
+have full control over the software that is supporting the site.  This would
+give the flexibility and determinism of how the site is configured and operates.&lt;/p&gt;
+&lt;p&gt;The downside for hosting the site myself is that it would require an ongoing
+maintenance cost (primarily calculated in the time I spend on the maintenance)
+and with my quite busy schedule I was not sure that I could afford it on the
+ongoing basis.  So the second requirement became low maintenance cost of the
+solution.  Preferably, I wanted to make changes only when I needed to change
+site&amp;rsquo;s functionality.&lt;/p&gt;
+&lt;p&gt;I did some research and figured that a static website generator could be a
+solution that addressed both aforementioned requirements assuming that I could
+find a place where all underlying maintenance of the infrastructure and
+application layer handled by somebody else (and, preferably, free of charge).&lt;/p&gt;
+&lt;p&gt;There are plenty of static site generators (SSG).  According to some articles,
+there are more than 400 different SSG at the moment, so the process of
+selecting one that is right for you could be quite challenging.  I decided to
+define what I would like to see in the generator I could use and be happy about
+it before I start shopping around:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;should be written in one of the scripting languages that are widely adopted&lt;/p&gt;
+&lt;p&gt;This requirement comes from my desire of running that software on a
+platform that is fully managed by somebody else (my initial thought was to
+host the site in an AWS S3 bucket and generate the site using AWS Lambda
+function)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;should be lean with minimum dependencies for the generator itself&lt;/p&gt;
+&lt;p&gt;The more dependencies software has the more likely it is to get an
+unexpected behaviour once one of the upstream dependencies make an
+undesirable breaking change.  I really wanted stability and to touch the
+configuration in rare occasions only when I needed to change the behaviour
+of my site and not in an adhoc response to an upstream breaking change.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;should be extensible and should support a plug-in mechanism&lt;/p&gt;
+&lt;p&gt;I have a really high bar on what the final result should be, e.g. valid and
+standard compliant HTML and CSS documents, semantic structuring, etc.  In
+order not to be limited by the generator I needed a way on how I could
+influence the generation process without patching or tweaking the core of
+the generator itself, since doing it this way would mean maintaining a fork
+of the generator and as I mentioned above, it does not fit the second
+requirement.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;the template language should be flexible and should allow conditional logic&lt;/p&gt;
+&lt;p&gt;Over the years I worked with multiple template engines and I found that the
+most comfortable engines are those that potentially allow you to break the
+concept of separating design from code.  Not that I recommend doing so, but
+having such power gives you yet another flexible interface to express
+yourself.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;the architecture of the generator should feel clean, stable, and thought out&lt;/p&gt;
+&lt;p&gt;I do not know how to easily describe this, but my understanding of the well
+engineered software is when its layout is simple to understand, structured,
+yet easily extendable without introducing any invasive changes to the
+structure, e.g. callbacks/hooks in the key transition points, so you could
+hook the external code up and influence the logic, etc.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;A bit more research brought me to the realisation that there is a trend in the
+community and it has a name: &lt;a href="https://jamstack.org/"&gt;Javascript, API, and Markup Stack(Jamstack)&lt;/a&gt;.
+The ideas behind Jamstack resonate with my vision on how I wanted to run my
+blog, so if you want to understand the reasoning behind many choices I made
+their website would be a good place to start reading about the approach.&lt;/p&gt;
+&lt;p&gt;After a lot of consideration the following three SSGs were the primary
+contenders to become the engine of my blog site:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://jekyllrb.com/"&gt;Jekill&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.gatsbyjs.org/"&gt;Gatsby&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://getpelican.com/"&gt;Pelican&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;All of these three were aligned to the requirements, however I have an
+indescribable allergy to NodeJS ecosystem and I prefer Python over Ruby, hence
+Pelican was the first generator to spike with and to see whether we are a match
+or not.&lt;/p&gt;
+&lt;p&gt;The more I worked with Pelican the more I was falling in love with the
+software: with less than 600K of source code spread across just 15 files (with
+a couple being redundant in my configuration) it is packed with features and is
+very extensible through a plug-in system.&lt;/p&gt;
+&lt;p&gt;The next step was to create the templates (the collection of templates used to
+generate the output is called a theme in Pelican).  While I was spiking I found
+a theme I somewhat liked (&lt;a href="https://brutalistpelican.com/"&gt;Brutalist&lt;/a&gt; by Matt
+McManus), then I found a free theme that I liked a lot
+(&lt;a href="https://html5up.net/striped"&gt;Striped&lt;/a&gt; by AJ), but that theme was just an
+HTML/CSS/JavaScript concept which was unrelated to Pelican in any way.&lt;/p&gt;
+&lt;p&gt;Initially, I started to port the Striped theme to Pelican using the Brutalist
+theme as the wireframe, but in the middle of that work I realised that despite
+the Striped theme was posed as &lt;q&gt;a free, fully responsive HTML5 site
+template&lt;/q&gt; it was generate in a haste and was not that responsive as the
+claim would make you think.  There were lots of inconsistencies and no
+overarching conventions on how things were structured within.&lt;/p&gt;
+&lt;p&gt;After a while, struggling to fix everything I was not happy with in Striped
+theme&amp;rsquo;s code, I decided to take a different approach: I decided to re-create
+Striped-like Pelican theme from scratch using Pelican&amp;rsquo;s default theme called
+&amp;ldquo;simple&amp;rdquo; as the foundation.&lt;/p&gt;
+&lt;p&gt;The result (which is still an ongoing process) as you can see has some
+resemblance to the theme I was taking inspiration from, but on the other hand
+it is quite different and standalone in its own right.  Up until some point I
+was even retaining &amp;ldquo;Design by HTML5 UP&amp;rdquo; at the bottom of the left hand side
+menu, but when I realised that almost nothing left of the original design an
+layout, I removed it, the theme evolved much further that the inspirational
+theme I started with.&lt;/p&gt;
+&lt;p&gt;This post is already getting too long, so I will conclude with the following:
+I am going to publish a series of posts covering the development of this
+website, the tips and tricks I learnt over the course of creating it, and the
+infrastructure supporting the site and its deployment process in detail.&lt;/p&gt;
+&lt;p&gt;All blog posts related to these topics will be tagged with the &amp;ldquo;&lt;a href="/tag/blog/"&gt;blog&lt;/a&gt;&amp;rdquo; tag, so
+you should be able to find them easily (or even subscribe to the &lt;a href="/feeds/blog.atom.cml"&gt;blog RSS feed&lt;/a&gt;
+(you may need to copy the link into your RSS Reader) to get the latest updates
+as soon as I publish them).&lt;/p&gt;</content><category term="blog"></category><category term="pelican"></category><category term="blog"></category></entry></feed>
