@@ -68,7 +68,7 @@ loader([
 	'/theme/css/base.css',
 	'/theme/js/visited.js',
 	'/theme/js/service.js',
-	'/theme/js/p-fixups.js',
+//	'/theme/js/p-fixups.js',
 ])
 .then(() => {
 	console.log('Loaded essentials')
@@ -114,5 +114,5 @@ if (document.getElementsByTagName('pre').length)
 		Prism.highlightAll(/* async, callback */)
 	})
 
-loader('/theme/js/twitter.js').then(() => { console.log('twitter.js loaded') })
+// loader('/theme/js/twitter.js').then(() => { console.log('twitter.js loaded') })
 

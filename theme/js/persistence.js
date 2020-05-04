@@ -30,7 +30,7 @@ function storageAvailable(type) {
 
 function save(event)
 {
-	config.menu = document.getElementById('menu-toggle').checked;
+	config.menu = document.querySelector('input[name="menu-toggle"]:checked').id;
 	if (storageAvailable('localStorage'))
 		sessionStorage.setItem("config", JSON.stringify(config));
 }
@@ -41,7 +41,7 @@ function restore(event)
 		result = sessionStorage.getItem("config");
 	if (result) {
 		config = JSON.parse(result);
-		document.getElementById('menu-toggle').checked = config.menu;
+		document.getElementById(config.menu).checked = true;
 	}
 }
 

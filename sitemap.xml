@@ -5,119 +5,140 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://dmitry.khlebnikov.net/</loc>
-<lastmod>2020-04-29T21:38:51-00:00</lastmod>
+<lastmod>2020-05-05T02:04:33-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.75</priority>
 </url>
 
 <url>
 <loc>https://dmitry.khlebnikov.net/archives.html</loc>
-<lastmod>2020-04-29T21:38:51-00:00</lastmod>
+<lastmod>2020-05-05T02:04:33-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.75</priority>
 </url>
 
 <url>
 <loc>https://dmitry.khlebnikov.net/tags.html</loc>
-<lastmod>2020-04-29T21:38:51-00:00</lastmod>
+<lastmod>2020-05-05T02:04:33-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.75</priority>
 </url>
 
 <url>
 <loc>https://dmitry.khlebnikov.net/categories.html</loc>
-<lastmod>2020-04-29T21:38:51-00:00</lastmod>
+<lastmod>2020-05-05T02:04:33-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.75</priority>
 </url>
 
 <url>
 <loc>https://dmitry.khlebnikov.net/about/</loc>
-<lastmod>2020-04-25T12:00:00+10:00</lastmod>
+<lastmod>2020-05-05T02:04:16+10:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://dmitry.khlebnikov.net/contact/</loc>
-<lastmod>2020-04-29T21:38:28+10:00</lastmod>
+<lastmod>2020-05-05T02:04:16+10:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://dmitry.khlebnikov.net/legal/policy/cookies/</loc>
+<lastmod>2020-05-05T02:04:16+10:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://dmitry.khlebnikov.net/legal/policy/privacy/</loc>
+<lastmod>2020-05-05T02:04:16+10:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://dmitry.khlebnikov.net/legal/terms-of-service/</loc>
+<lastmod>2020-05-05T02:04:16+10:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://dmitry.khlebnikov.net/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/</loc>
-<lastmod>2017-01-13T10:00:00+11:00</lastmod>
+<lastmod>2020-05-05T02:04:16+10:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://dmitry.khlebnikov.net/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/</loc>
-<lastmod>2016-09-20T10:00:00+10:00</lastmod>
+<lastmod>2020-05-05T02:04:16+10:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://dmitry.khlebnikov.net/2016/07/26/transparent-ssh-host-jumping-expert/</loc>
-<lastmod>2016-07-26T10:00:00+10:00</lastmod>
+<lastmod>2020-05-05T02:04:16+10:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://dmitry.khlebnikov.net/2016/07/25/ssh-interactive-proxycommand/</loc>
-<lastmod>2016-07-25T10:00:00+10:00</lastmod>
+<lastmod>2020-05-05T02:04:16+10:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://dmitry.khlebnikov.net/2016/05/22/raspberry-pi-3-toolchain-on-centos-7/</loc>
-<lastmod>2016-05-22T12:00:00+10:00</lastmod>
+<lastmod>2020-05-05T02:04:16+10:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://dmitry.khlebnikov.net/2016/05/22/building-a-firewall-simple-and-easy/</loc>
-<lastmod>2016-05-22T10:00:00+10:00</lastmod>
+<lastmod>2020-05-05T02:04:16+10:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://dmitry.khlebnikov.net/2015/08/06/transparent-ssh-host-jumping-advanced/</loc>
-<lastmod>2015-08-06T10:00:00+10:00</lastmod>
+<lastmod>2020-05-05T02:04:16+10:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://dmitry.khlebnikov.net/2015/07/18/should-we-use-sudo-for-day-to-day-activities/</loc>
-<lastmod>2015-07-18T20:04:00+10:00</lastmod>
+<lastmod>2020-05-05T02:04:16+10:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://dmitry.khlebnikov.net/2010/12/10/ssh-port-forwarding-intermediate/</loc>
-<lastmod>2010-12-10T10:00:00+11:00</lastmod>
+<lastmod>2020-05-05T02:04:16+10:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://dmitry.khlebnikov.net/2010/11/29/ssh-port-forwarding-basic/</loc>
-<lastmod>2010-11-29T10:00:00+11:00</lastmod>
+<lastmod>2020-05-05T02:04:16+10:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://dmitry.khlebnikov.net/2010/11/24/howto-vmware-player-as-a-remote-console-vnc/</loc>
-<lastmod>2010-11-24T10:00:00+11:00</lastmod>
+<lastmod>2020-05-05T02:04:16+10:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>

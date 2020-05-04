@@ -1,18 +1,20 @@
 <!DOCTYPE HTML>
 <html lang="en">
 	<head>
-		<meta http-equiv="Content-Security-Policy" content="default-src 'self' *.khlebnikov.net; script-src 'self' 'unsafe-eval'; script-src-elem 'self' 'sha256-WmUJoJNRfL/Sf4ma0odhQp0u96lMFj/yTIfk7WEMs7w=' 'sha256-Nh1WQbmRSQvyew+XXIrSx/vEFwVvy9UjWRGPWcRe5q4=' https://cse.google.com/cse.js https://cse.google.com/cse/element/ https://www.google.com/cse/static/element/; style-src 'self'; style-src-elem 'self' 'unsafe-inline' https://www.google.com/cse/static/element/ https://www.google.com/cse/static/style/; img-src 'self' https: https://*.gstatic.com/ https://www.google.com/cse/static/css/ https://ssl.gstatic.com/ui/;" />
+		<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-elem 'self' https://www.googletagmanager.com/gtag/js 'sha256-TelA7VsuYAMqhOKGk7CHgJyuqSJdmqZEp+hn6PWVRwQ='; style-src 'self' 'sha256-fszvBX/J9dhPxFSJ5wUrq/Pvg6HrnTkWyshMZpaxSQY='; " />
 		<title>Mind Drops</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="theme-color" content="#535353" />
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="format-detection" content="telephone=no" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 		<meta name="apple-mobile-web-app-title" content="Mind Drops" />
-		<link rel="apple-touch-icon" href="/theme/images/icons/mind-drops-192x192.png" />
-		<meta charset="utf-8" />
 		<meta name="description" content="">
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="apple-touch-icon" href="/theme/images/icons/mind-drops-192x192.png" />
 		<link rel="manifest" type="text/json" href="/manifest.json" />
+		<link rel="alternate" type="application/atom+xml" href="https://dmitry.khlebnikov.net/feeds/all.atom.xml" title="Mind Drops Full Atom Feed" />
+		<link rel="alternate" type="application/atom+xml" href="https://dmitry.khlebnikov.net/feeds/hacking.atom.xml" title="Mind Drops Categories Atom Feed" />
 		<link rel="preload" as="style" href="/theme/css/reset.css" />
 		<link rel="preload" as="style" href="/theme/css/fonts/Icons.css" />
 		<link rel="preload" as="style" href="/theme/css/fonts/Exo2.css" />
@@ -25,16 +27,23 @@
 		<link rel="preload" as="script" href="/theme/js/service.js" />
 		<script src="/theme/js/loader.js" defer></script>
 		<link rel="icon" type="image/png" href="/images/galaxy.png" />
+		<style>
+			body { display: none }
+		</style>
 
 		<link rel="stylesheet" type="text/css" href="/theme/css/article.css" />
 		<meta name="tags" content="nginx" />
 		<meta name="tags" content="patch" />
 	</head>
 	<body>
-		<input type="checkbox" id="menu-toggle" />
-		<label for="menu-toggle" class="icon menu"></label>
+
+		<input type="radio" name="menu-toggle" id="menu-toggle-full" value="full" tabindex="0" checked />
+		<input type="radio" name="menu-toggle" id="menu-toggle-mini" value="mini" tabindex="1" />
+		<input type="radio" name="menu-toggle" id="menu-toggle-hide" value="hide" tabindex="2" />
+		<label for="menu-toggle-full" class="icon menu">Show the full menu panel on the screen</label>
 		<aside id="sidebar">
-			<!-- Logo -->
+			<label for="menu-toggle-mini" class="icon left-big">Show the minimised menu panel on the screen</label>
+			<label for="menu-toggle-hide" class="icon eye-off">Remove the menu panel off the screen</label>
 			<div id="logo" class="box shadow">
 				<picture>
 					<source srcset="/images/galaxy.png.webp" type="image/webp">
@@ -50,17 +59,16 @@
 				</form>
 			</section>
 
-			<!-- Nav -->
-			<nav id="nav">
+			<nav>
 				<ul>
-					<li class="icon home">
-						<a href="/">Home</a>
+					<li>
+						<a class="icon home" href="/">Home</a>
 					</li>
-					<li class="icon user-agent">
-						<a href="/about">About</a>
+					<li>
+						<a class="icon user" href="/about">About</a>
 					</li>
-					<li class="icon paper-plane">
-						<a href="/contact">Contact</a>
+					<li>
+						<a class="icon phone" href="/contact">Contact</a>
 					</li>
 				</ul>
 			</nav>
@@ -77,7 +85,7 @@
 			<!-- Copyright -->
 			<ul id="copyright">
 				<li>&copy; Openwall Pty Ltd 2020 </li>
-				<li><a href="#">Terms &amp; Conditions</a></li>
+				<li><a href="/legal/terms-of-service">Terms of Service</a></li>
 			</ul>
 		</aside>
 
@@ -497,5 +505,12 @@ so if this is the case I would advise to run a local DNS caching service (e.g.
 					</footer>				</article>
 			</div>
 		</div>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-165060547-1"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'UA-165060547-1');
+		</script>
 	</body>
 </html>
