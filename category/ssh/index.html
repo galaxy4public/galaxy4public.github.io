@@ -5,6 +5,7 @@
 		<title>Mind Drops</title>
 		<script src="/theme/js/persistence.js" defer></script>
 		<meta charset="utf-8" />
+		<meta name="description" content="" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="theme-color" content="#535353" />
 		<meta name="apple-mobile-web-app-capable" content="yes" />
@@ -34,19 +35,19 @@
 		<link rel="preload" as="script" href="/theme/js/persistence.js" />
 		<link rel="preload" as="script" href="/theme/js/visited.js" />
 		<link rel="preload" as="script" href="/theme/js/service.js" />
-		<link rel="preload" as="script" href="https://www.googletagmanager.com/gtag/js?id=UA-165060547-1" crossorigin />
+		<link rel="preload" as="script" href="https://www.googletagmanager.com/gtag/js?id=UA-165060547-1" />
 		<script src="/theme/js/loader.js" defer></script>
 		<link rel="icon" type="image/png" href="/images/galaxy.png" />
 	</head>
 	<body>
 
-		<input type="radio" name="menu-toggle" id="menu-toggle-full" value="full" tabindex="0" checked />
-		<input type="radio" name="menu-toggle" id="menu-toggle-mini" value="mini" tabindex="1" />
-		<input type="radio" name="menu-toggle" id="menu-toggle-hide" value="hide" tabindex="2" />
-		<label for="menu-toggle-full" class="icon menu">Show the full menu panel on the screen</label>
+		<input type="radio" name="menu-toggle" id="menu-toggle-full" value="full" tabindex="-1" checked />
+		<input type="radio" name="menu-toggle" id="menu-toggle-mini" value="mini" tabindex="-1" />
+		<input type="radio" name="menu-toggle" id="menu-toggle-hide" value="hide" tabindex="-1" />
+		<label for="menu-toggle-full" class="icon menu" role="radio" tabindex="0">Show the full menu panel on the screen</label>
 		<aside id="sidebar">
-			<label for="menu-toggle-mini" class="icon left-big">Show the minimised menu panel on the screen</label>
-			<label for="menu-toggle-hide" class="icon eye-off">Remove the menu panel off the screen</label>
+			<label for="menu-toggle-mini" class="icon left-big" role="radio" tabindex="0">Show the minimised menu panel on the screen</label>
+			<label for="menu-toggle-hide" class="icon eye-off" role="radio" tabindex="0">Remove the menu panel off the screen</label>
 			<div id="logo" class="box shadow">
 				<picture>
 					<source srcset="/images/galaxy.png.webp" type="image/webp">
@@ -150,7 +151,7 @@ will allow one to tweak parameters for the hosts in the chain.</p>
 					</ul>
 					<footer>
 						Offloaded on
-						<time datetime="2016-07-26 10:00:00+10:00">Tue, 26/07/2016 at 10:00 (<a href="https://time.is/AEST" target="_blank">AEST</a>)</time>
+						<time datetime="2016-07-26 10:00:00+10:00">Tue, 26/07/2016 at 10:00 (<a href="https://time.is/AEST" target="_blank" rel="noreferrer">AEST</a>)</time>
 						<span class="category-tag"><a href="/category/ssh">ssh</a></span>
 					</footer>				</article>
 				<article id="ssh-interactive-proxycommand" class="box post post-excerpt">
@@ -198,7 +199,7 @@ for their ssh config file, so the functionality of sshephalopod would be <span c
 					</ul>
 					<footer>
 						Offloaded on
-						<time datetime="2016-07-25 10:00:00+10:00">Mon, 25/07/2016 at 10:00 (<a href="https://time.is/AEST" target="_blank">AEST</a>)</time>
+						<time datetime="2016-07-25 10:00:00+10:00">Mon, 25/07/2016 at 10:00 (<a href="https://time.is/AEST" target="_blank" rel="noreferrer">AEST</a>)</time>
 						<span class="category-tag"><a href="/category/ssh">ssh</a></span>
 					</footer>				</article>
 				<article id="transparent-ssh-host-jumping-advanced" class="box post post-excerpt">
@@ -252,7 +253,7 @@ through a new intermediate host) I had to edit my <span class="truncated"></span
 					</ul>
 					<footer>
 						Offloaded on
-						<time datetime="2015-08-06 10:00:00+10:00">Thu, 06/08/2015 at 10:00 (<a href="https://time.is/AEST" target="_blank">AEST</a>)</time>
+						<time datetime="2015-08-06 10:00:00+10:00">Thu, 06/08/2015 at 10:00 (<a href="https://time.is/AEST" target="_blank" rel="noreferrer">AEST</a>)</time>
 						<span class="category-tag"><a href="/category/ssh">ssh</a></span>
 					</footer>				</article>
 				<article id="ssh-port-forwarding-intermediate" class="box post post-excerpt">
@@ -292,7 +293,7 @@ imagine that you already have SSH access to some <span class="truncated"></span>
 					</ul>
 					<footer>
 						Offloaded on
-						<time datetime="2010-12-10 10:00:00+11:00">Fri, 10/12/2010 at 10:00 (<a href="https://time.is/AEDT" target="_blank">AEDT</a>)</time>
+						<time datetime="2010-12-10 10:00:00+11:00">Fri, 10/12/2010 at 10:00 (<a href="https://time.is/AEDT" target="_blank" rel="noreferrer">AEDT</a>)</time>
 						<span class="category-tag"><a href="/category/ssh">ssh</a></span>
 					</footer>				</article>
 <p class="paginator">
