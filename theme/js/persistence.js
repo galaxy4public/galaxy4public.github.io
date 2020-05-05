@@ -45,6 +45,6 @@ function restore(event)
 	}
 }
 
-window.addEventListener('pageshow', restore);
-//window.addEventListener('DOMContentLoaded', restore);
+//window.addEventListener('pageshow', restore);
+window.addEventListener('DOMContentLoaded', restore);
 window.addEventListener('pagehide', save);

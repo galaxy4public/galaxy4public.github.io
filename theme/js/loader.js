@@ -58,7 +58,6 @@ const loader = (input, promise) => {
 }
 
 loader([
-	'/theme/js/persistence.js',
 	'/theme/css/reset.css',
 	'/theme/css/fonts/Icons.css',
 	'/theme/css/fonts/Exo2.css',

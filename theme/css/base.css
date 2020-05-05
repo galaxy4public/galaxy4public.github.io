@@ -353,6 +353,7 @@ input[name='menu-toggle'][id$='-hide']:checked ~ label[for='menu-toggle-hide']::
 input[name='menu-toggle'][id$='-hide']:checked ~ #sidebar:not(:focus-within) {
         width: 14em;
         left: -14em;
+	box-shadow: none;
 }
 
 /*** end of Menu Component ***/
@@ -535,7 +536,7 @@ nav li a:hover {
 }
 
 ul#copyright {
-	position: fixed;
+	position: absolute;
 	left: 0;
 	bottom: 0;
 	width: inherit;
