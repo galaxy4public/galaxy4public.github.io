@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
 	<head>
-		<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com/gtag/js 'sha256-TelA7VsuYAMqhOKGk7CHgJyuqSJdmqZEp+hn6PWVRwQ=' https://www.google-analytics.com/analytics.js ; img-src 'self' https://www.google-analytics.com/r/collect https://www.google-analytics.com/collect https://stats.g.doubleclick.net/r/collect https://www.google.com/ads/ga-audiences https://www.google.com.au/ads/ga-audiences ; style-src 'self' 'sha256-fszvBX/J9dhPxFSJ5wUrq/Pvg6HrnTkWyshMZpaxSQY='; connect-src 'self' https://www.google-analytics.com/j/collect https://stats.g.doubleclick.net/j/collect ; " />
+		<meta http-equiv="Content-Security-Policy" content="default-src 'self'; object-src 'none'; script-src 'self' https://www.googletagmanager.com/gtag/js 'sha256-TelA7VsuYAMqhOKGk7CHgJyuqSJdmqZEp+hn6PWVRwQ=' https://www.google-analytics.com/analytics.js ; img-src 'self' https://www.google-analytics.com/r/collect https://www.google-analytics.com/collect https://stats.g.doubleclick.net/r/collect https://*/ads/ga-audiences ; style-src 'self' 'sha256-fszvBX/J9dhPxFSJ5wUrq/Pvg6HrnTkWyshMZpaxSQY='; connect-src 'self' https://www.google-analytics.com/j/collect https://stats.g.doubleclick.net/j/collect ; " />
 		<title>Mind Drops</title>
 		<script src="/theme/js/persistence.js" defer></script>
 		<meta charset="utf-8" />
@@ -52,6 +52,7 @@
 		<aside id="sidebar">
 			<label for="menu-toggle-mini" class="icon left-big" role="radio" tabindex="0">Show the minimised menu panel on the screen</label>
 			<label for="menu-toggle-hide" class="icon eye-off" role="radio" tabindex="0">Remove the menu panel off the screen</label>
+			<div class="title">Mind Drops</div>
 			<div id="logo" class="box shadow">
 				<picture>
 					<source srcset="/images/galaxy.png.webp" type="image/webp">
@@ -105,44 +106,48 @@
 						<h1><a name="top">Migrating blog to Pelican</a></h1>
 					</header>
 					<div class="info">
-						<span class="date"><span class="day">01</span> <span class="month">May<span></span></span> <span class="year">2020</span></span>
+						<span class="date">
+							<span class="day">01</span>
+							<span class="month"><a href="/2020/05/">May<span class="month full"></span></a></span>
+							<span class="year"><a href="/2020/">2020</a></span>
+						</span>
 						<ul class="stats">
-							<li><a href="#" class="icon fa-comment">?</a></li>
-							<li><a href="#" class="icon fa-heart">?</a></li>
-							<li><a href="#" class="icon fa-twitter">?</a></li>
-							<li><a href="#" class="icon fa-facebook">?</a></li>
+							<li><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="icon twitter" aria-label="Twitter" data-tweet-id="1257348802207518722">2</a></li>
 						</ul>
 					</div>
 					<p>I had my blog site for more than a decade now, but until now I was not putting
 any effort or thoughts into maintaining my audience or promoting the site.  It
 was dormant for nearly a decade and I decided to rejuvenate it and start using
-it a platform I could leverage to share some ideas I think which are worth
+it as a platform I could leverage to share some ideas I think which are worth
 sharing.</p>
 <p>Before I embarked on the journey of renovating the blog site I needed to set
 some goals and requirements up, so I would be able to assess my progress and
 estimate how much effort is required.  The primary goal is already known at
 this point: I need a tool that would allow me to easily share my ideas, grow
 and nurture the audience, and accumulate knowledge in one place over time.</p>
-<p>I started to be increasingly unhappy with the Blogger platform: they were
-changing things and as the result parts of my blog became defunct, e.g. in 2017
-I lost the comment capability and did not have enough time to investigate and
-fix it, in 2018 my theme became incompatible with the new trends of the
-platform, and so so.</p>
+<p>I started to be increasingly unhappy with the <a href="https://blogger.com">Blogger</a>) platform: they were
+changing things and as the result parts of my blog became defunct, e.g.</p>
+<ul>
+<li>in 2017, I lost the comment capability and did not have enough time to
+    investigate and fix it,</li>
+<li>in 2018, my theme became incompatible with the new trends of the platform,</li>
+<li>and so on.</li>
+</ul>
 <p>Therefore, the first requirement became to self-host my blog site, so I would
 have full control over the software that is supporting the site.  This would
 give the flexibility and determinism of how the site is configured and operates.</p>
-<p>The downside for hosting the site myself is that it would require an ongoing
+<p>The downside for hosting the site myself is that it would require ongoing
 maintenance cost (primarily calculated in the time I spend on the maintenance)
 and with my quite busy schedule I was not sure that I could afford it on the
-ongoing basis.  So the second requirement became low maintenance cost of the
-solution.  Preferably, I wanted to make changes only when I needed to change
-site&rsquo;s functionality.</p>
+ongoing basis.  So the second requirement became the low maintenance cost of
+the solution.  Preferably, I wanted to make changes only when I needed to
+change site&rsquo;s functionality.</p>
 <p>I did some research and figured that a static website generator could be a
 solution that addressed both aforementioned requirements assuming that I could
 find a place where all underlying maintenance of the infrastructure and
 application layer handled by somebody else (and, preferably, free of charge).</p>
-<p>There are plenty of static site generators (SSG).  According to some articles,
-there are more than 400 different SSG at the moment, so the process of
+<p>There are plenty of static site generators (<abbr title="Static Site Generator">SSG</abbr>).  According to some articles,
+there are more than 400 different <abbr title="Static Site Generator">SSG</abbr> at the moment, so the process of
 selecting one that is right for you could be quite challenging.  I decided to
 define what I would like to see in the generator I could use and be happy about
 it before I start shopping around:</p>

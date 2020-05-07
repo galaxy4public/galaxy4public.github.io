@@ -1,41 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - (GalaxyMaster)</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"></link><link href="https://dmitry.khlebnikov.net/feeds/galaxymaster.atom.xml" rel="self"></link><id>https://dmitry.khlebnikov.net/</id><updated>2020-05-05T02:06:13+10:00</updated><entry><title>Migrating blog to Pelican</title><link href="https://dmitry.khlebnikov.net/2020/05/01/migrating-blog-to-pelican/" rel="alternate"></link><published>2020-05-01T20:00:00+10:00</published><updated>2020-05-05T02:06:13+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-01:/2020/05/01/migrating-blog-to-pelican/</id><summary type="html">&lt;p&gt;I had my blog site for more than a decade now, but until now I was not putting
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - (GalaxyMaster)</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"></link><link href="https://dmitry.khlebnikov.net/feeds/galaxymaster.atom.xml" rel="self"></link><id>https://dmitry.khlebnikov.net/</id><updated>2020-05-08T00:15:11+10:00</updated><entry><title>Migrating blog to Pelican</title><link href="https://dmitry.khlebnikov.net/2020/05/01/migrating-blog-to-pelican/" rel="alternate"></link><published>2020-05-01T20:00:00+10:00</published><updated>2020-05-08T00:15:11+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-01:/2020/05/01/migrating-blog-to-pelican/</id><summary type="html">&lt;p&gt;I had my blog site for more than a decade now, but until now I was not putting
 any effort or thoughts into maintaining my audience or promoting the site.  It
 was dormant for nearly a decade and I decided to rejuvenate it and start using
-it a platform I could leverage to share some ideas I think which are worth
+it as a platform I could leverage to share some ideas I think which are worth
 sharing.&lt;/p&gt;
 &lt;p&gt;Before I embarked on the journey of renovating the blog site I needed to set
 some goals and requirements up, so I would be able to assess my progress and
-estimate how much effort is required.  The primary &lt;span class="truncated"&gt;&lt;/span&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;I had my blog site for more than a decade now, but until now I was not putting
+estimate how much effort is required.  The &lt;span class="truncated"&gt;&lt;/span&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;I had my blog site for more than a decade now, but until now I was not putting
 any effort or thoughts into maintaining my audience or promoting the site.  It
 was dormant for nearly a decade and I decided to rejuvenate it and start using
-it a platform I could leverage to share some ideas I think which are worth
+it as a platform I could leverage to share some ideas I think which are worth
 sharing.&lt;/p&gt;
 &lt;p&gt;Before I embarked on the journey of renovating the blog site I needed to set
 some goals and requirements up, so I would be able to assess my progress and
 estimate how much effort is required.  The primary goal is already known at
 this point: I need a tool that would allow me to easily share my ideas, grow
 and nurture the audience, and accumulate knowledge in one place over time.&lt;/p&gt;
-&lt;p&gt;I started to be increasingly unhappy with the Blogger platform: they were
-changing things and as the result parts of my blog became defunct, e.g. in 2017
-I lost the comment capability and did not have enough time to investigate and
-fix it, in 2018 my theme became incompatible with the new trends of the
-platform, and so so.&lt;/p&gt;
+&lt;p&gt;I started to be increasingly unhappy with the &lt;a href="https://blogger.com"&gt;Blogger&lt;/a&gt;) platform: they were
+changing things and as the result parts of my blog became defunct, e.g.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;in 2017, I lost the comment capability and did not have enough time to
+    investigate and fix it,&lt;/li&gt;
+&lt;li&gt;in 2018, my theme became incompatible with the new trends of the platform,&lt;/li&gt;
+&lt;li&gt;and so on.&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;Therefore, the first requirement became to self-host my blog site, so I would
 have full control over the software that is supporting the site.  This would
 give the flexibility and determinism of how the site is configured and operates.&lt;/p&gt;
-&lt;p&gt;The downside for hosting the site myself is that it would require an ongoing
+&lt;p&gt;The downside for hosting the site myself is that it would require ongoing
 maintenance cost (primarily calculated in the time I spend on the maintenance)
 and with my quite busy schedule I was not sure that I could afford it on the
-ongoing basis.  So the second requirement became low maintenance cost of the
-solution.  Preferably, I wanted to make changes only when I needed to change
-site&amp;rsquo;s functionality.&lt;/p&gt;
+ongoing basis.  So the second requirement became the low maintenance cost of
+the solution.  Preferably, I wanted to make changes only when I needed to
+change site&amp;rsquo;s functionality.&lt;/p&gt;
 &lt;p&gt;I did some research and figured that a static website generator could be a
 solution that addressed both aforementioned requirements assuming that I could
 find a place where all underlying maintenance of the infrastructure and
 application layer handled by somebody else (and, preferably, free of charge).&lt;/p&gt;
-&lt;p&gt;There are plenty of static site generators (SSG).  According to some articles,
-there are more than 400 different SSG at the moment, so the process of
+&lt;p&gt;There are plenty of static site generators (&lt;abbr title="Static Site Generator"&gt;SSG&lt;/abbr&gt;).  According to some articles,
+there are more than 400 different &lt;abbr title="Static Site Generator"&gt;SSG&lt;/abbr&gt; at the moment, so the process of
 selecting one that is right for you could be quite challenging.  I decided to
 define what I would like to see in the generator I could use and be happy about
 it before I start shopping around:&lt;/p&gt;
