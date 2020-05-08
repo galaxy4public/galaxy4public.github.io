@@ -240,3 +240,9 @@ article .readtime {
 a[data-visited] > span.readtime {
 	display: none;
 }
+
+@media only screen and (max-width: 50em) {
+	article.box.post .info {
+		display: none;
+	}
+}

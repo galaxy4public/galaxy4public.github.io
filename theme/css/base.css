@@ -145,6 +145,8 @@ dd:nth-of-type(even) {
 }
 
 input,textarea {
+	margin: 0;
+	padding: 0;
 	font: normal 1em 'Exo 2';
 	color: #535353;
 	color: var(--dark-base);
@@ -364,11 +366,13 @@ input[name='menu-toggle'][id$='-hide']:checked ~ #sidebar > .title {
 	box-shadow: 0.25em 0.25em 0.25em 0 #5353538b;
 }
 
+/*** clashes with mobile override moved to @media
 input[name='menu-toggle'][id$='-hide']:checked ~ #sidebar:not(:focus-within) {
         width: 14em;
         left: -14em;
 	box-shadow: none;
 }
+*/
 
 /*** end of Menu Component ***/
 
@@ -381,7 +385,7 @@ input[name='menu-toggle'][id$='-mini']:checked ~ #content {
 }
 
 input[name='menu-toggle'][id$='-hide']:checked ~ #content {
-	margin-top: 1.75em;
+	margin-top: 2em;
 	margin-left: 5em;
 }
 
@@ -1118,5 +1122,76 @@ p:nth-of-type(even) > img.figure {
 @media only screen and (max-width: 50em) {
 	body {
 		font-size: 2vw;
+	}
+
+	input#menu-toggle-hide::before {
+		content: '\f0c9';
+		position: absolute;
+		z-index: 10003;
+		top: 0;
+		left: 66666em;
+		font-family: Icons;
+		font-size: 1.5em;
+		padding: .25em .35em;
+		color: transparent;
+		cursor: pointer;
+	}
+
+	input[name='menu-toggle'][id$='-hide']:checked::before {
+		visibility: hidden;
+	}
+
+	input[name='menu-toggle'][id$='-full']:checked ~ label[for='menu-toggle-full']::before {
+		visibility: visible;
+	}
+
+	input[name='menu-toggle'][id$='-full']:checked ~ #sidebar:hover > label[for='menu-toggle-hide']::before,
+	input[name='menu-toggle'][id$='-full']:checked ~ label[for='menu-toggle-hide']::before {
+		visibility: hidden;
+	}
+
+	input[name='menu-toggle'][id$='-hide']:hover::before ~ #sidebar,
+	input[name='menu-toggle'][id$='-hide']:focus ~ #sidebar {
+		width: 14em;
+	}
+
+	input[name='menu-toggle'][id$='-full']:checked ~ #sidebar > .title {
+		font-size: 1.5em;
+		position: absolute;
+		top: 0;
+		left: 9.33333em;
+		width: 100vw;
+		min-width: 10em;
+		background: #535353;
+		background: var(--dark-base, #535353);
+		box-shadow: 0.25em 0.25em 0.25em 0 #5353538b;
+	}
+
+	input[name='menu-toggle'][id$='-full']:checked ~ #sidebar:not(:focus-within) {
+		width: 14em;
+		left: -14em;
+		box-shadow: none;
+	}
+
+	input[name='menu-toggle'][id$='-full']:checked ~ #content {
+		margin-top: 2em;
+		margin-left: 1em;
+	}
+
+	input[name='menu-toggle'][id$='-hide']:checked ~ #sidebar > .title {
+		left: 0;
+	}
+
+	input[name='menu-toggle'][id$='-hide']:checked ~ #content {
+		margin-left: 1em;
+	}
+}
+
+
+@media only screen and (min-width: 50.00001em) {
+	input[name='menu-toggle'][id$='-hide']:checked ~ #sidebar:not(:focus-within) {
+		width: 14em;
+		left: -14em;
+		box-shadow: none;
 	}
 }
