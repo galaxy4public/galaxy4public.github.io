@@ -11,6 +11,11 @@ code[class*="language-"] {
 	font-family: 'Fira Code', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
 }
 
+pre[class*="language-"] > code[class*="language-"] {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
 @supports (font-variation-settings: normal) {
 	pre[class*="language-"],
 	code[class*="language-"] {
