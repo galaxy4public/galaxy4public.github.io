@@ -1,0 +1,622 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Security-Policy" content="	default-src 'self';object-src 'none';script-src 'self' https://www.googletagmanager.com/gtag/js 'sha256-TelA7VsuYAMqhOKGk7CHgJyuqSJdmqZEp+hn6PWVRwQ=' https://www.google-analytics.com/analytics.js;img-src 'self' https://www.google-analytics.com/r/collect https://www.google-analytics.com/collect https://stats.g.doubleclick.net/r/collect https://*/ads/ga-audiences data:;style-src 'self' 'sha256-fszvBX/J9dhPxFSJ5wUrq/Pvg6HrnTkWyshMZpaxSQY=' 'sha256-4CEN9TM45MbS4QwXJrtHe7kr67dakywBiAl2bL6OmXU=' 'sha256-X9/7LgWmEw7NlPLxcc3SDr7+BAy0aPPPvaAWDaWFSg8=' 'sha256-2yxTP7ZQWaQMCGuA5Mgqk/0cf6ROxondzq+ha6NX5cw=' 'sha256-/5akq3jgGzimht/PX3f9x8vzqMyz+6cRE9+jg2n0clU=' 'sha256-NDb/rh1DZe5HfEd+I7qLk0iHwt5dZNk8vZUGfMDxyas=';connect-src 'self' https://www.google-analytics.com/j/collect https://stats.g.doubleclick.net/j/collect; " />
+		<title>Mind Drops</title>
+		<script src="/theme/js/persistence.js" defer></script>
+		<meta charset="utf-8" />
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content="#535353" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<meta name="apple-mobile-web-app-title" content="Mind Drops" />
+		<meta name="description" content="">
+		<link rel="apple-touch-icon" href="/theme/images/icons/mind-drops-192x192.png" />
+		<link rel="manifest" type="text/json" href="/manifest.json" />
+		<link rel="alternate" type="application/atom+xml" href="https://dmitry.khlebnikov.net/feeds/all.atom.xml" title="Mind Drops Full Atom Feed" />
+		<link rel="alternate" type="application/atom+xml" href="https://dmitry.khlebnikov.net/feeds/web-design.atom.xml" title="Mind Drops Categories Atom Feed" />
+		<link rel="dns-prefetch" href="https://www.google.com">
+		<link rel="preconnect" href="https://www.google.com" crossorigin>
+		<link rel="dns-prefetch" href="https://www.google-analytics.com">
+		<link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
+		<link rel="dns-prefetch" href="https://www.googletagmanager.com">
+		<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+		<link rel="dns-prefetch" href="https://stats.g.doubleclick.net">
+		<link rel="preconnect" href="https://stats.g.doubleclick.net" crossorigin>
+		<link rel="preload" as="style" href="/theme/css/reset.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Icons.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Exo2.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Oswald.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/DancingScript.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/FiraCode.css" />
+		<link rel="preload" as="style" href="/theme/css/base.css" />
+		<link rel="preload" as="script" href="/theme/js/persistence.js" />
+		<link rel="preload" as="script" href="/theme/js/visited.js" />
+		<link rel="preload" as="script" href="/theme/js/service.js" />
+		<link rel="preload" as="script" href="https://www.googletagmanager.com/gtag/js?id=UA-165060547-1" />
+		<script src="/theme/js/loader.js" defer></script>
+		<link rel="icon" type="image/png" href="/images/galaxy.png" />
+
+		<link rel="stylesheet" type="text/css" href="/theme/css/article.css" />
+		<meta name="tags" content="pelican" />
+		<meta name="tags" content="blog" />
+	</head>
+	<body>
+
+		<input type="radio" name="menu-toggle" id="menu-toggle-full" value="full" tabindex="-1" checked />
+		<input type="radio" name="menu-toggle" id="menu-toggle-mini" value="mini" tabindex="-1" />
+		<input type="radio" name="menu-toggle" id="menu-toggle-hide" value="hide" tabindex="-1" />
+		<label for="menu-toggle-full" class="icon menu" role="radio" tabindex="0">Show the full menu panel on the screen</label>
+		<aside id="sidebar">
+			<label for="menu-toggle-mini" class="icon left-big" role="radio" tabindex="0">Show the minimised menu panel on the screen</label>
+			<label for="menu-toggle-hide" class="icon eye-off" role="radio" tabindex="0">Remove the menu panel off the screen</label>
+			<div class="title">Mind Drops</div>
+			<div id="logo" class="box shadow">
+				<picture>
+					<source srcset="/images/galaxy.png.webp" type="image/webp">
+					<img src="/images/galaxy.png" alt="Logo">
+				</picture>
+			</div>
+
+			<!-- Search -->
+			<section class="box search">
+				<form name="google search" class="icon search" method="get" action="/search">
+					<label for="search" class="offscreen">Search</label>
+					<input id="search" type="text" class="text" name="q" placeholder="Search" />
+				</form>
+			</section>
+
+			<nav>
+				<ul>
+					<li>
+						<a class="icon home" href="/">Home</a>
+					</li>
+					<li>
+						<a class="icon user" href="/about">About</a>
+					</li>
+					<li>
+						<a class="icon phone" href="/contact">Contact</a>
+					</li>
+				</ul>
+			</nav>
+
+			<!-- Text -->
+			<section class="box text-style1">
+				<div class="inner">
+					<p>
+						<strong>Mind Drops:</strong>: A place to unload all these assorted bits.
+					</p>
+				</div>
+			</section>
+
+			<!-- Copyright -->
+			<ul id="copyright">
+				<li>&copy; Openwall Pty Ltd 2020 </li>
+				<li><a href="/legal/terms-of-service">Terms of Service</a></li>
+			</ul>
+		</aside>
+
+		<!-- Content -->
+		<div id="content">
+			<div class="inner">
+				<article id="wrap-indicator-in-pre-blocks" class="box post">
+					<header>
+						<h1><a name="top">Wrap indicator in &lt;pre&gt; blocks</a></h1>
+					</header>
+					<div class="info">
+						<span class="date">
+							<span class="day">10</span>
+							<span class="month"><a href="/2020/05/">May<span class="month full"></span></a></span>
+							<span class="year"><a href="/2020/">2020</a></span>
+						</span>
+						<ul class="stats">
+							<li><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="icon twitter" aria-label="Twitter" data-tweet-id="None">0</a></li>
+						</ul>
+					</div>
+					<p>I am not a front-end developer, a UI designer, or a UX guru, but I am an
+engineer, so when I face a puzzle worth solving my brain switches on and I
+cannot let it go until I find a satisfactory solution to the puzzle.</p>
+<p>My blog heavily relies on me sharing session dumps and file excerpts using the
+code blocks.  I am using PrismJS to highlight syntax in these blocks.  However,
+after a while I found that there is one thing that really irritates me: these
+code blocks are not designed to be truly responsive, for instance &ndash; when a
+line wraps there is no easy to spot indication that such a wrap happened.</p>
+<p>I quick search on the topic highlighted that this is kind of an unresolved
+issue and I found just <a href="https://blog.iany.me/2012/02/css-line-wrap-indicator/"><em>one</em> blog post</a> from 2012 by Ian Yang
+after I already implemented my solution.</p>
+<p>The approaches are quite close, but I like mine better since I think it is more
+semantically correct (I am using <code>&lt;div&gt;</code> instead of <code>&lt;span&gt;</code> and I did a bit
+deeper research in how to make it universal).</p>
+<p>So, below I present you with my version of the solution and I would appreciate
+any feedback you may have, especially if it could help to find a nicer solution
+in the end.</p>
+<p>Before we dive into details on how I come up with the solution, feel free to
+play with the basic demo &ndash; try to resize the box by dragging the bottom right
+corner and see how the text inside responds (if you are using IE or Edge you
+may be out of luck with the resizable <code>&lt;div&gt;</code>s, sorry):</p>
+<div class="demo resizable">
+    <style>
+        div[class^='demo'].resizable {
+            position: relative;
+            overflow: auto;
+            resize: both;
+            border: solid 0.25em rgba(0,0,0,0.5);
+            width: 100%;
+            min-width: 4.1em;
+            padding: 0.6em 1.2em;
+            border-radius: 0.5em;
+        }
+
+        div[class^='demo'] pre {
+            word-break: break-word;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: pre-wrap;
+            font-size: 1em;
+            line-height: 1.2;
+        }
+
+        div.demo pre div.line {
+            position: relative;
+            min-height: 1em;
+        }
+
+        div.demo pre div.line::after {
+            content: '';
+            position: absolute;
+            display: block;
+            font-family: inherit;
+            font-size: inherit;
+            width: 1.2em;
+            right: -1.2em;
+            background-size: 1.2em 1.2em;
+            margin-bottom: 1.2em;
+            clip: rect(1.2em 1.2em 100vh 0);
+            height: 100%;
+            bottom: 0;
+            opacity: .5;
+            background:
+                url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
+                no-repeat repeat;
+        }
+    </style>
+    <pre><div class="line">This is quite a long line.  It is long enough to ensure that it will wrap no matter how big your screen is.  Well, it is possible that in 20 years from the moment I type this humanity will invent a medium that could display the whole line with no breaks, but until then it should be good enough for the demonstration purposes.</div><div class="line">A very short line.</div><div class="line">The short line above is used to demonstrate that it stays clear of additional info when its neighbour lines are wrapped.</div></pre>
+</div>
+
+<p>I hope that demo gods were not angry at me and the demo above worked for you as
+expected, so if you want to understand how it works let&rsquo;s dive under the hood
+of this solution :)</p>
+<h2 id="preparation">Preparation</h2>
+<p>First of all, we need to define what we have and what we want to achieve &ndash; it
+helps to stay on course, to understand when we reached a solution, and to
+assess how good the solution is:</p>
+<ul>
+<li>we have one or more code blocks expressed through the <code>&lt;pre&gt;</code> HTML element;</li>
+<li>these code blocks may have continuous white space that we want to preserve;</li>
+<li>our page layout is flexible and there are no guarantees that the width of a
+    particular viewport (a window through which a browser renders the visible
+    part of the page) is enough to display the whole line of code</li>
+<li>we want to ensure that layout does not break when a very long code line is
+    encountered, so we expect that line to be wrapped to the next line upon
+    hitting width of the containing box;</li>
+<li>we need to present the reader (a user who is consuming information) a
+    visual indicator that the line was wrapped;</li>
+<li>we also want the syntax highlighter (such as PrismJS in my case) not to be
+    affected by whatever we come up with.</li>
+</ul>
+<p>I think the above quite a solid definition of the goals and requirements for
+our little project.  It is time to assess the artefacts we have and what we can
+do with them.</p>
+<h2 id="analysis">Analysis</h2>
+<p>Our primary artefact is the <code>&lt;pre&gt;</code> element.  It contains the information we
+want to share with the world and we want to do this in the most easy to digest
+way.</p>
+<p>By default, the <code>&lt;pre&gt;</code> element is quite a simplistic container.  Its semantic
+meaning dictates that the content preserves the original formatting (such as
+amount and type of white space on the lines).  The element also provides some
+basic functionality: you can define the size of the container and browsers are
+supposed to present you with controls to scroll the content if it does not fit
+the size of the container.</p>
+<p>The following is just such bare almost not styled <code>&lt;pre&gt;</code> block wrapped into a
+resizable <code>&lt;div&gt;</code> container, so you could play with the dimensions of the
+container (in order to preserve the layout I am keeping the wrapping styles, so
+the box would fit into the layout):</p>
+<div class="demo1 resizable">
+    <pre>This is an example of an unstyled, basic &lt;pre&gt; container.  You should
+be able to resize it by dragging the bottom right corner (but if you are
+using IE/Edge you may be out of luck with the resizing).
+
+This line was made specifically long to trigger the scrolling bars (at least the horizontal scrolling bar), so even those who are using browser that cannot resize should be able to play with it :)</pre>
+</div>
+
+<p>However, if you played with the above container you may have noticed that at
+some point all lines are so mixed up together and it is really hard to tell
+that the original text comprised of five separate lines.</p>
+<p>Unfortunately, the CSS standards do not provide any selectors or
+pseudo-elements to anchor the soft breaks.  All we can do with the CSS
+selectors on the contained text is to choose the first letter (with
+<code>:first-letter</code>) and the first line of the text inside the <code>&lt;pre&gt;</code> element
+(with <code>:first-line</code>).</p>
+<p>Not good enough is you ask me.  I would love to see some CSS selectors for soft
+breaks in the future iterations of the standard, but we are not there yet, so
+we have to work with what we have got.</p>
+<p>And all we have is the standard <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Introduction_to_the_CSS_box_model">CSS basic box model</a> with some content inside plus some
+presentation focused selectors such as <code>::before</code> and <code>::after</code>.</p>
+<p>So, if we look text is rendered inside the <code>&lt;pre&gt;</code> block (browser&rsquo;s DevTools is
+a really good tool to do the observations, by the way) we will notice that the
+browser considers the entire text as a single entity &ndash; there are no lines or
+anything, just a blob of text.</p>
+<p>Therefore, the first piece of the puzzle would be to introduce something that
+would make the distinction between different lines of text possible.</p>
+<p>Assuming that we can solve the above issue with introducing lines, the next
+step would be to display a marker on the right side of the line.  That marker
+should follow the height of the line box as the line wraps.</p>
+<p>Finally, we will need to figure out how not to display the marker on the last
+line of the wrapped multiline text to denote the end of wrapped line.</p>
+<h2 id="implementation">Implementation</h2>
+<p>Since the <a href="https://html.spec.whatwg.org/multipage/grouping-content.html#the-pre-element">definition of the <code>&lt;pre&gt;</code> element</a> only stipulates that the content of
+the element is pre-formatted with white space we can use other tags inside,
+e.g. we can wrap each physical line (a line that is terminated by a newline
+character) in a block element such as <code>&lt;div&gt;</code>.</p>
+<p>Let&rsquo;s see how it looks on our sample <code>&lt;pre&gt;</code> block when we wrap each physical
+line in <code>&lt;div class="line"&gt;</code>&hellip;<code>&lt;/div&gt;</code>.  Keep in mind that <code>&lt;div&gt;</code> is a block
+element, so in order not to introduce unintended line breaks we need to ensure
+that every newline character in the original text except the very first one is
+replaced with the combination of the closing and opening tags such as
+<code>&lt;/div&gt;&lt;div class="line"&gt;</code>, below is the result of such a change on our sample:</p>
+<div class="demo2 resizable">
+<pre><div class="line">This is an example of an unstyled, basic &lt;pre&gt; container.  You should</div><div class="line">be able to resize it by dragging the bottom right corner (but if you are</div><div class="line">using IE/Edge you may be out of luck with the resizing).</div><div class="line"></div><div class="line">This line was made specifically long to trigger the scrolling bars (at least the horizontal scrolling bar), so even those who are using browser that cannot resize should be able to play with it :)</div></pre>
+</div>
+
+<p>Visually, it is almost exactly the same as the original sample we presented in
+the &ldquo;Analysis&rdquo; section, however there is a couple of differences.</p>
+<p>The first one is visual and is obvious: the empty line (the fourth line of the
+sample) has collapsed into nothing.  This is an undesired side effect and the
+reason for that is that the corresponding <code>&lt;div&gt;</code> block has no content, hence
+it has zero height.  We can fix it by defining the <code>min-height</code> attribute for
+out <code>&lt;div&gt;</code>s defining line boundaries.</p>
+<p>The second difference is not so obvious, but if you inspect any line of this
+<code>&lt;pre&gt;</code> block using your browser&rsquo;s DevTools you will see that now we can
+differentiate between lines (when you walk through the DOM in your DevTools
+your browser will highlight the corresponding line inside the <code>&lt;pre&gt;</code> block and
+this is what we wanted to achieve at this step!</p>
+<p>The next step is to display a marker on the right side of the line and that
+marker should occupy the exactly the same height as the line block we are
+attaching it to.  Well, this can be easily done with the `::after&rsquo;
+pseudo-element:</p>
+<pre class="highlight"><code class="language-css">pre div.line {
+    position: relative; /* so we could position the child      */
+    min-height: 1em;    /* to avoid collapsing empty lines     */
+}
+
+pre div.line::after {
+    content: '';        /* we need content for pseudo elements */
+    position: absolute;
+    display: block;
+    width: 1em;     /* without width it will be invisible  */
+    height: 100%;       /* to match the height of the parent   */
+    top: 0;
+    right: -1em;
+    background-color: blue; /* temporary, to make it visible       */
+}</code></pre>
+
+
+<p>Note that we also introduced <code>position: relative</code> to our <code>&lt;div&gt;</code>&lsquo;s.  It is
+needed since if we want to position our pseudo-element relative to its parent,
+the parent needs to have the position attribute set to anything but <code>static</code>.
+In our context, <code>relative</code> is the desired positioning for the <code>&lt;div&gt;</code> element.
+The corresponding rendered sample with the above stylesheet applied follows:</p>
+<div class="demo3 resizable">
+    <style>
+        div.demo3 pre div.line {
+            min-height: 1em;
+            position: relative;
+        }
+
+        div.demo3 pre div.line::after {
+            content: '';
+            position: absolute;
+            display: block;
+            width: 1em;
+            height: 100%;
+            top: 0;
+            right: -1em;
+            background-color: blue;
+        }
+    </style>
+<pre><div class="line">This is an example of an unstyled, basic &lt;pre&gt; container.  You should</div><div class="line">be able to resize it by dragging the bottom right corner (but if you are</div><div class="line">using IE/Edge you may be out of luck with the resizing).</div><div class="line"></div><div class="line">This line was made specifically long to trigger the scrolling bars (at least the horizontal scrolling bar), so even those who are using browser that cannot resize should be able to play with it :)</div></pre>
+</div>
+
+<p>So far so good!  We have a coloured strip hanging on the right side just next
+to our text.  Let&rsquo;s style it a bit so it looks more appealing.</p>
+<p>We have a couple of options here:</p>
+<ol>
+<li>we can just use a transparenti bitmap image with the desired marker;</li>
+<li>we can leverage SVG as the source of the image.</li>
+</ol>
+<p>The issue I have with transparent bitmap images is that they are not very
+responsive: to accomodate to all the possible resolutions I will end up with
+creating many bitmaps of a different size to ensure that the marker looks good
+no matter what device is rendering the page.</p>
+<p>On the other hand, the SVG graphics was not well supported on some browsers
+like Internet Explorer 6, etc. &ndash; The support is much better now, hence I would
+choose SVG everytime.</p>
+<p>Ideally, I did not want to use an image, but I could not figure out how I could
+put a repeating text block next to my lines, hence I found the following
+compromise (this is the content of the SVG file I created):</p>
+<pre class="highlight"><code class="language-svg">&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot;
+        version=&quot;1.1&quot;
+        viewBox=&quot;0 0 24 24&quot;&gt;
+    &lt;text x=&quot;0&quot; y=&quot;19&quot;&gt;&amp;#x23ce;&lt;/text&gt;
+&lt;/svg&gt;</code></pre>
+
+
+<p>The first two lines are mandatory and describe to a browser that it works with
+an SVG image file.</p>
+<p>The third line (<code>viewBox=</code>) is really important since it allows the SVG image
+to be scaleable, basically it says that the dimensions of the image are 25 by
+25 units (the units are abstract, but you may think of them as pixels if it
+makes it easier).</p>
+<p>Finally, the <code>&lt;text&gt;</code> element puts a text box with just a single Unicode
+character for the return symbol (&#x23ce;), since I think it is quite an
+adequate symbol to represent a line wrap point.</p>
+<p>There are diffrent ways how you can incorporate an SVG image into CSS rule, but since the content of the SVG file is so small and I did not want to host it externally (it would be an additional fetch request and more maintenance), I just did the following:</p>
+<pre class="highlight"><code class="language-bash">$ cat nl.svg 
+&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot;
+        version=&quot;1.1&quot;
+        viewBox=&quot;0 0 24 24&quot;&gt;
+    &lt;text x=&quot;0&quot; y=&quot;19&quot;&gt;&amp;#x23ce;&lt;/text&gt;
+&lt;/svg&gt;
+$ sed -n '1{h;d};$!H;${H;x;s,\s\+, ,g;s,&gt;\s*&lt;,&gt;&lt;,g;p}' nl.svg | base64 -w 0 ; echo
+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==</code></pre>
+
+
+<p>In other words, I removed all the white space, then deleted all line breaks, so
+I got a single line SVG body, and I converted it to Base64.  The resulting line
+is usable as the inline definition of an image.  Let&rsquo;s update our stylesheet
+with the new values (we just replaced the last line to change the <code>background</code>
+to <code>background-image</code>):</p>
+<pre class="highlight"><code class="language-css">pre div.line {
+    position: relative; /* so we could position the child      */
+    min-height: 1em;    /* to avoid collapsing empty lines     */
+}
+
+pre div.line::after {
+    content: '';        /* we need content for pseudo elements */
+    position: absolute;
+    display: block;
+    width: 1em;     /* without width it will be invisible  */
+    height: 100%;       /* to match the height of the parent   */
+    top: 0;
+    right: -1em;
+    background-image: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
+        no-repeat repeat;
+    background-size: 1em 1em;
+}</code></pre>
+
+
+<div class="demo4 resizable">
+    <style>
+        div.demo4 pre div.line {
+            position: relative;
+            min-height: 1em;
+        }
+
+        div.demo4 pre div.line::after {
+            content: '';
+            position: absolute;
+            display: block;
+            width: 1em;
+            height: 100%;
+            top: 0;
+            right: -1em;
+            background: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
+                no-repeat repeat;
+            background-size: 1em 1em;
+        }
+    </style>
+<pre><div class="line">This is an example of an unstyled, basic &lt;pre&gt; container.  You should</div><div class="line">be able to resize it by dragging the bottom right corner (but if you are</div><div class="line">using IE/Edge you may be out of luck with the resizing).</div><div class="line"></div><div class="line">This line was made specifically long to trigger the scrolling bars (at least the horizontal scrolling bar), so even those who are using browser that cannot resize should be able to play with it :)</div></pre>
+</div>
+
+<p>Look at that, it is almost shaping into what we want :).  However, something is
+not right &ndash; the alignment of the markers to the corresponding lines is nowhere
+to be seen.  It is, like, they are of different sizes despite that the
+<code>font-size</code> property for both of them is the same.  Hmm.</p>
+<p>If we recall that <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Introduction_to_the_CSS_box_model">CSS basic model document</a> we will discover in the very last
+paragraph that:</p>
+<blockquote>
+<p><a name="CSS_basic_model_line_height" href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Introduction_to_the_CSS_box_model"></a>
+note that for non-replaced inline elements, the amount of space taken up (the
+contribution to the height of the line) is determined by the line-height
+property</p>
+</blockquote>
+<p>Is this our hint?  Let&rsquo;s try to explicitly set the <code>line-height</code> property for
+our lines (reading documentation you may find that the default value is
+<code>normal</code> and you can also find that <code>normal</code> equals <code>1.2</code> for the majority of
+browsers, but relying on that, I think is a bad idea).  We also need to adjust
+our markers with the new information we have got:</p>
+<pre class="highlight"><code class="language-css">pre div.line {
+    position: relative; /* so we could position the child      */
+    min-height: 1em;    /* to avoid collapsing empty lines     */
+    line-height: 1.2;   /* set the height explicitly           */
+}
+
+pre div.line::after {
+    content: '';        /* we need content for pseudo elements */
+    position: absolute;
+    display: block;
+    width: 1.2em;       /* without width it will be invisible  */
+    height: 100%;       /* to match the height of the parent   */
+    top: 0;
+    right: -1.2em;
+    background-image: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
+        no-repeat repeat;
+    background-size: 1.2em 1.2em;
+}</code></pre>
+
+
+<div class="demo5 resizable">
+    <style>
+        div.demo5 pre div.line {
+            position: relative;
+            min-height: 1em;
+            line-height: 1.2;
+        }
+
+        div.demo5 pre div.line::after {
+            content: '';
+            position: absolute;
+            display: block;
+            width: 1.2em;
+            height: 100%;
+            top: 0;
+            right: -1.2em;
+            background: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
+                no-repeat repeat;
+            background-size: 1.2em 1.2em;
+        }
+    </style>
+<pre><div class="line">This is an example of an unstyled, basic &lt;pre&gt; container.  You should</div><div class="line">be able to resize it by dragging the bottom right corner (but if you are</div><div class="line">using IE/Edge you may be out of luck with the resizing).</div><div class="line"></div><div class="line">This line was made specifically long to trigger the scrolling bars (at least the horizontal scrolling bar), so even those who are using browser that cannot resize should be able to play with it :)</div></pre>
+</div>
+
+<p>This is an improvement, is not it?  So we just need some final touches to call
+it done:</p>
+<ul>
+<li>As it stands, we are showing the marker for the last part of the wrapped line, but we should not;</li>
+<li>The colour of the marker is too bright and matches the text colour of the line wrapping of which we are highlighting.</li>
+</ul>
+<p>To address the latter a simple play with the <code>opacity</code> attribute will suffice,
+e.g. I think 50% transparency should make the marker less distracting.</p>
+<p>The former, however, requires some thinking.  Given that the post is already too long, I will just state that out of multiple options I had I chose the following: raise the background image by one <code>line-height</code> from the bottom, and clip a square 1x1 <code>line-height</code> at the top to compensate, as follows:</p>
+<pre class="highlight"><code class="language-css">pre div.line {
+    position: relative; /* so we could position the child      */
+    min-height: 1em;    /* to avoid collapsing empty lines     */
+    line-height: 1.2;   /* set the height explicitly           */
+}
+
+pre div.line::after {
+    content: '';        /* we need content for pseudo elements */
+    position: absolute;
+    display: block;
+    width: 1.2em;       /* without width it will be invisible  */
+    height: 100%;       /* to match the height of the parent   */
+    bottom: 0;
+    right: -1.2em;
+    background-image: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
+        no-repeat repeat;
+    background-size: 1.2em 1.2em;
+    margin-bottom: 0;
+    clip: rect(1.2em 1.2em 100vh 0);
+    opacity: .5;
+}</code></pre>
+
+
+<p>The only tricky part in the added lines is the <code>clip: rect(1.2em 1.2em 100vh
+0)</code> line.  The <code>clip</code> property defines the visible rectangle the browser should
+preserve, but there is a conundrum: the height of the wrapped line is variable,
+so we cannot deterministically set this.  The trick here is that it is highly
+unlikely (on the border of completely impossible :) ) that the visible height
+of the wrapped line would be bigger that the height of the viewport the user is
+looking through.</p>
+<p>Therefore, we are setting the height of the clipped area to the height of the
+viewport (<code>100vh</code>), but this will be a rare edge case to actually utilise this
+&ndash; in the majority of cases the height of the clipping rectangle will be
+limited by the height of the block containing the wrapped line.  Basically,
+this is exactly what we want :).</p>
+<p>Let&rsquo;s see the final result in action:</p>
+<div class="demo6 resizable">
+    <style>
+        div.demo6 pre div.line {
+            position: relative;
+            min-height: 1em;
+            line-height: 1.2;
+        }
+
+        div.demo6 pre div.line::after {
+            content: '';
+            position: absolute;
+            display: block;
+            width: 1.2em;
+            height: 100%;
+            bottom: 0;
+            right: -1.2em;
+            background: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
+                no-repeat repeat;
+            background-size: 1.2em 1.2em;
+            margin-bottom: 1.2em;
+            clip: rect(1.2em 1.2em 100vh 0);
+            opacity: .5;
+        }
+    </style>
+<pre><div class="line">This is an example of an unstyled, basic &lt;pre&gt; container.  You should</div><div class="line">be able to resize it by dragging the bottom right corner (but if you are</div><div class="line">using IE/Edge you may be out of luck with the resizing).</div><div class="line"></div><div class="line">This line was made specifically long to trigger the scrolling bars (at least the horizontal scrolling bar), so even those who are using browser that cannot resize should be able to play with it :)</div></pre>
+</div>
+
+<h2 id="assessment-of-the-result">Assessment of the result</h2>
+<p>We started with the following requirement:</p>
+<ul>
+<li>
+<p>these code blocks may have continuous white space that we want to preserve;</p>
+<p>Achieved: we did some changes to ensure that even empty lines are preseved.</p>
+</li>
+<li>
+<p>our page layout is flexible and there are no guarantees that the width of a
+    particular viewport (a window through which a browser renders the visible
+    part of the page) is enough to display the whole line of code</p>
+<p>Achieved: our blocks are flexible and if a line is too long it is wrapped
+in an easy to understand way.  We proved it by ensuring that any block
+can be dynamically resized.</p>
+</li>
+<li>
+<p>we want to ensure that layout does not break when a very long code line is
+    encountered, so we expect that line to be wrapped to the next line upon
+    hitting width of the containing box;</p>
+<p>Achieved: ditto as the previous item.</p>
+</li>
+<li>
+<p>we need to present the reader (a user who is consuming information) a
+    visual indicator that the line was wrapped;</p>
+<p>Achieved: we got our dynamic markers showing when the line was wrapped.</p>
+</li>
+<li>
+<p>we also want the syntax highlighter (such as PrismJS in my case) not to be
+    affected by whatever we come up with.</p>
+<p>Unknown: I think it would be the material for another post, but I do not
+expect a lot of issues since we only replaced the newline characters and
+preserved the rest of lines intact.</p>
+</li>
+</ul>
+<p>I hope this helped you and you learnt something :).  If you have any
+constructive feedback, I would appreciate it, specifically if you have ideas on
+how to improve the presented solution.</p>
+					<ul class="tags">
+						<li class="tag">
+							<div>
+								<a href="/tag/pelican/" class="tag name">pelican</a>
+							</div>
+							<a href="/tag/pelican/" class="tag count">2</a>
+						</li>
+						<li class="tag">
+							<div>
+								<a href="/tag/blog/" class="tag name">blog</a>
+							</div>
+							<a href="/tag/blog/" class="tag count">2</a>
+						</li>
+					</ul>
+					<footer>
+						Offloaded on
+						<time datetime="2020-05-10 21:00:00+10:00">Sun, 10/05/2020 at 21:00 (<a href="https://time.is/AEST" target="_blank" rel="noreferrer">AEST</a>)</time>
+						<span class="category-tag"><a href="/category/web-design">web design</a></span>
+					</footer>				</article>
+			</div>
+		</div>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-165060547-1"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'UA-165060547-1');
+		</script>
+	</body>
+</html>

@@ -5,7 +5,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://dmitry.khlebnikov.net/</loc>
-<lastmod>2020-05-10T21:23:00-00:00</lastmod>
+<lastmod>2020-05-13T01:14:31-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.75</priority>
 </url>
@@ -42,6 +42,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <loc>https://dmitry.khlebnikov.net/legal/terms-of-service/</loc>
 <lastmod>2020-05-05T02:01:58+10:00</lastmod>
 <changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://dmitry.khlebnikov.net/2020/05/10/wrap-indicator-in-pre-blocks/</loc>
+<lastmod>2020-05-13T01:13:23+10:00</lastmod>
+<changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
