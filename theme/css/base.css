@@ -472,15 +472,18 @@ input[name='menu-toggle'][id$='-hide']:checked ~ #sidebar:not(:focus-within) {
 
 input[name='menu-toggle'][id$='-full']:checked ~ #content {
 	margin-left: 14.25em;
+	max-width: calc(100% - 16.25em);
 }
 
 input[name='menu-toggle'][id$='-mini']:checked ~ #content {
 	margin-left: 6.5em;
+	max-width: calc(100% - 8.5em);
 }
 
 input[name='menu-toggle'][id$='-hide']:checked ~ #content {
 	margin-top: 2em;
 	margin-left: 5em;
+	max-width: calc(100% - 7em);
 }
 
 #sidebar .title {
@@ -680,6 +683,10 @@ ul#copyright a {
 
 div#content {
 	margin: 0.75em 2em 0.75em 7em;
+	max-width: 93%;
+	max-width: -moz-available;
+	max-width: -webkit-fill-available;
+	max-width: stretch;
 /*
 	min-width: 56em;
 	min-width: calc(100% - 24em);
@@ -1273,6 +1280,7 @@ p:nth-of-type(even) > img.figure {
 	input[name='menu-toggle'][id$='-full']:checked ~ #content {
 		margin-top: 2em;
 		margin-left: 1em;
+		max-width: calc(100% - 3em);
 	}
 
 	input[name='menu-toggle'][id$='-hide']:checked ~ #sidebar > .title {
@@ -1281,6 +1289,7 @@ p:nth-of-type(even) > img.figure {
 
 	input[name='menu-toggle'][id$='-hide']:checked ~ #content {
 		margin-left: 1em;
+		max-width: calc(100% - 3em);
 	}
 }
 

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - (GalaxyMaster)</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"></link><link href="https://dmitry.khlebnikov.net/feeds/galaxymaster.atom.xml" rel="self"></link><id>https://dmitry.khlebnikov.net/</id><updated>2020-05-13T01:13:23+10:00</updated><entry><title>Wrap indicator in &lt;pre&gt; blocks</title><link href="https://dmitry.khlebnikov.net/2020/05/10/wrap-indicator-in-pre-blocks/" rel="alternate"></link><published>2020-05-10T21:00:00+10:00</published><updated>2020-05-13T01:13:23+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-10:/2020/05/10/wrap-indicator-in-pre-blocks/</id><summary type="html">&lt;p&gt;I am not a front-end developer, a UI designer, or a UX guru, but I am an
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - (GalaxyMaster)</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"></link><link href="https://dmitry.khlebnikov.net/feeds/galaxymaster.atom.xml" rel="self"></link><id>https://dmitry.khlebnikov.net/</id><updated>2020-05-14T21:40:39+10:00</updated><entry><title>Wrap indicator in &lt;pre&gt; blocks</title><link href="https://dmitry.khlebnikov.net/2020/05/10/wrap-indicator-in-pre-blocks/" rel="alternate"></link><published>2020-05-10T21:00:00+10:00</published><updated>2020-05-14T21:40:39+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-10:/2020/05/10/wrap-indicator-in-pre-blocks/</id><summary type="html">&lt;p&gt;I am not a front-end developer, not a UI designer, nor a UX guru, but I am an
 engineer, so when I face a puzzle worth solving my brain switches on and I
 cannot let it go until I find a satisfactory solution to the puzzle.&lt;/p&gt;
 &lt;p&gt;My blog heavily relies on me sharing session dumps and file excerpts using the
-code blocks.  I am using PrismJS to highlight syntax in these blocks.  However,
+code blocks.  I am using &lt;a href="https://prismjs.com"&gt;PrismJS&lt;/a&gt; to highlight syntax in these blocks.  However,
 after a while I found that there is one thing that really irritates me: these
-code blocks are not designed to be truly responsive, for instance &amp;ndash; when a &lt;span class="truncated"&gt;&lt;/span&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;I am not a front-end developer, a UI designer, or a UX guru, but I am an
+code blocks are not designed to be truly responsive, for instance &amp;ndash; when &lt;span class="truncated"&gt;&lt;/span&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;I am not a front-end developer, not a UI designer, nor a UX guru, but I am an
 engineer, so when I face a puzzle worth solving my brain switches on and I
 cannot let it go until I find a satisfactory solution to the puzzle.&lt;/p&gt;
 &lt;p&gt;My blog heavily relies on me sharing session dumps and file excerpts using the
-code blocks.  I am using PrismJS to highlight syntax in these blocks.  However,
+code blocks.  I am using &lt;a href="https://prismjs.com"&gt;PrismJS&lt;/a&gt; to highlight syntax in these blocks.  However,
 after a while I found that there is one thing that really irritates me: these
 code blocks are not designed to be truly responsive, for instance &amp;ndash; when a
 line wraps there is no easy to spot indication that such a wrap happened.&lt;/p&gt;
@@ -18,14 +18,14 @@ issue and I found just &lt;a href="https://blog.iany.me/2012/02/css-line-wrap-in
 after I already implemented my solution.&lt;/p&gt;
 &lt;p&gt;The approaches are quite close, but I like mine better since I think it is more
 semantically correct (I am using &lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt; instead of &lt;code&gt;&amp;lt;span&amp;gt;&lt;/code&gt; and I did a bit
-deeper research in how to make it universal).&lt;/p&gt;
+deeper research into how to make it universal).&lt;/p&gt;
 &lt;p&gt;So, below I present you with my version of the solution and I would appreciate
 any feedback you may have, especially if it could help to find a nicer solution
 in the end.&lt;/p&gt;
 &lt;p&gt;Before we dive into details on how I come up with the solution, feel free to
 play with the basic demo &amp;ndash; try to resize the box by dragging the bottom right
-corner and see how the text inside responds (if you are using IE or Edge you
-may be out of luck with the resizable &lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt;s, sorry):&lt;/p&gt;
+corner and see how the text inside responds (if you are using anything than
+the Chrome browser you may be out of luck with the resizable &lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt;s, sorry):&lt;/p&gt;
 &lt;div class="demo resizable"&gt;
     &lt;style&gt;
         div[class^='demo'].resizable {
@@ -33,10 +33,11 @@ may be out of luck with the resizable &lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&g
             overflow: auto;
             resize: both;
             border: solid 0.25em rgba(0,0,0,0.5);
-            width: 100%;
+            max-width: 100%;
             min-width: 4.1em;
             padding: 0.6em 1.2em;
             border-radius: 0.5em;
+            margin-bottom: 1.5em;
         }
 
         div[class^='demo'] pre {
@@ -87,13 +88,13 @@ assess how good the solution is:&lt;/p&gt;
 &lt;li&gt;these code blocks may have continuous white space that we want to preserve;&lt;/li&gt;
 &lt;li&gt;our page layout is flexible and there are no guarantees that the width of a
     particular viewport (a window through which a browser renders the visible
-    part of the page) is enough to display the whole line of code&lt;/li&gt;
+    part of the page) is enough to display the whole line of code;&lt;/li&gt;
 &lt;li&gt;we want to ensure that layout does not break when a very long code line is
     encountered, so we expect that line to be wrapped to the next line upon
     hitting width of the containing box;&lt;/li&gt;
 &lt;li&gt;we need to present the reader (a user who is consuming information) a
     visual indicator that the line was wrapped;&lt;/li&gt;
-&lt;li&gt;we also want the syntax highlighter (such as PrismJS in my case) not to be
+&lt;li&gt;we also want the syntax highlighter (such as &lt;a href="https://prismjs.com"&gt;PrismJS&lt;/a&gt; in my case) not to be
     affected by whatever we come up with.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;I think the above quite a solid definition of the goals and requirements for
@@ -114,11 +115,11 @@ resizable &lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt; container, so you could p
 container (in order to preserve the layout I am keeping the wrapping styles, so
 the box would fit into the layout):&lt;/p&gt;
 &lt;div class="demo1 resizable"&gt;
-    &lt;pre&gt;This is an example of an unstyled, basic &amp;lt;pre&amp;gt; container.  You should
+    &lt;pre&gt;This is an example of a basic &amp;lt;pre&amp;gt; container.  You should
 be able to resize it by dragging the bottom right corner (but if you are
-using IE/Edge you may be out of luck with the resizing).
+using anything other than Chrome you may be out of luck with the resizing).
 
-This line was made specifically long to trigger the scrolling bars (at least the horizontal scrolling bar), so even those who are using browser that cannot resize should be able to play with it :)&lt;/pre&gt;
+This line was made specifically long to trigger the line wrapping, so even those who are using a browser that cannot resize should be able to play with it :)&lt;/pre&gt;
 &lt;/div&gt;
 
 &lt;p&gt;However, if you played with the above container you may have noticed that at
@@ -129,17 +130,17 @@ pseudo-elements to anchor the soft breaks.  All we can do with the CSS
 selectors on the contained text is to choose the first letter (with
 &lt;code&gt;:first-letter&lt;/code&gt;) and the first line of the text inside the &lt;code&gt;&amp;lt;pre&amp;gt;&lt;/code&gt; element
 (with &lt;code&gt;:first-line&lt;/code&gt;).&lt;/p&gt;
-&lt;p&gt;Not good enough is you ask me.  I would love to see some CSS selectors for soft
-breaks in the future iterations of the standard, but we are not there yet, so
-we have to work with what we have got.&lt;/p&gt;
-&lt;p&gt;And all we have is the standard &lt;a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Introduction_to_the_CSS_box_model"&gt;CSS basic box model&lt;/a&gt; with some content inside plus some
-presentation focused selectors such as &lt;code&gt;::before&lt;/code&gt; and &lt;code&gt;::after&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;So, if we look text is rendered inside the &lt;code&gt;&amp;lt;pre&amp;gt;&lt;/code&gt; block (browser&amp;rsquo;s DevTools is
-a really good tool to do the observations, by the way) we will notice that the
-browser considers the entire text as a single entity &amp;ndash; there are no lines or
-anything, just a blob of text.&lt;/p&gt;
+&lt;p&gt;This is not good enough if you ask me.  I would love to see some CSS selectors
+for soft breaks in the future iterations of the standard, but we are not there
+yet, so we have to work with what we have got.&lt;/p&gt;
+&lt;p&gt;And all we have is the standard &lt;a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Introduction_to_the_CSS_box_model" title="Introduction to the CSS box model"&gt;CSS basic box model&lt;/a&gt; presentation focused
+selectors such as &lt;code&gt;::before&lt;/code&gt; and &lt;code&gt;::after&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;So, if we look how text is rendered inside the &lt;code&gt;&amp;lt;pre&amp;gt;&lt;/code&gt; block (browser&amp;rsquo;s
+DevTools is a really good tool to do the observations, by the way) we will
+notice that the browser considers the entire text as a single entity &amp;ndash; there
+are no lines or anything, just a blob of text.&lt;/p&gt;
 &lt;p&gt;Therefore, the first piece of the puzzle would be to introduce something that
-would make the distinction between different lines of text possible.&lt;/p&gt;
+could make the distinction between different lines of text possible.&lt;/p&gt;
 &lt;p&gt;Assuming that we can solve the above issue with introducing lines, the next
 step would be to display a marker on the right side of the line.  That marker
 should follow the height of the line box as the line wraps.&lt;/p&gt;
@@ -157,7 +158,7 @@ that every newline character in the original text except the very first one is
 replaced with the combination of the closing and opening tags such as
 &lt;code&gt;&amp;lt;/div&amp;gt;&amp;lt;div class="line"&amp;gt;&lt;/code&gt;, below is the result of such a change on our sample:&lt;/p&gt;
 &lt;div class="demo2 resizable"&gt;
-&lt;pre&gt;&lt;div class="line"&gt;This is an example of an unstyled, basic &amp;lt;pre&amp;gt; container.  You should&lt;/div&gt;&lt;div class="line"&gt;be able to resize it by dragging the bottom right corner (but if you are&lt;/div&gt;&lt;div class="line"&gt;using IE/Edge you may be out of luck with the resizing).&lt;/div&gt;&lt;div class="line"&gt;&lt;/div&gt;&lt;div class="line"&gt;This line was made specifically long to trigger the scrolling bars (at least the horizontal scrolling bar), so even those who are using browser that cannot resize should be able to play with it :)&lt;/div&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;div class="line"&gt;This is an example of a basic &amp;lt;pre&amp;gt; container.  You should&lt;/div&gt;&lt;div class="line"&gt;be able to resize it by dragging the bottom right corner (but if you are&lt;/div&gt;&lt;div class="line"&gt;using anything than Chrome you may be out of luck with the resizing).&lt;/div&gt;&lt;div class="line"&gt;&lt;/div&gt;&lt;div class="line"&gt;This line was made specifically long to trigger the line wrapping, so even those who are using a browser that cannot resize should be able to play with it :)&lt;/div&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
 &lt;p&gt;Visually, it is almost exactly the same as the original sample we presented in
@@ -174,22 +175,22 @@ your browser will highlight the corresponding line inside the &lt;code&gt;&amp;l
 this is what we wanted to achieve at this step!&lt;/p&gt;
 &lt;p&gt;The next step is to display a marker on the right side of the line and that
 marker should occupy the exactly the same height as the line block we are
-attaching it to.  Well, this can be easily done with the `::after&amp;rsquo;
+attaching it to.  Well, this can be easily done with the &lt;code&gt;::after&lt;/code&gt;
 pseudo-element:&lt;/p&gt;
 &lt;pre class="highlight"&gt;&lt;code class="language-css"&gt;pre div.line {
-    position: relative; /* so we could position the child      */
-    min-height: 1em;    /* to avoid collapsing empty lines     */
+    position: relative; /* so we could position the child */
+    min-height: 1em;    /* to avoid collapsing empty lines */
 }
 
 pre div.line::after {
     content: '';        /* we need content for pseudo elements */
     position: absolute;
     display: block;
-    width: 1em;     /* without width it will be invisible  */
-    height: 100%;       /* to match the height of the parent   */
+    width: 1em;     /* without width it will be invisible */
+    height: 100%;       /* to match the height of the parent */
     top: 0;
     right: -1em;
-    background-color: blue; /* temporary, to make it visible       */
+    background-color: blue; /* temporary, to make it visible */
 }&lt;/code&gt;&lt;/pre&gt;
 
 
@@ -216,19 +217,19 @@ The corresponding rendered sample with the above stylesheet applied follows:&lt;
             background-color: blue;
         }
     &lt;/style&gt;
-&lt;pre&gt;&lt;div class="line"&gt;This is an example of an unstyled, basic &amp;lt;pre&amp;gt; container.  You should&lt;/div&gt;&lt;div class="line"&gt;be able to resize it by dragging the bottom right corner (but if you are&lt;/div&gt;&lt;div class="line"&gt;using IE/Edge you may be out of luck with the resizing).&lt;/div&gt;&lt;div class="line"&gt;&lt;/div&gt;&lt;div class="line"&gt;This line was made specifically long to trigger the scrolling bars (at least the horizontal scrolling bar), so even those who are using browser that cannot resize should be able to play with it :)&lt;/div&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;div class="line"&gt;This is an example of a basic &amp;lt;pre&amp;gt; container.  You should&lt;/div&gt;&lt;div class="line"&gt;be able to resize it by dragging the bottom right corner (but if you are&lt;/div&gt;&lt;div class="line"&gt;using anything than Chrome you may be out of luck with the resizing).&lt;/div&gt;&lt;div class="line"&gt;&lt;/div&gt;&lt;div class="line"&gt;This line was made specifically long to trigger the line wrapping, so even those who are using a browser that cannot resize should be able to play with it :)&lt;/div&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;So far so good!  We have a coloured strip hanging on the right side just next
-to our text.  Let&amp;rsquo;s style it a bit so it looks more appealing.&lt;/p&gt;
+&lt;p&gt;So far so good!  We have a blue coloured strip hanging on the right side just
+next to our text.  Let&amp;rsquo;s style it a bit so it looks more appealing.&lt;/p&gt;
 &lt;p&gt;We have a couple of options here:&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;we can just use a transparenti bitmap image with the desired marker;&lt;/li&gt;
+&lt;li&gt;we can just use a transparent bitmap image with the desired marker;&lt;/li&gt;
 &lt;li&gt;we can leverage SVG as the source of the image.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;The issue I have with transparent bitmap images is that they are not very
-responsive: to accomodate to all the possible resolutions I will end up with
-creating many bitmaps of a different size to ensure that the marker looks good
+responsive: to accomodate to all the possible resolutions I would end up with
+creating many bitmaps of different sizes to ensure that the marker looks good
 no matter what device is rendering the page.&lt;/p&gt;
 &lt;p&gt;On the other hand, the SVG graphics was not well supported on some browsers
 like Internet Explorer 6, etc. &amp;ndash; The support is much better now, hence I would
@@ -252,7 +253,10 @@ makes it easier).&lt;/p&gt;
 &lt;p&gt;Finally, the &lt;code&gt;&amp;lt;text&amp;gt;&lt;/code&gt; element puts a text box with just a single Unicode
 character for the return symbol (&amp;#x23ce;), since I think it is quite an
 adequate symbol to represent a line wrap point.&lt;/p&gt;
-&lt;p&gt;There are diffrent ways how you can incorporate an SVG image into CSS rule, but since the content of the SVG file is so small and I did not want to host it externally (it would be an additional fetch request and more maintenance), I just did the following:&lt;/p&gt;
+&lt;p&gt;There are different ways how you can incorporate an SVG image into CSS rule,
+but since the content of the SVG file is so small and I did not want to host it
+externally (it would be an additional fetch request and more maintenance), I
+just did the following:&lt;/p&gt;
 &lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;$ cat nl.svg 
 &amp;lt;svg xmlns=&amp;quot;http://www.w3.org/2000/svg&amp;quot;
         version=&amp;quot;1.1&amp;quot;
@@ -267,21 +271,22 @@ PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0Jv
 I got a single line SVG body, and I converted it to Base64.  The resulting line
 is usable as the inline definition of an image.  Let&amp;rsquo;s update our stylesheet
 with the new values (we just replaced the last line to change the &lt;code&gt;background&lt;/code&gt;
-to &lt;code&gt;background-image&lt;/code&gt;):&lt;/p&gt;
+to &lt;code&gt;background-image&lt;/code&gt;) and added dimensions for the background itself:&lt;/p&gt;
 &lt;pre class="highlight"&gt;&lt;code class="language-css"&gt;pre div.line {
-    position: relative; /* so we could position the child      */
-    min-height: 1em;    /* to avoid collapsing empty lines     */
+    position: relative; /* so we could position the child */
+    min-height: 1em;    /* to avoid collapsing empty lines */
 }
 
 pre div.line::after {
     content: '';        /* we need content for pseudo elements */
     position: absolute;
     display: block;
-    width: 1em;     /* without width it will be invisible  */
-    height: 100%;       /* to match the height of the parent   */
+    width: 1em;     /* without width it will be invisible */
+    height: 100%;       /* to match the height of the parent */
     top: 0;
     right: -1em;
-    background-image: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
+    background-image:
+        url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
         no-repeat repeat;
     background-size: 1em 1em;
 }&lt;/code&gt;&lt;/pre&gt;
@@ -302,19 +307,20 @@ pre div.line::after {
             height: 100%;
             top: 0;
             right: -1em;
-            background: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
+            background:
+                url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
                 no-repeat repeat;
             background-size: 1em 1em;
         }
     &lt;/style&gt;
-&lt;pre&gt;&lt;div class="line"&gt;This is an example of an unstyled, basic &amp;lt;pre&amp;gt; container.  You should&lt;/div&gt;&lt;div class="line"&gt;be able to resize it by dragging the bottom right corner (but if you are&lt;/div&gt;&lt;div class="line"&gt;using IE/Edge you may be out of luck with the resizing).&lt;/div&gt;&lt;div class="line"&gt;&lt;/div&gt;&lt;div class="line"&gt;This line was made specifically long to trigger the scrolling bars (at least the horizontal scrolling bar), so even those who are using browser that cannot resize should be able to play with it :)&lt;/div&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;div class="line"&gt;This is an example of a basic &amp;lt;pre&amp;gt; container.  You should&lt;/div&gt;&lt;div class="line"&gt;be able to resize it by dragging the bottom right corner (but if you are&lt;/div&gt;&lt;div class="line"&gt;using anything than Chrome you may be out of luck with the resizing).&lt;/div&gt;&lt;div class="line"&gt;&lt;/div&gt;&lt;div class="line"&gt;This line was made specifically long to trigger the line wrapping, so even those who are using a browser that cannot resize should be able to play with it :)&lt;/div&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
 &lt;p&gt;Look at that, it is almost shaping into what we want :).  However, something is
 not right &amp;ndash; the alignment of the markers to the corresponding lines is nowhere
 to be seen.  It is, like, they are of different sizes despite that the
 &lt;code&gt;font-size&lt;/code&gt; property for both of them is the same.  Hmm.&lt;/p&gt;
-&lt;p&gt;If we recall that &lt;a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Introduction_to_the_CSS_box_model"&gt;CSS basic model document&lt;/a&gt; we will discover in the very last
+&lt;p&gt;If we recall that &lt;a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Introduction_to_the_CSS_box_model" title="Introduction to the CSS box model"&gt;CSS basic model document&lt;/a&gt; we will discover in the very last
 paragraph that:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a name="CSS_basic_model_line_height" href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Introduction_to_the_CSS_box_model"&gt;&lt;/a&gt;
@@ -328,20 +334,21 @@ our lines (reading documentation you may find that the default value is
 browsers, but relying on that, I think is a bad idea).  We also need to adjust
 our markers with the new information we have got:&lt;/p&gt;
 &lt;pre class="highlight"&gt;&lt;code class="language-css"&gt;pre div.line {
-    position: relative; /* so we could position the child      */
-    min-height: 1em;    /* to avoid collapsing empty lines     */
-    line-height: 1.2;   /* set the height explicitly           */
+    position: relative; /* so we could position the child */
+    min-height: 1em;    /* to avoid collapsing empty lines */
+    line-height: 1.2;   /* set the height explicitly */
 }
 
 pre div.line::after {
     content: '';        /* we need content for pseudo elements */
     position: absolute;
     display: block;
-    width: 1.2em;       /* without width it will be invisible  */
-    height: 100%;       /* to match the height of the parent   */
+    width: 1.2em;       /* without width it will be invisible */
+    height: 100%;       /* to match the height of the parent */
     top: 0;
     right: -1.2em;
-    background-image: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
+    background-image:
+        url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
         no-repeat repeat;
     background-size: 1.2em 1.2em;
 }&lt;/code&gt;&lt;/pre&gt;
@@ -363,12 +370,13 @@ pre div.line::after {
             height: 100%;
             top: 0;
             right: -1.2em;
-            background: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
+            background:
+                url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
                 no-repeat repeat;
             background-size: 1.2em 1.2em;
         }
     &lt;/style&gt;
-&lt;pre&gt;&lt;div class="line"&gt;This is an example of an unstyled, basic &amp;lt;pre&amp;gt; container.  You should&lt;/div&gt;&lt;div class="line"&gt;be able to resize it by dragging the bottom right corner (but if you are&lt;/div&gt;&lt;div class="line"&gt;using IE/Edge you may be out of luck with the resizing).&lt;/div&gt;&lt;div class="line"&gt;&lt;/div&gt;&lt;div class="line"&gt;This line was made specifically long to trigger the scrolling bars (at least the horizontal scrolling bar), so even those who are using browser that cannot resize should be able to play with it :)&lt;/div&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;div class="line"&gt;This is an example of a basic &amp;lt;pre&amp;gt; container.  You should&lt;/div&gt;&lt;div class="line"&gt;be able to resize it by dragging the bottom right corner (but if you are&lt;/div&gt;&lt;div class="line"&gt;using anything than Chrome you may be out of luck with the resizing).&lt;/div&gt;&lt;div class="line"&gt;&lt;/div&gt;&lt;div class="line"&gt;This line was made specifically long to trigger the line wrapping, so even those who are using a browser that cannot resize should be able to play with it :)&lt;/div&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
 &lt;p&gt;This is an improvement, is not it?  So we just need some final touches to call
@@ -381,20 +389,21 @@ it done:&lt;/p&gt;
 e.g. I think 50% transparency should make the marker less distracting.&lt;/p&gt;
 &lt;p&gt;The former, however, requires some thinking.  Given that the post is already too long, I will just state that out of multiple options I had I chose the following: raise the background image by one &lt;code&gt;line-height&lt;/code&gt; from the bottom, and clip a square 1x1 &lt;code&gt;line-height&lt;/code&gt; at the top to compensate, as follows:&lt;/p&gt;
 &lt;pre class="highlight"&gt;&lt;code class="language-css"&gt;pre div.line {
-    position: relative; /* so we could position the child      */
-    min-height: 1em;    /* to avoid collapsing empty lines     */
-    line-height: 1.2;   /* set the height explicitly           */
+    position: relative; /* so we could position the child */
+    min-height: 1em;    /* to avoid collapsing empty lines */
+    line-height: 1.2;   /* set the height explicitly */
 }
 
 pre div.line::after {
     content: '';        /* we need content for pseudo elements */
     position: absolute;
     display: block;
-    width: 1.2em;       /* without width it will be invisible  */
-    height: 100%;       /* to match the height of the parent   */
+    width: 1.2em;       /* without width it will be invisible */
+    height: 100%;       /* to match the height of the parent */
     bottom: 0;
     right: -1.2em;
-    background-image: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
+    background-image:
+        url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
         no-repeat repeat;
     background-size: 1.2em 1.2em;
     margin-bottom: 0;
@@ -432,7 +441,8 @@ this is exactly what we want :).&lt;/p&gt;
             height: 100%;
             bottom: 0;
             right: -1.2em;
-            background: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
+            background:
+                url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
                 no-repeat repeat;
             background-size: 1.2em 1.2em;
             margin-bottom: 1.2em;
@@ -440,7 +450,76 @@ this is exactly what we want :).&lt;/p&gt;
             opacity: .5;
         }
     &lt;/style&gt;
-&lt;pre&gt;&lt;div class="line"&gt;This is an example of an unstyled, basic &amp;lt;pre&amp;gt; container.  You should&lt;/div&gt;&lt;div class="line"&gt;be able to resize it by dragging the bottom right corner (but if you are&lt;/div&gt;&lt;div class="line"&gt;using IE/Edge you may be out of luck with the resizing).&lt;/div&gt;&lt;div class="line"&gt;&lt;/div&gt;&lt;div class="line"&gt;This line was made specifically long to trigger the scrolling bars (at least the horizontal scrolling bar), so even those who are using browser that cannot resize should be able to play with it :)&lt;/div&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;div class="line"&gt;This is an example of a basic &amp;lt;pre&amp;gt; container.  You should&lt;/div&gt;&lt;div class="line"&gt;be able to resize it by dragging the bottom right corner (but if you are&lt;/div&gt;&lt;div class="line"&gt;using anything than Chrome you may be out of luck with the resizing).&lt;/div&gt;&lt;div class="line"&gt;&lt;/div&gt;&lt;div class="line"&gt;This line was made specifically long to trigger the line wrapping, so even those who are using a browser that cannot resize should be able to play with it :)&lt;/div&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id="bonus-round"&gt;Bonus Round&lt;/h2&gt;
+&lt;p&gt;It should be mentioned, it is also possible to apply the same approach to the
+left side of the lines with a bit of a twist.&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-css"&gt;pre div.line {
+    position: relative; /* so we could position the child */
+    min-height: 1em;    /* to avoid collapsing empty lines */
+    line-height: 1.2;   /* set the height explicitly */
+    text-indent: -1.2em;    /* first line indent */
+    padding-left: 1.2em;    /* padding for the line */
+}
+
+pre div.line::before {
+    content: '';        /* we need content for pseudo elements */
+    position: absolute;
+    display: block;
+    width: 1.2em;       /* without width it will be invisible */
+    height: 100%;       /* to match the height of the parent */
+    top: 0;
+    left: 0;
+    background:
+        url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
+        no-repeat repeat;
+    background-size: 1.2em 1.2em;
+    clip: rect(1.2em 1.2em 100vh 0);
+    opacity: .5;
+    transform: rotateY(180deg); /* mirror the arrow */
+    transform-origin: left;
+}&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;The trick here is the play between &lt;code&gt;padding-left&lt;/code&gt; and &lt;code&gt;text-indent&lt;/code&gt; for the
+&lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt; element since &lt;code&gt;text-indent&lt;/code&gt; will be applied to the first line only
+(effectively negating the padding set for the whole element), thus the rest of
+wrapped line will be padded to make space for the marker, which we place as
+usual with the clipping region to suppress it for the very first part of the
+wrapped line.&lt;/p&gt;
+&lt;p&gt;The result looks as follows (and I am actually torn which side I like better,
+so, maybe, for my blog I may just go with the left-side solution):&lt;/p&gt;
+&lt;div class="demo7 resizable"&gt;
+    &lt;style&gt;
+        div.demo7 pre div.line {
+            position: relative;
+            min-height: 1em;
+            line-height: 1.2;
+            text-indent: -1.2em;
+            padding-left: 1.2em;
+        }
+
+        div.demo7 pre div.line::after {
+            content: '';
+            position: absolute;
+            display: block;
+            width: 1.2em;
+            height: 100%;
+            top: 0;
+            left: 1em;
+            background:
+                url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
+                no-repeat repeat;
+            background-size: 1.2em 1.2em;
+            clip: rect(1.2em 1.2em 100vh 0);
+            opacity: .5;
+            transform: rotateY(180deg);
+            transform-origin: left;
+        }
+    &lt;/style&gt;
+&lt;pre&gt;&lt;div class="line"&gt;This is an example of a basic &amp;lt;pre&amp;gt; container.  You should&lt;/div&gt;&lt;div class="line"&gt;be able to resize it by dragging the bottom right corner (but if you are&lt;/div&gt;&lt;div class="line"&gt;using anything than Chrome you may be out of luck with the resizing).&lt;/div&gt;&lt;div class="line"&gt;&lt;/div&gt;&lt;div class="line"&gt;This line was made specifically long to trigger the line wrapping, so even those who are using a browser that cannot resize should be able to play with it :)&lt;/div&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
 &lt;h2 id="assessment-of-the-result"&gt;Assessment of the result&lt;/h2&gt;
@@ -479,7 +558,7 @@ preserved the rest of lines intact.&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;I hope this helped you and you learnt something :).  If you have any
 constructive feedback, I would appreciate it, specifically if you have ideas on
-how to improve the presented solution.&lt;/p&gt;</content><category term="web design"></category><category term="pelican"></category><category term="blog"></category></entry><entry><title>Migrating blog to Pelican</title><link href="https://dmitry.khlebnikov.net/2020/05/01/migrating-blog-to-pelican/" rel="alternate"></link><published>2020-05-01T20:00:00+10:00</published><updated>2020-05-10T21:22:11+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-01:/2020/05/01/migrating-blog-to-pelican/</id><summary type="html">&lt;p&gt;I had my blog site for more than a decade now, but until now I was not putting
+how to improve the presented solution.&lt;/p&gt;</content><category term="web design"></category><category term="html"></category><category term="css"></category><category term="design"></category></entry><entry><title>Migrating blog to Pelican</title><link href="https://dmitry.khlebnikov.net/2020/05/01/migrating-blog-to-pelican/" rel="alternate"></link><published>2020-05-01T20:00:00+10:00</published><updated>2020-05-10T21:22:11+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-01:/2020/05/01/migrating-blog-to-pelican/</id><summary type="html">&lt;p&gt;I had my blog site for more than a decade now, but until now I was not putting
 any effort or thoughts into maintaining my audience or promoting the site.  It
 was dormant for nearly a decade and I decided to rejuvenate it and start using
 it as a platform I could leverage to share some ideas I think which are worth
