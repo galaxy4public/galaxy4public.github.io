@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - blog</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"></link><link href="https://dmitry.khlebnikov.net/feeds/blog.atom.xml" rel="self"></link><id>https://dmitry.khlebnikov.net/</id><updated>2020-05-17T22:01:58+10:00</updated><entry><title>Automating Static Website Deployment</title><link href="https://dmitry.khlebnikov.net/2020/05/17/automating-static-website-deployment/" rel="alternate"></link><published>2020-05-17T21:32:00+10:00</published><updated>2020-05-17T22:01:58+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-17:/2020/05/17/automating-static-website-deployment/</id><summary type="html">&lt;div class="toc"&gt;&lt;span class="toctitle"&gt;Table of Contents&lt;/span&gt;&lt;ul&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - blog</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"></link><link href="https://dmitry.khlebnikov.net/feeds/blog.atom.xml" rel="self"></link><id>https://dmitry.khlebnikov.net/</id><updated>2020-05-17T22:13:06+10:00</updated><entry><title>Automating Static Website Deployment</title><link href="https://dmitry.khlebnikov.net/2020/05/17/automating-static-website-deployment/" rel="alternate"></link><published>2020-05-17T21:32:00+10:00</published><updated>2020-05-17T22:13:06+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-17:/2020/05/17/automating-static-website-deployment/</id><summary type="html">&lt;div class="toc"&gt;&lt;span class="toctitle"&gt;Table of Contents&lt;/span&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a href="#setting-up-github-pages"&gt;Setting up GitHub Pages&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#setting-up-the-private-code-repository"&gt;Setting up the private, code repository&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#configuring-the-github-action-for-publishing"&gt;Configuring the GitHub Action for publishing&lt;/a&gt;&lt;/li&gt;
@@ -144,13 +144,15 @@ SSH key configured with write privileges for the repository and I could push
 with &lt;code&gt;git push&lt;/code&gt; from my local copy of the repository.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a name="quote-private-keys" href="#quote-private-keys"&gt;&lt;/a&gt; &amp;hellip; private keys are called &amp;ldquo;private&amp;rdquo; for a reason &amp;ndash; they are not supposed
-to leave the device under any circumstances&lt;/p&gt;
+to leave the device under any circumstances. [&amp;hellip;] please pay attention when
+you read of hear somebody advising you to upload your private keys somewhere,
+it is usually bad advice.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;My private keys are called &amp;ldquo;private&amp;rdquo; for a reason &amp;ndash; they are not supposed to
 leave my device(s) under any circumstances (except for backup purposes such as
 storing them in a safe).  So, please pay attention when you read or hear
-somebody advising you to upload your private keys somewhere, it is usually an
-ill advice.&lt;/p&gt;
+somebody advising you to upload your private keys somewhere, it is usually
+bad advice.&lt;/p&gt;
 &lt;p&gt;For the integration purposes, GitHub provides so-called &amp;ldquo;Deploy keys&amp;rdquo; and
 &amp;ldquo;Personal access tokens&amp;rdquo;.  The former is just an SSH key pair associated with a
 particular repository (you can configure it in repository&amp;rsquo;s setting) while the
