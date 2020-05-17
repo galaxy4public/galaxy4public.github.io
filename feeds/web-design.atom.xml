@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - web design</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"></link><link href="https://dmitry.khlebnikov.net/feeds/web-design.atom.xml" rel="self"></link><id>https://dmitry.khlebnikov.net/</id><updated>2020-05-14T21:59:59+10:00</updated><entry><title>Wrap indicator in &lt;pre&gt; blocks</title><link href="https://dmitry.khlebnikov.net/2020/05/10/wrap-indicator-in-pre-blocks/" rel="alternate"></link><published>2020-05-10T21:00:00+10:00</published><updated>2020-05-14T21:59:59+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-10:/2020/05/10/wrap-indicator-in-pre-blocks/</id><summary type="html">&lt;p&gt;I am not a front-end developer, not a UI designer, nor a UX guru, but I am an
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - web design</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"></link><link href="https://dmitry.khlebnikov.net/feeds/web-design.atom.xml" rel="self"></link><id>https://dmitry.khlebnikov.net/</id><updated>2020-05-17T20:25:15+10:00</updated><entry><title>Wrap indicator in &lt;pre&gt; blocks</title><link href="https://dmitry.khlebnikov.net/2020/05/10/wrap-indicator-in-pre-blocks/" rel="alternate"></link><published>2020-05-10T21:00:00+10:00</published><updated>2020-05-17T20:25:15+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-10:/2020/05/10/wrap-indicator-in-pre-blocks/</id><summary type="html">&lt;p&gt;I am not a front-end developer, not a UI designer, nor a UX guru, but I am an
 engineer, so when I face a puzzle worth solving my brain switches on and I
 cannot let it go until I find a satisfactory solution to the puzzle.&lt;/p&gt;
 &lt;p&gt;My blog heavily relies on me sharing session dumps and file excerpts using the
@@ -177,7 +177,7 @@ this is what we wanted to achieve at this step!&lt;/p&gt;
 marker should occupy the exactly the same height as the line block we are
 attaching it to.  Well, this can be easily done with the &lt;code&gt;::after&lt;/code&gt;
 pseudo-element:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-css"&gt;pre div.line {
+&lt;pre id="demo3" class="highlight line-numbers"&gt;&lt;code class="language-css"&gt;pre div.line {
     position: relative; /* so we could position the child */
     min-height: 1em;    /* to avoid collapsing empty lines */
 }
@@ -192,7 +192,6 @@ pre div.line::after {
     right: -1em;
     background-color: blue; /* temporary, to make it visible */
 }&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;Note that we also introduced &lt;code&gt;position: relative&lt;/code&gt; to our &lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt;&amp;lsquo;s.  It is
 needed since if we want to position our pseudo-element relative to its parent,
@@ -243,7 +242,6 @@ compromise (this is the content of the SVG file I created):&lt;/p&gt;
     &amp;lt;text x=&amp;quot;0&amp;quot; y=&amp;quot;19&amp;quot;&amp;gt;&amp;amp;#x23ce;&amp;lt;/text&amp;gt;
 &amp;lt;/svg&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;The first two lines are mandatory and describe to a browser that it works with
 an SVG image file.&lt;/p&gt;
 &lt;p&gt;The third line (&lt;code&gt;viewBox=&lt;/code&gt;) is really important since it allows the SVG image
@@ -257,22 +255,21 @@ adequate symbol to represent a line wrap point.&lt;/p&gt;
 but since the content of the SVG file is so small and I did not want to host it
 externally (it would be an additional fetch request and more maintenance), I
 just did the following:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;$ cat nl.svg 
+&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;[user@localhost ~]$ cat nl.svg 
 &amp;lt;svg xmlns=&amp;quot;http://www.w3.org/2000/svg&amp;quot;
         version=&amp;quot;1.1&amp;quot;
         viewBox=&amp;quot;0 0 24 24&amp;quot;&amp;gt;
     &amp;lt;text x=&amp;quot;0&amp;quot; y=&amp;quot;19&amp;quot;&amp;gt;&amp;amp;#x23ce;&amp;lt;/text&amp;gt;
 &amp;lt;/svg&amp;gt;
-$ sed -n '1{h;d};$!H;${H;x;s,\s\+, ,g;s,&amp;gt;\s*&amp;lt;,&amp;gt;&amp;lt;,g;p}' nl.svg | base64 -w 0 ; echo
+[user@localhost ~]$ sed -n '1{h;d};$!H;${H;x;s,\s\+, ,g;s,&amp;gt;\s*&amp;lt;,&amp;gt;&amp;lt;,g;p}' nl.svg | base64 -w 0 ; echo
 PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;In other words, I removed all the white space, then deleted all line breaks, so
 I got a single line SVG body, and I converted it to Base64.  The resulting line
 is usable as the inline definition of an image.  Let&amp;rsquo;s update our stylesheet
 with the new values (we just replaced the last line to change the &lt;code&gt;background&lt;/code&gt;
 to &lt;code&gt;background-image&lt;/code&gt;) and added dimensions for the background itself:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-css"&gt;pre div.line {
+&lt;pre id="demo4" class="highlight line-numbers"&gt;&lt;code class="language-css"&gt;pre div.line {
     position: relative; /* so we could position the child */
     min-height: 1em;    /* to avoid collapsing empty lines */
 }
@@ -290,7 +287,6 @@ pre div.line::after {
         no-repeat repeat;
     background-size: 1em 1em;
 }&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;div class="demo4 resizable"&gt;
     &lt;style&gt;
@@ -333,7 +329,7 @@ our lines (reading documentation you may find that the default value is
 &lt;code&gt;normal&lt;/code&gt; and you can also find that &lt;code&gt;normal&lt;/code&gt; equals &lt;code&gt;1.2&lt;/code&gt; for the majority of
 browsers, but relying on that, I think is a bad idea).  We also need to adjust
 our markers with the new information we have got:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-css"&gt;pre div.line {
+&lt;pre id="demo5" class="highlight"&gt;&lt;code class="language-css"&gt;pre div.line {
     position: relative; /* so we could position the child */
     min-height: 1em;    /* to avoid collapsing empty lines */
     line-height: 1.2;   /* set the height explicitly */
@@ -352,7 +348,6 @@ pre div.line::after {
         no-repeat repeat;
     background-size: 1.2em 1.2em;
 }&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;div class="demo5 resizable"&gt;
     &lt;style&gt;
@@ -388,7 +383,7 @@ it done:&lt;/p&gt;
 &lt;p&gt;To address the latter a simple play with the &lt;code&gt;opacity&lt;/code&gt; attribute will suffice,
 e.g. I think 50% transparency should make the marker less distracting.&lt;/p&gt;
 &lt;p&gt;The former, however, requires some thinking.  Given that the post is already too long, I will just state that out of multiple options I had I chose the following: raise the background image by one &lt;code&gt;line-height&lt;/code&gt; from the bottom, and clip a square 1x1 &lt;code&gt;line-height&lt;/code&gt; at the top to compensate, as follows:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-css"&gt;pre div.line {
+&lt;pre id="demo6" class="highlight"&gt;&lt;code class="language-css"&gt;pre div.line {
     position: relative; /* so we could position the child */
     min-height: 1em;    /* to avoid collapsing empty lines */
     line-height: 1.2;   /* set the height explicitly */
@@ -410,7 +405,6 @@ pre div.line::after {
     clip: rect(1.2em 1.2em 100vh 0);
     opacity: .5;
 }&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;The only tricky part in the added lines is the &lt;code&gt;clip: rect(1.2em 1.2em 100vh
 0)&lt;/code&gt; line.  The &lt;code&gt;clip&lt;/code&gt; property defines the visible rectangle the browser should
@@ -456,7 +450,7 @@ this is exactly what we want :).&lt;/p&gt;
 &lt;h2 id="bonus-round"&gt;Bonus Round&lt;/h2&gt;
 &lt;p&gt;It should be mentioned, it is also possible to apply the same approach to the
 left side of the lines with a bit of a twist.&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-css"&gt;pre div.line {
+&lt;pre id="demo7" class="highlight"&gt;&lt;code class="language-css"&gt;pre div.line {
     position: relative; /* so we could position the child */
     min-height: 1em;    /* to avoid collapsing empty lines */
     line-height: 1.2;   /* set the height explicitly */
@@ -481,7 +475,6 @@ pre div.line::before {
     transform: rotateY(180deg); /* mirror the arrow */
     transform-origin: left;
 }&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;The trick here is the play between &lt;code&gt;padding-left&lt;/code&gt; and &lt;code&gt;text-indent&lt;/code&gt; for the
 &lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt; element since &lt;code&gt;text-indent&lt;/code&gt; will be applied to the first line only
@@ -522,10 +515,10 @@ so, maybe, for my blog I may just go with the left-side solution):&lt;/p&gt;
 &lt;pre&gt;&lt;div class="line"&gt;This is an example of a basic &amp;lt;pre&amp;gt; container.  You should&lt;/div&gt;&lt;div class="line"&gt;be able to resize it by dragging the bottom right corner (but if you are&lt;/div&gt;&lt;div class="line"&gt;using anything than Chrome you may be out of luck with the resizing).&lt;/div&gt;&lt;div class="line"&gt;&lt;/div&gt;&lt;div class="line"&gt;This line was made specifically long to trigger the line wrapping, so even those who are using a browser that cannot resize should be able to play with it :)&lt;/div&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;The idea for the &lt;code&gt;text-indent&lt;/code&gt; and &lt;code&gt;padding-left&lt;/code&gt; trick came from &lt;a href="http://shaunwagner.com/"&gt;C. Shaun
+&lt;p&gt;This idea for the &lt;code&gt;padding-left&lt;/code&gt; and &lt;code&gt;text-indent&lt;/code&gt; trick came from &lt;a href="http://shaunwagner.com/"&gt;C. Shaun
 &amp;ldquo;Kainaw&amp;rdquo; Wagner&lt;/a&gt; when &lt;a href="https://stackoverflow.com/a/48936538/3316011"&gt;he answered a question about
 the wrap indicators&lt;/a&gt; on Stack
-Overflow.&lt;/p&gt;
+Overflow (I am sure that it was known before, but this is where I learnt it).&lt;/p&gt;
 &lt;h2 id="assessment-of-the-result"&gt;Assessment of the result&lt;/h2&gt;
 &lt;p&gt;We started with the following requirement:&lt;/p&gt;
 &lt;ul&gt;
@@ -555,9 +548,20 @@ can be dynamically resized.&lt;/p&gt;
 &lt;li&gt;
 &lt;p&gt;we also want the syntax highlighter (such as PrismJS in my case) not to be
     affected by whatever we come up with.&lt;/p&gt;
-&lt;p&gt;Unknown: I think it would be the material for another post, but I do not
+&lt;p&gt;&lt;del&gt;Unknown: I think it would be the material for another post, but I do not
 expect a lot of issues since we only replaced the newline characters and
-preserved the rest of lines intact.&lt;/p&gt;
+preserved the rest of lines intact.i&lt;/del&gt;&lt;/p&gt;
+&lt;p&gt;It turned out, that it was quite a hassle since none of plugins PrismJS
+have for working with lines expect semantic markup of the lines inside the
+block.  Therefore, I spent some time and came up with a plugin that does it
+&amp;ldquo;right&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;It is highly likely, that my plugin will get merged into the Prism tree
+(see the corresponding &lt;a href="https://github.com/PrismJS/prism/pull/2389"&gt;Pull Request&lt;/a&gt;).  However, if for some reason it would
+not be or you need the functionality &amp;ldquo;here &amp;amp; now&amp;rdquo;, you can always get it
+from my &lt;a href="https://github.com/galaxy4public/prism/tree/plugin-lines"&gt;fork of PrismJS&lt;/a&gt; (I will keep the &lt;code&gt;plugin-lines&lt;/code&gt; branch until it
+is merged upstream).&lt;/p&gt;
+&lt;p&gt;By the way, my Lines plugin is the primary working horse for all syntax
+highlighted blocks on this site (so you have already seen it in action).&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;I hope this helped you and you learnt something :).  If you have any

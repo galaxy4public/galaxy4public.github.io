@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
 	<head>
-		<meta http-equiv="Content-Security-Policy" content="	default-src 'self';object-src 'none';script-src 'self' https://www.googletagmanager.com/gtag/js 'sha256-TelA7VsuYAMqhOKGk7CHgJyuqSJdmqZEp+hn6PWVRwQ=' https://www.google-analytics.com/analytics.js;img-src 'self' https://www.google-analytics.com/r/collect https://www.google-analytics.com/collect https://stats.g.doubleclick.net/r/collect https://*/ads/ga-audiences data:;style-src 'self' 'sha256-fszvBX/J9dhPxFSJ5wUrq/Pvg6HrnTkWyshMZpaxSQY=' 'sha256-Fvx9M61e9e0u1bU/b4F/gvva+rsq9KRBqq6VvEBeC/A=' 'sha256-X9/7LgWmEw7NlPLxcc3SDr7+BAy0aPPPvaAWDaWFSg8=' 'sha256-qwQxpLFpY1RSbHcY3MelF07N45deGrhGoFCZJVyu4rQ=' 'sha256-Tmgyaho1GhddVxwLgWj7bKT7jjjBrIZQ6I8U2GvttJI=' 'sha256-8tl3rbL69gF7zbbflFNLOMNv50Jvvc6RFxYvwhDA5JA=' 'sha256-jgSB52jMr0ri6YSE+tSQ/V0+b0I9gAOCsZPJBDmfa/8=';connect-src 'self' https://www.google-analytics.com/j/collect https://stats.g.doubleclick.net/j/collect; " />
+		<meta http-equiv="Content-Security-Policy" content="	default-src 'self';object-src 'none';script-src 'self' https://www.googletagmanager.com/gtag/js 'sha256-TelA7VsuYAMqhOKGk7CHgJyuqSJdmqZEp+hn6PWVRwQ=' https://www.google-analytics.com/analytics.js;img-src 'self' data: https://www.google-analytics.com/r/collect https://www.google-analytics.com/collect https://stats.g.doubleclick.net/r/collect https://*/ads/ga-audiences data:;style-src 'self' 'sha256-fszvBX/J9dhPxFSJ5wUrq/Pvg6HrnTkWyshMZpaxSQY=' 'sha256-Fvx9M61e9e0u1bU/b4F/gvva+rsq9KRBqq6VvEBeC/A=' 'sha256-X9/7LgWmEw7NlPLxcc3SDr7+BAy0aPPPvaAWDaWFSg8=' 'sha256-qwQxpLFpY1RSbHcY3MelF07N45deGrhGoFCZJVyu4rQ=' 'sha256-Tmgyaho1GhddVxwLgWj7bKT7jjjBrIZQ6I8U2GvttJI=' 'sha256-8tl3rbL69gF7zbbflFNLOMNv50Jvvc6RFxYvwhDA5JA=' 'sha256-jgSB52jMr0ri6YSE+tSQ/V0+b0I9gAOCsZPJBDmfa/8=';connect-src 'self' https://www.google-analytics.com/j/collect https://stats.g.doubleclick.net/j/collect; " />
 		<title>Mind Drops</title>
 		<script src="/theme/js/persistence.js" defer></script>
 		<meta charset="utf-8" />
@@ -288,7 +288,7 @@ this is what we wanted to achieve at this step!</p>
 marker should occupy the exactly the same height as the line block we are
 attaching it to.  Well, this can be easily done with the <code>::after</code>
 pseudo-element:</p>
-<pre class="highlight"><code class="language-css">pre div.line {
+<pre id="demo3" class="highlight line-numbers"><code class="language-css">pre div.line {
     position: relative; /* so we could position the child */
     min-height: 1em;    /* to avoid collapsing empty lines */
 }
@@ -303,7 +303,6 @@ pre div.line::after {
     right: -1em;
     background-color: blue; /* temporary, to make it visible */
 }</code></pre>
-
 
 <p>Note that we also introduced <code>position: relative</code> to our <code>&lt;div&gt;</code>&lsquo;s.  It is
 needed since if we want to position our pseudo-element relative to its parent,
@@ -354,7 +353,6 @@ compromise (this is the content of the SVG file I created):</p>
     &lt;text x=&quot;0&quot; y=&quot;19&quot;&gt;&amp;#x23ce;&lt;/text&gt;
 &lt;/svg&gt;</code></pre>
 
-
 <p>The first two lines are mandatory and describe to a browser that it works with
 an SVG image file.</p>
 <p>The third line (<code>viewBox=</code>) is really important since it allows the SVG image
@@ -368,22 +366,21 @@ adequate symbol to represent a line wrap point.</p>
 but since the content of the SVG file is so small and I did not want to host it
 externally (it would be an additional fetch request and more maintenance), I
 just did the following:</p>
-<pre class="highlight"><code class="language-bash">$ cat nl.svg 
+<pre class="highlight" data-user="user"><code class="language-shell">[user@localhost ~]$ cat nl.svg 
 &lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot;
         version=&quot;1.1&quot;
         viewBox=&quot;0 0 24 24&quot;&gt;
     &lt;text x=&quot;0&quot; y=&quot;19&quot;&gt;&amp;#x23ce;&lt;/text&gt;
 &lt;/svg&gt;
-$ sed -n '1{h;d};$!H;${H;x;s,\s\+, ,g;s,&gt;\s*&lt;,&gt;&lt;,g;p}' nl.svg | base64 -w 0 ; echo
+[user@localhost ~]$ sed -n '1{h;d};$!H;${H;x;s,\s\+, ,g;s,&gt;\s*&lt;,&gt;&lt;,g;p}' nl.svg | base64 -w 0 ; echo
 PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==</code></pre>
-
 
 <p>In other words, I removed all the white space, then deleted all line breaks, so
 I got a single line SVG body, and I converted it to Base64.  The resulting line
 is usable as the inline definition of an image.  Let&rsquo;s update our stylesheet
 with the new values (we just replaced the last line to change the <code>background</code>
 to <code>background-image</code>) and added dimensions for the background itself:</p>
-<pre class="highlight"><code class="language-css">pre div.line {
+<pre id="demo4" class="highlight line-numbers"><code class="language-css">pre div.line {
     position: relative; /* so we could position the child */
     min-height: 1em;    /* to avoid collapsing empty lines */
 }
@@ -401,7 +398,6 @@ pre div.line::after {
         no-repeat repeat;
     background-size: 1em 1em;
 }</code></pre>
-
 
 <div class="demo4 resizable">
     <style>
@@ -444,7 +440,7 @@ our lines (reading documentation you may find that the default value is
 <code>normal</code> and you can also find that <code>normal</code> equals <code>1.2</code> for the majority of
 browsers, but relying on that, I think is a bad idea).  We also need to adjust
 our markers with the new information we have got:</p>
-<pre class="highlight"><code class="language-css">pre div.line {
+<pre id="demo5" class="highlight"><code class="language-css">pre div.line {
     position: relative; /* so we could position the child */
     min-height: 1em;    /* to avoid collapsing empty lines */
     line-height: 1.2;   /* set the height explicitly */
@@ -463,7 +459,6 @@ pre div.line::after {
         no-repeat repeat;
     background-size: 1.2em 1.2em;
 }</code></pre>
-
 
 <div class="demo5 resizable">
     <style>
@@ -499,7 +494,7 @@ it done:</p>
 <p>To address the latter a simple play with the <code>opacity</code> attribute will suffice,
 e.g. I think 50% transparency should make the marker less distracting.</p>
 <p>The former, however, requires some thinking.  Given that the post is already too long, I will just state that out of multiple options I had I chose the following: raise the background image by one <code>line-height</code> from the bottom, and clip a square 1x1 <code>line-height</code> at the top to compensate, as follows:</p>
-<pre class="highlight"><code class="language-css">pre div.line {
+<pre id="demo6" class="highlight"><code class="language-css">pre div.line {
     position: relative; /* so we could position the child */
     min-height: 1em;    /* to avoid collapsing empty lines */
     line-height: 1.2;   /* set the height explicitly */
@@ -521,7 +516,6 @@ pre div.line::after {
     clip: rect(1.2em 1.2em 100vh 0);
     opacity: .5;
 }</code></pre>
-
 
 <p>The only tricky part in the added lines is the <code>clip: rect(1.2em 1.2em 100vh
 0)</code> line.  The <code>clip</code> property defines the visible rectangle the browser should
@@ -567,7 +561,7 @@ this is exactly what we want :).</p>
 <h2 id="bonus-round">Bonus Round</h2>
 <p>It should be mentioned, it is also possible to apply the same approach to the
 left side of the lines with a bit of a twist.</p>
-<pre class="highlight"><code class="language-css">pre div.line {
+<pre id="demo7" class="highlight"><code class="language-css">pre div.line {
     position: relative; /* so we could position the child */
     min-height: 1em;    /* to avoid collapsing empty lines */
     line-height: 1.2;   /* set the height explicitly */
@@ -592,7 +586,6 @@ pre div.line::before {
     transform: rotateY(180deg); /* mirror the arrow */
     transform-origin: left;
 }</code></pre>
-
 
 <p>The trick here is the play between <code>padding-left</code> and <code>text-indent</code> for the
 <code>&lt;div&gt;</code> element since <code>text-indent</code> will be applied to the first line only
@@ -633,10 +626,10 @@ so, maybe, for my blog I may just go with the left-side solution):</p>
 <pre><div class="line">This is an example of a basic &lt;pre&gt; container.  You should</div><div class="line">be able to resize it by dragging the bottom right corner (but if you are</div><div class="line">using anything than Chrome you may be out of luck with the resizing).</div><div class="line"></div><div class="line">This line was made specifically long to trigger the line wrapping, so even those who are using a browser that cannot resize should be able to play with it :)</div></pre>
 </div>
 
-<p>The idea for the <code>text-indent</code> and <code>padding-left</code> trick came from <a href="http://shaunwagner.com/">C. Shaun
+<p>This idea for the <code>padding-left</code> and <code>text-indent</code> trick came from <a href="http://shaunwagner.com/">C. Shaun
 &ldquo;Kainaw&rdquo; Wagner</a> when <a href="https://stackoverflow.com/a/48936538/3316011">he answered a question about
 the wrap indicators</a> on Stack
-Overflow.</p>
+Overflow (I am sure that it was known before, but this is where I learnt it).</p>
 <h2 id="assessment-of-the-result">Assessment of the result</h2>
 <p>We started with the following requirement:</p>
 <ul>
@@ -666,9 +659,20 @@ can be dynamically resized.</p>
 <li>
 <p>we also want the syntax highlighter (such as PrismJS in my case) not to be
     affected by whatever we come up with.</p>
-<p>Unknown: I think it would be the material for another post, but I do not
+<p><del>Unknown: I think it would be the material for another post, but I do not
 expect a lot of issues since we only replaced the newline characters and
-preserved the rest of lines intact.</p>
+preserved the rest of lines intact.i</del></p>
+<p>It turned out, that it was quite a hassle since none of plugins PrismJS
+have for working with lines expect semantic markup of the lines inside the
+block.  Therefore, I spent some time and came up with a plugin that does it
+&ldquo;right&rdquo;.</p>
+<p>It is highly likely, that my plugin will get merged into the Prism tree
+(see the corresponding <a href="https://github.com/PrismJS/prism/pull/2389">Pull Request</a>).  However, if for some reason it would
+not be or you need the functionality &ldquo;here &amp; now&rdquo;, you can always get it
+from my <a href="https://github.com/galaxy4public/prism/tree/plugin-lines">fork of PrismJS</a> (I will keep the <code>plugin-lines</code> branch until it
+is merged upstream).</p>
+<p>By the way, my Lines plugin is the primary working horse for all syntax
+highlighted blocks on this site (so you have already seen it in action).</p>
 </li>
 </ul>
 <p>I hope this helped you and you learnt something :).  If you have any

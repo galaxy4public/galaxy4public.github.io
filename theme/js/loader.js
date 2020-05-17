@@ -78,21 +78,23 @@ if (document.getElementsByTagName('pre').length)
 	loader([
 		'/theme/js/prism/prism-local.css'
 		], loader([
-		'/theme/js/prism/plugins/copy-to-clipboard/prism-copy-to-clipboard.js',
-		'/theme/js/prism/plugins/command-line/prism-command-line.js',
-		'/theme/js/prism/plugins/command-line/prism-command-line.css',
-		'/theme/js/prism/plugins/file-highlight/prism-file-highlight.js',
-		'/theme/js/prism/plugins/line-highlight/prism-line-highlight.js',
-		'/theme/js/prism/plugins/line-highlight/prism-line-highlight.css',
-		'/theme/js/prism/plugins/line-numbers/prism-line-numbers.js',
-		'/theme/js/prism/plugins/line-numbers/prism-line-numbers.css',
-		'/theme/js/prism/plugins/normalize-whitespace/prism-normalize-whitespace.js'
+//		'/theme/js/prism/plugins/copy-to-clipboard/prism-copy-to-clipboard.js',
+//		'/theme/js/prism/plugins/command-line/prism-command-line.js',
+//		'/theme/js/prism/plugins/command-line/prism-command-line.css',
+//		'/theme/js/prism/plugins/file-highlight/prism-file-highlight.js',
+//		'/theme/js/prism/plugins/line-highlight/prism-line-highlight.js',
+//		'/theme/js/prism/plugins/line-highlight/prism-line-highlight.css',
+//		'/theme/js/prism/plugins/line-numbers/prism-line-numbers.js',
+//		'/theme/js/prism/plugins/line-numbers/prism-line-numbers.css',
+//		'/theme/js/prism/plugins/normalize-whitespace/prism-normalize-whitespace.js',
+		'/theme/js/prism/plugins/lines/prism-lines.js',
+		'/theme/js/prism/plugins/lines/prism-lines.css',
 		], loader([
 		'/theme/js/prism/plugins/autoloader/prism-autoloader.js',
-		'/theme/js/prism/plugins/toolbar/prism-toolbar.js',
-		'/theme/js/prism/plugins/toolbar/prism-toolbar.css'
+//		'/theme/js/prism/plugins/toolbar/prism-toolbar.js',
+//		'/theme/js/prism/plugins/toolbar/prism-toolbar.css'
 		], loader([
-		'/theme/js/clipboard/clipboard.js',
+//		'/theme/js/clipboard/clipboard.js',
 		'/theme/js/prism/components/prism-core.js',
 		'/theme/js/prism/prism.css'
 	]))))
@@ -101,16 +103,24 @@ if (document.getElementsByTagName('pre').length)
 		Prism.plugins.autoloader.languages_path = '/theme/js/prism/components/'
 		Prism.plugins.autoloader.use_minified = false
 		Prism.hooks.add('before-highlight', (env) => {
+			var pre = env.element.parentNode
+			if (!pre || !/pre/i.test(pre.nodeName))
+				return;
 			var match = env.code.match(/\n(?!$)/g)
 			var linesNum = match ? match.length + 1 : 1
-			if (linesNum > 10)
-				env.element.className += ' line-numbers'
-			if (env.element.parentNode.className.includes('language-shell')) {
-				env.element.parentNode.className += ' command-line'
-				env.element.parentNode.dataset.prompt = '$'
+			if (!pre.className.includes('line-numbers'))
+				if (linesNum > 10)
+					pre.className += ' line-numbers';
+			if (pre.className.includes('language-shell')) {
+				pre.className += ' command-line'
+				pre.dataset.prompt = '$'
 			}
 		})
-		Prism.highlightAll(/* async, callback */)
+		//Prism.highlightAll(/* async, callback */)
+		window.addEventListener('load', listener => {
+			if (Prism)
+				Prism.highlightAll(true)
+		})
 	})
 
 // loader('/theme/js/twitter.js').then(() => { console.log('twitter.js loaded') })

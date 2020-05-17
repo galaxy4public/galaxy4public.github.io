@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
 	<head>
-		<meta http-equiv="Content-Security-Policy" content="	default-src 'self';object-src 'none';script-src 'self' https://www.googletagmanager.com/gtag/js 'sha256-TelA7VsuYAMqhOKGk7CHgJyuqSJdmqZEp+hn6PWVRwQ=' https://www.google-analytics.com/analytics.js;img-src 'self' https://www.google-analytics.com/r/collect https://www.google-analytics.com/collect https://stats.g.doubleclick.net/r/collect https://*/ads/ga-audiences;style-src 'self' 'sha256-fszvBX/J9dhPxFSJ5wUrq/Pvg6HrnTkWyshMZpaxSQY=';connect-src 'self' https://www.google-analytics.com/j/collect https://stats.g.doubleclick.net/j/collect; " />
+		<meta http-equiv="Content-Security-Policy" content="	default-src 'self';object-src 'none';script-src 'self' https://www.googletagmanager.com/gtag/js 'sha256-TelA7VsuYAMqhOKGk7CHgJyuqSJdmqZEp+hn6PWVRwQ=' https://www.google-analytics.com/analytics.js;img-src 'self' data: https://www.google-analytics.com/r/collect https://www.google-analytics.com/collect https://stats.g.doubleclick.net/r/collect https://*/ads/ga-audiences;style-src 'self' 'sha256-fszvBX/J9dhPxFSJ5wUrq/Pvg6HrnTkWyshMZpaxSQY=';connect-src 'self' https://www.google-analytics.com/j/collect https://stats.g.doubleclick.net/j/collect; " />
 		<title>Mind Drops</title>
 		<script src="/theme/js/persistence.js" defer></script>
 		<meta charset="utf-8" />
@@ -159,7 +159,6 @@ drwxr-xr-x  5 vmware vmware 4096 Nov 23 09:01 vmware-player
 drwxr-xr-x 11 vmware vmware 4096 Nov 23 09:01 vmware-player-app
 drwxr-xr-x  3 vmware vmware 4096 Nov 23 09:01 vmware-player-setup</code></pre>
 
-
 <p>So far so good. We now have the whole bundle unacked into the specified
 directory and we are interested in just two subdirectories: <code>vmware-player</code> and
 <code>vmware-player-app</code>, the rest is not related to the functionality we are
@@ -176,7 +175,6 @@ drwx------ 2 vmware vmware 4096 Nov 24 01:21 etc
 drwx------ 2 vmware vmware 4096 Nov 24 01:21 lib
 drwx------ 2 vmware vmware 4096 Nov 24 01:21 share</code></pre>
 
-
 <p>From now on we are going to populate these directories with files from the
 unpacked bundle.</p>
 <p>The first file we are interested in is <code>appLoader</code> &ndash; this is the primary
@@ -190,7 +188,6 @@ $ echo $?
 255
 $</code></pre>
 
-
 <p>Huh, this is not very informative, is it? The binary silently exits with error
 code of 255. Well, you may get other errors at this stage if you don&rsquo;t have all
 the required shared libraries installed on you system &ndash; however I doubt it
@@ -201,7 +198,6 @@ highlighting important things only):</p>
 <pre class="highlight"><code class="language-shell">$ strace -f -eopen ~/vmrconsole/bin/vmplayer 2&gt;&amp;1 | tail -2
 open(&quot;/etc/localtime&quot;, O_RDONLY)        = 6
 open(&quot;/etc/vmware/config&quot;, O_RDONLY|O_LARGEFILE) = -1 EACCES (Permission denied)</code></pre>
-
 
 <p>It looks that vmplayer wants to access a global config file and does not try to
 look for an alternative, home directory based one. Well, this is understandable
@@ -217,7 +213,6 @@ path inside the binary with something relative:</p>
       1 /etc/vmware/ssl/dh512.pem
       1 /etc/vmware/ssl/dh1024.pem
 $ sed -i 's,/etc/vmware,..//////etc,g' ~/vmrconsole/bin/appLoader</code></pre>
-
 
 <p>The trick here is to substitute one string with another of the same length (we
 are modifying a binary so we do not want to mess offsets up) and luckily enough
@@ -242,7 +237,6 @@ open(&quot;..//////etc/config&quot;, O_RDONLY|O_LARGEFILE) = 6
 write(5, &quot;Nov 24 01:53:09.825: app-3077760&quot;..., 89) = 89
 write(5, &quot;Nov 24 01:53:09.825: app-3077760&quot;..., 73) = 73</code></pre>
 
-
 <p>Looks better, does not it? Our binary found the config file and was able to
 open it, however it still produces no output, but it reports something to a log
 file:</p>
@@ -255,7 +249,6 @@ Nov 24 01:53:09.825: app-3077760704| Using configuration file ..//////etc/config
 Nov 24 01:53:09.825: app-3077760704| libdir entry was not present in ..//////etc/config.
 Nov 24 01:53:09.825: app-3077760704| Unable to lookup library directory.</code></pre>
 
-
 <p>I do not know much about VMware Players config file but according to the log
 message it wants some variable called <code>libdir</code> and this variable should point
 to the library directory, so let&rsquo;s introduce such a variable and try to execute
@@ -266,7 +259,6 @@ write(5, &quot;LOG NOT INITIALIZED | LoadLibrar&quot;..., 73) = 73
 open(&quot;../lib/libvmplayer.so/libvmplayer.so&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
 write(5, &quot;LOG NOT INITIALIZED | Error load&quot;..., 153) = 153
 write(5, &quot;LOG NOT INITIALIZED | Could not &quot;..., 74) = 74</code></pre>
-
 
 <p>I hope you have noticed that I have used a relative path for the library
 directory in the config file and this means that we always should run the
@@ -286,7 +278,6 @@ $ ldd ~/vmrconsole/lib/libvmplayer.so/libvmplayer.so | fgrep 'not found'
  libvmwareui.so.0 =&gt; not found
  libgvmomi.so.0 =&gt; not found</code></pre>
 
-
 <p>The last command showed that <code>libvmplayer.so</code> depends on some libraries and
 that their locations are currently unknown to the system. In order to solve
 this there are two things we need to do:</p>
@@ -298,7 +289,7 @@ this there are two things we need to do:</p>
 <p>To accomplish the first thing we need to create a wrapper script around
 vmplayer and use this script for fine-tuning later. Here is the very basic
 script for this purpose (created as <code>~/vmrconsole/bin/loader.sh</code>:</p>
-<pre class="highlight"><code class="language-bash">#!/bin/bash
+<pre class="highlight" data-file="~/vmrconsole/bin/loader.sh"><code class="language-bash">#!/bin/bash
 
 # We must run vmplayer from the directory it resides in since all
 # relative paths are solved from there.
@@ -351,12 +342,10 @@ export LD_LIBRARY_PATH
 # execute the real binary and pass the supplied arguments to it
 exec -a &quot;$ORIG_NAME&quot; ./appLoader &quot;$@&quot;</code></pre>
 
-
 <p>This wrapper script should not be called directly, instead we need to create a
 symbolic link to this wrapper, e.g. for vmplayer the following should be
 performed:</p>
 <pre class="highlight"><code class="language-shell">$ ln -sf loader.sh ~/vmrconsole/bin/vmplayer</code></pre>
-
 
 <p>Since our vmplayer is not a full scale VMware Player I suggest to create
 another small wrapper script and name it <code>vmrconsole</code>:</p>
@@ -366,7 +355,6 @@ ABS_NAME=$(readlink -e $BASH_SOURCE) || exit 1
 BINDIR=&quot;${ABS_NAME%/*}&quot;
 exec &quot;$BINDIR/vmplayer&quot; -h &quot;$@&quot;
 $ chmod 0700 ~/vmrconsole/bin/vmrconsole</code></pre>
-
 
 <p>Now we need to populate our library directory with the needed libraries. It is
 a bit tricky to describe since on different systems you will likely end up with
@@ -385,13 +373,11 @@ need to locate and copy them over to our library directory):</p>
 `libvmwareui.so.0' -&gt; `/home/vmware/vmrconsole/lib/libvmwareui.so.0'
 `libgvmomi.so.0' -&gt; `/home/vmware/vmrconsole/lib/libgvmomi.so.0'</code></pre>
 
-
 <p>Once this is done we need to follow the following loop until there is no output
 from the command listed below (in fact, on my system this step was not needed
 since I had all dependencies in place already, but it is harmless to execute
 this command anyway):</p>
 <pre class="highlight"><code class="language-shell">$ LD_LIBRARY_PATH=~/vmrconsole/lib ldd ~/vmrconsole/lib/* 2&gt;/dev/null | fgrep 'not found' | awk '{ print $1; }' | xargs -i find ~/vmplayer -type f -name '{}' -execdir cp -avL '{}' ~/vmrconsole/lib/ \;</code></pre>
-
 
 <p>If we try to access any remote VM&rsquo;s console it will be clear that some parts
 are still missing:</p>
@@ -401,7 +387,6 @@ Failed to open file '/usr/lib/vmware/share/pixmaps/eula.png': No such file or di
 Failed to open file '/usr/lib/vmware/share/pixmaps/stream-spinner.png': No such file or directory
 Failed to open file '/usr/lib/vmware/share/pixmaps/stream-spinner-stopped.png': No such file or directory
 SSLLoadSharedLibrary: Failed to load library libcrypto.so.0.9.8:/home/vmplayer/vmrconsole/bin/libdir/lib/libcrypto.so.0.9.8/libcrypto.so.0.9.8: cannot open shared object file: No such file or directory</code></pre>
-
 
 <p><code>strace</code> is our best friend here, just run the command through <code>strace</code>,
 examine the log file, and fix stuff properly:</p>
@@ -464,7 +449,6 @@ $ strings libvmwareui.so.0 | fgrep /var/run/vmware
 /var/run/vmware/fuse/%Lu.info
 $ sed -i 's,/var/run/vmware,..//////var/run,g' libvmwareui.so.0</code></pre>
 
-
 <p>Ufff, we did a lot of binary patching &ndash; luckily, VMware binaries and libraries
 are not calculating their checksums. Now, we need to put all this stuff we have
 seen in the <code>strings</code> output and during the execution of the program in place (in
@@ -485,12 +469,10 @@ $ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/share/EULA.txt ~/vmrconsole
 $ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/share/*.ui ~/vmrconsole/share/
 $ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/share/icons ~/vmrconsole/share/</code></pre>
 
-
 <p>At this stage we should be able to launch the vmplayer program via our wrapper
 script (I am launching it on a remote machine through SSH, but here I am
 describing how it should look on the local console):</p>
 <pre class="highlight"><code class="language-shell">$ ~/vmrconsole/bin/vmplayer</code></pre>
-
 
 <p><img alt="VMware Player: main window" class="figure" src="https://dmitry.khlebnikov.net/images/howto-vmware-player-as-remote-console-01.jpg"></p>
 <p>So far so good, but we need to resolve the issue with the OpenSSL library
@@ -502,10 +484,8 @@ $ ls -ld ~/vmrconsole/lib/lib*.so.0.9.8
 lrwxrwxrwx 1 vmware vmware 27 Nov 24 05:27 /home/vmware/vmrconsole/lib/libcrypto.so.0.9.8 -&gt; /usr/lib/libcrypto.so.0.9.8
 lrwxrwxrwx 1 vmware vmware 27 Nov 24 05:27 /home/vmware/vmrconsole/lib/libssl.so.0.9.8 -&gt; /usr/lib/libssl.so.0.9.8</code></pre>
 
-
 <p>Let&rsquo;s try to connect to remote VM&rsquo;s console again:</p>
 <pre class="highlight"><code class="language-shell">$ vmrconsole 192.168.70.31</code></pre>
-
 
 <p><img alt="VMware Player: credentials window" class="figure" src="https://dmitry.khlebnikov.net/images/howto-vmware-player-as-remote-console-02.jpg"></p>
 <p><img alt="VMware Player: MKS error message" class="figure" src="https://dmitry.khlebnikov.net/images/howto-vmware-player-as-remote-console-03.jpg"></p>
@@ -527,7 +507,6 @@ Nov 24 03:41:05.444: player| VMClient_ConnectMksClientEx - trying remote socket 
 Nov 24 03:41:05.611: player| VMClient_ConnectMksClientEx - connecting the MKS client
 Nov 24 03:41:05.616: player| vmdbPipe_Streams: Couldn't read
 Nov 24 03:41:15.941: player| Gdk: losing last reference to undestroyed window</code></pre>
-
 
 <p>From the messages quoted above it is quite clear that the program is trying to
 launch some helper binaries/daemons in the background and to delegate the
@@ -563,10 +542,8 @@ vmauthd/vmware-authd
 $ sed -i 's,/var/run/vmware,..//////var/run,g' ~/vmrconsole/bin/vmware-remotemks
 $ sed -i 's,/etc/vmware/,..//////etc/,g' ~/vmrconsole/bin/vmware-remotemks</code></pre>
 
-
 <p>Another attempt:</p>
 <pre class="highlight"><code class="language-shell">$ vmrconsole 192.168.70.31</code></pre>
-
 
 <p><img alt="VMware Player: hints messages" class="figure" src="https://dmitry.khlebnikov.net/images/howto-vmware-player-as-remote-console-04.jpg"></p>
 <p>Ouch, we are presented by a bunch of hints (your mileage may vary since it
@@ -580,7 +557,6 @@ is just a right thing to do to fix this little bugger:</p>
 $ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/xkeymap ~/vmrconsole/
 $ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/vnckeymap ~/vmrconsole/
 $ vmrconsole 192.168.70.31</code></pre>
-
 
 <p><img alt="VMware Player: remote console window" class="figure" src="https://dmitry.khlebnikov.net/images/howto-vmware-player-as-remote-console-05.jpg"></p>
 <p>We are almost done! At least we achieved the goal we set at the beginning of
@@ -597,7 +573,6 @@ $ mv vmrconsole vmrconsole-3.1.3.324285
 $ tar cjpf ~/vmrconsole-3.1.3.324285.i386.tar.bz2 vmrconsole-3.1.3.324285
 $ ls -lh vmrconsole-3.1.3.324285.i386.tar.bz2 
 -rw-r--r-- 1 vmware vmware 13M Nov 24 07:06 vmrconsole-3.1.3.324285.i386.tar.bz2</code></pre>
-
 
 <p>P.S. Oh, boy, it takes 2 hours to investigate and to come up with a solution,
 then 8 hours to write an article to describe steps to reproduce! I hope that

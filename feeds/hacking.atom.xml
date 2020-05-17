@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - hacking</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"></link><link href="https://dmitry.khlebnikov.net/feeds/hacking.atom.xml" rel="self"></link><id>https://dmitry.khlebnikov.net/</id><updated>2020-04-27T00:27:04+10:00</updated><entry><title>nginx + a backend with a dynamic IP (e.g. AWS ELB)</title><link href="https://dmitry.khlebnikov.net/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/" rel="alternate"></link><published>2017-01-13T10:00:00+11:00</published><updated>2020-04-27T00:27:04+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2017-01-13:/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/</id><summary type="html">&lt;p&gt;Recently, I wrote about &lt;a href="https://dmitry.khlebnikov.net/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/"&gt;the dynamic resolution of upstream servers&lt;/a&gt; in
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - hacking</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"></link><link href="https://dmitry.khlebnikov.net/feeds/hacking.atom.xml" rel="self"></link><id>https://dmitry.khlebnikov.net/</id><updated>2020-05-17T20:25:15+10:00</updated><entry><title>nginx + a backend with a dynamic IP (e.g. AWS ELB)</title><link href="https://dmitry.khlebnikov.net/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/" rel="alternate"></link><published>2017-01-13T10:00:00+11:00</published><updated>2020-05-17T20:25:15+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2017-01-13:/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/</id><summary type="html">&lt;p&gt;Recently, I wrote about &lt;a href="https://dmitry.khlebnikov.net/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/"&gt;the dynamic resolution of upstream servers&lt;/a&gt; in
 nginx which was achieved by quite an intrusive patch to the core nginx module.
 The patch was invented a while ago and was working very well up until recent
 nginx versions were released.&lt;/p&gt;
@@ -57,7 +57,6 @@ location ~ \.php$ {
     include     fastcgi.conf;
 }&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;The next step is to define the socket activated proxy service. This generally
 requires creating two files in &lt;code&gt;/etc/system/systemd&lt;/code&gt; directory: one for the
 socket and the other for the proxy itself. However, in this article we will go
@@ -65,7 +64,7 @@ an extra mile and will define template units so the same configuration could be
 reused to launch multiple proxies using the same base templates.&lt;/p&gt;
 &lt;p&gt;The first template file is for the systemd service which will provide the proxy
 capability:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-systemd"&gt;[Unit]
+&lt;pre class="highlight" data-file="/etc/systemd/system/systemd-socket-proxyd@.service"&gt;&lt;code class="language-systemd"&gt;[Unit]
 Description=&amp;quot;Generic Socket Proxy (%I)&amp;quot;
 Documentation=https://www.freedesktop.org/software/systemd/man/systemd-socket-proxyd.html
 After=network.service
@@ -89,7 +88,6 @@ ProtectSystem=full
 #ProtectKernelModules=true
 #MemoryDenyWriteExecute=true&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;Depending on the version of your &lt;code&gt;systemd&lt;/code&gt; manager you may be able to uncomment
 more lines than was shown in this example, which was tested on CentOS 7.3.1611.&lt;/p&gt;
 &lt;p&gt;Also, in the example template given above we are using &lt;code&gt;OOMScoreAdjust=-1000&lt;/code&gt; to
@@ -97,7 +95,7 @@ protect this proxy service from being killed in the event the system is
 starving for memory &amp;ndash; this may be something you do not need.&lt;/p&gt;
 &lt;p&gt;The second template file is for the socket unit that would trigger the
 activation of the proxy service when a request arrives on the socket:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-systemd"&gt;[Unit]
+&lt;pre class="highlight" data-file="/etc/systemd/system/systemd-socket-proxyd@.socket"&gt;&lt;code class="language-systemd"&gt;[Unit]
 Description=&amp;quot;Socket for Generic Socket Proxy (%I)&amp;quot;
 Documentation=https://www.freedesktop.org/software/systemd/man/systemd-socket-proxyd.html
 
@@ -110,7 +108,6 @@ DirectoryMode=0711
 
 [Install]
 WantedBy=sockets.target&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;You may notice that the defaults are pretty strict:&lt;/p&gt;
 &lt;ul&gt;
@@ -125,28 +122,25 @@ instantiated using the template as shown later in this article.&lt;/p&gt;
 &lt;p&gt;Since our goal is to connect nginx to the backend FastCGI service we need to
 ensure that the proxy socket is read/write accessible to nginx&amp;rsquo;es workers, so
 we need to tweak the settings of the socket unit:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-systemd"&gt;[Socket]
+&lt;pre class="highlight" data-file="/etc/systemd/system/systemd-socket-proxyd@fastcgi.socket.d/fastcgi.conf"&gt;&lt;code class="language-systemd"&gt;[Socket]
 SocketGroup=nginx&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;Note how we extended the template for a specific named instance of the socket
 unit: we defined the &lt;code&gt;systemd-socket-proxyd@fastcgi.socket.d&lt;/code&gt; sub-directory and
 put a drop-in configuration snippet there.&lt;/p&gt;
 &lt;p&gt;Now, to achieve our goal we need to specify the target endpoint for our proxy
 service (the named instance we spawn using the template):&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-systemd"&gt;[Service]
+&lt;pre class="highlight" data-file="/etc/systemd/system/systemd-socket-proxyd@fastcgi.service.d/fastcgi.conf"&gt;&lt;code class="language-systemd"&gt;[Service]
 # Reset the ExecStart, so we could override it
 ExecStart=
 ExecStart=/usr/lib/systemd/systemd-socket-proxyd remote.php.backend.domain.tld.:9000&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;The mechanics behind extending the configuration is the same as for the socket
 unit, but here we overrode the &lt;code&gt;ExecStart&lt;/code&gt; command to specify the target endpoint
 for the proxy.&lt;/p&gt;
 &lt;p&gt;OK, we are done with the configuration of &lt;code&gt;systemd&lt;/code&gt;, so it would be a good time
 to reload the &lt;code&gt;systemd&lt;/code&gt; daemon:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;systemctl daemon-reload&lt;/code&gt;&lt;/pre&gt;
-
+&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;[root@localhost ~]# systemctl daemon-reload&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;If you run a system where SELinux is disabled (why?!) you don&amp;rsquo;t need to do
 anything additional and should be good, but if you are security conscious and
@@ -163,8 +157,7 @@ VM for building/compiling policies since the only time you need that
 development stuff is when you are compiling the module from sources).&lt;/p&gt;
 &lt;p&gt;On CentOS, you can install all the necessary bits to build a loadable SELinux
 module by installing the &lt;code&gt;selinux-policy-devel&lt;/code&gt; package using &lt;code&gt;yum&lt;/code&gt;:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;# yum -y install selinux-policy-devel&lt;/code&gt;&lt;/pre&gt;
-
+&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;[root@localhost ~]# yum -y install selinux-policy-devel&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Note, I skipped the output of the command since it does not provide any useful
 information for the purposes of this article.&lt;/p&gt;
@@ -179,7 +172,7 @@ loadable policy for the &lt;code&gt;systemd-socket-proxyd&lt;/code&gt; service.&
 support file too, but for the purposes of this article we should be fine with
 the automatically generated one.&lt;/p&gt;
 &lt;p&gt;The content of the systemd-socket-proxy.te file is listed below:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-selinux"&gt;policy_module(systemd-socket-proxyd, 1.0)
+&lt;pre class="highlight" data-file="systemd-socket-proxy.te"&gt;&lt;code class="language-selinux"&gt;policy_module(systemd-socket-proxyd, 1.0)
 
 ## &amp;lt;desc&amp;gt;
 ##  &amp;lt;p&amp;gt;
@@ -232,7 +225,6 @@ tunable_policy(`systemd_socket_proxyd_connect_any',`
 # consumer
 allow daemon systemd_socket_proxyd_t:unix_stream_socket connectto;&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;This is still work in progress, but so far it works at least for my projects.
 Note that there are two SELinux booleans defined which affect the behaviour of
 the policy:&lt;/p&gt;
@@ -255,13 +247,12 @@ need to label the &lt;code&gt;systemd-socket-proxyd&lt;/code&gt; binary with the
 &lt;code&gt;systemd_socket_proxyd_exec_t&lt;/code&gt; label.&lt;/p&gt;
 &lt;p&gt;The content of the systemd-socket-proxy.fc file that implements this behavior
 is as follows:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-selinux"&gt;/(usr/lib|etc)/systemd/system/systemd-socket-proxyd\.service  gen_context(system_u:object_r:systemd_socket_proxyd_unit_file_t,s0)
+&lt;pre class="highlight" data-file="systemd-socket-proxy.fc"&gt;&lt;code class="language-selinux"&gt;/(usr/lib|etc)/systemd/system/systemd-socket-proxyd\.service  gen_context(system_u:object_r:systemd_socket_proxyd_unit_file_t,s0)
 /usr/lib/systemd/systemd-socket-proxyd -- gen_context(system_u:object_r:systemd_socket_proxyd_exec_t,s0)&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;At this point, we have everything we need to compile a policy module, so let&amp;rsquo;s
 just do it now:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;[root@localhost ~]# ls -l
+&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;[root@localhost ~]# ls -l
 total 8
 -rw-r--r--. 1 root root  235 Jan  5 05:21 systemd-socket-proxyd.fc
 -rw-r--r--. 1 root root 1467 Jan  6 00:10 systemd-socket-proxyd.te
@@ -276,7 +267,6 @@ rm tmp/systemd-socket-proxyd.mod tmp/systemd-socket-proxyd.mod.fc
 [root@localhost ~]# restorecon -v /usr/lib/systemd/systemd-socket-proxyd
 restorecon reset /usr/lib/systemd/systemd-socket-proxyd context system_u:object_r:init_exec_t:s0-&amp;gt;system_u:object_r:systemd_socket_proxyd_exec_t:s0&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;The &lt;code&gt;semodule -i systemd-socket-proxyd.pp&lt;/code&gt; command has actually installed the
 module into the system, but if you were building the module on a different
 instance, then instead of installing the module you just need to grab the
@@ -286,22 +276,20 @@ where proxy is going to be running and only apply the last two commands
 &lt;p&gt;We approached the time when we need to perform the pre-flight checks before
 launching our new service :). First, we need to check whether the file context
 was applied to the &lt;code&gt;systemd-socket-proxyd binary&lt;/code&gt;:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;[root@localhost ~]# ls -ldZ /usr/lib/systemd/systemd-socket-proxyd 
+&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;[root@localhost ~]# ls -ldZ /usr/lib/systemd/systemd-socket-proxyd 
 -rwxr-xr-x. root root system_u:object_r:systemd_socket_proxyd_exec_t:s0 /usr/lib/systemd/systemd-socket-proxyd&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;Looks good! Let&amp;rsquo;s start the socket unit and check the permissions set on the
 socket file:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;[root@localhost ~]# systemctl start systemd-socket-proxyd@fastcgi.socket
+&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;[root@localhost ~]# systemctl start systemd-socket-proxyd@fastcgi.socket
 [root@localhost ~]# ls -ldZ /run/systemd-socket-proxyd{,/fastcgi.sock}
 drwx--x--x. root root  system_u:object_r:var_run_t:s0   /run/systemd-socket-proxyd
 srw-rw----. root nginx system_u:object_r:var_run_t:s0   /run/systemd-socket-proxyd/fastcgi.sock&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;This also looks as expected. The next test would be to check that our proxy
 service is running with the desired set of permissions and in the correct
 SELinux domain:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;[root@localhost ~]# socat -v unix-client:/run/systemd-socket-proxyd/fastcgi.sock stdin
+&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;[root@localhost ~]# socat -v unix-client:/run/systemd-socket-proxyd/fastcgi.sock stdin
 
 &amp;lt; 2017/01/13 00:59:22.987083  length=1 from=0 to=0
 
@@ -322,7 +310,6 @@ FDSize: 64
 Groups: 99 
 [truncated]&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;The first &lt;code&gt;socat&lt;/code&gt; command was needed to trigger the socket activation that
 resulted in the &lt;code&gt;systemd-socket-proxyd.service&lt;/code&gt; being launched.&lt;/p&gt;
 &lt;p&gt;The second command confirmed that the service is running under the nobody user
@@ -331,23 +318,22 @@ and within the &lt;code&gt;systemd_socket_proxyd_t&lt;/code&gt; domain.&lt;/p&gt
 and there is no way the service could regain the escalated privileges back.&lt;/p&gt;
 &lt;p&gt;Looks like we are all, so let&amp;rsquo;s make our changes persistent. To achieve this we
 just need to enable the &lt;code&gt;systemd-socket-proxyd@fastcgi.socket&lt;/code&gt; unit:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;[root@localhost ~]# systemctl enable systemd-socket-proxyd@fastcgi.socket
+&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;[root@localhost ~]# systemctl enable systemd-socket-proxyd@fastcgi.socket
 Created symlink from /etc/systemd/system/sockets.target.wants/systemd-socket-proxyd@fastcgi.socket to /etc/systemd/system/systemd-socket-proxyd@.socket.
 [root@localhost ~]# systemctl status systemd-socket-proxyd@fastcgi.socket | fgrep Loaded:
    Loaded: loaded (/etc/systemd/system/systemd-socket-proxyd@.socket; enabled; vendor preset: disabled)&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;Just to show that the configuration is working I set a simple lab up in a VM
 and followed this article with the only exception of the PHP/FPM location which
 I am running on the same VM:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;[root@localhost ~]# cat /usr/share/nginx/html/test.php 
+&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;[root@localhost ~]# cat /usr/share/nginx/html/test.php
 &amp;lt;?php echo &amp;quot;This is the output from PHP\n&amp;quot; ?&amp;gt;
 [root@localhost ~]# cat /etc/nginx/conf.d/php-upstream.conf 
 upstream php {
     #server        remote.php.backend.domain.tld.:9000
     server         unix:/run/systemd-socket-proxyd/fastcgi.sock;
 }
-[root@localhost ~]# cat /etc/nginx/default.d/php.conf 
+[root@localhost ~]# cat /etc/nginx/default.d/php.conf
 location ~ \.php$ {
     try_files      $uri = 404;
     fastcgi_pass   php;
@@ -375,7 +361,6 @@ X-Powered-By: PHP/5.4.16
 This is the output from PHP
 Connection closed by foreign host.&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;Works as expected :).&lt;/p&gt;
 &lt;p&gt;There is one thing one needs to be aware of: when I started to work on this I
 discovered that &lt;code&gt;systemd-socket-proxyd&lt;/code&gt; had a hard-coded limit for the number
@@ -386,7 +371,7 @@ would take some time until this change is propagated to all major distros).&lt;/
 efficient if you are using a domain name for the target endpoint for the proxy,
 so if this is the case I would advise to run a local DNS caching service (e.g.
 &lt;code&gt;dnsmasq&lt;/code&gt;) so you would not spend time on the DNS queries.&lt;/p&gt;
-&lt;p&gt;As always, I would appreciate any feedback you may have.&lt;/p&gt;</content><category term="hacking"></category><category term="nginx"></category><category term="patch"></category></entry><entry><title>Dynamic resolution of upstream servers in nginx</title><link href="https://dmitry.khlebnikov.net/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/" rel="alternate"></link><published>2016-09-20T10:00:00+10:00</published><updated>2020-04-27T00:27:04+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2016-09-20:/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/</id><summary type="html">&lt;p&gt;UPDATE: This approach was superseded by the &lt;a href="https://dmitry.khlebnikov.net/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/"&gt;proxying through
+&lt;p&gt;As always, I would appreciate any feedback you may have.&lt;/p&gt;</content><category term="hacking"></category><category term="nginx"></category><category term="patch"></category></entry><entry><title>Dynamic resolution of upstream servers in nginx</title><link href="https://dmitry.khlebnikov.net/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/" rel="alternate"></link><published>2016-09-20T10:00:00+10:00</published><updated>2020-05-17T20:25:15+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2016-09-20:/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/</id><summary type="html">&lt;p&gt;UPDATE: This approach was superseded by the &lt;a href="https://dmitry.khlebnikov.net/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/"&gt;proxying through
 systemd-socket-proxyd&lt;/a&gt; approach.&lt;/p&gt;
 &lt;p&gt;Many of my clients are running application stacks consisting of nginx plus some
 kind of scripting engine behind it (be it PHP, Ruby, or something else).&lt;/p&gt;
@@ -432,7 +417,7 @@ need to change your configs.&lt;/p&gt;
 production for the last couple of years. The work on the patch was sponsored by
 &lt;a href="https://openwall.com.au"&gt;Openwall (Australia)&lt;/a&gt; and &lt;a href="https://withriley.com"&gt;Data Solutions
 Group&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Enjoy! :)&lt;/p&gt;</content><category term="hacking"></category><category term="nginx"></category><category term="patch"></category></entry><entry><title>HOWTO: VMware Player as a remote console (VNC)</title><link href="https://dmitry.khlebnikov.net/2010/11/24/howto-vmware-player-as-a-remote-console-vnc/" rel="alternate"></link><published>2010-11-24T10:00:00+11:00</published><updated>2020-04-27T00:27:04+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2010-11-24:/2010/11/24/howto-vmware-player-as-a-remote-console-vnc/</id><summary type="html">&lt;p&gt;Turning VMware Player into a non-privileged VNC client to access VMware VMs from a Linux-based PC&lt;/p&gt;</summary><content type="html">&lt;p&gt;Since I am doing a lot of remote systems administration tasks due to the nature
+&lt;p&gt;Enjoy! :)&lt;/p&gt;</content><category term="hacking"></category><category term="nginx"></category><category term="patch"></category></entry><entry><title>HOWTO: VMware Player as a remote console (VNC)</title><link href="https://dmitry.khlebnikov.net/2010/11/24/howto-vmware-player-as-a-remote-console-vnc/" rel="alternate"></link><published>2010-11-24T10:00:00+11:00</published><updated>2020-05-17T20:25:15+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2010-11-24:/2010/11/24/howto-vmware-player-as-a-remote-console-vnc/</id><summary type="html">&lt;p&gt;Turning VMware Player into a non-privileged VNC client to access VMware VMs from a Linux-based PC&lt;/p&gt;</summary><content type="html">&lt;p&gt;Since I am doing a lot of remote systems administration tasks due to the nature
 of my IT consulting work and since I am also running Linux on all my computers
 I was looking for a native way how to get a remote console to VMware VMs from
 linux.&lt;/p&gt;
@@ -478,7 +463,6 @@ drwxr-xr-x  5 vmware vmware 4096 Nov 23 09:01 vmware-player
 drwxr-xr-x 11 vmware vmware 4096 Nov 23 09:01 vmware-player-app
 drwxr-xr-x  3 vmware vmware 4096 Nov 23 09:01 vmware-player-setup&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;So far so good. We now have the whole bundle unacked into the specified
 directory and we are interested in just two subdirectories: &lt;code&gt;vmware-player&lt;/code&gt; and
 &lt;code&gt;vmware-player-app&lt;/code&gt;, the rest is not related to the functionality we are
@@ -495,7 +479,6 @@ drwx------ 2 vmware vmware 4096 Nov 24 01:21 etc
 drwx------ 2 vmware vmware 4096 Nov 24 01:21 lib
 drwx------ 2 vmware vmware 4096 Nov 24 01:21 share&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;From now on we are going to populate these directories with files from the
 unpacked bundle.&lt;/p&gt;
 &lt;p&gt;The first file we are interested in is &lt;code&gt;appLoader&lt;/code&gt; &amp;ndash; this is the primary
@@ -509,7 +492,6 @@ $ echo $?
 255
 $&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;Huh, this is not very informative, is it? The binary silently exits with error
 code of 255. Well, you may get other errors at this stage if you don&amp;rsquo;t have all
 the required shared libraries installed on you system &amp;ndash; however I doubt it
@@ -520,7 +502,6 @@ highlighting important things only):&lt;/p&gt;
 &lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ strace -f -eopen ~/vmrconsole/bin/vmplayer 2&amp;gt;&amp;amp;1 | tail -2
 open(&amp;quot;/etc/localtime&amp;quot;, O_RDONLY)        = 6
 open(&amp;quot;/etc/vmware/config&amp;quot;, O_RDONLY|O_LARGEFILE) = -1 EACCES (Permission denied)&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;It looks that vmplayer wants to access a global config file and does not try to
 look for an alternative, home directory based one. Well, this is understandable
@@ -536,7 +517,6 @@ path inside the binary with something relative:&lt;/p&gt;
       1 /etc/vmware/ssl/dh512.pem
       1 /etc/vmware/ssl/dh1024.pem
 $ sed -i 's,/etc/vmware,..//////etc,g' ~/vmrconsole/bin/appLoader&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;The trick here is to substitute one string with another of the same length (we
 are modifying a binary so we do not want to mess offsets up) and luckily enough
@@ -561,7 +541,6 @@ open(&amp;quot;..//////etc/config&amp;quot;, O_RDONLY|O_LARGEFILE) = 6
 write(5, &amp;quot;Nov 24 01:53:09.825: app-3077760&amp;quot;..., 89) = 89
 write(5, &amp;quot;Nov 24 01:53:09.825: app-3077760&amp;quot;..., 73) = 73&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;Looks better, does not it? Our binary found the config file and was able to
 open it, however it still produces no output, but it reports something to a log
 file:&lt;/p&gt;
@@ -574,7 +553,6 @@ Nov 24 01:53:09.825: app-3077760704| Using configuration file ..//////etc/config
 Nov 24 01:53:09.825: app-3077760704| libdir entry was not present in ..//////etc/config.
 Nov 24 01:53:09.825: app-3077760704| Unable to lookup library directory.&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;I do not know much about VMware Players config file but according to the log
 message it wants some variable called &lt;code&gt;libdir&lt;/code&gt; and this variable should point
 to the library directory, so let&amp;rsquo;s introduce such a variable and try to execute
@@ -585,7 +563,6 @@ write(5, &amp;quot;LOG NOT INITIALIZED | LoadLibrar&amp;quot;..., 73) = 73
 open(&amp;quot;../lib/libvmplayer.so/libvmplayer.so&amp;quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
 write(5, &amp;quot;LOG NOT INITIALIZED | Error load&amp;quot;..., 153) = 153
 write(5, &amp;quot;LOG NOT INITIALIZED | Could not &amp;quot;..., 74) = 74&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;I hope you have noticed that I have used a relative path for the library
 directory in the config file and this means that we always should run the
@@ -605,7 +582,6 @@ $ ldd ~/vmrconsole/lib/libvmplayer.so/libvmplayer.so | fgrep 'not found'
  libvmwareui.so.0 =&amp;gt; not found
  libgvmomi.so.0 =&amp;gt; not found&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;The last command showed that &lt;code&gt;libvmplayer.so&lt;/code&gt; depends on some libraries and
 that their locations are currently unknown to the system. In order to solve
 this there are two things we need to do:&lt;/p&gt;
@@ -617,7 +593,7 @@ this there are two things we need to do:&lt;/p&gt;
 &lt;p&gt;To accomplish the first thing we need to create a wrapper script around
 vmplayer and use this script for fine-tuning later. Here is the very basic
 script for this purpose (created as &lt;code&gt;~/vmrconsole/bin/loader.sh&lt;/code&gt;:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;#!/bin/bash
+&lt;pre class="highlight" data-file="~/vmrconsole/bin/loader.sh"&gt;&lt;code class="language-bash"&gt;#!/bin/bash
 
 # We must run vmplayer from the directory it resides in since all
 # relative paths are solved from there.
@@ -670,12 +646,10 @@ export LD_LIBRARY_PATH
 # execute the real binary and pass the supplied arguments to it
 exec -a &amp;quot;$ORIG_NAME&amp;quot; ./appLoader &amp;quot;$@&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;This wrapper script should not be called directly, instead we need to create a
 symbolic link to this wrapper, e.g. for vmplayer the following should be
 performed:&lt;/p&gt;
 &lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ ln -sf loader.sh ~/vmrconsole/bin/vmplayer&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;Since our vmplayer is not a full scale VMware Player I suggest to create
 another small wrapper script and name it &lt;code&gt;vmrconsole&lt;/code&gt;:&lt;/p&gt;
@@ -685,7 +659,6 @@ ABS_NAME=$(readlink -e $BASH_SOURCE) || exit 1
 BINDIR=&amp;quot;${ABS_NAME%/*}&amp;quot;
 exec &amp;quot;$BINDIR/vmplayer&amp;quot; -h &amp;quot;$@&amp;quot;
 $ chmod 0700 ~/vmrconsole/bin/vmrconsole&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;Now we need to populate our library directory with the needed libraries. It is
 a bit tricky to describe since on different systems you will likely end up with
@@ -704,13 +677,11 @@ need to locate and copy them over to our library directory):&lt;/p&gt;
 `libvmwareui.so.0' -&amp;gt; `/home/vmware/vmrconsole/lib/libvmwareui.so.0'
 `libgvmomi.so.0' -&amp;gt; `/home/vmware/vmrconsole/lib/libgvmomi.so.0'&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;Once this is done we need to follow the following loop until there is no output
 from the command listed below (in fact, on my system this step was not needed
 since I had all dependencies in place already, but it is harmless to execute
 this command anyway):&lt;/p&gt;
 &lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ LD_LIBRARY_PATH=~/vmrconsole/lib ldd ~/vmrconsole/lib/* 2&amp;gt;/dev/null | fgrep 'not found' | awk '{ print $1; }' | xargs -i find ~/vmplayer -type f -name '{}' -execdir cp -avL '{}' ~/vmrconsole/lib/ \;&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;If we try to access any remote VM&amp;rsquo;s console it will be clear that some parts
 are still missing:&lt;/p&gt;
@@ -720,7 +691,6 @@ Failed to open file '/usr/lib/vmware/share/pixmaps/eula.png': No such file or di
 Failed to open file '/usr/lib/vmware/share/pixmaps/stream-spinner.png': No such file or directory
 Failed to open file '/usr/lib/vmware/share/pixmaps/stream-spinner-stopped.png': No such file or directory
 SSLLoadSharedLibrary: Failed to load library libcrypto.so.0.9.8:/home/vmplayer/vmrconsole/bin/libdir/lib/libcrypto.so.0.9.8/libcrypto.so.0.9.8: cannot open shared object file: No such file or directory&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;&lt;code&gt;strace&lt;/code&gt; is our best friend here, just run the command through &lt;code&gt;strace&lt;/code&gt;,
 examine the log file, and fix stuff properly:&lt;/p&gt;
@@ -783,7 +753,6 @@ $ strings libvmwareui.so.0 | fgrep /var/run/vmware
 /var/run/vmware/fuse/%Lu.info
 $ sed -i 's,/var/run/vmware,..//////var/run,g' libvmwareui.so.0&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;Ufff, we did a lot of binary patching &amp;ndash; luckily, VMware binaries and libraries
 are not calculating their checksums. Now, we need to put all this stuff we have
 seen in the &lt;code&gt;strings&lt;/code&gt; output and during the execution of the program in place (in
@@ -804,12 +773,10 @@ $ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/share/EULA.txt ~/vmrconsole
 $ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/share/*.ui ~/vmrconsole/share/
 $ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/share/icons ~/vmrconsole/share/&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;At this stage we should be able to launch the vmplayer program via our wrapper
 script (I am launching it on a remote machine through SSH, but here I am
 describing how it should look on the local console):&lt;/p&gt;
 &lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ ~/vmrconsole/bin/vmplayer&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;&lt;img alt="VMware Player: main window" class="figure" src="https://dmitry.khlebnikov.net/images/howto-vmware-player-as-remote-console-01.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;So far so good, but we need to resolve the issue with the OpenSSL library
@@ -821,10 +788,8 @@ $ ls -ld ~/vmrconsole/lib/lib*.so.0.9.8
 lrwxrwxrwx 1 vmware vmware 27 Nov 24 05:27 /home/vmware/vmrconsole/lib/libcrypto.so.0.9.8 -&amp;gt; /usr/lib/libcrypto.so.0.9.8
 lrwxrwxrwx 1 vmware vmware 27 Nov 24 05:27 /home/vmware/vmrconsole/lib/libssl.so.0.9.8 -&amp;gt; /usr/lib/libssl.so.0.9.8&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;Let&amp;rsquo;s try to connect to remote VM&amp;rsquo;s console again:&lt;/p&gt;
 &lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ vmrconsole 192.168.70.31&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;&lt;img alt="VMware Player: credentials window" class="figure" src="https://dmitry.khlebnikov.net/images/howto-vmware-player-as-remote-console-02.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img alt="VMware Player: MKS error message" class="figure" src="https://dmitry.khlebnikov.net/images/howto-vmware-player-as-remote-console-03.jpg"&gt;&lt;/p&gt;
@@ -846,7 +811,6 @@ Nov 24 03:41:05.444: player| VMClient_ConnectMksClientEx - trying remote socket 
 Nov 24 03:41:05.611: player| VMClient_ConnectMksClientEx - connecting the MKS client
 Nov 24 03:41:05.616: player| vmdbPipe_Streams: Couldn't read
 Nov 24 03:41:15.941: player| Gdk: losing last reference to undestroyed window&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;From the messages quoted above it is quite clear that the program is trying to
 launch some helper binaries/daemons in the background and to delegate the
@@ -882,10 +846,8 @@ vmauthd/vmware-authd
 $ sed -i 's,/var/run/vmware,..//////var/run,g' ~/vmrconsole/bin/vmware-remotemks
 $ sed -i 's,/etc/vmware/,..//////etc/,g' ~/vmrconsole/bin/vmware-remotemks&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;Another attempt:&lt;/p&gt;
 &lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ vmrconsole 192.168.70.31&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;&lt;img alt="VMware Player: hints messages" class="figure" src="https://dmitry.khlebnikov.net/images/howto-vmware-player-as-remote-console-04.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;Ouch, we are presented by a bunch of hints (your mileage may vary since it
@@ -899,7 +861,6 @@ is just a right thing to do to fix this little bugger:&lt;/p&gt;
 $ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/xkeymap ~/vmrconsole/
 $ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/vnckeymap ~/vmrconsole/
 $ vmrconsole 192.168.70.31&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;&lt;img alt="VMware Player: remote console window" class="figure" src="https://dmitry.khlebnikov.net/images/howto-vmware-player-as-remote-console-05.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;We are almost done! At least we achieved the goal we set at the beginning of
@@ -916,7 +877,6 @@ $ mv vmrconsole vmrconsole-3.1.3.324285
 $ tar cjpf ~/vmrconsole-3.1.3.324285.i386.tar.bz2 vmrconsole-3.1.3.324285
 $ ls -lh vmrconsole-3.1.3.324285.i386.tar.bz2 
 -rw-r--r-- 1 vmware vmware 13M Nov 24 07:06 vmrconsole-3.1.3.324285.i386.tar.bz2&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;P.S. Oh, boy, it takes 2 hours to investigate and to come up with a solution,
 then 8 hours to write an article to describe steps to reproduce! I hope that

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"></link><link href="https://dmitry.khlebnikov.net/feeds/all-en.atom.xml" rel="self"></link><id>https://dmitry.khlebnikov.net/</id><updated>2020-05-14T21:59:59+10:00</updated><entry><title>Wrap indicator in &lt;pre&gt; blocks</title><link href="https://dmitry.khlebnikov.net/2020/05/10/wrap-indicator-in-pre-blocks/" rel="alternate"></link><published>2020-05-10T21:00:00+10:00</published><updated>2020-05-14T21:59:59+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-10:/2020/05/10/wrap-indicator-in-pre-blocks/</id><summary type="html">&lt;p&gt;I am not a front-end developer, not a UI designer, nor a UX guru, but I am an
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"></link><link href="https://dmitry.khlebnikov.net/feeds/all-en.atom.xml" rel="self"></link><id>https://dmitry.khlebnikov.net/</id><updated>2020-05-17T20:25:15+10:00</updated><entry><title>Wrap indicator in &lt;pre&gt; blocks</title><link href="https://dmitry.khlebnikov.net/2020/05/10/wrap-indicator-in-pre-blocks/" rel="alternate"></link><published>2020-05-10T21:00:00+10:00</published><updated>2020-05-17T20:25:15+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-10:/2020/05/10/wrap-indicator-in-pre-blocks/</id><summary type="html">&lt;p&gt;I am not a front-end developer, not a UI designer, nor a UX guru, but I am an
 engineer, so when I face a puzzle worth solving my brain switches on and I
 cannot let it go until I find a satisfactory solution to the puzzle.&lt;/p&gt;
 &lt;p&gt;My blog heavily relies on me sharing session dumps and file excerpts using the
@@ -177,7 +177,7 @@ this is what we wanted to achieve at this step!&lt;/p&gt;
 marker should occupy the exactly the same height as the line block we are
 attaching it to.  Well, this can be easily done with the &lt;code&gt;::after&lt;/code&gt;
 pseudo-element:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-css"&gt;pre div.line {
+&lt;pre id="demo3" class="highlight line-numbers"&gt;&lt;code class="language-css"&gt;pre div.line {
     position: relative; /* so we could position the child */
     min-height: 1em;    /* to avoid collapsing empty lines */
 }
@@ -192,7 +192,6 @@ pre div.line::after {
     right: -1em;
     background-color: blue; /* temporary, to make it visible */
 }&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;Note that we also introduced &lt;code&gt;position: relative&lt;/code&gt; to our &lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt;&amp;lsquo;s.  It is
 needed since if we want to position our pseudo-element relative to its parent,
@@ -243,7 +242,6 @@ compromise (this is the content of the SVG file I created):&lt;/p&gt;
     &amp;lt;text x=&amp;quot;0&amp;quot; y=&amp;quot;19&amp;quot;&amp;gt;&amp;amp;#x23ce;&amp;lt;/text&amp;gt;
 &amp;lt;/svg&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;The first two lines are mandatory and describe to a browser that it works with
 an SVG image file.&lt;/p&gt;
 &lt;p&gt;The third line (&lt;code&gt;viewBox=&lt;/code&gt;) is really important since it allows the SVG image
@@ -257,22 +255,21 @@ adequate symbol to represent a line wrap point.&lt;/p&gt;
 but since the content of the SVG file is so small and I did not want to host it
 externally (it would be an additional fetch request and more maintenance), I
 just did the following:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;$ cat nl.svg 
+&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;[user@localhost ~]$ cat nl.svg 
 &amp;lt;svg xmlns=&amp;quot;http://www.w3.org/2000/svg&amp;quot;
         version=&amp;quot;1.1&amp;quot;
         viewBox=&amp;quot;0 0 24 24&amp;quot;&amp;gt;
     &amp;lt;text x=&amp;quot;0&amp;quot; y=&amp;quot;19&amp;quot;&amp;gt;&amp;amp;#x23ce;&amp;lt;/text&amp;gt;
 &amp;lt;/svg&amp;gt;
-$ sed -n '1{h;d};$!H;${H;x;s,\s\+, ,g;s,&amp;gt;\s*&amp;lt;,&amp;gt;&amp;lt;,g;p}' nl.svg | base64 -w 0 ; echo
+[user@localhost ~]$ sed -n '1{h;d};$!H;${H;x;s,\s\+, ,g;s,&amp;gt;\s*&amp;lt;,&amp;gt;&amp;lt;,g;p}' nl.svg | base64 -w 0 ; echo
 PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;In other words, I removed all the white space, then deleted all line breaks, so
 I got a single line SVG body, and I converted it to Base64.  The resulting line
 is usable as the inline definition of an image.  Let&amp;rsquo;s update our stylesheet
 with the new values (we just replaced the last line to change the &lt;code&gt;background&lt;/code&gt;
 to &lt;code&gt;background-image&lt;/code&gt;) and added dimensions for the background itself:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-css"&gt;pre div.line {
+&lt;pre id="demo4" class="highlight line-numbers"&gt;&lt;code class="language-css"&gt;pre div.line {
     position: relative; /* so we could position the child */
     min-height: 1em;    /* to avoid collapsing empty lines */
 }
@@ -290,7 +287,6 @@ pre div.line::after {
         no-repeat repeat;
     background-size: 1em 1em;
 }&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;div class="demo4 resizable"&gt;
     &lt;style&gt;
@@ -333,7 +329,7 @@ our lines (reading documentation you may find that the default value is
 &lt;code&gt;normal&lt;/code&gt; and you can also find that &lt;code&gt;normal&lt;/code&gt; equals &lt;code&gt;1.2&lt;/code&gt; for the majority of
 browsers, but relying on that, I think is a bad idea).  We also need to adjust
 our markers with the new information we have got:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-css"&gt;pre div.line {
+&lt;pre id="demo5" class="highlight"&gt;&lt;code class="language-css"&gt;pre div.line {
     position: relative; /* so we could position the child */
     min-height: 1em;    /* to avoid collapsing empty lines */
     line-height: 1.2;   /* set the height explicitly */
@@ -352,7 +348,6 @@ pre div.line::after {
         no-repeat repeat;
     background-size: 1.2em 1.2em;
 }&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;div class="demo5 resizable"&gt;
     &lt;style&gt;
@@ -388,7 +383,7 @@ it done:&lt;/p&gt;
 &lt;p&gt;To address the latter a simple play with the &lt;code&gt;opacity&lt;/code&gt; attribute will suffice,
 e.g. I think 50% transparency should make the marker less distracting.&lt;/p&gt;
 &lt;p&gt;The former, however, requires some thinking.  Given that the post is already too long, I will just state that out of multiple options I had I chose the following: raise the background image by one &lt;code&gt;line-height&lt;/code&gt; from the bottom, and clip a square 1x1 &lt;code&gt;line-height&lt;/code&gt; at the top to compensate, as follows:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-css"&gt;pre div.line {
+&lt;pre id="demo6" class="highlight"&gt;&lt;code class="language-css"&gt;pre div.line {
     position: relative; /* so we could position the child */
     min-height: 1em;    /* to avoid collapsing empty lines */
     line-height: 1.2;   /* set the height explicitly */
@@ -410,7 +405,6 @@ pre div.line::after {
     clip: rect(1.2em 1.2em 100vh 0);
     opacity: .5;
 }&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;The only tricky part in the added lines is the &lt;code&gt;clip: rect(1.2em 1.2em 100vh
 0)&lt;/code&gt; line.  The &lt;code&gt;clip&lt;/code&gt; property defines the visible rectangle the browser should
@@ -456,7 +450,7 @@ this is exactly what we want :).&lt;/p&gt;
 &lt;h2 id="bonus-round"&gt;Bonus Round&lt;/h2&gt;
 &lt;p&gt;It should be mentioned, it is also possible to apply the same approach to the
 left side of the lines with a bit of a twist.&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-css"&gt;pre div.line {
+&lt;pre id="demo7" class="highlight"&gt;&lt;code class="language-css"&gt;pre div.line {
     position: relative; /* so we could position the child */
     min-height: 1em;    /* to avoid collapsing empty lines */
     line-height: 1.2;   /* set the height explicitly */
@@ -481,7 +475,6 @@ pre div.line::before {
     transform: rotateY(180deg); /* mirror the arrow */
     transform-origin: left;
 }&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;The trick here is the play between &lt;code&gt;padding-left&lt;/code&gt; and &lt;code&gt;text-indent&lt;/code&gt; for the
 &lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt; element since &lt;code&gt;text-indent&lt;/code&gt; will be applied to the first line only
@@ -522,10 +515,10 @@ so, maybe, for my blog I may just go with the left-side solution):&lt;/p&gt;
 &lt;pre&gt;&lt;div class="line"&gt;This is an example of a basic &amp;lt;pre&amp;gt; container.  You should&lt;/div&gt;&lt;div class="line"&gt;be able to resize it by dragging the bottom right corner (but if you are&lt;/div&gt;&lt;div class="line"&gt;using anything than Chrome you may be out of luck with the resizing).&lt;/div&gt;&lt;div class="line"&gt;&lt;/div&gt;&lt;div class="line"&gt;This line was made specifically long to trigger the line wrapping, so even those who are using a browser that cannot resize should be able to play with it :)&lt;/div&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;The idea for the &lt;code&gt;text-indent&lt;/code&gt; and &lt;code&gt;padding-left&lt;/code&gt; trick came from &lt;a href="http://shaunwagner.com/"&gt;C. Shaun
+&lt;p&gt;This idea for the &lt;code&gt;padding-left&lt;/code&gt; and &lt;code&gt;text-indent&lt;/code&gt; trick came from &lt;a href="http://shaunwagner.com/"&gt;C. Shaun
 &amp;ldquo;Kainaw&amp;rdquo; Wagner&lt;/a&gt; when &lt;a href="https://stackoverflow.com/a/48936538/3316011"&gt;he answered a question about
 the wrap indicators&lt;/a&gt; on Stack
-Overflow.&lt;/p&gt;
+Overflow (I am sure that it was known before, but this is where I learnt it).&lt;/p&gt;
 &lt;h2 id="assessment-of-the-result"&gt;Assessment of the result&lt;/h2&gt;
 &lt;p&gt;We started with the following requirement:&lt;/p&gt;
 &lt;ul&gt;
@@ -555,14 +548,25 @@ can be dynamically resized.&lt;/p&gt;
 &lt;li&gt;
 &lt;p&gt;we also want the syntax highlighter (such as PrismJS in my case) not to be
     affected by whatever we come up with.&lt;/p&gt;
-&lt;p&gt;Unknown: I think it would be the material for another post, but I do not
+&lt;p&gt;&lt;del&gt;Unknown: I think it would be the material for another post, but I do not
 expect a lot of issues since we only replaced the newline characters and
-preserved the rest of lines intact.&lt;/p&gt;
+preserved the rest of lines intact.i&lt;/del&gt;&lt;/p&gt;
+&lt;p&gt;It turned out, that it was quite a hassle since none of plugins PrismJS
+have for working with lines expect semantic markup of the lines inside the
+block.  Therefore, I spent some time and came up with a plugin that does it
+&amp;ldquo;right&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;It is highly likely, that my plugin will get merged into the Prism tree
+(see the corresponding &lt;a href="https://github.com/PrismJS/prism/pull/2389"&gt;Pull Request&lt;/a&gt;).  However, if for some reason it would
+not be or you need the functionality &amp;ldquo;here &amp;amp; now&amp;rdquo;, you can always get it
+from my &lt;a href="https://github.com/galaxy4public/prism/tree/plugin-lines"&gt;fork of PrismJS&lt;/a&gt; (I will keep the &lt;code&gt;plugin-lines&lt;/code&gt; branch until it
+is merged upstream).&lt;/p&gt;
+&lt;p&gt;By the way, my Lines plugin is the primary working horse for all syntax
+highlighted blocks on this site (so you have already seen it in action).&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;I hope this helped you and you learnt something :).  If you have any
 constructive feedback, I would appreciate it, specifically if you have ideas on
-how to improve the presented solution.&lt;/p&gt;</content><category term="web design"></category><category term="html"></category><category term="css"></category><category term="design"></category></entry><entry><title>Migrating blog to Pelican</title><link href="https://dmitry.khlebnikov.net/2020/05/01/migrating-blog-to-pelican/" rel="alternate"></link><published>2020-05-01T20:00:00+10:00</published><updated>2020-05-10T21:22:11+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-01:/2020/05/01/migrating-blog-to-pelican/</id><summary type="html">&lt;p&gt;I had my blog site for more than a decade now, but until now I was not putting
+how to improve the presented solution.&lt;/p&gt;</content><category term="web design"></category><category term="html"></category><category term="css"></category><category term="design"></category></entry><entry><title>Migrating blog to Pelican</title><link href="https://dmitry.khlebnikov.net/2020/05/01/migrating-blog-to-pelican/" rel="alternate"></link><published>2020-05-01T20:00:00+10:00</published><updated>2020-05-17T20:25:15+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-01:/2020/05/01/migrating-blog-to-pelican/</id><summary type="html">&lt;p&gt;I had my blog site for more than a decade now, but until now I was not putting
 any effort or thoughts into maintaining my audience or promoting the site.  It
 was dormant for nearly a decade and I decided to rejuvenate it and start using
 it as a platform I could leverage to share some ideas I think which are worth
@@ -698,7 +702,7 @@ infrastructure supporting the site and its deployment process in detail.&lt;/p&g
 &lt;p&gt;All blog posts related to these topics will be tagged with the &amp;ldquo;&lt;a href="/tag/blog/"&gt;blog&lt;/a&gt;&amp;rdquo; tag, so
 you should be able to find them easily (or even subscribe to the &lt;a href="/feeds/blog.atom.xml"&gt;blog RSS feed&lt;/a&gt;
 (you may need to copy the link into your RSS Reader) to get the latest updates
-as soon as I publish them).&lt;/p&gt;</content><category term="blog"></category><category term="pelican"></category><category term="blog"></category></entry><entry><title>nginx + a backend with a dynamic IP (e.g. AWS ELB)</title><link href="https://dmitry.khlebnikov.net/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/" rel="alternate"></link><published>2017-01-13T10:00:00+11:00</published><updated>2020-04-27T00:27:04+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2017-01-13:/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/</id><summary type="html">&lt;p&gt;Recently, I wrote about &lt;a href="https://dmitry.khlebnikov.net/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/"&gt;the dynamic resolution of upstream servers&lt;/a&gt; in
+as soon as I publish them).&lt;/p&gt;</content><category term="blog"></category><category term="pelican"></category><category term="blog"></category></entry><entry><title>nginx + a backend with a dynamic IP (e.g. AWS ELB)</title><link href="https://dmitry.khlebnikov.net/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/" rel="alternate"></link><published>2017-01-13T10:00:00+11:00</published><updated>2020-05-17T20:25:15+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2017-01-13:/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/</id><summary type="html">&lt;p&gt;Recently, I wrote about &lt;a href="https://dmitry.khlebnikov.net/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/"&gt;the dynamic resolution of upstream servers&lt;/a&gt; in
 nginx which was achieved by quite an intrusive patch to the core nginx module.
 The patch was invented a while ago and was working very well up until recent
 nginx versions were released.&lt;/p&gt;
@@ -756,7 +760,6 @@ location ~ \.php$ {
     include     fastcgi.conf;
 }&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;The next step is to define the socket activated proxy service. This generally
 requires creating two files in &lt;code&gt;/etc/system/systemd&lt;/code&gt; directory: one for the
 socket and the other for the proxy itself. However, in this article we will go
@@ -764,7 +767,7 @@ an extra mile and will define template units so the same configuration could be
 reused to launch multiple proxies using the same base templates.&lt;/p&gt;
 &lt;p&gt;The first template file is for the systemd service which will provide the proxy
 capability:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-systemd"&gt;[Unit]
+&lt;pre class="highlight" data-file="/etc/systemd/system/systemd-socket-proxyd@.service"&gt;&lt;code class="language-systemd"&gt;[Unit]
 Description=&amp;quot;Generic Socket Proxy (%I)&amp;quot;
 Documentation=https://www.freedesktop.org/software/systemd/man/systemd-socket-proxyd.html
 After=network.service
@@ -788,7 +791,6 @@ ProtectSystem=full
 #ProtectKernelModules=true
 #MemoryDenyWriteExecute=true&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;Depending on the version of your &lt;code&gt;systemd&lt;/code&gt; manager you may be able to uncomment
 more lines than was shown in this example, which was tested on CentOS 7.3.1611.&lt;/p&gt;
 &lt;p&gt;Also, in the example template given above we are using &lt;code&gt;OOMScoreAdjust=-1000&lt;/code&gt; to
@@ -796,7 +798,7 @@ protect this proxy service from being killed in the event the system is
 starving for memory &amp;ndash; this may be something you do not need.&lt;/p&gt;
 &lt;p&gt;The second template file is for the socket unit that would trigger the
 activation of the proxy service when a request arrives on the socket:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-systemd"&gt;[Unit]
+&lt;pre class="highlight" data-file="/etc/systemd/system/systemd-socket-proxyd@.socket"&gt;&lt;code class="language-systemd"&gt;[Unit]
 Description=&amp;quot;Socket for Generic Socket Proxy (%I)&amp;quot;
 Documentation=https://www.freedesktop.org/software/systemd/man/systemd-socket-proxyd.html
 
@@ -809,7 +811,6 @@ DirectoryMode=0711
 
 [Install]
 WantedBy=sockets.target&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;You may notice that the defaults are pretty strict:&lt;/p&gt;
 &lt;ul&gt;
@@ -824,28 +825,25 @@ instantiated using the template as shown later in this article.&lt;/p&gt;
 &lt;p&gt;Since our goal is to connect nginx to the backend FastCGI service we need to
 ensure that the proxy socket is read/write accessible to nginx&amp;rsquo;es workers, so
 we need to tweak the settings of the socket unit:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-systemd"&gt;[Socket]
+&lt;pre class="highlight" data-file="/etc/systemd/system/systemd-socket-proxyd@fastcgi.socket.d/fastcgi.conf"&gt;&lt;code class="language-systemd"&gt;[Socket]
 SocketGroup=nginx&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;Note how we extended the template for a specific named instance of the socket
 unit: we defined the &lt;code&gt;systemd-socket-proxyd@fastcgi.socket.d&lt;/code&gt; sub-directory and
 put a drop-in configuration snippet there.&lt;/p&gt;
 &lt;p&gt;Now, to achieve our goal we need to specify the target endpoint for our proxy
 service (the named instance we spawn using the template):&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-systemd"&gt;[Service]
+&lt;pre class="highlight" data-file="/etc/systemd/system/systemd-socket-proxyd@fastcgi.service.d/fastcgi.conf"&gt;&lt;code class="language-systemd"&gt;[Service]
 # Reset the ExecStart, so we could override it
 ExecStart=
 ExecStart=/usr/lib/systemd/systemd-socket-proxyd remote.php.backend.domain.tld.:9000&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;The mechanics behind extending the configuration is the same as for the socket
 unit, but here we overrode the &lt;code&gt;ExecStart&lt;/code&gt; command to specify the target endpoint
 for the proxy.&lt;/p&gt;
 &lt;p&gt;OK, we are done with the configuration of &lt;code&gt;systemd&lt;/code&gt;, so it would be a good time
 to reload the &lt;code&gt;systemd&lt;/code&gt; daemon:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;systemctl daemon-reload&lt;/code&gt;&lt;/pre&gt;
-
+&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;[root@localhost ~]# systemctl daemon-reload&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;If you run a system where SELinux is disabled (why?!) you don&amp;rsquo;t need to do
 anything additional and should be good, but if you are security conscious and
@@ -862,8 +860,7 @@ VM for building/compiling policies since the only time you need that
 development stuff is when you are compiling the module from sources).&lt;/p&gt;
 &lt;p&gt;On CentOS, you can install all the necessary bits to build a loadable SELinux
 module by installing the &lt;code&gt;selinux-policy-devel&lt;/code&gt; package using &lt;code&gt;yum&lt;/code&gt;:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;# yum -y install selinux-policy-devel&lt;/code&gt;&lt;/pre&gt;
-
+&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;[root@localhost ~]# yum -y install selinux-policy-devel&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Note, I skipped the output of the command since it does not provide any useful
 information for the purposes of this article.&lt;/p&gt;
@@ -878,7 +875,7 @@ loadable policy for the &lt;code&gt;systemd-socket-proxyd&lt;/code&gt; service.&
 support file too, but for the purposes of this article we should be fine with
 the automatically generated one.&lt;/p&gt;
 &lt;p&gt;The content of the systemd-socket-proxy.te file is listed below:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-selinux"&gt;policy_module(systemd-socket-proxyd, 1.0)
+&lt;pre class="highlight" data-file="systemd-socket-proxy.te"&gt;&lt;code class="language-selinux"&gt;policy_module(systemd-socket-proxyd, 1.0)
 
 ## &amp;lt;desc&amp;gt;
 ##  &amp;lt;p&amp;gt;
@@ -931,7 +928,6 @@ tunable_policy(`systemd_socket_proxyd_connect_any',`
 # consumer
 allow daemon systemd_socket_proxyd_t:unix_stream_socket connectto;&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;This is still work in progress, but so far it works at least for my projects.
 Note that there are two SELinux booleans defined which affect the behaviour of
 the policy:&lt;/p&gt;
@@ -954,13 +950,12 @@ need to label the &lt;code&gt;systemd-socket-proxyd&lt;/code&gt; binary with the
 &lt;code&gt;systemd_socket_proxyd_exec_t&lt;/code&gt; label.&lt;/p&gt;
 &lt;p&gt;The content of the systemd-socket-proxy.fc file that implements this behavior
 is as follows:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-selinux"&gt;/(usr/lib|etc)/systemd/system/systemd-socket-proxyd\.service  gen_context(system_u:object_r:systemd_socket_proxyd_unit_file_t,s0)
+&lt;pre class="highlight" data-file="systemd-socket-proxy.fc"&gt;&lt;code class="language-selinux"&gt;/(usr/lib|etc)/systemd/system/systemd-socket-proxyd\.service  gen_context(system_u:object_r:systemd_socket_proxyd_unit_file_t,s0)
 /usr/lib/systemd/systemd-socket-proxyd -- gen_context(system_u:object_r:systemd_socket_proxyd_exec_t,s0)&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;At this point, we have everything we need to compile a policy module, so let&amp;rsquo;s
 just do it now:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;[root@localhost ~]# ls -l
+&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;[root@localhost ~]# ls -l
 total 8
 -rw-r--r--. 1 root root  235 Jan  5 05:21 systemd-socket-proxyd.fc
 -rw-r--r--. 1 root root 1467 Jan  6 00:10 systemd-socket-proxyd.te
@@ -975,7 +970,6 @@ rm tmp/systemd-socket-proxyd.mod tmp/systemd-socket-proxyd.mod.fc
 [root@localhost ~]# restorecon -v /usr/lib/systemd/systemd-socket-proxyd
 restorecon reset /usr/lib/systemd/systemd-socket-proxyd context system_u:object_r:init_exec_t:s0-&amp;gt;system_u:object_r:systemd_socket_proxyd_exec_t:s0&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;The &lt;code&gt;semodule -i systemd-socket-proxyd.pp&lt;/code&gt; command has actually installed the
 module into the system, but if you were building the module on a different
 instance, then instead of installing the module you just need to grab the
@@ -985,22 +979,20 @@ where proxy is going to be running and only apply the last two commands
 &lt;p&gt;We approached the time when we need to perform the pre-flight checks before
 launching our new service :). First, we need to check whether the file context
 was applied to the &lt;code&gt;systemd-socket-proxyd binary&lt;/code&gt;:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;[root@localhost ~]# ls -ldZ /usr/lib/systemd/systemd-socket-proxyd 
+&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;[root@localhost ~]# ls -ldZ /usr/lib/systemd/systemd-socket-proxyd 
 -rwxr-xr-x. root root system_u:object_r:systemd_socket_proxyd_exec_t:s0 /usr/lib/systemd/systemd-socket-proxyd&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;Looks good! Let&amp;rsquo;s start the socket unit and check the permissions set on the
 socket file:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;[root@localhost ~]# systemctl start systemd-socket-proxyd@fastcgi.socket
+&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;[root@localhost ~]# systemctl start systemd-socket-proxyd@fastcgi.socket
 [root@localhost ~]# ls -ldZ /run/systemd-socket-proxyd{,/fastcgi.sock}
 drwx--x--x. root root  system_u:object_r:var_run_t:s0   /run/systemd-socket-proxyd
 srw-rw----. root nginx system_u:object_r:var_run_t:s0   /run/systemd-socket-proxyd/fastcgi.sock&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;This also looks as expected. The next test would be to check that our proxy
 service is running with the desired set of permissions and in the correct
 SELinux domain:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;[root@localhost ~]# socat -v unix-client:/run/systemd-socket-proxyd/fastcgi.sock stdin
+&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;[root@localhost ~]# socat -v unix-client:/run/systemd-socket-proxyd/fastcgi.sock stdin
 
 &amp;lt; 2017/01/13 00:59:22.987083  length=1 from=0 to=0
 
@@ -1021,7 +1013,6 @@ FDSize: 64
 Groups: 99 
 [truncated]&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;The first &lt;code&gt;socat&lt;/code&gt; command was needed to trigger the socket activation that
 resulted in the &lt;code&gt;systemd-socket-proxyd.service&lt;/code&gt; being launched.&lt;/p&gt;
 &lt;p&gt;The second command confirmed that the service is running under the nobody user
@@ -1030,23 +1021,22 @@ and within the &lt;code&gt;systemd_socket_proxyd_t&lt;/code&gt; domain.&lt;/p&gt
 and there is no way the service could regain the escalated privileges back.&lt;/p&gt;
 &lt;p&gt;Looks like we are all, so let&amp;rsquo;s make our changes persistent. To achieve this we
 just need to enable the &lt;code&gt;systemd-socket-proxyd@fastcgi.socket&lt;/code&gt; unit:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;[root@localhost ~]# systemctl enable systemd-socket-proxyd@fastcgi.socket
+&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;[root@localhost ~]# systemctl enable systemd-socket-proxyd@fastcgi.socket
 Created symlink from /etc/systemd/system/sockets.target.wants/systemd-socket-proxyd@fastcgi.socket to /etc/systemd/system/systemd-socket-proxyd@.socket.
 [root@localhost ~]# systemctl status systemd-socket-proxyd@fastcgi.socket | fgrep Loaded:
    Loaded: loaded (/etc/systemd/system/systemd-socket-proxyd@.socket; enabled; vendor preset: disabled)&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;Just to show that the configuration is working I set a simple lab up in a VM
 and followed this article with the only exception of the PHP/FPM location which
 I am running on the same VM:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;[root@localhost ~]# cat /usr/share/nginx/html/test.php 
+&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;[root@localhost ~]# cat /usr/share/nginx/html/test.php
 &amp;lt;?php echo &amp;quot;This is the output from PHP\n&amp;quot; ?&amp;gt;
 [root@localhost ~]# cat /etc/nginx/conf.d/php-upstream.conf 
 upstream php {
     #server        remote.php.backend.domain.tld.:9000
     server         unix:/run/systemd-socket-proxyd/fastcgi.sock;
 }
-[root@localhost ~]# cat /etc/nginx/default.d/php.conf 
+[root@localhost ~]# cat /etc/nginx/default.d/php.conf
 location ~ \.php$ {
     try_files      $uri = 404;
     fastcgi_pass   php;
@@ -1074,7 +1064,6 @@ X-Powered-By: PHP/5.4.16
 This is the output from PHP
 Connection closed by foreign host.&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;Works as expected :).&lt;/p&gt;
 &lt;p&gt;There is one thing one needs to be aware of: when I started to work on this I
 discovered that &lt;code&gt;systemd-socket-proxyd&lt;/code&gt; had a hard-coded limit for the number
@@ -1085,7 +1074,7 @@ would take some time until this change is propagated to all major distros).&lt;/
 efficient if you are using a domain name for the target endpoint for the proxy,
 so if this is the case I would advise to run a local DNS caching service (e.g.
 &lt;code&gt;dnsmasq&lt;/code&gt;) so you would not spend time on the DNS queries.&lt;/p&gt;
-&lt;p&gt;As always, I would appreciate any feedback you may have.&lt;/p&gt;</content><category term="hacking"></category><category term="nginx"></category><category term="patch"></category></entry><entry><title>Dynamic resolution of upstream servers in nginx</title><link href="https://dmitry.khlebnikov.net/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/" rel="alternate"></link><published>2016-09-20T10:00:00+10:00</published><updated>2020-04-27T00:27:04+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2016-09-20:/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/</id><summary type="html">&lt;p&gt;UPDATE: This approach was superseded by the &lt;a href="https://dmitry.khlebnikov.net/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/"&gt;proxying through
+&lt;p&gt;As always, I would appreciate any feedback you may have.&lt;/p&gt;</content><category term="hacking"></category><category term="nginx"></category><category term="patch"></category></entry><entry><title>Dynamic resolution of upstream servers in nginx</title><link href="https://dmitry.khlebnikov.net/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/" rel="alternate"></link><published>2016-09-20T10:00:00+10:00</published><updated>2020-05-17T20:25:15+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2016-09-20:/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/</id><summary type="html">&lt;p&gt;UPDATE: This approach was superseded by the &lt;a href="https://dmitry.khlebnikov.net/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/"&gt;proxying through
 systemd-socket-proxyd&lt;/a&gt; approach.&lt;/p&gt;
 &lt;p&gt;Many of my clients are running application stacks consisting of nginx plus some
 kind of scripting engine behind it (be it PHP, Ruby, or something else).&lt;/p&gt;
@@ -1131,7 +1120,7 @@ need to change your configs.&lt;/p&gt;
 production for the last couple of years. The work on the patch was sponsored by
 &lt;a href="https://openwall.com.au"&gt;Openwall (Australia)&lt;/a&gt; and &lt;a href="https://withriley.com"&gt;Data Solutions
 Group&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Enjoy! :)&lt;/p&gt;</content><category term="hacking"></category><category term="nginx"></category><category term="patch"></category></entry><entry><title>Transparent SSH host-jumping (Expert)</title><link href="https://dmitry.khlebnikov.net/2016/07/26/transparent-ssh-host-jumping-expert/" rel="alternate"></link><published>2016-07-26T10:00:00+10:00</published><updated>2020-04-27T00:27:04+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2016-07-26:/2016/07/26/transparent-ssh-host-jumping-expert/</id><summary type="html">&lt;p&gt;A while ago in the &lt;a href="https://dmitry.khlebnikov.net/2015/08/06/transparent-ssh-host-jumping-advanced/"&gt;Transparent SSH host-jumping (Advanced)&lt;/a&gt; post I
+&lt;p&gt;Enjoy! :)&lt;/p&gt;</content><category term="hacking"></category><category term="nginx"></category><category term="patch"></category></entry><entry><title>Transparent SSH host-jumping (Expert)</title><link href="https://dmitry.khlebnikov.net/2016/07/26/transparent-ssh-host-jumping-expert/" rel="alternate"></link><published>2016-07-26T10:00:00+10:00</published><updated>2020-05-17T04:45:11+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2016-07-26:/2016/07/26/transparent-ssh-host-jumping-expert/</id><summary type="html">&lt;p&gt;A while ago in the &lt;a href="https://dmitry.khlebnikov.net/2015/08/06/transparent-ssh-host-jumping-advanced/"&gt;Transparent SSH host-jumping (Advanced)&lt;/a&gt; post I
 described a technique on how one could jump quite effortlessly through a chain
 of intermediate hosts. However, there was a catch: the user names and ports
 across the whole chain should be the same and there was no easy way to change
@@ -1151,8 +1140,7 @@ will allow one to tweak parameters for the hosts in the chain.&lt;/p&gt;
 technique works, here I am only going to provide the proxy script and the
 corresponding ssh config parameter block to use the script.&lt;/p&gt;
 &lt;p&gt;The goal was to support the following syntax:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;$ ssh default_user@userA^hostA/userB^hostB:port/hostC&lt;/code&gt;&lt;/pre&gt;
-
+&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;[user@localhost ~]$ ssh default_user@userA^hostA/userB^hostB:port/hostC&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;It was a little challenge to come up with the character for identifying the
 user part for intermediate hosts:&lt;/p&gt;
@@ -1173,7 +1161,7 @@ port is omitted, it will use the global port configuration (usually 22/tcp but
 can be changed with the &lt;code&gt;-p&lt;/code&gt; argument to ssh).  The script is a bit not optimised
 (bash is really slow on string processing, but I decided to stick with pure
 bash where it was possible):&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;#!/bin/bash
+&lt;pre class="highlight" data-file="~/bin/ssh-helper.sh"&gt;&lt;code class="language-bash"&gt;#!/bin/bash
 set -eu -o pipefail
 exec 10&amp;lt;&amp;amp;0 11&amp;gt;&amp;amp;1 0&amp;lt;&amp;amp;2 1&amp;gt;&amp;amp;2
 DEFAULT_USER=&amp;quot;$1&amp;quot;
@@ -1212,14 +1200,13 @@ exec ssh \
     &amp;quot;$HOST_CHAIN&amp;quot; \
     -W &amp;quot;$TARGET_HOST&amp;quot;:&amp;quot;$TARGET_PORT&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;The above is a proof of the concept and it &amp;ldquo;works for me&amp;rdquo; :). I am using it
 every day when I need to access boxes behind a bastion host. Your mileage may
 vary and you are free to create your own version of the script that would
 perform better (I would be really glad if a version of such a script could be
 shared with me).&lt;/p&gt;
 &lt;p&gt;The corresponding configuration block in the ssh config file looks as follows:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;Host */*
+&lt;pre class="highlight" data-file="~/.ssh/config"&gt;&lt;code class="language-ssh_config"&gt;Host */*
     # if you uncomment ControlPath you also need to uncomment ControlMaster
     #ControlMaster auto
     # For OpenSSH &amp;lt; 6.7 you may uncomment the following, but long chains will fail:
@@ -1228,10 +1215,9 @@ shared with me).&lt;/p&gt;
     #ControlPath   ~/.ssh/.sessions/%C
     ProxyCommand ~/bin/ssh-helper.sh %r %h %p&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;Well, this is a bit messy since OpenSSH introduced the &lt;code&gt;%C&lt;/code&gt; macro in version 6.7
-and without &lt;code&gt;%C&lt;/code&gt; the ControlPath string gets too long for OpenSSH to create a
-socket on the filesystem for long chains of hosts.&lt;/p&gt;</content><category term="ssh"></category><category term="console"></category><category term="ssh"></category><category term="howto"></category></entry><entry><title>SSH: Interactive ProxyCommand</title><link href="https://dmitry.khlebnikov.net/2016/07/25/ssh-interactive-proxycommand/" rel="alternate"></link><published>2016-07-25T10:00:00+10:00</published><updated>2020-04-27T00:27:04+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2016-07-25:/2016/07/25/ssh-interactive-proxycommand/</id><summary type="html">&lt;p&gt;I was involved in the creation of the &lt;a href="https://github.com/realestate-com-au/sshephalopod"&gt;sshephalopod&lt;/a&gt; project, which was an
+and without &lt;code&gt;%C&lt;/code&gt; the &lt;code&gt;ControlPath&lt;/code&gt; string gets too long for OpenSSH to create a
+socket on the filesystem for long chains of hosts.&lt;/p&gt;</content><category term="ssh"></category><category term="console"></category><category term="ssh"></category><category term="howto"></category></entry><entry><title>SSH: Interactive ProxyCommand</title><link href="https://dmitry.khlebnikov.net/2016/07/25/ssh-interactive-proxycommand/" rel="alternate"></link><published>2016-07-25T10:00:00+10:00</published><updated>2020-05-17T04:45:11+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2016-07-25:/2016/07/25/ssh-interactive-proxycommand/</id><summary type="html">&lt;p&gt;I was involved in the creation of the &lt;a href="https://github.com/realestate-com-au/sshephalopod"&gt;sshephalopod&lt;/a&gt; project, which was an
 attempt to build an enterprise level authentication framework for SSH
 authentication using the SSH &lt;abbr title="Certificate Authority"&gt;CA&lt;/abbr&gt; feature.&lt;/p&gt;
 &lt;p&gt;The project is based on a wrapper script that signs a user via a &lt;abbr title="Security Assertion Markup Language"&gt;SAML&lt;/abbr&gt; identity
@@ -1259,27 +1245,24 @@ running on the local host would be sufficient), then we needed an interactive
 script, and a configuration block for the connection.&lt;/p&gt;
 &lt;p&gt;The configuration block is pretty simple (%h expands to localhost and %p
 expands to the port specified on the command line or to &amp;ldquo;22&amp;rdquo; otherwise):&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;$ fgrep -A1 'Host localhost' ~/.ssh/config
+&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;[user@localhost ~]$ fgrep -A1 'Host localhost' ~/.ssh/config
 Host localhost
  ProxyCommand ~/bin/interactive.script.sh %h %p&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;Since most of our research is going to be inside the interactive script you
 will see several incarnations of script&amp;rsquo;s body. The very first one was the
 following:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;#!/bin/bash
+&lt;pre class="highlight" data-file="~/bin/interactive.script.sh"&gt;&lt;code class="language-bash"&gt;#!/bin/bash
 exec nc &amp;quot;$1&amp;quot; &amp;quot;$2&amp;quot;&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;At this point we just need to confirm that our test environment works as
 expected &amp;ndash; the ssh session should be proxied through the nc command and we
 should be able to login under our own account via ssh to the localhost (my
 private key was added to the key manager with ssh-add, hence no password prompt
 was displayed):&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;$ ssh galaxy@localhost
+&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;[user@localhost ~]$ ssh galaxy@localhost
 Last login: Thu Jul 21 01:30:21 2016
-home:~ galaxy$&lt;/code&gt;&lt;/pre&gt;
-
+$&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;OK, we confirmed that we can establish a proxied connection and tunnel our ssh
 session through it.&lt;/p&gt;
@@ -1287,30 +1270,28 @@ session through it.&lt;/p&gt;
 user otherwise it could not be interactive. This channel comprises at least of
 two file descriptors: one for standard input and the other for standard output,
 so let&amp;rsquo;s check what descriptors are available for our script:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;#!/bin/bash
+&lt;pre class="highlight" data="file="~/bin/interactive.script.sh""&gt;&lt;code class="language-bash"&gt;#!/bin/bash
 # on Linux the following line would be much simpler: ls -l /proc/$$/fd/, but
 # on OS X they do not expose the open file descriptors through /proc, so I
 # used &amp;quot;lsof&amp;quot; instead.
 lsof -p $$ &amp;gt;&amp;amp;2
 exec nc &amp;quot;$1&amp;quot; &amp;quot;$2&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;If we try to connect now we should see something like the following (I am
 writing this article on an OS X machine so I provide the output from OS X,
 however this also works for Linux):&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;$ ssh galaxy@localhost
+&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;[user@localhost ~]$ ssh galaxy@localhost
 COMMAND   PID   USER   FD   TYPE             DEVICE  SIZE/OFF     NODE NAME
-bash    45225 galaxy  cwd    DIR                1,2       612   893854 /Users/galaxy/.ssh
-bash    45225 galaxy  txt    REG                1,2    628640  2329236 /bin/bash
-bash    45225 galaxy  txt    REG                1,2    625712 13892061 /usr/lib/dyld
-bash    45225 galaxy  txt    REG                1,2 385393734 13894121 /private/var/run/dyld_shared_cache_x86_64
-bash    45225 galaxy    0   PIPE 0x44d71099589485df     16384          -&amp;gt;0x44d7109951223d0f
-bash    45225 galaxy    1   PIPE 0x44d710995122454f     16384          -&amp;gt;0x44d71099512246af
-bash    45225 galaxy    2u   CHR               16,1  0t631830     9705 /dev/ttys001
-bash    45225 galaxy  255r   REG                1,2       219 15455259 /Users/galaxy/bin/interactive.script.sh
+bash    45225   user  cwd    DIR                1,2       612   893854 /Users/user/.ssh
+bash    45225   user  txt    REG                1,2    628640  2329236 /bin/bash
+bash    45225   user  txt    REG                1,2    625712 13892061 /usr/lib/dyld
+bash    45225   user  txt    REG                1,2 385393734 13894121 /private/var/run/dyld_shared_cache_x86_64
+bash    45225   user    0   PIPE 0x44d71099589485df     16384          -&amp;gt;0x44d7109951223d0f
+bash    45225   user    1   PIPE 0x44d710995122454f     16384          -&amp;gt;0x44d71099512246af
+bash    45225   user    2u   CHR               16,1  0t631830     9705 /dev/ttys001
+bash    45225   user  255r   REG                1,2       219 15455259 /Users/user/bin/interactive.script.sh
 Last login: Mon Jul 25 17:52:40 2016 from localhost
-home:~ galaxy$&lt;/code&gt;&lt;/pre&gt;
-
+$&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;We are interested in file descriptors 0 (standard input), 1 (standard output),
 and 2 (standard error). As you can see the standard input and output are part
@@ -1333,7 +1314,7 @@ parent ssh process? Well, the answer is quite obvious:&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;The following version of the script demonstrates the implementation of the
 above logic:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;#!/bin/bash
+&lt;pre class="highlight" data-file="~/bin/interactive.script.sh"&gt;&lt;code class="language-bash"&gt;#!/bin/bash
 exec 10&amp;lt;&amp;amp;0 11&amp;gt;&amp;amp;1 0&amp;lt;&amp;amp;2 1&amp;gt;&amp;amp;2
 # start of the interactive behaviour
 lsof -p $$
@@ -1343,26 +1324,24 @@ echo &amp;quot;You typed: $I&amp;quot;
 exec 0&amp;lt;&amp;amp;10 1&amp;gt;&amp;amp;11
 exec nc &amp;quot;$1&amp;quot; &amp;quot;$2&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;I think it is time to test it :) :&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;$ ssh galaxy@localhost
+&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;[user@localhost ~]$ ssh galaxy@localhost
 COMMAND   PID   USER   FD   TYPE             DEVICE  SIZE/OFF     NODE NAME
-bash    45238 galaxy  cwd    DIR                1,2       612   893854 /Users/galaxy/.ssh
-bash    45238 galaxy  txt    REG                1,2    628640  2329236 /bin/bash
-bash    45238 galaxy  txt    REG                1,2    625712 13892061 /usr/lib/dyld
-bash    45238 galaxy  txt    REG                1,2 385393734 13894121 /private/var/run/dyld_shared_cache_x86_64
-bash    45238 galaxy    0u   CHR               16,1  0t640407     9705 /dev/ttys001
-bash    45238 galaxy    1u   CHR               16,1  0t640407     9705 /dev/ttys001
-bash    45238 galaxy    2u   CHR               16,1  0t640407     9705 /dev/ttys001
-bash    45238 galaxy   10   PIPE 0x44d710995122378f     16384          -&amp;gt;0x44d71099589494ff
-bash    45238 galaxy   11   PIPE 0x44d7109951223d0f     16384          -&amp;gt;0x44d710995122454f
-bash    45238 galaxy  255r   REG                1,2       135 15455285 /Users/galaxy/bin/interactive.script.sh
+bash    45238   user  cwd    DIR                1,2       612   893854 /Users/user/.ssh
+bash    45238   user  txt    REG                1,2    628640  2329236 /bin/bash
+bash    45238   user  txt    REG                1,2    625712 13892061 /usr/lib/dyld
+bash    45238   user  txt    REG                1,2 385393734 13894121 /private/var/run/dyld_shared_cache_x86_64
+bash    45238   user    0u   CHR               16,1  0t640407     9705 /dev/ttys001
+bash    45238   user    1u   CHR               16,1  0t640407     9705 /dev/ttys001
+bash    45238   user    2u   CHR               16,1  0t640407     9705 /dev/ttys001
+bash    45238   user   10   PIPE 0x44d710995122378f     16384          -&amp;gt;0x44d71099589494ff
+bash    45238   user   11   PIPE 0x44d7109951223d0f     16384          -&amp;gt;0x44d710995122454f
+bash    45238   user  255r   REG                1,2       135 15455285 /Users/user/bin/interactive.script.sh
 Type something: This is a test
 You typed: This is a test
 Last login: Mon Jul 25 17:57:05 2016 from localhost
-home:~ galaxy$ logout
+$ logout
 Connection to localhost closed.&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;Mission accomplished! :)&lt;/p&gt;
 &lt;p&gt;I hope this small article would help somebody to design better wrappers around
@@ -1371,7 +1350,7 @@ versions of OpenSSH support passing of a file descriptor from the ProxyCommand
 script, so if you have a decent netcat tool that supports the &amp;ldquo;-F&amp;rdquo; option
 (fdpass) you could get native performance for the ssh communication link with
 no proxy process hanging around.&lt;/p&gt;
-&lt;p&gt;P.S. if you have any questions do not hesitate to comment.&lt;/p&gt;</content><category term="ssh"></category><category term="ssh"></category><category term="console"></category></entry><entry><title>Raspberry Pi 3 toolchain on CentOS 7</title><link href="https://dmitry.khlebnikov.net/2016/05/22/raspberry-pi-3-toolchain-on-centos-7/" rel="alternate"></link><published>2016-05-22T12:00:00+10:00</published><updated>2020-04-27T00:27:04+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2016-05-22:/2016/05/22/raspberry-pi-3-toolchain-on-centos-7/</id><summary type="html">&lt;p&gt;I heard a lot about Raspberry Pi boards but until now I had no need nor time to
+&lt;p&gt;P.S. if you have any questions do not hesitate to comment.&lt;/p&gt;</content><category term="ssh"></category><category term="ssh"></category><category term="console"></category></entry><entry><title>Raspberry Pi 3 toolchain on CentOS 7</title><link href="https://dmitry.khlebnikov.net/2016/05/22/raspberry-pi-3-toolchain-on-centos-7/" rel="alternate"></link><published>2016-05-22T12:00:00+10:00</published><updated>2020-05-17T04:45:11+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2016-05-22:/2016/05/22/raspberry-pi-3-toolchain-on-centos-7/</id><summary type="html">&lt;p&gt;I heard a lot about Raspberry Pi boards but until now I had no need nor time to
 work with one.&lt;/p&gt;
 &lt;p&gt;However, recently I purchased a Dodge Journey R/T and found that although I
 love the car I am so disappointed with its software and hard-wired logic that I
@@ -1399,7 +1378,7 @@ on an AWS EC2 instance which was running a minimal CentOS 7 as its OS.&lt;/p&gt;
 &lt;p&gt;I spawned an EC2 instance (you need at least 8GB of free space there to be able
 to build the toolchain), logged in, and ensured that my system is up to date
 (and update it if it was not):&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;# yum -y update
+&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;[root@localhost ~]# yum -y update
 Loaded plugins: at-exit, fastestmirror, post-transaction-actions
 Loading mirror speeds from cached hostfile
  * base: mirror.domain.tld
@@ -1407,19 +1386,18 @@ Loading mirror speeds from cached hostfile
  * updates: mirror.domain.tld
 No packages marked for update&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;The easiest way to build a toolchain is to use the crosstool-ng project, so I
 went ahead and downloaded the latest version with the corresponding GPG
 signature, verified the signature (although the verification was very
 superficial since Bryan Hundven is not in my Web of Trust and the crosstool-ng
 website was not providing an HTTPS page to confirm the fingerprint of the key),
 and unpacked the sources:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;# yum -y install bison bzip2 flex gcc gcc-c++ glibc-static gperf help2man libstdc++-static libtool make ncurses-devel texinfo wget
-# useradd -m build
-# su - build
-$ wget -q 'http://crosstool-ng.org/download/crosstool-ng/crosstool-ng-1.22.0.tar.xz'
-$ wget -q 'http://crosstool-ng.org/download/crosstool-ng/crosstool-ng-1.22.0.tar.xz.sig'
-$ gpg --recv-keys 35B871D1 --keyserver pgp.surfnet.nl
+&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;[root@localhost ~]# yum -y install bison bzip2 flex gcc gcc-c++ glibc-static gperf help2man libstdc++-static libtool make ncurses-devel texinfo wget
+[root@localhost ~]# useradd -m build
+[root@localhost ~]# su - build
+[build@localhost ~]$ wget -q 'http://crosstool-ng.org/download/crosstool-ng/crosstool-ng-1.22.0.tar.xz'
+[build@localhost ~]$ wget -q 'http://crosstool-ng.org/download/crosstool-ng/crosstool-ng-1.22.0.tar.xz.sig'
+[build@localhost ~]$ gpg --recv-keys 35B871D1 --keyserver pgp.surfnet.nl
 gpg: &amp;quot;--keyserver&amp;quot; not a key ID: skipping
 gpg: &amp;quot;pgp.surfnet.nl&amp;quot; not a key ID: skipping
 gpg: requesting key 35B871D1 from hkp server keys.gnupg.net
@@ -1427,7 +1405,7 @@ gpg: /home/build/.gnupg/trustdb.gpg: trustdb created
 gpg: key 35B871D1: public key &amp;quot;Bryan Hundven &amp;quot; imported
 gpg: Total number processed: 1
 gpg:               imported: 1  (RSA: 1)
-$ gpg --verify crosstool-ng-1.22.0.tar.xz.sig
+[build@localhost ~]$ gpg --verify crosstool-ng-1.22.0.tar.xz.sig
 gpg: Signature made Fri Nov 20 13:09:26 2015 UTC using RSA key ID 35B871D1
 gpg: Good signature from &amp;quot;Bryan Hundven &amp;quot;
 gpg:                 aka &amp;quot;Bryan Hundven &amp;quot;
@@ -1438,38 +1416,34 @@ gpg:                 aka &amp;quot;[jpeg image of size 16246]&amp;quot;
 gpg: WARNING: This key is not certified with a trusted signature!
 gpg:          There is no indication that the signature belongs to the owner.
 Primary key fingerprint: 561E D9B6 2095 88ED 23C6  8329 CAD7 C8FC 35B8 71D1
-$ tar xJSf crosstool-ng-1.22.0.tar.xz
-$ rm crosstool-ng-1.22.0.tar.xz*&lt;/code&gt;&lt;/pre&gt;
-
+[build@localhost ~]$ tar xJSf crosstool-ng-1.22.0.tar.xz
+[build@localhost ~]$ rm crosstool-ng-1.22.0.tar.xz*&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The next step was to prepare the environment for the crosstool-ng build process:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;$ cd crosstool-ng
-$ /configure --prefix=$HOME/ct-ng
+&lt;pre class="highlight" data-user="build"&gt;&lt;code class="language-shell"&gt;[build@localhost ~]$ cd crosstool-ng
+[build@localhost ~]$ /configure --prefix=$HOME/ct-ng
 checking build system type... x86_64-pc-linux-gnu
 [skipped]
 configure: creating ./config.status
 config.status: creating Makefile
-$ make
+[build@localhost ~]$ make
   SED    'ct-ng'
 [skipped]
   SED    'docs/ct-ng.1'
   GZIP   'docs/ct-ng.1.gz'
-$ make install
+[build@localhost ~]$ make install
   GEN    'config/configure.in'
 [skipped]&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;For auto-completion, do not forget to install &lt;code&gt;ct-ng.comp&lt;/code&gt; into your &lt;code&gt;bash&lt;/code&gt;
 completion directory (usually &lt;code&gt;/etc/bash_completion.d/&lt;/code&gt;)&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;$ export PATH=$HOME/ct-ng/bin:$PATH
-$ cd&lt;/code&gt;&lt;/pre&gt;
-
+&lt;pre class="highlight" data-user="build"&gt;&lt;code class="language-shell"&gt;[build@localhost ~]$ export PATH=$HOME/ct-ng/bin:$PATH
+[build@localhost ~]$ cd&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Once the above was done we are ready to actually configure and build our toolchain:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;$ mkdir ~/builddir
-$ cd ~/builddir
-$ ct-ng menuconfig&lt;/code&gt;&lt;/pre&gt;
-
+&lt;pre class="highlight" data-user="build"&gt;&lt;code class="language-shell"&gt;[build@localhost ~]$ mkdir ~/builddir
+[build@localhost ~]$ cd ~/builddir
+[build@localhost ~]$ ct-ng menuconfig&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;I was quite happy with the defaults and the only changes I made were the
 following:&lt;/p&gt;
@@ -1525,12 +1499,12 @@ binaries would not be properly linked to work with the OS on the board&lt;/p&gt;
 &lt;p&gt;Once we are comfortable with the configuration of the future toolchain we exit
 the configuration menu (saving the changes) and launch the build process (it
 would take approximately an hour on AWS t2.small instance):&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;configuration written to .config
+&lt;pre class="highlight" data-user="build" data-prompt=""[build@localhost"&gt;&lt;code class="language-shell"&gt;configuration written to .config
 
 *** End of the configuration.
 *** Execute 'ct-ng build' to start the build or try 'ct-ng help'.
 
-$ ct-ng build
+[build@localhost ~]$ ct-ng build
 [INFO ]  Performing some trivial sanity checks
 [INFO ]  Build started 20160522.070915
 [skipped]
@@ -1539,27 +1513,24 @@ $ ct-ng build
 [INFO ]  Finishing installation (may take a few seconds)...
 [57:15] /&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;Seems that our Raspberry Pi 3 toolchain is ready to be used. Let&amp;rsquo;s compile
 something and see how it goes:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;$ export PATH=$HOME/x-tools/aarch64-rpi3-linux-gnueabi/bin:$PATH
-$ aarch64-rpi3-linux-gnueabi-gcc --version
+&lt;pre class="highlight" data-user="build"&gt;&lt;code class="language-shell"&gt;[build@localhost ~]$ export PATH=$HOME/x-tools/aarch64-rpi3-linux-gnueabi/bin:$PATH
+[build@localhost ~]$ aarch64-rpi3-linux-gnueabi-gcc --version
 aarch64-rpi3-linux-gnueabi-gcc (crosstool-NG crosstool-ng-1.22.0) 5.2.0
 Copyright (C) 2015 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-$ printf '#include \nint main(){printf(&amp;quot;Hello\\n&amp;quot;); return 0;}\n' &amp;gt; sample.c
-$ aarch64-rpi3-linux-gnueabi-gcc -o sample sample.c
-$ ls -l sample
+[build@localhost ~]$ printf '#include \nint main(){printf(&amp;quot;Hello\\n&amp;quot;); return 0;}\n' &amp;gt; sample.c
+[build@localhost ~]$ aarch64-rpi3-linux-gnueabi-gcc -o sample sample.c
+[build@localhost ~]$ ls -l sample
 -rwxr-xr-x. 1 build build 7672 May 22 08:19 sample
-$ file sample
-sample: ELF 64-bit LSB executable, ARM aarch64, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 4.3.0, not stripped
-$&lt;/code&gt;&lt;/pre&gt;
-
+[build@localhost ~]$ file sample
+sample: ELF 64-bit LSB executable, ARM aarch64, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 4.3.0, not stripped&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Well, it is time to build some awesome stuff for Raspberry Pi 3, I guess, but
-this will be in another post. :)&lt;/p&gt;</content><category term="linux"></category><category term="console"></category><category term="howto"></category><category term="linux"></category><category term="raspberry pi"></category></entry><entry><title>Building a firewall? Simple and easy!</title><link href="https://dmitry.khlebnikov.net/2016/05/22/building-a-firewall-simple-and-easy/" rel="alternate"></link><published>2016-05-22T10:00:00+10:00</published><updated>2020-04-27T00:27:04+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2016-05-22:/2016/05/22/building-a-firewall-simple-and-easy/</id><summary type="html">&lt;p&gt;I strive for simplicity since I am a strong believer that achieving a goal with
+this will be in another post. :)&lt;/p&gt;</content><category term="linux"></category><category term="console"></category><category term="howto"></category><category term="linux"></category><category term="raspberry pi"></category></entry><entry><title>Building a firewall? Simple and easy!</title><link href="https://dmitry.khlebnikov.net/2016/05/22/building-a-firewall-simple-and-easy/" rel="alternate"></link><published>2016-05-22T10:00:00+10:00</published><updated>2020-05-17T20:25:15+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2016-05-22:/2016/05/22/building-a-firewall-simple-and-easy/</id><summary type="html">&lt;p&gt;I strive for simplicity since I am a strong believer that achieving a goal with
 the most simplest solution looks elegant, proves that you have deep knowledge
 on the subject, and overall is beautiful by itself.  Additionally to this, a
 simple solution is easier to comprehend and to audit, hence it is much easier
@@ -1705,7 +1676,7 @@ your goals &amp;ndash; you will be able to optimise the result at a later stage.
 used as the skeleton for the iptables ruleset on systems I manage (this snippet
 assumes that 192.168.0.0/16 is the internal network and that the ruleset is
 installed on the NAT instance which is a gateway to the Internet):&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-iptables"&gt;*filter
+&lt;pre class="highlight" data-file="/etc/sysconfig/iptables"&gt;&lt;code class="language-iptables"&gt;*filter
 :INPUT ACCEPT [0:0]
 :FORWARD ACCEPT [0:0]
 :OUTPUT ACCEPT [0:0]
@@ -1741,7 +1712,6 @@ COMMIT
 -A POSTROUTING -s 192.168.0.0/22 ! -d 192.168.0.0/22 -j MASQUERADE
 COMMIT&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;There are a few things to note:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -1769,7 +1739,7 @@ COMMIT&lt;/code&gt;&lt;/pre&gt;
     11 (time exceeded), and 30 (traceroute) to pass through the firewall.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;So, here you have it a solid firewall ruleset consisting of just 13 rules.&lt;/p&gt;</content><category term="linux"></category><category term="console"></category><category term="howto"></category><category term="iptables"></category><category term="linux"></category><category term="security"></category></entry><entry><title>Transparent SSH host-jumping (Advanced)</title><link href="https://dmitry.khlebnikov.net/2015/08/06/transparent-ssh-host-jumping-advanced/" rel="alternate"></link><published>2015-08-06T10:00:00+10:00</published><updated>2020-04-27T00:27:04+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2015-08-06:/2015/08/06/transparent-ssh-host-jumping-advanced/</id><summary type="html">&lt;p&gt;In this brief article I am going to describe how I resolved a nagging issue I
+&lt;p&gt;So, here you have it a solid firewall ruleset consisting of just 13 rules.&lt;/p&gt;</content><category term="linux"></category><category term="console"></category><category term="howto"></category><category term="iptables"></category><category term="linux"></category><category term="security"></category></entry><entry><title>Transparent SSH host-jumping (Advanced)</title><link href="https://dmitry.khlebnikov.net/2015/08/06/transparent-ssh-host-jumping-advanced/" rel="alternate"></link><published>2015-08-06T10:00:00+10:00</published><updated>2020-05-17T20:25:15+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2015-08-06:/2015/08/06/transparent-ssh-host-jumping-advanced/</id><summary type="html">&lt;p&gt;In this brief article I am going to describe how I resolved a nagging issue I
 had with setting up access to hosts which are not directly reachable, but where
 you need to forward your connection through an intermediate host.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://dmitry.khlebnikov.net/2010/12/10/ssh-port-forwarding-intermediate/"&gt;Previously&lt;/a&gt;, I was using the local SSH port-forwarding technique (although I
@@ -1795,7 +1765,6 @@ Host target
     HostKeyAlias target
     Port 10001&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;Upon closer examination of my day-to-day routine I found two things that
 frustrated me the most:&lt;/p&gt;
 &lt;ol&gt;
@@ -1812,11 +1781,9 @@ file just before the &lt;code&gt;Host *&lt;/code&gt; section:&lt;/p&gt;
 &lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;Host */*
     ProxyCommand ssh $(dirname %h) -W $(basename %h):%p&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;From that point on, I could connect to a target host via an intermediate one
 by simply executing the following command:&lt;/p&gt;
 &lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;ssh user@intemediate/target&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;The configuration with the &lt;code&gt;ProxyCommand&lt;/code&gt; directive was spawning two &lt;code&gt;ssh&lt;/code&gt;
 processes with one connected to the intermediate host in the background and the
@@ -1824,7 +1791,6 @@ other proxied through the intermediate host and connected to the target running
 in the foreground, so from my point of view I had just one terminal session
 open. The configuration allowed to chain as many hosts as I wanted, e.g.:&lt;/p&gt;
 &lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;ssh user@hostA/hostB/hostC/hostD&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;The above would result in three &lt;code&gt;ssh&lt;/code&gt; processes running in the background (the
 first connected to hostA, the second connected to &lt;em&gt;hostB&lt;/em&gt; proxied through &lt;em&gt;hostA&lt;/em&gt;,
@@ -1848,10 +1814,8 @@ this block should be placed &lt;em&gt;before&lt;/em&gt; the &lt;code&gt;Host *&l
     ControlPath   ~/.ssh/.sessions/%r@%h:%p
     ProxyCommand /bin/sh -c 'mkdir -p -m700 ~/.ssh/.sessions/&amp;quot;%r@$(dirname %h)&amp;quot; &amp;amp;&amp;amp; exec ssh -o &amp;quot;ControlMaster auto&amp;quot; -o &amp;quot;ControlPath   ~/.ssh/.sessions/%r@$(dirname %h):%p&amp;quot; -o &amp;quot;ControlPersist 120s&amp;quot; -l %r -p %p $(dirname %h) -W $(basename %h):%p'&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;Let&amp;rsquo;s review it line by line, so the logic is clear:&lt;/p&gt;
 &lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;Host */*&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;This host definition block would catch any host specified on the &lt;code&gt;ssh&lt;/code&gt; command
 line when the host name matches the &lt;code&gt;*/*&lt;/code&gt; pattern, so &lt;code&gt;ssh hostA/hostB/hostC&lt;/code&gt;
@@ -1860,13 +1824,11 @@ the second part after &lt;code&gt;/&lt;/code&gt;. Due to a recursive call to &lt
 block will be recursively applied to all hosts in the specified chain.&lt;/p&gt;
 &lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;    ControlMaster auto&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;This directive instructs &lt;code&gt;ssh&lt;/code&gt; to try to reuse an existing control channel to
 communicate with the remote host, and if such a channel does not exist it will
 be created, so further connections to the same remote host would benefit from
 a speedup provided by the already established connection.&lt;/p&gt;
 &lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;    ControlPath ~/.ssh/.sessions/%r@%h:%p&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;This directive provides &lt;code&gt;ssh&lt;/code&gt; with the location of the control channel socket
 file. The socket file should be unique for each remote host. Since we are
@@ -1878,7 +1840,6 @@ separator in the chain the path constructed here will have a subdirectory
 defined in the middle of the %h expansion. &lt;code&gt;ssh&lt;/code&gt; would not automatically create
 that subdirectory, so it is something we need to address (see below)&lt;/p&gt;
 &lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;    ProxyCommand …&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;This is the heart of the whole block. I am starting this proxy command with
 &lt;code&gt;/bin/sh -c '…'&lt;/code&gt; since &lt;code&gt;ssh&lt;/code&gt; is &lt;code&gt;exec()&lt;/code&gt;uting the specified command (this
@@ -1936,7 +1897,6 @@ following:&lt;/p&gt;
 &lt;p&gt;the second part executes&lt;/p&gt;
 &lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;ssh … -o &amp;quot;ControlPath ~/.ssh/.sessions/user@hostA/hostB:22&amp;quot; … hostA/hostB -W hostC:22&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;This will initiate another round of the above steps, but with a shorter chain
  and it will be recursive until there is just a single host left, e.g. when
  we ascend to &lt;code&gt;hostA&lt;/code&gt; as the host to connect to.&lt;/p&gt;
@@ -1955,7 +1915,7 @@ following:&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;I hope this little trick will save you some time and will make your life
-easier. :)&lt;/p&gt;</content><category term="ssh"></category><category term="console"></category><category term="ssh"></category><category term="howto"></category></entry><entry><title>Should we use "sudo" for day-to-day activities?</title><link href="https://dmitry.khlebnikov.net/2015/07/18/should-we-use-sudo-for-day-to-day-activities/" rel="alternate"></link><published>2015-07-18T20:04:00+10:00</published><updated>2020-04-27T00:27:04+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2015-07-18:/2015/07/18/should-we-use-sudo-for-day-to-day-activities/</id><summary type="html">&lt;div class="toc"&gt;&lt;span class="toctitle"&gt;Table of Contents&lt;/span&gt;&lt;ul&gt;
+easier. :)&lt;/p&gt;</content><category term="ssh"></category><category term="console"></category><category term="ssh"></category><category term="howto"></category></entry><entry><title>Should we use "sudo" for day-to-day activities?</title><link href="https://dmitry.khlebnikov.net/2015/07/18/should-we-use-sudo-for-day-to-day-activities/" rel="alternate"></link><published>2015-07-18T20:04:00+10:00</published><updated>2020-05-17T04:45:11+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2015-07-18:/2015/07/18/should-we-use-sudo-for-day-to-day-activities/</id><summary type="html">&lt;div class="toc"&gt;&lt;span class="toctitle"&gt;Table of Contents&lt;/span&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a href="#history"&gt;History&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#people-are-saying-sudo-is-good-is-it-true"&gt;People are saying &amp;ldquo;sudo&amp;rdquo; is good. Is it true?&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#what-is-the-problem-with-the-sudo-approach"&gt;What is the problem with the &amp;ldquo;sudo&amp;rdquo; approach?&lt;/a&gt;&lt;/li&gt;
@@ -2100,7 +2060,6 @@ through all of them and see if they are real benefits at all:&lt;/p&gt;
  following scenario — a user executes:&lt;/p&gt;
 &lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;sudo less /var/log/messages&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;and then types &amp;ldquo;!&amp;rdquo; followed by the Enter/Return key — the user effectively
  now in the root shell and what &lt;code&gt;sudo&lt;/code&gt; will log into its logs has nothing
  to do with what user actually did.&lt;/p&gt;
@@ -2137,9 +2096,8 @@ through all of them and see if they are real benefits at all:&lt;/p&gt;
  account/password.  The truth is that nobody is limited by a single root
  account: you can create as many as you want and each of them could have
  their own distinct password, e.g.&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;useradd -om -o 0 -g 0 -s /bin/sh new_root
-passwd new_root&lt;/code&gt;&lt;/pre&gt;
-
+&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;[root@localhost ~]# useradd -om -o 0 -g 0 -s /bin/sh new_root
+[root@localhost ~]# passwd new_root&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Better yet, do not set the password and lock the account instead with
  &lt;code&gt;usermod -L new_root&lt;/code&gt; since we are using keys, remember?&lt;/p&gt;
@@ -2153,7 +2111,7 @@ passwd new_root&lt;/code&gt;&lt;/pre&gt;
  and lacks the part it is comparing the functionality to.  If we are
  comparing a legacy Unix access control system with &lt;code&gt;sudo&lt;/code&gt;, then yes &lt;code&gt;sudo&lt;/code&gt;
  is much more configurable. If we compare &lt;code&gt;sudo&lt;/code&gt; with, say, SELinux or
- GRsecurity’s RBAC — &lt;code&gt;sudo&lt;/code&gt; will lose since both have much more
+ GRsecurity’s RBAC &amp;ndash; &lt;code&gt;sudo&lt;/code&gt; will lose since both have much more
  fine-grained security controls than &lt;code&gt;sudo&lt;/code&gt;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
@@ -2345,7 +2303,7 @@ generally it should be assumed&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;I would be really happy to answer any question in regard to this article and
 provide any possible help in making our everyday system level activities more
-secure, so do not hesitate to comment or &lt;a href="/contact"&gt;contact me&lt;/a&gt;.&lt;/p&gt;</content><category term="sudo"></category><category term="sudo"></category><category term="console"></category></entry><entry><title>SSH port-forwarding (Intermediate)</title><link href="https://dmitry.khlebnikov.net/2010/12/10/ssh-port-forwarding-intermediate/" rel="alternate"></link><published>2010-12-10T10:00:00+11:00</published><updated>2020-04-27T00:27:04+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2010-12-10:/2010/12/10/ssh-port-forwarding-intermediate/</id><summary type="html">&lt;p&gt;In my previous blog entry I described some basic functionality of SSH in terms
+secure, so do not hesitate to comment or &lt;a href="/contact"&gt;contact me&lt;/a&gt;.&lt;/p&gt;</content><category term="sudo"></category><category term="sudo"></category><category term="console"></category></entry><entry><title>SSH port-forwarding (Intermediate)</title><link href="https://dmitry.khlebnikov.net/2010/12/10/ssh-port-forwarding-intermediate/" rel="alternate"></link><published>2010-12-10T10:00:00+11:00</published><updated>2020-05-17T04:45:11+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2010-12-10:/2010/12/10/ssh-port-forwarding-intermediate/</id><summary type="html">&lt;p&gt;In my previous blog entry I described some basic functionality of SSH in terms
 of port-forwarding. Now it&amp;rsquo;s time for a little bit more complex stuff.&lt;/p&gt;
 &lt;p&gt;In this article I will highlight:&lt;/p&gt;
 &lt;ul&gt;
@@ -2376,8 +2334,7 @@ standard firewall/NAT router.&lt;/p&gt;
 &lt;p&gt;Now, how can you access port 12345 on host behind the firewall given that this
 port is not &amp;ldquo;exported&amp;rdquo; by the NAT on the firewall? This is quite simple. Open a
 terminal window on your local computer and type the following:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;ssh -L12345:192.168.1.2:12345 joe@firewall.domain.tld&lt;/code&gt;&lt;/pre&gt;
-
+&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;[user@localhost ~] ssh -L12345:192.168.1.2:12345 joe@firewall.domain.tld&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;From now on, as long as your SSH session is up and running you will be able to
 reach &lt;code&gt;192.168.1.2:12345&lt;/code&gt; by connecting to &lt;code&gt;localhost:12345&lt;/code&gt; (i.e. the &lt;code&gt;12345&lt;/code&gt;
@@ -2396,8 +2353,7 @@ requests to many ports useful:&lt;/p&gt;
   physically in Australia&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;In both cases, you use the following SSH command in your terminal window:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;ssh -D3128 joe@relay.domain.tld&lt;/code&gt;&lt;/pre&gt;
-
+&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;[user@localhost ~]$ ssh -D3128 joe@relay.domain.tld&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;As long as you SSH session is active, you can use port &lt;code&gt;3128&lt;/code&gt; on your local
 machine as SOCKS4/SOCKS5 proxy (e.g. you can configure proxy settings in your
@@ -2417,8 +2373,7 @@ to folks from WikiLeaks&amp;hellip; just kidding :) )?&lt;/p&gt;
 Google for &amp;ldquo;free ssh account&amp;rdquo; and you will surely find one for yourself).&lt;/p&gt;
 &lt;p&gt;Now, when you have the account, you can execute the following on your local
 computer (which is inside that highly secure network :) ):&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;ssh -R:60000:127.0.0.1:22 joe@friendly.domain.tld&lt;/code&gt;&lt;/pre&gt;
-
+&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;[user@localhost ~]$ ssh -R:60000:127.0.0.1:22 joe@friendly.domain.tld&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The above command will setup such a configuration that connecting on port &lt;code&gt;60000&lt;/code&gt;
 at &lt;code&gt;friendly.domain.tld&lt;/code&gt; will forward traffic to your local machine&amp;rsquo;s port 22
@@ -2441,17 +2396,15 @@ way you want it!&lt;/p&gt;
 &lt;p&gt;Anyway, even if you fail to find a host that allows you to expose your service
 to the public, you still should be able to access it yourself &amp;ndash; using the
 forward firewall piercing technique described at the beginning of this post:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;# from your home computer
-ssh -L60000:127.0.0.1:60000 joe@friendly.domain.tld&lt;/code&gt;&lt;/pre&gt;
-
+&lt;pre class="highlight" data-user="user" data-prompt=""[user@localhost"&gt;&lt;code class="language-shell"&gt;# from your home computer
+[user@localhost ~]$ ssh -L60000:127.0.0.1:60000 joe@friendly.domain.tld&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Once it is done your computer in the highly secure network should be reachable
 via SSH on your &lt;code&gt;localhost:60000&lt;/code&gt;, e.g.&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;ssh -p6000 my_account@localhost&lt;/code&gt;&lt;/pre&gt;
-
+&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;[user@localhost ~] ssh -p6000 my_account@localhost&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Where &lt;code&gt;my_account&lt;/code&gt; is a user allowed to SSH into your computer in the highly
-secure network.&lt;/p&gt;</content><category term="ssh"></category></entry><entry><title>SSH port-forwarding (Basic)</title><link href="https://dmitry.khlebnikov.net/2010/11/29/ssh-port-forwarding-basic/" rel="alternate"></link><published>2010-11-29T10:00:00+11:00</published><updated>2020-04-27T00:27:04+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2010-11-29:/2010/11/29/ssh-port-forwarding-basic/</id><summary type="html">&lt;p&gt;I think all of you are using SSH in your daily routines. However, do you use
+secure network.&lt;/p&gt;</content><category term="ssh"></category></entry><entry><title>SSH port-forwarding (Basic)</title><link href="https://dmitry.khlebnikov.net/2010/11/29/ssh-port-forwarding-basic/" rel="alternate"></link><published>2010-11-29T10:00:00+11:00</published><updated>2020-05-17T04:45:11+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2010-11-29:/2010/11/29/ssh-port-forwarding-basic/</id><summary type="html">&lt;p&gt;I think all of you are using SSH in your daily routines. However, do you use
 its full potential? Today&amp;rsquo;s topic is the SSH port-forwarding feature and how
 it can be use to achieve some interesting configurations.&lt;/p&gt;
 &lt;p&gt;I&amp;rsquo;m sure most of you are aware of the feature, but how many of you are using
@@ -2486,8 +2439,7 @@ another machine, you may want to bind MySQL to some internal interface &amp;ndas
 network that links your servers only, e.g. 192.168.1.1:3306), and then use the
 SSH port-forwarding feature to setup a tunnel between your remote database and
 your local computer:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;ssh -L3306:127.0.0.1:3306 user@server&lt;/code&gt;&lt;/pre&gt;
-
+&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;[root@localhost ~]# ssh -L3306:127.0.0.1:3306 user@server&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Here, &lt;code&gt;-L3306:127.0.0.1:3306&lt;/code&gt; says that we want &lt;code&gt;127.0.0.1:3306&lt;/code&gt; to be &amp;ldquo;mapped&amp;rdquo;
 to our local host to port &lt;code&gt;3306&lt;/code&gt;. While the SSH session is active any packet
@@ -2504,7 +2456,7 @@ the Internet, but I decided to write this article as a foundation for my
 further articles on this topic which will cover more advanced usage of the SSH
 port-forwarding feature. For example, I intend to document a configuration of
 the MySQL replication setup between two servers located at two different data
-centres where each server is a part of a server farm protected by a firewall.&lt;/p&gt;</content><category term="ssh"></category><category term="ssh"></category><category term="console"></category><category term="bastion"></category></entry><entry><title>HOWTO: VMware Player as a remote console (VNC)</title><link href="https://dmitry.khlebnikov.net/2010/11/24/howto-vmware-player-as-a-remote-console-vnc/" rel="alternate"></link><published>2010-11-24T10:00:00+11:00</published><updated>2020-04-27T00:27:04+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2010-11-24:/2010/11/24/howto-vmware-player-as-a-remote-console-vnc/</id><summary type="html">&lt;p&gt;Turning VMware Player into a non-privileged VNC client to access VMware VMs from a Linux-based PC&lt;/p&gt;</summary><content type="html">&lt;p&gt;Since I am doing a lot of remote systems administration tasks due to the nature
+centres where each server is a part of a server farm protected by a firewall.&lt;/p&gt;</content><category term="ssh"></category><category term="ssh"></category><category term="console"></category><category term="bastion"></category></entry><entry><title>HOWTO: VMware Player as a remote console (VNC)</title><link href="https://dmitry.khlebnikov.net/2010/11/24/howto-vmware-player-as-a-remote-console-vnc/" rel="alternate"></link><published>2010-11-24T10:00:00+11:00</published><updated>2020-05-17T20:25:15+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2010-11-24:/2010/11/24/howto-vmware-player-as-a-remote-console-vnc/</id><summary type="html">&lt;p&gt;Turning VMware Player into a non-privileged VNC client to access VMware VMs from a Linux-based PC&lt;/p&gt;</summary><content type="html">&lt;p&gt;Since I am doing a lot of remote systems administration tasks due to the nature
 of my IT consulting work and since I am also running Linux on all my computers
 I was looking for a native way how to get a remote console to VMware VMs from
 linux.&lt;/p&gt;
@@ -2550,7 +2502,6 @@ drwxr-xr-x  5 vmware vmware 4096 Nov 23 09:01 vmware-player
 drwxr-xr-x 11 vmware vmware 4096 Nov 23 09:01 vmware-player-app
 drwxr-xr-x  3 vmware vmware 4096 Nov 23 09:01 vmware-player-setup&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;So far so good. We now have the whole bundle unacked into the specified
 directory and we are interested in just two subdirectories: &lt;code&gt;vmware-player&lt;/code&gt; and
 &lt;code&gt;vmware-player-app&lt;/code&gt;, the rest is not related to the functionality we are
@@ -2567,7 +2518,6 @@ drwx------ 2 vmware vmware 4096 Nov 24 01:21 etc
 drwx------ 2 vmware vmware 4096 Nov 24 01:21 lib
 drwx------ 2 vmware vmware 4096 Nov 24 01:21 share&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;From now on we are going to populate these directories with files from the
 unpacked bundle.&lt;/p&gt;
 &lt;p&gt;The first file we are interested in is &lt;code&gt;appLoader&lt;/code&gt; &amp;ndash; this is the primary
@@ -2581,7 +2531,6 @@ $ echo $?
 255
 $&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;Huh, this is not very informative, is it? The binary silently exits with error
 code of 255. Well, you may get other errors at this stage if you don&amp;rsquo;t have all
 the required shared libraries installed on you system &amp;ndash; however I doubt it
@@ -2592,7 +2541,6 @@ highlighting important things only):&lt;/p&gt;
 &lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ strace -f -eopen ~/vmrconsole/bin/vmplayer 2&amp;gt;&amp;amp;1 | tail -2
 open(&amp;quot;/etc/localtime&amp;quot;, O_RDONLY)        = 6
 open(&amp;quot;/etc/vmware/config&amp;quot;, O_RDONLY|O_LARGEFILE) = -1 EACCES (Permission denied)&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;It looks that vmplayer wants to access a global config file and does not try to
 look for an alternative, home directory based one. Well, this is understandable
@@ -2608,7 +2556,6 @@ path inside the binary with something relative:&lt;/p&gt;
       1 /etc/vmware/ssl/dh512.pem
       1 /etc/vmware/ssl/dh1024.pem
 $ sed -i 's,/etc/vmware,..//////etc,g' ~/vmrconsole/bin/appLoader&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;The trick here is to substitute one string with another of the same length (we
 are modifying a binary so we do not want to mess offsets up) and luckily enough
@@ -2633,7 +2580,6 @@ open(&amp;quot;..//////etc/config&amp;quot;, O_RDONLY|O_LARGEFILE) = 6
 write(5, &amp;quot;Nov 24 01:53:09.825: app-3077760&amp;quot;..., 89) = 89
 write(5, &amp;quot;Nov 24 01:53:09.825: app-3077760&amp;quot;..., 73) = 73&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;Looks better, does not it? Our binary found the config file and was able to
 open it, however it still produces no output, but it reports something to a log
 file:&lt;/p&gt;
@@ -2646,7 +2592,6 @@ Nov 24 01:53:09.825: app-3077760704| Using configuration file ..//////etc/config
 Nov 24 01:53:09.825: app-3077760704| libdir entry was not present in ..//////etc/config.
 Nov 24 01:53:09.825: app-3077760704| Unable to lookup library directory.&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;I do not know much about VMware Players config file but according to the log
 message it wants some variable called &lt;code&gt;libdir&lt;/code&gt; and this variable should point
 to the library directory, so let&amp;rsquo;s introduce such a variable and try to execute
@@ -2657,7 +2602,6 @@ write(5, &amp;quot;LOG NOT INITIALIZED | LoadLibrar&amp;quot;..., 73) = 73
 open(&amp;quot;../lib/libvmplayer.so/libvmplayer.so&amp;quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
 write(5, &amp;quot;LOG NOT INITIALIZED | Error load&amp;quot;..., 153) = 153
 write(5, &amp;quot;LOG NOT INITIALIZED | Could not &amp;quot;..., 74) = 74&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;I hope you have noticed that I have used a relative path for the library
 directory in the config file and this means that we always should run the
@@ -2677,7 +2621,6 @@ $ ldd ~/vmrconsole/lib/libvmplayer.so/libvmplayer.so | fgrep 'not found'
  libvmwareui.so.0 =&amp;gt; not found
  libgvmomi.so.0 =&amp;gt; not found&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;The last command showed that &lt;code&gt;libvmplayer.so&lt;/code&gt; depends on some libraries and
 that their locations are currently unknown to the system. In order to solve
 this there are two things we need to do:&lt;/p&gt;
@@ -2689,7 +2632,7 @@ this there are two things we need to do:&lt;/p&gt;
 &lt;p&gt;To accomplish the first thing we need to create a wrapper script around
 vmplayer and use this script for fine-tuning later. Here is the very basic
 script for this purpose (created as &lt;code&gt;~/vmrconsole/bin/loader.sh&lt;/code&gt;:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;#!/bin/bash
+&lt;pre class="highlight" data-file="~/vmrconsole/bin/loader.sh"&gt;&lt;code class="language-bash"&gt;#!/bin/bash
 
 # We must run vmplayer from the directory it resides in since all
 # relative paths are solved from there.
@@ -2742,12 +2685,10 @@ export LD_LIBRARY_PATH
 # execute the real binary and pass the supplied arguments to it
 exec -a &amp;quot;$ORIG_NAME&amp;quot; ./appLoader &amp;quot;$@&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;This wrapper script should not be called directly, instead we need to create a
 symbolic link to this wrapper, e.g. for vmplayer the following should be
 performed:&lt;/p&gt;
 &lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ ln -sf loader.sh ~/vmrconsole/bin/vmplayer&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;Since our vmplayer is not a full scale VMware Player I suggest to create
 another small wrapper script and name it &lt;code&gt;vmrconsole&lt;/code&gt;:&lt;/p&gt;
@@ -2757,7 +2698,6 @@ ABS_NAME=$(readlink -e $BASH_SOURCE) || exit 1
 BINDIR=&amp;quot;${ABS_NAME%/*}&amp;quot;
 exec &amp;quot;$BINDIR/vmplayer&amp;quot; -h &amp;quot;$@&amp;quot;
 $ chmod 0700 ~/vmrconsole/bin/vmrconsole&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;Now we need to populate our library directory with the needed libraries. It is
 a bit tricky to describe since on different systems you will likely end up with
@@ -2776,13 +2716,11 @@ need to locate and copy them over to our library directory):&lt;/p&gt;
 `libvmwareui.so.0' -&amp;gt; `/home/vmware/vmrconsole/lib/libvmwareui.so.0'
 `libgvmomi.so.0' -&amp;gt; `/home/vmware/vmrconsole/lib/libgvmomi.so.0'&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;Once this is done we need to follow the following loop until there is no output
 from the command listed below (in fact, on my system this step was not needed
 since I had all dependencies in place already, but it is harmless to execute
 this command anyway):&lt;/p&gt;
 &lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ LD_LIBRARY_PATH=~/vmrconsole/lib ldd ~/vmrconsole/lib/* 2&amp;gt;/dev/null | fgrep 'not found' | awk '{ print $1; }' | xargs -i find ~/vmplayer -type f -name '{}' -execdir cp -avL '{}' ~/vmrconsole/lib/ \;&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;If we try to access any remote VM&amp;rsquo;s console it will be clear that some parts
 are still missing:&lt;/p&gt;
@@ -2792,7 +2730,6 @@ Failed to open file '/usr/lib/vmware/share/pixmaps/eula.png': No such file or di
 Failed to open file '/usr/lib/vmware/share/pixmaps/stream-spinner.png': No such file or directory
 Failed to open file '/usr/lib/vmware/share/pixmaps/stream-spinner-stopped.png': No such file or directory
 SSLLoadSharedLibrary: Failed to load library libcrypto.so.0.9.8:/home/vmplayer/vmrconsole/bin/libdir/lib/libcrypto.so.0.9.8/libcrypto.so.0.9.8: cannot open shared object file: No such file or directory&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;&lt;code&gt;strace&lt;/code&gt; is our best friend here, just run the command through &lt;code&gt;strace&lt;/code&gt;,
 examine the log file, and fix stuff properly:&lt;/p&gt;
@@ -2855,7 +2792,6 @@ $ strings libvmwareui.so.0 | fgrep /var/run/vmware
 /var/run/vmware/fuse/%Lu.info
 $ sed -i 's,/var/run/vmware,..//////var/run,g' libvmwareui.so.0&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;Ufff, we did a lot of binary patching &amp;ndash; luckily, VMware binaries and libraries
 are not calculating their checksums. Now, we need to put all this stuff we have
 seen in the &lt;code&gt;strings&lt;/code&gt; output and during the execution of the program in place (in
@@ -2876,12 +2812,10 @@ $ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/share/EULA.txt ~/vmrconsole
 $ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/share/*.ui ~/vmrconsole/share/
 $ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/share/icons ~/vmrconsole/share/&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;At this stage we should be able to launch the vmplayer program via our wrapper
 script (I am launching it on a remote machine through SSH, but here I am
 describing how it should look on the local console):&lt;/p&gt;
 &lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ ~/vmrconsole/bin/vmplayer&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;&lt;img alt="VMware Player: main window" class="figure" src="https://dmitry.khlebnikov.net/images/howto-vmware-player-as-remote-console-01.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;So far so good, but we need to resolve the issue with the OpenSSL library
@@ -2893,10 +2827,8 @@ $ ls -ld ~/vmrconsole/lib/lib*.so.0.9.8
 lrwxrwxrwx 1 vmware vmware 27 Nov 24 05:27 /home/vmware/vmrconsole/lib/libcrypto.so.0.9.8 -&amp;gt; /usr/lib/libcrypto.so.0.9.8
 lrwxrwxrwx 1 vmware vmware 27 Nov 24 05:27 /home/vmware/vmrconsole/lib/libssl.so.0.9.8 -&amp;gt; /usr/lib/libssl.so.0.9.8&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;Let&amp;rsquo;s try to connect to remote VM&amp;rsquo;s console again:&lt;/p&gt;
 &lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ vmrconsole 192.168.70.31&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;&lt;img alt="VMware Player: credentials window" class="figure" src="https://dmitry.khlebnikov.net/images/howto-vmware-player-as-remote-console-02.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img alt="VMware Player: MKS error message" class="figure" src="https://dmitry.khlebnikov.net/images/howto-vmware-player-as-remote-console-03.jpg"&gt;&lt;/p&gt;
@@ -2918,7 +2850,6 @@ Nov 24 03:41:05.444: player| VMClient_ConnectMksClientEx - trying remote socket 
 Nov 24 03:41:05.611: player| VMClient_ConnectMksClientEx - connecting the MKS client
 Nov 24 03:41:05.616: player| vmdbPipe_Streams: Couldn't read
 Nov 24 03:41:15.941: player| Gdk: losing last reference to undestroyed window&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;From the messages quoted above it is quite clear that the program is trying to
 launch some helper binaries/daemons in the background and to delegate the
@@ -2954,10 +2885,8 @@ vmauthd/vmware-authd
 $ sed -i 's,/var/run/vmware,..//////var/run,g' ~/vmrconsole/bin/vmware-remotemks
 $ sed -i 's,/etc/vmware/,..//////etc/,g' ~/vmrconsole/bin/vmware-remotemks&lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;Another attempt:&lt;/p&gt;
 &lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ vmrconsole 192.168.70.31&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;&lt;img alt="VMware Player: hints messages" class="figure" src="https://dmitry.khlebnikov.net/images/howto-vmware-player-as-remote-console-04.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;Ouch, we are presented by a bunch of hints (your mileage may vary since it
@@ -2971,7 +2900,6 @@ is just a right thing to do to fix this little bugger:&lt;/p&gt;
 $ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/xkeymap ~/vmrconsole/
 $ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/vnckeymap ~/vmrconsole/
 $ vmrconsole 192.168.70.31&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;&lt;img alt="VMware Player: remote console window" class="figure" src="https://dmitry.khlebnikov.net/images/howto-vmware-player-as-remote-console-05.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;We are almost done! At least we achieved the goal we set at the beginning of
@@ -2988,7 +2916,6 @@ $ mv vmrconsole vmrconsole-3.1.3.324285
 $ tar cjpf ~/vmrconsole-3.1.3.324285.i386.tar.bz2 vmrconsole-3.1.3.324285
 $ ls -lh vmrconsole-3.1.3.324285.i386.tar.bz2 
 -rw-r--r-- 1 vmware vmware 13M Nov 24 07:06 vmrconsole-3.1.3.324285.i386.tar.bz2&lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;P.S. Oh, boy, it takes 2 hours to investigate and to come up with a solution,
 then 8 hours to write an article to describe steps to reproduce! I hope that

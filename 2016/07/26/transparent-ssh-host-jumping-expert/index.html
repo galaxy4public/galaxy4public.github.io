@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
 	<head>
-		<meta http-equiv="Content-Security-Policy" content="	default-src 'self';object-src 'none';script-src 'self' https://www.googletagmanager.com/gtag/js 'sha256-TelA7VsuYAMqhOKGk7CHgJyuqSJdmqZEp+hn6PWVRwQ=' https://www.google-analytics.com/analytics.js;img-src 'self' https://www.google-analytics.com/r/collect https://www.google-analytics.com/collect https://stats.g.doubleclick.net/r/collect https://*/ads/ga-audiences;style-src 'self' 'sha256-fszvBX/J9dhPxFSJ5wUrq/Pvg6HrnTkWyshMZpaxSQY=';connect-src 'self' https://www.google-analytics.com/j/collect https://stats.g.doubleclick.net/j/collect; " />
+		<meta http-equiv="Content-Security-Policy" content="	default-src 'self';object-src 'none';script-src 'self' https://www.googletagmanager.com/gtag/js 'sha256-TelA7VsuYAMqhOKGk7CHgJyuqSJdmqZEp+hn6PWVRwQ=' https://www.google-analytics.com/analytics.js;img-src 'self' data: https://www.google-analytics.com/r/collect https://www.google-analytics.com/collect https://stats.g.doubleclick.net/r/collect https://*/ads/ga-audiences;style-src 'self' 'sha256-fszvBX/J9dhPxFSJ5wUrq/Pvg6HrnTkWyshMZpaxSQY=';connect-src 'self' https://www.google-analytics.com/j/collect https://stats.g.doubleclick.net/j/collect; " />
 		<title>Mind Drops</title>
 		<script src="/theme/js/persistence.js" defer></script>
 		<meta charset="utf-8" />
@@ -128,8 +128,7 @@ will allow one to tweak parameters for the hosts in the chain.</p>
 technique works, here I am only going to provide the proxy script and the
 corresponding ssh config parameter block to use the script.</p>
 <p>The goal was to support the following syntax:</p>
-<pre class="highlight"><code class="language-bash">$ ssh default_user@userA^hostA/userB^hostB:port/hostC</code></pre>
-
+<pre class="highlight" data-user="user"><code class="language-shell">[user@localhost ~]$ ssh default_user@userA^hostA/userB^hostB:port/hostC</code></pre>
 
 <p>It was a little challenge to come up with the character for identifying the
 user part for intermediate hosts:</p>
@@ -150,7 +149,7 @@ port is omitted, it will use the global port configuration (usually 22/tcp but
 can be changed with the <code>-p</code> argument to ssh).  The script is a bit not optimised
 (bash is really slow on string processing, but I decided to stick with pure
 bash where it was possible):</p>
-<pre class="highlight"><code class="language-bash">#!/bin/bash
+<pre class="highlight" data-file="~/bin/ssh-helper.sh"><code class="language-bash">#!/bin/bash
 set -eu -o pipefail
 exec 10&lt;&amp;0 11&gt;&amp;1 0&lt;&amp;2 1&gt;&amp;2
 DEFAULT_USER=&quot;$1&quot;
@@ -189,14 +188,13 @@ exec ssh \
     &quot;$HOST_CHAIN&quot; \
     -W &quot;$TARGET_HOST&quot;:&quot;$TARGET_PORT&quot;</code></pre>
 
-
 <p>The above is a proof of the concept and it &ldquo;works for me&rdquo; :). I am using it
 every day when I need to access boxes behind a bastion host. Your mileage may
 vary and you are free to create your own version of the script that would
 perform better (I would be really glad if a version of such a script could be
 shared with me).</p>
 <p>The corresponding configuration block in the ssh config file looks as follows:</p>
-<pre class="highlight"><code class="language-ssh_config">Host */*
+<pre class="highlight" data-file="~/.ssh/config"><code class="language-ssh_config">Host */*
     # if you uncomment ControlPath you also need to uncomment ControlMaster
     #ControlMaster auto
     # For OpenSSH &lt; 6.7 you may uncomment the following, but long chains will fail:
@@ -205,9 +203,8 @@ shared with me).</p>
     #ControlPath   ~/.ssh/.sessions/%C
     ProxyCommand ~/bin/ssh-helper.sh %r %h %p</code></pre>
 
-
 <p>Well, this is a bit messy since OpenSSH introduced the <code>%C</code> macro in version 6.7
-and without <code>%C</code> the ControlPath string gets too long for OpenSSH to create a
+and without <code>%C</code> the <code>ControlPath</code> string gets too long for OpenSSH to create a
 socket on the filesystem for long chains of hosts.</p>
 					<ul class="tags">
 						<li class="tag">

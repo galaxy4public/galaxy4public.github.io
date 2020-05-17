@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
 	<head>
-		<meta http-equiv="Content-Security-Policy" content="	default-src 'self';object-src 'none';script-src 'self' https://www.googletagmanager.com/gtag/js 'sha256-TelA7VsuYAMqhOKGk7CHgJyuqSJdmqZEp+hn6PWVRwQ=' https://www.google-analytics.com/analytics.js;img-src 'self' https://www.google-analytics.com/r/collect https://www.google-analytics.com/collect https://stats.g.doubleclick.net/r/collect https://*/ads/ga-audiences;style-src 'self' 'sha256-fszvBX/J9dhPxFSJ5wUrq/Pvg6HrnTkWyshMZpaxSQY=';connect-src 'self' https://www.google-analytics.com/j/collect https://stats.g.doubleclick.net/j/collect; " />
+		<meta http-equiv="Content-Security-Policy" content="	default-src 'self';object-src 'none';script-src 'self' https://www.googletagmanager.com/gtag/js 'sha256-TelA7VsuYAMqhOKGk7CHgJyuqSJdmqZEp+hn6PWVRwQ=' https://www.google-analytics.com/analytics.js;img-src 'self' data: https://www.google-analytics.com/r/collect https://www.google-analytics.com/collect https://stats.g.doubleclick.net/r/collect https://*/ads/ga-audiences;style-src 'self' 'sha256-fszvBX/J9dhPxFSJ5wUrq/Pvg6HrnTkWyshMZpaxSQY=';connect-src 'self' https://www.google-analytics.com/j/collect https://stats.g.doubleclick.net/j/collect; " />
 		<title>Mind Drops</title>
 		<script src="/theme/js/persistence.js" defer></script>
 		<meta charset="utf-8" />
@@ -135,7 +135,6 @@ Host target
     HostKeyAlias target
     Port 10001</code></pre>
 
-
 <p>Upon closer examination of my day-to-day routine I found two things that
 frustrated me the most:</p>
 <ol>
@@ -152,11 +151,9 @@ file just before the <code>Host *</code> section:</p>
 <pre class="highlight"><code class="language-ssh_config">Host */*
     ProxyCommand ssh $(dirname %h) -W $(basename %h):%p</code></pre>
 
-
 <p>From that point on, I could connect to a target host via an intermediate one
 by simply executing the following command:</p>
 <pre class="highlight"><code class="language-shell">ssh user@intemediate/target</code></pre>
-
 
 <p>The configuration with the <code>ProxyCommand</code> directive was spawning two <code>ssh</code>
 processes with one connected to the intermediate host in the background and the
@@ -164,7 +161,6 @@ other proxied through the intermediate host and connected to the target running
 in the foreground, so from my point of view I had just one terminal session
 open. The configuration allowed to chain as many hosts as I wanted, e.g.:</p>
 <pre class="highlight"><code class="language-shell">ssh user@hostA/hostB/hostC/hostD</code></pre>
-
 
 <p>The above would result in three <code>ssh</code> processes running in the background (the
 first connected to hostA, the second connected to <em>hostB</em> proxied through <em>hostA</em>,
@@ -188,10 +184,8 @@ this block should be placed <em>before</em> the <code>Host *</code> one):</p>
     ControlPath   ~/.ssh/.sessions/%r@%h:%p
     ProxyCommand /bin/sh -c 'mkdir -p -m700 ~/.ssh/.sessions/&quot;%r@$(dirname %h)&quot; &amp;&amp; exec ssh -o &quot;ControlMaster auto&quot; -o &quot;ControlPath   ~/.ssh/.sessions/%r@$(dirname %h):%p&quot; -o &quot;ControlPersist 120s&quot; -l %r -p %p $(dirname %h) -W $(basename %h):%p'</code></pre>
 
-
 <p>Let&rsquo;s review it line by line, so the logic is clear:</p>
 <pre class="highlight"><code class="language-ssh_config">Host */*</code></pre>
-
 
 <p>This host definition block would catch any host specified on the <code>ssh</code> command
 line when the host name matches the <code>*/*</code> pattern, so <code>ssh hostA/hostB/hostC</code>
@@ -200,13 +194,11 @@ the second part after <code>/</code>. Due to a recursive call to <code>ssh</code
 block will be recursively applied to all hosts in the specified chain.</p>
 <pre class="highlight"><code class="language-ssh_config">    ControlMaster auto</code></pre>
 
-
 <p>This directive instructs <code>ssh</code> to try to reuse an existing control channel to
 communicate with the remote host, and if such a channel does not exist it will
 be created, so further connections to the same remote host would benefit from
 a speedup provided by the already established connection.</p>
 <pre class="highlight"><code class="language-ssh_config">    ControlPath ~/.ssh/.sessions/%r@%h:%p</code></pre>
-
 
 <p>This directive provides <code>ssh</code> with the location of the control channel socket
 file. The socket file should be unique for each remote host. Since we are
@@ -218,7 +210,6 @@ separator in the chain the path constructed here will have a subdirectory
 defined in the middle of the %h expansion. <code>ssh</code> would not automatically create
 that subdirectory, so it is something we need to address (see below)</p>
 <pre class="highlight"><code class="language-ssh_config">    ProxyCommand …</code></pre>
-
 
 <p>This is the heart of the whole block. I am starting this proxy command with
 <code>/bin/sh -c '…'</code> since <code>ssh</code> is <code>exec()</code>uting the specified command (this
@@ -275,7 +266,6 @@ following:</p>
 <li>
 <p>the second part executes</p>
 <pre class="highlight"><code class="language-shell">ssh … -o &quot;ControlPath ~/.ssh/.sessions/user@hostA/hostB:22&quot; … hostA/hostB -W hostC:22</code></pre>
-
 
 <p>This will initiate another round of the above steps, but with a shorter chain
  and it will be recursive until there is just a single host left, e.g. when

@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
 	<head>
-		<meta http-equiv="Content-Security-Policy" content="	default-src 'self';object-src 'none';script-src 'self' https://www.googletagmanager.com/gtag/js 'sha256-TelA7VsuYAMqhOKGk7CHgJyuqSJdmqZEp+hn6PWVRwQ=' https://www.google-analytics.com/analytics.js;img-src 'self' https://www.google-analytics.com/r/collect https://www.google-analytics.com/collect https://stats.g.doubleclick.net/r/collect https://*/ads/ga-audiences;style-src 'self' 'sha256-fszvBX/J9dhPxFSJ5wUrq/Pvg6HrnTkWyshMZpaxSQY=';connect-src 'self' https://www.google-analytics.com/j/collect https://stats.g.doubleclick.net/j/collect; " />
+		<meta http-equiv="Content-Security-Policy" content="	default-src 'self';object-src 'none';script-src 'self' https://www.googletagmanager.com/gtag/js 'sha256-TelA7VsuYAMqhOKGk7CHgJyuqSJdmqZEp+hn6PWVRwQ=' https://www.google-analytics.com/analytics.js;img-src 'self' data: https://www.google-analytics.com/r/collect https://www.google-analytics.com/collect https://stats.g.doubleclick.net/r/collect https://*/ads/ga-audiences;style-src 'self' 'sha256-fszvBX/J9dhPxFSJ5wUrq/Pvg6HrnTkWyshMZpaxSQY=';connect-src 'self' https://www.google-analytics.com/j/collect https://stats.g.doubleclick.net/j/collect; " />
 		<title>Mind Drops</title>
 		<script src="/theme/js/persistence.js" defer></script>
 		<meta charset="utf-8" />
@@ -248,7 +248,6 @@ through all of them and see if they are real benefits at all:</p>
  following scenario — a user executes:</p>
 <pre class="highlight"><code class="language-shell">sudo less /var/log/messages</code></pre>
 
-
 <p>and then types &ldquo;!&rdquo; followed by the Enter/Return key — the user effectively
  now in the root shell and what <code>sudo</code> will log into its logs has nothing
  to do with what user actually did.</p>
@@ -285,9 +284,8 @@ through all of them and see if they are real benefits at all:</p>
  account/password.  The truth is that nobody is limited by a single root
  account: you can create as many as you want and each of them could have
  their own distinct password, e.g.</p>
-<pre class="highlight"><code class="language-bash">useradd -om -o 0 -g 0 -s /bin/sh new_root
-passwd new_root</code></pre>
-
+<pre class="highlight" data-user="root"><code class="language-shell">[root@localhost ~]# useradd -om -o 0 -g 0 -s /bin/sh new_root
+[root@localhost ~]# passwd new_root</code></pre>
 
 <p>Better yet, do not set the password and lock the account instead with
  <code>usermod -L new_root</code> since we are using keys, remember?</p>
@@ -301,7 +299,7 @@ passwd new_root</code></pre>
  and lacks the part it is comparing the functionality to.  If we are
  comparing a legacy Unix access control system with <code>sudo</code>, then yes <code>sudo</code>
  is much more configurable. If we compare <code>sudo</code> with, say, SELinux or
- GRsecurity’s RBAC — <code>sudo</code> will lose since both have much more
+ GRsecurity’s RBAC &ndash; <code>sudo</code> will lose since both have much more
  fine-grained security controls than <code>sudo</code>.</p>
 </li>
 <li>
