@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"></link><link href="https://dmitry.khlebnikov.net/feeds/all-en.atom.xml" rel="self"></link><id>https://dmitry.khlebnikov.net/</id><updated>2020-05-17T21:33:08+10:00</updated><entry><title>Automating Static Website Deployment</title><link href="https://dmitry.khlebnikov.net/2020/05/17/automating-static-website-deployment/" rel="alternate"></link><published>2020-05-17T21:32:00+10:00</published><updated>2020-05-17T21:33:08+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-17:/2020/05/17/automating-static-website-deployment/</id><summary type="html">&lt;div class="toc"&gt;&lt;span class="toctitle"&gt;Table of Contents&lt;/span&gt;&lt;ul&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"></link><link href="https://dmitry.khlebnikov.net/feeds/all-en.atom.xml" rel="self"></link><id>https://dmitry.khlebnikov.net/</id><updated>2020-05-17T22:01:58+10:00</updated><entry><title>Automating Static Website Deployment</title><link href="https://dmitry.khlebnikov.net/2020/05/17/automating-static-website-deployment/" rel="alternate"></link><published>2020-05-17T21:32:00+10:00</published><updated>2020-05-17T22:01:58+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-17:/2020/05/17/automating-static-website-deployment/</id><summary type="html">&lt;div class="toc"&gt;&lt;span class="toctitle"&gt;Table of Contents&lt;/span&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a href="#setting-up-github-pages"&gt;Setting up GitHub Pages&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#setting-up-the-private-code-repository"&gt;Setting up the private, code repository&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#configuring-the-github-action-for-publishing"&gt;Configuring the GitHub Action for publishing&lt;/a&gt;&lt;/li&gt;
@@ -142,6 +142,10 @@ to resolve.&lt;/p&gt;
 updates manually all I need is a private SSH key with the corresponding public
 SSH key configured with write privileges for the repository and I could push
 with &lt;code&gt;git push&lt;/code&gt; from my local copy of the repository.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a name="quote-private-keys" href="#quote-private-keys"&gt;&lt;/a&gt; &amp;hellip; private keys are called &amp;ldquo;private&amp;rdquo; for a reason &amp;ndash; they are not supposed
+to leave the device under any circumstances&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;My private keys are called &amp;ldquo;private&amp;rdquo; for a reason &amp;ndash; they are not supposed to
 leave my device(s) under any circumstances (except for backup purposes such as
 storing them in a safe).  So, please pay attention when you read or hear
@@ -161,8 +165,8 @@ look like &lt;em&gt;you&lt;/em&gt; are executing them.&lt;/p&gt;
 &lt;p&gt;Generate an SSH key pair, e.g.:&lt;/p&gt;
 &lt;pre id="code2" class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;&lt;div id="code2.1" class="lines"&gt;&lt;a href="#code2.1"&gt;&lt;/a&gt;[user@localhost ~]$ ssh-keygen -t ed25519 -N '' -C 'Updating the blog from GH Action' -f ~/gh-action
 &lt;/div&gt;&lt;div id="code2.2" class="lines"&gt;&lt;a href="#code2.2"&gt;&lt;/a&gt;Generating public/private ed25519 key pair.
-&lt;/div&gt;&lt;div id="code2.3" class="lines"&gt;&lt;a href="#code2.3"&gt;&lt;/a&gt;Your identification has been saved in /home/galaxy/gh-action
-&lt;/div&gt;&lt;div id="code2.4" class="lines"&gt;&lt;a href="#code2.4"&gt;&lt;/a&gt;Your public key has been saved in /home/galaxy/gh-action.pub
+&lt;/div&gt;&lt;div id="code2.3" class="lines"&gt;&lt;a href="#code2.3"&gt;&lt;/a&gt;Your identification has been saved in /home/user/gh-action
+&lt;/div&gt;&lt;div id="code2.4" class="lines"&gt;&lt;a href="#code2.4"&gt;&lt;/a&gt;Your public key has been saved in /home/user/gh-action.pub
 &lt;/div&gt;&lt;div id="code2.5" class="lines"&gt;&lt;a href="#code2.5"&gt;&lt;/a&gt;The key fingerprint is:
 &lt;/div&gt;&lt;div id="code2.6" class="lines"&gt;&lt;a href="#code2.6"&gt;&lt;/a&gt;SHA256:7W9pUV5IlrRVE0RAVkjLgKJz4RdtVbH7GKQu8AfYITw Updating the blog from GH Action
 &lt;/div&gt;&lt;div id="code2.7" class="lines"&gt;&lt;a href="#code2.7"&gt;&lt;/a&gt;The key's randomart image is:
@@ -229,14 +233,14 @@ suggest to stick with the default for now.&lt;/p&gt;
 doing something as follows:&lt;/p&gt;
 &lt;pre id="code3" class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;&lt;div id="code3.1" class="lines"&gt;&lt;a href="#code3.1"&gt;&lt;/a&gt;[user@localhost ~]$ virtualenv ~/venv/pelican
 &lt;/div&gt;&lt;div id="code3.2" class="lines"&gt;&lt;a href="#code3.2"&gt;&lt;/a&gt;created virtual environment CPython3.8.2.final.0-64 in 477ms
-&lt;/div&gt;&lt;div id="code3.3" class="lines"&gt;&lt;a href="#code3.3"&gt;&lt;/a&gt;  creator CPython3Posix(dest=/home/galaxy/venv/pelican, clear=False, global=False)
-&lt;/div&gt;&lt;div id="code3.4" class="lines"&gt;&lt;a href="#code3.4"&gt;&lt;/a&gt;  seeder FromAppData(download=False, pip=latest, setuptools=latest, wheel=latest, via=copy, app_data_dir=/home/galaxy/.local/share/virtualenv/seed-app-data/v1.0.1)
+&lt;/div&gt;&lt;div id="code3.3" class="lines"&gt;&lt;a href="#code3.3"&gt;&lt;/a&gt;  creator CPython3Posix(dest=/home/user/venv/pelican, clear=False, global=False)
+&lt;/div&gt;&lt;div id="code3.4" class="lines"&gt;&lt;a href="#code3.4"&gt;&lt;/a&gt;  seeder FromAppData(download=False, pip=latest, setuptools=latest, wheel=latest, via=copy, app_data_dir=/home/user/.local/share/virtualenv/seed-app-data/v1.0.1)
 &lt;/div&gt;&lt;div id="code3.5" class="lines"&gt;&lt;a href="#code3.5"&gt;&lt;/a&gt;  activators BashActivator,CShellActivator,FishActivator,PowerShellActivator,PythonActivator,XonshActivator
 &lt;/div&gt;&lt;div id="code3.6" class="lines"&gt;&lt;a href="#code3.6"&gt;&lt;/a&gt;[user@localhost ~]$ . ~/venv/pelican/bin/activate
 &lt;/div&gt;&lt;div id="code3.7" class="lines"&gt;&lt;a href="#code3.7"&gt;&lt;/a&gt;(pelican) $ mkdir ~/blog
 &lt;/div&gt;&lt;div id="code3.8" class="lines"&gt;&lt;a href="#code3.8"&gt;&lt;/a&gt;(pelican) $ cd ~/blog
 &lt;/div&gt;&lt;div id="code3.9" class="lines"&gt;&lt;a href="#code3.9"&gt;&lt;/a&gt;(pelican) $ git init
-&lt;/div&gt;&lt;div id="code3.10" class="lines"&gt;&lt;a href="#code3.10"&gt;&lt;/a&gt;Initialized empty Git repository in /home/galaxy/blog/.git/
+&lt;/div&gt;&lt;div id="code3.10" class="lines"&gt;&lt;a href="#code3.10"&gt;&lt;/a&gt;Initialized empty Git repository in /home/user/blog/.git/
 &lt;/div&gt;&lt;div id="code3.11" class="lines"&gt;&lt;a href="#code3.11"&gt;&lt;/a&gt;(pelican) $ git config --local user.email &amp;quot;your@github-email.here&amp;quot;
 &lt;/div&gt;&lt;div id="code3.12" class="lines"&gt;&lt;a href="#code3.12"&gt;&lt;/a&gt;(pelican) $ git config --local user.name &amp;quot;Joe Happy&amp;quot;
 &lt;/div&gt;&lt;div id="code3.13" class="lines"&gt;&lt;a href="#code3.13"&gt;&lt;/a&gt;(pelican) $ pelican-quickstart 
@@ -257,13 +261,13 @@ doing something as follows:&lt;/p&gt;
 &lt;/div&gt;&lt;div id="code3.28" class="lines"&gt;&lt;a href="#code3.28"&gt;&lt;/a&gt;&amp;gt; How many articles per page do you want? [10] 
 &lt;/div&gt;&lt;div id="code3.29" class="lines"&gt;&lt;a href="#code3.29"&gt;&lt;/a&gt;&amp;gt; What is your time zone? [Europe/Paris] Australia/Melbourne
 &lt;/div&gt;&lt;div id="code3.30" class="lines"&gt;&lt;a href="#code3.30"&gt;&lt;/a&gt;&amp;gt; Do you want to generate a tasks.py/Makefile to automate generation and publishing? (Y/n) n
-&lt;/div&gt;&lt;div id="code3.31" class="lines"&gt;&lt;a href="#code3.31"&gt;&lt;/a&gt;Done. Your new project is available at /home/galaxy/blog
+&lt;/div&gt;&lt;div id="code3.31" class="lines"&gt;&lt;a href="#code3.31"&gt;&lt;/a&gt;Done. Your new project is available at /home/user/blog
 &lt;/div&gt;&lt;div id="code3.32" class="lines"&gt;&lt;a href="#code3.32"&gt;&lt;/a&gt;(pelican) $ ls -l
 &lt;/div&gt;&lt;div id="code3.33" class="lines"&gt;&lt;a href="#code3.33"&gt;&lt;/a&gt;total 16
-&lt;/div&gt;&lt;div id="code3.34" class="lines"&gt;&lt;a href="#code3.34"&gt;&lt;/a&gt;drwxr-xr-x 2 galaxy galaxy 4096 May 10 00:31 content
-&lt;/div&gt;&lt;div id="code3.35" class="lines"&gt;&lt;a href="#code3.35"&gt;&lt;/a&gt;drwxr-xr-x 2 galaxy galaxy 4096 May 10 00:31 output
-&lt;/div&gt;&lt;div id="code3.36" class="lines"&gt;&lt;a href="#code3.36"&gt;&lt;/a&gt;-rw-r--r-- 1 galaxy galaxy  869 May 10 00:31 pelicanconf.py
-&lt;/div&gt;&lt;div id="code3.37" class="lines"&gt;&lt;a href="#code3.37"&gt;&lt;/a&gt;-rw-r--r-- 1 galaxy galaxy  589 May 10 00:31 publishconf.py
+&lt;/div&gt;&lt;div id="code3.34" class="lines"&gt;&lt;a href="#code3.34"&gt;&lt;/a&gt;drwxr-xr-x 2   user   user 4096 May 10 00:31 content
+&lt;/div&gt;&lt;div id="code3.35" class="lines"&gt;&lt;a href="#code3.35"&gt;&lt;/a&gt;drwxr-xr-x 2   user   user 4096 May 10 00:31 output
+&lt;/div&gt;&lt;div id="code3.36" class="lines"&gt;&lt;a href="#code3.36"&gt;&lt;/a&gt;-rw-r--r-- 1   user   user  869 May 10 00:31 pelicanconf.py
+&lt;/div&gt;&lt;div id="code3.37" class="lines"&gt;&lt;a href="#code3.37"&gt;&lt;/a&gt;-rw-r--r-- 1   user   user  589 May 10 00:31 publishconf.py
 &lt;/div&gt;&lt;div id="code3.38" class="lines"&gt;&lt;a href="#code3.38"&gt;&lt;/a&gt;(pelican) $ rm -rf output publishconf.py
 &lt;/div&gt;&lt;div id="code3.39" class="lines"&gt;&lt;a href="#code3.39"&gt;&lt;/a&gt;(pelican) $ git add content pelicanconf.py 
 &lt;/div&gt;&lt;div id="code3.40" class="lines"&gt;&lt;a href="#code3.40"&gt;&lt;/a&gt;(pelican) $ git commit -m 'Initial commit'

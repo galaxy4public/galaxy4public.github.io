@@ -244,6 +244,10 @@ to resolve.</p>
 updates manually all I need is a private SSH key with the corresponding public
 SSH key configured with write privileges for the repository and I could push
 with <code>git push</code> from my local copy of the repository.</p>
+<blockquote>
+<p><a name="quote-private-keys" href="#quote-private-keys"></a> &hellip; private keys are called &ldquo;private&rdquo; for a reason &ndash; they are not supposed
+to leave the device under any circumstances</p>
+</blockquote>
 <p>My private keys are called &ldquo;private&rdquo; for a reason &ndash; they are not supposed to
 leave my device(s) under any circumstances (except for backup purposes such as
 storing them in a safe).  So, please pay attention when you read or hear
@@ -263,8 +267,8 @@ look like <em>you</em> are executing them.</p>
 <p>Generate an SSH key pair, e.g.:</p>
 <pre id="code2" class="highlight" data-user="user"><code class="language-shell"><div id="code2.1" class="lines"><a href="#code2.1"></a>[user@localhost ~]$ ssh-keygen -t ed25519 -N '' -C 'Updating the blog from GH Action' -f ~/gh-action
 </div><div id="code2.2" class="lines"><a href="#code2.2"></a>Generating public/private ed25519 key pair.
-</div><div id="code2.3" class="lines"><a href="#code2.3"></a>Your identification has been saved in /home/galaxy/gh-action
-</div><div id="code2.4" class="lines"><a href="#code2.4"></a>Your public key has been saved in /home/galaxy/gh-action.pub
+</div><div id="code2.3" class="lines"><a href="#code2.3"></a>Your identification has been saved in /home/user/gh-action
+</div><div id="code2.4" class="lines"><a href="#code2.4"></a>Your public key has been saved in /home/user/gh-action.pub
 </div><div id="code2.5" class="lines"><a href="#code2.5"></a>The key fingerprint is:
 </div><div id="code2.6" class="lines"><a href="#code2.6"></a>SHA256:7W9pUV5IlrRVE0RAVkjLgKJz4RdtVbH7GKQu8AfYITw Updating the blog from GH Action
 </div><div id="code2.7" class="lines"><a href="#code2.7"></a>The key's randomart image is:
@@ -331,14 +335,14 @@ suggest to stick with the default for now.</p>
 doing something as follows:</p>
 <pre id="code3" class="highlight" data-user="user"><code class="language-shell"><div id="code3.1" class="lines"><a href="#code3.1"></a>[user@localhost ~]$ virtualenv ~/venv/pelican
 </div><div id="code3.2" class="lines"><a href="#code3.2"></a>created virtual environment CPython3.8.2.final.0-64 in 477ms
-</div><div id="code3.3" class="lines"><a href="#code3.3"></a>  creator CPython3Posix(dest=/home/galaxy/venv/pelican, clear=False, global=False)
-</div><div id="code3.4" class="lines"><a href="#code3.4"></a>  seeder FromAppData(download=False, pip=latest, setuptools=latest, wheel=latest, via=copy, app_data_dir=/home/galaxy/.local/share/virtualenv/seed-app-data/v1.0.1)
+</div><div id="code3.3" class="lines"><a href="#code3.3"></a>  creator CPython3Posix(dest=/home/user/venv/pelican, clear=False, global=False)
+</div><div id="code3.4" class="lines"><a href="#code3.4"></a>  seeder FromAppData(download=False, pip=latest, setuptools=latest, wheel=latest, via=copy, app_data_dir=/home/user/.local/share/virtualenv/seed-app-data/v1.0.1)
 </div><div id="code3.5" class="lines"><a href="#code3.5"></a>  activators BashActivator,CShellActivator,FishActivator,PowerShellActivator,PythonActivator,XonshActivator
 </div><div id="code3.6" class="lines"><a href="#code3.6"></a>[user@localhost ~]$ . ~/venv/pelican/bin/activate
 </div><div id="code3.7" class="lines"><a href="#code3.7"></a>(pelican) $ mkdir ~/blog
 </div><div id="code3.8" class="lines"><a href="#code3.8"></a>(pelican) $ cd ~/blog
 </div><div id="code3.9" class="lines"><a href="#code3.9"></a>(pelican) $ git init
-</div><div id="code3.10" class="lines"><a href="#code3.10"></a>Initialized empty Git repository in /home/galaxy/blog/.git/
+</div><div id="code3.10" class="lines"><a href="#code3.10"></a>Initialized empty Git repository in /home/user/blog/.git/
 </div><div id="code3.11" class="lines"><a href="#code3.11"></a>(pelican) $ git config --local user.email &quot;your@github-email.here&quot;
 </div><div id="code3.12" class="lines"><a href="#code3.12"></a>(pelican) $ git config --local user.name &quot;Joe Happy&quot;
 </div><div id="code3.13" class="lines"><a href="#code3.13"></a>(pelican) $ pelican-quickstart 
@@ -359,13 +363,13 @@ doing something as follows:</p>
 </div><div id="code3.28" class="lines"><a href="#code3.28"></a>&gt; How many articles per page do you want? [10] 
 </div><div id="code3.29" class="lines"><a href="#code3.29"></a>&gt; What is your time zone? [Europe/Paris] Australia/Melbourne
 </div><div id="code3.30" class="lines"><a href="#code3.30"></a>&gt; Do you want to generate a tasks.py/Makefile to automate generation and publishing? (Y/n) n
-</div><div id="code3.31" class="lines"><a href="#code3.31"></a>Done. Your new project is available at /home/galaxy/blog
+</div><div id="code3.31" class="lines"><a href="#code3.31"></a>Done. Your new project is available at /home/user/blog
 </div><div id="code3.32" class="lines"><a href="#code3.32"></a>(pelican) $ ls -l
 </div><div id="code3.33" class="lines"><a href="#code3.33"></a>total 16
-</div><div id="code3.34" class="lines"><a href="#code3.34"></a>drwxr-xr-x 2 galaxy galaxy 4096 May 10 00:31 content
-</div><div id="code3.35" class="lines"><a href="#code3.35"></a>drwxr-xr-x 2 galaxy galaxy 4096 May 10 00:31 output
-</div><div id="code3.36" class="lines"><a href="#code3.36"></a>-rw-r--r-- 1 galaxy galaxy  869 May 10 00:31 pelicanconf.py
-</div><div id="code3.37" class="lines"><a href="#code3.37"></a>-rw-r--r-- 1 galaxy galaxy  589 May 10 00:31 publishconf.py
+</div><div id="code3.34" class="lines"><a href="#code3.34"></a>drwxr-xr-x 2   user   user 4096 May 10 00:31 content
+</div><div id="code3.35" class="lines"><a href="#code3.35"></a>drwxr-xr-x 2   user   user 4096 May 10 00:31 output
+</div><div id="code3.36" class="lines"><a href="#code3.36"></a>-rw-r--r-- 1   user   user  869 May 10 00:31 pelicanconf.py
+</div><div id="code3.37" class="lines"><a href="#code3.37"></a>-rw-r--r-- 1   user   user  589 May 10 00:31 publishconf.py
 </div><div id="code3.38" class="lines"><a href="#code3.38"></a>(pelican) $ rm -rf output publishconf.py
 </div><div id="code3.39" class="lines"><a href="#code3.39"></a>(pelican) $ git add content pelicanconf.py 
 </div><div id="code3.40" class="lines"><a href="#code3.40"></a>(pelican) $ git commit -m 'Initial commit'
