@@ -4,6 +4,7 @@ pre[class*="language-"] {
 	overflow-wrap: break-word;
 	word-break: break-word;
 	font-size: 0.75em;
+	contain: content;
 }
 
 pre[class*="language-"],
