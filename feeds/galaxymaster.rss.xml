@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>Mind Drops - (GalaxyMaster)</title><link>https://dmitry.khlebnikov.net/</link><description></description><lastBuildDate>Sun, 17 May 2020 20:25:15 +1000</lastBuildDate><item><title>Wrap indicator in &lt;pre&gt; blocks</title><link>https://dmitry.khlebnikov.net/2020/05/10/wrap-indicator-in-pre-blocks/</link><description>&lt;p&gt;I am not a front-end developer, not a UI designer, nor a UX guru, but I am an
+<rss version="2.0"><channel><title>Mind Drops - (GalaxyMaster)</title><link>https://dmitry.khlebnikov.net/</link><description></description><lastBuildDate>Sun, 17 May 2020 21:33:08 +1000</lastBuildDate><item><title>Automating Static Website Deployment</title><link>https://dmitry.khlebnikov.net/2020/05/17/automating-static-website-deployment/</link><description>&lt;div class="toc"&gt;&lt;span class="toctitle"&gt;Table of Contents&lt;/span&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#setting-up-github-pages"&gt;Setting up GitHub Pages&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#setting-up-the-private-code-repository"&gt;Setting up the private, code repository&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#configuring-the-github-action-for-publishing"&gt;Configuring the GitHub Action for publishing&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;In this post I am going to document the steps I took to implement a fully
+automated deployment of my blog using GitHub Actions and GitHub Pages.&lt;/p&gt;
+&lt;p&gt;As always, I started my journey with the definition of what I really wanted to
+get at the end:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The website is published on GitHub pages&lt;/p&gt;
+&lt;p&gt;Since the website is static and all of its content can be easily downloaded
+using a web crawler (like &lt;code&gt;wget --mirror https://website.tld&lt;/code&gt;) I was OK
+with &lt;span class="truncated"&gt;&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">(GalaxyMaster)</dc:creator><pubDate>Sun, 17 May 2020 21:32:00 +1000</pubDate><guid isPermaLink="false">tag:dmitry.khlebnikov.net,2020-05-17:/2020/05/17/automating-static-website-deployment/</guid><category>blog</category><category>pelican</category><category>blog</category><category>github</category></item><item><title>Wrap indicator in &lt;pre&gt; blocks</title><link>https://dmitry.khlebnikov.net/2020/05/10/wrap-indicator-in-pre-blocks/</link><description>&lt;p&gt;I am not a front-end developer, not a UI designer, nor a UX guru, but I am an
 engineer, so when I face a puzzle worth solving my brain switches on and I
 cannot let it go until I find a satisfactory solution to the puzzle.&lt;/p&gt;
 &lt;p&gt;My blog heavily relies on me sharing session dumps and file excerpts using the

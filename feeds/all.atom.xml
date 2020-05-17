@@ -1,5 +1,483 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"></link><link href="https://dmitry.khlebnikov.net/feeds/all.atom.xml" rel="self"></link><id>https://dmitry.khlebnikov.net/</id><updated>2020-05-17T20:25:15+10:00</updated><entry><title>Wrap indicator in &lt;pre&gt; blocks</title><link href="https://dmitry.khlebnikov.net/2020/05/10/wrap-indicator-in-pre-blocks/" rel="alternate"></link><published>2020-05-10T21:00:00+10:00</published><updated>2020-05-17T20:25:15+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-10:/2020/05/10/wrap-indicator-in-pre-blocks/</id><summary type="html">&lt;p&gt;I am not a front-end developer, not a UI designer, nor a UX guru, but I am an
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"></link><link href="https://dmitry.khlebnikov.net/feeds/all.atom.xml" rel="self"></link><id>https://dmitry.khlebnikov.net/</id><updated>2020-05-17T21:33:08+10:00</updated><entry><title>Automating Static Website Deployment</title><link href="https://dmitry.khlebnikov.net/2020/05/17/automating-static-website-deployment/" rel="alternate"></link><published>2020-05-17T21:32:00+10:00</published><updated>2020-05-17T21:33:08+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-17:/2020/05/17/automating-static-website-deployment/</id><summary type="html">&lt;div class="toc"&gt;&lt;span class="toctitle"&gt;Table of Contents&lt;/span&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#setting-up-github-pages"&gt;Setting up GitHub Pages&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#setting-up-the-private-code-repository"&gt;Setting up the private, code repository&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#configuring-the-github-action-for-publishing"&gt;Configuring the GitHub Action for publishing&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;In this post I am going to document the steps I took to implement a fully
+automated deployment of my blog using GitHub Actions and GitHub Pages.&lt;/p&gt;
+&lt;p&gt;As always, I started my journey with the definition of what I really wanted to
+get at the end:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The website is published on GitHub pages&lt;/p&gt;
+&lt;p&gt;Since the website is static and all of its content can be easily downloaded
+using a web crawler (like &lt;code&gt;wget --mirror https://website.tld&lt;/code&gt;) I was OK
+with &lt;span class="truncated"&gt;&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;div class="toc"&gt;&lt;span class="toctitle"&gt;Table of Contents&lt;/span&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#setting-up-github-pages"&gt;Setting up GitHub Pages&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#setting-up-the-private-code-repository"&gt;Setting up the private, code repository&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#configuring-the-github-action-for-publishing"&gt;Configuring the GitHub Action for publishing&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;In this post I am going to document the steps I took to implement a fully
+automated deployment of my blog using GitHub Actions and GitHub Pages.&lt;/p&gt;
+&lt;p&gt;As always, I started my journey with the definition of what I really wanted to
+get at the end:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The website is published on GitHub pages&lt;/p&gt;
+&lt;p&gt;Since the website is static and all of its content can be easily downloaded
+using a web crawler (like &lt;code&gt;wget --mirror https://website.tld&lt;/code&gt;) I was OK
+with exposing the structure in the public repository, which is what GitHub
+offers on a free plan.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The code to generate the website should be private&lt;/p&gt;
+&lt;p&gt;I do a lot of work on the SSG (which is Pelican in my case) itself: extend
+it with plug-ins that may contain &lt;abbr title="Application Programming Interface"&gt;API&lt;/abbr&gt; tokens to reach out to some third
+party &lt;span&gt;&lt;abbr title="Application Programming Interface"&gt;API&lt;/abbr&gt;&lt;/span&gt;s, hack the core code when I want to quickly test stuff, etc. &amp;ndash;
+so, I really did not have any desire to publish publicly all the commotions
+I did in the background (sometimes I do more than a hundred commits per day
+just to experiment with different ideas I have).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;There should be a valid history of changes in both repositories&lt;/p&gt;
+&lt;p&gt;Well, I would get the history on my private repository for free, since it
+is the core value of maintaining a repository in the &lt;abbr title="Version Control System"&gt;VCS&lt;/abbr&gt;, but I also wanted
+to have clean history of changes to the content I publish publicly.&lt;/p&gt;
+&lt;p&gt;It would be a pleasant bonus if the changes in the public repository could
+refer back to the corresponding commit in the private repository.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;One may say that to do what I set out to do I would need to subscribe for a
+paid account with GitHub since according to their &lt;a href="https://help.github.com/en/github/working-with-github-pages/getting-started-with-github-pages"&gt;help page&lt;/a&gt; GitHub Pages
+for private repositories are only available on the paid plans.&lt;/p&gt;
+&lt;p&gt;However, as I pointed out above, it does not make sense to hide the content of
+the actual static website, hence all I needed to do is to find a way how to
+&amp;ldquo;publish&amp;rdquo; the resulting artefact to the GitHub Pages repository, and,
+preferably, that &amp;ldquo;publishing&amp;rdquo; should happen on GitHub&amp;rsquo;s side.&lt;/p&gt;
+&lt;p&gt;Luckily for me, GitHub started to support GitHub Actions on the free plan some
+time ago and as long as it is not abused according to their terms and
+conditions, it is a perfect vehicle for what I am trying to do, in my opinion.&lt;/p&gt;
+&lt;h2 id="setting-up-github-pages"&gt;Setting up GitHub Pages&lt;/h2&gt;
+&lt;p&gt;There are multiple howtos and tutorials in the Internet on how to set GitHub
+Pages up, including &lt;a href="https://help.github.com/en/github/working-with-github-pages/getting-started-with-github-pages"&gt;the official help section on this topic&lt;/a&gt;, so I will
+only elaborate on details where I did something specific for the purposes of
+achieving my goals.&lt;/p&gt;
+&lt;p&gt;There are different types of GitHub Pages:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;user or organisation&lt;/li&gt;
+&lt;li&gt;per-project&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The difference between two is subtle (the former requires a dedicated
+repository for your website, while the latter allows you to keep it in a branch
+of the existing repository), but for the purposes of this article I am assuming
+that we are working with the user level GitHub pages which are residing in the
+repository named &amp;ldquo;&lt;strong&gt;&amp;lt;username&amp;gt;&lt;/strong&gt;.github.io&amp;rdquo; (where &lt;strong&gt;&amp;lt;username&amp;gt;&lt;/strong&gt;
+is your GitHub user name) as per the official documentation.&lt;/p&gt;
+&lt;p&gt;A few caveat I found and spent some time solving after following the official
+documentation a listed below:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;GitHub&amp;rsquo;s documentation assumes use of Jekyll for site generation.&lt;/p&gt;
+&lt;p&gt;It is not obvious how to use a different SSG (like Pelican).  As far as I
+understand there are multiple triggers for GitHub to consider that the
+web site is in &amp;ldquo;published&amp;rdquo; state, so just ignore any references to Jekyll
+in the documentation: you will trip one of the triggers sooner or later,
+for example by pushing HTML files into your repository.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Configure your DNS &lt;em&gt;before&lt;/em&gt; setting the custom domain name in GitHub Pages.&lt;/p&gt;
+&lt;p&gt;Pushing the &lt;code&gt;CNAME&lt;/code&gt; file with the name of your custom domain within will
+trigger a DNS check from GitHub to see that your custom domain name is
+pointing back to GitHub Pages.&lt;/p&gt;
+&lt;p&gt;DNS heavily relies on caching and depending on the TTL settings in your
+zone if a negative check is performed (that is, when GitHub fails to
+retrieve the corresponding record) you will likely need to wait for quite a
+while for GitHub to retry.&lt;/p&gt;
+&lt;p&gt;Setting up the CNAME record in advance and then verifying it with a query
+&lt;em&gt;before&lt;/em&gt; you commit the &lt;code&gt;CNAME&lt;/code&gt; file to your repository ensures that you
+will get the quickest validation response from GitHub, e.g. I set up my
+CNAME records and then verified it from the command line (before)
+submitting the request to GitHub:&lt;/p&gt;
+&lt;pre id="code1" class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;&lt;div id="code1.1" class="lines"&gt;&lt;a href="#code1.1"&gt;&lt;/a&gt;[user@localhost ~]$ host -t cname dmitry.khlebnikov.net 8.8.8.8
+&lt;/div&gt;&lt;div id="code1.2" class="lines"&gt;&lt;a href="#code1.2"&gt;&lt;/a&gt;Using domain server:
+&lt;/div&gt;&lt;div id="code1.3" class="lines"&gt;&lt;a href="#code1.3"&gt;&lt;/a&gt;Name: 8.8.8.8
+&lt;/div&gt;&lt;div id="code1.4" class="lines"&gt;&lt;a href="#code1.4"&gt;&lt;/a&gt;Address: 8.8.8.8#53
+&lt;/div&gt;&lt;div id="code1.5" class="lines"&gt;&lt;a href="#code1.5"&gt;&lt;/a&gt;Aliases:
+&lt;/div&gt;&lt;div id="code1.6" class="lines"&gt;&lt;a href="#code1.6"&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div id="code1.7" class="lines"&gt;&lt;a href="#code1.7"&gt;&lt;/a&gt;dmitry.khlebnikov.net is an alias for galaxy4public.github.io.&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;There are some shenanigans with the &amp;ldquo;Enforce HTTPS&amp;rdquo; option.&lt;/p&gt;
+&lt;p&gt;It is not obvious from the documentation, but the enforcement of HTTPS for
+custom domains on GitHub&amp;rsquo;s side is dependent on the several things:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;before the checkbox is enabled your custom domain name should be
+    confirmed by GitHub (your &lt;code&gt;CNAME&lt;/code&gt; file is in place and the repository
+    settings show that the name was recognised);&lt;/li&gt;
+&lt;li&gt;the CNAME record should point to your &amp;ldquo;&lt;strong&gt;&amp;lt;&lt;username&gt;&amp;gt;&lt;/strong&gt;.github.io.&amp;rdquo;
+    DNS record (or, you can point it directly to GitHub Pages IP addresses
+    if you want to conceal the repository name in the DNS output);&lt;/li&gt;
+&lt;li&gt;if GitHub did not like something and you adjusted anything in the above
+    dot points the &lt;strong&gt;only&lt;/strong&gt; way to trigger the enforcement of HTTPS is to
+    re-submit the &lt;code&gt;CNAME&lt;/code&gt; file to the repository (yes, you read it right:
+    you need to delete the file and push it to the repository again);&lt;/li&gt;
+&lt;li&gt;Removing the &lt;code&gt;CNAME&lt;/code&gt; file from the repository is a disruptive action &amp;ndash;
+    the site will not be accessible for the duration of the file being
+    missing.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;OK, you have your public repository configured the way you want, so let&amp;rsquo;s look
+at the settings we need to be able to publish our code to this public
+repository.&lt;/p&gt;
+&lt;p&gt;When I try to automate something, I usually start with writing down manual
+steps I would do to achieve the results.  This helps me to see patterns and to
+understand what I can easily automate and what will require some brain-storming
+to resolve.&lt;/p&gt;
+&lt;p&gt;In the case of updating the repository it is quite trivial: if I were to push
+updates manually all I need is a private SSH key with the corresponding public
+SSH key configured with write privileges for the repository and I could push
+with &lt;code&gt;git push&lt;/code&gt; from my local copy of the repository.&lt;/p&gt;
+&lt;p&gt;My private keys are called &amp;ldquo;private&amp;rdquo; for a reason &amp;ndash; they are not supposed to
+leave my device(s) under any circumstances (except for backup purposes such as
+storing them in a safe).  So, please pay attention when you read or hear
+somebody advising you to upload your private keys somewhere, it is usually an
+ill advice.&lt;/p&gt;
+&lt;p&gt;For the integration purposes, GitHub provides so-called &amp;ldquo;Deploy keys&amp;rdquo; and
+&amp;ldquo;Personal access tokens&amp;rdquo;.  The former is just an SSH key pair associated with a
+particular repository (you can configure it in repository&amp;rsquo;s setting) while the
+latter is an OAuth access token associated with &lt;em&gt;your&lt;/em&gt; account.&lt;/p&gt;
+&lt;p&gt;While you can successfully use both, I would recommend to use the &amp;ldquo;Deploy keys&amp;rdquo;
+only, since despite that you can try to scope access down for a personal token
+it would not be good enough and the actions performed using that token will
+look like &lt;em&gt;you&lt;/em&gt; are executing them.&lt;/p&gt;
+&lt;p&gt;To configure a &amp;ldquo;Deploy key&amp;rdquo; we need to do two things:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Generate an SSH key pair, e.g.:&lt;/p&gt;
+&lt;pre id="code2" class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;&lt;div id="code2.1" class="lines"&gt;&lt;a href="#code2.1"&gt;&lt;/a&gt;[user@localhost ~]$ ssh-keygen -t ed25519 -N '' -C 'Updating the blog from GH Action' -f ~/gh-action
+&lt;/div&gt;&lt;div id="code2.2" class="lines"&gt;&lt;a href="#code2.2"&gt;&lt;/a&gt;Generating public/private ed25519 key pair.
+&lt;/div&gt;&lt;div id="code2.3" class="lines"&gt;&lt;a href="#code2.3"&gt;&lt;/a&gt;Your identification has been saved in /home/galaxy/gh-action
+&lt;/div&gt;&lt;div id="code2.4" class="lines"&gt;&lt;a href="#code2.4"&gt;&lt;/a&gt;Your public key has been saved in /home/galaxy/gh-action.pub
+&lt;/div&gt;&lt;div id="code2.5" class="lines"&gt;&lt;a href="#code2.5"&gt;&lt;/a&gt;The key fingerprint is:
+&lt;/div&gt;&lt;div id="code2.6" class="lines"&gt;&lt;a href="#code2.6"&gt;&lt;/a&gt;SHA256:7W9pUV5IlrRVE0RAVkjLgKJz4RdtVbH7GKQu8AfYITw Updating the blog from GH Action
+&lt;/div&gt;&lt;div id="code2.7" class="lines"&gt;&lt;a href="#code2.7"&gt;&lt;/a&gt;The key's randomart image is:
+&lt;/div&gt;&lt;div id="code2.8" class="lines"&gt;&lt;a href="#code2.8"&gt;&lt;/a&gt;+--[ED25519 256]--+
+&lt;/div&gt;&lt;div id="code2.9" class="lines"&gt;&lt;a href="#code2.9"&gt;&lt;/a&gt;|          o.+BOX*|
+&lt;/div&gt;&lt;div id="code2.10" class="lines"&gt;&lt;a href="#code2.10"&gt;&lt;/a&gt;|       + o o+.=oo|
+&lt;/div&gt;&lt;div id="code2.11" class="lines"&gt;&lt;a href="#code2.11"&gt;&lt;/a&gt;|      o E +  =oo |
+&lt;/div&gt;&lt;div id="code2.12" class="lines"&gt;&lt;a href="#code2.12"&gt;&lt;/a&gt;|     o o B . oo o|
+&lt;/div&gt;&lt;div id="code2.13" class="lines"&gt;&lt;a href="#code2.13"&gt;&lt;/a&gt;|      o S + .o.o |
+&lt;/div&gt;&lt;div id="code2.14" class="lines"&gt;&lt;a href="#code2.14"&gt;&lt;/a&gt;|         + o. .o.|
+&lt;/div&gt;&lt;div id="code2.15" class="lines"&gt;&lt;a href="#code2.15"&gt;&lt;/a&gt;|          + oo. .|
+&lt;/div&gt;&lt;div id="code2.16" class="lines"&gt;&lt;a href="#code2.16"&gt;&lt;/a&gt;|           ++    |
+&lt;/div&gt;&lt;div id="code2.17" class="lines"&gt;&lt;a href="#code2.17"&gt;&lt;/a&gt;|           o.    |
+&lt;/div&gt;&lt;div id="code2.18" class="lines"&gt;&lt;a href="#code2.18"&gt;&lt;/a&gt;+----[SHA256]-----+&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here, I chose the &lt;code&gt;ed25519&lt;/code&gt; key type since it is the shortest from the
+GitHub supported key types at the moment, yet it is strong enough.&lt;/p&gt;
+&lt;p&gt;I also made the key pair passphrase-less (&lt;code&gt;-N ''&lt;/code&gt;) since the purpose of the
+key pair is to automate things in the unattended fashion and there will be
+no one to type in the passphrase.&lt;/p&gt;
+&lt;p&gt;The key pair comment just makes it easier to maintain your keys, but optional.&lt;/p&gt;
+&lt;p&gt;Finally, the &lt;code&gt;-f ~/gh-action&lt;/code&gt; option specifies where the generated private
+key is going to be stored.  The public counterpart will use the same path with
+the &lt;code&gt;.pub&lt;/code&gt; suffix appended to it.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Set the newly generated &lt;em&gt;public&lt;/em&gt; key up as the &amp;ldquo;Deploy key&amp;rdquo;:&lt;/p&gt;
+&lt;p&gt;All you need to do is to go to the repository setting for the public
+ repository you created for GitHub Pages, click on &amp;ldquo;Deploy keys&amp;rdquo; in the
+ left side menu, then click on the &amp;ldquo;Add deploy key&amp;rdquo; button in the upper
+ right corner.&lt;/p&gt;
+&lt;p&gt;On the next page, provide a sensible description for the deploy key (I
+ used the same text as I put into the keys comment, i.e. &amp;ldquo;Updating the blog
+ from GH Action&amp;rdquo;) and copy and paste the recently generated &lt;em&gt;public&lt;/em&gt; key.
+ GitHub does not allow you to upload files over there, so you need to copy
+ the content of the &lt;strong&gt;public&lt;/strong&gt; key file and paste it into the form, e.g.:&lt;/p&gt;
+&lt;pre id="code3" class="highlight" data-file="~/gh-action.pub"&gt;&lt;code class="language-text"&gt;&lt;div id="code3.1" class="lines"&gt;&lt;a href="#code3.1"&gt;&lt;/a&gt;ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGHCy+stVCBjsrVO2ld1DwKCwcKL9+i1sjxcZu4u4lFQ Updating the blog from GH Action&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;: You need to ensure that you tick the &amp;ldquo;Allow write access&amp;rdquo; checkbox,
+ otherwise we would not be able to push to the repository with the
+ corresponding private key.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;This, actually, concludes the configuration of the GitHub Pages repository for
+now &amp;ndash; in later articles I will document how one could leverage the repository
+Issues for managing comments on the web site and maintain the counters for
+likes on the pages, but it would be a completely separate post :).&lt;/p&gt;
+&lt;h2 id="setting-up-the-private-code-repository"&gt;Setting up the private, code repository&lt;/h2&gt;
+&lt;p&gt;A typical Pelican repository layout is quite simple and comprises of one
+mandatory directory, one semi-mandatory file, and everything else is optional,
+but could be used to enhance your experience.&lt;/p&gt;
+&lt;p&gt;The mandatory directory is the so-called
+&amp;ldquo;&lt;a href="https://docs.getpelican.com/en/stable/install.html#kickstart-your-site"&gt;content&lt;/a&gt;&amp;rdquo;
+directory (in Pelican&amp;rsquo;s terms).  The name of the directory can be anything you
+want, but it is better be reflected in &lt;a href="https://docs.getpelican.com/en/stable/settings.html#PATH"&gt;the &lt;code&gt;PATH =&lt;/code&gt;
+directive&lt;/a&gt; of the
+setting file.&lt;/p&gt;
+&lt;p&gt;I am saying &amp;ldquo;better be&amp;rdquo; since Pelican can operate without any configuration
+files, but the result will be limited, hence I call the &lt;code&gt;pelicanconf.py&lt;/code&gt; file
+(which is the default name for the configuration file) to be &amp;ldquo;semi-mandatory&amp;rdquo;.
+The name of the configuration file can be also anything you like, however, I
+suggest to stick with the default for now.&lt;/p&gt;
+&lt;p&gt;Basically, you can quickly start by following the Pelican documentation, by
+doing something as follows:&lt;/p&gt;
+&lt;pre id="code3" class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;&lt;div id="code3.1" class="lines"&gt;&lt;a href="#code3.1"&gt;&lt;/a&gt;[user@localhost ~]$ virtualenv ~/venv/pelican
+&lt;/div&gt;&lt;div id="code3.2" class="lines"&gt;&lt;a href="#code3.2"&gt;&lt;/a&gt;created virtual environment CPython3.8.2.final.0-64 in 477ms
+&lt;/div&gt;&lt;div id="code3.3" class="lines"&gt;&lt;a href="#code3.3"&gt;&lt;/a&gt;  creator CPython3Posix(dest=/home/galaxy/venv/pelican, clear=False, global=False)
+&lt;/div&gt;&lt;div id="code3.4" class="lines"&gt;&lt;a href="#code3.4"&gt;&lt;/a&gt;  seeder FromAppData(download=False, pip=latest, setuptools=latest, wheel=latest, via=copy, app_data_dir=/home/galaxy/.local/share/virtualenv/seed-app-data/v1.0.1)
+&lt;/div&gt;&lt;div id="code3.5" class="lines"&gt;&lt;a href="#code3.5"&gt;&lt;/a&gt;  activators BashActivator,CShellActivator,FishActivator,PowerShellActivator,PythonActivator,XonshActivator
+&lt;/div&gt;&lt;div id="code3.6" class="lines"&gt;&lt;a href="#code3.6"&gt;&lt;/a&gt;[user@localhost ~]$ . ~/venv/pelican/bin/activate
+&lt;/div&gt;&lt;div id="code3.7" class="lines"&gt;&lt;a href="#code3.7"&gt;&lt;/a&gt;(pelican) $ mkdir ~/blog
+&lt;/div&gt;&lt;div id="code3.8" class="lines"&gt;&lt;a href="#code3.8"&gt;&lt;/a&gt;(pelican) $ cd ~/blog
+&lt;/div&gt;&lt;div id="code3.9" class="lines"&gt;&lt;a href="#code3.9"&gt;&lt;/a&gt;(pelican) $ git init
+&lt;/div&gt;&lt;div id="code3.10" class="lines"&gt;&lt;a href="#code3.10"&gt;&lt;/a&gt;Initialized empty Git repository in /home/galaxy/blog/.git/
+&lt;/div&gt;&lt;div id="code3.11" class="lines"&gt;&lt;a href="#code3.11"&gt;&lt;/a&gt;(pelican) $ git config --local user.email &amp;quot;your@github-email.here&amp;quot;
+&lt;/div&gt;&lt;div id="code3.12" class="lines"&gt;&lt;a href="#code3.12"&gt;&lt;/a&gt;(pelican) $ git config --local user.name &amp;quot;Joe Happy&amp;quot;
+&lt;/div&gt;&lt;div id="code3.13" class="lines"&gt;&lt;a href="#code3.13"&gt;&lt;/a&gt;(pelican) $ pelican-quickstart 
+&lt;/div&gt;&lt;div id="code3.14" class="lines"&gt;&lt;a href="#code3.14"&gt;&lt;/a&gt;Welcome to pelican-quickstart v4.2.0.
+&lt;/div&gt;&lt;div id="code3.15" class="lines"&gt;&lt;a href="#code3.15"&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div id="code3.16" class="lines"&gt;&lt;a href="#code3.16"&gt;&lt;/a&gt;This script will help you create a new Pelican-based website.
+&lt;/div&gt;&lt;div id="code3.17" class="lines"&gt;&lt;a href="#code3.17"&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div id="code3.18" class="lines"&gt;&lt;a href="#code3.18"&gt;&lt;/a&gt;Please answer the following questions so this script can generate the files
+&lt;/div&gt;&lt;div id="code3.19" class="lines"&gt;&lt;a href="#code3.19"&gt;&lt;/a&gt;needed by Pelican.
+&lt;/div&gt;&lt;div id="code3.20" class="lines"&gt;&lt;a href="#code3.20"&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div id="code3.21" class="lines"&gt;&lt;a href="#code3.21"&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div id="code3.22" class="lines"&gt;&lt;a href="#code3.22"&gt;&lt;/a&gt;&amp;gt; Where do you want to create your new web site? [.] 
+&lt;/div&gt;&lt;div id="code3.23" class="lines"&gt;&lt;a href="#code3.23"&gt;&lt;/a&gt;&amp;gt; What will be the title of this web site? My Awesome Blog
+&lt;/div&gt;&lt;div id="code3.24" class="lines"&gt;&lt;a href="#code3.24"&gt;&lt;/a&gt;&amp;gt; Who will be the author of this web site? Joe Happy
+&lt;/div&gt;&lt;div id="code3.25" class="lines"&gt;&lt;a href="#code3.25"&gt;&lt;/a&gt;&amp;gt; What will be the default language of this web site? [en] 
+&lt;/div&gt;&lt;div id="code3.26" class="lines"&gt;&lt;a href="#code3.26"&gt;&lt;/a&gt;&amp;gt; Do you want to specify a URL prefix? e.g., https://example.com   (Y/n) n
+&lt;/div&gt;&lt;div id="code3.27" class="lines"&gt;&lt;a href="#code3.27"&gt;&lt;/a&gt;&amp;gt; Do you want to enable article pagination? (Y/n) 
+&lt;/div&gt;&lt;div id="code3.28" class="lines"&gt;&lt;a href="#code3.28"&gt;&lt;/a&gt;&amp;gt; How many articles per page do you want? [10] 
+&lt;/div&gt;&lt;div id="code3.29" class="lines"&gt;&lt;a href="#code3.29"&gt;&lt;/a&gt;&amp;gt; What is your time zone? [Europe/Paris] Australia/Melbourne
+&lt;/div&gt;&lt;div id="code3.30" class="lines"&gt;&lt;a href="#code3.30"&gt;&lt;/a&gt;&amp;gt; Do you want to generate a tasks.py/Makefile to automate generation and publishing? (Y/n) n
+&lt;/div&gt;&lt;div id="code3.31" class="lines"&gt;&lt;a href="#code3.31"&gt;&lt;/a&gt;Done. Your new project is available at /home/galaxy/blog
+&lt;/div&gt;&lt;div id="code3.32" class="lines"&gt;&lt;a href="#code3.32"&gt;&lt;/a&gt;(pelican) $ ls -l
+&lt;/div&gt;&lt;div id="code3.33" class="lines"&gt;&lt;a href="#code3.33"&gt;&lt;/a&gt;total 16
+&lt;/div&gt;&lt;div id="code3.34" class="lines"&gt;&lt;a href="#code3.34"&gt;&lt;/a&gt;drwxr-xr-x 2 galaxy galaxy 4096 May 10 00:31 content
+&lt;/div&gt;&lt;div id="code3.35" class="lines"&gt;&lt;a href="#code3.35"&gt;&lt;/a&gt;drwxr-xr-x 2 galaxy galaxy 4096 May 10 00:31 output
+&lt;/div&gt;&lt;div id="code3.36" class="lines"&gt;&lt;a href="#code3.36"&gt;&lt;/a&gt;-rw-r--r-- 1 galaxy galaxy  869 May 10 00:31 pelicanconf.py
+&lt;/div&gt;&lt;div id="code3.37" class="lines"&gt;&lt;a href="#code3.37"&gt;&lt;/a&gt;-rw-r--r-- 1 galaxy galaxy  589 May 10 00:31 publishconf.py
+&lt;/div&gt;&lt;div id="code3.38" class="lines"&gt;&lt;a href="#code3.38"&gt;&lt;/a&gt;(pelican) $ rm -rf output publishconf.py
+&lt;/div&gt;&lt;div id="code3.39" class="lines"&gt;&lt;a href="#code3.39"&gt;&lt;/a&gt;(pelican) $ git add content pelicanconf.py 
+&lt;/div&gt;&lt;div id="code3.40" class="lines"&gt;&lt;a href="#code3.40"&gt;&lt;/a&gt;(pelican) $ git commit -m 'Initial commit'
+&lt;/div&gt;&lt;div id="code3.41" class="lines"&gt;&lt;a href="#code3.41"&gt;&lt;/a&gt;[master (root-commit) f077002] Initial commit
+&lt;/div&gt;&lt;div id="code3.42" class="lines"&gt;&lt;a href="#code3.42"&gt;&lt;/a&gt; 1 file changed, 35 insertions(+)
+&lt;/div&gt;&lt;div id="code3.43" class="lines"&gt;&lt;a href="#code3.43"&gt;&lt;/a&gt; create mode 100644 pelicanconf.py&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;A short break down of the above session snippet is:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;On line 1 we create a virtual Python environment, so we could install Pelican locally;&lt;/li&gt;
+&lt;li&gt;We enter the newly created virtual environment on line 2, which makes Pelican available to us;&lt;/li&gt;
+&lt;li&gt;We create an empty repository (&lt;code&gt;~/blog&lt;/code&gt;) and initialise it using Pelican&amp;rsquo;s quickstart;&lt;/li&gt;
+&lt;li&gt;Since we are not using the default publishing capabilities and we are not interested in storing the generated pages in our code repository, we clean things up a bit;&lt;/li&gt;
+&lt;li&gt;Finally, we commit the generated skeleton to Git.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;A good test at this stage would be to ensure that Pelican is working and likes our structure:&lt;/p&gt;
+&lt;pre id="code4" class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;&lt;div id="code4.1" class="lines"&gt;&lt;a href="#code4.1"&gt;&lt;/a&gt;[user@localhost ~]$ pelican
+&lt;/div&gt;&lt;div id="code4.2" class="lines"&gt;&lt;a href="#code4.2"&gt;&lt;/a&gt;WARNING: No valid files found in content for the active readers:
+&lt;/div&gt;&lt;div id="code4.3" class="lines"&gt;&lt;a href="#code4.3"&gt;&lt;/a&gt;  | BaseReader (static)
+&lt;/div&gt;&lt;div id="code4.4" class="lines"&gt;&lt;a href="#code4.4"&gt;&lt;/a&gt;  | HTMLReader (htm, html)
+&lt;/div&gt;&lt;div id="code4.5" class="lines"&gt;&lt;a href="#code4.5"&gt;&lt;/a&gt;  | MarkdownReader (md, markdown, mkd, mdown)
+&lt;/div&gt;&lt;div id="code4.6" class="lines"&gt;&lt;a href="#code4.6"&gt;&lt;/a&gt;  | RstReader (rst)
+&lt;/div&gt;&lt;div id="code4.7" class="lines"&gt;&lt;a href="#code4.7"&gt;&lt;/a&gt;Done: Processed 0 articles, 0 drafts, 0 pages, 0 hidden pages and 0 draft pages in 0.07 seconds.&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So far so good, but it is not a real test since there are no source files to generate something from, so let&amp;rsquo;s give Pelican something to work on:&lt;/p&gt;
+&lt;pre id="code5" class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;&lt;div id="code5.1" class="lines"&gt;&lt;a href="#code5.1"&gt;&lt;/a&gt;[user@localhost ~]$ printf 'Title: First Post\nDate: 2020-05-10\n\n#First post\nPelican is awesome!' &amp;gt; content/first.md
+&lt;/div&gt;&lt;div id="code5.2" class="lines"&gt;&lt;a href="#code5.2"&gt;&lt;/a&gt;[user@localhost ~]$ pelican
+&lt;/div&gt;&lt;div id="code5.3" class="lines"&gt;&lt;a href="#code5.3"&gt;&lt;/a&gt;Done: Processed 1 article, 0 drafts, 0 pages, 0 hidden pages and 0 draft pages in 0.12 seconds.
+&lt;/div&gt;&lt;div id="code5.4" class="lines"&gt;&lt;a href="#code5.4"&gt;&lt;/a&gt;[user@localhost ~]$ elinks -dump output/index.html 
+&lt;/div&gt;&lt;div id="code5.5" class="lines"&gt;&lt;a href="#code5.5"&gt;&lt;/a&gt;                               [1]My Awesome Blog
+&lt;/div&gt;&lt;div id="code5.6" class="lines"&gt;&lt;a href="#code5.6"&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div id="code5.7" class="lines"&gt;&lt;a href="#code5.7"&gt;&lt;/a&gt;     • [2]misc
+&lt;/div&gt;&lt;div id="code5.8" class="lines"&gt;&lt;a href="#code5.8"&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div id="code5.9" class="lines"&gt;&lt;a href="#code5.9"&gt;&lt;/a&gt;                                 [3]First Post
+&lt;/div&gt;&lt;div id="code5.10" class="lines"&gt;&lt;a href="#code5.10"&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div id="code5.11" class="lines"&gt;&lt;a href="#code5.11"&gt;&lt;/a&gt;   Published: Sun 10 May 2020
+&lt;/div&gt;&lt;div id="code5.12" class="lines"&gt;&lt;a href="#code5.12"&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div id="code5.13" class="lines"&gt;&lt;a href="#code5.13"&gt;&lt;/a&gt;    By [4]Joe Happy
+&lt;/div&gt;&lt;div id="code5.14" class="lines"&gt;&lt;a href="#code5.14"&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div id="code5.15" class="lines"&gt;&lt;a href="#code5.15"&gt;&lt;/a&gt;   In [5]misc.
+&lt;/div&gt;&lt;div id="code5.16" class="lines"&gt;&lt;a href="#code5.16"&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div id="code5.17" class="lines"&gt;&lt;a href="#code5.17"&gt;&lt;/a&gt;                                   First post
+&lt;/div&gt;&lt;div id="code5.18" class="lines"&gt;&lt;a href="#code5.18"&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div id="code5.19" class="lines"&gt;&lt;a href="#code5.19"&gt;&lt;/a&gt;   Pelican is awesome!&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The output from &lt;code&gt;elinks&lt;/code&gt; was truncated on purpose since I just wanted to
+showcase that Pelican has indeed generated the structure for a static website
+from just one article file we created.&lt;/p&gt;
+&lt;p&gt;Before we push our local repository to GitHub we may want to do some house
+keeping first, such as create the &lt;code&gt;.gitignore&lt;/code&gt; file and list the temporary
+things we do not want Git to track.  A good enough version of the &lt;code&gt;.gitignore&lt;/code&gt;
+file I am using for my code repository is the following:&lt;/p&gt;
+&lt;pre id="code6" class="highlight" data-file=".gitignore"&gt;&lt;code class="language-txt"&gt;&lt;div id="code6.1" class="lines"&gt;&lt;a href="#code6.1"&gt;&lt;/a&gt;*~
+&lt;/div&gt;&lt;div id="code6.2" class="lines"&gt;&lt;a href="#code6.2"&gt;&lt;/a&gt;*.pyc
+&lt;/div&gt;&lt;div id="code6.3" class="lines"&gt;&lt;a href="#code6.3"&gt;&lt;/a&gt;.*.swp
+&lt;/div&gt;&lt;div id="code6.4" class="lines"&gt;&lt;a href="#code6.4"&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div id="code6.5" class="lines"&gt;&lt;a href="#code6.5"&gt;&lt;/a&gt;**/__pycache__
+&lt;/div&gt;&lt;div id="code6.6" class="lines"&gt;&lt;a href="#code6.6"&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div id="code6.7" class="lines"&gt;&lt;a href="#code6.7"&gt;&lt;/a&gt;/output&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Do not forget to actually commit that &lt;code&gt;.gitignore&lt;/code&gt; file to your local
+repository using the &lt;code&gt;git add .gitignore &amp;amp;&amp;amp; git commit -m 'Added .gitignore'&lt;/code&gt;,
+by the way.&lt;/p&gt;
+&lt;p&gt;Now, we need to create a private repository on GitHub, so jump into your
+browser, go to your GitHub account, press the &amp;ldquo;+&amp;rdquo; icon in the upper right
+corner (right next to your profile icon), and select &amp;ldquo;New repository&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;On the &amp;ldquo;Create repository&amp;rdquo; page put whatever you desire as the name and the
+description of the repository you are about to create.  Ensure that the
+&amp;ldquo;Private&amp;rdquo; radio button is selected and uncheck the &amp;ldquo;Initialize this repository
+with a README&amp;rdquo; if it was checked.&lt;/p&gt;
+&lt;p&gt;Once the repository is created, you will be presented with a page that
+enumerates your options for the next step, but I will just go ahead and show a
+session dump of what you will need to do.  In the following session snippet
+&lt;code&gt;blog&lt;/code&gt; is the repository name I chose for my private code repository and you
+will need to replace it with your private repository name (the working
+directory is our newly created local repository):&lt;/p&gt;
+&lt;pre id="code7" class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;&lt;div id="code7.1" class="lines"&gt;&lt;a href="#code7.1"&gt;&lt;/a&gt;[user@localhost ~]$ git remote add origin git@github.com:galaxy4public/blog.git
+&lt;/div&gt;&lt;div id="code7.2" class="lines"&gt;&lt;a href="#code7.2"&gt;&lt;/a&gt;[user@localhost ~]$ git push -u origin master
+&lt;/div&gt;&lt;div id="code7.3" class="lines"&gt;&lt;a href="#code7.3"&gt;&lt;/a&gt;Enter passphrase for key '/home/user/.ssh/keys/github': 
+&lt;/div&gt;&lt;div id="code7.4" class="lines"&gt;&lt;a href="#code7.4"&gt;&lt;/a&gt;Enumerating objects: 6, done.
+&lt;/div&gt;&lt;div id="code7.5" class="lines"&gt;&lt;a href="#code7.5"&gt;&lt;/a&gt;Counting objects: 100% (6/6), done.
+&lt;/div&gt;&lt;div id="code7.6" class="lines"&gt;&lt;a href="#code7.6"&gt;&lt;/a&gt;Delta compression using up to 4 threads
+&lt;/div&gt;&lt;div id="code7.7" class="lines"&gt;&lt;a href="#code7.7"&gt;&lt;/a&gt;Compressing objects: 100% (4/4), done.
+&lt;/div&gt;&lt;div id="code7.8" class="lines"&gt;&lt;a href="#code7.8"&gt;&lt;/a&gt;Writing objects: 100% (6/6), 1008 bytes | 1008.00 KiB/s, done.
+&lt;/div&gt;&lt;div id="code7.9" class="lines"&gt;&lt;a href="#code7.9"&gt;&lt;/a&gt;Total 6 (delta 0), reused 0 (delta 0), pack-reused 0
+&lt;/div&gt;&lt;div id="code7.10" class="lines"&gt;&lt;a href="#code7.10"&gt;&lt;/a&gt;To github.com:galaxy4public/blog.git
+&lt;/div&gt;&lt;div id="code7.11" class="lines"&gt;&lt;a href="#code7.11"&gt;&lt;/a&gt; * [new branch]      master -&amp;gt; master
+&lt;/div&gt;&lt;div id="code7.12" class="lines"&gt;&lt;a href="#code7.12"&gt;&lt;/a&gt;Branch 'master' set up to track remote branch 'master' from 'origin'.&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id="configuring-the-github-action-for-publishing"&gt;Configuring the GitHub Action for publishing&lt;/h2&gt;
+&lt;p&gt;Everything is well and good, but &amp;ldquo;where is the automation?&amp;rdquo; you may ask.  After
+all, I suspect this was the primary reason you are reading this post.  Well, we
+are about to start to look into the automation part and it is rather short in
+comparison to all the steps we did to set repositories up.&lt;/p&gt;
+&lt;p&gt;Our automation relies on the GitHub Action feature of GitHub.  In plain terms,
+GitHub Action is free compute resource provided by GitHub (there are some
+limits, but for the purposes of a personal blog it is unlikely that you will
+ever hit these limits).&lt;/p&gt;
+&lt;p&gt;Each GitHub Action is associated with a specific repository and is defined
+using quite a simple YAML configuration file that instructs GitHub on how to
+provision a required compute environment and what to run inside that
+environment.&lt;/p&gt;
+&lt;p&gt;The GitHub Action I am using for my blog web site is the following (we will
+dissect it further down the post):&lt;/p&gt;
+&lt;pre id="code8" class="highlight" data-file=".github/workflows/pelican.yml"&gt;&lt;code class="language-yaml"&gt;&lt;div id="code8.1" class="lines"&gt;&lt;a href="#code8.1"&gt;&lt;/a&gt;name: Static Website Generator
+&lt;/div&gt;&lt;div id="code8.2" class="lines"&gt;&lt;a href="#code8.2"&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div id="code8.3" class="lines"&gt;&lt;a href="#code8.3"&gt;&lt;/a&gt;on:
+&lt;/div&gt;&lt;div id="code8.4" class="lines"&gt;&lt;a href="#code8.4"&gt;&lt;/a&gt;  push:
+&lt;/div&gt;&lt;div id="code8.5" class="lines"&gt;&lt;a href="#code8.5"&gt;&lt;/a&gt;    branches: [ master ]
+&lt;/div&gt;&lt;div id="code8.6" class="lines"&gt;&lt;a href="#code8.6"&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div id="code8.7" class="lines"&gt;&lt;a href="#code8.7"&gt;&lt;/a&gt;env:
+&lt;/div&gt;&lt;div id="code8.8" class="lines"&gt;&lt;a href="#code8.8"&gt;&lt;/a&gt;  LANG: en_AU.UTF-8
+&lt;/div&gt;&lt;div id="code8.9" class="lines"&gt;&lt;a href="#code8.9"&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div id="code8.10" class="lines"&gt;&lt;a href="#code8.10"&gt;&lt;/a&gt;jobs:
+&lt;/div&gt;&lt;div id="code8.11" class="lines"&gt;&lt;a href="#code8.11"&gt;&lt;/a&gt;  build:
+&lt;/div&gt;&lt;div id="code8.12" class="lines"&gt;&lt;a href="#code8.12"&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div id="code8.13" class="lines"&gt;&lt;a href="#code8.13"&gt;&lt;/a&gt;    runs-on: ubuntu-latest
+&lt;/div&gt;&lt;div id="code8.14" class="lines"&gt;&lt;a href="#code8.14"&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div id="code8.15" class="lines"&gt;&lt;a href="#code8.15"&gt;&lt;/a&gt;    steps:
+&lt;/div&gt;&lt;div id="code8.16" class="lines"&gt;&lt;a href="#code8.16"&gt;&lt;/a&gt;    - name: Initialise locale
+&lt;/div&gt;&lt;div id="code8.17" class="lines"&gt;&lt;a href="#code8.17"&gt;&lt;/a&gt;      run: |
+&lt;/div&gt;&lt;div id="code8.18" class="lines"&gt;&lt;a href="#code8.18"&gt;&lt;/a&gt;        if [ &amp;quot;$LANG&amp;quot; != 'C' -a &amp;quot;{$LANG:0:2}&amp;quot; != 'C.' ]; then
+&lt;/div&gt;&lt;div id="code8.19" class="lines"&gt;&lt;a href="#code8.19"&gt;&lt;/a&gt;          CP=&amp;quot;${LANG#*.}&amp;quot; &amp;amp;&amp;amp; [ -z &amp;quot;$CP&amp;quot; ] &amp;amp;&amp;amp; CP=UTF-8 ||:
+&lt;/div&gt;&lt;div id="code8.20" class="lines"&gt;&lt;a href="#code8.20"&gt;&lt;/a&gt;          sudo sed -i -E &amp;quot;/^\s*$LANG(\s|\$)/{:a;n;ba;q};\$a$LANG $CP&amp;quot; /etc/locale.gen
+&lt;/div&gt;&lt;div id="code8.21" class="lines"&gt;&lt;a href="#code8.21"&gt;&lt;/a&gt;          sudo locale-gen
+&lt;/div&gt;&lt;div id="code8.22" class="lines"&gt;&lt;a href="#code8.22"&gt;&lt;/a&gt;          sudo localectl set-locale LANG=&amp;quot;${LANG:-C.UTF-8}&amp;quot;
+&lt;/div&gt;&lt;div id="code8.23" class="lines"&gt;&lt;a href="#code8.23"&gt;&lt;/a&gt;        fi
+&lt;/div&gt;&lt;div id="code8.24" class="lines"&gt;&lt;a href="#code8.24"&gt;&lt;/a&gt;        locale -a
+&lt;/div&gt;&lt;div id="code8.25" class="lines"&gt;&lt;a href="#code8.25"&gt;&lt;/a&gt;    - name: Checkout the primary repo
+&lt;/div&gt;&lt;div id="code8.26" class="lines"&gt;&lt;a href="#code8.26"&gt;&lt;/a&gt;      uses: actions/checkout@v2
+&lt;/div&gt;&lt;div id="code8.27" class="lines"&gt;&lt;a href="#code8.27"&gt;&lt;/a&gt;      with:
+&lt;/div&gt;&lt;div id="code8.28" class="lines"&gt;&lt;a href="#code8.28"&gt;&lt;/a&gt;        fetch-depth: 0
+&lt;/div&gt;&lt;div id="code8.29" class="lines"&gt;&lt;a href="#code8.29"&gt;&lt;/a&gt;        submodules: recursive
+&lt;/div&gt;&lt;div id="code8.30" class="lines"&gt;&lt;a href="#code8.30"&gt;&lt;/a&gt;    - name: Restore modification times for content
+&lt;/div&gt;&lt;div id="code8.31" class="lines"&gt;&lt;a href="#code8.31"&gt;&lt;/a&gt;      run: |
+&lt;/div&gt;&lt;div id="code8.32" class="lines"&gt;&lt;a href="#code8.32"&gt;&lt;/a&gt;        git log --pretty=tformat:&amp;quot;%at&amp;quot; --name-status --no-merges -- \
+&lt;/div&gt;&lt;div id="code8.33" class="lines"&gt;&lt;a href="#code8.33"&gt;&lt;/a&gt;            content \
+&lt;/div&gt;&lt;div id="code8.34" class="lines"&gt;&lt;a href="#code8.34"&gt;&lt;/a&gt;            themes/mind-drops/content \
+&lt;/div&gt;&lt;div id="code8.35" class="lines"&gt;&lt;a href="#code8.35"&gt;&lt;/a&gt;        | sed -nE '
+&lt;/div&gt;&lt;div id="code8.36" class="lines"&gt;&lt;a href="#code8.36"&gt;&lt;/a&gt;            /^\s*$/d;/^[[:digit:]]+$/{h;d};
+&lt;/div&gt;&lt;div id="code8.37" class="lines"&gt;&lt;a href="#code8.37"&gt;&lt;/a&gt;            /^[UXB]/d;
+&lt;/div&gt;&lt;div id="code8.38" class="lines"&gt;&lt;a href="#code8.38"&gt;&lt;/a&gt;            /^[AMT]/{s,^\S\s+,,;G;s,^(.+)\n(.+),\2 \1,;p};
+&lt;/div&gt;&lt;div id="code8.39" class="lines"&gt;&lt;a href="#code8.39"&gt;&lt;/a&gt;            /^[DR]/{
+&lt;/div&gt;&lt;div id="code8.40" class="lines"&gt;&lt;a href="#code8.40"&gt;&lt;/a&gt;              s,^(D|[CR][[:digit:]]+)\s+,\1 ,;G;
+&lt;/div&gt;&lt;div id="code8.41" class="lines"&gt;&lt;a href="#code8.41"&gt;&lt;/a&gt;              s,^(\S+) ([^[=\t=]]+[[=\t=]])?(.*)\n(.+),\4\1 \3,;
+&lt;/div&gt;&lt;div id="code8.42" class="lines"&gt;&lt;a href="#code8.42"&gt;&lt;/a&gt;              p
+&lt;/div&gt;&lt;div id="code8.43" class="lines"&gt;&lt;a href="#code8.43"&gt;&lt;/a&gt;            }' \
+&lt;/div&gt;&lt;div id="code8.44" class="lines"&gt;&lt;a href="#code8.44"&gt;&lt;/a&gt;        | LC_ALL=C sort -k2 -k1rn | uniq -f1 \
+&lt;/div&gt;&lt;div id="code8.45" class="lines"&gt;&lt;a href="#code8.45"&gt;&lt;/a&gt;        | sed -E '/^[[:digit:]]+D /d' \
+&lt;/div&gt;&lt;div id="code8.46" class="lines"&gt;&lt;a href="#code8.46"&gt;&lt;/a&gt;        | while read TSTAMP FILE; do
+&lt;/div&gt;&lt;div id="code8.47" class="lines"&gt;&lt;a href="#code8.47"&gt;&lt;/a&gt;            if [ -f &amp;quot;$FILE&amp;quot; ]; then
+&lt;/div&gt;&lt;div id="code8.48" class="lines"&gt;&lt;a href="#code8.48"&gt;&lt;/a&gt;                echo &amp;quot;$FILE =&amp;gt; $(date -d @$TSTAMP)&amp;quot;
+&lt;/div&gt;&lt;div id="code8.49" class="lines"&gt;&lt;a href="#code8.49"&gt;&lt;/a&gt;                touch -m -d &amp;quot;@$TSTAMP&amp;quot; -- &amp;quot;$FILE&amp;quot;
+&lt;/div&gt;&lt;div id="code8.50" class="lines"&gt;&lt;a href="#code8.50"&gt;&lt;/a&gt;            fi
+&lt;/div&gt;&lt;div id="code8.51" class="lines"&gt;&lt;a href="#code8.51"&gt;&lt;/a&gt;        done
+&lt;/div&gt;&lt;div id="code8.52" class="lines"&gt;&lt;a href="#code8.52"&gt;&lt;/a&gt;    - name: Checkout Pages repo
+&lt;/div&gt;&lt;div id="code8.53" class="lines"&gt;&lt;a href="#code8.53"&gt;&lt;/a&gt;      uses: actions/checkout@v2
+&lt;/div&gt;&lt;div id="code8.54" class="lines"&gt;&lt;a href="#code8.54"&gt;&lt;/a&gt;      with:
+&lt;/div&gt;&lt;div id="code8.55" class="lines"&gt;&lt;a href="#code8.55"&gt;&lt;/a&gt;        repository: galaxy4public/galaxy4public.github.io
+&lt;/div&gt;&lt;div id="code8.56" class="lines"&gt;&lt;a href="#code8.56"&gt;&lt;/a&gt;        path: output
+&lt;/div&gt;&lt;div id="code8.57" class="lines"&gt;&lt;a href="#code8.57"&gt;&lt;/a&gt;    - name: Set up Python
+&lt;/div&gt;&lt;div id="code8.58" class="lines"&gt;&lt;a href="#code8.58"&gt;&lt;/a&gt;      uses: actions/setup-python@v2
+&lt;/div&gt;&lt;div id="code8.59" class="lines"&gt;&lt;a href="#code8.59"&gt;&lt;/a&gt;      with:
+&lt;/div&gt;&lt;div id="code8.60" class="lines"&gt;&lt;a href="#code8.60"&gt;&lt;/a&gt;        python-version: 3.x
+&lt;/div&gt;&lt;div id="code8.61" class="lines"&gt;&lt;a href="#code8.61"&gt;&lt;/a&gt;    - name: Install dependencies
+&lt;/div&gt;&lt;div id="code8.62" class="lines"&gt;&lt;a href="#code8.62"&gt;&lt;/a&gt;      run: |
+&lt;/div&gt;&lt;div id="code8.63" class="lines"&gt;&lt;a href="#code8.63"&gt;&lt;/a&gt;        python -m pip install --upgrade pip
+&lt;/div&gt;&lt;div id="code8.64" class="lines"&gt;&lt;a href="#code8.64"&gt;&lt;/a&gt;        pip install -r requirements.txt
+&lt;/div&gt;&lt;div id="code8.65" class="lines"&gt;&lt;a href="#code8.65"&gt;&lt;/a&gt;    - name: Generate the website
+&lt;/div&gt;&lt;div id="code8.66" class="lines"&gt;&lt;a href="#code8.66"&gt;&lt;/a&gt;      run: |
+&lt;/div&gt;&lt;div id="code8.67" class="lines"&gt;&lt;a href="#code8.67"&gt;&lt;/a&gt;        ls -laR content/
+&lt;/div&gt;&lt;div id="code8.68" class="lines"&gt;&lt;a href="#code8.68"&gt;&lt;/a&gt;        rm -rf output/*
+&lt;/div&gt;&lt;div id="code8.69" class="lines"&gt;&lt;a href="#code8.69"&gt;&lt;/a&gt;        ls -la output/
+&lt;/div&gt;&lt;div id="code8.70" class="lines"&gt;&lt;a href="#code8.70"&gt;&lt;/a&gt;        TIMEZONE=$(sed -nE 's|^\s*TIMEZONE\s*=\s*['&amp;quot;'&amp;quot;'&amp;quot;]([^'&amp;quot;'&amp;quot;'&amp;quot;]+)['&amp;quot;'&amp;quot;'&amp;quot;].*|\1|;T;p' pelicanconf.py)
+&lt;/div&gt;&lt;div id="code8.71" class="lines"&gt;&lt;a href="#code8.71"&gt;&lt;/a&gt;        TZ=&amp;quot;${TIMEZONE:-UTC}&amp;quot; pelican
+&lt;/div&gt;&lt;div id="code8.72" class="lines"&gt;&lt;a href="#code8.72"&gt;&lt;/a&gt;    - name: Publish to GitHub Pages
+&lt;/div&gt;&lt;div id="code8.73" class="lines"&gt;&lt;a href="#code8.73"&gt;&lt;/a&gt;      env:
+&lt;/div&gt;&lt;div id="code8.74" class="lines"&gt;&lt;a href="#code8.74"&gt;&lt;/a&gt;        DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+&lt;/div&gt;&lt;div id="code8.75" class="lines"&gt;&lt;a href="#code8.75"&gt;&lt;/a&gt;      run: |
+&lt;/div&gt;&lt;div id="code8.76" class="lines"&gt;&lt;a href="#code8.76"&gt;&lt;/a&gt;        cd output
+&lt;/div&gt;&lt;div id="code8.77" class="lines"&gt;&lt;a href="#code8.77"&gt;&lt;/a&gt;        git config --local user.email &amp;quot;action@github.com&amp;quot;
+&lt;/div&gt;&lt;div id="code8.78" class="lines"&gt;&lt;a href="#code8.78"&gt;&lt;/a&gt;        git config --local user.name &amp;quot;GitHub Action&amp;quot;
+&lt;/div&gt;&lt;div id="code8.79" class="lines"&gt;&lt;a href="#code8.79"&gt;&lt;/a&gt;        if output=$(git status --porcelain) &amp;amp;&amp;amp; [ -z &amp;quot;$output&amp;quot; ]; then
+&lt;/div&gt;&lt;div id="code8.80" class="lines"&gt;&lt;a href="#code8.80"&gt;&lt;/a&gt;          echo &amp;quot;No new content was generated, exiting gracefully&amp;quot;
+&lt;/div&gt;&lt;div id="code8.81" class="lines"&gt;&lt;a href="#code8.81"&gt;&lt;/a&gt;        else 
+&lt;/div&gt;&lt;div id="code8.82" class="lines"&gt;&lt;a href="#code8.82"&gt;&lt;/a&gt;          git add -A
+&lt;/div&gt;&lt;div id="code8.83" class="lines"&gt;&lt;a href="#code8.83"&gt;&lt;/a&gt;          git commit -m &amp;quot;Updated content on $(date)&amp;quot;
+&lt;/div&gt;&lt;div id="code8.84" class="lines"&gt;&lt;a href="#code8.84"&gt;&lt;/a&gt;          eval $(ssh-agent)
+&lt;/div&gt;&lt;div id="code8.85" class="lines"&gt;&lt;a href="#code8.85"&gt;&lt;/a&gt;          echo &amp;quot;$DEPLOY_KEY&amp;quot; | ssh-add -t 5m /dev/stdin
+&lt;/div&gt;&lt;div id="code8.86" class="lines"&gt;&lt;a href="#code8.86"&gt;&lt;/a&gt;          ssh-add -l
+&lt;/div&gt;&lt;div id="code8.87" class="lines"&gt;&lt;a href="#code8.87"&gt;&lt;/a&gt;          git push git@github.com:galaxy4public/galaxy4public.github.io.git
+&lt;/div&gt;&lt;div id="code8.88" class="lines"&gt;&lt;a href="#code8.88"&gt;&lt;/a&gt;          ssh-add -D
+&lt;/div&gt;&lt;div id="code8.89" class="lines"&gt;&lt;a href="#code8.89"&gt;&lt;/a&gt;          ssh-agent -k
+&lt;/div&gt;&lt;div id="code8.90" class="lines"&gt;&lt;a href="#code8.90"&gt;&lt;/a&gt;        fi
+&lt;/div&gt;&lt;div id="code8.91" class="lines"&gt;&lt;a href="#code8.91"&gt;&lt;/a&gt;        cd ..
+&lt;/div&gt;&lt;div id="code8.92" class="lines"&gt;&lt;a href="#code8.92"&gt;&lt;/a&gt;        echo Completed&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This is a copy of my live GitHub Action for deploying my blog that you are most
+likely reading right now, and I decided not to edit anything, so if you just
+want to re-use it you will need to replace a few things, namely:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;en_AU.UTF-8&lt;/code&gt; =&amp;gt; to a locale you are using (you can run &lt;code&gt;locale -a&lt;/code&gt; if you
+    are running Linux to see the list of locales available on your system);&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;content&lt;/code&gt; =&amp;gt; you may need to change that to the name of your content
+    directory (if you did not use the default name);&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;themes/mind-drops/content&lt;/code&gt; =&amp;gt; you will need to drop this line since it is
+    my theme&amp;rsquo;s content directory and you would not have it;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;galaxy4public/galaxy4public.github.io&lt;/code&gt; =&amp;gt; to &lt;strong&gt;&amp;lt;your_username/your_blog_repo_name&amp;gt;&lt;/strong&gt;, obviously :)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This being sorted, let&amp;rsquo;s look a bit more closely to understand how this GitHub
+Action is structured and what each step is doing.&lt;/p&gt;
+&lt;p&gt;It all starts with the definition of the action itself and the conditions of
+how it is triggered and how does it run.&lt;/p&gt;
+&lt;p&gt;[I ran out of time for this session :(, will update the post with more details shortly ]&lt;/p&gt;</content><category term="blog"></category><category term="pelican"></category><category term="blog"></category><category term="github"></category></entry><entry><title>Wrap indicator in &lt;pre&gt; blocks</title><link href="https://dmitry.khlebnikov.net/2020/05/10/wrap-indicator-in-pre-blocks/" rel="alternate"></link><published>2020-05-10T21:00:00+10:00</published><updated>2020-05-17T20:25:15+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-10:/2020/05/10/wrap-indicator-in-pre-blocks/</id><summary type="html">&lt;p&gt;I am not a front-end developer, not a UI designer, nor a UX guru, but I am an
 engineer, so when I face a puzzle worth solving my brain switches on and I
 cannot let it go until I find a satisfactory solution to the puzzle.&lt;/p&gt;
 &lt;p&gt;My blog heavily relies on me sharing session dumps and file excerpts using the
