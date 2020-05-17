@@ -19,7 +19,7 @@ will allow one to tweak parameters for the hosts in the chain.&lt;/p&gt;
 technique works, here I am only going to provide the proxy script and the
 corresponding ssh config parameter block to use the script.&lt;/p&gt;
 &lt;p&gt;The goal was to support the following syntax:&lt;/p&gt;
-&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;[user@localhost ~]$ ssh default_user@userA^hostA/userB^hostB:port/hostC&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[user@localhost ~]$ ssh default_user@userA^hostA/userB^hostB:port/hostC&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;It was a little challenge to come up with the character for identifying the
 user part for intermediate hosts:&lt;/p&gt;
@@ -40,44 +40,44 @@ port is omitted, it will use the global port configuration (usually 22/tcp but
 can be changed with the &lt;code&gt;-p&lt;/code&gt; argument to ssh).  The script is a bit not optimised
 (bash is really slow on string processing, but I decided to stick with pure
 bash where it was possible):&lt;/p&gt;
-&lt;pre class="highlight" data-file="~/bin/ssh-helper.sh"&gt;&lt;code class="language-bash"&gt;#!/bin/bash
-set -eu -o pipefail
-exec 10&amp;lt;&amp;amp;0 11&amp;gt;&amp;amp;1 0&amp;lt;&amp;amp;2 1&amp;gt;&amp;amp;2
-DEFAULT_USER=&amp;quot;$1&amp;quot;
-DEFAULT_PORT=&amp;quot;$3&amp;quot;
-HOST_CHAIN=&amp;quot;$2&amp;quot;
-HOST_NEXT=&amp;quot;${HOST_CHAIN%%/*}&amp;quot;
-HOST_USER=&amp;quot;${HOST_NEXT%%^*}&amp;quot;
-[ &amp;quot;$HOST_USER&amp;quot; == &amp;quot;$HOST_NEXT&amp;quot; ] &amp;amp;&amp;amp; HOST_USER=&amp;quot;$DEFAULT_USER&amp;quot; ||:
-HOST_PORT=&amp;quot;${HOST_NEXT##*:}&amp;quot;
-[ &amp;quot;$HOST_PORT&amp;quot; == &amp;quot;$HOST_NEXT&amp;quot; ] &amp;amp;&amp;amp; HOST_PORT=&amp;quot;$DEFAULT_PORT&amp;quot; ||:
-TARGET_HOST=&amp;quot;${HOST_CHAIN##*/}&amp;quot;
-TARGET_PORT=&amp;quot;${TARGET_HOST##*:}&amp;quot;
-TARGET_HOST=&amp;quot;${TARGET_HOST%:*}&amp;quot;
-[ &amp;quot;$TARGET_PORT&amp;quot; == &amp;quot;$TARGET_HOST&amp;quot; ] &amp;amp;&amp;amp; TARGET_PORT=&amp;quot;$DEFAULT_PORT&amp;quot; ||:
-TARGET_HOST=&amp;quot;${TARGET_HOST#*^}&amp;quot;
-HOST_NEXT=&amp;quot;${HOST_NEXT#*^}&amp;quot;
-HOST_NEXT=&amp;quot;${HOST_NEXT%:*}&amp;quot;
-HOST_CHAIN=&amp;quot;${HOST_CHAIN%/*}&amp;quot;
-[ &amp;quot;$HOST_CHAIN&amp;quot; == &amp;quot;${HOST_CHAIN#*/}&amp;quot; ] &amp;amp;&amp;amp; HOST_CHAIN= || HOST_CHAIN=&amp;quot;${HOST_CHAIN#*/}&amp;quot;
-HOST_CHAIN=&amp;quot;$HOST_NEXT${HOST_CHAIN:+/$HOST_CHAIN}&amp;quot;
-
-if [ ! -d &amp;quot;$HOME/.ssh/.sessions&amp;quot; ]; then
-    echo &amp;quot;Creating the sessions directory&amp;quot; &amp;gt;&amp;amp;2
-    mkdir -m700 &amp;quot;$HOME/.ssh/.sessions&amp;quot;
-fi
-
-CONTROL_SOCKET=$(printf &amp;quot;$HOST_USER@HOST_CHAIN:$HOST_PORT\n&amp;quot; | shasum | cut -f1 -d' ')
-
-exec 0&amp;lt;&amp;amp;10 1&amp;gt;&amp;amp;11
-exec ssh \
-    -o &amp;quot;ControlMaster auto&amp;quot; \
-    -o &amp;quot;ControlPath ~/.ssh/.sessions/$CONTROL_SOCKET&amp;quot; \
-    -o &amp;quot;ControlPersist 120s&amp;quot; \
-    -l &amp;quot;$HOST_USER&amp;quot; \
-    -p &amp;quot;$HOST_PORT&amp;quot; \
-    &amp;quot;$HOST_CHAIN&amp;quot; \
-    -W &amp;quot;$TARGET_HOST&amp;quot;:&amp;quot;$TARGET_PORT&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-file="~/bin/ssh-helper.sh"&gt;&lt;code class="language-bash"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;#!/bin/bash
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;set -eu -o pipefail
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;exec 10&amp;lt;&amp;amp;0 11&amp;gt;&amp;amp;1 0&amp;lt;&amp;amp;2 1&amp;gt;&amp;amp;2
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;DEFAULT_USER=&amp;quot;$1&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;DEFAULT_PORT=&amp;quot;$3&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;HOST_CHAIN=&amp;quot;$2&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;HOST_NEXT=&amp;quot;${HOST_CHAIN%%/*}&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;HOST_USER=&amp;quot;${HOST_NEXT%%^*}&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[ &amp;quot;$HOST_USER&amp;quot; == &amp;quot;$HOST_NEXT&amp;quot; ] &amp;amp;&amp;amp; HOST_USER=&amp;quot;$DEFAULT_USER&amp;quot; ||:
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;HOST_PORT=&amp;quot;${HOST_NEXT##*:}&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[ &amp;quot;$HOST_PORT&amp;quot; == &amp;quot;$HOST_NEXT&amp;quot; ] &amp;amp;&amp;amp; HOST_PORT=&amp;quot;$DEFAULT_PORT&amp;quot; ||:
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;TARGET_HOST=&amp;quot;${HOST_CHAIN##*/}&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;TARGET_PORT=&amp;quot;${TARGET_HOST##*:}&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;TARGET_HOST=&amp;quot;${TARGET_HOST%:*}&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[ &amp;quot;$TARGET_PORT&amp;quot; == &amp;quot;$TARGET_HOST&amp;quot; ] &amp;amp;&amp;amp; TARGET_PORT=&amp;quot;$DEFAULT_PORT&amp;quot; ||:
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;TARGET_HOST=&amp;quot;${TARGET_HOST#*^}&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;HOST_NEXT=&amp;quot;${HOST_NEXT#*^}&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;HOST_NEXT=&amp;quot;${HOST_NEXT%:*}&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;HOST_CHAIN=&amp;quot;${HOST_CHAIN%/*}&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[ &amp;quot;$HOST_CHAIN&amp;quot; == &amp;quot;${HOST_CHAIN#*/}&amp;quot; ] &amp;amp;&amp;amp; HOST_CHAIN= || HOST_CHAIN=&amp;quot;${HOST_CHAIN#*/}&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;HOST_CHAIN=&amp;quot;$HOST_NEXT${HOST_CHAIN:+/$HOST_CHAIN}&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;if [ ! -d &amp;quot;$HOME/.ssh/.sessions&amp;quot; ]; then
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    echo &amp;quot;Creating the sessions directory&amp;quot; &amp;gt;&amp;amp;2
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    mkdir -m700 &amp;quot;$HOME/.ssh/.sessions&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;fi
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;CONTROL_SOCKET=$(printf &amp;quot;$HOST_USER@HOST_CHAIN:$HOST_PORT\n&amp;quot; | shasum | cut -f1 -d' ')
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;exec 0&amp;lt;&amp;amp;10 1&amp;gt;&amp;amp;11
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;exec ssh \
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    -o &amp;quot;ControlMaster auto&amp;quot; \
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    -o &amp;quot;ControlPath ~/.ssh/.sessions/$CONTROL_SOCKET&amp;quot; \
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    -o &amp;quot;ControlPersist 120s&amp;quot; \
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    -l &amp;quot;$HOST_USER&amp;quot; \
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    -p &amp;quot;$HOST_PORT&amp;quot; \
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    &amp;quot;$HOST_CHAIN&amp;quot; \
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    -W &amp;quot;$TARGET_HOST&amp;quot;:&amp;quot;$TARGET_PORT&amp;quot;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The above is a proof of the concept and it &amp;ldquo;works for me&amp;rdquo; :). I am using it
 every day when I need to access boxes behind a bastion host. Your mileage may
@@ -85,14 +85,14 @@ vary and you are free to create your own version of the script that would
 perform better (I would be really glad if a version of such a script could be
 shared with me).&lt;/p&gt;
 &lt;p&gt;The corresponding configuration block in the ssh config file looks as follows:&lt;/p&gt;
-&lt;pre class="highlight" data-file="~/.ssh/config"&gt;&lt;code class="language-ssh_config"&gt;Host */*
-    # if you uncomment ControlPath you also need to uncomment ControlMaster
-    #ControlMaster auto
-    # For OpenSSH &amp;lt; 6.7 you may uncomment the following, but long chains will fail:
-    #ControlPath   ~/.ssh/.sessions/%r@%h:%p
-    # For OpenSSH &amp;gt;= 6.7 you should uncomment the following:
-    #ControlPath   ~/.ssh/.sessions/%C
-    ProxyCommand ~/bin/ssh-helper.sh %r %h %p&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-file="~/.ssh/config"&gt;&lt;code class="language-ssh_config"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Host */*
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    # if you uncomment ControlPath you also need to uncomment ControlMaster
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    #ControlMaster auto
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    # For OpenSSH &amp;lt; 6.7 you may uncomment the following, but long chains will fail:
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    #ControlPath   ~/.ssh/.sessions/%r@%h:%p
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    # For OpenSSH &amp;gt;= 6.7 you should uncomment the following:
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    #ControlPath   ~/.ssh/.sessions/%C
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    ProxyCommand ~/bin/ssh-helper.sh %r %h %p&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Well, this is a bit messy since OpenSSH introduced the &lt;code&gt;%C&lt;/code&gt; macro in version 6.7
 and without &lt;code&gt;%C&lt;/code&gt; the &lt;code&gt;ControlPath&lt;/code&gt; string gets too long for OpenSSH to create a
@@ -124,24 +124,24 @@ running on the local host would be sufficient), then we needed an interactive
 script, and a configuration block for the connection.&lt;/p&gt;
 &lt;p&gt;The configuration block is pretty simple (%h expands to localhost and %p
 expands to the port specified on the command line or to &amp;ldquo;22&amp;rdquo; otherwise):&lt;/p&gt;
-&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;[user@localhost ~]$ fgrep -A1 'Host localhost' ~/.ssh/config
-Host localhost
- ProxyCommand ~/bin/interactive.script.sh %h %p&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[user@localhost ~]$ fgrep -A1 'Host localhost' ~/.ssh/config
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Host localhost
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt; ProxyCommand ~/bin/interactive.script.sh %h %p&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Since most of our research is going to be inside the interactive script you
 will see several incarnations of script&amp;rsquo;s body. The very first one was the
 following:&lt;/p&gt;
-&lt;pre class="highlight" data-file="~/bin/interactive.script.sh"&gt;&lt;code class="language-bash"&gt;#!/bin/bash
-exec nc &amp;quot;$1&amp;quot; &amp;quot;$2&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-file="~/bin/interactive.script.sh"&gt;&lt;code class="language-bash"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;#!/bin/bash
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;exec nc &amp;quot;$1&amp;quot; &amp;quot;$2&amp;quot;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;At this point we just need to confirm that our test environment works as
 expected &amp;ndash; the ssh session should be proxied through the nc command and we
 should be able to login under our own account via ssh to the localhost (my
 private key was added to the key manager with ssh-add, hence no password prompt
 was displayed):&lt;/p&gt;
-&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;[user@localhost ~]$ ssh galaxy@localhost
-Last login: Thu Jul 21 01:30:21 2016
-$&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[user@localhost ~]$ ssh galaxy@localhost
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Last login: Thu Jul 21 01:30:21 2016
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;OK, we confirmed that we can establish a proxied connection and tunnel our ssh
 session through it.&lt;/p&gt;
@@ -149,28 +149,28 @@ session through it.&lt;/p&gt;
 user otherwise it could not be interactive. This channel comprises at least of
 two file descriptors: one for standard input and the other for standard output,
 so let&amp;rsquo;s check what descriptors are available for our script:&lt;/p&gt;
-&lt;pre class="highlight" data="file="~/bin/interactive.script.sh""&gt;&lt;code class="language-bash"&gt;#!/bin/bash
-# on Linux the following line would be much simpler: ls -l /proc/$$/fd/, but
-# on OS X they do not expose the open file descriptors through /proc, so I
-# used &amp;quot;lsof&amp;quot; instead.
-lsof -p $$ &amp;gt;&amp;amp;2
-exec nc &amp;quot;$1&amp;quot; &amp;quot;$2&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data="file="~/bin/interactive.script.sh""&gt;&lt;code class="language-bash"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;#!/bin/bash
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# on Linux the following line would be much simpler: ls -l /proc/$$/fd/, but
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# on OS X they do not expose the open file descriptors through /proc, so I
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# used &amp;quot;lsof&amp;quot; instead.
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;lsof -p $$ &amp;gt;&amp;amp;2
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;exec nc &amp;quot;$1&amp;quot; &amp;quot;$2&amp;quot;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;If we try to connect now we should see something like the following (I am
 writing this article on an OS X machine so I provide the output from OS X,
 however this also works for Linux):&lt;/p&gt;
-&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;[user@localhost ~]$ ssh galaxy@localhost
-COMMAND   PID   USER   FD   TYPE             DEVICE  SIZE/OFF     NODE NAME
-bash    45225   user  cwd    DIR                1,2       612   893854 /Users/user/.ssh
-bash    45225   user  txt    REG                1,2    628640  2329236 /bin/bash
-bash    45225   user  txt    REG                1,2    625712 13892061 /usr/lib/dyld
-bash    45225   user  txt    REG                1,2 385393734 13894121 /private/var/run/dyld_shared_cache_x86_64
-bash    45225   user    0   PIPE 0x44d71099589485df     16384          -&amp;gt;0x44d7109951223d0f
-bash    45225   user    1   PIPE 0x44d710995122454f     16384          -&amp;gt;0x44d71099512246af
-bash    45225   user    2u   CHR               16,1  0t631830     9705 /dev/ttys001
-bash    45225   user  255r   REG                1,2       219 15455259 /Users/user/bin/interactive.script.sh
-Last login: Mon Jul 25 17:52:40 2016 from localhost
-$&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[user@localhost ~]$ ssh galaxy@localhost
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;COMMAND   PID   USER   FD   TYPE             DEVICE  SIZE/OFF     NODE NAME
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;bash    45225   user  cwd    DIR                1,2       612   893854 /Users/user/.ssh
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;bash    45225   user  txt    REG                1,2    628640  2329236 /bin/bash
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;bash    45225   user  txt    REG                1,2    625712 13892061 /usr/lib/dyld
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;bash    45225   user  txt    REG                1,2 385393734 13894121 /private/var/run/dyld_shared_cache_x86_64
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;bash    45225   user    0   PIPE 0x44d71099589485df     16384          -&amp;gt;0x44d7109951223d0f
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;bash    45225   user    1   PIPE 0x44d710995122454f     16384          -&amp;gt;0x44d71099512246af
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;bash    45225   user    2u   CHR               16,1  0t631830     9705 /dev/ttys001
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;bash    45225   user  255r   REG                1,2       219 15455259 /Users/user/bin/interactive.script.sh
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Last login: Mon Jul 25 17:52:40 2016 from localhost
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;We are interested in file descriptors 0 (standard input), 1 (standard output),
 and 2 (standard error). As you can see the standard input and output are part
@@ -193,34 +193,34 @@ parent ssh process? Well, the answer is quite obvious:&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;The following version of the script demonstrates the implementation of the
 above logic:&lt;/p&gt;
-&lt;pre class="highlight" data-file="~/bin/interactive.script.sh"&gt;&lt;code class="language-bash"&gt;#!/bin/bash
-exec 10&amp;lt;&amp;amp;0 11&amp;gt;&amp;amp;1 0&amp;lt;&amp;amp;2 1&amp;gt;&amp;amp;2
-# start of the interactive behaviour
-lsof -p $$
-read -p &amp;quot;Type something: &amp;quot; I
-echo &amp;quot;You typed: $I&amp;quot;
-# finish of the interactive behaviour
-exec 0&amp;lt;&amp;amp;10 1&amp;gt;&amp;amp;11
-exec nc &amp;quot;$1&amp;quot; &amp;quot;$2&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-file="~/bin/interactive.script.sh"&gt;&lt;code class="language-bash"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;#!/bin/bash
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;exec 10&amp;lt;&amp;amp;0 11&amp;gt;&amp;amp;1 0&amp;lt;&amp;amp;2 1&amp;gt;&amp;amp;2
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# start of the interactive behaviour
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;lsof -p $$
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;read -p &amp;quot;Type something: &amp;quot; I
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;echo &amp;quot;You typed: $I&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# finish of the interactive behaviour
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;exec 0&amp;lt;&amp;amp;10 1&amp;gt;&amp;amp;11
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;exec nc &amp;quot;$1&amp;quot; &amp;quot;$2&amp;quot;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;I think it is time to test it :) :&lt;/p&gt;
-&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;[user@localhost ~]$ ssh galaxy@localhost
-COMMAND   PID   USER   FD   TYPE             DEVICE  SIZE/OFF     NODE NAME
-bash    45238   user  cwd    DIR                1,2       612   893854 /Users/user/.ssh
-bash    45238   user  txt    REG                1,2    628640  2329236 /bin/bash
-bash    45238   user  txt    REG                1,2    625712 13892061 /usr/lib/dyld
-bash    45238   user  txt    REG                1,2 385393734 13894121 /private/var/run/dyld_shared_cache_x86_64
-bash    45238   user    0u   CHR               16,1  0t640407     9705 /dev/ttys001
-bash    45238   user    1u   CHR               16,1  0t640407     9705 /dev/ttys001
-bash    45238   user    2u   CHR               16,1  0t640407     9705 /dev/ttys001
-bash    45238   user   10   PIPE 0x44d710995122378f     16384          -&amp;gt;0x44d71099589494ff
-bash    45238   user   11   PIPE 0x44d7109951223d0f     16384          -&amp;gt;0x44d710995122454f
-bash    45238   user  255r   REG                1,2       135 15455285 /Users/user/bin/interactive.script.sh
-Type something: This is a test
-You typed: This is a test
-Last login: Mon Jul 25 17:57:05 2016 from localhost
-$ logout
-Connection to localhost closed.&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[user@localhost ~]$ ssh galaxy@localhost
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;COMMAND   PID   USER   FD   TYPE             DEVICE  SIZE/OFF     NODE NAME
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;bash    45238   user  cwd    DIR                1,2       612   893854 /Users/user/.ssh
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;bash    45238   user  txt    REG                1,2    628640  2329236 /bin/bash
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;bash    45238   user  txt    REG                1,2    625712 13892061 /usr/lib/dyld
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;bash    45238   user  txt    REG                1,2 385393734 13894121 /private/var/run/dyld_shared_cache_x86_64
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;bash    45238   user    0u   CHR               16,1  0t640407     9705 /dev/ttys001
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;bash    45238   user    1u   CHR               16,1  0t640407     9705 /dev/ttys001
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;bash    45238   user    2u   CHR               16,1  0t640407     9705 /dev/ttys001
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;bash    45238   user   10   PIPE 0x44d710995122378f     16384          -&amp;gt;0x44d71099589494ff
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;bash    45238   user   11   PIPE 0x44d7109951223d0f     16384          -&amp;gt;0x44d710995122454f
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;bash    45238   user  255r   REG                1,2       135 15455285 /Users/user/bin/interactive.script.sh
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Type something: This is a test
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;You typed: This is a test
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Last login: Mon Jul 25 17:57:05 2016 from localhost
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ logout
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Connection to localhost closed.&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Mission accomplished! :)&lt;/p&gt;
 &lt;p&gt;I hope this small article would help somebody to design better wrappers around
@@ -245,15 +245,15 @@ using the command-line options). However, this approach turned out to be quite
 inconvenient since every time I wanted to connect to a new host (and, possibly,
 through a new intermediate host) I had to edit my SSH configuration file and
 add something like the following:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;Host intermediate
-    HostName 192.168.1.1
-    HostKeyAlias intermediate
-    LocalForward 10001 target:22
-
-Host target
-    HostName 127.0.0.1
-    HostKeyAlias target
-    Port 10001&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Host intermediate
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    HostName 192.168.1.1
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    HostKeyAlias intermediate
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    LocalForward 10001 target:22
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Host target
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    HostName 127.0.0.1
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    HostKeyAlias target
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    Port 10001&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Upon closer examination of my day-to-day routine I found two things that
 frustrated me the most:&lt;/p&gt;
@@ -268,19 +268,19 @@ frustrated me the most:&lt;/p&gt;
 tunnel through an intermediate host and found the approach quite convenient for
 the day-to-day use. So, I have added the following block into my &lt;code&gt;~/.ssh/config&lt;/code&gt;
 file just before the &lt;code&gt;Host *&lt;/code&gt; section:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;Host */*
-    ProxyCommand ssh $(dirname %h) -W $(basename %h):%p&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Host */*
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    ProxyCommand ssh $(dirname %h) -W $(basename %h):%p&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;From that point on, I could connect to a target host via an intermediate one
 by simply executing the following command:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;ssh user@intemediate/target&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;ssh user@intemediate/target&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The configuration with the &lt;code&gt;ProxyCommand&lt;/code&gt; directive was spawning two &lt;code&gt;ssh&lt;/code&gt;
 processes with one connected to the intermediate host in the background and the
 other proxied through the intermediate host and connected to the target running
 in the foreground, so from my point of view I had just one terminal session
 open. The configuration allowed to chain as many hosts as I wanted, e.g.:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;ssh user@hostA/hostB/hostC/hostD&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;ssh user@hostA/hostB/hostC/hostD&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The above would result in three &lt;code&gt;ssh&lt;/code&gt; processes running in the background (the
 first connected to hostA, the second connected to &lt;em&gt;hostB&lt;/em&gt; proxied through &lt;em&gt;hostA&lt;/em&gt;,
@@ -299,26 +299,26 @@ was irritating enough and I decided to figure out whether it is possible to
 optimise it. After a bit of reading the documentation and a few attempts I came
 up with the following configuration block in my &lt;code&gt;~/.ssh/config&lt;/code&gt; file (remember,
 this block should be placed &lt;em&gt;before&lt;/em&gt; the &lt;code&gt;Host *&lt;/code&gt; one):&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;Host */*
-    ControlMaster auto
-    ControlPath   ~/.ssh/.sessions/%r@%h:%p
-    ProxyCommand /bin/sh -c 'mkdir -p -m700 ~/.ssh/.sessions/&amp;quot;%r@$(dirname %h)&amp;quot; &amp;amp;&amp;amp; exec ssh -o &amp;quot;ControlMaster auto&amp;quot; -o &amp;quot;ControlPath   ~/.ssh/.sessions/%r@$(dirname %h):%p&amp;quot; -o &amp;quot;ControlPersist 120s&amp;quot; -l %r -p %p $(dirname %h) -W $(basename %h):%p'&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Host */*
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    ControlMaster auto
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    ControlPath   ~/.ssh/.sessions/%r@%h:%p
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    ProxyCommand /bin/sh -c 'mkdir -p -m700 ~/.ssh/.sessions/&amp;quot;%r@$(dirname %h)&amp;quot; &amp;amp;&amp;amp; exec ssh -o &amp;quot;ControlMaster auto&amp;quot; -o &amp;quot;ControlPath   ~/.ssh/.sessions/%r@$(dirname %h):%p&amp;quot; -o &amp;quot;ControlPersist 120s&amp;quot; -l %r -p %p $(dirname %h) -W $(basename %h):%p'&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Let&amp;rsquo;s review it line by line, so the logic is clear:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;Host */*&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Host */*&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;This host definition block would catch any host specified on the &lt;code&gt;ssh&lt;/code&gt; command
 line when the host name matches the &lt;code&gt;*/*&lt;/code&gt; pattern, so &lt;code&gt;ssh hostA/hostB/hostC&lt;/code&gt;
 will be matched as &lt;code&gt;hostA/hostB&lt;/code&gt; being the first part before &lt;code&gt;/&lt;/code&gt; and &lt;code&gt;hostC&lt;/code&gt; as
 the second part after &lt;code&gt;/&lt;/code&gt;. Due to a recursive call to &lt;code&gt;ssh&lt;/code&gt; (see below) this
 block will be recursively applied to all hosts in the specified chain.&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;    ControlMaster auto&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    ControlMaster auto&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;This directive instructs &lt;code&gt;ssh&lt;/code&gt; to try to reuse an existing control channel to
 communicate with the remote host, and if such a channel does not exist it will
 be created, so further connections to the same remote host would benefit from
 a speedup provided by the already established connection.&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;    ControlPath ~/.ssh/.sessions/%r@%h:%p&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    ControlPath ~/.ssh/.sessions/%r@%h:%p&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;This directive provides &lt;code&gt;ssh&lt;/code&gt; with the location of the control channel socket
 file. The socket file should be unique for each remote host. Since we are
@@ -329,7 +329,7 @@ part of the file name. Please note that due to our usage of &amp;ldquo;/&amp;rdq
 separator in the chain the path constructed here will have a subdirectory
 defined in the middle of the %h expansion. &lt;code&gt;ssh&lt;/code&gt; would not automatically create
 that subdirectory, so it is something we need to address (see below)&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;    ProxyCommand …&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    ProxyCommand …&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;This is the heart of the whole block. I am starting this proxy command with
 &lt;code&gt;/bin/sh -c '…'&lt;/code&gt; since &lt;code&gt;ssh&lt;/code&gt; is &lt;code&gt;exec()&lt;/code&gt;uting the specified command (this
@@ -385,7 +385,7 @@ following:&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;the second part executes&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;ssh … -o &amp;quot;ControlPath ~/.ssh/.sessions/user@hostA/hostB:22&amp;quot; … hostA/hostB -W hostC:22&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;ssh … -o &amp;quot;ControlPath ~/.ssh/.sessions/user@hostA/hostB:22&amp;quot; … hostA/hostB -W hostC:22&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;This will initiate another round of the above steps, but with a shorter chain
  and it will be recursive until there is just a single host left, e.g. when
@@ -436,7 +436,7 @@ standard firewall/NAT router.&lt;/p&gt;
 &lt;p&gt;Now, how can you access port 12345 on host behind the firewall given that this
 port is not &amp;ldquo;exported&amp;rdquo; by the NAT on the firewall? This is quite simple. Open a
 terminal window on your local computer and type the following:&lt;/p&gt;
-&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;[user@localhost ~] ssh -L12345:192.168.1.2:12345 joe@firewall.domain.tld&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[user@localhost ~] ssh -L12345:192.168.1.2:12345 joe@firewall.domain.tld&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;From now on, as long as your SSH session is up and running you will be able to
 reach &lt;code&gt;192.168.1.2:12345&lt;/code&gt; by connecting to &lt;code&gt;localhost:12345&lt;/code&gt; (i.e. the &lt;code&gt;12345&lt;/code&gt;
@@ -455,7 +455,7 @@ requests to many ports useful:&lt;/p&gt;
   physically in Australia&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;In both cases, you use the following SSH command in your terminal window:&lt;/p&gt;
-&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;[user@localhost ~]$ ssh -D3128 joe@relay.domain.tld&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[user@localhost ~]$ ssh -D3128 joe@relay.domain.tld&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;As long as you SSH session is active, you can use port &lt;code&gt;3128&lt;/code&gt; on your local
 machine as SOCKS4/SOCKS5 proxy (e.g. you can configure proxy settings in your
@@ -475,7 +475,7 @@ to folks from WikiLeaks&amp;hellip; just kidding :) )?&lt;/p&gt;
 Google for &amp;ldquo;free ssh account&amp;rdquo; and you will surely find one for yourself).&lt;/p&gt;
 &lt;p&gt;Now, when you have the account, you can execute the following on your local
 computer (which is inside that highly secure network :) ):&lt;/p&gt;
-&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;[user@localhost ~]$ ssh -R:60000:127.0.0.1:22 joe@friendly.domain.tld&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[user@localhost ~]$ ssh -R:60000:127.0.0.1:22 joe@friendly.domain.tld&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The above command will setup such a configuration that connecting on port &lt;code&gt;60000&lt;/code&gt;
 at &lt;code&gt;friendly.domain.tld&lt;/code&gt; will forward traffic to your local machine&amp;rsquo;s port 22
@@ -498,12 +498,12 @@ way you want it!&lt;/p&gt;
 &lt;p&gt;Anyway, even if you fail to find a host that allows you to expose your service
 to the public, you still should be able to access it yourself &amp;ndash; using the
 forward firewall piercing technique described at the beginning of this post:&lt;/p&gt;
-&lt;pre class="highlight" data-user="user" data-prompt=""[user@localhost"&gt;&lt;code class="language-shell"&gt;# from your home computer
-[user@localhost ~]$ ssh -L60000:127.0.0.1:60000 joe@friendly.domain.tld&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="user" data-prompt=""[user@localhost"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# from your home computer
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[user@localhost ~]$ ssh -L60000:127.0.0.1:60000 joe@friendly.domain.tld&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Once it is done your computer in the highly secure network should be reachable
 via SSH on your &lt;code&gt;localhost:60000&lt;/code&gt;, e.g.&lt;/p&gt;
-&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;[user@localhost ~] ssh -p6000 my_account@localhost&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[user@localhost ~] ssh -p6000 my_account@localhost&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Where &lt;code&gt;my_account&lt;/code&gt; is a user allowed to SSH into your computer in the highly
 secure network.&lt;/p&gt;</content><category term="ssh"></category></entry><entry><title>SSH port-forwarding (Basic)</title><link href="https://dmitry.khlebnikov.net/2010/11/29/ssh-port-forwarding-basic/" rel="alternate"></link><published>2010-11-29T10:00:00+11:00</published><updated>2020-05-17T04:45:11+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2010-11-29:/2010/11/29/ssh-port-forwarding-basic/</id><summary type="html">&lt;p&gt;I think all of you are using SSH in your daily routines. However, do you use
@@ -541,7 +541,7 @@ another machine, you may want to bind MySQL to some internal interface &amp;ndas
 network that links your servers only, e.g. 192.168.1.1:3306), and then use the
 SSH port-forwarding feature to setup a tunnel between your remote database and
 your local computer:&lt;/p&gt;
-&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;[root@localhost ~]# ssh -L3306:127.0.0.1:3306 user@server&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[root@localhost ~]# ssh -L3306:127.0.0.1:3306 user@server&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Here, &lt;code&gt;-L3306:127.0.0.1:3306&lt;/code&gt; says that we want &lt;code&gt;127.0.0.1:3306&lt;/code&gt; to be &amp;ldquo;mapped&amp;rdquo;
 to our local host to port &lt;code&gt;3306&lt;/code&gt;. While the SSH session is active any packet

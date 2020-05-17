@@ -142,7 +142,7 @@ through all of them and see if they are real benefits at all:&lt;/p&gt;
 &lt;p&gt;The ability of logging is so limited in &lt;code&gt;sudo&lt;/code&gt; that it cannot be used for
  anything except a substitute for the shell history. Just imagine the
  following scenario — a user executes:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;sudo less /var/log/messages&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;sudo less /var/log/messages&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;and then types &amp;ldquo;!&amp;rdquo; followed by the Enter/Return key — the user effectively
  now in the root shell and what &lt;code&gt;sudo&lt;/code&gt; will log into its logs has nothing
@@ -180,8 +180,8 @@ through all of them and see if they are real benefits at all:&lt;/p&gt;
  account/password.  The truth is that nobody is limited by a single root
  account: you can create as many as you want and each of them could have
  their own distinct password, e.g.&lt;/p&gt;
-&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;[root@localhost ~]# useradd -om -o 0 -g 0 -s /bin/sh new_root
-[root@localhost ~]# passwd new_root&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[root@localhost ~]# useradd -om -o 0 -g 0 -s /bin/sh new_root
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[root@localhost ~]# passwd new_root&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Better yet, do not set the password and lock the account instead with
  &lt;code&gt;usermod -L new_root&lt;/code&gt; since we are using keys, remember?&lt;/p&gt;

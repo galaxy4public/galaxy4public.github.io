@@ -246,7 +246,7 @@ through all of them and see if they are real benefits at all:</p>
 <p>The ability of logging is so limited in <code>sudo</code> that it cannot be used for
  anything except a substitute for the shell history. Just imagine the
  following scenario — a user executes:</p>
-<pre class="highlight"><code class="language-shell">sudo less /var/log/messages</code></pre>
+<pre class="highlight"><code class="language-shell"><div class="lines"><a></a>sudo less /var/log/messages</div></code></pre>
 
 <p>and then types &ldquo;!&rdquo; followed by the Enter/Return key — the user effectively
  now in the root shell and what <code>sudo</code> will log into its logs has nothing
@@ -284,8 +284,8 @@ through all of them and see if they are real benefits at all:</p>
  account/password.  The truth is that nobody is limited by a single root
  account: you can create as many as you want and each of them could have
  their own distinct password, e.g.</p>
-<pre class="highlight" data-user="root"><code class="language-shell">[root@localhost ~]# useradd -om -o 0 -g 0 -s /bin/sh new_root
-[root@localhost ~]# passwd new_root</code></pre>
+<pre class="highlight" data-user="root"><code class="language-shell"><div class="lines"><a></a>[root@localhost ~]# useradd -om -o 0 -g 0 -s /bin/sh new_root
+</div><div class="lines"><a></a>[root@localhost ~]# passwd new_root</div></code></pre>
 
 <p>Better yet, do not set the password and lock the account instead with
  <code>usermod -L new_root</code> since we are using keys, remember?</p>

@@ -125,15 +125,15 @@ using the command-line options). However, this approach turned out to be quite
 inconvenient since every time I wanted to connect to a new host (and, possibly,
 through a new intermediate host) I had to edit my SSH configuration file and
 add something like the following:</p>
-<pre class="highlight"><code class="language-ssh_config">Host intermediate
-    HostName 192.168.1.1
-    HostKeyAlias intermediate
-    LocalForward 10001 target:22
-
-Host target
-    HostName 127.0.0.1
-    HostKeyAlias target
-    Port 10001</code></pre>
+<pre class="highlight"><code class="language-ssh_config"><div class="lines"><a></a>Host intermediate
+</div><div class="lines"><a></a>    HostName 192.168.1.1
+</div><div class="lines"><a></a>    HostKeyAlias intermediate
+</div><div class="lines"><a></a>    LocalForward 10001 target:22
+</div><div class="lines"><a></a>
+</div><div class="lines"><a></a>Host target
+</div><div class="lines"><a></a>    HostName 127.0.0.1
+</div><div class="lines"><a></a>    HostKeyAlias target
+</div><div class="lines"><a></a>    Port 10001</div></code></pre>
 
 <p>Upon closer examination of my day-to-day routine I found two things that
 frustrated me the most:</p>
@@ -148,19 +148,19 @@ frustrated me the most:</p>
 tunnel through an intermediate host and found the approach quite convenient for
 the day-to-day use. So, I have added the following block into my <code>~/.ssh/config</code>
 file just before the <code>Host *</code> section:</p>
-<pre class="highlight"><code class="language-ssh_config">Host */*
-    ProxyCommand ssh $(dirname %h) -W $(basename %h):%p</code></pre>
+<pre class="highlight"><code class="language-ssh_config"><div class="lines"><a></a>Host */*
+</div><div class="lines"><a></a>    ProxyCommand ssh $(dirname %h) -W $(basename %h):%p</div></code></pre>
 
 <p>From that point on, I could connect to a target host via an intermediate one
 by simply executing the following command:</p>
-<pre class="highlight"><code class="language-shell">ssh user@intemediate/target</code></pre>
+<pre class="highlight"><code class="language-shell"><div class="lines"><a></a>ssh user@intemediate/target</div></code></pre>
 
 <p>The configuration with the <code>ProxyCommand</code> directive was spawning two <code>ssh</code>
 processes with one connected to the intermediate host in the background and the
 other proxied through the intermediate host and connected to the target running
 in the foreground, so from my point of view I had just one terminal session
 open. The configuration allowed to chain as many hosts as I wanted, e.g.:</p>
-<pre class="highlight"><code class="language-shell">ssh user@hostA/hostB/hostC/hostD</code></pre>
+<pre class="highlight"><code class="language-shell"><div class="lines"><a></a>ssh user@hostA/hostB/hostC/hostD</div></code></pre>
 
 <p>The above would result in three <code>ssh</code> processes running in the background (the
 first connected to hostA, the second connected to <em>hostB</em> proxied through <em>hostA</em>,
@@ -179,26 +179,26 @@ was irritating enough and I decided to figure out whether it is possible to
 optimise it. After a bit of reading the documentation and a few attempts I came
 up with the following configuration block in my <code>~/.ssh/config</code> file (remember,
 this block should be placed <em>before</em> the <code>Host *</code> one):</p>
-<pre class="highlight"><code class="language-ssh_config">Host */*
-    ControlMaster auto
-    ControlPath   ~/.ssh/.sessions/%r@%h:%p
-    ProxyCommand /bin/sh -c 'mkdir -p -m700 ~/.ssh/.sessions/&quot;%r@$(dirname %h)&quot; &amp;&amp; exec ssh -o &quot;ControlMaster auto&quot; -o &quot;ControlPath   ~/.ssh/.sessions/%r@$(dirname %h):%p&quot; -o &quot;ControlPersist 120s&quot; -l %r -p %p $(dirname %h) -W $(basename %h):%p'</code></pre>
+<pre class="highlight"><code class="language-ssh_config"><div class="lines"><a></a>Host */*
+</div><div class="lines"><a></a>    ControlMaster auto
+</div><div class="lines"><a></a>    ControlPath   ~/.ssh/.sessions/%r@%h:%p
+</div><div class="lines"><a></a>    ProxyCommand /bin/sh -c 'mkdir -p -m700 ~/.ssh/.sessions/&quot;%r@$(dirname %h)&quot; &amp;&amp; exec ssh -o &quot;ControlMaster auto&quot; -o &quot;ControlPath   ~/.ssh/.sessions/%r@$(dirname %h):%p&quot; -o &quot;ControlPersist 120s&quot; -l %r -p %p $(dirname %h) -W $(basename %h):%p'</div></code></pre>
 
 <p>Let&rsquo;s review it line by line, so the logic is clear:</p>
-<pre class="highlight"><code class="language-ssh_config">Host */*</code></pre>
+<pre class="highlight"><code class="language-ssh_config"><div class="lines"><a></a>Host */*</div></code></pre>
 
 <p>This host definition block would catch any host specified on the <code>ssh</code> command
 line when the host name matches the <code>*/*</code> pattern, so <code>ssh hostA/hostB/hostC</code>
 will be matched as <code>hostA/hostB</code> being the first part before <code>/</code> and <code>hostC</code> as
 the second part after <code>/</code>. Due to a recursive call to <code>ssh</code> (see below) this
 block will be recursively applied to all hosts in the specified chain.</p>
-<pre class="highlight"><code class="language-ssh_config">    ControlMaster auto</code></pre>
+<pre class="highlight"><code class="language-ssh_config"><div class="lines"><a></a>    ControlMaster auto</div></code></pre>
 
 <p>This directive instructs <code>ssh</code> to try to reuse an existing control channel to
 communicate with the remote host, and if such a channel does not exist it will
 be created, so further connections to the same remote host would benefit from
 a speedup provided by the already established connection.</p>
-<pre class="highlight"><code class="language-ssh_config">    ControlPath ~/.ssh/.sessions/%r@%h:%p</code></pre>
+<pre class="highlight"><code class="language-ssh_config"><div class="lines"><a></a>    ControlPath ~/.ssh/.sessions/%r@%h:%p</div></code></pre>
 
 <p>This directive provides <code>ssh</code> with the location of the control channel socket
 file. The socket file should be unique for each remote host. Since we are
@@ -209,7 +209,7 @@ part of the file name. Please note that due to our usage of &ldquo;/&rdquo; as a
 separator in the chain the path constructed here will have a subdirectory
 defined in the middle of the %h expansion. <code>ssh</code> would not automatically create
 that subdirectory, so it is something we need to address (see below)</p>
-<pre class="highlight"><code class="language-ssh_config">    ProxyCommand …</code></pre>
+<pre class="highlight"><code class="language-ssh_config"><div class="lines"><a></a>    ProxyCommand …</div></code></pre>
 
 <p>This is the heart of the whole block. I am starting this proxy command with
 <code>/bin/sh -c '…'</code> since <code>ssh</code> is <code>exec()</code>uting the specified command (this
@@ -265,7 +265,7 @@ following:</p>
 </li>
 <li>
 <p>the second part executes</p>
-<pre class="highlight"><code class="language-shell">ssh … -o &quot;ControlPath ~/.ssh/.sessions/user@hostA/hostB:22&quot; … hostA/hostB -W hostC:22</code></pre>
+<pre class="highlight"><code class="language-shell"><div class="lines"><a></a>ssh … -o &quot;ControlPath ~/.ssh/.sessions/user@hostA/hostB:22&quot; … hostA/hostB -W hostC:22</div></code></pre>
 
 <p>This will initiate another round of the above steps, but with a shorter chain
  and it will be recursive until there is just a single host left, e.g. when

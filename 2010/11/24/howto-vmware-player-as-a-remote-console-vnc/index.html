@@ -146,18 +146,18 @@ but I see no issues with 64-bit ones).</p>
 <p>The first step is to download <a href="http://www.vmware.com/go/downloadplayer/">VMware Player</a> for your architecture, set proper
 permissions on the downloaded file, and then extract the payload as follows
 (you need to ensure that you have at least 40MB of free space on <code>/tmp</code>, BTW):</p>
-<pre class="highlight"><code class="language-shell">$ chmod 0700 ./VMware-Player-3.1.3.324285.i386.bundle
-$ ./VMware-Player-3.1.3-324285.i386.bundle --console -x $(pwd)/vmplayer
-Extracting VMware Installer...done.
-No protocol specified
-No protocol specified
-$ ls -l vmplayer
-total 20
-drwxr-xr-x  8 vmware vmware 4096 Nov 23 09:01 vmware-installer
-drwxr-xr-x  4 vmware vmware 4096 Nov 23 09:01 vmware-ovftool
-drwxr-xr-x  5 vmware vmware 4096 Nov 23 09:01 vmware-player
-drwxr-xr-x 11 vmware vmware 4096 Nov 23 09:01 vmware-player-app
-drwxr-xr-x  3 vmware vmware 4096 Nov 23 09:01 vmware-player-setup</code></pre>
+<pre class="highlight"><code class="language-shell"><div class="lines"><a></a>$ chmod 0700 ./VMware-Player-3.1.3.324285.i386.bundle
+</div><div class="lines"><a></a>$ ./VMware-Player-3.1.3-324285.i386.bundle --console -x $(pwd)/vmplayer
+</div><div class="lines"><a></a>Extracting VMware Installer...done.
+</div><div class="lines"><a></a>No protocol specified
+</div><div class="lines"><a></a>No protocol specified
+</div><div class="lines"><a></a>$ ls -l vmplayer
+</div><div class="lines"><a></a>total 20
+</div><div class="lines"><a></a>drwxr-xr-x  8 vmware vmware 4096 Nov 23 09:01 vmware-installer
+</div><div class="lines"><a></a>drwxr-xr-x  4 vmware vmware 4096 Nov 23 09:01 vmware-ovftool
+</div><div class="lines"><a></a>drwxr-xr-x  5 vmware vmware 4096 Nov 23 09:01 vmware-player
+</div><div class="lines"><a></a>drwxr-xr-x 11 vmware vmware 4096 Nov 23 09:01 vmware-player-app
+</div><div class="lines"><a></a>drwxr-xr-x  3 vmware vmware 4096 Nov 23 09:01 vmware-player-setup</div></code></pre>
 
 <p>So far so good. We now have the whole bundle unacked into the specified
 directory and we are interested in just two subdirectories: <code>vmware-player</code> and
@@ -166,27 +166,27 @@ looking for.</p>
 <p>Now, let&rsquo;s pick up all parts from which we will build our future &ldquo;VMware remote
 console&rdquo; tool. To make it easier create a dedicated subdirectory, e.g.
 <code>vmrconsole</code>, with the following structure:</p>
-<pre class="highlight"><code class="language-shell">$ mkdir -m700 ~/vmrconsole
-$ mkdir -m700 ~/vmrconsole/{bin,etc,lib,share}
-$ ls -l ~/vmrconsole
-total 12
-drwx------ 2 vmware vmware 4096 Nov 24 01:21 bin
-drwx------ 2 vmware vmware 4096 Nov 24 01:21 etc
-drwx------ 2 vmware vmware 4096 Nov 24 01:21 lib
-drwx------ 2 vmware vmware 4096 Nov 24 01:21 share</code></pre>
+<pre class="highlight"><code class="language-shell"><div class="lines"><a></a>$ mkdir -m700 ~/vmrconsole
+</div><div class="lines"><a></a>$ mkdir -m700 ~/vmrconsole/{bin,etc,lib,share}
+</div><div class="lines"><a></a>$ ls -l ~/vmrconsole
+</div><div class="lines"><a></a>total 12
+</div><div class="lines"><a></a>drwx------ 2 vmware vmware 4096 Nov 24 01:21 bin
+</div><div class="lines"><a></a>drwx------ 2 vmware vmware 4096 Nov 24 01:21 etc
+</div><div class="lines"><a></a>drwx------ 2 vmware vmware 4096 Nov 24 01:21 lib
+</div><div class="lines"><a></a>drwx------ 2 vmware vmware 4096 Nov 24 01:21 share</div></code></pre>
 
 <p>From now on we are going to populate these directories with files from the
 unpacked bundle.</p>
 <p>The first file we are interested in is <code>appLoader</code> &ndash; this is the primary
 executable by the way, we need to copy it to our bin directory and then try to
 run it:</p>
-<pre class="highlight"><code class="language-shell">$ cp ~/vmplayer/vmware-player-app/lib/bin/appLoader ~/vmrconsole/bin/
-$ chmod 0700 ~/vmrconsole/bin/appLoader
-$ ln -s appLoader ~/vmrconsole/bin/vmplayer
-$ ~/vmrconsole/bin/vmplayer 
-$ echo $?
-255
-$</code></pre>
+<pre class="highlight"><code class="language-shell"><div class="lines"><a></a>$ cp ~/vmplayer/vmware-player-app/lib/bin/appLoader ~/vmrconsole/bin/
+</div><div class="lines"><a></a>$ chmod 0700 ~/vmrconsole/bin/appLoader
+</div><div class="lines"><a></a>$ ln -s appLoader ~/vmrconsole/bin/vmplayer
+</div><div class="lines"><a></a>$ ~/vmrconsole/bin/vmplayer 
+</div><div class="lines"><a></a>$ echo $?
+</div><div class="lines"><a></a>255
+</div><div class="lines"><a></a>$</div></code></pre>
 
 <p>Huh, this is not very informative, is it? The binary silently exits with error
 code of 255. Well, you may get other errors at this stage if you don&rsquo;t have all
@@ -195,9 +195,9 @@ since the requirements of this binary are pretty reasonable: glibc and zlib.</p>
 <p>OK, let&rsquo;s take a peek inside and figure out what is going on (originally I used
 strace with logging to a file, but to keep this article reasonable short I am
 highlighting important things only):</p>
-<pre class="highlight"><code class="language-shell">$ strace -f -eopen ~/vmrconsole/bin/vmplayer 2&gt;&amp;1 | tail -2
-open(&quot;/etc/localtime&quot;, O_RDONLY)        = 6
-open(&quot;/etc/vmware/config&quot;, O_RDONLY|O_LARGEFILE) = -1 EACCES (Permission denied)</code></pre>
+<pre class="highlight"><code class="language-shell"><div class="lines"><a></a>$ strace -f -eopen ~/vmrconsole/bin/vmplayer 2&gt;&amp;1 | tail -2
+</div><div class="lines"><a></a>open(&quot;/etc/localtime&quot;, O_RDONLY)        = 6
+</div><div class="lines"><a></a>open(&quot;/etc/vmware/config&quot;, O_RDONLY|O_LARGEFILE) = -1 EACCES (Permission denied)</div></code></pre>
 
 <p>It looks that vmplayer wants to access a global config file and does not try to
 look for an alternative, home directory based one. Well, this is understandable
@@ -205,14 +205,14 @@ since VMware folks did not expect it to be run as a non-privileged process, but
 we need to deal with this somehow. What are our options here? The simpliest
 option I could think of at the moment is to substitute the hardcoded absolute
 path inside the binary with something relative:</p>
-<pre class="highlight"><code class="language-shell">$ strings ~/vmrconsole/bin/appLoader | fgrep /etc/vmware | uniq -c
-      1 /etc/vmware/config
-      1 /etc/vmware/icu
-      1 /etc/vmware/ssl/rui.crt
-      1 /etc/vmware/ssl/rui.key
-      1 /etc/vmware/ssl/dh512.pem
-      1 /etc/vmware/ssl/dh1024.pem
-$ sed -i 's,/etc/vmware,..//////etc,g' ~/vmrconsole/bin/appLoader</code></pre>
+<pre class="highlight"><code class="language-shell"><div class="lines"><a></a>$ strings ~/vmrconsole/bin/appLoader | fgrep /etc/vmware | uniq -c
+</div><div class="lines"><a></a>      1 /etc/vmware/config
+</div><div class="lines"><a></a>      1 /etc/vmware/icu
+</div><div class="lines"><a></a>      1 /etc/vmware/ssl/rui.crt
+</div><div class="lines"><a></a>      1 /etc/vmware/ssl/rui.key
+</div><div class="lines"><a></a>      1 /etc/vmware/ssl/dh512.pem
+</div><div class="lines"><a></a>      1 /etc/vmware/ssl/dh1024.pem
+</div><div class="lines"><a></a>$ sed -i 's,/etc/vmware,..//////etc,g' ~/vmrconsole/bin/appLoader</div></code></pre>
 
 <p>The trick here is to substitute one string with another of the same length (we
 are modifying a binary so we do not want to mess offsets up) and luckily enough
@@ -221,44 +221,44 @@ single separator nevertheless. OK, we could have used a hex editor and could
 have terminated strings with a NULL byte, but the point is that the approach I
 took is the quickest and is working well. Let&rsquo;s run the modified binary through
 strace again, but this time we need to be prepared for the changed behaviour:</p>
-<pre class="highlight"><code class="language-shell">$ cd ~/vmrconsole/bin/
-$ touch ../etc/config
-$ strace -f -emkdir,lstat,open,write ./vmplayer 2&gt;&amp;1 | tail -12
-mkdir(&quot;/tmp/.private/vmware/vmware-vmplayer&quot;, 0700) = -1 EEXIST (File exists)
-open(&quot;/tmp/.private/vmware/vmware-vmplayer/appLoader-9245.log&quot;, O_RDWR|O_CREAT|O_APPEND|O_LARGEFILE, 0644) = 5
-open(&quot;/etc/localtime&quot;, O_RDONLY)        = 6
-write(5, &quot;Nov 24 01:53:09.824: app-3077760&quot;..., 121) = 121
-write(5, &quot;Nov 24 01:53:09.824: app-3077760&quot;..., 60) = 60
-write(5, &quot;Nov 24 01:53:09.824: app-3077760&quot;..., 71) = 71
-write(5, &quot;Nov 24 01:53:09.824: app-3077760&quot;..., 57) = 57
-write(5, &quot;\&quot;\n&quot;, 2)                     = 2
-write(5, &quot;Nov 24 01:53:09.825: app-3077760&quot;..., 82) = 82
-open(&quot;..//////etc/config&quot;, O_RDONLY|O_LARGEFILE) = 6
-write(5, &quot;Nov 24 01:53:09.825: app-3077760&quot;..., 89) = 89
-write(5, &quot;Nov 24 01:53:09.825: app-3077760&quot;..., 73) = 73</code></pre>
+<pre class="highlight"><code class="language-shell"><div class="lines"><a></a>$ cd ~/vmrconsole/bin/
+</div><div class="lines"><a></a>$ touch ../etc/config
+</div><div class="lines"><a></a>$ strace -f -emkdir,lstat,open,write ./vmplayer 2&gt;&amp;1 | tail -12
+</div><div class="lines"><a></a>mkdir(&quot;/tmp/.private/vmware/vmware-vmplayer&quot;, 0700) = -1 EEXIST (File exists)
+</div><div class="lines"><a></a>open(&quot;/tmp/.private/vmware/vmware-vmplayer/appLoader-9245.log&quot;, O_RDWR|O_CREAT|O_APPEND|O_LARGEFILE, 0644) = 5
+</div><div class="lines"><a></a>open(&quot;/etc/localtime&quot;, O_RDONLY)        = 6
+</div><div class="lines"><a></a>write(5, &quot;Nov 24 01:53:09.824: app-3077760&quot;..., 121) = 121
+</div><div class="lines"><a></a>write(5, &quot;Nov 24 01:53:09.824: app-3077760&quot;..., 60) = 60
+</div><div class="lines"><a></a>write(5, &quot;Nov 24 01:53:09.824: app-3077760&quot;..., 71) = 71
+</div><div class="lines"><a></a>write(5, &quot;Nov 24 01:53:09.824: app-3077760&quot;..., 57) = 57
+</div><div class="lines"><a></a>write(5, &quot;\&quot;\n&quot;, 2)                     = 2
+</div><div class="lines"><a></a>write(5, &quot;Nov 24 01:53:09.825: app-3077760&quot;..., 82) = 82
+</div><div class="lines"><a></a>open(&quot;..//////etc/config&quot;, O_RDONLY|O_LARGEFILE) = 6
+</div><div class="lines"><a></a>write(5, &quot;Nov 24 01:53:09.825: app-3077760&quot;..., 89) = 89
+</div><div class="lines"><a></a>write(5, &quot;Nov 24 01:53:09.825: app-3077760&quot;..., 73) = 73</div></code></pre>
 
 <p>Looks better, does not it? Our binary found the config file and was able to
 open it, however it still produces no output, but it reports something to a log
 file:</p>
-<pre class="highlight"><code class="language-shell">$ tail -7 /tmp/.private/vmware/vmware-vmplayer/appLoader-9245.log
-Nov 24 01:53:09.824: app-3077760704| Log for VMware Workstation pid=9245 version=7.1.3 build=build-324285 option=Release
-Nov 24 01:53:09.824: app-3077760704| The process is 32-bit.
-Nov 24 01:53:09.824: app-3077760704| Host codepage=utf8 encoding=UTF-8
-Nov 24 01:53:09.824: app-3077760704| Calling: &quot;./vmplayer&quot;
-Nov 24 01:53:09.825: app-3077760704| Using configuration file ..//////etc/config.
-Nov 24 01:53:09.825: app-3077760704| libdir entry was not present in ..//////etc/config.
-Nov 24 01:53:09.825: app-3077760704| Unable to lookup library directory.</code></pre>
+<pre class="highlight"><code class="language-shell"><div class="lines"><a></a>$ tail -7 /tmp/.private/vmware/vmware-vmplayer/appLoader-9245.log
+</div><div class="lines"><a></a>Nov 24 01:53:09.824: app-3077760704| Log for VMware Workstation pid=9245 version=7.1.3 build=build-324285 option=Release
+</div><div class="lines"><a></a>Nov 24 01:53:09.824: app-3077760704| The process is 32-bit.
+</div><div class="lines"><a></a>Nov 24 01:53:09.824: app-3077760704| Host codepage=utf8 encoding=UTF-8
+</div><div class="lines"><a></a>Nov 24 01:53:09.824: app-3077760704| Calling: &quot;./vmplayer&quot;
+</div><div class="lines"><a></a>Nov 24 01:53:09.825: app-3077760704| Using configuration file ..//////etc/config.
+</div><div class="lines"><a></a>Nov 24 01:53:09.825: app-3077760704| libdir entry was not present in ..//////etc/config.
+</div><div class="lines"><a></a>Nov 24 01:53:09.825: app-3077760704| Unable to lookup library directory.</div></code></pre>
 
 <p>I do not know much about VMware Players config file but according to the log
 message it wants some variable called <code>libdir</code> and this variable should point
 to the library directory, so let&rsquo;s introduce such a variable and try to execute
 the binary again:</p>
-<pre class="highlight"><code class="language-shell">$ echo 'libdir = ..' &gt;&gt; ../etc/config
-$ strace -f -emkdir,lstat,open,write ./vmplayer 2&gt;&amp;1 | tail -4
-write(5, &quot;LOG NOT INITIALIZED | LoadLibrar&quot;..., 73) = 73
-open(&quot;../lib/libvmplayer.so/libvmplayer.so&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
-write(5, &quot;LOG NOT INITIALIZED | Error load&quot;..., 153) = 153
-write(5, &quot;LOG NOT INITIALIZED | Could not &quot;..., 74) = 74</code></pre>
+<pre class="highlight"><code class="language-shell"><div class="lines"><a></a>$ echo 'libdir = ..' &gt;&gt; ../etc/config
+</div><div class="lines"><a></a>$ strace -f -emkdir,lstat,open,write ./vmplayer 2&gt;&amp;1 | tail -4
+</div><div class="lines"><a></a>write(5, &quot;LOG NOT INITIALIZED | LoadLibrar&quot;..., 73) = 73
+</div><div class="lines"><a></a>open(&quot;../lib/libvmplayer.so/libvmplayer.so&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
+</div><div class="lines"><a></a>write(5, &quot;LOG NOT INITIALIZED | Error load&quot;..., 153) = 153
+</div><div class="lines"><a></a>write(5, &quot;LOG NOT INITIALIZED | Could not &quot;..., 74) = 74</div></code></pre>
 
 <p>I hope you have noticed that I have used a relative path for the library
 directory in the config file and this means that we always should run the
@@ -267,16 +267,16 @@ inconvenient, but we will solve this with a wrapper script later. Right now, we
 need to get it working and we see that it tried to dynamically load some
 library from the library directory. OK, let&rsquo;s search for this library in the
 unpacked bundle directory and copy the library file over to our tree:</p>
-<pre class="highlight"><code class="language-shell">$ find ~/vmplayer -name libvmplayer.so
-/home/vmware/vmplayer/vmware-player-app/lib/lib/libvmplayer.so
-/home/vmware/vmplayer/vmware-player-app/lib/lib/libvmplayer.so/libvmplayer.so
-$ cp -a ~/vmplayer/vmware-player-app/lib/lib/libvmplayer.so ~/vmrconsole/lib/
-$ ldd ~/vmrconsole/lib/libvmplayer.so/libvmplayer.so | fgrep 'not found'
- libview.so.2 =&gt; not found
- libcds.so =&gt; not found
- libvmwarebase.so.0 =&gt; not found
- libvmwareui.so.0 =&gt; not found
- libgvmomi.so.0 =&gt; not found</code></pre>
+<pre class="highlight"><code class="language-shell"><div class="lines"><a></a>$ find ~/vmplayer -name libvmplayer.so
+</div><div class="lines"><a></a>/home/vmware/vmplayer/vmware-player-app/lib/lib/libvmplayer.so
+</div><div class="lines"><a></a>/home/vmware/vmplayer/vmware-player-app/lib/lib/libvmplayer.so/libvmplayer.so
+</div><div class="lines"><a></a>$ cp -a ~/vmplayer/vmware-player-app/lib/lib/libvmplayer.so ~/vmrconsole/lib/
+</div><div class="lines"><a></a>$ ldd ~/vmrconsole/lib/libvmplayer.so/libvmplayer.so | fgrep 'not found'
+</div><div class="lines"><a></a> libview.so.2 =&gt; not found
+</div><div class="lines"><a></a> libcds.so =&gt; not found
+</div><div class="lines"><a></a> libvmwarebase.so.0 =&gt; not found
+</div><div class="lines"><a></a> libvmwareui.so.0 =&gt; not found
+</div><div class="lines"><a></a> libgvmomi.so.0 =&gt; not found</div></code></pre>
 
 <p>The last command showed that <code>libvmplayer.so</code> depends on some libraries and
 that their locations are currently unknown to the system. In order to solve
@@ -289,72 +289,72 @@ this there are two things we need to do:</p>
 <p>To accomplish the first thing we need to create a wrapper script around
 vmplayer and use this script for fine-tuning later. Here is the very basic
 script for this purpose (created as <code>~/vmrconsole/bin/loader.sh</code>:</p>
-<pre class="highlight" data-file="~/vmrconsole/bin/loader.sh"><code class="language-bash">#!/bin/bash
-
-# We must run vmplayer from the directory it resides in since all
-# relative paths are solved from there.
-ORIG_NAME=&quot;${BASH_SOURCE##*/}&quot;
-ABS_NAME=$(readlink -e $BASH_SOURCE) || exit 1
-VMW_BINDIR=&quot;${ABS_NAME%/*}&quot;
-VMW_LIBDIR=&quot;$VMW_BINDIR/../lib&quot;
-
-# check that directories exist, if not notify the user
-if [ ! -d &quot;$VMW_BINDIR&quot; ]; then
-    echo &quot;ERROR: cannot determine the directory where this script resides!&quot; &gt;&amp;2
-    exit 1
-fi
-
-# preserve the current working directory
-OLD_PWD=&quot;$PWD&quot;
-
-if ! cd &quot;$VMW_LIBDIR&quot; &gt;/dev/null 2&gt;&amp;1 ; then
-    echo &quot;ERROR: the '$VMW_LIBDIR' directory does not exist!&quot; &gt;&amp;2
-    exit 1
-fi
-
-# resolve the library directory path (to get rid off ../ inside of it)
-VMW_LIBDIR=$(pwd -P 2&gt;/dev/null)
-if [ $? -ne 0 -o ! -d &quot;$VMW_LIBDIR&quot; ]; then
-    echo &quot;ERROR: could not resolve the '$VMW_LIBDIR' directory path!&quot; &gt;&amp;2
-    exit 1
-fi
-
-# return back since it possible that we were called as ./vmrconsole
-if ! cd &quot;$OLD_PWD&quot; &gt;/dev/null 2&gt;&amp;1 ; then
-    echo &quot;ERROR: could not return to the original '$OLD_PWD' directory!&quot; &gt;&amp;2
-    exit 1
-fi
-
-# we don't need the following variable anymore
-unset OLD_PWD
-
-# change the current directory to $VMW_BINDIR
-if ! cd &quot;$VMW_BINDIR&quot; &gt;/dev/null 2&gt;&amp;1 ; then
-    echo &quot;ERROR: failed to change directory to '$VMW_BINDIR'!&quot; &gt;&amp;2
-    exit 1
-fi
-
-# set the library search path so the dynamic linker will be able
-# to locate locally installed libraries.
-LD_LIBRARY_PATH=&quot;$VMW_LIBDIR${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}&quot;
-export LD_LIBRARY_PATH
-
-# execute the real binary and pass the supplied arguments to it
-exec -a &quot;$ORIG_NAME&quot; ./appLoader &quot;$@&quot;</code></pre>
+<pre class="highlight" data-file="~/vmrconsole/bin/loader.sh"><code class="language-bash"><div class="lines"><a></a>#!/bin/bash
+</div><div class="lines"><a></a>
+</div><div class="lines"><a></a># We must run vmplayer from the directory it resides in since all
+</div><div class="lines"><a></a># relative paths are solved from there.
+</div><div class="lines"><a></a>ORIG_NAME=&quot;${BASH_SOURCE##*/}&quot;
+</div><div class="lines"><a></a>ABS_NAME=$(readlink -e $BASH_SOURCE) || exit 1
+</div><div class="lines"><a></a>VMW_BINDIR=&quot;${ABS_NAME%/*}&quot;
+</div><div class="lines"><a></a>VMW_LIBDIR=&quot;$VMW_BINDIR/../lib&quot;
+</div><div class="lines"><a></a>
+</div><div class="lines"><a></a># check that directories exist, if not notify the user
+</div><div class="lines"><a></a>if [ ! -d &quot;$VMW_BINDIR&quot; ]; then
+</div><div class="lines"><a></a>    echo &quot;ERROR: cannot determine the directory where this script resides!&quot; &gt;&amp;2
+</div><div class="lines"><a></a>    exit 1
+</div><div class="lines"><a></a>fi
+</div><div class="lines"><a></a>
+</div><div class="lines"><a></a># preserve the current working directory
+</div><div class="lines"><a></a>OLD_PWD=&quot;$PWD&quot;
+</div><div class="lines"><a></a>
+</div><div class="lines"><a></a>if ! cd &quot;$VMW_LIBDIR&quot; &gt;/dev/null 2&gt;&amp;1 ; then
+</div><div class="lines"><a></a>    echo &quot;ERROR: the '$VMW_LIBDIR' directory does not exist!&quot; &gt;&amp;2
+</div><div class="lines"><a></a>    exit 1
+</div><div class="lines"><a></a>fi
+</div><div class="lines"><a></a>
+</div><div class="lines"><a></a># resolve the library directory path (to get rid off ../ inside of it)
+</div><div class="lines"><a></a>VMW_LIBDIR=$(pwd -P 2&gt;/dev/null)
+</div><div class="lines"><a></a>if [ $? -ne 0 -o ! -d &quot;$VMW_LIBDIR&quot; ]; then
+</div><div class="lines"><a></a>    echo &quot;ERROR: could not resolve the '$VMW_LIBDIR' directory path!&quot; &gt;&amp;2
+</div><div class="lines"><a></a>    exit 1
+</div><div class="lines"><a></a>fi
+</div><div class="lines"><a></a>
+</div><div class="lines"><a></a># return back since it possible that we were called as ./vmrconsole
+</div><div class="lines"><a></a>if ! cd &quot;$OLD_PWD&quot; &gt;/dev/null 2&gt;&amp;1 ; then
+</div><div class="lines"><a></a>    echo &quot;ERROR: could not return to the original '$OLD_PWD' directory!&quot; &gt;&amp;2
+</div><div class="lines"><a></a>    exit 1
+</div><div class="lines"><a></a>fi
+</div><div class="lines"><a></a>
+</div><div class="lines"><a></a># we don't need the following variable anymore
+</div><div class="lines"><a></a>unset OLD_PWD
+</div><div class="lines"><a></a>
+</div><div class="lines"><a></a># change the current directory to $VMW_BINDIR
+</div><div class="lines"><a></a>if ! cd &quot;$VMW_BINDIR&quot; &gt;/dev/null 2&gt;&amp;1 ; then
+</div><div class="lines"><a></a>    echo &quot;ERROR: failed to change directory to '$VMW_BINDIR'!&quot; &gt;&amp;2
+</div><div class="lines"><a></a>    exit 1
+</div><div class="lines"><a></a>fi
+</div><div class="lines"><a></a>
+</div><div class="lines"><a></a># set the library search path so the dynamic linker will be able
+</div><div class="lines"><a></a># to locate locally installed libraries.
+</div><div class="lines"><a></a>LD_LIBRARY_PATH=&quot;$VMW_LIBDIR${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}&quot;
+</div><div class="lines"><a></a>export LD_LIBRARY_PATH
+</div><div class="lines"><a></a>
+</div><div class="lines"><a></a># execute the real binary and pass the supplied arguments to it
+</div><div class="lines"><a></a>exec -a &quot;$ORIG_NAME&quot; ./appLoader &quot;$@&quot;</div></code></pre>
 
 <p>This wrapper script should not be called directly, instead we need to create a
 symbolic link to this wrapper, e.g. for vmplayer the following should be
 performed:</p>
-<pre class="highlight"><code class="language-shell">$ ln -sf loader.sh ~/vmrconsole/bin/vmplayer</code></pre>
+<pre class="highlight"><code class="language-shell"><div class="lines"><a></a>$ ln -sf loader.sh ~/vmrconsole/bin/vmplayer</div></code></pre>
 
 <p>Since our vmplayer is not a full scale VMware Player I suggest to create
 another small wrapper script and name it <code>vmrconsole</code>:</p>
-<pre class="highlight"><code class="language-shell">$ cat ~/vmrconsole/bin/vmrconsole
-#!/bin/bash
-ABS_NAME=$(readlink -e $BASH_SOURCE) || exit 1
-BINDIR=&quot;${ABS_NAME%/*}&quot;
-exec &quot;$BINDIR/vmplayer&quot; -h &quot;$@&quot;
-$ chmod 0700 ~/vmrconsole/bin/vmrconsole</code></pre>
+<pre class="highlight"><code class="language-shell"><div class="lines"><a></a>$ cat ~/vmrconsole/bin/vmrconsole
+</div><div class="lines"><a></a>#!/bin/bash
+</div><div class="lines"><a></a>ABS_NAME=$(readlink -e $BASH_SOURCE) || exit 1
+</div><div class="lines"><a></a>BINDIR=&quot;${ABS_NAME%/*}&quot;
+</div><div class="lines"><a></a>exec &quot;$BINDIR/vmplayer&quot; -h &quot;$@&quot;
+</div><div class="lines"><a></a>$ chmod 0700 ~/vmrconsole/bin/vmrconsole</div></code></pre>
 
 <p>Now we need to populate our library directory with the needed libraries. It is
 a bit tricky to describe since on different systems you will likely end up with
@@ -366,126 +366,126 @@ fixes in comparison to the VMWare provided ones.</p>
 we start with the libraries we determined as missing during our <code>ldd
 ~/vmrconsole/lib/libvmplayer.so/libvmplayer.so | fgrep 'not found'</code> step (we
 need to locate and copy them over to our library directory):</p>
-<pre class="highlight"><code class="language-shell">$ ldd ~/vmrconsole/lib/libvmplayer.so/libvmplayer.so | fgrep 'not found' | awk '{ print $1; }' | xargs -i find ~/vmplayer -type f -name '{}' -execdir cp -avL '{}' ~/vmrconsole/lib/ \;
-`libview.so.2' -&gt; `/home/vmware/vmrconsole/lib/libview.so.2'
-`libcds.so' -&gt; `/home/vmware/vmrconsole/lib/libcds.so'
-`libvmwarebase.so.0' -&gt; `/home/vmware/vmrconsole/lib/libvmwarebase.so.0'
-`libvmwareui.so.0' -&gt; `/home/vmware/vmrconsole/lib/libvmwareui.so.0'
-`libgvmomi.so.0' -&gt; `/home/vmware/vmrconsole/lib/libgvmomi.so.0'</code></pre>
+<pre class="highlight"><code class="language-shell"><div class="lines"><a></a>$ ldd ~/vmrconsole/lib/libvmplayer.so/libvmplayer.so | fgrep 'not found' | awk '{ print $1; }' | xargs -i find ~/vmplayer -type f -name '{}' -execdir cp -avL '{}' ~/vmrconsole/lib/ \;
+</div><div class="lines"><a></a>`libview.so.2' -&gt; `/home/vmware/vmrconsole/lib/libview.so.2'
+</div><div class="lines"><a></a>`libcds.so' -&gt; `/home/vmware/vmrconsole/lib/libcds.so'
+</div><div class="lines"><a></a>`libvmwarebase.so.0' -&gt; `/home/vmware/vmrconsole/lib/libvmwarebase.so.0'
+</div><div class="lines"><a></a>`libvmwareui.so.0' -&gt; `/home/vmware/vmrconsole/lib/libvmwareui.so.0'
+</div><div class="lines"><a></a>`libgvmomi.so.0' -&gt; `/home/vmware/vmrconsole/lib/libgvmomi.so.0'</div></code></pre>
 
 <p>Once this is done we need to follow the following loop until there is no output
 from the command listed below (in fact, on my system this step was not needed
 since I had all dependencies in place already, but it is harmless to execute
 this command anyway):</p>
-<pre class="highlight"><code class="language-shell">$ LD_LIBRARY_PATH=~/vmrconsole/lib ldd ~/vmrconsole/lib/* 2&gt;/dev/null | fgrep 'not found' | awk '{ print $1; }' | xargs -i find ~/vmplayer -type f -name '{}' -execdir cp -avL '{}' ~/vmrconsole/lib/ \;</code></pre>
+<pre class="highlight"><code class="language-shell"><div class="lines"><a></a>$ LD_LIBRARY_PATH=~/vmrconsole/lib ldd ~/vmrconsole/lib/* 2&gt;/dev/null | fgrep 'not found' | awk '{ print $1; }' | xargs -i find ~/vmplayer -type f -name '{}' -execdir cp -avL '{}' ~/vmrconsole/lib/ \;</div></code></pre>
 
 <p>If we try to access any remote VM&rsquo;s console it will be clear that some parts
 are still missing:</p>
-<pre class="highlight"><code class="language-shell">$ vmrconsole 192.168.70.31
-Failed to open file '/usr/lib/vmware/share/pixmaps/progress.png': No such file or directory
-Failed to open file '/usr/lib/vmware/share/pixmaps/eula.png': No such file or directory
-Failed to open file '/usr/lib/vmware/share/pixmaps/stream-spinner.png': No such file or directory
-Failed to open file '/usr/lib/vmware/share/pixmaps/stream-spinner-stopped.png': No such file or directory
-SSLLoadSharedLibrary: Failed to load library libcrypto.so.0.9.8:/home/vmplayer/vmrconsole/bin/libdir/lib/libcrypto.so.0.9.8/libcrypto.so.0.9.8: cannot open shared object file: No such file or directory</code></pre>
+<pre class="highlight"><code class="language-shell"><div class="lines"><a></a>$ vmrconsole 192.168.70.31
+</div><div class="lines"><a></a>Failed to open file '/usr/lib/vmware/share/pixmaps/progress.png': No such file or directory
+</div><div class="lines"><a></a>Failed to open file '/usr/lib/vmware/share/pixmaps/eula.png': No such file or directory
+</div><div class="lines"><a></a>Failed to open file '/usr/lib/vmware/share/pixmaps/stream-spinner.png': No such file or directory
+</div><div class="lines"><a></a>Failed to open file '/usr/lib/vmware/share/pixmaps/stream-spinner-stopped.png': No such file or directory
+</div><div class="lines"><a></a>SSLLoadSharedLibrary: Failed to load library libcrypto.so.0.9.8:/home/vmplayer/vmrconsole/bin/libdir/lib/libcrypto.so.0.9.8/libcrypto.so.0.9.8: cannot open shared object file: No such file or directory</div></code></pre>
 
 <p><code>strace</code> is our best friend here, just run the command through <code>strace</code>,
 examine the log file, and fix stuff properly:</p>
-<pre class="highlight"><code class="language-shell">$ strace -f -eopen -o ~/strace.log vmrconsole 192.168.70.31 &gt;/dev/null 2&gt;&amp;1
-$ less -n ~/strace.log
-$ cd ~/vmrconsole/lib
-$ fgrep -lr /vmware *
-libcds.so
-libgvmomi.so.0
-libvmplayer.so/libvmplayer.so
-libvmwarebase.so.0
-libvmwareui.so.0
-$ strings libcds.so | fgrep /vmware
-/etc/vmware/bootstrap
-/etc/vmware-installer/bootstrap
-/etc/vmware-installer/database
-$ sed -i 's,/etc/vmware/,..//////etc/,' libcds.so 
-$ sed -i 's,/etc/vmware-installer/,..//////etc/installer/,' libcds.so 
-$ strings libgvmomi.so.0 | fgrep /vmware
-/etc/vmware/hostd/proxy.xml
-/etc/vmware/icu
-/etc/vmware/ssl/rui.crt
-/etc/vmware/ssl/rui.key
-/etc/vmware/ssl/dh512.pem
-/etc/vmware/ssl/dh1024.pem
-$ sed -i 's,/etc/vmware/,..//////etc/,g' libgvmomi.so.0
-$ strings libvmplayer.so/libvmplayer.so | fgrep /vmware
-/usr/lib/vmware
-bin/vmware-vmrc-daemon
-$ strings libvmwarebase.so.0 | fgrep /vmware
-/etc/vmware/config
-/usr/lib/vmware
-/etc/vmware/icu
-/etc/vmware/CVP
-vmauthd/vmware-authd
-/usr/sbin/vmware-authd
-/var/run/vmware/authd_
-/var/run/vmware
-/etc/vmware/ssl/rui.crt
-/etc/vmware/ssl/rui.key
-/etc/vmware/ssl/dh512.pem
-/etc/vmware/ssl/dh1024.pem
-/var/run/vmware/usbarbitrator-socket
-/usr/lib/vmware/settings
-/usr/lib/vmware/config
-bin/vmware-vmx
-bin/vmware-vmx-debug
-bin/vmware-vmx-stats
-%s/vmware-speedtest-%d.tmp
-/etc/vmware/vmware-ace/host.vmpl
-/etc/vmware/vmware-ace/host-update.vmpl
-/etc/vmware
-$ sed -i 's,/etc/vmware/,..//////etc/,g' libvmwarebase.so.0 
-$ sed -i 's,/etc/vmware,..//////etc,g' libvmwarebase.so.0 
-$ sed -i 's,/usr/lib/vmware/,..//////////etc/,g' libvmwarebase.so.0 
-$ sed -i 's,/var/run/vmware,..//////var/run,g' libvmwarebase.so.0 
-$ strings libvmwareui.so.0 | fgrep /usr/lib/vmware
-/usr/lib/vmware
-$ strings libvmwareui.so.0 | fgrep /var/run/vmware
-/var/run/vmware/fuse/%Lu.info
-$ sed -i 's,/var/run/vmware,..//////var/run,g' libvmwareui.so.0</code></pre>
+<pre class="highlight"><code class="language-shell"><div class="lines"><a></a>$ strace -f -eopen -o ~/strace.log vmrconsole 192.168.70.31 &gt;/dev/null 2&gt;&amp;1
+</div><div class="lines"><a></a>$ less -n ~/strace.log
+</div><div class="lines"><a></a>$ cd ~/vmrconsole/lib
+</div><div class="lines"><a></a>$ fgrep -lr /vmware *
+</div><div class="lines"><a></a>libcds.so
+</div><div class="lines"><a></a>libgvmomi.so.0
+</div><div class="lines"><a></a>libvmplayer.so/libvmplayer.so
+</div><div class="lines"><a></a>libvmwarebase.so.0
+</div><div class="lines"><a></a>libvmwareui.so.0
+</div><div class="lines"><a></a>$ strings libcds.so | fgrep /vmware
+</div><div class="lines"><a></a>/etc/vmware/bootstrap
+</div><div class="lines"><a></a>/etc/vmware-installer/bootstrap
+</div><div class="lines"><a></a>/etc/vmware-installer/database
+</div><div class="lines"><a></a>$ sed -i 's,/etc/vmware/,..//////etc/,' libcds.so 
+</div><div class="lines"><a></a>$ sed -i 's,/etc/vmware-installer/,..//////etc/installer/,' libcds.so 
+</div><div class="lines"><a></a>$ strings libgvmomi.so.0 | fgrep /vmware
+</div><div class="lines"><a></a>/etc/vmware/hostd/proxy.xml
+</div><div class="lines"><a></a>/etc/vmware/icu
+</div><div class="lines"><a></a>/etc/vmware/ssl/rui.crt
+</div><div class="lines"><a></a>/etc/vmware/ssl/rui.key
+</div><div class="lines"><a></a>/etc/vmware/ssl/dh512.pem
+</div><div class="lines"><a></a>/etc/vmware/ssl/dh1024.pem
+</div><div class="lines"><a></a>$ sed -i 's,/etc/vmware/,..//////etc/,g' libgvmomi.so.0
+</div><div class="lines"><a></a>$ strings libvmplayer.so/libvmplayer.so | fgrep /vmware
+</div><div class="lines"><a></a>/usr/lib/vmware
+</div><div class="lines"><a></a>bin/vmware-vmrc-daemon
+</div><div class="lines"><a></a>$ strings libvmwarebase.so.0 | fgrep /vmware
+</div><div class="lines"><a></a>/etc/vmware/config
+</div><div class="lines"><a></a>/usr/lib/vmware
+</div><div class="lines"><a></a>/etc/vmware/icu
+</div><div class="lines"><a></a>/etc/vmware/CVP
+</div><div class="lines"><a></a>vmauthd/vmware-authd
+</div><div class="lines"><a></a>/usr/sbin/vmware-authd
+</div><div class="lines"><a></a>/var/run/vmware/authd_
+</div><div class="lines"><a></a>/var/run/vmware
+</div><div class="lines"><a></a>/etc/vmware/ssl/rui.crt
+</div><div class="lines"><a></a>/etc/vmware/ssl/rui.key
+</div><div class="lines"><a></a>/etc/vmware/ssl/dh512.pem
+</div><div class="lines"><a></a>/etc/vmware/ssl/dh1024.pem
+</div><div class="lines"><a></a>/var/run/vmware/usbarbitrator-socket
+</div><div class="lines"><a></a>/usr/lib/vmware/settings
+</div><div class="lines"><a></a>/usr/lib/vmware/config
+</div><div class="lines"><a></a>bin/vmware-vmx
+</div><div class="lines"><a></a>bin/vmware-vmx-debug
+</div><div class="lines"><a></a>bin/vmware-vmx-stats
+</div><div class="lines"><a></a>%s/vmware-speedtest-%d.tmp
+</div><div class="lines"><a></a>/etc/vmware/vmware-ace/host.vmpl
+</div><div class="lines"><a></a>/etc/vmware/vmware-ace/host-update.vmpl
+</div><div class="lines"><a></a>/etc/vmware
+</div><div class="lines"><a></a>$ sed -i 's,/etc/vmware/,..//////etc/,g' libvmwarebase.so.0 
+</div><div class="lines"><a></a>$ sed -i 's,/etc/vmware,..//////etc,g' libvmwarebase.so.0 
+</div><div class="lines"><a></a>$ sed -i 's,/usr/lib/vmware/,..//////////etc/,g' libvmwarebase.so.0 
+</div><div class="lines"><a></a>$ sed -i 's,/var/run/vmware,..//////var/run,g' libvmwarebase.so.0 
+</div><div class="lines"><a></a>$ strings libvmwareui.so.0 | fgrep /usr/lib/vmware
+</div><div class="lines"><a></a>/usr/lib/vmware
+</div><div class="lines"><a></a>$ strings libvmwareui.so.0 | fgrep /var/run/vmware
+</div><div class="lines"><a></a>/var/run/vmware/fuse/%Lu.info
+</div><div class="lines"><a></a>$ sed -i 's,/var/run/vmware,..//////var/run,g' libvmwareui.so.0</div></code></pre>
 
 <p>Ufff, we did a lot of binary patching &ndash; luckily, VMware binaries and libraries
 are not calculating their checksums. Now, we need to put all this stuff we have
 seen in the <code>strings</code> output and during the execution of the program in place (in
 accordance to our new relative paths):</p>
-<pre class="highlight"><code class="language-shell">$ find ~/vmplayer -name icu
-/home/vmware/vmplayer/vmware-player-app/lib/icu
-$ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/icu ~/vmrconsole/etc/
-$ mkdir -m700 ~/vmrconsole/etc/ssl
-$ find ~/vmplayer -name CVP
-$ mkdir -m700 ~/vmrconsole/var
-$ mkdir -m700 ~/vmrconsole/var/run
-$ find ~/vmplayer -name pixmaps
-/home/vmware/vmplayer/vmware-player/lib/share/pixmaps
-/home/vmware/vmplayer/vmware-player-app/lib/share/pixmaps
-$ mkdir -m700 ~/vmrconsole/share/pixmaps
-$ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/share/pixmaps/* ~/vmrconsole/share/pixmaps/
-$ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/share/EULA.txt ~/vmrconsole/share/
-$ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/share/*.ui ~/vmrconsole/share/
-$ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/share/icons ~/vmrconsole/share/</code></pre>
+<pre class="highlight"><code class="language-shell"><div class="lines"><a></a>$ find ~/vmplayer -name icu
+</div><div class="lines"><a></a>/home/vmware/vmplayer/vmware-player-app/lib/icu
+</div><div class="lines"><a></a>$ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/icu ~/vmrconsole/etc/
+</div><div class="lines"><a></a>$ mkdir -m700 ~/vmrconsole/etc/ssl
+</div><div class="lines"><a></a>$ find ~/vmplayer -name CVP
+</div><div class="lines"><a></a>$ mkdir -m700 ~/vmrconsole/var
+</div><div class="lines"><a></a>$ mkdir -m700 ~/vmrconsole/var/run
+</div><div class="lines"><a></a>$ find ~/vmplayer -name pixmaps
+</div><div class="lines"><a></a>/home/vmware/vmplayer/vmware-player/lib/share/pixmaps
+</div><div class="lines"><a></a>/home/vmware/vmplayer/vmware-player-app/lib/share/pixmaps
+</div><div class="lines"><a></a>$ mkdir -m700 ~/vmrconsole/share/pixmaps
+</div><div class="lines"><a></a>$ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/share/pixmaps/* ~/vmrconsole/share/pixmaps/
+</div><div class="lines"><a></a>$ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/share/EULA.txt ~/vmrconsole/share/
+</div><div class="lines"><a></a>$ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/share/*.ui ~/vmrconsole/share/
+</div><div class="lines"><a></a>$ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/share/icons ~/vmrconsole/share/</div></code></pre>
 
 <p>At this stage we should be able to launch the vmplayer program via our wrapper
 script (I am launching it on a remote machine through SSH, but here I am
 describing how it should look on the local console):</p>
-<pre class="highlight"><code class="language-shell">$ ~/vmrconsole/bin/vmplayer</code></pre>
+<pre class="highlight"><code class="language-shell"><div class="lines"><a></a>$ ~/vmrconsole/bin/vmplayer</div></code></pre>
 
 <p><img alt="VMware Player: main window" class="figure" src="https://dmitry.khlebnikov.net/images/howto-vmware-player-as-remote-console-01.jpg"></p>
 <p>So far so good, but we need to resolve the issue with the OpenSSL library
 dependency. To resolve the issue we need to create symbolic links from our
 local library directory to the system-wide version of the OpenSSL library:</p>
-<pre class="highlight"><code class="language-shell">$ ln -s /usr/lib/libcrypto.so.0.9.8 ~/vmrconsole/lib/
-$ ln -s /usr/lib/libssl.so.0.9.8 ~/vmrconsole/lib/
-$ ls -ld ~/vmrconsole/lib/lib*.so.0.9.8 
-lrwxrwxrwx 1 vmware vmware 27 Nov 24 05:27 /home/vmware/vmrconsole/lib/libcrypto.so.0.9.8 -&gt; /usr/lib/libcrypto.so.0.9.8
-lrwxrwxrwx 1 vmware vmware 27 Nov 24 05:27 /home/vmware/vmrconsole/lib/libssl.so.0.9.8 -&gt; /usr/lib/libssl.so.0.9.8</code></pre>
+<pre class="highlight"><code class="language-shell"><div class="lines"><a></a>$ ln -s /usr/lib/libcrypto.so.0.9.8 ~/vmrconsole/lib/
+</div><div class="lines"><a></a>$ ln -s /usr/lib/libssl.so.0.9.8 ~/vmrconsole/lib/
+</div><div class="lines"><a></a>$ ls -ld ~/vmrconsole/lib/lib*.so.0.9.8 
+</div><div class="lines"><a></a>lrwxrwxrwx 1 vmware vmware 27 Nov 24 05:27 /home/vmware/vmrconsole/lib/libcrypto.so.0.9.8 -&gt; /usr/lib/libcrypto.so.0.9.8
+</div><div class="lines"><a></a>lrwxrwxrwx 1 vmware vmware 27 Nov 24 05:27 /home/vmware/vmrconsole/lib/libssl.so.0.9.8 -&gt; /usr/lib/libssl.so.0.9.8</div></code></pre>
 
 <p>Let&rsquo;s try to connect to remote VM&rsquo;s console again:</p>
-<pre class="highlight"><code class="language-shell">$ vmrconsole 192.168.70.31</code></pre>
+<pre class="highlight"><code class="language-shell"><div class="lines"><a></a>$ vmrconsole 192.168.70.31</div></code></pre>
 
 <p><img alt="VMware Player: credentials window" class="figure" src="https://dmitry.khlebnikov.net/images/howto-vmware-player-as-remote-console-02.jpg"></p>
 <p><img alt="VMware Player: MKS error message" class="figure" src="https://dmitry.khlebnikov.net/images/howto-vmware-player-as-remote-console-03.jpg"></p>
@@ -495,18 +495,18 @@ called <code>player-XXXXX.log</code> (where XXXXX is the PID of the VMware Playe
 produced this log file). Inside the log file we may see some interesting parts
 like the following (I have included only those messages which are related to our
 task):</p>
-<pre class="highlight"><code class="language-syslog">Nov 24 03:40:42.002: player| CDS error: Cannot locate VMIS, bootstrap file /etc/vmware-installer/bootstrap unavailable!
-Nov 24 03:40:42.072: player| Unable to launch vmplayer-daemon: File does not exist.
-Nov 24 03:40:42.072: player| Unable to find /home/vmplayer/bin/vmware-unity-helper in attempt to launch daemon.
-Nov 24 03:41:04.630: player| Player dispatch: Opening VM while not connected to the daemon.
-Nov 24 03:41:05.437: player| ConnectMksClient - calling VMClient_ConnectMksClientEx
-Nov 24 03:41:05.437: player| VMClient_ConnectMksClientEx - trying local socket connection
-Nov 24 03:41:05.444: player| Cnx_Connect: Returning false because CnxConnectAuthd failed
-Nov 24 03:41:05.444: player| Cnx_Connect: Error message: Connection terminated by server
-Nov 24 03:41:05.444: player| VMClient_ConnectMksClientEx - trying remote socket connection
-Nov 24 03:41:05.611: player| VMClient_ConnectMksClientEx - connecting the MKS client
-Nov 24 03:41:05.616: player| vmdbPipe_Streams: Couldn't read
-Nov 24 03:41:15.941: player| Gdk: losing last reference to undestroyed window</code></pre>
+<pre class="highlight"><code class="language-syslog"><div class="lines"><a></a>Nov 24 03:40:42.002: player| CDS error: Cannot locate VMIS, bootstrap file /etc/vmware-installer/bootstrap unavailable!
+</div><div class="lines"><a></a>Nov 24 03:40:42.072: player| Unable to launch vmplayer-daemon: File does not exist.
+</div><div class="lines"><a></a>Nov 24 03:40:42.072: player| Unable to find /home/vmplayer/bin/vmware-unity-helper in attempt to launch daemon.
+</div><div class="lines"><a></a>Nov 24 03:41:04.630: player| Player dispatch: Opening VM while not connected to the daemon.
+</div><div class="lines"><a></a>Nov 24 03:41:05.437: player| ConnectMksClient - calling VMClient_ConnectMksClientEx
+</div><div class="lines"><a></a>Nov 24 03:41:05.437: player| VMClient_ConnectMksClientEx - trying local socket connection
+</div><div class="lines"><a></a>Nov 24 03:41:05.444: player| Cnx_Connect: Returning false because CnxConnectAuthd failed
+</div><div class="lines"><a></a>Nov 24 03:41:05.444: player| Cnx_Connect: Error message: Connection terminated by server
+</div><div class="lines"><a></a>Nov 24 03:41:05.444: player| VMClient_ConnectMksClientEx - trying remote socket connection
+</div><div class="lines"><a></a>Nov 24 03:41:05.611: player| VMClient_ConnectMksClientEx - connecting the MKS client
+</div><div class="lines"><a></a>Nov 24 03:41:05.616: player| vmdbPipe_Streams: Couldn't read
+</div><div class="lines"><a></a>Nov 24 03:41:15.941: player| Gdk: losing last reference to undestroyed window</div></code></pre>
 
 <p>From the messages quoted above it is quite clear that the program is trying to
 launch some helper binaries/daemons in the background and to delegate the
@@ -517,33 +517,33 @@ console engine, while the former is some kind of an authentication daemon and I
 do not think it is needed for our purposes. I am not going to describe in
 details how I arrived at the following (it is all clear once you have studied
 the <code>strace</code>/<code>ltrace</code> log files):</p>
-<pre class="highlight"><code class="language-shell">$ find ~/vmplayer -name vmware-authd -o -name vmware-remotemks
-/home/vmware/vmplayer/vmware-player-app/lib/bin/vmware-remotemks
-/home/vmware/vmplayer/vmware-player-app/sbin/vmware-authd
-$ mkdir -m700 ~/vmrconsole/vmauthd
-$ ln -s `which true` ~/vmrconsole/vmauthd/vmware-authd
-$ ls -ld ~/vmrconsole/vmauthd/vmware-authd
-lrwxrwxrwx 1 vmware vmware 9 Nov 24 04:15 /home/vmware/vmrconsole/vmauthd/vmware-authd -&gt; /bin/true
-$ cp -aL ~/vmplayer/vmware-player-app/lib/bin/vmware-remotemks ~/vmrconsole/bin/
-$ chmod 0700 ~/vmrconsole/bin/vmware-remotemks
-$ strings ~/vmrconsole/bin/vmware-remotemks | fgrep /vmware
-/usr/lib/vmware
-/etc/vmware/config
-/etc/vmware/icu
-/etc/vmware/ssl/rui.crt
-/etc/vmware/ssl/rui.key
-/etc/vmware/ssl/dh512.pem
-/etc/vmware/ssl/dh1024.pem
-/etc/vmware/CVP
-vmauthd/vmware-authd
-/usr/sbin/vmware-authd
-/var/run/vmware/authd_
-/var/run/vmware
-$ sed -i 's,/var/run/vmware,..//////var/run,g' ~/vmrconsole/bin/vmware-remotemks
-$ sed -i 's,/etc/vmware/,..//////etc/,g' ~/vmrconsole/bin/vmware-remotemks</code></pre>
+<pre class="highlight"><code class="language-shell"><div class="lines"><a></a>$ find ~/vmplayer -name vmware-authd -o -name vmware-remotemks
+</div><div class="lines"><a></a>/home/vmware/vmplayer/vmware-player-app/lib/bin/vmware-remotemks
+</div><div class="lines"><a></a>/home/vmware/vmplayer/vmware-player-app/sbin/vmware-authd
+</div><div class="lines"><a></a>$ mkdir -m700 ~/vmrconsole/vmauthd
+</div><div class="lines"><a></a>$ ln -s `which true` ~/vmrconsole/vmauthd/vmware-authd
+</div><div class="lines"><a></a>$ ls -ld ~/vmrconsole/vmauthd/vmware-authd
+</div><div class="lines"><a></a>lrwxrwxrwx 1 vmware vmware 9 Nov 24 04:15 /home/vmware/vmrconsole/vmauthd/vmware-authd -&gt; /bin/true
+</div><div class="lines"><a></a>$ cp -aL ~/vmplayer/vmware-player-app/lib/bin/vmware-remotemks ~/vmrconsole/bin/
+</div><div class="lines"><a></a>$ chmod 0700 ~/vmrconsole/bin/vmware-remotemks
+</div><div class="lines"><a></a>$ strings ~/vmrconsole/bin/vmware-remotemks | fgrep /vmware
+</div><div class="lines"><a></a>/usr/lib/vmware
+</div><div class="lines"><a></a>/etc/vmware/config
+</div><div class="lines"><a></a>/etc/vmware/icu
+</div><div class="lines"><a></a>/etc/vmware/ssl/rui.crt
+</div><div class="lines"><a></a>/etc/vmware/ssl/rui.key
+</div><div class="lines"><a></a>/etc/vmware/ssl/dh512.pem
+</div><div class="lines"><a></a>/etc/vmware/ssl/dh1024.pem
+</div><div class="lines"><a></a>/etc/vmware/CVP
+</div><div class="lines"><a></a>vmauthd/vmware-authd
+</div><div class="lines"><a></a>/usr/sbin/vmware-authd
+</div><div class="lines"><a></a>/var/run/vmware/authd_
+</div><div class="lines"><a></a>/var/run/vmware
+</div><div class="lines"><a></a>$ sed -i 's,/var/run/vmware,..//////var/run,g' ~/vmrconsole/bin/vmware-remotemks
+</div><div class="lines"><a></a>$ sed -i 's,/etc/vmware/,..//////etc/,g' ~/vmrconsole/bin/vmware-remotemks</div></code></pre>
 
 <p>Another attempt:</p>
-<pre class="highlight"><code class="language-shell">$ vmrconsole 192.168.70.31</code></pre>
+<pre class="highlight"><code class="language-shell"><div class="lines"><a></a>$ vmrconsole 192.168.70.31</div></code></pre>
 
 <p><img alt="VMware Player: hints messages" class="figure" src="https://dmitry.khlebnikov.net/images/howto-vmware-player-as-remote-console-04.jpg"></p>
 <p>Ouch, we are presented by a bunch of hints (your mileage may vary since it
@@ -552,11 +552,11 @@ presented on the above screenshot.</p>
 <p>This is not a showstopper if you are an English-only user - just click on the
 OK button and you should be able to work with the console, however I think it
 is just a right thing to do to fix this little bugger:</p>
-<pre class="highlight"><code class="language-shell">$ find ~/vmplayer -iname xkeymap
-/home/vmware/vmplayer/vmware-player-app/lib/xkeymap
-$ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/xkeymap ~/vmrconsole/
-$ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/vnckeymap ~/vmrconsole/
-$ vmrconsole 192.168.70.31</code></pre>
+<pre class="highlight"><code class="language-shell"><div class="lines"><a></a>$ find ~/vmplayer -iname xkeymap
+</div><div class="lines"><a></a>/home/vmware/vmplayer/vmware-player-app/lib/xkeymap
+</div><div class="lines"><a></a>$ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/xkeymap ~/vmrconsole/
+</div><div class="lines"><a></a>$ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/vnckeymap ~/vmrconsole/
+</div><div class="lines"><a></a>$ vmrconsole 192.168.70.31</div></code></pre>
 
 <p><img alt="VMware Player: remote console window" class="figure" src="https://dmitry.khlebnikov.net/images/howto-vmware-player-as-remote-console-05.jpg"></p>
 <p>We are almost done! At least we achieved the goal we set at the beginning of
@@ -564,15 +564,15 @@ this article.</p>
 <p>Now, it is time to ensure that all file/directory permissions are strict enough
 and to create a tarball, then place it somewhere so we will be able to use our
 new tool when the right time comes:</p>
-<pre class="highlight"><code class="language-shell">$ cd ~/vmrconsole
-$ find . -type d -execdir chmod 0700 '{}' \;
-$ find . -type f -execdir chmod 0600 '{}' \;
-$ chmod 0700 bin/*
-$ cd
-$ mv vmrconsole vmrconsole-3.1.3.324285
-$ tar cjpf ~/vmrconsole-3.1.3.324285.i386.tar.bz2 vmrconsole-3.1.3.324285
-$ ls -lh vmrconsole-3.1.3.324285.i386.tar.bz2 
--rw-r--r-- 1 vmware vmware 13M Nov 24 07:06 vmrconsole-3.1.3.324285.i386.tar.bz2</code></pre>
+<pre class="highlight"><code class="language-shell"><div class="lines"><a></a>$ cd ~/vmrconsole
+</div><div class="lines"><a></a>$ find . -type d -execdir chmod 0700 '{}' \;
+</div><div class="lines"><a></a>$ find . -type f -execdir chmod 0600 '{}' \;
+</div><div class="lines"><a></a>$ chmod 0700 bin/*
+</div><div class="lines"><a></a>$ cd
+</div><div class="lines"><a></a>$ mv vmrconsole vmrconsole-3.1.3.324285
+</div><div class="lines"><a></a>$ tar cjpf ~/vmrconsole-3.1.3.324285.i386.tar.bz2 vmrconsole-3.1.3.324285
+</div><div class="lines"><a></a>$ ls -lh vmrconsole-3.1.3.324285.i386.tar.bz2 
+</div><div class="lines"><a></a>-rw-r--r-- 1 vmware vmware 13M Nov 24 07:06 vmrconsole-3.1.3.324285.i386.tar.bz2</div></code></pre>
 
 <p>P.S. Oh, boy, it takes 2 hours to investigate and to come up with a solution,
 then 8 hours to write an article to describe steps to reproduce! I hope that

@@ -136,24 +136,24 @@ running on the local host would be sufficient), then we needed an interactive
 script, and a configuration block for the connection.</p>
 <p>The configuration block is pretty simple (%h expands to localhost and %p
 expands to the port specified on the command line or to &ldquo;22&rdquo; otherwise):</p>
-<pre class="highlight" data-user="user"><code class="language-shell">[user@localhost ~]$ fgrep -A1 'Host localhost' ~/.ssh/config
-Host localhost
- ProxyCommand ~/bin/interactive.script.sh %h %p</code></pre>
+<pre class="highlight" data-user="user"><code class="language-shell"><div class="lines"><a></a>[user@localhost ~]$ fgrep -A1 'Host localhost' ~/.ssh/config
+</div><div class="lines"><a></a>Host localhost
+</div><div class="lines"><a></a> ProxyCommand ~/bin/interactive.script.sh %h %p</div></code></pre>
 
 <p>Since most of our research is going to be inside the interactive script you
 will see several incarnations of script&rsquo;s body. The very first one was the
 following:</p>
-<pre class="highlight" data-file="~/bin/interactive.script.sh"><code class="language-bash">#!/bin/bash
-exec nc &quot;$1&quot; &quot;$2&quot;</code></pre>
+<pre class="highlight" data-file="~/bin/interactive.script.sh"><code class="language-bash"><div class="lines"><a></a>#!/bin/bash
+</div><div class="lines"><a></a>exec nc &quot;$1&quot; &quot;$2&quot;</div></code></pre>
 
 <p>At this point we just need to confirm that our test environment works as
 expected &ndash; the ssh session should be proxied through the nc command and we
 should be able to login under our own account via ssh to the localhost (my
 private key was added to the key manager with ssh-add, hence no password prompt
 was displayed):</p>
-<pre class="highlight" data-user="user"><code class="language-shell">[user@localhost ~]$ ssh galaxy@localhost
-Last login: Thu Jul 21 01:30:21 2016
-$</code></pre>
+<pre class="highlight" data-user="user"><code class="language-shell"><div class="lines"><a></a>[user@localhost ~]$ ssh galaxy@localhost
+</div><div class="lines"><a></a>Last login: Thu Jul 21 01:30:21 2016
+</div><div class="lines"><a></a>$</div></code></pre>
 
 <p>OK, we confirmed that we can establish a proxied connection and tunnel our ssh
 session through it.</p>
@@ -161,28 +161,28 @@ session through it.</p>
 user otherwise it could not be interactive. This channel comprises at least of
 two file descriptors: one for standard input and the other for standard output,
 so let&rsquo;s check what descriptors are available for our script:</p>
-<pre class="highlight" data="file="~/bin/interactive.script.sh""><code class="language-bash">#!/bin/bash
-# on Linux the following line would be much simpler: ls -l /proc/$$/fd/, but
-# on OS X they do not expose the open file descriptors through /proc, so I
-# used &quot;lsof&quot; instead.
-lsof -p $$ &gt;&amp;2
-exec nc &quot;$1&quot; &quot;$2&quot;</code></pre>
+<pre class="highlight" data="file="~/bin/interactive.script.sh""><code class="language-bash"><div class="lines"><a></a>#!/bin/bash
+</div><div class="lines"><a></a># on Linux the following line would be much simpler: ls -l /proc/$$/fd/, but
+</div><div class="lines"><a></a># on OS X they do not expose the open file descriptors through /proc, so I
+</div><div class="lines"><a></a># used &quot;lsof&quot; instead.
+</div><div class="lines"><a></a>lsof -p $$ &gt;&amp;2
+</div><div class="lines"><a></a>exec nc &quot;$1&quot; &quot;$2&quot;</div></code></pre>
 
 <p>If we try to connect now we should see something like the following (I am
 writing this article on an OS X machine so I provide the output from OS X,
 however this also works for Linux):</p>
-<pre class="highlight" data-user="user"><code class="language-shell">[user@localhost ~]$ ssh galaxy@localhost
-COMMAND   PID   USER   FD   TYPE             DEVICE  SIZE/OFF     NODE NAME
-bash    45225   user  cwd    DIR                1,2       612   893854 /Users/user/.ssh
-bash    45225   user  txt    REG                1,2    628640  2329236 /bin/bash
-bash    45225   user  txt    REG                1,2    625712 13892061 /usr/lib/dyld
-bash    45225   user  txt    REG                1,2 385393734 13894121 /private/var/run/dyld_shared_cache_x86_64
-bash    45225   user    0   PIPE 0x44d71099589485df     16384          -&gt;0x44d7109951223d0f
-bash    45225   user    1   PIPE 0x44d710995122454f     16384          -&gt;0x44d71099512246af
-bash    45225   user    2u   CHR               16,1  0t631830     9705 /dev/ttys001
-bash    45225   user  255r   REG                1,2       219 15455259 /Users/user/bin/interactive.script.sh
-Last login: Mon Jul 25 17:52:40 2016 from localhost
-$</code></pre>
+<pre class="highlight" data-user="user"><code class="language-shell"><div class="lines"><a></a>[user@localhost ~]$ ssh galaxy@localhost
+</div><div class="lines"><a></a>COMMAND   PID   USER   FD   TYPE             DEVICE  SIZE/OFF     NODE NAME
+</div><div class="lines"><a></a>bash    45225   user  cwd    DIR                1,2       612   893854 /Users/user/.ssh
+</div><div class="lines"><a></a>bash    45225   user  txt    REG                1,2    628640  2329236 /bin/bash
+</div><div class="lines"><a></a>bash    45225   user  txt    REG                1,2    625712 13892061 /usr/lib/dyld
+</div><div class="lines"><a></a>bash    45225   user  txt    REG                1,2 385393734 13894121 /private/var/run/dyld_shared_cache_x86_64
+</div><div class="lines"><a></a>bash    45225   user    0   PIPE 0x44d71099589485df     16384          -&gt;0x44d7109951223d0f
+</div><div class="lines"><a></a>bash    45225   user    1   PIPE 0x44d710995122454f     16384          -&gt;0x44d71099512246af
+</div><div class="lines"><a></a>bash    45225   user    2u   CHR               16,1  0t631830     9705 /dev/ttys001
+</div><div class="lines"><a></a>bash    45225   user  255r   REG                1,2       219 15455259 /Users/user/bin/interactive.script.sh
+</div><div class="lines"><a></a>Last login: Mon Jul 25 17:52:40 2016 from localhost
+</div><div class="lines"><a></a>$</div></code></pre>
 
 <p>We are interested in file descriptors 0 (standard input), 1 (standard output),
 and 2 (standard error). As you can see the standard input and output are part
@@ -205,34 +205,34 @@ parent ssh process? Well, the answer is quite obvious:</p>
 </ul>
 <p>The following version of the script demonstrates the implementation of the
 above logic:</p>
-<pre class="highlight" data-file="~/bin/interactive.script.sh"><code class="language-bash">#!/bin/bash
-exec 10&lt;&amp;0 11&gt;&amp;1 0&lt;&amp;2 1&gt;&amp;2
-# start of the interactive behaviour
-lsof -p $$
-read -p &quot;Type something: &quot; I
-echo &quot;You typed: $I&quot;
-# finish of the interactive behaviour
-exec 0&lt;&amp;10 1&gt;&amp;11
-exec nc &quot;$1&quot; &quot;$2&quot;</code></pre>
+<pre class="highlight" data-file="~/bin/interactive.script.sh"><code class="language-bash"><div class="lines"><a></a>#!/bin/bash
+</div><div class="lines"><a></a>exec 10&lt;&amp;0 11&gt;&amp;1 0&lt;&amp;2 1&gt;&amp;2
+</div><div class="lines"><a></a># start of the interactive behaviour
+</div><div class="lines"><a></a>lsof -p $$
+</div><div class="lines"><a></a>read -p &quot;Type something: &quot; I
+</div><div class="lines"><a></a>echo &quot;You typed: $I&quot;
+</div><div class="lines"><a></a># finish of the interactive behaviour
+</div><div class="lines"><a></a>exec 0&lt;&amp;10 1&gt;&amp;11
+</div><div class="lines"><a></a>exec nc &quot;$1&quot; &quot;$2&quot;</div></code></pre>
 
 <p>I think it is time to test it :) :</p>
-<pre class="highlight" data-user="user"><code class="language-shell">[user@localhost ~]$ ssh galaxy@localhost
-COMMAND   PID   USER   FD   TYPE             DEVICE  SIZE/OFF     NODE NAME
-bash    45238   user  cwd    DIR                1,2       612   893854 /Users/user/.ssh
-bash    45238   user  txt    REG                1,2    628640  2329236 /bin/bash
-bash    45238   user  txt    REG                1,2    625712 13892061 /usr/lib/dyld
-bash    45238   user  txt    REG                1,2 385393734 13894121 /private/var/run/dyld_shared_cache_x86_64
-bash    45238   user    0u   CHR               16,1  0t640407     9705 /dev/ttys001
-bash    45238   user    1u   CHR               16,1  0t640407     9705 /dev/ttys001
-bash    45238   user    2u   CHR               16,1  0t640407     9705 /dev/ttys001
-bash    45238   user   10   PIPE 0x44d710995122378f     16384          -&gt;0x44d71099589494ff
-bash    45238   user   11   PIPE 0x44d7109951223d0f     16384          -&gt;0x44d710995122454f
-bash    45238   user  255r   REG                1,2       135 15455285 /Users/user/bin/interactive.script.sh
-Type something: This is a test
-You typed: This is a test
-Last login: Mon Jul 25 17:57:05 2016 from localhost
-$ logout
-Connection to localhost closed.</code></pre>
+<pre class="highlight" data-user="user"><code class="language-shell"><div class="lines"><a></a>[user@localhost ~]$ ssh galaxy@localhost
+</div><div class="lines"><a></a>COMMAND   PID   USER   FD   TYPE             DEVICE  SIZE/OFF     NODE NAME
+</div><div class="lines"><a></a>bash    45238   user  cwd    DIR                1,2       612   893854 /Users/user/.ssh
+</div><div class="lines"><a></a>bash    45238   user  txt    REG                1,2    628640  2329236 /bin/bash
+</div><div class="lines"><a></a>bash    45238   user  txt    REG                1,2    625712 13892061 /usr/lib/dyld
+</div><div class="lines"><a></a>bash    45238   user  txt    REG                1,2 385393734 13894121 /private/var/run/dyld_shared_cache_x86_64
+</div><div class="lines"><a></a>bash    45238   user    0u   CHR               16,1  0t640407     9705 /dev/ttys001
+</div><div class="lines"><a></a>bash    45238   user    1u   CHR               16,1  0t640407     9705 /dev/ttys001
+</div><div class="lines"><a></a>bash    45238   user    2u   CHR               16,1  0t640407     9705 /dev/ttys001
+</div><div class="lines"><a></a>bash    45238   user   10   PIPE 0x44d710995122378f     16384          -&gt;0x44d71099589494ff
+</div><div class="lines"><a></a>bash    45238   user   11   PIPE 0x44d7109951223d0f     16384          -&gt;0x44d710995122454f
+</div><div class="lines"><a></a>bash    45238   user  255r   REG                1,2       135 15455285 /Users/user/bin/interactive.script.sh
+</div><div class="lines"><a></a>Type something: This is a test
+</div><div class="lines"><a></a>You typed: This is a test
+</div><div class="lines"><a></a>Last login: Mon Jul 25 17:57:05 2016 from localhost
+</div><div class="lines"><a></a>$ logout
+</div><div class="lines"><a></a>Connection to localhost closed.</div></code></pre>
 
 <p>Mission accomplished! :)</p>
 <p>I hope this small article would help somebody to design better wrappers around

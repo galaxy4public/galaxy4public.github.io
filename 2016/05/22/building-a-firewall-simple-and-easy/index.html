@@ -257,41 +257,41 @@ your goals &ndash; you will be able to optimise the result at a later stage.</p>
 used as the skeleton for the iptables ruleset on systems I manage (this snippet
 assumes that 192.168.0.0/16 is the internal network and that the ruleset is
 installed on the NAT instance which is a gateway to the Internet):</p>
-<pre class="highlight" data-file="/etc/sysconfig/iptables"><code class="language-iptables">*filter
-:INPUT ACCEPT [0:0]
-:FORWARD ACCEPT [0:0]
-:OUTPUT ACCEPT [0:0]
--A INPUT -m state --state INVALID -j DROP
-# If it was already established pass bits through
--A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
-# Allow for the local traffic
--A INPUT -i lo -j ACCEPT
-# Let's MTU discovery and other network management to work properly
--A INPUT -p icmp -m icmp --icmp-type any -j ACCEPT
-# Allow remote SSH logins on the specified port (should be &lt;1024 and would require sshd re-configuration if the port is not standard)
--A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT
-# Allow DHCP client to get its information
--A INPUT -i eth0 -p udp -m state --state NEW -m udp --sport 67:68 --dport 67:68 -j ACCEPT
-
-# Reject anything that we did not specifically allow above
--A INPUT -j REJECT --reject-with icmp-host-prohibited
-
-# This is a NAT box, so we accept packets from our network designated to the world, but reject any other forwarding attempts.
--A FORWARD -i eth0 -s 192.168.0.0/22 ! -d 192.168.0.0/22 -j ACCEPT
--A FORWARD -i eth0 ! -s 192.168.0.0/22 -d 192.168.0.0/22 -j ACCEPT
-# If there is a MTU mismatch between the NAT box and hosts behind it we want to allow ICMP for the MTU discovery
--A FORWARD -i eth0 -p icmp -m icmp --icmp-type any -s 192.168.0.0/22 -d 192.168.0.0/22 -j ACCEPT
-# We may be interested in anything that is rejected in this chain, so let's log it
--A FORWARD -j LOG
-
-# We do not allow to forward anything else
--A FORWARD -j REJECT --reject-with icmp-host-prohibited
-COMMIT
-
-*nat
-:POSTROUTING ACCEPT [0:0]
--A POSTROUTING -s 192.168.0.0/22 ! -d 192.168.0.0/22 -j MASQUERADE
-COMMIT</code></pre>
+<pre class="highlight" data-file="/etc/sysconfig/iptables"><code class="language-iptables"><div class="lines"><a></a>*filter
+</div><div class="lines"><a></a>:INPUT ACCEPT [0:0]
+</div><div class="lines"><a></a>:FORWARD ACCEPT [0:0]
+</div><div class="lines"><a></a>:OUTPUT ACCEPT [0:0]
+</div><div class="lines"><a></a>-A INPUT -m state --state INVALID -j DROP
+</div><div class="lines"><a></a># If it was already established pass bits through
+</div><div class="lines"><a></a>-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+</div><div class="lines"><a></a># Allow for the local traffic
+</div><div class="lines"><a></a>-A INPUT -i lo -j ACCEPT
+</div><div class="lines"><a></a># Let's MTU discovery and other network management to work properly
+</div><div class="lines"><a></a>-A INPUT -p icmp -m icmp --icmp-type any -j ACCEPT
+</div><div class="lines"><a></a># Allow remote SSH logins on the specified port (should be &lt;1024 and would require sshd re-configuration if the port is not standard)
+</div><div class="lines"><a></a>-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT
+</div><div class="lines"><a></a># Allow DHCP client to get its information
+</div><div class="lines"><a></a>-A INPUT -i eth0 -p udp -m state --state NEW -m udp --sport 67:68 --dport 67:68 -j ACCEPT
+</div><div class="lines"><a></a>
+</div><div class="lines"><a></a># Reject anything that we did not specifically allow above
+</div><div class="lines"><a></a>-A INPUT -j REJECT --reject-with icmp-host-prohibited
+</div><div class="lines"><a></a>
+</div><div class="lines"><a></a># This is a NAT box, so we accept packets from our network designated to the world, but reject any other forwarding attempts.
+</div><div class="lines"><a></a>-A FORWARD -i eth0 -s 192.168.0.0/22 ! -d 192.168.0.0/22 -j ACCEPT
+</div><div class="lines"><a></a>-A FORWARD -i eth0 ! -s 192.168.0.0/22 -d 192.168.0.0/22 -j ACCEPT
+</div><div class="lines"><a></a># If there is a MTU mismatch between the NAT box and hosts behind it we want to allow ICMP for the MTU discovery
+</div><div class="lines"><a></a>-A FORWARD -i eth0 -p icmp -m icmp --icmp-type any -s 192.168.0.0/22 -d 192.168.0.0/22 -j ACCEPT
+</div><div class="lines"><a></a># We may be interested in anything that is rejected in this chain, so let's log it
+</div><div class="lines"><a></a>-A FORWARD -j LOG
+</div><div class="lines"><a></a>
+</div><div class="lines"><a></a># We do not allow to forward anything else
+</div><div class="lines"><a></a>-A FORWARD -j REJECT --reject-with icmp-host-prohibited
+</div><div class="lines"><a></a>COMMIT
+</div><div class="lines"><a></a>
+</div><div class="lines"><a></a>*nat
+</div><div class="lines"><a></a>:POSTROUTING ACCEPT [0:0]
+</div><div class="lines"><a></a>-A POSTROUTING -s 192.168.0.0/22 ! -d 192.168.0.0/22 -j MASQUERADE
+</div><div class="lines"><a></a>COMMIT</div></code></pre>
 
 <p>There are a few things to note:</p>
 <ul>

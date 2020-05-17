@@ -128,7 +128,7 @@ will allow one to tweak parameters for the hosts in the chain.</p>
 technique works, here I am only going to provide the proxy script and the
 corresponding ssh config parameter block to use the script.</p>
 <p>The goal was to support the following syntax:</p>
-<pre class="highlight" data-user="user"><code class="language-shell">[user@localhost ~]$ ssh default_user@userA^hostA/userB^hostB:port/hostC</code></pre>
+<pre class="highlight" data-user="user"><code class="language-shell"><div class="lines"><a></a>[user@localhost ~]$ ssh default_user@userA^hostA/userB^hostB:port/hostC</div></code></pre>
 
 <p>It was a little challenge to come up with the character for identifying the
 user part for intermediate hosts:</p>
@@ -149,44 +149,44 @@ port is omitted, it will use the global port configuration (usually 22/tcp but
 can be changed with the <code>-p</code> argument to ssh).  The script is a bit not optimised
 (bash is really slow on string processing, but I decided to stick with pure
 bash where it was possible):</p>
-<pre class="highlight" data-file="~/bin/ssh-helper.sh"><code class="language-bash">#!/bin/bash
-set -eu -o pipefail
-exec 10&lt;&amp;0 11&gt;&amp;1 0&lt;&amp;2 1&gt;&amp;2
-DEFAULT_USER=&quot;$1&quot;
-DEFAULT_PORT=&quot;$3&quot;
-HOST_CHAIN=&quot;$2&quot;
-HOST_NEXT=&quot;${HOST_CHAIN%%/*}&quot;
-HOST_USER=&quot;${HOST_NEXT%%^*}&quot;
-[ &quot;$HOST_USER&quot; == &quot;$HOST_NEXT&quot; ] &amp;&amp; HOST_USER=&quot;$DEFAULT_USER&quot; ||:
-HOST_PORT=&quot;${HOST_NEXT##*:}&quot;
-[ &quot;$HOST_PORT&quot; == &quot;$HOST_NEXT&quot; ] &amp;&amp; HOST_PORT=&quot;$DEFAULT_PORT&quot; ||:
-TARGET_HOST=&quot;${HOST_CHAIN##*/}&quot;
-TARGET_PORT=&quot;${TARGET_HOST##*:}&quot;
-TARGET_HOST=&quot;${TARGET_HOST%:*}&quot;
-[ &quot;$TARGET_PORT&quot; == &quot;$TARGET_HOST&quot; ] &amp;&amp; TARGET_PORT=&quot;$DEFAULT_PORT&quot; ||:
-TARGET_HOST=&quot;${TARGET_HOST#*^}&quot;
-HOST_NEXT=&quot;${HOST_NEXT#*^}&quot;
-HOST_NEXT=&quot;${HOST_NEXT%:*}&quot;
-HOST_CHAIN=&quot;${HOST_CHAIN%/*}&quot;
-[ &quot;$HOST_CHAIN&quot; == &quot;${HOST_CHAIN#*/}&quot; ] &amp;&amp; HOST_CHAIN= || HOST_CHAIN=&quot;${HOST_CHAIN#*/}&quot;
-HOST_CHAIN=&quot;$HOST_NEXT${HOST_CHAIN:+/$HOST_CHAIN}&quot;
-
-if [ ! -d &quot;$HOME/.ssh/.sessions&quot; ]; then
-    echo &quot;Creating the sessions directory&quot; &gt;&amp;2
-    mkdir -m700 &quot;$HOME/.ssh/.sessions&quot;
-fi
-
-CONTROL_SOCKET=$(printf &quot;$HOST_USER@HOST_CHAIN:$HOST_PORT\n&quot; | shasum | cut -f1 -d' ')
-
-exec 0&lt;&amp;10 1&gt;&amp;11
-exec ssh \
-    -o &quot;ControlMaster auto&quot; \
-    -o &quot;ControlPath ~/.ssh/.sessions/$CONTROL_SOCKET&quot; \
-    -o &quot;ControlPersist 120s&quot; \
-    -l &quot;$HOST_USER&quot; \
-    -p &quot;$HOST_PORT&quot; \
-    &quot;$HOST_CHAIN&quot; \
-    -W &quot;$TARGET_HOST&quot;:&quot;$TARGET_PORT&quot;</code></pre>
+<pre class="highlight" data-file="~/bin/ssh-helper.sh"><code class="language-bash"><div class="lines"><a></a>#!/bin/bash
+</div><div class="lines"><a></a>set -eu -o pipefail
+</div><div class="lines"><a></a>exec 10&lt;&amp;0 11&gt;&amp;1 0&lt;&amp;2 1&gt;&amp;2
+</div><div class="lines"><a></a>DEFAULT_USER=&quot;$1&quot;
+</div><div class="lines"><a></a>DEFAULT_PORT=&quot;$3&quot;
+</div><div class="lines"><a></a>HOST_CHAIN=&quot;$2&quot;
+</div><div class="lines"><a></a>HOST_NEXT=&quot;${HOST_CHAIN%%/*}&quot;
+</div><div class="lines"><a></a>HOST_USER=&quot;${HOST_NEXT%%^*}&quot;
+</div><div class="lines"><a></a>[ &quot;$HOST_USER&quot; == &quot;$HOST_NEXT&quot; ] &amp;&amp; HOST_USER=&quot;$DEFAULT_USER&quot; ||:
+</div><div class="lines"><a></a>HOST_PORT=&quot;${HOST_NEXT##*:}&quot;
+</div><div class="lines"><a></a>[ &quot;$HOST_PORT&quot; == &quot;$HOST_NEXT&quot; ] &amp;&amp; HOST_PORT=&quot;$DEFAULT_PORT&quot; ||:
+</div><div class="lines"><a></a>TARGET_HOST=&quot;${HOST_CHAIN##*/}&quot;
+</div><div class="lines"><a></a>TARGET_PORT=&quot;${TARGET_HOST##*:}&quot;
+</div><div class="lines"><a></a>TARGET_HOST=&quot;${TARGET_HOST%:*}&quot;
+</div><div class="lines"><a></a>[ &quot;$TARGET_PORT&quot; == &quot;$TARGET_HOST&quot; ] &amp;&amp; TARGET_PORT=&quot;$DEFAULT_PORT&quot; ||:
+</div><div class="lines"><a></a>TARGET_HOST=&quot;${TARGET_HOST#*^}&quot;
+</div><div class="lines"><a></a>HOST_NEXT=&quot;${HOST_NEXT#*^}&quot;
+</div><div class="lines"><a></a>HOST_NEXT=&quot;${HOST_NEXT%:*}&quot;
+</div><div class="lines"><a></a>HOST_CHAIN=&quot;${HOST_CHAIN%/*}&quot;
+</div><div class="lines"><a></a>[ &quot;$HOST_CHAIN&quot; == &quot;${HOST_CHAIN#*/}&quot; ] &amp;&amp; HOST_CHAIN= || HOST_CHAIN=&quot;${HOST_CHAIN#*/}&quot;
+</div><div class="lines"><a></a>HOST_CHAIN=&quot;$HOST_NEXT${HOST_CHAIN:+/$HOST_CHAIN}&quot;
+</div><div class="lines"><a></a>
+</div><div class="lines"><a></a>if [ ! -d &quot;$HOME/.ssh/.sessions&quot; ]; then
+</div><div class="lines"><a></a>    echo &quot;Creating the sessions directory&quot; &gt;&amp;2
+</div><div class="lines"><a></a>    mkdir -m700 &quot;$HOME/.ssh/.sessions&quot;
+</div><div class="lines"><a></a>fi
+</div><div class="lines"><a></a>
+</div><div class="lines"><a></a>CONTROL_SOCKET=$(printf &quot;$HOST_USER@HOST_CHAIN:$HOST_PORT\n&quot; | shasum | cut -f1 -d' ')
+</div><div class="lines"><a></a>
+</div><div class="lines"><a></a>exec 0&lt;&amp;10 1&gt;&amp;11
+</div><div class="lines"><a></a>exec ssh \
+</div><div class="lines"><a></a>    -o &quot;ControlMaster auto&quot; \
+</div><div class="lines"><a></a>    -o &quot;ControlPath ~/.ssh/.sessions/$CONTROL_SOCKET&quot; \
+</div><div class="lines"><a></a>    -o &quot;ControlPersist 120s&quot; \
+</div><div class="lines"><a></a>    -l &quot;$HOST_USER&quot; \
+</div><div class="lines"><a></a>    -p &quot;$HOST_PORT&quot; \
+</div><div class="lines"><a></a>    &quot;$HOST_CHAIN&quot; \
+</div><div class="lines"><a></a>    -W &quot;$TARGET_HOST&quot;:&quot;$TARGET_PORT&quot;</div></code></pre>
 
 <p>The above is a proof of the concept and it &ldquo;works for me&rdquo; :). I am using it
 every day when I need to access boxes behind a bastion host. Your mileage may
@@ -194,14 +194,14 @@ vary and you are free to create your own version of the script that would
 perform better (I would be really glad if a version of such a script could be
 shared with me).</p>
 <p>The corresponding configuration block in the ssh config file looks as follows:</p>
-<pre class="highlight" data-file="~/.ssh/config"><code class="language-ssh_config">Host */*
-    # if you uncomment ControlPath you also need to uncomment ControlMaster
-    #ControlMaster auto
-    # For OpenSSH &lt; 6.7 you may uncomment the following, but long chains will fail:
-    #ControlPath   ~/.ssh/.sessions/%r@%h:%p
-    # For OpenSSH &gt;= 6.7 you should uncomment the following:
-    #ControlPath   ~/.ssh/.sessions/%C
-    ProxyCommand ~/bin/ssh-helper.sh %r %h %p</code></pre>
+<pre class="highlight" data-file="~/.ssh/config"><code class="language-ssh_config"><div class="lines"><a></a>Host */*
+</div><div class="lines"><a></a>    # if you uncomment ControlPath you also need to uncomment ControlMaster
+</div><div class="lines"><a></a>    #ControlMaster auto
+</div><div class="lines"><a></a>    # For OpenSSH &lt; 6.7 you may uncomment the following, but long chains will fail:
+</div><div class="lines"><a></a>    #ControlPath   ~/.ssh/.sessions/%r@%h:%p
+</div><div class="lines"><a></a>    # For OpenSSH &gt;= 6.7 you should uncomment the following:
+</div><div class="lines"><a></a>    #ControlPath   ~/.ssh/.sessions/%C
+</div><div class="lines"><a></a>    ProxyCommand ~/bin/ssh-helper.sh %r %h %p</div></code></pre>
 
 <p>Well, this is a bit messy since OpenSSH introduced the <code>%C</code> macro in version 6.7
 and without <code>%C</code> the <code>ControlPath</code> string gets too long for OpenSSH to create a

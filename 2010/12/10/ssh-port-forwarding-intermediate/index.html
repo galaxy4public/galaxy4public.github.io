@@ -133,7 +133,7 @@ standard firewall/NAT router.</p>
 <p>Now, how can you access port 12345 on host behind the firewall given that this
 port is not &ldquo;exported&rdquo; by the NAT on the firewall? This is quite simple. Open a
 terminal window on your local computer and type the following:</p>
-<pre class="highlight" data-user="user"><code class="language-shell">[user@localhost ~] ssh -L12345:192.168.1.2:12345 joe@firewall.domain.tld</code></pre>
+<pre class="highlight" data-user="user"><code class="language-shell"><div class="lines"><a></a>[user@localhost ~] ssh -L12345:192.168.1.2:12345 joe@firewall.domain.tld</div></code></pre>
 
 <p>From now on, as long as your SSH session is up and running you will be able to
 reach <code>192.168.1.2:12345</code> by connecting to <code>localhost:12345</code> (i.e. the <code>12345</code>
@@ -152,7 +152,7 @@ requests to many ports useful:</p>
   physically in Australia</li>
 </ul>
 <p>In both cases, you use the following SSH command in your terminal window:</p>
-<pre class="highlight" data-user="user"><code class="language-shell">[user@localhost ~]$ ssh -D3128 joe@relay.domain.tld</code></pre>
+<pre class="highlight" data-user="user"><code class="language-shell"><div class="lines"><a></a>[user@localhost ~]$ ssh -D3128 joe@relay.domain.tld</div></code></pre>
 
 <p>As long as you SSH session is active, you can use port <code>3128</code> on your local
 machine as SOCKS4/SOCKS5 proxy (e.g. you can configure proxy settings in your
@@ -172,7 +172,7 @@ to folks from WikiLeaks&hellip; just kidding :) )?</p>
 Google for &ldquo;free ssh account&rdquo; and you will surely find one for yourself).</p>
 <p>Now, when you have the account, you can execute the following on your local
 computer (which is inside that highly secure network :) ):</p>
-<pre class="highlight" data-user="user"><code class="language-shell">[user@localhost ~]$ ssh -R:60000:127.0.0.1:22 joe@friendly.domain.tld</code></pre>
+<pre class="highlight" data-user="user"><code class="language-shell"><div class="lines"><a></a>[user@localhost ~]$ ssh -R:60000:127.0.0.1:22 joe@friendly.domain.tld</div></code></pre>
 
 <p>The above command will setup such a configuration that connecting on port <code>60000</code>
 at <code>friendly.domain.tld</code> will forward traffic to your local machine&rsquo;s port 22
@@ -195,12 +195,12 @@ way you want it!</p>
 <p>Anyway, even if you fail to find a host that allows you to expose your service
 to the public, you still should be able to access it yourself &ndash; using the
 forward firewall piercing technique described at the beginning of this post:</p>
-<pre class="highlight" data-user="user" data-prompt=""[user@localhost"><code class="language-shell"># from your home computer
-[user@localhost ~]$ ssh -L60000:127.0.0.1:60000 joe@friendly.domain.tld</code></pre>
+<pre class="highlight" data-user="user" data-prompt=""[user@localhost"><code class="language-shell"><div class="lines"><a></a># from your home computer
+</div><div class="lines"><a></a>[user@localhost ~]$ ssh -L60000:127.0.0.1:60000 joe@friendly.domain.tld</div></code></pre>
 
 <p>Once it is done your computer in the highly secure network should be reachable
 via SSH on your <code>localhost:60000</code>, e.g.</p>
-<pre class="highlight" data-user="user"><code class="language-shell">[user@localhost ~] ssh -p6000 my_account@localhost</code></pre>
+<pre class="highlight" data-user="user"><code class="language-shell"><div class="lines"><a></a>[user@localhost ~] ssh -p6000 my_account@localhost</div></code></pre>
 
 <p>Where <code>my_account</code> is a user allowed to SSH into your computer in the highly
 secure network.</p>

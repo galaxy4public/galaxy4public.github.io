@@ -27,13 +27,13 @@ on an AWS EC2 instance which was running a minimal CentOS 7 as its OS.&lt;/p&gt;
 &lt;p&gt;I spawned an EC2 instance (you need at least 8GB of free space there to be able
 to build the toolchain), logged in, and ensured that my system is up to date
 (and update it if it was not):&lt;/p&gt;
-&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;[root@localhost ~]# yum -y update
-Loaded plugins: at-exit, fastestmirror, post-transaction-actions
-Loading mirror speeds from cached hostfile
- * base: mirror.domain.tld
- * extras: mirror.domain.tld
- * updates: mirror.domain.tld
-No packages marked for update&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[root@localhost ~]# yum -y update
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Loaded plugins: at-exit, fastestmirror, post-transaction-actions
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Loading mirror speeds from cached hostfile
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt; * base: mirror.domain.tld
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt; * extras: mirror.domain.tld
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt; * updates: mirror.domain.tld
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;No packages marked for update&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The easiest way to build a toolchain is to use the crosstool-ng project, so I
 went ahead and downloaded the latest version with the corresponding GPG
@@ -41,58 +41,58 @@ signature, verified the signature (although the verification was very
 superficial since Bryan Hundven is not in my Web of Trust and the crosstool-ng
 website was not providing an HTTPS page to confirm the fingerprint of the key),
 and unpacked the sources:&lt;/p&gt;
-&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;[root@localhost ~]# yum -y install bison bzip2 flex gcc gcc-c++ glibc-static gperf help2man libstdc++-static libtool make ncurses-devel texinfo wget
-[root@localhost ~]# useradd -m build
-[root@localhost ~]# su - build
-[build@localhost ~]$ wget -q 'http://crosstool-ng.org/download/crosstool-ng/crosstool-ng-1.22.0.tar.xz'
-[build@localhost ~]$ wget -q 'http://crosstool-ng.org/download/crosstool-ng/crosstool-ng-1.22.0.tar.xz.sig'
-[build@localhost ~]$ gpg --recv-keys 35B871D1 --keyserver pgp.surfnet.nl
-gpg: &amp;quot;--keyserver&amp;quot; not a key ID: skipping
-gpg: &amp;quot;pgp.surfnet.nl&amp;quot; not a key ID: skipping
-gpg: requesting key 35B871D1 from hkp server keys.gnupg.net
-gpg: /home/build/.gnupg/trustdb.gpg: trustdb created
-gpg: key 35B871D1: public key &amp;quot;Bryan Hundven &amp;quot; imported
-gpg: Total number processed: 1
-gpg:               imported: 1  (RSA: 1)
-[build@localhost ~]$ gpg --verify crosstool-ng-1.22.0.tar.xz.sig
-gpg: Signature made Fri Nov 20 13:09:26 2015 UTC using RSA key ID 35B871D1
-gpg: Good signature from &amp;quot;Bryan Hundven &amp;quot;
-gpg:                 aka &amp;quot;Bryan Hundven &amp;quot;
-gpg:                 aka &amp;quot;Bryan Hundven &amp;quot;
-gpg:                 aka &amp;quot;Bryan Hundven &amp;quot;
-gpg:                 aka &amp;quot;[jpeg image of size 3080]&amp;quot;
-gpg:                 aka &amp;quot;[jpeg image of size 16246]&amp;quot;
-gpg: WARNING: This key is not certified with a trusted signature!
-gpg:          There is no indication that the signature belongs to the owner.
-Primary key fingerprint: 561E D9B6 2095 88ED 23C6  8329 CAD7 C8FC 35B8 71D1
-[build@localhost ~]$ tar xJSf crosstool-ng-1.22.0.tar.xz
-[build@localhost ~]$ rm crosstool-ng-1.22.0.tar.xz*&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[root@localhost ~]# yum -y install bison bzip2 flex gcc gcc-c++ glibc-static gperf help2man libstdc++-static libtool make ncurses-devel texinfo wget
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[root@localhost ~]# useradd -m build
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[root@localhost ~]# su - build
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ wget -q 'http://crosstool-ng.org/download/crosstool-ng/crosstool-ng-1.22.0.tar.xz'
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ wget -q 'http://crosstool-ng.org/download/crosstool-ng/crosstool-ng-1.22.0.tar.xz.sig'
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ gpg --recv-keys 35B871D1 --keyserver pgp.surfnet.nl
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg: &amp;quot;--keyserver&amp;quot; not a key ID: skipping
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg: &amp;quot;pgp.surfnet.nl&amp;quot; not a key ID: skipping
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg: requesting key 35B871D1 from hkp server keys.gnupg.net
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg: /home/build/.gnupg/trustdb.gpg: trustdb created
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg: key 35B871D1: public key &amp;quot;Bryan Hundven &amp;quot; imported
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg: Total number processed: 1
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg:               imported: 1  (RSA: 1)
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ gpg --verify crosstool-ng-1.22.0.tar.xz.sig
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg: Signature made Fri Nov 20 13:09:26 2015 UTC using RSA key ID 35B871D1
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg: Good signature from &amp;quot;Bryan Hundven &amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg:                 aka &amp;quot;Bryan Hundven &amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg:                 aka &amp;quot;Bryan Hundven &amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg:                 aka &amp;quot;Bryan Hundven &amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg:                 aka &amp;quot;[jpeg image of size 3080]&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg:                 aka &amp;quot;[jpeg image of size 16246]&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg: WARNING: This key is not certified with a trusted signature!
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg:          There is no indication that the signature belongs to the owner.
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Primary key fingerprint: 561E D9B6 2095 88ED 23C6  8329 CAD7 C8FC 35B8 71D1
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ tar xJSf crosstool-ng-1.22.0.tar.xz
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ rm crosstool-ng-1.22.0.tar.xz*&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The next step was to prepare the environment for the crosstool-ng build process:&lt;/p&gt;
-&lt;pre class="highlight" data-user="build"&gt;&lt;code class="language-shell"&gt;[build@localhost ~]$ cd crosstool-ng
-[build@localhost ~]$ /configure --prefix=$HOME/ct-ng
-checking build system type... x86_64-pc-linux-gnu
-[skipped]
-configure: creating ./config.status
-config.status: creating Makefile
-[build@localhost ~]$ make
-  SED    'ct-ng'
-[skipped]
-  SED    'docs/ct-ng.1'
-  GZIP   'docs/ct-ng.1.gz'
-[build@localhost ~]$ make install
-  GEN    'config/configure.in'
-[skipped]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="build"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ cd crosstool-ng
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ /configure --prefix=$HOME/ct-ng
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;checking build system type... x86_64-pc-linux-gnu
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[skipped]
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;configure: creating ./config.status
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;config.status: creating Makefile
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ make
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;  SED    'ct-ng'
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[skipped]
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;  SED    'docs/ct-ng.1'
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;  GZIP   'docs/ct-ng.1.gz'
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ make install
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;  GEN    'config/configure.in'
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[skipped]&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;For auto-completion, do not forget to install &lt;code&gt;ct-ng.comp&lt;/code&gt; into your &lt;code&gt;bash&lt;/code&gt;
 completion directory (usually &lt;code&gt;/etc/bash_completion.d/&lt;/code&gt;)&lt;/p&gt;
-&lt;pre class="highlight" data-user="build"&gt;&lt;code class="language-shell"&gt;[build@localhost ~]$ export PATH=$HOME/ct-ng/bin:$PATH
-[build@localhost ~]$ cd&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="build"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ export PATH=$HOME/ct-ng/bin:$PATH
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ cd&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Once the above was done we are ready to actually configure and build our toolchain:&lt;/p&gt;
-&lt;pre class="highlight" data-user="build"&gt;&lt;code class="language-shell"&gt;[build@localhost ~]$ mkdir ~/builddir
-[build@localhost ~]$ cd ~/builddir
-[build@localhost ~]$ ct-ng menuconfig&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="build"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ mkdir ~/builddir
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ cd ~/builddir
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ ct-ng menuconfig&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;I was quite happy with the defaults and the only changes I made were the
 following:&lt;/p&gt;
@@ -148,35 +148,35 @@ binaries would not be properly linked to work with the OS on the board&lt;/p&gt;
 &lt;p&gt;Once we are comfortable with the configuration of the future toolchain we exit
 the configuration menu (saving the changes) and launch the build process (it
 would take approximately an hour on AWS t2.small instance):&lt;/p&gt;
-&lt;pre class="highlight" data-user="build" data-prompt=""[build@localhost"&gt;&lt;code class="language-shell"&gt;configuration written to .config
-
-*** End of the configuration.
-*** Execute 'ct-ng build' to start the build or try 'ct-ng help'.
-
-[build@localhost ~]$ ct-ng build
-[INFO ]  Performing some trivial sanity checks
-[INFO ]  Build started 20160522.070915
-[skipped]
-[INFO ]  Build completed at 20160522.080629
-[INFO ]  (elapsed: 57:14.18)
-[INFO ]  Finishing installation (may take a few seconds)...
-[57:15] /&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="build" data-prompt=""[build@localhost"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;configuration written to .config
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;*** End of the configuration.
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;*** Execute 'ct-ng build' to start the build or try 'ct-ng help'.
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ ct-ng build
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[INFO ]  Performing some trivial sanity checks
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[INFO ]  Build started 20160522.070915
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[skipped]
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[INFO ]  Build completed at 20160522.080629
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[INFO ]  (elapsed: 57:14.18)
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[INFO ]  Finishing installation (may take a few seconds)...
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[57:15] /&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Seems that our Raspberry Pi 3 toolchain is ready to be used. Let&amp;rsquo;s compile
 something and see how it goes:&lt;/p&gt;
-&lt;pre class="highlight" data-user="build"&gt;&lt;code class="language-shell"&gt;[build@localhost ~]$ export PATH=$HOME/x-tools/aarch64-rpi3-linux-gnueabi/bin:$PATH
-[build@localhost ~]$ aarch64-rpi3-linux-gnueabi-gcc --version
-aarch64-rpi3-linux-gnueabi-gcc (crosstool-NG crosstool-ng-1.22.0) 5.2.0
-Copyright (C) 2015 Free Software Foundation, Inc.
-This is free software; see the source for copying conditions.  There is NO
-warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-
-[build@localhost ~]$ printf '#include \nint main(){printf(&amp;quot;Hello\\n&amp;quot;); return 0;}\n' &amp;gt; sample.c
-[build@localhost ~]$ aarch64-rpi3-linux-gnueabi-gcc -o sample sample.c
-[build@localhost ~]$ ls -l sample
--rwxr-xr-x. 1 build build 7672 May 22 08:19 sample
-[build@localhost ~]$ file sample
-sample: ELF 64-bit LSB executable, ARM aarch64, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 4.3.0, not stripped&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="build"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ export PATH=$HOME/x-tools/aarch64-rpi3-linux-gnueabi/bin:$PATH
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ aarch64-rpi3-linux-gnueabi-gcc --version
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;aarch64-rpi3-linux-gnueabi-gcc (crosstool-NG crosstool-ng-1.22.0) 5.2.0
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Copyright (C) 2015 Free Software Foundation, Inc.
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;This is free software; see the source for copying conditions.  There is NO
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ printf '#include \nint main(){printf(&amp;quot;Hello\\n&amp;quot;); return 0;}\n' &amp;gt; sample.c
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ aarch64-rpi3-linux-gnueabi-gcc -o sample sample.c
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ ls -l sample
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-rwxr-xr-x. 1 build build 7672 May 22 08:19 sample
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ file sample
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;sample: ELF 64-bit LSB executable, ARM aarch64, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 4.3.0, not stripped&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Well, it is time to build some awesome stuff for Raspberry Pi 3, I guess, but
 this will be in another post. :)&lt;/p&gt;</content><category term="linux"></category><category term="console"></category><category term="howto"></category><category term="linux"></category><category term="raspberry pi"></category></entry><entry><title>Building a firewall? Simple and easy!</title><link href="https://dmitry.khlebnikov.net/2016/05/22/building-a-firewall-simple-and-easy/" rel="alternate"></link><published>2016-05-22T10:00:00+10:00</published><updated>2020-05-17T20:25:15+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2016-05-22:/2016/05/22/building-a-firewall-simple-and-easy/</id><summary type="html">&lt;p&gt;I strive for simplicity since I am a strong believer that achieving a goal with
@@ -325,41 +325,41 @@ your goals &amp;ndash; you will be able to optimise the result at a later stage.
 used as the skeleton for the iptables ruleset on systems I manage (this snippet
 assumes that 192.168.0.0/16 is the internal network and that the ruleset is
 installed on the NAT instance which is a gateway to the Internet):&lt;/p&gt;
-&lt;pre class="highlight" data-file="/etc/sysconfig/iptables"&gt;&lt;code class="language-iptables"&gt;*filter
-:INPUT ACCEPT [0:0]
-:FORWARD ACCEPT [0:0]
-:OUTPUT ACCEPT [0:0]
--A INPUT -m state --state INVALID -j DROP
-# If it was already established pass bits through
--A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
-# Allow for the local traffic
--A INPUT -i lo -j ACCEPT
-# Let's MTU discovery and other network management to work properly
--A INPUT -p icmp -m icmp --icmp-type any -j ACCEPT
-# Allow remote SSH logins on the specified port (should be &amp;lt;1024 and would require sshd re-configuration if the port is not standard)
--A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT
-# Allow DHCP client to get its information
--A INPUT -i eth0 -p udp -m state --state NEW -m udp --sport 67:68 --dport 67:68 -j ACCEPT
-
-# Reject anything that we did not specifically allow above
--A INPUT -j REJECT --reject-with icmp-host-prohibited
-
-# This is a NAT box, so we accept packets from our network designated to the world, but reject any other forwarding attempts.
--A FORWARD -i eth0 -s 192.168.0.0/22 ! -d 192.168.0.0/22 -j ACCEPT
--A FORWARD -i eth0 ! -s 192.168.0.0/22 -d 192.168.0.0/22 -j ACCEPT
-# If there is a MTU mismatch between the NAT box and hosts behind it we want to allow ICMP for the MTU discovery
--A FORWARD -i eth0 -p icmp -m icmp --icmp-type any -s 192.168.0.0/22 -d 192.168.0.0/22 -j ACCEPT
-# We may be interested in anything that is rejected in this chain, so let's log it
--A FORWARD -j LOG
-
-# We do not allow to forward anything else
--A FORWARD -j REJECT --reject-with icmp-host-prohibited
-COMMIT
-
-*nat
-:POSTROUTING ACCEPT [0:0]
--A POSTROUTING -s 192.168.0.0/22 ! -d 192.168.0.0/22 -j MASQUERADE
-COMMIT&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-file="/etc/sysconfig/iptables"&gt;&lt;code class="language-iptables"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;*filter
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;:INPUT ACCEPT [0:0]
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;:FORWARD ACCEPT [0:0]
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;:OUTPUT ACCEPT [0:0]
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-A INPUT -m state --state INVALID -j DROP
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# If it was already established pass bits through
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# Allow for the local traffic
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-A INPUT -i lo -j ACCEPT
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# Let's MTU discovery and other network management to work properly
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-A INPUT -p icmp -m icmp --icmp-type any -j ACCEPT
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# Allow remote SSH logins on the specified port (should be &amp;lt;1024 and would require sshd re-configuration if the port is not standard)
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# Allow DHCP client to get its information
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-A INPUT -i eth0 -p udp -m state --state NEW -m udp --sport 67:68 --dport 67:68 -j ACCEPT
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# Reject anything that we did not specifically allow above
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-A INPUT -j REJECT --reject-with icmp-host-prohibited
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# This is a NAT box, so we accept packets from our network designated to the world, but reject any other forwarding attempts.
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-A FORWARD -i eth0 -s 192.168.0.0/22 ! -d 192.168.0.0/22 -j ACCEPT
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-A FORWARD -i eth0 ! -s 192.168.0.0/22 -d 192.168.0.0/22 -j ACCEPT
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# If there is a MTU mismatch between the NAT box and hosts behind it we want to allow ICMP for the MTU discovery
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-A FORWARD -i eth0 -p icmp -m icmp --icmp-type any -s 192.168.0.0/22 -d 192.168.0.0/22 -j ACCEPT
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# We may be interested in anything that is rejected in this chain, so let's log it
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-A FORWARD -j LOG
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# We do not allow to forward anything else
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-A FORWARD -j REJECT --reject-with icmp-host-prohibited
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;COMMIT
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;*nat
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;:POSTROUTING ACCEPT [0:0]
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-A POSTROUTING -s 192.168.0.0/22 ! -d 192.168.0.0/22 -j MASQUERADE
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;COMMIT&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;There are a few things to note:&lt;/p&gt;
 &lt;ul&gt;

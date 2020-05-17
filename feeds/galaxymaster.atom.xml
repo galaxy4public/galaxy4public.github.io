@@ -177,21 +177,21 @@ this is what we wanted to achieve at this step!&lt;/p&gt;
 marker should occupy the exactly the same height as the line block we are
 attaching it to.  Well, this can be easily done with the &lt;code&gt;::after&lt;/code&gt;
 pseudo-element:&lt;/p&gt;
-&lt;pre id="demo3" class="highlight line-numbers"&gt;&lt;code class="language-css"&gt;pre div.line {
-    position: relative; /* so we could position the child */
-    min-height: 1em;    /* to avoid collapsing empty lines */
-}
-
-pre div.line::after {
-    content: '';        /* we need content for pseudo elements */
-    position: absolute;
-    display: block;
-    width: 1em;     /* without width it will be invisible */
-    height: 100%;       /* to match the height of the parent */
-    top: 0;
-    right: -1em;
-    background-color: blue; /* temporary, to make it visible */
-}&lt;/code&gt;&lt;/pre&gt;
+&lt;pre id="demo3" class="highlight line-numbers"&gt;&lt;code class="language-css"&gt;&lt;div id="demo3.1" class="lines"&gt;&lt;a href="#demo3.1"&gt;&lt;/a&gt;pre div.line {
+&lt;/div&gt;&lt;div id="demo3.2" class="lines"&gt;&lt;a href="#demo3.2"&gt;&lt;/a&gt;    position: relative; /* so we could position the child */
+&lt;/div&gt;&lt;div id="demo3.3" class="lines"&gt;&lt;a href="#demo3.3"&gt;&lt;/a&gt;    min-height: 1em;    /* to avoid collapsing empty lines */
+&lt;/div&gt;&lt;div id="demo3.4" class="lines"&gt;&lt;a href="#demo3.4"&gt;&lt;/a&gt;}
+&lt;/div&gt;&lt;div id="demo3.5" class="lines"&gt;&lt;a href="#demo3.5"&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div id="demo3.6" class="lines"&gt;&lt;a href="#demo3.6"&gt;&lt;/a&gt;pre div.line::after {
+&lt;/div&gt;&lt;div id="demo3.7" class="lines"&gt;&lt;a href="#demo3.7"&gt;&lt;/a&gt;    content: '';        /* we need content for pseudo elements */
+&lt;/div&gt;&lt;div id="demo3.8" class="lines"&gt;&lt;a href="#demo3.8"&gt;&lt;/a&gt;    position: absolute;
+&lt;/div&gt;&lt;div id="demo3.9" class="lines"&gt;&lt;a href="#demo3.9"&gt;&lt;/a&gt;    display: block;
+&lt;/div&gt;&lt;div id="demo3.10" class="lines"&gt;&lt;a href="#demo3.10"&gt;&lt;/a&gt;    width: 1em;     /* without width it will be invisible */
+&lt;/div&gt;&lt;div id="demo3.11" class="lines"&gt;&lt;a href="#demo3.11"&gt;&lt;/a&gt;    height: 100%;       /* to match the height of the parent */
+&lt;/div&gt;&lt;div id="demo3.12" class="lines"&gt;&lt;a href="#demo3.12"&gt;&lt;/a&gt;    top: 0;
+&lt;/div&gt;&lt;div id="demo3.13" class="lines"&gt;&lt;a href="#demo3.13"&gt;&lt;/a&gt;    right: -1em;
+&lt;/div&gt;&lt;div id="demo3.14" class="lines"&gt;&lt;a href="#demo3.14"&gt;&lt;/a&gt;    background-color: blue; /* temporary, to make it visible */
+&lt;/div&gt;&lt;div id="demo3.15" class="lines"&gt;&lt;a href="#demo3.15"&gt;&lt;/a&gt;}&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Note that we also introduced &lt;code&gt;position: relative&lt;/code&gt; to our &lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt;&amp;lsquo;s.  It is
 needed since if we want to position our pseudo-element relative to its parent,
@@ -236,11 +236,11 @@ choose SVG everytime.&lt;/p&gt;
 &lt;p&gt;Ideally, I did not want to use an image, but I could not figure out how I could
 put a repeating text block next to my lines, hence I found the following
 compromise (this is the content of the SVG file I created):&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-svg"&gt;&amp;lt;svg xmlns=&amp;quot;http://www.w3.org/2000/svg&amp;quot;
-        version=&amp;quot;1.1&amp;quot;
-        viewBox=&amp;quot;0 0 24 24&amp;quot;&amp;gt;
-    &amp;lt;text x=&amp;quot;0&amp;quot; y=&amp;quot;19&amp;quot;&amp;gt;&amp;amp;#x23ce;&amp;lt;/text&amp;gt;
-&amp;lt;/svg&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-svg"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;&amp;lt;svg xmlns=&amp;quot;http://www.w3.org/2000/svg&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        version=&amp;quot;1.1&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        viewBox=&amp;quot;0 0 24 24&amp;quot;&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    &amp;lt;text x=&amp;quot;0&amp;quot; y=&amp;quot;19&amp;quot;&amp;gt;&amp;amp;#x23ce;&amp;lt;/text&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;&amp;lt;/svg&amp;gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The first two lines are mandatory and describe to a browser that it works with
 an SVG image file.&lt;/p&gt;
@@ -255,38 +255,38 @@ adequate symbol to represent a line wrap point.&lt;/p&gt;
 but since the content of the SVG file is so small and I did not want to host it
 externally (it would be an additional fetch request and more maintenance), I
 just did the following:&lt;/p&gt;
-&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;[user@localhost ~]$ cat nl.svg 
-&amp;lt;svg xmlns=&amp;quot;http://www.w3.org/2000/svg&amp;quot;
-        version=&amp;quot;1.1&amp;quot;
-        viewBox=&amp;quot;0 0 24 24&amp;quot;&amp;gt;
-    &amp;lt;text x=&amp;quot;0&amp;quot; y=&amp;quot;19&amp;quot;&amp;gt;&amp;amp;#x23ce;&amp;lt;/text&amp;gt;
-&amp;lt;/svg&amp;gt;
-[user@localhost ~]$ sed -n '1{h;d};$!H;${H;x;s,\s\+, ,g;s,&amp;gt;\s*&amp;lt;,&amp;gt;&amp;lt;,g;p}' nl.svg | base64 -w 0 ; echo
-PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[user@localhost ~]$ cat nl.svg 
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;&amp;lt;svg xmlns=&amp;quot;http://www.w3.org/2000/svg&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        version=&amp;quot;1.1&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        viewBox=&amp;quot;0 0 24 24&amp;quot;&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    &amp;lt;text x=&amp;quot;0&amp;quot; y=&amp;quot;19&amp;quot;&amp;gt;&amp;amp;#x23ce;&amp;lt;/text&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;&amp;lt;/svg&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[user@localhost ~]$ sed -n '1{h;d};$!H;${H;x;s,\s\+, ,g;s,&amp;gt;\s*&amp;lt;,&amp;gt;&amp;lt;,g;p}' nl.svg | base64 -w 0 ; echo
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;In other words, I removed all the white space, then deleted all line breaks, so
 I got a single line SVG body, and I converted it to Base64.  The resulting line
 is usable as the inline definition of an image.  Let&amp;rsquo;s update our stylesheet
 with the new values (we just replaced the last line to change the &lt;code&gt;background&lt;/code&gt;
 to &lt;code&gt;background-image&lt;/code&gt;) and added dimensions for the background itself:&lt;/p&gt;
-&lt;pre id="demo4" class="highlight line-numbers"&gt;&lt;code class="language-css"&gt;pre div.line {
-    position: relative; /* so we could position the child */
-    min-height: 1em;    /* to avoid collapsing empty lines */
-}
-
-pre div.line::after {
-    content: '';        /* we need content for pseudo elements */
-    position: absolute;
-    display: block;
-    width: 1em;     /* without width it will be invisible */
-    height: 100%;       /* to match the height of the parent */
-    top: 0;
-    right: -1em;
-    background-image:
-        url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
-        no-repeat repeat;
-    background-size: 1em 1em;
-}&lt;/code&gt;&lt;/pre&gt;
+&lt;pre id="demo4" class="highlight line-numbers"&gt;&lt;code class="language-css"&gt;&lt;div id="demo4.1" class="lines"&gt;&lt;a href="#demo4.1"&gt;&lt;/a&gt;pre div.line {
+&lt;/div&gt;&lt;div id="demo4.2" class="lines"&gt;&lt;a href="#demo4.2"&gt;&lt;/a&gt;    position: relative; /* so we could position the child */
+&lt;/div&gt;&lt;div id="demo4.3" class="lines"&gt;&lt;a href="#demo4.3"&gt;&lt;/a&gt;    min-height: 1em;    /* to avoid collapsing empty lines */
+&lt;/div&gt;&lt;div id="demo4.4" class="lines"&gt;&lt;a href="#demo4.4"&gt;&lt;/a&gt;}
+&lt;/div&gt;&lt;div id="demo4.5" class="lines"&gt;&lt;a href="#demo4.5"&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div id="demo4.6" class="lines"&gt;&lt;a href="#demo4.6"&gt;&lt;/a&gt;pre div.line::after {
+&lt;/div&gt;&lt;div id="demo4.7" class="lines"&gt;&lt;a href="#demo4.7"&gt;&lt;/a&gt;    content: '';        /* we need content for pseudo elements */
+&lt;/div&gt;&lt;div id="demo4.8" class="lines"&gt;&lt;a href="#demo4.8"&gt;&lt;/a&gt;    position: absolute;
+&lt;/div&gt;&lt;div id="demo4.9" class="lines"&gt;&lt;a href="#demo4.9"&gt;&lt;/a&gt;    display: block;
+&lt;/div&gt;&lt;div id="demo4.10" class="lines"&gt;&lt;a href="#demo4.10"&gt;&lt;/a&gt;    width: 1em;     /* without width it will be invisible */
+&lt;/div&gt;&lt;div id="demo4.11" class="lines"&gt;&lt;a href="#demo4.11"&gt;&lt;/a&gt;    height: 100%;       /* to match the height of the parent */
+&lt;/div&gt;&lt;div id="demo4.12" class="lines"&gt;&lt;a href="#demo4.12"&gt;&lt;/a&gt;    top: 0;
+&lt;/div&gt;&lt;div id="demo4.13" class="lines"&gt;&lt;a href="#demo4.13"&gt;&lt;/a&gt;    right: -1em;
+&lt;/div&gt;&lt;div id="demo4.14" class="lines"&gt;&lt;a href="#demo4.14"&gt;&lt;/a&gt;    background-image:
+&lt;/div&gt;&lt;div id="demo4.15" class="lines"&gt;&lt;a href="#demo4.15"&gt;&lt;/a&gt;        url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
+&lt;/div&gt;&lt;div id="demo4.16" class="lines"&gt;&lt;a href="#demo4.16"&gt;&lt;/a&gt;        no-repeat repeat;
+&lt;/div&gt;&lt;div id="demo4.17" class="lines"&gt;&lt;a href="#demo4.17"&gt;&lt;/a&gt;    background-size: 1em 1em;
+&lt;/div&gt;&lt;div id="demo4.18" class="lines"&gt;&lt;a href="#demo4.18"&gt;&lt;/a&gt;}&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;div class="demo4 resizable"&gt;
     &lt;style&gt;
@@ -329,25 +329,25 @@ our lines (reading documentation you may find that the default value is
 &lt;code&gt;normal&lt;/code&gt; and you can also find that &lt;code&gt;normal&lt;/code&gt; equals &lt;code&gt;1.2&lt;/code&gt; for the majority of
 browsers, but relying on that, I think is a bad idea).  We also need to adjust
 our markers with the new information we have got:&lt;/p&gt;
-&lt;pre id="demo5" class="highlight"&gt;&lt;code class="language-css"&gt;pre div.line {
-    position: relative; /* so we could position the child */
-    min-height: 1em;    /* to avoid collapsing empty lines */
-    line-height: 1.2;   /* set the height explicitly */
-}
-
-pre div.line::after {
-    content: '';        /* we need content for pseudo elements */
-    position: absolute;
-    display: block;
-    width: 1.2em;       /* without width it will be invisible */
-    height: 100%;       /* to match the height of the parent */
-    top: 0;
-    right: -1.2em;
-    background-image:
-        url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
-        no-repeat repeat;
-    background-size: 1.2em 1.2em;
-}&lt;/code&gt;&lt;/pre&gt;
+&lt;pre id="demo5" class="highlight"&gt;&lt;code class="language-css"&gt;&lt;div id="demo5.1" class="lines"&gt;&lt;a href="#demo5.1"&gt;&lt;/a&gt;pre div.line {
+&lt;/div&gt;&lt;div id="demo5.2" class="lines"&gt;&lt;a href="#demo5.2"&gt;&lt;/a&gt;    position: relative; /* so we could position the child */
+&lt;/div&gt;&lt;div id="demo5.3" class="lines"&gt;&lt;a href="#demo5.3"&gt;&lt;/a&gt;    min-height: 1em;    /* to avoid collapsing empty lines */
+&lt;/div&gt;&lt;div id="demo5.4" class="lines"&gt;&lt;a href="#demo5.4"&gt;&lt;/a&gt;    line-height: 1.2;   /* set the height explicitly */
+&lt;/div&gt;&lt;div id="demo5.5" class="lines"&gt;&lt;a href="#demo5.5"&gt;&lt;/a&gt;}
+&lt;/div&gt;&lt;div id="demo5.6" class="lines"&gt;&lt;a href="#demo5.6"&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div id="demo5.7" class="lines"&gt;&lt;a href="#demo5.7"&gt;&lt;/a&gt;pre div.line::after {
+&lt;/div&gt;&lt;div id="demo5.8" class="lines"&gt;&lt;a href="#demo5.8"&gt;&lt;/a&gt;    content: '';        /* we need content for pseudo elements */
+&lt;/div&gt;&lt;div id="demo5.9" class="lines"&gt;&lt;a href="#demo5.9"&gt;&lt;/a&gt;    position: absolute;
+&lt;/div&gt;&lt;div id="demo5.10" class="lines"&gt;&lt;a href="#demo5.10"&gt;&lt;/a&gt;    display: block;
+&lt;/div&gt;&lt;div id="demo5.11" class="lines"&gt;&lt;a href="#demo5.11"&gt;&lt;/a&gt;    width: 1.2em;       /* without width it will be invisible */
+&lt;/div&gt;&lt;div id="demo5.12" class="lines"&gt;&lt;a href="#demo5.12"&gt;&lt;/a&gt;    height: 100%;       /* to match the height of the parent */
+&lt;/div&gt;&lt;div id="demo5.13" class="lines"&gt;&lt;a href="#demo5.13"&gt;&lt;/a&gt;    top: 0;
+&lt;/div&gt;&lt;div id="demo5.14" class="lines"&gt;&lt;a href="#demo5.14"&gt;&lt;/a&gt;    right: -1.2em;
+&lt;/div&gt;&lt;div id="demo5.15" class="lines"&gt;&lt;a href="#demo5.15"&gt;&lt;/a&gt;    background-image:
+&lt;/div&gt;&lt;div id="demo5.16" class="lines"&gt;&lt;a href="#demo5.16"&gt;&lt;/a&gt;        url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
+&lt;/div&gt;&lt;div id="demo5.17" class="lines"&gt;&lt;a href="#demo5.17"&gt;&lt;/a&gt;        no-repeat repeat;
+&lt;/div&gt;&lt;div id="demo5.18" class="lines"&gt;&lt;a href="#demo5.18"&gt;&lt;/a&gt;    background-size: 1.2em 1.2em;
+&lt;/div&gt;&lt;div id="demo5.19" class="lines"&gt;&lt;a href="#demo5.19"&gt;&lt;/a&gt;}&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;div class="demo5 resizable"&gt;
     &lt;style&gt;
@@ -383,28 +383,28 @@ it done:&lt;/p&gt;
 &lt;p&gt;To address the latter a simple play with the &lt;code&gt;opacity&lt;/code&gt; attribute will suffice,
 e.g. I think 50% transparency should make the marker less distracting.&lt;/p&gt;
 &lt;p&gt;The former, however, requires some thinking.  Given that the post is already too long, I will just state that out of multiple options I had I chose the following: raise the background image by one &lt;code&gt;line-height&lt;/code&gt; from the bottom, and clip a square 1x1 &lt;code&gt;line-height&lt;/code&gt; at the top to compensate, as follows:&lt;/p&gt;
-&lt;pre id="demo6" class="highlight"&gt;&lt;code class="language-css"&gt;pre div.line {
-    position: relative; /* so we could position the child */
-    min-height: 1em;    /* to avoid collapsing empty lines */
-    line-height: 1.2;   /* set the height explicitly */
-}
-
-pre div.line::after {
-    content: '';        /* we need content for pseudo elements */
-    position: absolute;
-    display: block;
-    width: 1.2em;       /* without width it will be invisible */
-    height: 100%;       /* to match the height of the parent */
-    bottom: 0;
-    right: -1.2em;
-    background-image:
-        url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
-        no-repeat repeat;
-    background-size: 1.2em 1.2em;
-    margin-bottom: 0;
-    clip: rect(1.2em 1.2em 100vh 0);
-    opacity: .5;
-}&lt;/code&gt;&lt;/pre&gt;
+&lt;pre id="demo6" class="highlight"&gt;&lt;code class="language-css"&gt;&lt;div id="demo6.1" class="lines"&gt;&lt;a href="#demo6.1"&gt;&lt;/a&gt;pre div.line {
+&lt;/div&gt;&lt;div id="demo6.2" class="lines"&gt;&lt;a href="#demo6.2"&gt;&lt;/a&gt;    position: relative; /* so we could position the child */
+&lt;/div&gt;&lt;div id="demo6.3" class="lines"&gt;&lt;a href="#demo6.3"&gt;&lt;/a&gt;    min-height: 1em;    /* to avoid collapsing empty lines */
+&lt;/div&gt;&lt;div id="demo6.4" class="lines"&gt;&lt;a href="#demo6.4"&gt;&lt;/a&gt;    line-height: 1.2;   /* set the height explicitly */
+&lt;/div&gt;&lt;div id="demo6.5" class="lines"&gt;&lt;a href="#demo6.5"&gt;&lt;/a&gt;}
+&lt;/div&gt;&lt;div id="demo6.6" class="lines"&gt;&lt;a href="#demo6.6"&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div id="demo6.7" class="lines"&gt;&lt;a href="#demo6.7"&gt;&lt;/a&gt;pre div.line::after {
+&lt;/div&gt;&lt;div id="demo6.8" class="lines"&gt;&lt;a href="#demo6.8"&gt;&lt;/a&gt;    content: '';        /* we need content for pseudo elements */
+&lt;/div&gt;&lt;div id="demo6.9" class="lines"&gt;&lt;a href="#demo6.9"&gt;&lt;/a&gt;    position: absolute;
+&lt;/div&gt;&lt;div id="demo6.10" class="lines"&gt;&lt;a href="#demo6.10"&gt;&lt;/a&gt;    display: block;
+&lt;/div&gt;&lt;div id="demo6.11" class="lines"&gt;&lt;a href="#demo6.11"&gt;&lt;/a&gt;    width: 1.2em;       /* without width it will be invisible */
+&lt;/div&gt;&lt;div id="demo6.12" class="lines"&gt;&lt;a href="#demo6.12"&gt;&lt;/a&gt;    height: 100%;       /* to match the height of the parent */
+&lt;/div&gt;&lt;div id="demo6.13" class="lines"&gt;&lt;a href="#demo6.13"&gt;&lt;/a&gt;    bottom: 0;
+&lt;/div&gt;&lt;div id="demo6.14" class="lines"&gt;&lt;a href="#demo6.14"&gt;&lt;/a&gt;    right: -1.2em;
+&lt;/div&gt;&lt;div id="demo6.15" class="lines"&gt;&lt;a href="#demo6.15"&gt;&lt;/a&gt;    background-image:
+&lt;/div&gt;&lt;div id="demo6.16" class="lines"&gt;&lt;a href="#demo6.16"&gt;&lt;/a&gt;        url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
+&lt;/div&gt;&lt;div id="demo6.17" class="lines"&gt;&lt;a href="#demo6.17"&gt;&lt;/a&gt;        no-repeat repeat;
+&lt;/div&gt;&lt;div id="demo6.18" class="lines"&gt;&lt;a href="#demo6.18"&gt;&lt;/a&gt;    background-size: 1.2em 1.2em;
+&lt;/div&gt;&lt;div id="demo6.19" class="lines"&gt;&lt;a href="#demo6.19"&gt;&lt;/a&gt;    margin-bottom: 0;
+&lt;/div&gt;&lt;div id="demo6.20" class="lines"&gt;&lt;a href="#demo6.20"&gt;&lt;/a&gt;    clip: rect(1.2em 1.2em 100vh 0);
+&lt;/div&gt;&lt;div id="demo6.21" class="lines"&gt;&lt;a href="#demo6.21"&gt;&lt;/a&gt;    opacity: .5;
+&lt;/div&gt;&lt;div id="demo6.22" class="lines"&gt;&lt;a href="#demo6.22"&gt;&lt;/a&gt;}&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The only tricky part in the added lines is the &lt;code&gt;clip: rect(1.2em 1.2em 100vh
 0)&lt;/code&gt; line.  The &lt;code&gt;clip&lt;/code&gt; property defines the visible rectangle the browser should
@@ -450,31 +450,31 @@ this is exactly what we want :).&lt;/p&gt;
 &lt;h2 id="bonus-round"&gt;Bonus Round&lt;/h2&gt;
 &lt;p&gt;It should be mentioned, it is also possible to apply the same approach to the
 left side of the lines with a bit of a twist.&lt;/p&gt;
-&lt;pre id="demo7" class="highlight"&gt;&lt;code class="language-css"&gt;pre div.line {
-    position: relative; /* so we could position the child */
-    min-height: 1em;    /* to avoid collapsing empty lines */
-    line-height: 1.2;   /* set the height explicitly */
-    text-indent: -1.2em;    /* first line indent */
-    padding-left: 1.2em;    /* padding for the line */
-}
-
-pre div.line::before {
-    content: '';        /* we need content for pseudo elements */
-    position: absolute;
-    display: block;
-    width: 1.2em;       /* without width it will be invisible */
-    height: 100%;       /* to match the height of the parent */
-    top: 0;
-    left: 0;
-    background:
-        url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
-        no-repeat repeat;
-    background-size: 1.2em 1.2em;
-    clip: rect(1.2em 1.2em 100vh 0);
-    opacity: .5;
-    transform: rotateY(180deg); /* mirror the arrow */
-    transform-origin: left;
-}&lt;/code&gt;&lt;/pre&gt;
+&lt;pre id="demo7" class="highlight"&gt;&lt;code class="language-css"&gt;&lt;div id="demo7.1" class="lines"&gt;&lt;a href="#demo7.1"&gt;&lt;/a&gt;pre div.line {
+&lt;/div&gt;&lt;div id="demo7.2" class="lines"&gt;&lt;a href="#demo7.2"&gt;&lt;/a&gt;    position: relative; /* so we could position the child */
+&lt;/div&gt;&lt;div id="demo7.3" class="lines"&gt;&lt;a href="#demo7.3"&gt;&lt;/a&gt;    min-height: 1em;    /* to avoid collapsing empty lines */
+&lt;/div&gt;&lt;div id="demo7.4" class="lines"&gt;&lt;a href="#demo7.4"&gt;&lt;/a&gt;    line-height: 1.2;   /* set the height explicitly */
+&lt;/div&gt;&lt;div id="demo7.5" class="lines"&gt;&lt;a href="#demo7.5"&gt;&lt;/a&gt;    text-indent: -1.2em;    /* first line indent */
+&lt;/div&gt;&lt;div id="demo7.6" class="lines"&gt;&lt;a href="#demo7.6"&gt;&lt;/a&gt;    padding-left: 1.2em;    /* padding for the line */
+&lt;/div&gt;&lt;div id="demo7.7" class="lines"&gt;&lt;a href="#demo7.7"&gt;&lt;/a&gt;}
+&lt;/div&gt;&lt;div id="demo7.8" class="lines"&gt;&lt;a href="#demo7.8"&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div id="demo7.9" class="lines"&gt;&lt;a href="#demo7.9"&gt;&lt;/a&gt;pre div.line::before {
+&lt;/div&gt;&lt;div id="demo7.10" class="lines"&gt;&lt;a href="#demo7.10"&gt;&lt;/a&gt;    content: '';        /* we need content for pseudo elements */
+&lt;/div&gt;&lt;div id="demo7.11" class="lines"&gt;&lt;a href="#demo7.11"&gt;&lt;/a&gt;    position: absolute;
+&lt;/div&gt;&lt;div id="demo7.12" class="lines"&gt;&lt;a href="#demo7.12"&gt;&lt;/a&gt;    display: block;
+&lt;/div&gt;&lt;div id="demo7.13" class="lines"&gt;&lt;a href="#demo7.13"&gt;&lt;/a&gt;    width: 1.2em;       /* without width it will be invisible */
+&lt;/div&gt;&lt;div id="demo7.14" class="lines"&gt;&lt;a href="#demo7.14"&gt;&lt;/a&gt;    height: 100%;       /* to match the height of the parent */
+&lt;/div&gt;&lt;div id="demo7.15" class="lines"&gt;&lt;a href="#demo7.15"&gt;&lt;/a&gt;    top: 0;
+&lt;/div&gt;&lt;div id="demo7.16" class="lines"&gt;&lt;a href="#demo7.16"&gt;&lt;/a&gt;    left: 0;
+&lt;/div&gt;&lt;div id="demo7.17" class="lines"&gt;&lt;a href="#demo7.17"&gt;&lt;/a&gt;    background:
+&lt;/div&gt;&lt;div id="demo7.18" class="lines"&gt;&lt;a href="#demo7.18"&gt;&lt;/a&gt;        url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
+&lt;/div&gt;&lt;div id="demo7.19" class="lines"&gt;&lt;a href="#demo7.19"&gt;&lt;/a&gt;        no-repeat repeat;
+&lt;/div&gt;&lt;div id="demo7.20" class="lines"&gt;&lt;a href="#demo7.20"&gt;&lt;/a&gt;    background-size: 1.2em 1.2em;
+&lt;/div&gt;&lt;div id="demo7.21" class="lines"&gt;&lt;a href="#demo7.21"&gt;&lt;/a&gt;    clip: rect(1.2em 1.2em 100vh 0);
+&lt;/div&gt;&lt;div id="demo7.22" class="lines"&gt;&lt;a href="#demo7.22"&gt;&lt;/a&gt;    opacity: .5;
+&lt;/div&gt;&lt;div id="demo7.23" class="lines"&gt;&lt;a href="#demo7.23"&gt;&lt;/a&gt;    transform: rotateY(180deg); /* mirror the arrow */
+&lt;/div&gt;&lt;div id="demo7.24" class="lines"&gt;&lt;a href="#demo7.24"&gt;&lt;/a&gt;    transform-origin: left;
+&lt;/div&gt;&lt;div id="demo7.25" class="lines"&gt;&lt;a href="#demo7.25"&gt;&lt;/a&gt;}&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The trick here is the play between &lt;code&gt;padding-left&lt;/code&gt; and &lt;code&gt;text-indent&lt;/code&gt; for the
 &lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt; element since &lt;code&gt;text-indent&lt;/code&gt; will be applied to the first line only
@@ -749,16 +749,16 @@ what we are going to do and how:&lt;/p&gt;
 address (in our example below it was &lt;code&gt;remote.php.backend.domain.tld.:9000&lt;/code&gt;)
 with our local socket (we are using a unix socket at
 &lt;code&gt;/run/systemd-socket-proxyd/fastcgi.sock&lt;/code&gt; in this example):&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-nginx"&gt;upstream php {
-    #server remote.php.backend.domain.tld.:9000;
-    server  unix:/run/systemd-socket-proxyd/fastcgi.sock;
-}
-location ~ \.php$ {
-    try_files   $uri = 404;
-    fastcgi_pass    php;
-    fastcgi_index   index.php;
-    include     fastcgi.conf;
-}&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-nginx"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;upstream php {
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    #server remote.php.backend.domain.tld.:9000;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    server  unix:/run/systemd-socket-proxyd/fastcgi.sock;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;}
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;location ~ \.php$ {
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    try_files   $uri = 404;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    fastcgi_pass    php;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    fastcgi_index   index.php;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    include     fastcgi.conf;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;}&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The next step is to define the socket activated proxy service. This generally
 requires creating two files in &lt;code&gt;/etc/system/systemd&lt;/code&gt; directory: one for the
@@ -767,29 +767,29 @@ an extra mile and will define template units so the same configuration could be
 reused to launch multiple proxies using the same base templates.&lt;/p&gt;
 &lt;p&gt;The first template file is for the systemd service which will provide the proxy
 capability:&lt;/p&gt;
-&lt;pre class="highlight" data-file="/etc/systemd/system/systemd-socket-proxyd@.service"&gt;&lt;code class="language-systemd"&gt;[Unit]
-Description=&amp;quot;Generic Socket Proxy (%I)&amp;quot;
-Documentation=https://www.freedesktop.org/software/systemd/man/systemd-socket-proxyd.html
-After=network.service
-
-[Service]
-EnvironmentFile=-/etc/sysconfig/systemd-socket-proxyd.%i
-User=nobody
-Group=nobody
-OOMScoreAdjust=-1000
-UMask=077
-ExecStart=/usr/lib/systemd/systemd-socket-proxyd $TARGET
-Restart=on-failure
-PrivateTmp=true
-PrivateDevices=true
-#PrivateUsers=true
-#ProtectSystem=strict
-ProtectSystem=full
-#ProtectKernelTunables=true
-#ProtectControlGroups=true
-#NoNewPrivileges=true
-#ProtectKernelModules=true
-#MemoryDenyWriteExecute=true&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-file="/etc/systemd/system/systemd-socket-proxyd@.service"&gt;&lt;code class="language-systemd"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[Unit]
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Description=&amp;quot;Generic Socket Proxy (%I)&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Documentation=https://www.freedesktop.org/software/systemd/man/systemd-socket-proxyd.html
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;After=network.service
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[Service]
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;EnvironmentFile=-/etc/sysconfig/systemd-socket-proxyd.%i
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;User=nobody
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Group=nobody
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;OOMScoreAdjust=-1000
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;UMask=077
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;ExecStart=/usr/lib/systemd/systemd-socket-proxyd $TARGET
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Restart=on-failure
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;PrivateTmp=true
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;PrivateDevices=true
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;#PrivateUsers=true
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;#ProtectSystem=strict
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;ProtectSystem=full
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;#ProtectKernelTunables=true
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;#ProtectControlGroups=true
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;#NoNewPrivileges=true
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;#ProtectKernelModules=true
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;#MemoryDenyWriteExecute=true&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Depending on the version of your &lt;code&gt;systemd&lt;/code&gt; manager you may be able to uncomment
 more lines than was shown in this example, which was tested on CentOS 7.3.1611.&lt;/p&gt;
@@ -798,19 +798,19 @@ protect this proxy service from being killed in the event the system is
 starving for memory &amp;ndash; this may be something you do not need.&lt;/p&gt;
 &lt;p&gt;The second template file is for the socket unit that would trigger the
 activation of the proxy service when a request arrives on the socket:&lt;/p&gt;
-&lt;pre class="highlight" data-file="/etc/systemd/system/systemd-socket-proxyd@.socket"&gt;&lt;code class="language-systemd"&gt;[Unit]
-Description=&amp;quot;Socket for Generic Socket Proxy (%I)&amp;quot;
-Documentation=https://www.freedesktop.org/software/systemd/man/systemd-socket-proxyd.html
-
-[Socket]
-ListenStream=/run/systemd-socket-proxyd/%i.sock
-SocketUser=root
-SocketGroup=root
-SocketMode=0660
-DirectoryMode=0711
-
-[Install]
-WantedBy=sockets.target&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-file="/etc/systemd/system/systemd-socket-proxyd@.socket"&gt;&lt;code class="language-systemd"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[Unit]
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Description=&amp;quot;Socket for Generic Socket Proxy (%I)&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Documentation=https://www.freedesktop.org/software/systemd/man/systemd-socket-proxyd.html
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[Socket]
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;ListenStream=/run/systemd-socket-proxyd/%i.sock
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;SocketUser=root
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;SocketGroup=root
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;SocketMode=0660
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;DirectoryMode=0711
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[Install]
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;WantedBy=sockets.target&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;You may notice that the defaults are pretty strict:&lt;/p&gt;
 &lt;ul&gt;
@@ -825,25 +825,25 @@ instantiated using the template as shown later in this article.&lt;/p&gt;
 &lt;p&gt;Since our goal is to connect nginx to the backend FastCGI service we need to
 ensure that the proxy socket is read/write accessible to nginx&amp;rsquo;es workers, so
 we need to tweak the settings of the socket unit:&lt;/p&gt;
-&lt;pre class="highlight" data-file="/etc/systemd/system/systemd-socket-proxyd@fastcgi.socket.d/fastcgi.conf"&gt;&lt;code class="language-systemd"&gt;[Socket]
-SocketGroup=nginx&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-file="/etc/systemd/system/systemd-socket-proxyd@fastcgi.socket.d/fastcgi.conf"&gt;&lt;code class="language-systemd"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[Socket]
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;SocketGroup=nginx&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Note how we extended the template for a specific named instance of the socket
 unit: we defined the &lt;code&gt;systemd-socket-proxyd@fastcgi.socket.d&lt;/code&gt; sub-directory and
 put a drop-in configuration snippet there.&lt;/p&gt;
 &lt;p&gt;Now, to achieve our goal we need to specify the target endpoint for our proxy
 service (the named instance we spawn using the template):&lt;/p&gt;
-&lt;pre class="highlight" data-file="/etc/systemd/system/systemd-socket-proxyd@fastcgi.service.d/fastcgi.conf"&gt;&lt;code class="language-systemd"&gt;[Service]
-# Reset the ExecStart, so we could override it
-ExecStart=
-ExecStart=/usr/lib/systemd/systemd-socket-proxyd remote.php.backend.domain.tld.:9000&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-file="/etc/systemd/system/systemd-socket-proxyd@fastcgi.service.d/fastcgi.conf"&gt;&lt;code class="language-systemd"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[Service]
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# Reset the ExecStart, so we could override it
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;ExecStart=
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;ExecStart=/usr/lib/systemd/systemd-socket-proxyd remote.php.backend.domain.tld.:9000&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The mechanics behind extending the configuration is the same as for the socket
 unit, but here we overrode the &lt;code&gt;ExecStart&lt;/code&gt; command to specify the target endpoint
 for the proxy.&lt;/p&gt;
 &lt;p&gt;OK, we are done with the configuration of &lt;code&gt;systemd&lt;/code&gt;, so it would be a good time
 to reload the &lt;code&gt;systemd&lt;/code&gt; daemon:&lt;/p&gt;
-&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;[root@localhost ~]# systemctl daemon-reload&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[root@localhost ~]# systemctl daemon-reload&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;If you run a system where SELinux is disabled (why?!) you don&amp;rsquo;t need to do
 anything additional and should be good, but if you are security conscious and
@@ -860,7 +860,7 @@ VM for building/compiling policies since the only time you need that
 development stuff is when you are compiling the module from sources).&lt;/p&gt;
 &lt;p&gt;On CentOS, you can install all the necessary bits to build a loadable SELinux
 module by installing the &lt;code&gt;selinux-policy-devel&lt;/code&gt; package using &lt;code&gt;yum&lt;/code&gt;:&lt;/p&gt;
-&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;[root@localhost ~]# yum -y install selinux-policy-devel&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[root@localhost ~]# yum -y install selinux-policy-devel&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Note, I skipped the output of the command since it does not provide any useful
 information for the purposes of this article.&lt;/p&gt;
@@ -875,58 +875,58 @@ loadable policy for the &lt;code&gt;systemd-socket-proxyd&lt;/code&gt; service.&
 support file too, but for the purposes of this article we should be fine with
 the automatically generated one.&lt;/p&gt;
 &lt;p&gt;The content of the systemd-socket-proxy.te file is listed below:&lt;/p&gt;
-&lt;pre class="highlight" data-file="systemd-socket-proxy.te"&gt;&lt;code class="language-selinux"&gt;policy_module(systemd-socket-proxyd, 1.0)
-
-## &amp;lt;desc&amp;gt;
-##  &amp;lt;p&amp;gt;
-##  Allow systemd-socket-proxyd to bind any port instead of one labelled
-## with systemd_socket_proxyd_port_t.
-##  &amp;lt;/p&amp;gt;
-## &amp;lt;/desc&amp;gt;
-gen_tunable(systemd_socket_proxyd_bind_any, false)
-
-## &amp;lt;desc&amp;gt;
-## &amp;lt;p&amp;gt;
-## Allow systemd-socket-proxyd to connect to any port instead of
-## labelled ones.
-## &amp;lt;/p&amp;gt;
-## &amp;lt;/desc&amp;gt;
-gen_tunable(systemd_socket_proxyd_connect_any, false)
-
-systemd_domain_template(systemd_socket_proxyd)
-
-type systemd_socket_proxyd_unit_file_t;
-systemd_unit_file(systemd_socket_proxyd_unit_file_t)
-
-sysnet_dns_name_resolve(systemd_socket_proxyd_t)
-
-# resolver
-allow systemd_socket_proxyd_t self:unix_dgram_socket { create getopt setopt sendto read write };
-
-# listener
-type systemd_socket_proxyd_port_t;
-corenet_port(systemd_socket_proxyd_port_t);
-allow systemd_socket_proxyd_t self:tcp_socket accept;
-
-tunable_policy(`!systemd_socket_proxyd_bind_any',`
- allow systemd_socket_proxyd_t systemd_socket_proxyd_port_t:tcp_socket name_bind;
-')
-
-tunable_policy(`systemd_socket_proxyd_bind_any',`
- corenet_tcp_bind_all_ports(systemd_socket_proxyd_t)
-')
-
-# target
-tunable_policy(`!systemd_socket_proxyd_connect_any',`
- allow systemd_socket_proxyd_t port_type:tcp_socket name_connect;
-')
-
-tunable_policy(`systemd_socket_proxyd_connect_any',`
- corenet_tcp_connect_all_ports(systemd_socket_proxyd_t)
-')
-
-# consumer
-allow daemon systemd_socket_proxyd_t:unix_stream_socket connectto;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-file="systemd-socket-proxy.te"&gt;&lt;code class="language-selinux"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;policy_module(systemd-socket-proxyd, 1.0)
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;## &amp;lt;desc&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;##  &amp;lt;p&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;##  Allow systemd-socket-proxyd to bind any port instead of one labelled
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;## with systemd_socket_proxyd_port_t.
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;##  &amp;lt;/p&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;## &amp;lt;/desc&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gen_tunable(systemd_socket_proxyd_bind_any, false)
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;## &amp;lt;desc&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;## &amp;lt;p&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;## Allow systemd-socket-proxyd to connect to any port instead of
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;## labelled ones.
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;## &amp;lt;/p&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;## &amp;lt;/desc&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gen_tunable(systemd_socket_proxyd_connect_any, false)
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;systemd_domain_template(systemd_socket_proxyd)
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;type systemd_socket_proxyd_unit_file_t;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;systemd_unit_file(systemd_socket_proxyd_unit_file_t)
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;sysnet_dns_name_resolve(systemd_socket_proxyd_t)
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# resolver
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;allow systemd_socket_proxyd_t self:unix_dgram_socket { create getopt setopt sendto read write };
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# listener
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;type systemd_socket_proxyd_port_t;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;corenet_port(systemd_socket_proxyd_port_t);
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;allow systemd_socket_proxyd_t self:tcp_socket accept;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;tunable_policy(`!systemd_socket_proxyd_bind_any',`
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt; allow systemd_socket_proxyd_t systemd_socket_proxyd_port_t:tcp_socket name_bind;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;')
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;tunable_policy(`systemd_socket_proxyd_bind_any',`
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt; corenet_tcp_bind_all_ports(systemd_socket_proxyd_t)
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;')
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# target
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;tunable_policy(`!systemd_socket_proxyd_connect_any',`
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt; allow systemd_socket_proxyd_t port_type:tcp_socket name_connect;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;')
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;tunable_policy(`systemd_socket_proxyd_connect_any',`
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt; corenet_tcp_connect_all_ports(systemd_socket_proxyd_t)
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;')
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# consumer
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;allow daemon systemd_socket_proxyd_t:unix_stream_socket connectto;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;This is still work in progress, but so far it works at least for my projects.
 Note that there are two SELinux booleans defined which affect the behaviour of
@@ -950,25 +950,25 @@ need to label the &lt;code&gt;systemd-socket-proxyd&lt;/code&gt; binary with the
 &lt;code&gt;systemd_socket_proxyd_exec_t&lt;/code&gt; label.&lt;/p&gt;
 &lt;p&gt;The content of the systemd-socket-proxy.fc file that implements this behavior
 is as follows:&lt;/p&gt;
-&lt;pre class="highlight" data-file="systemd-socket-proxy.fc"&gt;&lt;code class="language-selinux"&gt;/(usr/lib|etc)/systemd/system/systemd-socket-proxyd\.service  gen_context(system_u:object_r:systemd_socket_proxyd_unit_file_t,s0)
-/usr/lib/systemd/systemd-socket-proxyd -- gen_context(system_u:object_r:systemd_socket_proxyd_exec_t,s0)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-file="systemd-socket-proxy.fc"&gt;&lt;code class="language-selinux"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/(usr/lib|etc)/systemd/system/systemd-socket-proxyd\.service  gen_context(system_u:object_r:systemd_socket_proxyd_unit_file_t,s0)
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/usr/lib/systemd/systemd-socket-proxyd -- gen_context(system_u:object_r:systemd_socket_proxyd_exec_t,s0)&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;At this point, we have everything we need to compile a policy module, so let&amp;rsquo;s
 just do it now:&lt;/p&gt;
-&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;[root@localhost ~]# ls -l
-total 8
--rw-r--r--. 1 root root  235 Jan  5 05:21 systemd-socket-proxyd.fc
--rw-r--r--. 1 root root 1467 Jan  6 00:10 systemd-socket-proxyd.te
-[root@localhost ~]# make -f /usr/share/selinux/devel/Makefile
-Compiling targeted systemd-socket-proxyd module
-/usr/bin/checkmodule:  loading policy configuration from tmp/systemd-socket-proxyd.tmp
-/usr/bin/checkmodule:  policy configuration loaded
-/usr/bin/checkmodule:  writing binary representation (version 17) to tmp/systemd-socket-proxyd.mod
-Creating targeted systemd-socket-proxyd.pp policy package
-rm tmp/systemd-socket-proxyd.mod tmp/systemd-socket-proxyd.mod.fc
-[root@localhost ~]# semodule -i systemd-socket-proxyd.pp
-[root@localhost ~]# restorecon -v /usr/lib/systemd/systemd-socket-proxyd
-restorecon reset /usr/lib/systemd/systemd-socket-proxyd context system_u:object_r:init_exec_t:s0-&amp;gt;system_u:object_r:systemd_socket_proxyd_exec_t:s0&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[root@localhost ~]# ls -l
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;total 8
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-rw-r--r--. 1 root root  235 Jan  5 05:21 systemd-socket-proxyd.fc
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-rw-r--r--. 1 root root 1467 Jan  6 00:10 systemd-socket-proxyd.te
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[root@localhost ~]# make -f /usr/share/selinux/devel/Makefile
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Compiling targeted systemd-socket-proxyd module
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/usr/bin/checkmodule:  loading policy configuration from tmp/systemd-socket-proxyd.tmp
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/usr/bin/checkmodule:  policy configuration loaded
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/usr/bin/checkmodule:  writing binary representation (version 17) to tmp/systemd-socket-proxyd.mod
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Creating targeted systemd-socket-proxyd.pp policy package
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;rm tmp/systemd-socket-proxyd.mod tmp/systemd-socket-proxyd.mod.fc
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[root@localhost ~]# semodule -i systemd-socket-proxyd.pp
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[root@localhost ~]# restorecon -v /usr/lib/systemd/systemd-socket-proxyd
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;restorecon reset /usr/lib/systemd/systemd-socket-proxyd context system_u:object_r:init_exec_t:s0-&amp;gt;system_u:object_r:systemd_socket_proxyd_exec_t:s0&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The &lt;code&gt;semodule -i systemd-socket-proxyd.pp&lt;/code&gt; command has actually installed the
 module into the system, but if you were building the module on a different
@@ -979,39 +979,39 @@ where proxy is going to be running and only apply the last two commands
 &lt;p&gt;We approached the time when we need to perform the pre-flight checks before
 launching our new service :). First, we need to check whether the file context
 was applied to the &lt;code&gt;systemd-socket-proxyd binary&lt;/code&gt;:&lt;/p&gt;
-&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;[root@localhost ~]# ls -ldZ /usr/lib/systemd/systemd-socket-proxyd 
--rwxr-xr-x. root root system_u:object_r:systemd_socket_proxyd_exec_t:s0 /usr/lib/systemd/systemd-socket-proxyd&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[root@localhost ~]# ls -ldZ /usr/lib/systemd/systemd-socket-proxyd 
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-rwxr-xr-x. root root system_u:object_r:systemd_socket_proxyd_exec_t:s0 /usr/lib/systemd/systemd-socket-proxyd&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Looks good! Let&amp;rsquo;s start the socket unit and check the permissions set on the
 socket file:&lt;/p&gt;
-&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;[root@localhost ~]# systemctl start systemd-socket-proxyd@fastcgi.socket
-[root@localhost ~]# ls -ldZ /run/systemd-socket-proxyd{,/fastcgi.sock}
-drwx--x--x. root root  system_u:object_r:var_run_t:s0   /run/systemd-socket-proxyd
-srw-rw----. root nginx system_u:object_r:var_run_t:s0   /run/systemd-socket-proxyd/fastcgi.sock&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[root@localhost ~]# systemctl start systemd-socket-proxyd@fastcgi.socket
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[root@localhost ~]# ls -ldZ /run/systemd-socket-proxyd{,/fastcgi.sock}
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;drwx--x--x. root root  system_u:object_r:var_run_t:s0   /run/systemd-socket-proxyd
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;srw-rw----. root nginx system_u:object_r:var_run_t:s0   /run/systemd-socket-proxyd/fastcgi.sock&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;This also looks as expected. The next test would be to check that our proxy
 service is running with the desired set of permissions and in the correct
 SELinux domain:&lt;/p&gt;
-&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;[root@localhost ~]# socat -v unix-client:/run/systemd-socket-proxyd/fastcgi.sock stdin
-
-&amp;lt; 2017/01/13 00:59:22.987083  length=1 from=0 to=0
-
-[root@localhost ~]# ps uZ -C systemd-socket-proxyd
-LABEL                           USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
-system_u:system_r:systemd_socket_proxyd_t:s0 nobody 28643 0.0  0.0 86628 756 ? Ssl  00:59   0:00 /usr/lib/systemd/systemd-socket-proxyd 127.0.0.1:9000
-[root@localhost ~]# cat /proc/28643/status 
-Name: systemd-socket-
-State: S (sleeping)
-Tgid: 28643
-Ngid: 0
-Pid: 28643
-PPid: 1
-TracerPid: 0
-Uid: 99 99 99 99
-Gid: 99 99 99 99
-FDSize: 64
-Groups: 99 
-[truncated]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[root@localhost ~]# socat -v unix-client:/run/systemd-socket-proxyd/fastcgi.sock stdin
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;&amp;lt; 2017/01/13 00:59:22.987083  length=1 from=0 to=0
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[root@localhost ~]# ps uZ -C systemd-socket-proxyd
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;LABEL                           USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;system_u:system_r:systemd_socket_proxyd_t:s0 nobody 28643 0.0  0.0 86628 756 ? Ssl  00:59   0:00 /usr/lib/systemd/systemd-socket-proxyd 127.0.0.1:9000
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[root@localhost ~]# cat /proc/28643/status 
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Name: systemd-socket-
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;State: S (sleeping)
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Tgid: 28643
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Ngid: 0
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Pid: 28643
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;PPid: 1
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;TracerPid: 0
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Uid: 99 99 99 99
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Gid: 99 99 99 99
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;FDSize: 64
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Groups: 99 
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[truncated]&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The first &lt;code&gt;socat&lt;/code&gt; command was needed to trigger the socket activation that
 resulted in the &lt;code&gt;systemd-socket-proxyd.service&lt;/code&gt; being launched.&lt;/p&gt;
@@ -1021,48 +1021,48 @@ and within the &lt;code&gt;systemd_socket_proxyd_t&lt;/code&gt; domain.&lt;/p&gt
 and there is no way the service could regain the escalated privileges back.&lt;/p&gt;
 &lt;p&gt;Looks like we are all, so let&amp;rsquo;s make our changes persistent. To achieve this we
 just need to enable the &lt;code&gt;systemd-socket-proxyd@fastcgi.socket&lt;/code&gt; unit:&lt;/p&gt;
-&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;[root@localhost ~]# systemctl enable systemd-socket-proxyd@fastcgi.socket
-Created symlink from /etc/systemd/system/sockets.target.wants/systemd-socket-proxyd@fastcgi.socket to /etc/systemd/system/systemd-socket-proxyd@.socket.
-[root@localhost ~]# systemctl status systemd-socket-proxyd@fastcgi.socket | fgrep Loaded:
-   Loaded: loaded (/etc/systemd/system/systemd-socket-proxyd@.socket; enabled; vendor preset: disabled)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[root@localhost ~]# systemctl enable systemd-socket-proxyd@fastcgi.socket
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Created symlink from /etc/systemd/system/sockets.target.wants/systemd-socket-proxyd@fastcgi.socket to /etc/systemd/system/systemd-socket-proxyd@.socket.
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[root@localhost ~]# systemctl status systemd-socket-proxyd@fastcgi.socket | fgrep Loaded:
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;   Loaded: loaded (/etc/systemd/system/systemd-socket-proxyd@.socket; enabled; vendor preset: disabled)&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Just to show that the configuration is working I set a simple lab up in a VM
 and followed this article with the only exception of the PHP/FPM location which
 I am running on the same VM:&lt;/p&gt;
-&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;[root@localhost ~]# cat /usr/share/nginx/html/test.php
-&amp;lt;?php echo &amp;quot;This is the output from PHP\n&amp;quot; ?&amp;gt;
-[root@localhost ~]# cat /etc/nginx/conf.d/php-upstream.conf 
-upstream php {
-    #server        remote.php.backend.domain.tld.:9000
-    server         unix:/run/systemd-socket-proxyd/fastcgi.sock;
-}
-[root@localhost ~]# cat /etc/nginx/default.d/php.conf
-location ~ \.php$ {
-    try_files      $uri = 404;
-    fastcgi_pass   php;
-    fastcgi_index  index.php;
-    include        fastcgi.conf;
-}
-[root@localhost ~]# cat /etc/systemd/system/systemd-socket-proxyd@fastcgi.service.d/fastcgi.conf
-[Service]
-# Reset the ExecStart, so we could override it
-ExecStart=
-ExecStart=/usr/lib/systemd/systemd-socket-proxyd 127.0.0.1:9000
-[root@localhost ~]# telnet 0 80
-Trying 0.0.0.0...
-Connected to 0.
-Escape character is '^]'.
-GET /test.php HTTP/1.0
-
-HTTP/1.1 200 OK
-Server: nginx/1.10.2
-Date: Fri, 13 Jan 2017 03:01:16 GMT
-Content-Type: text/html
-Connection: close
-X-Powered-By: PHP/5.4.16
-
-This is the output from PHP
-Connection closed by foreign host.&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[root@localhost ~]# cat /usr/share/nginx/html/test.php
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;&amp;lt;?php echo &amp;quot;This is the output from PHP\n&amp;quot; ?&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[root@localhost ~]# cat /etc/nginx/conf.d/php-upstream.conf 
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;upstream php {
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    #server        remote.php.backend.domain.tld.:9000
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    server         unix:/run/systemd-socket-proxyd/fastcgi.sock;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;}
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[root@localhost ~]# cat /etc/nginx/default.d/php.conf
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;location ~ \.php$ {
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    try_files      $uri = 404;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    fastcgi_pass   php;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    fastcgi_index  index.php;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    include        fastcgi.conf;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;}
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[root@localhost ~]# cat /etc/systemd/system/systemd-socket-proxyd@fastcgi.service.d/fastcgi.conf
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[Service]
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# Reset the ExecStart, so we could override it
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;ExecStart=
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;ExecStart=/usr/lib/systemd/systemd-socket-proxyd 127.0.0.1:9000
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[root@localhost ~]# telnet 0 80
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Trying 0.0.0.0...
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Connected to 0.
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Escape character is '^]'.
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;GET /test.php HTTP/1.0
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;HTTP/1.1 200 OK
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Server: nginx/1.10.2
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Date: Fri, 13 Jan 2017 03:01:16 GMT
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Content-Type: text/html
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Connection: close
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;X-Powered-By: PHP/5.4.16
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;This is the output from PHP
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Connection closed by foreign host.&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Works as expected :).&lt;/p&gt;
 &lt;p&gt;There is one thing one needs to be aware of: when I started to work on this I
@@ -1140,7 +1140,7 @@ will allow one to tweak parameters for the hosts in the chain.&lt;/p&gt;
 technique works, here I am only going to provide the proxy script and the
 corresponding ssh config parameter block to use the script.&lt;/p&gt;
 &lt;p&gt;The goal was to support the following syntax:&lt;/p&gt;
-&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;[user@localhost ~]$ ssh default_user@userA^hostA/userB^hostB:port/hostC&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[user@localhost ~]$ ssh default_user@userA^hostA/userB^hostB:port/hostC&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;It was a little challenge to come up with the character for identifying the
 user part for intermediate hosts:&lt;/p&gt;
@@ -1161,44 +1161,44 @@ port is omitted, it will use the global port configuration (usually 22/tcp but
 can be changed with the &lt;code&gt;-p&lt;/code&gt; argument to ssh).  The script is a bit not optimised
 (bash is really slow on string processing, but I decided to stick with pure
 bash where it was possible):&lt;/p&gt;
-&lt;pre class="highlight" data-file="~/bin/ssh-helper.sh"&gt;&lt;code class="language-bash"&gt;#!/bin/bash
-set -eu -o pipefail
-exec 10&amp;lt;&amp;amp;0 11&amp;gt;&amp;amp;1 0&amp;lt;&amp;amp;2 1&amp;gt;&amp;amp;2
-DEFAULT_USER=&amp;quot;$1&amp;quot;
-DEFAULT_PORT=&amp;quot;$3&amp;quot;
-HOST_CHAIN=&amp;quot;$2&amp;quot;
-HOST_NEXT=&amp;quot;${HOST_CHAIN%%/*}&amp;quot;
-HOST_USER=&amp;quot;${HOST_NEXT%%^*}&amp;quot;
-[ &amp;quot;$HOST_USER&amp;quot; == &amp;quot;$HOST_NEXT&amp;quot; ] &amp;amp;&amp;amp; HOST_USER=&amp;quot;$DEFAULT_USER&amp;quot; ||:
-HOST_PORT=&amp;quot;${HOST_NEXT##*:}&amp;quot;
-[ &amp;quot;$HOST_PORT&amp;quot; == &amp;quot;$HOST_NEXT&amp;quot; ] &amp;amp;&amp;amp; HOST_PORT=&amp;quot;$DEFAULT_PORT&amp;quot; ||:
-TARGET_HOST=&amp;quot;${HOST_CHAIN##*/}&amp;quot;
-TARGET_PORT=&amp;quot;${TARGET_HOST##*:}&amp;quot;
-TARGET_HOST=&amp;quot;${TARGET_HOST%:*}&amp;quot;
-[ &amp;quot;$TARGET_PORT&amp;quot; == &amp;quot;$TARGET_HOST&amp;quot; ] &amp;amp;&amp;amp; TARGET_PORT=&amp;quot;$DEFAULT_PORT&amp;quot; ||:
-TARGET_HOST=&amp;quot;${TARGET_HOST#*^}&amp;quot;
-HOST_NEXT=&amp;quot;${HOST_NEXT#*^}&amp;quot;
-HOST_NEXT=&amp;quot;${HOST_NEXT%:*}&amp;quot;
-HOST_CHAIN=&amp;quot;${HOST_CHAIN%/*}&amp;quot;
-[ &amp;quot;$HOST_CHAIN&amp;quot; == &amp;quot;${HOST_CHAIN#*/}&amp;quot; ] &amp;amp;&amp;amp; HOST_CHAIN= || HOST_CHAIN=&amp;quot;${HOST_CHAIN#*/}&amp;quot;
-HOST_CHAIN=&amp;quot;$HOST_NEXT${HOST_CHAIN:+/$HOST_CHAIN}&amp;quot;
-
-if [ ! -d &amp;quot;$HOME/.ssh/.sessions&amp;quot; ]; then
-    echo &amp;quot;Creating the sessions directory&amp;quot; &amp;gt;&amp;amp;2
-    mkdir -m700 &amp;quot;$HOME/.ssh/.sessions&amp;quot;
-fi
-
-CONTROL_SOCKET=$(printf &amp;quot;$HOST_USER@HOST_CHAIN:$HOST_PORT\n&amp;quot; | shasum | cut -f1 -d' ')
-
-exec 0&amp;lt;&amp;amp;10 1&amp;gt;&amp;amp;11
-exec ssh \
-    -o &amp;quot;ControlMaster auto&amp;quot; \
-    -o &amp;quot;ControlPath ~/.ssh/.sessions/$CONTROL_SOCKET&amp;quot; \
-    -o &amp;quot;ControlPersist 120s&amp;quot; \
-    -l &amp;quot;$HOST_USER&amp;quot; \
-    -p &amp;quot;$HOST_PORT&amp;quot; \
-    &amp;quot;$HOST_CHAIN&amp;quot; \
-    -W &amp;quot;$TARGET_HOST&amp;quot;:&amp;quot;$TARGET_PORT&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-file="~/bin/ssh-helper.sh"&gt;&lt;code class="language-bash"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;#!/bin/bash
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;set -eu -o pipefail
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;exec 10&amp;lt;&amp;amp;0 11&amp;gt;&amp;amp;1 0&amp;lt;&amp;amp;2 1&amp;gt;&amp;amp;2
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;DEFAULT_USER=&amp;quot;$1&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;DEFAULT_PORT=&amp;quot;$3&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;HOST_CHAIN=&amp;quot;$2&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;HOST_NEXT=&amp;quot;${HOST_CHAIN%%/*}&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;HOST_USER=&amp;quot;${HOST_NEXT%%^*}&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[ &amp;quot;$HOST_USER&amp;quot; == &amp;quot;$HOST_NEXT&amp;quot; ] &amp;amp;&amp;amp; HOST_USER=&amp;quot;$DEFAULT_USER&amp;quot; ||:
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;HOST_PORT=&amp;quot;${HOST_NEXT##*:}&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[ &amp;quot;$HOST_PORT&amp;quot; == &amp;quot;$HOST_NEXT&amp;quot; ] &amp;amp;&amp;amp; HOST_PORT=&amp;quot;$DEFAULT_PORT&amp;quot; ||:
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;TARGET_HOST=&amp;quot;${HOST_CHAIN##*/}&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;TARGET_PORT=&amp;quot;${TARGET_HOST##*:}&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;TARGET_HOST=&amp;quot;${TARGET_HOST%:*}&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[ &amp;quot;$TARGET_PORT&amp;quot; == &amp;quot;$TARGET_HOST&amp;quot; ] &amp;amp;&amp;amp; TARGET_PORT=&amp;quot;$DEFAULT_PORT&amp;quot; ||:
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;TARGET_HOST=&amp;quot;${TARGET_HOST#*^}&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;HOST_NEXT=&amp;quot;${HOST_NEXT#*^}&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;HOST_NEXT=&amp;quot;${HOST_NEXT%:*}&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;HOST_CHAIN=&amp;quot;${HOST_CHAIN%/*}&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[ &amp;quot;$HOST_CHAIN&amp;quot; == &amp;quot;${HOST_CHAIN#*/}&amp;quot; ] &amp;amp;&amp;amp; HOST_CHAIN= || HOST_CHAIN=&amp;quot;${HOST_CHAIN#*/}&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;HOST_CHAIN=&amp;quot;$HOST_NEXT${HOST_CHAIN:+/$HOST_CHAIN}&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;if [ ! -d &amp;quot;$HOME/.ssh/.sessions&amp;quot; ]; then
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    echo &amp;quot;Creating the sessions directory&amp;quot; &amp;gt;&amp;amp;2
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    mkdir -m700 &amp;quot;$HOME/.ssh/.sessions&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;fi
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;CONTROL_SOCKET=$(printf &amp;quot;$HOST_USER@HOST_CHAIN:$HOST_PORT\n&amp;quot; | shasum | cut -f1 -d' ')
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;exec 0&amp;lt;&amp;amp;10 1&amp;gt;&amp;amp;11
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;exec ssh \
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    -o &amp;quot;ControlMaster auto&amp;quot; \
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    -o &amp;quot;ControlPath ~/.ssh/.sessions/$CONTROL_SOCKET&amp;quot; \
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    -o &amp;quot;ControlPersist 120s&amp;quot; \
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    -l &amp;quot;$HOST_USER&amp;quot; \
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    -p &amp;quot;$HOST_PORT&amp;quot; \
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    &amp;quot;$HOST_CHAIN&amp;quot; \
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    -W &amp;quot;$TARGET_HOST&amp;quot;:&amp;quot;$TARGET_PORT&amp;quot;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The above is a proof of the concept and it &amp;ldquo;works for me&amp;rdquo; :). I am using it
 every day when I need to access boxes behind a bastion host. Your mileage may
@@ -1206,14 +1206,14 @@ vary and you are free to create your own version of the script that would
 perform better (I would be really glad if a version of such a script could be
 shared with me).&lt;/p&gt;
 &lt;p&gt;The corresponding configuration block in the ssh config file looks as follows:&lt;/p&gt;
-&lt;pre class="highlight" data-file="~/.ssh/config"&gt;&lt;code class="language-ssh_config"&gt;Host */*
-    # if you uncomment ControlPath you also need to uncomment ControlMaster
-    #ControlMaster auto
-    # For OpenSSH &amp;lt; 6.7 you may uncomment the following, but long chains will fail:
-    #ControlPath   ~/.ssh/.sessions/%r@%h:%p
-    # For OpenSSH &amp;gt;= 6.7 you should uncomment the following:
-    #ControlPath   ~/.ssh/.sessions/%C
-    ProxyCommand ~/bin/ssh-helper.sh %r %h %p&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-file="~/.ssh/config"&gt;&lt;code class="language-ssh_config"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Host */*
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    # if you uncomment ControlPath you also need to uncomment ControlMaster
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    #ControlMaster auto
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    # For OpenSSH &amp;lt; 6.7 you may uncomment the following, but long chains will fail:
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    #ControlPath   ~/.ssh/.sessions/%r@%h:%p
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    # For OpenSSH &amp;gt;= 6.7 you should uncomment the following:
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    #ControlPath   ~/.ssh/.sessions/%C
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    ProxyCommand ~/bin/ssh-helper.sh %r %h %p&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Well, this is a bit messy since OpenSSH introduced the &lt;code&gt;%C&lt;/code&gt; macro in version 6.7
 and without &lt;code&gt;%C&lt;/code&gt; the &lt;code&gt;ControlPath&lt;/code&gt; string gets too long for OpenSSH to create a
@@ -1245,24 +1245,24 @@ running on the local host would be sufficient), then we needed an interactive
 script, and a configuration block for the connection.&lt;/p&gt;
 &lt;p&gt;The configuration block is pretty simple (%h expands to localhost and %p
 expands to the port specified on the command line or to &amp;ldquo;22&amp;rdquo; otherwise):&lt;/p&gt;
-&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;[user@localhost ~]$ fgrep -A1 'Host localhost' ~/.ssh/config
-Host localhost
- ProxyCommand ~/bin/interactive.script.sh %h %p&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[user@localhost ~]$ fgrep -A1 'Host localhost' ~/.ssh/config
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Host localhost
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt; ProxyCommand ~/bin/interactive.script.sh %h %p&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Since most of our research is going to be inside the interactive script you
 will see several incarnations of script&amp;rsquo;s body. The very first one was the
 following:&lt;/p&gt;
-&lt;pre class="highlight" data-file="~/bin/interactive.script.sh"&gt;&lt;code class="language-bash"&gt;#!/bin/bash
-exec nc &amp;quot;$1&amp;quot; &amp;quot;$2&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-file="~/bin/interactive.script.sh"&gt;&lt;code class="language-bash"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;#!/bin/bash
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;exec nc &amp;quot;$1&amp;quot; &amp;quot;$2&amp;quot;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;At this point we just need to confirm that our test environment works as
 expected &amp;ndash; the ssh session should be proxied through the nc command and we
 should be able to login under our own account via ssh to the localhost (my
 private key was added to the key manager with ssh-add, hence no password prompt
 was displayed):&lt;/p&gt;
-&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;[user@localhost ~]$ ssh galaxy@localhost
-Last login: Thu Jul 21 01:30:21 2016
-$&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[user@localhost ~]$ ssh galaxy@localhost
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Last login: Thu Jul 21 01:30:21 2016
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;OK, we confirmed that we can establish a proxied connection and tunnel our ssh
 session through it.&lt;/p&gt;
@@ -1270,28 +1270,28 @@ session through it.&lt;/p&gt;
 user otherwise it could not be interactive. This channel comprises at least of
 two file descriptors: one for standard input and the other for standard output,
 so let&amp;rsquo;s check what descriptors are available for our script:&lt;/p&gt;
-&lt;pre class="highlight" data="file="~/bin/interactive.script.sh""&gt;&lt;code class="language-bash"&gt;#!/bin/bash
-# on Linux the following line would be much simpler: ls -l /proc/$$/fd/, but
-# on OS X they do not expose the open file descriptors through /proc, so I
-# used &amp;quot;lsof&amp;quot; instead.
-lsof -p $$ &amp;gt;&amp;amp;2
-exec nc &amp;quot;$1&amp;quot; &amp;quot;$2&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data="file="~/bin/interactive.script.sh""&gt;&lt;code class="language-bash"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;#!/bin/bash
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# on Linux the following line would be much simpler: ls -l /proc/$$/fd/, but
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# on OS X they do not expose the open file descriptors through /proc, so I
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# used &amp;quot;lsof&amp;quot; instead.
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;lsof -p $$ &amp;gt;&amp;amp;2
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;exec nc &amp;quot;$1&amp;quot; &amp;quot;$2&amp;quot;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;If we try to connect now we should see something like the following (I am
 writing this article on an OS X machine so I provide the output from OS X,
 however this also works for Linux):&lt;/p&gt;
-&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;[user@localhost ~]$ ssh galaxy@localhost
-COMMAND   PID   USER   FD   TYPE             DEVICE  SIZE/OFF     NODE NAME
-bash    45225   user  cwd    DIR                1,2       612   893854 /Users/user/.ssh
-bash    45225   user  txt    REG                1,2    628640  2329236 /bin/bash
-bash    45225   user  txt    REG                1,2    625712 13892061 /usr/lib/dyld
-bash    45225   user  txt    REG                1,2 385393734 13894121 /private/var/run/dyld_shared_cache_x86_64
-bash    45225   user    0   PIPE 0x44d71099589485df     16384          -&amp;gt;0x44d7109951223d0f
-bash    45225   user    1   PIPE 0x44d710995122454f     16384          -&amp;gt;0x44d71099512246af
-bash    45225   user    2u   CHR               16,1  0t631830     9705 /dev/ttys001
-bash    45225   user  255r   REG                1,2       219 15455259 /Users/user/bin/interactive.script.sh
-Last login: Mon Jul 25 17:52:40 2016 from localhost
-$&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[user@localhost ~]$ ssh galaxy@localhost
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;COMMAND   PID   USER   FD   TYPE             DEVICE  SIZE/OFF     NODE NAME
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;bash    45225   user  cwd    DIR                1,2       612   893854 /Users/user/.ssh
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;bash    45225   user  txt    REG                1,2    628640  2329236 /bin/bash
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;bash    45225   user  txt    REG                1,2    625712 13892061 /usr/lib/dyld
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;bash    45225   user  txt    REG                1,2 385393734 13894121 /private/var/run/dyld_shared_cache_x86_64
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;bash    45225   user    0   PIPE 0x44d71099589485df     16384          -&amp;gt;0x44d7109951223d0f
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;bash    45225   user    1   PIPE 0x44d710995122454f     16384          -&amp;gt;0x44d71099512246af
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;bash    45225   user    2u   CHR               16,1  0t631830     9705 /dev/ttys001
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;bash    45225   user  255r   REG                1,2       219 15455259 /Users/user/bin/interactive.script.sh
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Last login: Mon Jul 25 17:52:40 2016 from localhost
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;We are interested in file descriptors 0 (standard input), 1 (standard output),
 and 2 (standard error). As you can see the standard input and output are part
@@ -1314,34 +1314,34 @@ parent ssh process? Well, the answer is quite obvious:&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;The following version of the script demonstrates the implementation of the
 above logic:&lt;/p&gt;
-&lt;pre class="highlight" data-file="~/bin/interactive.script.sh"&gt;&lt;code class="language-bash"&gt;#!/bin/bash
-exec 10&amp;lt;&amp;amp;0 11&amp;gt;&amp;amp;1 0&amp;lt;&amp;amp;2 1&amp;gt;&amp;amp;2
-# start of the interactive behaviour
-lsof -p $$
-read -p &amp;quot;Type something: &amp;quot; I
-echo &amp;quot;You typed: $I&amp;quot;
-# finish of the interactive behaviour
-exec 0&amp;lt;&amp;amp;10 1&amp;gt;&amp;amp;11
-exec nc &amp;quot;$1&amp;quot; &amp;quot;$2&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-file="~/bin/interactive.script.sh"&gt;&lt;code class="language-bash"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;#!/bin/bash
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;exec 10&amp;lt;&amp;amp;0 11&amp;gt;&amp;amp;1 0&amp;lt;&amp;amp;2 1&amp;gt;&amp;amp;2
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# start of the interactive behaviour
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;lsof -p $$
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;read -p &amp;quot;Type something: &amp;quot; I
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;echo &amp;quot;You typed: $I&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# finish of the interactive behaviour
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;exec 0&amp;lt;&amp;amp;10 1&amp;gt;&amp;amp;11
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;exec nc &amp;quot;$1&amp;quot; &amp;quot;$2&amp;quot;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;I think it is time to test it :) :&lt;/p&gt;
-&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;[user@localhost ~]$ ssh galaxy@localhost
-COMMAND   PID   USER   FD   TYPE             DEVICE  SIZE/OFF     NODE NAME
-bash    45238   user  cwd    DIR                1,2       612   893854 /Users/user/.ssh
-bash    45238   user  txt    REG                1,2    628640  2329236 /bin/bash
-bash    45238   user  txt    REG                1,2    625712 13892061 /usr/lib/dyld
-bash    45238   user  txt    REG                1,2 385393734 13894121 /private/var/run/dyld_shared_cache_x86_64
-bash    45238   user    0u   CHR               16,1  0t640407     9705 /dev/ttys001
-bash    45238   user    1u   CHR               16,1  0t640407     9705 /dev/ttys001
-bash    45238   user    2u   CHR               16,1  0t640407     9705 /dev/ttys001
-bash    45238   user   10   PIPE 0x44d710995122378f     16384          -&amp;gt;0x44d71099589494ff
-bash    45238   user   11   PIPE 0x44d7109951223d0f     16384          -&amp;gt;0x44d710995122454f
-bash    45238   user  255r   REG                1,2       135 15455285 /Users/user/bin/interactive.script.sh
-Type something: This is a test
-You typed: This is a test
-Last login: Mon Jul 25 17:57:05 2016 from localhost
-$ logout
-Connection to localhost closed.&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[user@localhost ~]$ ssh galaxy@localhost
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;COMMAND   PID   USER   FD   TYPE             DEVICE  SIZE/OFF     NODE NAME
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;bash    45238   user  cwd    DIR                1,2       612   893854 /Users/user/.ssh
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;bash    45238   user  txt    REG                1,2    628640  2329236 /bin/bash
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;bash    45238   user  txt    REG                1,2    625712 13892061 /usr/lib/dyld
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;bash    45238   user  txt    REG                1,2 385393734 13894121 /private/var/run/dyld_shared_cache_x86_64
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;bash    45238   user    0u   CHR               16,1  0t640407     9705 /dev/ttys001
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;bash    45238   user    1u   CHR               16,1  0t640407     9705 /dev/ttys001
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;bash    45238   user    2u   CHR               16,1  0t640407     9705 /dev/ttys001
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;bash    45238   user   10   PIPE 0x44d710995122378f     16384          -&amp;gt;0x44d71099589494ff
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;bash    45238   user   11   PIPE 0x44d7109951223d0f     16384          -&amp;gt;0x44d710995122454f
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;bash    45238   user  255r   REG                1,2       135 15455285 /Users/user/bin/interactive.script.sh
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Type something: This is a test
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;You typed: This is a test
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Last login: Mon Jul 25 17:57:05 2016 from localhost
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ logout
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Connection to localhost closed.&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Mission accomplished! :)&lt;/p&gt;
 &lt;p&gt;I hope this small article would help somebody to design better wrappers around
@@ -1378,13 +1378,13 @@ on an AWS EC2 instance which was running a minimal CentOS 7 as its OS.&lt;/p&gt;
 &lt;p&gt;I spawned an EC2 instance (you need at least 8GB of free space there to be able
 to build the toolchain), logged in, and ensured that my system is up to date
 (and update it if it was not):&lt;/p&gt;
-&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;[root@localhost ~]# yum -y update
-Loaded plugins: at-exit, fastestmirror, post-transaction-actions
-Loading mirror speeds from cached hostfile
- * base: mirror.domain.tld
- * extras: mirror.domain.tld
- * updates: mirror.domain.tld
-No packages marked for update&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[root@localhost ~]# yum -y update
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Loaded plugins: at-exit, fastestmirror, post-transaction-actions
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Loading mirror speeds from cached hostfile
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt; * base: mirror.domain.tld
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt; * extras: mirror.domain.tld
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt; * updates: mirror.domain.tld
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;No packages marked for update&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The easiest way to build a toolchain is to use the crosstool-ng project, so I
 went ahead and downloaded the latest version with the corresponding GPG
@@ -1392,58 +1392,58 @@ signature, verified the signature (although the verification was very
 superficial since Bryan Hundven is not in my Web of Trust and the crosstool-ng
 website was not providing an HTTPS page to confirm the fingerprint of the key),
 and unpacked the sources:&lt;/p&gt;
-&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;[root@localhost ~]# yum -y install bison bzip2 flex gcc gcc-c++ glibc-static gperf help2man libstdc++-static libtool make ncurses-devel texinfo wget
-[root@localhost ~]# useradd -m build
-[root@localhost ~]# su - build
-[build@localhost ~]$ wget -q 'http://crosstool-ng.org/download/crosstool-ng/crosstool-ng-1.22.0.tar.xz'
-[build@localhost ~]$ wget -q 'http://crosstool-ng.org/download/crosstool-ng/crosstool-ng-1.22.0.tar.xz.sig'
-[build@localhost ~]$ gpg --recv-keys 35B871D1 --keyserver pgp.surfnet.nl
-gpg: &amp;quot;--keyserver&amp;quot; not a key ID: skipping
-gpg: &amp;quot;pgp.surfnet.nl&amp;quot; not a key ID: skipping
-gpg: requesting key 35B871D1 from hkp server keys.gnupg.net
-gpg: /home/build/.gnupg/trustdb.gpg: trustdb created
-gpg: key 35B871D1: public key &amp;quot;Bryan Hundven &amp;quot; imported
-gpg: Total number processed: 1
-gpg:               imported: 1  (RSA: 1)
-[build@localhost ~]$ gpg --verify crosstool-ng-1.22.0.tar.xz.sig
-gpg: Signature made Fri Nov 20 13:09:26 2015 UTC using RSA key ID 35B871D1
-gpg: Good signature from &amp;quot;Bryan Hundven &amp;quot;
-gpg:                 aka &amp;quot;Bryan Hundven &amp;quot;
-gpg:                 aka &amp;quot;Bryan Hundven &amp;quot;
-gpg:                 aka &amp;quot;Bryan Hundven &amp;quot;
-gpg:                 aka &amp;quot;[jpeg image of size 3080]&amp;quot;
-gpg:                 aka &amp;quot;[jpeg image of size 16246]&amp;quot;
-gpg: WARNING: This key is not certified with a trusted signature!
-gpg:          There is no indication that the signature belongs to the owner.
-Primary key fingerprint: 561E D9B6 2095 88ED 23C6  8329 CAD7 C8FC 35B8 71D1
-[build@localhost ~]$ tar xJSf crosstool-ng-1.22.0.tar.xz
-[build@localhost ~]$ rm crosstool-ng-1.22.0.tar.xz*&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[root@localhost ~]# yum -y install bison bzip2 flex gcc gcc-c++ glibc-static gperf help2man libstdc++-static libtool make ncurses-devel texinfo wget
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[root@localhost ~]# useradd -m build
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[root@localhost ~]# su - build
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ wget -q 'http://crosstool-ng.org/download/crosstool-ng/crosstool-ng-1.22.0.tar.xz'
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ wget -q 'http://crosstool-ng.org/download/crosstool-ng/crosstool-ng-1.22.0.tar.xz.sig'
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ gpg --recv-keys 35B871D1 --keyserver pgp.surfnet.nl
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg: &amp;quot;--keyserver&amp;quot; not a key ID: skipping
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg: &amp;quot;pgp.surfnet.nl&amp;quot; not a key ID: skipping
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg: requesting key 35B871D1 from hkp server keys.gnupg.net
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg: /home/build/.gnupg/trustdb.gpg: trustdb created
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg: key 35B871D1: public key &amp;quot;Bryan Hundven &amp;quot; imported
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg: Total number processed: 1
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg:               imported: 1  (RSA: 1)
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ gpg --verify crosstool-ng-1.22.0.tar.xz.sig
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg: Signature made Fri Nov 20 13:09:26 2015 UTC using RSA key ID 35B871D1
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg: Good signature from &amp;quot;Bryan Hundven &amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg:                 aka &amp;quot;Bryan Hundven &amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg:                 aka &amp;quot;Bryan Hundven &amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg:                 aka &amp;quot;Bryan Hundven &amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg:                 aka &amp;quot;[jpeg image of size 3080]&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg:                 aka &amp;quot;[jpeg image of size 16246]&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg: WARNING: This key is not certified with a trusted signature!
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg:          There is no indication that the signature belongs to the owner.
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Primary key fingerprint: 561E D9B6 2095 88ED 23C6  8329 CAD7 C8FC 35B8 71D1
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ tar xJSf crosstool-ng-1.22.0.tar.xz
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ rm crosstool-ng-1.22.0.tar.xz*&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The next step was to prepare the environment for the crosstool-ng build process:&lt;/p&gt;
-&lt;pre class="highlight" data-user="build"&gt;&lt;code class="language-shell"&gt;[build@localhost ~]$ cd crosstool-ng
-[build@localhost ~]$ /configure --prefix=$HOME/ct-ng
-checking build system type... x86_64-pc-linux-gnu
-[skipped]
-configure: creating ./config.status
-config.status: creating Makefile
-[build@localhost ~]$ make
-  SED    'ct-ng'
-[skipped]
-  SED    'docs/ct-ng.1'
-  GZIP   'docs/ct-ng.1.gz'
-[build@localhost ~]$ make install
-  GEN    'config/configure.in'
-[skipped]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="build"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ cd crosstool-ng
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ /configure --prefix=$HOME/ct-ng
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;checking build system type... x86_64-pc-linux-gnu
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[skipped]
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;configure: creating ./config.status
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;config.status: creating Makefile
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ make
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;  SED    'ct-ng'
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[skipped]
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;  SED    'docs/ct-ng.1'
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;  GZIP   'docs/ct-ng.1.gz'
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ make install
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;  GEN    'config/configure.in'
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[skipped]&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;For auto-completion, do not forget to install &lt;code&gt;ct-ng.comp&lt;/code&gt; into your &lt;code&gt;bash&lt;/code&gt;
 completion directory (usually &lt;code&gt;/etc/bash_completion.d/&lt;/code&gt;)&lt;/p&gt;
-&lt;pre class="highlight" data-user="build"&gt;&lt;code class="language-shell"&gt;[build@localhost ~]$ export PATH=$HOME/ct-ng/bin:$PATH
-[build@localhost ~]$ cd&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="build"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ export PATH=$HOME/ct-ng/bin:$PATH
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ cd&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Once the above was done we are ready to actually configure and build our toolchain:&lt;/p&gt;
-&lt;pre class="highlight" data-user="build"&gt;&lt;code class="language-shell"&gt;[build@localhost ~]$ mkdir ~/builddir
-[build@localhost ~]$ cd ~/builddir
-[build@localhost ~]$ ct-ng menuconfig&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="build"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ mkdir ~/builddir
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ cd ~/builddir
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ ct-ng menuconfig&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;I was quite happy with the defaults and the only changes I made were the
 following:&lt;/p&gt;
@@ -1499,35 +1499,35 @@ binaries would not be properly linked to work with the OS on the board&lt;/p&gt;
 &lt;p&gt;Once we are comfortable with the configuration of the future toolchain we exit
 the configuration menu (saving the changes) and launch the build process (it
 would take approximately an hour on AWS t2.small instance):&lt;/p&gt;
-&lt;pre class="highlight" data-user="build" data-prompt=""[build@localhost"&gt;&lt;code class="language-shell"&gt;configuration written to .config
-
-*** End of the configuration.
-*** Execute 'ct-ng build' to start the build or try 'ct-ng help'.
-
-[build@localhost ~]$ ct-ng build
-[INFO ]  Performing some trivial sanity checks
-[INFO ]  Build started 20160522.070915
-[skipped]
-[INFO ]  Build completed at 20160522.080629
-[INFO ]  (elapsed: 57:14.18)
-[INFO ]  Finishing installation (may take a few seconds)...
-[57:15] /&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="build" data-prompt=""[build@localhost"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;configuration written to .config
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;*** End of the configuration.
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;*** Execute 'ct-ng build' to start the build or try 'ct-ng help'.
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ ct-ng build
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[INFO ]  Performing some trivial sanity checks
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[INFO ]  Build started 20160522.070915
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[skipped]
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[INFO ]  Build completed at 20160522.080629
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[INFO ]  (elapsed: 57:14.18)
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[INFO ]  Finishing installation (may take a few seconds)...
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[57:15] /&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Seems that our Raspberry Pi 3 toolchain is ready to be used. Let&amp;rsquo;s compile
 something and see how it goes:&lt;/p&gt;
-&lt;pre class="highlight" data-user="build"&gt;&lt;code class="language-shell"&gt;[build@localhost ~]$ export PATH=$HOME/x-tools/aarch64-rpi3-linux-gnueabi/bin:$PATH
-[build@localhost ~]$ aarch64-rpi3-linux-gnueabi-gcc --version
-aarch64-rpi3-linux-gnueabi-gcc (crosstool-NG crosstool-ng-1.22.0) 5.2.0
-Copyright (C) 2015 Free Software Foundation, Inc.
-This is free software; see the source for copying conditions.  There is NO
-warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-
-[build@localhost ~]$ printf '#include \nint main(){printf(&amp;quot;Hello\\n&amp;quot;); return 0;}\n' &amp;gt; sample.c
-[build@localhost ~]$ aarch64-rpi3-linux-gnueabi-gcc -o sample sample.c
-[build@localhost ~]$ ls -l sample
--rwxr-xr-x. 1 build build 7672 May 22 08:19 sample
-[build@localhost ~]$ file sample
-sample: ELF 64-bit LSB executable, ARM aarch64, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 4.3.0, not stripped&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="build"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ export PATH=$HOME/x-tools/aarch64-rpi3-linux-gnueabi/bin:$PATH
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ aarch64-rpi3-linux-gnueabi-gcc --version
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;aarch64-rpi3-linux-gnueabi-gcc (crosstool-NG crosstool-ng-1.22.0) 5.2.0
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Copyright (C) 2015 Free Software Foundation, Inc.
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;This is free software; see the source for copying conditions.  There is NO
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ printf '#include \nint main(){printf(&amp;quot;Hello\\n&amp;quot;); return 0;}\n' &amp;gt; sample.c
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ aarch64-rpi3-linux-gnueabi-gcc -o sample sample.c
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ ls -l sample
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-rwxr-xr-x. 1 build build 7672 May 22 08:19 sample
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ file sample
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;sample: ELF 64-bit LSB executable, ARM aarch64, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 4.3.0, not stripped&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Well, it is time to build some awesome stuff for Raspberry Pi 3, I guess, but
 this will be in another post. :)&lt;/p&gt;</content><category term="linux"></category><category term="console"></category><category term="howto"></category><category term="linux"></category><category term="raspberry pi"></category></entry><entry><title>Building a firewall? Simple and easy!</title><link href="https://dmitry.khlebnikov.net/2016/05/22/building-a-firewall-simple-and-easy/" rel="alternate"></link><published>2016-05-22T10:00:00+10:00</published><updated>2020-05-17T20:25:15+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2016-05-22:/2016/05/22/building-a-firewall-simple-and-easy/</id><summary type="html">&lt;p&gt;I strive for simplicity since I am a strong believer that achieving a goal with
@@ -1676,41 +1676,41 @@ your goals &amp;ndash; you will be able to optimise the result at a later stage.
 used as the skeleton for the iptables ruleset on systems I manage (this snippet
 assumes that 192.168.0.0/16 is the internal network and that the ruleset is
 installed on the NAT instance which is a gateway to the Internet):&lt;/p&gt;
-&lt;pre class="highlight" data-file="/etc/sysconfig/iptables"&gt;&lt;code class="language-iptables"&gt;*filter
-:INPUT ACCEPT [0:0]
-:FORWARD ACCEPT [0:0]
-:OUTPUT ACCEPT [0:0]
--A INPUT -m state --state INVALID -j DROP
-# If it was already established pass bits through
--A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
-# Allow for the local traffic
--A INPUT -i lo -j ACCEPT
-# Let's MTU discovery and other network management to work properly
--A INPUT -p icmp -m icmp --icmp-type any -j ACCEPT
-# Allow remote SSH logins on the specified port (should be &amp;lt;1024 and would require sshd re-configuration if the port is not standard)
--A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT
-# Allow DHCP client to get its information
--A INPUT -i eth0 -p udp -m state --state NEW -m udp --sport 67:68 --dport 67:68 -j ACCEPT
-
-# Reject anything that we did not specifically allow above
--A INPUT -j REJECT --reject-with icmp-host-prohibited
-
-# This is a NAT box, so we accept packets from our network designated to the world, but reject any other forwarding attempts.
--A FORWARD -i eth0 -s 192.168.0.0/22 ! -d 192.168.0.0/22 -j ACCEPT
--A FORWARD -i eth0 ! -s 192.168.0.0/22 -d 192.168.0.0/22 -j ACCEPT
-# If there is a MTU mismatch between the NAT box and hosts behind it we want to allow ICMP for the MTU discovery
--A FORWARD -i eth0 -p icmp -m icmp --icmp-type any -s 192.168.0.0/22 -d 192.168.0.0/22 -j ACCEPT
-# We may be interested in anything that is rejected in this chain, so let's log it
--A FORWARD -j LOG
-
-# We do not allow to forward anything else
--A FORWARD -j REJECT --reject-with icmp-host-prohibited
-COMMIT
-
-*nat
-:POSTROUTING ACCEPT [0:0]
--A POSTROUTING -s 192.168.0.0/22 ! -d 192.168.0.0/22 -j MASQUERADE
-COMMIT&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-file="/etc/sysconfig/iptables"&gt;&lt;code class="language-iptables"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;*filter
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;:INPUT ACCEPT [0:0]
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;:FORWARD ACCEPT [0:0]
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;:OUTPUT ACCEPT [0:0]
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-A INPUT -m state --state INVALID -j DROP
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# If it was already established pass bits through
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# Allow for the local traffic
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-A INPUT -i lo -j ACCEPT
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# Let's MTU discovery and other network management to work properly
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-A INPUT -p icmp -m icmp --icmp-type any -j ACCEPT
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# Allow remote SSH logins on the specified port (should be &amp;lt;1024 and would require sshd re-configuration if the port is not standard)
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# Allow DHCP client to get its information
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-A INPUT -i eth0 -p udp -m state --state NEW -m udp --sport 67:68 --dport 67:68 -j ACCEPT
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# Reject anything that we did not specifically allow above
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-A INPUT -j REJECT --reject-with icmp-host-prohibited
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# This is a NAT box, so we accept packets from our network designated to the world, but reject any other forwarding attempts.
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-A FORWARD -i eth0 -s 192.168.0.0/22 ! -d 192.168.0.0/22 -j ACCEPT
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-A FORWARD -i eth0 ! -s 192.168.0.0/22 -d 192.168.0.0/22 -j ACCEPT
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# If there is a MTU mismatch between the NAT box and hosts behind it we want to allow ICMP for the MTU discovery
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-A FORWARD -i eth0 -p icmp -m icmp --icmp-type any -s 192.168.0.0/22 -d 192.168.0.0/22 -j ACCEPT
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# We may be interested in anything that is rejected in this chain, so let's log it
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-A FORWARD -j LOG
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# We do not allow to forward anything else
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-A FORWARD -j REJECT --reject-with icmp-host-prohibited
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;COMMIT
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;*nat
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;:POSTROUTING ACCEPT [0:0]
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-A POSTROUTING -s 192.168.0.0/22 ! -d 192.168.0.0/22 -j MASQUERADE
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;COMMIT&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;There are a few things to note:&lt;/p&gt;
 &lt;ul&gt;
@@ -1755,15 +1755,15 @@ using the command-line options). However, this approach turned out to be quite
 inconvenient since every time I wanted to connect to a new host (and, possibly,
 through a new intermediate host) I had to edit my SSH configuration file and
 add something like the following:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;Host intermediate
-    HostName 192.168.1.1
-    HostKeyAlias intermediate
-    LocalForward 10001 target:22
-
-Host target
-    HostName 127.0.0.1
-    HostKeyAlias target
-    Port 10001&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Host intermediate
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    HostName 192.168.1.1
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    HostKeyAlias intermediate
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    LocalForward 10001 target:22
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Host target
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    HostName 127.0.0.1
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    HostKeyAlias target
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    Port 10001&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Upon closer examination of my day-to-day routine I found two things that
 frustrated me the most:&lt;/p&gt;
@@ -1778,19 +1778,19 @@ frustrated me the most:&lt;/p&gt;
 tunnel through an intermediate host and found the approach quite convenient for
 the day-to-day use. So, I have added the following block into my &lt;code&gt;~/.ssh/config&lt;/code&gt;
 file just before the &lt;code&gt;Host *&lt;/code&gt; section:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;Host */*
-    ProxyCommand ssh $(dirname %h) -W $(basename %h):%p&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Host */*
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    ProxyCommand ssh $(dirname %h) -W $(basename %h):%p&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;From that point on, I could connect to a target host via an intermediate one
 by simply executing the following command:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;ssh user@intemediate/target&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;ssh user@intemediate/target&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The configuration with the &lt;code&gt;ProxyCommand&lt;/code&gt; directive was spawning two &lt;code&gt;ssh&lt;/code&gt;
 processes with one connected to the intermediate host in the background and the
 other proxied through the intermediate host and connected to the target running
 in the foreground, so from my point of view I had just one terminal session
 open. The configuration allowed to chain as many hosts as I wanted, e.g.:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;ssh user@hostA/hostB/hostC/hostD&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;ssh user@hostA/hostB/hostC/hostD&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The above would result in three &lt;code&gt;ssh&lt;/code&gt; processes running in the background (the
 first connected to hostA, the second connected to &lt;em&gt;hostB&lt;/em&gt; proxied through &lt;em&gt;hostA&lt;/em&gt;,
@@ -1809,26 +1809,26 @@ was irritating enough and I decided to figure out whether it is possible to
 optimise it. After a bit of reading the documentation and a few attempts I came
 up with the following configuration block in my &lt;code&gt;~/.ssh/config&lt;/code&gt; file (remember,
 this block should be placed &lt;em&gt;before&lt;/em&gt; the &lt;code&gt;Host *&lt;/code&gt; one):&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;Host */*
-    ControlMaster auto
-    ControlPath   ~/.ssh/.sessions/%r@%h:%p
-    ProxyCommand /bin/sh -c 'mkdir -p -m700 ~/.ssh/.sessions/&amp;quot;%r@$(dirname %h)&amp;quot; &amp;amp;&amp;amp; exec ssh -o &amp;quot;ControlMaster auto&amp;quot; -o &amp;quot;ControlPath   ~/.ssh/.sessions/%r@$(dirname %h):%p&amp;quot; -o &amp;quot;ControlPersist 120s&amp;quot; -l %r -p %p $(dirname %h) -W $(basename %h):%p'&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Host */*
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    ControlMaster auto
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    ControlPath   ~/.ssh/.sessions/%r@%h:%p
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    ProxyCommand /bin/sh -c 'mkdir -p -m700 ~/.ssh/.sessions/&amp;quot;%r@$(dirname %h)&amp;quot; &amp;amp;&amp;amp; exec ssh -o &amp;quot;ControlMaster auto&amp;quot; -o &amp;quot;ControlPath   ~/.ssh/.sessions/%r@$(dirname %h):%p&amp;quot; -o &amp;quot;ControlPersist 120s&amp;quot; -l %r -p %p $(dirname %h) -W $(basename %h):%p'&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Let&amp;rsquo;s review it line by line, so the logic is clear:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;Host */*&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Host */*&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;This host definition block would catch any host specified on the &lt;code&gt;ssh&lt;/code&gt; command
 line when the host name matches the &lt;code&gt;*/*&lt;/code&gt; pattern, so &lt;code&gt;ssh hostA/hostB/hostC&lt;/code&gt;
 will be matched as &lt;code&gt;hostA/hostB&lt;/code&gt; being the first part before &lt;code&gt;/&lt;/code&gt; and &lt;code&gt;hostC&lt;/code&gt; as
 the second part after &lt;code&gt;/&lt;/code&gt;. Due to a recursive call to &lt;code&gt;ssh&lt;/code&gt; (see below) this
 block will be recursively applied to all hosts in the specified chain.&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;    ControlMaster auto&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    ControlMaster auto&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;This directive instructs &lt;code&gt;ssh&lt;/code&gt; to try to reuse an existing control channel to
 communicate with the remote host, and if such a channel does not exist it will
 be created, so further connections to the same remote host would benefit from
 a speedup provided by the already established connection.&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;    ControlPath ~/.ssh/.sessions/%r@%h:%p&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    ControlPath ~/.ssh/.sessions/%r@%h:%p&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;This directive provides &lt;code&gt;ssh&lt;/code&gt; with the location of the control channel socket
 file. The socket file should be unique for each remote host. Since we are
@@ -1839,7 +1839,7 @@ part of the file name. Please note that due to our usage of &amp;ldquo;/&amp;rdq
 separator in the chain the path constructed here will have a subdirectory
 defined in the middle of the %h expansion. &lt;code&gt;ssh&lt;/code&gt; would not automatically create
 that subdirectory, so it is something we need to address (see below)&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;    ProxyCommand …&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    ProxyCommand …&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;This is the heart of the whole block. I am starting this proxy command with
 &lt;code&gt;/bin/sh -c '…'&lt;/code&gt; since &lt;code&gt;ssh&lt;/code&gt; is &lt;code&gt;exec()&lt;/code&gt;uting the specified command (this
@@ -1895,7 +1895,7 @@ following:&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;the second part executes&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;ssh … -o &amp;quot;ControlPath ~/.ssh/.sessions/user@hostA/hostB:22&amp;quot; … hostA/hostB -W hostC:22&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;ssh … -o &amp;quot;ControlPath ~/.ssh/.sessions/user@hostA/hostB:22&amp;quot; … hostA/hostB -W hostC:22&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;This will initiate another round of the above steps, but with a shorter chain
  and it will be recursive until there is just a single host left, e.g. when
@@ -2058,7 +2058,7 @@ through all of them and see if they are real benefits at all:&lt;/p&gt;
 &lt;p&gt;The ability of logging is so limited in &lt;code&gt;sudo&lt;/code&gt; that it cannot be used for
  anything except a substitute for the shell history. Just imagine the
  following scenario — a user executes:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;sudo less /var/log/messages&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;sudo less /var/log/messages&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;and then types &amp;ldquo;!&amp;rdquo; followed by the Enter/Return key — the user effectively
  now in the root shell and what &lt;code&gt;sudo&lt;/code&gt; will log into its logs has nothing
@@ -2096,8 +2096,8 @@ through all of them and see if they are real benefits at all:&lt;/p&gt;
  account/password.  The truth is that nobody is limited by a single root
  account: you can create as many as you want and each of them could have
  their own distinct password, e.g.&lt;/p&gt;
-&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;[root@localhost ~]# useradd -om -o 0 -g 0 -s /bin/sh new_root
-[root@localhost ~]# passwd new_root&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[root@localhost ~]# useradd -om -o 0 -g 0 -s /bin/sh new_root
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[root@localhost ~]# passwd new_root&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Better yet, do not set the password and lock the account instead with
  &lt;code&gt;usermod -L new_root&lt;/code&gt; since we are using keys, remember?&lt;/p&gt;
@@ -2334,7 +2334,7 @@ standard firewall/NAT router.&lt;/p&gt;
 &lt;p&gt;Now, how can you access port 12345 on host behind the firewall given that this
 port is not &amp;ldquo;exported&amp;rdquo; by the NAT on the firewall? This is quite simple. Open a
 terminal window on your local computer and type the following:&lt;/p&gt;
-&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;[user@localhost ~] ssh -L12345:192.168.1.2:12345 joe@firewall.domain.tld&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[user@localhost ~] ssh -L12345:192.168.1.2:12345 joe@firewall.domain.tld&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;From now on, as long as your SSH session is up and running you will be able to
 reach &lt;code&gt;192.168.1.2:12345&lt;/code&gt; by connecting to &lt;code&gt;localhost:12345&lt;/code&gt; (i.e. the &lt;code&gt;12345&lt;/code&gt;
@@ -2353,7 +2353,7 @@ requests to many ports useful:&lt;/p&gt;
   physically in Australia&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;In both cases, you use the following SSH command in your terminal window:&lt;/p&gt;
-&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;[user@localhost ~]$ ssh -D3128 joe@relay.domain.tld&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[user@localhost ~]$ ssh -D3128 joe@relay.domain.tld&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;As long as you SSH session is active, you can use port &lt;code&gt;3128&lt;/code&gt; on your local
 machine as SOCKS4/SOCKS5 proxy (e.g. you can configure proxy settings in your
@@ -2373,7 +2373,7 @@ to folks from WikiLeaks&amp;hellip; just kidding :) )?&lt;/p&gt;
 Google for &amp;ldquo;free ssh account&amp;rdquo; and you will surely find one for yourself).&lt;/p&gt;
 &lt;p&gt;Now, when you have the account, you can execute the following on your local
 computer (which is inside that highly secure network :) ):&lt;/p&gt;
-&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;[user@localhost ~]$ ssh -R:60000:127.0.0.1:22 joe@friendly.domain.tld&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[user@localhost ~]$ ssh -R:60000:127.0.0.1:22 joe@friendly.domain.tld&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The above command will setup such a configuration that connecting on port &lt;code&gt;60000&lt;/code&gt;
 at &lt;code&gt;friendly.domain.tld&lt;/code&gt; will forward traffic to your local machine&amp;rsquo;s port 22
@@ -2396,12 +2396,12 @@ way you want it!&lt;/p&gt;
 &lt;p&gt;Anyway, even if you fail to find a host that allows you to expose your service
 to the public, you still should be able to access it yourself &amp;ndash; using the
 forward firewall piercing technique described at the beginning of this post:&lt;/p&gt;
-&lt;pre class="highlight" data-user="user" data-prompt=""[user@localhost"&gt;&lt;code class="language-shell"&gt;# from your home computer
-[user@localhost ~]$ ssh -L60000:127.0.0.1:60000 joe@friendly.domain.tld&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="user" data-prompt=""[user@localhost"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# from your home computer
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[user@localhost ~]$ ssh -L60000:127.0.0.1:60000 joe@friendly.domain.tld&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Once it is done your computer in the highly secure network should be reachable
 via SSH on your &lt;code&gt;localhost:60000&lt;/code&gt;, e.g.&lt;/p&gt;
-&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;[user@localhost ~] ssh -p6000 my_account@localhost&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[user@localhost ~] ssh -p6000 my_account@localhost&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Where &lt;code&gt;my_account&lt;/code&gt; is a user allowed to SSH into your computer in the highly
 secure network.&lt;/p&gt;</content><category term="ssh"></category></entry><entry><title>SSH port-forwarding (Basic)</title><link href="https://dmitry.khlebnikov.net/2010/11/29/ssh-port-forwarding-basic/" rel="alternate"></link><published>2010-11-29T10:00:00+11:00</published><updated>2020-05-17T04:45:11+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2010-11-29:/2010/11/29/ssh-port-forwarding-basic/</id><summary type="html">&lt;p&gt;I think all of you are using SSH in your daily routines. However, do you use
@@ -2439,7 +2439,7 @@ another machine, you may want to bind MySQL to some internal interface &amp;ndas
 network that links your servers only, e.g. 192.168.1.1:3306), and then use the
 SSH port-forwarding feature to setup a tunnel between your remote database and
 your local computer:&lt;/p&gt;
-&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;[root@localhost ~]# ssh -L3306:127.0.0.1:3306 user@server&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[root@localhost ~]# ssh -L3306:127.0.0.1:3306 user@server&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Here, &lt;code&gt;-L3306:127.0.0.1:3306&lt;/code&gt; says that we want &lt;code&gt;127.0.0.1:3306&lt;/code&gt; to be &amp;ldquo;mapped&amp;rdquo;
 to our local host to port &lt;code&gt;3306&lt;/code&gt;. While the SSH session is active any packet
@@ -2489,18 +2489,18 @@ but I see no issues with 64-bit ones).&lt;/p&gt;
 &lt;p&gt;The first step is to download &lt;a href="http://www.vmware.com/go/downloadplayer/"&gt;VMware Player&lt;/a&gt; for your architecture, set proper
 permissions on the downloaded file, and then extract the payload as follows
 (you need to ensure that you have at least 40MB of free space on &lt;code&gt;/tmp&lt;/code&gt;, BTW):&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ chmod 0700 ./VMware-Player-3.1.3.324285.i386.bundle
-$ ./VMware-Player-3.1.3-324285.i386.bundle --console -x $(pwd)/vmplayer
-Extracting VMware Installer...done.
-No protocol specified
-No protocol specified
-$ ls -l vmplayer
-total 20
-drwxr-xr-x  8 vmware vmware 4096 Nov 23 09:01 vmware-installer
-drwxr-xr-x  4 vmware vmware 4096 Nov 23 09:01 vmware-ovftool
-drwxr-xr-x  5 vmware vmware 4096 Nov 23 09:01 vmware-player
-drwxr-xr-x 11 vmware vmware 4096 Nov 23 09:01 vmware-player-app
-drwxr-xr-x  3 vmware vmware 4096 Nov 23 09:01 vmware-player-setup&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ chmod 0700 ./VMware-Player-3.1.3.324285.i386.bundle
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ ./VMware-Player-3.1.3-324285.i386.bundle --console -x $(pwd)/vmplayer
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Extracting VMware Installer...done.
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;No protocol specified
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;No protocol specified
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ ls -l vmplayer
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;total 20
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;drwxr-xr-x  8 vmware vmware 4096 Nov 23 09:01 vmware-installer
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;drwxr-xr-x  4 vmware vmware 4096 Nov 23 09:01 vmware-ovftool
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;drwxr-xr-x  5 vmware vmware 4096 Nov 23 09:01 vmware-player
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;drwxr-xr-x 11 vmware vmware 4096 Nov 23 09:01 vmware-player-app
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;drwxr-xr-x  3 vmware vmware 4096 Nov 23 09:01 vmware-player-setup&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;So far so good. We now have the whole bundle unacked into the specified
 directory and we are interested in just two subdirectories: &lt;code&gt;vmware-player&lt;/code&gt; and
@@ -2509,27 +2509,27 @@ looking for.&lt;/p&gt;
 &lt;p&gt;Now, let&amp;rsquo;s pick up all parts from which we will build our future &amp;ldquo;VMware remote
 console&amp;rdquo; tool. To make it easier create a dedicated subdirectory, e.g.
 &lt;code&gt;vmrconsole&lt;/code&gt;, with the following structure:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ mkdir -m700 ~/vmrconsole
-$ mkdir -m700 ~/vmrconsole/{bin,etc,lib,share}
-$ ls -l ~/vmrconsole
-total 12
-drwx------ 2 vmware vmware 4096 Nov 24 01:21 bin
-drwx------ 2 vmware vmware 4096 Nov 24 01:21 etc
-drwx------ 2 vmware vmware 4096 Nov 24 01:21 lib
-drwx------ 2 vmware vmware 4096 Nov 24 01:21 share&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ mkdir -m700 ~/vmrconsole
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ mkdir -m700 ~/vmrconsole/{bin,etc,lib,share}
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ ls -l ~/vmrconsole
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;total 12
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;drwx------ 2 vmware vmware 4096 Nov 24 01:21 bin
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;drwx------ 2 vmware vmware 4096 Nov 24 01:21 etc
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;drwx------ 2 vmware vmware 4096 Nov 24 01:21 lib
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;drwx------ 2 vmware vmware 4096 Nov 24 01:21 share&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;From now on we are going to populate these directories with files from the
 unpacked bundle.&lt;/p&gt;
 &lt;p&gt;The first file we are interested in is &lt;code&gt;appLoader&lt;/code&gt; &amp;ndash; this is the primary
 executable by the way, we need to copy it to our bin directory and then try to
 run it:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ cp ~/vmplayer/vmware-player-app/lib/bin/appLoader ~/vmrconsole/bin/
-$ chmod 0700 ~/vmrconsole/bin/appLoader
-$ ln -s appLoader ~/vmrconsole/bin/vmplayer
-$ ~/vmrconsole/bin/vmplayer 
-$ echo $?
-255
-$&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ cp ~/vmplayer/vmware-player-app/lib/bin/appLoader ~/vmrconsole/bin/
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ chmod 0700 ~/vmrconsole/bin/appLoader
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ ln -s appLoader ~/vmrconsole/bin/vmplayer
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ ~/vmrconsole/bin/vmplayer 
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ echo $?
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;255
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Huh, this is not very informative, is it? The binary silently exits with error
 code of 255. Well, you may get other errors at this stage if you don&amp;rsquo;t have all
@@ -2538,9 +2538,9 @@ since the requirements of this binary are pretty reasonable: glibc and zlib.&lt;
 &lt;p&gt;OK, let&amp;rsquo;s take a peek inside and figure out what is going on (originally I used
 strace with logging to a file, but to keep this article reasonable short I am
 highlighting important things only):&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ strace -f -eopen ~/vmrconsole/bin/vmplayer 2&amp;gt;&amp;amp;1 | tail -2
-open(&amp;quot;/etc/localtime&amp;quot;, O_RDONLY)        = 6
-open(&amp;quot;/etc/vmware/config&amp;quot;, O_RDONLY|O_LARGEFILE) = -1 EACCES (Permission denied)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ strace -f -eopen ~/vmrconsole/bin/vmplayer 2&amp;gt;&amp;amp;1 | tail -2
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;open(&amp;quot;/etc/localtime&amp;quot;, O_RDONLY)        = 6
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;open(&amp;quot;/etc/vmware/config&amp;quot;, O_RDONLY|O_LARGEFILE) = -1 EACCES (Permission denied)&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;It looks that vmplayer wants to access a global config file and does not try to
 look for an alternative, home directory based one. Well, this is understandable
@@ -2548,14 +2548,14 @@ since VMware folks did not expect it to be run as a non-privileged process, but
 we need to deal with this somehow. What are our options here? The simpliest
 option I could think of at the moment is to substitute the hardcoded absolute
 path inside the binary with something relative:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ strings ~/vmrconsole/bin/appLoader | fgrep /etc/vmware | uniq -c
-      1 /etc/vmware/config
-      1 /etc/vmware/icu
-      1 /etc/vmware/ssl/rui.crt
-      1 /etc/vmware/ssl/rui.key
-      1 /etc/vmware/ssl/dh512.pem
-      1 /etc/vmware/ssl/dh1024.pem
-$ sed -i 's,/etc/vmware,..//////etc,g' ~/vmrconsole/bin/appLoader&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ strings ~/vmrconsole/bin/appLoader | fgrep /etc/vmware | uniq -c
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;      1 /etc/vmware/config
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;      1 /etc/vmware/icu
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;      1 /etc/vmware/ssl/rui.crt
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;      1 /etc/vmware/ssl/rui.key
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;      1 /etc/vmware/ssl/dh512.pem
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;      1 /etc/vmware/ssl/dh1024.pem
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ sed -i 's,/etc/vmware,..//////etc,g' ~/vmrconsole/bin/appLoader&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The trick here is to substitute one string with another of the same length (we
 are modifying a binary so we do not want to mess offsets up) and luckily enough
@@ -2564,44 +2564,44 @@ single separator nevertheless. OK, we could have used a hex editor and could
 have terminated strings with a NULL byte, but the point is that the approach I
 took is the quickest and is working well. Let&amp;rsquo;s run the modified binary through
 strace again, but this time we need to be prepared for the changed behaviour:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ cd ~/vmrconsole/bin/
-$ touch ../etc/config
-$ strace -f -emkdir,lstat,open,write ./vmplayer 2&amp;gt;&amp;amp;1 | tail -12
-mkdir(&amp;quot;/tmp/.private/vmware/vmware-vmplayer&amp;quot;, 0700) = -1 EEXIST (File exists)
-open(&amp;quot;/tmp/.private/vmware/vmware-vmplayer/appLoader-9245.log&amp;quot;, O_RDWR|O_CREAT|O_APPEND|O_LARGEFILE, 0644) = 5
-open(&amp;quot;/etc/localtime&amp;quot;, O_RDONLY)        = 6
-write(5, &amp;quot;Nov 24 01:53:09.824: app-3077760&amp;quot;..., 121) = 121
-write(5, &amp;quot;Nov 24 01:53:09.824: app-3077760&amp;quot;..., 60) = 60
-write(5, &amp;quot;Nov 24 01:53:09.824: app-3077760&amp;quot;..., 71) = 71
-write(5, &amp;quot;Nov 24 01:53:09.824: app-3077760&amp;quot;..., 57) = 57
-write(5, &amp;quot;\&amp;quot;\n&amp;quot;, 2)                     = 2
-write(5, &amp;quot;Nov 24 01:53:09.825: app-3077760&amp;quot;..., 82) = 82
-open(&amp;quot;..//////etc/config&amp;quot;, O_RDONLY|O_LARGEFILE) = 6
-write(5, &amp;quot;Nov 24 01:53:09.825: app-3077760&amp;quot;..., 89) = 89
-write(5, &amp;quot;Nov 24 01:53:09.825: app-3077760&amp;quot;..., 73) = 73&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ cd ~/vmrconsole/bin/
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ touch ../etc/config
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ strace -f -emkdir,lstat,open,write ./vmplayer 2&amp;gt;&amp;amp;1 | tail -12
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;mkdir(&amp;quot;/tmp/.private/vmware/vmware-vmplayer&amp;quot;, 0700) = -1 EEXIST (File exists)
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;open(&amp;quot;/tmp/.private/vmware/vmware-vmplayer/appLoader-9245.log&amp;quot;, O_RDWR|O_CREAT|O_APPEND|O_LARGEFILE, 0644) = 5
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;open(&amp;quot;/etc/localtime&amp;quot;, O_RDONLY)        = 6
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;write(5, &amp;quot;Nov 24 01:53:09.824: app-3077760&amp;quot;..., 121) = 121
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;write(5, &amp;quot;Nov 24 01:53:09.824: app-3077760&amp;quot;..., 60) = 60
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;write(5, &amp;quot;Nov 24 01:53:09.824: app-3077760&amp;quot;..., 71) = 71
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;write(5, &amp;quot;Nov 24 01:53:09.824: app-3077760&amp;quot;..., 57) = 57
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;write(5, &amp;quot;\&amp;quot;\n&amp;quot;, 2)                     = 2
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;write(5, &amp;quot;Nov 24 01:53:09.825: app-3077760&amp;quot;..., 82) = 82
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;open(&amp;quot;..//////etc/config&amp;quot;, O_RDONLY|O_LARGEFILE) = 6
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;write(5, &amp;quot;Nov 24 01:53:09.825: app-3077760&amp;quot;..., 89) = 89
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;write(5, &amp;quot;Nov 24 01:53:09.825: app-3077760&amp;quot;..., 73) = 73&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Looks better, does not it? Our binary found the config file and was able to
 open it, however it still produces no output, but it reports something to a log
 file:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ tail -7 /tmp/.private/vmware/vmware-vmplayer/appLoader-9245.log
-Nov 24 01:53:09.824: app-3077760704| Log for VMware Workstation pid=9245 version=7.1.3 build=build-324285 option=Release
-Nov 24 01:53:09.824: app-3077760704| The process is 32-bit.
-Nov 24 01:53:09.824: app-3077760704| Host codepage=utf8 encoding=UTF-8
-Nov 24 01:53:09.824: app-3077760704| Calling: &amp;quot;./vmplayer&amp;quot;
-Nov 24 01:53:09.825: app-3077760704| Using configuration file ..//////etc/config.
-Nov 24 01:53:09.825: app-3077760704| libdir entry was not present in ..//////etc/config.
-Nov 24 01:53:09.825: app-3077760704| Unable to lookup library directory.&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ tail -7 /tmp/.private/vmware/vmware-vmplayer/appLoader-9245.log
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Nov 24 01:53:09.824: app-3077760704| Log for VMware Workstation pid=9245 version=7.1.3 build=build-324285 option=Release
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Nov 24 01:53:09.824: app-3077760704| The process is 32-bit.
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Nov 24 01:53:09.824: app-3077760704| Host codepage=utf8 encoding=UTF-8
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Nov 24 01:53:09.824: app-3077760704| Calling: &amp;quot;./vmplayer&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Nov 24 01:53:09.825: app-3077760704| Using configuration file ..//////etc/config.
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Nov 24 01:53:09.825: app-3077760704| libdir entry was not present in ..//////etc/config.
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Nov 24 01:53:09.825: app-3077760704| Unable to lookup library directory.&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;I do not know much about VMware Players config file but according to the log
 message it wants some variable called &lt;code&gt;libdir&lt;/code&gt; and this variable should point
 to the library directory, so let&amp;rsquo;s introduce such a variable and try to execute
 the binary again:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ echo 'libdir = ..' &amp;gt;&amp;gt; ../etc/config
-$ strace -f -emkdir,lstat,open,write ./vmplayer 2&amp;gt;&amp;amp;1 | tail -4
-write(5, &amp;quot;LOG NOT INITIALIZED | LoadLibrar&amp;quot;..., 73) = 73
-open(&amp;quot;../lib/libvmplayer.so/libvmplayer.so&amp;quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
-write(5, &amp;quot;LOG NOT INITIALIZED | Error load&amp;quot;..., 153) = 153
-write(5, &amp;quot;LOG NOT INITIALIZED | Could not &amp;quot;..., 74) = 74&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ echo 'libdir = ..' &amp;gt;&amp;gt; ../etc/config
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ strace -f -emkdir,lstat,open,write ./vmplayer 2&amp;gt;&amp;amp;1 | tail -4
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;write(5, &amp;quot;LOG NOT INITIALIZED | LoadLibrar&amp;quot;..., 73) = 73
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;open(&amp;quot;../lib/libvmplayer.so/libvmplayer.so&amp;quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;write(5, &amp;quot;LOG NOT INITIALIZED | Error load&amp;quot;..., 153) = 153
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;write(5, &amp;quot;LOG NOT INITIALIZED | Could not &amp;quot;..., 74) = 74&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;I hope you have noticed that I have used a relative path for the library
 directory in the config file and this means that we always should run the
@@ -2610,16 +2610,16 @@ inconvenient, but we will solve this with a wrapper script later. Right now, we
 need to get it working and we see that it tried to dynamically load some
 library from the library directory. OK, let&amp;rsquo;s search for this library in the
 unpacked bundle directory and copy the library file over to our tree:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ find ~/vmplayer -name libvmplayer.so
-/home/vmware/vmplayer/vmware-player-app/lib/lib/libvmplayer.so
-/home/vmware/vmplayer/vmware-player-app/lib/lib/libvmplayer.so/libvmplayer.so
-$ cp -a ~/vmplayer/vmware-player-app/lib/lib/libvmplayer.so ~/vmrconsole/lib/
-$ ldd ~/vmrconsole/lib/libvmplayer.so/libvmplayer.so | fgrep 'not found'
- libview.so.2 =&amp;gt; not found
- libcds.so =&amp;gt; not found
- libvmwarebase.so.0 =&amp;gt; not found
- libvmwareui.so.0 =&amp;gt; not found
- libgvmomi.so.0 =&amp;gt; not found&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ find ~/vmplayer -name libvmplayer.so
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/home/vmware/vmplayer/vmware-player-app/lib/lib/libvmplayer.so
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/home/vmware/vmplayer/vmware-player-app/lib/lib/libvmplayer.so/libvmplayer.so
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ cp -a ~/vmplayer/vmware-player-app/lib/lib/libvmplayer.so ~/vmrconsole/lib/
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ ldd ~/vmrconsole/lib/libvmplayer.so/libvmplayer.so | fgrep 'not found'
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt; libview.so.2 =&amp;gt; not found
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt; libcds.so =&amp;gt; not found
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt; libvmwarebase.so.0 =&amp;gt; not found
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt; libvmwareui.so.0 =&amp;gt; not found
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt; libgvmomi.so.0 =&amp;gt; not found&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The last command showed that &lt;code&gt;libvmplayer.so&lt;/code&gt; depends on some libraries and
 that their locations are currently unknown to the system. In order to solve
@@ -2632,72 +2632,72 @@ this there are two things we need to do:&lt;/p&gt;
 &lt;p&gt;To accomplish the first thing we need to create a wrapper script around
 vmplayer and use this script for fine-tuning later. Here is the very basic
 script for this purpose (created as &lt;code&gt;~/vmrconsole/bin/loader.sh&lt;/code&gt;:&lt;/p&gt;
-&lt;pre class="highlight" data-file="~/vmrconsole/bin/loader.sh"&gt;&lt;code class="language-bash"&gt;#!/bin/bash
-
-# We must run vmplayer from the directory it resides in since all
-# relative paths are solved from there.
-ORIG_NAME=&amp;quot;${BASH_SOURCE##*/}&amp;quot;
-ABS_NAME=$(readlink -e $BASH_SOURCE) || exit 1
-VMW_BINDIR=&amp;quot;${ABS_NAME%/*}&amp;quot;
-VMW_LIBDIR=&amp;quot;$VMW_BINDIR/../lib&amp;quot;
-
-# check that directories exist, if not notify the user
-if [ ! -d &amp;quot;$VMW_BINDIR&amp;quot; ]; then
-    echo &amp;quot;ERROR: cannot determine the directory where this script resides!&amp;quot; &amp;gt;&amp;amp;2
-    exit 1
-fi
-
-# preserve the current working directory
-OLD_PWD=&amp;quot;$PWD&amp;quot;
-
-if ! cd &amp;quot;$VMW_LIBDIR&amp;quot; &amp;gt;/dev/null 2&amp;gt;&amp;amp;1 ; then
-    echo &amp;quot;ERROR: the '$VMW_LIBDIR' directory does not exist!&amp;quot; &amp;gt;&amp;amp;2
-    exit 1
-fi
-
-# resolve the library directory path (to get rid off ../ inside of it)
-VMW_LIBDIR=$(pwd -P 2&amp;gt;/dev/null)
-if [ $? -ne 0 -o ! -d &amp;quot;$VMW_LIBDIR&amp;quot; ]; then
-    echo &amp;quot;ERROR: could not resolve the '$VMW_LIBDIR' directory path!&amp;quot; &amp;gt;&amp;amp;2
-    exit 1
-fi
-
-# return back since it possible that we were called as ./vmrconsole
-if ! cd &amp;quot;$OLD_PWD&amp;quot; &amp;gt;/dev/null 2&amp;gt;&amp;amp;1 ; then
-    echo &amp;quot;ERROR: could not return to the original '$OLD_PWD' directory!&amp;quot; &amp;gt;&amp;amp;2
-    exit 1
-fi
-
-# we don't need the following variable anymore
-unset OLD_PWD
-
-# change the current directory to $VMW_BINDIR
-if ! cd &amp;quot;$VMW_BINDIR&amp;quot; &amp;gt;/dev/null 2&amp;gt;&amp;amp;1 ; then
-    echo &amp;quot;ERROR: failed to change directory to '$VMW_BINDIR'!&amp;quot; &amp;gt;&amp;amp;2
-    exit 1
-fi
-
-# set the library search path so the dynamic linker will be able
-# to locate locally installed libraries.
-LD_LIBRARY_PATH=&amp;quot;$VMW_LIBDIR${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}&amp;quot;
-export LD_LIBRARY_PATH
-
-# execute the real binary and pass the supplied arguments to it
-exec -a &amp;quot;$ORIG_NAME&amp;quot; ./appLoader &amp;quot;$@&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-file="~/vmrconsole/bin/loader.sh"&gt;&lt;code class="language-bash"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;#!/bin/bash
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# We must run vmplayer from the directory it resides in since all
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# relative paths are solved from there.
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;ORIG_NAME=&amp;quot;${BASH_SOURCE##*/}&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;ABS_NAME=$(readlink -e $BASH_SOURCE) || exit 1
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;VMW_BINDIR=&amp;quot;${ABS_NAME%/*}&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;VMW_LIBDIR=&amp;quot;$VMW_BINDIR/../lib&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# check that directories exist, if not notify the user
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;if [ ! -d &amp;quot;$VMW_BINDIR&amp;quot; ]; then
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    echo &amp;quot;ERROR: cannot determine the directory where this script resides!&amp;quot; &amp;gt;&amp;amp;2
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    exit 1
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;fi
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# preserve the current working directory
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;OLD_PWD=&amp;quot;$PWD&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;if ! cd &amp;quot;$VMW_LIBDIR&amp;quot; &amp;gt;/dev/null 2&amp;gt;&amp;amp;1 ; then
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    echo &amp;quot;ERROR: the '$VMW_LIBDIR' directory does not exist!&amp;quot; &amp;gt;&amp;amp;2
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    exit 1
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;fi
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# resolve the library directory path (to get rid off ../ inside of it)
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;VMW_LIBDIR=$(pwd -P 2&amp;gt;/dev/null)
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;if [ $? -ne 0 -o ! -d &amp;quot;$VMW_LIBDIR&amp;quot; ]; then
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    echo &amp;quot;ERROR: could not resolve the '$VMW_LIBDIR' directory path!&amp;quot; &amp;gt;&amp;amp;2
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    exit 1
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;fi
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# return back since it possible that we were called as ./vmrconsole
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;if ! cd &amp;quot;$OLD_PWD&amp;quot; &amp;gt;/dev/null 2&amp;gt;&amp;amp;1 ; then
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    echo &amp;quot;ERROR: could not return to the original '$OLD_PWD' directory!&amp;quot; &amp;gt;&amp;amp;2
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    exit 1
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;fi
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# we don't need the following variable anymore
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;unset OLD_PWD
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# change the current directory to $VMW_BINDIR
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;if ! cd &amp;quot;$VMW_BINDIR&amp;quot; &amp;gt;/dev/null 2&amp;gt;&amp;amp;1 ; then
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    echo &amp;quot;ERROR: failed to change directory to '$VMW_BINDIR'!&amp;quot; &amp;gt;&amp;amp;2
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    exit 1
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;fi
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# set the library search path so the dynamic linker will be able
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# to locate locally installed libraries.
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;LD_LIBRARY_PATH=&amp;quot;$VMW_LIBDIR${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;export LD_LIBRARY_PATH
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# execute the real binary and pass the supplied arguments to it
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;exec -a &amp;quot;$ORIG_NAME&amp;quot; ./appLoader &amp;quot;$@&amp;quot;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;This wrapper script should not be called directly, instead we need to create a
 symbolic link to this wrapper, e.g. for vmplayer the following should be
 performed:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ ln -sf loader.sh ~/vmrconsole/bin/vmplayer&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ ln -sf loader.sh ~/vmrconsole/bin/vmplayer&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Since our vmplayer is not a full scale VMware Player I suggest to create
 another small wrapper script and name it &lt;code&gt;vmrconsole&lt;/code&gt;:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ cat ~/vmrconsole/bin/vmrconsole
-#!/bin/bash
-ABS_NAME=$(readlink -e $BASH_SOURCE) || exit 1
-BINDIR=&amp;quot;${ABS_NAME%/*}&amp;quot;
-exec &amp;quot;$BINDIR/vmplayer&amp;quot; -h &amp;quot;$@&amp;quot;
-$ chmod 0700 ~/vmrconsole/bin/vmrconsole&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ cat ~/vmrconsole/bin/vmrconsole
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;#!/bin/bash
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;ABS_NAME=$(readlink -e $BASH_SOURCE) || exit 1
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;BINDIR=&amp;quot;${ABS_NAME%/*}&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;exec &amp;quot;$BINDIR/vmplayer&amp;quot; -h &amp;quot;$@&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ chmod 0700 ~/vmrconsole/bin/vmrconsole&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Now we need to populate our library directory with the needed libraries. It is
 a bit tricky to describe since on different systems you will likely end up with
@@ -2709,126 +2709,126 @@ fixes in comparison to the VMWare provided ones.&lt;/p&gt;
 we start with the libraries we determined as missing during our &lt;code&gt;ldd
 ~/vmrconsole/lib/libvmplayer.so/libvmplayer.so | fgrep 'not found'&lt;/code&gt; step (we
 need to locate and copy them over to our library directory):&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ ldd ~/vmrconsole/lib/libvmplayer.so/libvmplayer.so | fgrep 'not found' | awk '{ print $1; }' | xargs -i find ~/vmplayer -type f -name '{}' -execdir cp -avL '{}' ~/vmrconsole/lib/ \;
-`libview.so.2' -&amp;gt; `/home/vmware/vmrconsole/lib/libview.so.2'
-`libcds.so' -&amp;gt; `/home/vmware/vmrconsole/lib/libcds.so'
-`libvmwarebase.so.0' -&amp;gt; `/home/vmware/vmrconsole/lib/libvmwarebase.so.0'
-`libvmwareui.so.0' -&amp;gt; `/home/vmware/vmrconsole/lib/libvmwareui.so.0'
-`libgvmomi.so.0' -&amp;gt; `/home/vmware/vmrconsole/lib/libgvmomi.so.0'&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ ldd ~/vmrconsole/lib/libvmplayer.so/libvmplayer.so | fgrep 'not found' | awk '{ print $1; }' | xargs -i find ~/vmplayer -type f -name '{}' -execdir cp -avL '{}' ~/vmrconsole/lib/ \;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;`libview.so.2' -&amp;gt; `/home/vmware/vmrconsole/lib/libview.so.2'
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;`libcds.so' -&amp;gt; `/home/vmware/vmrconsole/lib/libcds.so'
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;`libvmwarebase.so.0' -&amp;gt; `/home/vmware/vmrconsole/lib/libvmwarebase.so.0'
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;`libvmwareui.so.0' -&amp;gt; `/home/vmware/vmrconsole/lib/libvmwareui.so.0'
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;`libgvmomi.so.0' -&amp;gt; `/home/vmware/vmrconsole/lib/libgvmomi.so.0'&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Once this is done we need to follow the following loop until there is no output
 from the command listed below (in fact, on my system this step was not needed
 since I had all dependencies in place already, but it is harmless to execute
 this command anyway):&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ LD_LIBRARY_PATH=~/vmrconsole/lib ldd ~/vmrconsole/lib/* 2&amp;gt;/dev/null | fgrep 'not found' | awk '{ print $1; }' | xargs -i find ~/vmplayer -type f -name '{}' -execdir cp -avL '{}' ~/vmrconsole/lib/ \;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ LD_LIBRARY_PATH=~/vmrconsole/lib ldd ~/vmrconsole/lib/* 2&amp;gt;/dev/null | fgrep 'not found' | awk '{ print $1; }' | xargs -i find ~/vmplayer -type f -name '{}' -execdir cp -avL '{}' ~/vmrconsole/lib/ \;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;If we try to access any remote VM&amp;rsquo;s console it will be clear that some parts
 are still missing:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ vmrconsole 192.168.70.31
-Failed to open file '/usr/lib/vmware/share/pixmaps/progress.png': No such file or directory
-Failed to open file '/usr/lib/vmware/share/pixmaps/eula.png': No such file or directory
-Failed to open file '/usr/lib/vmware/share/pixmaps/stream-spinner.png': No such file or directory
-Failed to open file '/usr/lib/vmware/share/pixmaps/stream-spinner-stopped.png': No such file or directory
-SSLLoadSharedLibrary: Failed to load library libcrypto.so.0.9.8:/home/vmplayer/vmrconsole/bin/libdir/lib/libcrypto.so.0.9.8/libcrypto.so.0.9.8: cannot open shared object file: No such file or directory&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ vmrconsole 192.168.70.31
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Failed to open file '/usr/lib/vmware/share/pixmaps/progress.png': No such file or directory
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Failed to open file '/usr/lib/vmware/share/pixmaps/eula.png': No such file or directory
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Failed to open file '/usr/lib/vmware/share/pixmaps/stream-spinner.png': No such file or directory
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Failed to open file '/usr/lib/vmware/share/pixmaps/stream-spinner-stopped.png': No such file or directory
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;SSLLoadSharedLibrary: Failed to load library libcrypto.so.0.9.8:/home/vmplayer/vmrconsole/bin/libdir/lib/libcrypto.so.0.9.8/libcrypto.so.0.9.8: cannot open shared object file: No such file or directory&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;code&gt;strace&lt;/code&gt; is our best friend here, just run the command through &lt;code&gt;strace&lt;/code&gt;,
 examine the log file, and fix stuff properly:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ strace -f -eopen -o ~/strace.log vmrconsole 192.168.70.31 &amp;gt;/dev/null 2&amp;gt;&amp;amp;1
-$ less -n ~/strace.log
-$ cd ~/vmrconsole/lib
-$ fgrep -lr /vmware *
-libcds.so
-libgvmomi.so.0
-libvmplayer.so/libvmplayer.so
-libvmwarebase.so.0
-libvmwareui.so.0
-$ strings libcds.so | fgrep /vmware
-/etc/vmware/bootstrap
-/etc/vmware-installer/bootstrap
-/etc/vmware-installer/database
-$ sed -i 's,/etc/vmware/,..//////etc/,' libcds.so 
-$ sed -i 's,/etc/vmware-installer/,..//////etc/installer/,' libcds.so 
-$ strings libgvmomi.so.0 | fgrep /vmware
-/etc/vmware/hostd/proxy.xml
-/etc/vmware/icu
-/etc/vmware/ssl/rui.crt
-/etc/vmware/ssl/rui.key
-/etc/vmware/ssl/dh512.pem
-/etc/vmware/ssl/dh1024.pem
-$ sed -i 's,/etc/vmware/,..//////etc/,g' libgvmomi.so.0
-$ strings libvmplayer.so/libvmplayer.so | fgrep /vmware
-/usr/lib/vmware
-bin/vmware-vmrc-daemon
-$ strings libvmwarebase.so.0 | fgrep /vmware
-/etc/vmware/config
-/usr/lib/vmware
-/etc/vmware/icu
-/etc/vmware/CVP
-vmauthd/vmware-authd
-/usr/sbin/vmware-authd
-/var/run/vmware/authd_
-/var/run/vmware
-/etc/vmware/ssl/rui.crt
-/etc/vmware/ssl/rui.key
-/etc/vmware/ssl/dh512.pem
-/etc/vmware/ssl/dh1024.pem
-/var/run/vmware/usbarbitrator-socket
-/usr/lib/vmware/settings
-/usr/lib/vmware/config
-bin/vmware-vmx
-bin/vmware-vmx-debug
-bin/vmware-vmx-stats
-%s/vmware-speedtest-%d.tmp
-/etc/vmware/vmware-ace/host.vmpl
-/etc/vmware/vmware-ace/host-update.vmpl
-/etc/vmware
-$ sed -i 's,/etc/vmware/,..//////etc/,g' libvmwarebase.so.0 
-$ sed -i 's,/etc/vmware,..//////etc,g' libvmwarebase.so.0 
-$ sed -i 's,/usr/lib/vmware/,..//////////etc/,g' libvmwarebase.so.0 
-$ sed -i 's,/var/run/vmware,..//////var/run,g' libvmwarebase.so.0 
-$ strings libvmwareui.so.0 | fgrep /usr/lib/vmware
-/usr/lib/vmware
-$ strings libvmwareui.so.0 | fgrep /var/run/vmware
-/var/run/vmware/fuse/%Lu.info
-$ sed -i 's,/var/run/vmware,..//////var/run,g' libvmwareui.so.0&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ strace -f -eopen -o ~/strace.log vmrconsole 192.168.70.31 &amp;gt;/dev/null 2&amp;gt;&amp;amp;1
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ less -n ~/strace.log
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ cd ~/vmrconsole/lib
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ fgrep -lr /vmware *
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;libcds.so
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;libgvmomi.so.0
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;libvmplayer.so/libvmplayer.so
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;libvmwarebase.so.0
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;libvmwareui.so.0
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ strings libcds.so | fgrep /vmware
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/etc/vmware/bootstrap
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/etc/vmware-installer/bootstrap
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/etc/vmware-installer/database
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ sed -i 's,/etc/vmware/,..//////etc/,' libcds.so 
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ sed -i 's,/etc/vmware-installer/,..//////etc/installer/,' libcds.so 
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ strings libgvmomi.so.0 | fgrep /vmware
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/etc/vmware/hostd/proxy.xml
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/etc/vmware/icu
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/etc/vmware/ssl/rui.crt
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/etc/vmware/ssl/rui.key
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/etc/vmware/ssl/dh512.pem
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/etc/vmware/ssl/dh1024.pem
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ sed -i 's,/etc/vmware/,..//////etc/,g' libgvmomi.so.0
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ strings libvmplayer.so/libvmplayer.so | fgrep /vmware
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/usr/lib/vmware
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;bin/vmware-vmrc-daemon
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ strings libvmwarebase.so.0 | fgrep /vmware
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/etc/vmware/config
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/usr/lib/vmware
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/etc/vmware/icu
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/etc/vmware/CVP
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;vmauthd/vmware-authd
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/usr/sbin/vmware-authd
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/var/run/vmware/authd_
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/var/run/vmware
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/etc/vmware/ssl/rui.crt
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/etc/vmware/ssl/rui.key
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/etc/vmware/ssl/dh512.pem
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/etc/vmware/ssl/dh1024.pem
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/var/run/vmware/usbarbitrator-socket
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/usr/lib/vmware/settings
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/usr/lib/vmware/config
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;bin/vmware-vmx
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;bin/vmware-vmx-debug
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;bin/vmware-vmx-stats
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;%s/vmware-speedtest-%d.tmp
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/etc/vmware/vmware-ace/host.vmpl
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/etc/vmware/vmware-ace/host-update.vmpl
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/etc/vmware
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ sed -i 's,/etc/vmware/,..//////etc/,g' libvmwarebase.so.0 
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ sed -i 's,/etc/vmware,..//////etc,g' libvmwarebase.so.0 
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ sed -i 's,/usr/lib/vmware/,..//////////etc/,g' libvmwarebase.so.0 
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ sed -i 's,/var/run/vmware,..//////var/run,g' libvmwarebase.so.0 
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ strings libvmwareui.so.0 | fgrep /usr/lib/vmware
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/usr/lib/vmware
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ strings libvmwareui.so.0 | fgrep /var/run/vmware
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/var/run/vmware/fuse/%Lu.info
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ sed -i 's,/var/run/vmware,..//////var/run,g' libvmwareui.so.0&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Ufff, we did a lot of binary patching &amp;ndash; luckily, VMware binaries and libraries
 are not calculating their checksums. Now, we need to put all this stuff we have
 seen in the &lt;code&gt;strings&lt;/code&gt; output and during the execution of the program in place (in
 accordance to our new relative paths):&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ find ~/vmplayer -name icu
-/home/vmware/vmplayer/vmware-player-app/lib/icu
-$ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/icu ~/vmrconsole/etc/
-$ mkdir -m700 ~/vmrconsole/etc/ssl
-$ find ~/vmplayer -name CVP
-$ mkdir -m700 ~/vmrconsole/var
-$ mkdir -m700 ~/vmrconsole/var/run
-$ find ~/vmplayer -name pixmaps
-/home/vmware/vmplayer/vmware-player/lib/share/pixmaps
-/home/vmware/vmplayer/vmware-player-app/lib/share/pixmaps
-$ mkdir -m700 ~/vmrconsole/share/pixmaps
-$ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/share/pixmaps/* ~/vmrconsole/share/pixmaps/
-$ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/share/EULA.txt ~/vmrconsole/share/
-$ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/share/*.ui ~/vmrconsole/share/
-$ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/share/icons ~/vmrconsole/share/&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ find ~/vmplayer -name icu
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/home/vmware/vmplayer/vmware-player-app/lib/icu
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/icu ~/vmrconsole/etc/
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ mkdir -m700 ~/vmrconsole/etc/ssl
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ find ~/vmplayer -name CVP
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ mkdir -m700 ~/vmrconsole/var
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ mkdir -m700 ~/vmrconsole/var/run
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ find ~/vmplayer -name pixmaps
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/home/vmware/vmplayer/vmware-player/lib/share/pixmaps
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/home/vmware/vmplayer/vmware-player-app/lib/share/pixmaps
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ mkdir -m700 ~/vmrconsole/share/pixmaps
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/share/pixmaps/* ~/vmrconsole/share/pixmaps/
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/share/EULA.txt ~/vmrconsole/share/
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/share/*.ui ~/vmrconsole/share/
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/share/icons ~/vmrconsole/share/&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;At this stage we should be able to launch the vmplayer program via our wrapper
 script (I am launching it on a remote machine through SSH, but here I am
 describing how it should look on the local console):&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ ~/vmrconsole/bin/vmplayer&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ ~/vmrconsole/bin/vmplayer&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;img alt="VMware Player: main window" class="figure" src="https://dmitry.khlebnikov.net/images/howto-vmware-player-as-remote-console-01.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;So far so good, but we need to resolve the issue with the OpenSSL library
 dependency. To resolve the issue we need to create symbolic links from our
 local library directory to the system-wide version of the OpenSSL library:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ ln -s /usr/lib/libcrypto.so.0.9.8 ~/vmrconsole/lib/
-$ ln -s /usr/lib/libssl.so.0.9.8 ~/vmrconsole/lib/
-$ ls -ld ~/vmrconsole/lib/lib*.so.0.9.8 
-lrwxrwxrwx 1 vmware vmware 27 Nov 24 05:27 /home/vmware/vmrconsole/lib/libcrypto.so.0.9.8 -&amp;gt; /usr/lib/libcrypto.so.0.9.8
-lrwxrwxrwx 1 vmware vmware 27 Nov 24 05:27 /home/vmware/vmrconsole/lib/libssl.so.0.9.8 -&amp;gt; /usr/lib/libssl.so.0.9.8&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ ln -s /usr/lib/libcrypto.so.0.9.8 ~/vmrconsole/lib/
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ ln -s /usr/lib/libssl.so.0.9.8 ~/vmrconsole/lib/
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ ls -ld ~/vmrconsole/lib/lib*.so.0.9.8 
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;lrwxrwxrwx 1 vmware vmware 27 Nov 24 05:27 /home/vmware/vmrconsole/lib/libcrypto.so.0.9.8 -&amp;gt; /usr/lib/libcrypto.so.0.9.8
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;lrwxrwxrwx 1 vmware vmware 27 Nov 24 05:27 /home/vmware/vmrconsole/lib/libssl.so.0.9.8 -&amp;gt; /usr/lib/libssl.so.0.9.8&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Let&amp;rsquo;s try to connect to remote VM&amp;rsquo;s console again:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ vmrconsole 192.168.70.31&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ vmrconsole 192.168.70.31&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;img alt="VMware Player: credentials window" class="figure" src="https://dmitry.khlebnikov.net/images/howto-vmware-player-as-remote-console-02.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img alt="VMware Player: MKS error message" class="figure" src="https://dmitry.khlebnikov.net/images/howto-vmware-player-as-remote-console-03.jpg"&gt;&lt;/p&gt;
@@ -2838,18 +2838,18 @@ called &lt;code&gt;player-XXXXX.log&lt;/code&gt; (where XXXXX is the PID of the 
 produced this log file). Inside the log file we may see some interesting parts
 like the following (I have included only those messages which are related to our
 task):&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-syslog"&gt;Nov 24 03:40:42.002: player| CDS error: Cannot locate VMIS, bootstrap file /etc/vmware-installer/bootstrap unavailable!
-Nov 24 03:40:42.072: player| Unable to launch vmplayer-daemon: File does not exist.
-Nov 24 03:40:42.072: player| Unable to find /home/vmplayer/bin/vmware-unity-helper in attempt to launch daemon.
-Nov 24 03:41:04.630: player| Player dispatch: Opening VM while not connected to the daemon.
-Nov 24 03:41:05.437: player| ConnectMksClient - calling VMClient_ConnectMksClientEx
-Nov 24 03:41:05.437: player| VMClient_ConnectMksClientEx - trying local socket connection
-Nov 24 03:41:05.444: player| Cnx_Connect: Returning false because CnxConnectAuthd failed
-Nov 24 03:41:05.444: player| Cnx_Connect: Error message: Connection terminated by server
-Nov 24 03:41:05.444: player| VMClient_ConnectMksClientEx - trying remote socket connection
-Nov 24 03:41:05.611: player| VMClient_ConnectMksClientEx - connecting the MKS client
-Nov 24 03:41:05.616: player| vmdbPipe_Streams: Couldn't read
-Nov 24 03:41:15.941: player| Gdk: losing last reference to undestroyed window&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-syslog"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Nov 24 03:40:42.002: player| CDS error: Cannot locate VMIS, bootstrap file /etc/vmware-installer/bootstrap unavailable!
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Nov 24 03:40:42.072: player| Unable to launch vmplayer-daemon: File does not exist.
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Nov 24 03:40:42.072: player| Unable to find /home/vmplayer/bin/vmware-unity-helper in attempt to launch daemon.
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Nov 24 03:41:04.630: player| Player dispatch: Opening VM while not connected to the daemon.
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Nov 24 03:41:05.437: player| ConnectMksClient - calling VMClient_ConnectMksClientEx
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Nov 24 03:41:05.437: player| VMClient_ConnectMksClientEx - trying local socket connection
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Nov 24 03:41:05.444: player| Cnx_Connect: Returning false because CnxConnectAuthd failed
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Nov 24 03:41:05.444: player| Cnx_Connect: Error message: Connection terminated by server
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Nov 24 03:41:05.444: player| VMClient_ConnectMksClientEx - trying remote socket connection
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Nov 24 03:41:05.611: player| VMClient_ConnectMksClientEx - connecting the MKS client
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Nov 24 03:41:05.616: player| vmdbPipe_Streams: Couldn't read
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Nov 24 03:41:15.941: player| Gdk: losing last reference to undestroyed window&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;From the messages quoted above it is quite clear that the program is trying to
 launch some helper binaries/daemons in the background and to delegate the
@@ -2860,33 +2860,33 @@ console engine, while the former is some kind of an authentication daemon and I
 do not think it is needed for our purposes. I am not going to describe in
 details how I arrived at the following (it is all clear once you have studied
 the &lt;code&gt;strace&lt;/code&gt;/&lt;code&gt;ltrace&lt;/code&gt; log files):&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ find ~/vmplayer -name vmware-authd -o -name vmware-remotemks
-/home/vmware/vmplayer/vmware-player-app/lib/bin/vmware-remotemks
-/home/vmware/vmplayer/vmware-player-app/sbin/vmware-authd
-$ mkdir -m700 ~/vmrconsole/vmauthd
-$ ln -s `which true` ~/vmrconsole/vmauthd/vmware-authd
-$ ls -ld ~/vmrconsole/vmauthd/vmware-authd
-lrwxrwxrwx 1 vmware vmware 9 Nov 24 04:15 /home/vmware/vmrconsole/vmauthd/vmware-authd -&amp;gt; /bin/true
-$ cp -aL ~/vmplayer/vmware-player-app/lib/bin/vmware-remotemks ~/vmrconsole/bin/
-$ chmod 0700 ~/vmrconsole/bin/vmware-remotemks
-$ strings ~/vmrconsole/bin/vmware-remotemks | fgrep /vmware
-/usr/lib/vmware
-/etc/vmware/config
-/etc/vmware/icu
-/etc/vmware/ssl/rui.crt
-/etc/vmware/ssl/rui.key
-/etc/vmware/ssl/dh512.pem
-/etc/vmware/ssl/dh1024.pem
-/etc/vmware/CVP
-vmauthd/vmware-authd
-/usr/sbin/vmware-authd
-/var/run/vmware/authd_
-/var/run/vmware
-$ sed -i 's,/var/run/vmware,..//////var/run,g' ~/vmrconsole/bin/vmware-remotemks
-$ sed -i 's,/etc/vmware/,..//////etc/,g' ~/vmrconsole/bin/vmware-remotemks&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ find ~/vmplayer -name vmware-authd -o -name vmware-remotemks
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/home/vmware/vmplayer/vmware-player-app/lib/bin/vmware-remotemks
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/home/vmware/vmplayer/vmware-player-app/sbin/vmware-authd
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ mkdir -m700 ~/vmrconsole/vmauthd
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ ln -s `which true` ~/vmrconsole/vmauthd/vmware-authd
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ ls -ld ~/vmrconsole/vmauthd/vmware-authd
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;lrwxrwxrwx 1 vmware vmware 9 Nov 24 04:15 /home/vmware/vmrconsole/vmauthd/vmware-authd -&amp;gt; /bin/true
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ cp -aL ~/vmplayer/vmware-player-app/lib/bin/vmware-remotemks ~/vmrconsole/bin/
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ chmod 0700 ~/vmrconsole/bin/vmware-remotemks
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ strings ~/vmrconsole/bin/vmware-remotemks | fgrep /vmware
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/usr/lib/vmware
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/etc/vmware/config
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/etc/vmware/icu
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/etc/vmware/ssl/rui.crt
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/etc/vmware/ssl/rui.key
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/etc/vmware/ssl/dh512.pem
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/etc/vmware/ssl/dh1024.pem
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/etc/vmware/CVP
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;vmauthd/vmware-authd
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/usr/sbin/vmware-authd
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/var/run/vmware/authd_
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/var/run/vmware
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ sed -i 's,/var/run/vmware,..//////var/run,g' ~/vmrconsole/bin/vmware-remotemks
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ sed -i 's,/etc/vmware/,..//////etc/,g' ~/vmrconsole/bin/vmware-remotemks&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Another attempt:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ vmrconsole 192.168.70.31&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ vmrconsole 192.168.70.31&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;img alt="VMware Player: hints messages" class="figure" src="https://dmitry.khlebnikov.net/images/howto-vmware-player-as-remote-console-04.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;Ouch, we are presented by a bunch of hints (your mileage may vary since it
@@ -2895,11 +2895,11 @@ presented on the above screenshot.&lt;/p&gt;
 &lt;p&gt;This is not a showstopper if you are an English-only user - just click on the
 OK button and you should be able to work with the console, however I think it
 is just a right thing to do to fix this little bugger:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ find ~/vmplayer -iname xkeymap
-/home/vmware/vmplayer/vmware-player-app/lib/xkeymap
-$ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/xkeymap ~/vmrconsole/
-$ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/vnckeymap ~/vmrconsole/
-$ vmrconsole 192.168.70.31&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ find ~/vmplayer -iname xkeymap
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;/home/vmware/vmplayer/vmware-player-app/lib/xkeymap
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/xkeymap ~/vmrconsole/
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ cp -aL /home/vmware/vmplayer/vmware-player-app/lib/vnckeymap ~/vmrconsole/
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ vmrconsole 192.168.70.31&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;img alt="VMware Player: remote console window" class="figure" src="https://dmitry.khlebnikov.net/images/howto-vmware-player-as-remote-console-05.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;We are almost done! At least we achieved the goal we set at the beginning of
@@ -2907,15 +2907,15 @@ this article.&lt;/p&gt;
 &lt;p&gt;Now, it is time to ensure that all file/directory permissions are strict enough
 and to create a tarball, then place it somewhere so we will be able to use our
 new tool when the right time comes:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;$ cd ~/vmrconsole
-$ find . -type d -execdir chmod 0700 '{}' \;
-$ find . -type f -execdir chmod 0600 '{}' \;
-$ chmod 0700 bin/*
-$ cd
-$ mv vmrconsole vmrconsole-3.1.3.324285
-$ tar cjpf ~/vmrconsole-3.1.3.324285.i386.tar.bz2 vmrconsole-3.1.3.324285
-$ ls -lh vmrconsole-3.1.3.324285.i386.tar.bz2 
--rw-r--r-- 1 vmware vmware 13M Nov 24 07:06 vmrconsole-3.1.3.324285.i386.tar.bz2&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ cd ~/vmrconsole
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ find . -type d -execdir chmod 0700 '{}' \;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ find . -type f -execdir chmod 0600 '{}' \;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ chmod 0700 bin/*
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ cd
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ mv vmrconsole vmrconsole-3.1.3.324285
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ tar cjpf ~/vmrconsole-3.1.3.324285.i386.tar.bz2 vmrconsole-3.1.3.324285
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;$ ls -lh vmrconsole-3.1.3.324285.i386.tar.bz2 
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-rw-r--r-- 1 vmware vmware 13M Nov 24 07:06 vmrconsole-3.1.3.324285.i386.tar.bz2&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;P.S. Oh, boy, it takes 2 hours to investigate and to come up with a solution,
 then 8 hours to write an article to describe steps to reproduce! I hope that

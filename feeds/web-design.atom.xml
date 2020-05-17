@@ -177,21 +177,21 @@ this is what we wanted to achieve at this step!&lt;/p&gt;
 marker should occupy the exactly the same height as the line block we are
 attaching it to.  Well, this can be easily done with the &lt;code&gt;::after&lt;/code&gt;
 pseudo-element:&lt;/p&gt;
-&lt;pre id="demo3" class="highlight line-numbers"&gt;&lt;code class="language-css"&gt;pre div.line {
-    position: relative; /* so we could position the child */
-    min-height: 1em;    /* to avoid collapsing empty lines */
-}
-
-pre div.line::after {
-    content: '';        /* we need content for pseudo elements */
-    position: absolute;
-    display: block;
-    width: 1em;     /* without width it will be invisible */
-    height: 100%;       /* to match the height of the parent */
-    top: 0;
-    right: -1em;
-    background-color: blue; /* temporary, to make it visible */
-}&lt;/code&gt;&lt;/pre&gt;
+&lt;pre id="demo3" class="highlight line-numbers"&gt;&lt;code class="language-css"&gt;&lt;div id="demo3.1" class="lines"&gt;&lt;a href="#demo3.1"&gt;&lt;/a&gt;pre div.line {
+&lt;/div&gt;&lt;div id="demo3.2" class="lines"&gt;&lt;a href="#demo3.2"&gt;&lt;/a&gt;    position: relative; /* so we could position the child */
+&lt;/div&gt;&lt;div id="demo3.3" class="lines"&gt;&lt;a href="#demo3.3"&gt;&lt;/a&gt;    min-height: 1em;    /* to avoid collapsing empty lines */
+&lt;/div&gt;&lt;div id="demo3.4" class="lines"&gt;&lt;a href="#demo3.4"&gt;&lt;/a&gt;}
+&lt;/div&gt;&lt;div id="demo3.5" class="lines"&gt;&lt;a href="#demo3.5"&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div id="demo3.6" class="lines"&gt;&lt;a href="#demo3.6"&gt;&lt;/a&gt;pre div.line::after {
+&lt;/div&gt;&lt;div id="demo3.7" class="lines"&gt;&lt;a href="#demo3.7"&gt;&lt;/a&gt;    content: '';        /* we need content for pseudo elements */
+&lt;/div&gt;&lt;div id="demo3.8" class="lines"&gt;&lt;a href="#demo3.8"&gt;&lt;/a&gt;    position: absolute;
+&lt;/div&gt;&lt;div id="demo3.9" class="lines"&gt;&lt;a href="#demo3.9"&gt;&lt;/a&gt;    display: block;
+&lt;/div&gt;&lt;div id="demo3.10" class="lines"&gt;&lt;a href="#demo3.10"&gt;&lt;/a&gt;    width: 1em;     /* without width it will be invisible */
+&lt;/div&gt;&lt;div id="demo3.11" class="lines"&gt;&lt;a href="#demo3.11"&gt;&lt;/a&gt;    height: 100%;       /* to match the height of the parent */
+&lt;/div&gt;&lt;div id="demo3.12" class="lines"&gt;&lt;a href="#demo3.12"&gt;&lt;/a&gt;    top: 0;
+&lt;/div&gt;&lt;div id="demo3.13" class="lines"&gt;&lt;a href="#demo3.13"&gt;&lt;/a&gt;    right: -1em;
+&lt;/div&gt;&lt;div id="demo3.14" class="lines"&gt;&lt;a href="#demo3.14"&gt;&lt;/a&gt;    background-color: blue; /* temporary, to make it visible */
+&lt;/div&gt;&lt;div id="demo3.15" class="lines"&gt;&lt;a href="#demo3.15"&gt;&lt;/a&gt;}&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Note that we also introduced &lt;code&gt;position: relative&lt;/code&gt; to our &lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt;&amp;lsquo;s.  It is
 needed since if we want to position our pseudo-element relative to its parent,
@@ -236,11 +236,11 @@ choose SVG everytime.&lt;/p&gt;
 &lt;p&gt;Ideally, I did not want to use an image, but I could not figure out how I could
 put a repeating text block next to my lines, hence I found the following
 compromise (this is the content of the SVG file I created):&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-svg"&gt;&amp;lt;svg xmlns=&amp;quot;http://www.w3.org/2000/svg&amp;quot;
-        version=&amp;quot;1.1&amp;quot;
-        viewBox=&amp;quot;0 0 24 24&amp;quot;&amp;gt;
-    &amp;lt;text x=&amp;quot;0&amp;quot; y=&amp;quot;19&amp;quot;&amp;gt;&amp;amp;#x23ce;&amp;lt;/text&amp;gt;
-&amp;lt;/svg&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-svg"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;&amp;lt;svg xmlns=&amp;quot;http://www.w3.org/2000/svg&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        version=&amp;quot;1.1&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        viewBox=&amp;quot;0 0 24 24&amp;quot;&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    &amp;lt;text x=&amp;quot;0&amp;quot; y=&amp;quot;19&amp;quot;&amp;gt;&amp;amp;#x23ce;&amp;lt;/text&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;&amp;lt;/svg&amp;gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The first two lines are mandatory and describe to a browser that it works with
 an SVG image file.&lt;/p&gt;
@@ -255,38 +255,38 @@ adequate symbol to represent a line wrap point.&lt;/p&gt;
 but since the content of the SVG file is so small and I did not want to host it
 externally (it would be an additional fetch request and more maintenance), I
 just did the following:&lt;/p&gt;
-&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;[user@localhost ~]$ cat nl.svg 
-&amp;lt;svg xmlns=&amp;quot;http://www.w3.org/2000/svg&amp;quot;
-        version=&amp;quot;1.1&amp;quot;
-        viewBox=&amp;quot;0 0 24 24&amp;quot;&amp;gt;
-    &amp;lt;text x=&amp;quot;0&amp;quot; y=&amp;quot;19&amp;quot;&amp;gt;&amp;amp;#x23ce;&amp;lt;/text&amp;gt;
-&amp;lt;/svg&amp;gt;
-[user@localhost ~]$ sed -n '1{h;d};$!H;${H;x;s,\s\+, ,g;s,&amp;gt;\s*&amp;lt;,&amp;gt;&amp;lt;,g;p}' nl.svg | base64 -w 0 ; echo
-PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[user@localhost ~]$ cat nl.svg 
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;&amp;lt;svg xmlns=&amp;quot;http://www.w3.org/2000/svg&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        version=&amp;quot;1.1&amp;quot;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        viewBox=&amp;quot;0 0 24 24&amp;quot;&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    &amp;lt;text x=&amp;quot;0&amp;quot; y=&amp;quot;19&amp;quot;&amp;gt;&amp;amp;#x23ce;&amp;lt;/text&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;&amp;lt;/svg&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[user@localhost ~]$ sed -n '1{h;d};$!H;${H;x;s,\s\+, ,g;s,&amp;gt;\s*&amp;lt;,&amp;gt;&amp;lt;,g;p}' nl.svg | base64 -w 0 ; echo
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;In other words, I removed all the white space, then deleted all line breaks, so
 I got a single line SVG body, and I converted it to Base64.  The resulting line
 is usable as the inline definition of an image.  Let&amp;rsquo;s update our stylesheet
 with the new values (we just replaced the last line to change the &lt;code&gt;background&lt;/code&gt;
 to &lt;code&gt;background-image&lt;/code&gt;) and added dimensions for the background itself:&lt;/p&gt;
-&lt;pre id="demo4" class="highlight line-numbers"&gt;&lt;code class="language-css"&gt;pre div.line {
-    position: relative; /* so we could position the child */
-    min-height: 1em;    /* to avoid collapsing empty lines */
-}
-
-pre div.line::after {
-    content: '';        /* we need content for pseudo elements */
-    position: absolute;
-    display: block;
-    width: 1em;     /* without width it will be invisible */
-    height: 100%;       /* to match the height of the parent */
-    top: 0;
-    right: -1em;
-    background-image:
-        url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
-        no-repeat repeat;
-    background-size: 1em 1em;
-}&lt;/code&gt;&lt;/pre&gt;
+&lt;pre id="demo4" class="highlight line-numbers"&gt;&lt;code class="language-css"&gt;&lt;div id="demo4.1" class="lines"&gt;&lt;a href="#demo4.1"&gt;&lt;/a&gt;pre div.line {
+&lt;/div&gt;&lt;div id="demo4.2" class="lines"&gt;&lt;a href="#demo4.2"&gt;&lt;/a&gt;    position: relative; /* so we could position the child */
+&lt;/div&gt;&lt;div id="demo4.3" class="lines"&gt;&lt;a href="#demo4.3"&gt;&lt;/a&gt;    min-height: 1em;    /* to avoid collapsing empty lines */
+&lt;/div&gt;&lt;div id="demo4.4" class="lines"&gt;&lt;a href="#demo4.4"&gt;&lt;/a&gt;}
+&lt;/div&gt;&lt;div id="demo4.5" class="lines"&gt;&lt;a href="#demo4.5"&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div id="demo4.6" class="lines"&gt;&lt;a href="#demo4.6"&gt;&lt;/a&gt;pre div.line::after {
+&lt;/div&gt;&lt;div id="demo4.7" class="lines"&gt;&lt;a href="#demo4.7"&gt;&lt;/a&gt;    content: '';        /* we need content for pseudo elements */
+&lt;/div&gt;&lt;div id="demo4.8" class="lines"&gt;&lt;a href="#demo4.8"&gt;&lt;/a&gt;    position: absolute;
+&lt;/div&gt;&lt;div id="demo4.9" class="lines"&gt;&lt;a href="#demo4.9"&gt;&lt;/a&gt;    display: block;
+&lt;/div&gt;&lt;div id="demo4.10" class="lines"&gt;&lt;a href="#demo4.10"&gt;&lt;/a&gt;    width: 1em;     /* without width it will be invisible */
+&lt;/div&gt;&lt;div id="demo4.11" class="lines"&gt;&lt;a href="#demo4.11"&gt;&lt;/a&gt;    height: 100%;       /* to match the height of the parent */
+&lt;/div&gt;&lt;div id="demo4.12" class="lines"&gt;&lt;a href="#demo4.12"&gt;&lt;/a&gt;    top: 0;
+&lt;/div&gt;&lt;div id="demo4.13" class="lines"&gt;&lt;a href="#demo4.13"&gt;&lt;/a&gt;    right: -1em;
+&lt;/div&gt;&lt;div id="demo4.14" class="lines"&gt;&lt;a href="#demo4.14"&gt;&lt;/a&gt;    background-image:
+&lt;/div&gt;&lt;div id="demo4.15" class="lines"&gt;&lt;a href="#demo4.15"&gt;&lt;/a&gt;        url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
+&lt;/div&gt;&lt;div id="demo4.16" class="lines"&gt;&lt;a href="#demo4.16"&gt;&lt;/a&gt;        no-repeat repeat;
+&lt;/div&gt;&lt;div id="demo4.17" class="lines"&gt;&lt;a href="#demo4.17"&gt;&lt;/a&gt;    background-size: 1em 1em;
+&lt;/div&gt;&lt;div id="demo4.18" class="lines"&gt;&lt;a href="#demo4.18"&gt;&lt;/a&gt;}&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;div class="demo4 resizable"&gt;
     &lt;style&gt;
@@ -329,25 +329,25 @@ our lines (reading documentation you may find that the default value is
 &lt;code&gt;normal&lt;/code&gt; and you can also find that &lt;code&gt;normal&lt;/code&gt; equals &lt;code&gt;1.2&lt;/code&gt; for the majority of
 browsers, but relying on that, I think is a bad idea).  We also need to adjust
 our markers with the new information we have got:&lt;/p&gt;
-&lt;pre id="demo5" class="highlight"&gt;&lt;code class="language-css"&gt;pre div.line {
-    position: relative; /* so we could position the child */
-    min-height: 1em;    /* to avoid collapsing empty lines */
-    line-height: 1.2;   /* set the height explicitly */
-}
-
-pre div.line::after {
-    content: '';        /* we need content for pseudo elements */
-    position: absolute;
-    display: block;
-    width: 1.2em;       /* without width it will be invisible */
-    height: 100%;       /* to match the height of the parent */
-    top: 0;
-    right: -1.2em;
-    background-image:
-        url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
-        no-repeat repeat;
-    background-size: 1.2em 1.2em;
-}&lt;/code&gt;&lt;/pre&gt;
+&lt;pre id="demo5" class="highlight"&gt;&lt;code class="language-css"&gt;&lt;div id="demo5.1" class="lines"&gt;&lt;a href="#demo5.1"&gt;&lt;/a&gt;pre div.line {
+&lt;/div&gt;&lt;div id="demo5.2" class="lines"&gt;&lt;a href="#demo5.2"&gt;&lt;/a&gt;    position: relative; /* so we could position the child */
+&lt;/div&gt;&lt;div id="demo5.3" class="lines"&gt;&lt;a href="#demo5.3"&gt;&lt;/a&gt;    min-height: 1em;    /* to avoid collapsing empty lines */
+&lt;/div&gt;&lt;div id="demo5.4" class="lines"&gt;&lt;a href="#demo5.4"&gt;&lt;/a&gt;    line-height: 1.2;   /* set the height explicitly */
+&lt;/div&gt;&lt;div id="demo5.5" class="lines"&gt;&lt;a href="#demo5.5"&gt;&lt;/a&gt;}
+&lt;/div&gt;&lt;div id="demo5.6" class="lines"&gt;&lt;a href="#demo5.6"&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div id="demo5.7" class="lines"&gt;&lt;a href="#demo5.7"&gt;&lt;/a&gt;pre div.line::after {
+&lt;/div&gt;&lt;div id="demo5.8" class="lines"&gt;&lt;a href="#demo5.8"&gt;&lt;/a&gt;    content: '';        /* we need content for pseudo elements */
+&lt;/div&gt;&lt;div id="demo5.9" class="lines"&gt;&lt;a href="#demo5.9"&gt;&lt;/a&gt;    position: absolute;
+&lt;/div&gt;&lt;div id="demo5.10" class="lines"&gt;&lt;a href="#demo5.10"&gt;&lt;/a&gt;    display: block;
+&lt;/div&gt;&lt;div id="demo5.11" class="lines"&gt;&lt;a href="#demo5.11"&gt;&lt;/a&gt;    width: 1.2em;       /* without width it will be invisible */
+&lt;/div&gt;&lt;div id="demo5.12" class="lines"&gt;&lt;a href="#demo5.12"&gt;&lt;/a&gt;    height: 100%;       /* to match the height of the parent */
+&lt;/div&gt;&lt;div id="demo5.13" class="lines"&gt;&lt;a href="#demo5.13"&gt;&lt;/a&gt;    top: 0;
+&lt;/div&gt;&lt;div id="demo5.14" class="lines"&gt;&lt;a href="#demo5.14"&gt;&lt;/a&gt;    right: -1.2em;
+&lt;/div&gt;&lt;div id="demo5.15" class="lines"&gt;&lt;a href="#demo5.15"&gt;&lt;/a&gt;    background-image:
+&lt;/div&gt;&lt;div id="demo5.16" class="lines"&gt;&lt;a href="#demo5.16"&gt;&lt;/a&gt;        url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
+&lt;/div&gt;&lt;div id="demo5.17" class="lines"&gt;&lt;a href="#demo5.17"&gt;&lt;/a&gt;        no-repeat repeat;
+&lt;/div&gt;&lt;div id="demo5.18" class="lines"&gt;&lt;a href="#demo5.18"&gt;&lt;/a&gt;    background-size: 1.2em 1.2em;
+&lt;/div&gt;&lt;div id="demo5.19" class="lines"&gt;&lt;a href="#demo5.19"&gt;&lt;/a&gt;}&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;div class="demo5 resizable"&gt;
     &lt;style&gt;
@@ -383,28 +383,28 @@ it done:&lt;/p&gt;
 &lt;p&gt;To address the latter a simple play with the &lt;code&gt;opacity&lt;/code&gt; attribute will suffice,
 e.g. I think 50% transparency should make the marker less distracting.&lt;/p&gt;
 &lt;p&gt;The former, however, requires some thinking.  Given that the post is already too long, I will just state that out of multiple options I had I chose the following: raise the background image by one &lt;code&gt;line-height&lt;/code&gt; from the bottom, and clip a square 1x1 &lt;code&gt;line-height&lt;/code&gt; at the top to compensate, as follows:&lt;/p&gt;
-&lt;pre id="demo6" class="highlight"&gt;&lt;code class="language-css"&gt;pre div.line {
-    position: relative; /* so we could position the child */
-    min-height: 1em;    /* to avoid collapsing empty lines */
-    line-height: 1.2;   /* set the height explicitly */
-}
-
-pre div.line::after {
-    content: '';        /* we need content for pseudo elements */
-    position: absolute;
-    display: block;
-    width: 1.2em;       /* without width it will be invisible */
-    height: 100%;       /* to match the height of the parent */
-    bottom: 0;
-    right: -1.2em;
-    background-image:
-        url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
-        no-repeat repeat;
-    background-size: 1.2em 1.2em;
-    margin-bottom: 0;
-    clip: rect(1.2em 1.2em 100vh 0);
-    opacity: .5;
-}&lt;/code&gt;&lt;/pre&gt;
+&lt;pre id="demo6" class="highlight"&gt;&lt;code class="language-css"&gt;&lt;div id="demo6.1" class="lines"&gt;&lt;a href="#demo6.1"&gt;&lt;/a&gt;pre div.line {
+&lt;/div&gt;&lt;div id="demo6.2" class="lines"&gt;&lt;a href="#demo6.2"&gt;&lt;/a&gt;    position: relative; /* so we could position the child */
+&lt;/div&gt;&lt;div id="demo6.3" class="lines"&gt;&lt;a href="#demo6.3"&gt;&lt;/a&gt;    min-height: 1em;    /* to avoid collapsing empty lines */
+&lt;/div&gt;&lt;div id="demo6.4" class="lines"&gt;&lt;a href="#demo6.4"&gt;&lt;/a&gt;    line-height: 1.2;   /* set the height explicitly */
+&lt;/div&gt;&lt;div id="demo6.5" class="lines"&gt;&lt;a href="#demo6.5"&gt;&lt;/a&gt;}
+&lt;/div&gt;&lt;div id="demo6.6" class="lines"&gt;&lt;a href="#demo6.6"&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div id="demo6.7" class="lines"&gt;&lt;a href="#demo6.7"&gt;&lt;/a&gt;pre div.line::after {
+&lt;/div&gt;&lt;div id="demo6.8" class="lines"&gt;&lt;a href="#demo6.8"&gt;&lt;/a&gt;    content: '';        /* we need content for pseudo elements */
+&lt;/div&gt;&lt;div id="demo6.9" class="lines"&gt;&lt;a href="#demo6.9"&gt;&lt;/a&gt;    position: absolute;
+&lt;/div&gt;&lt;div id="demo6.10" class="lines"&gt;&lt;a href="#demo6.10"&gt;&lt;/a&gt;    display: block;
+&lt;/div&gt;&lt;div id="demo6.11" class="lines"&gt;&lt;a href="#demo6.11"&gt;&lt;/a&gt;    width: 1.2em;       /* without width it will be invisible */
+&lt;/div&gt;&lt;div id="demo6.12" class="lines"&gt;&lt;a href="#demo6.12"&gt;&lt;/a&gt;    height: 100%;       /* to match the height of the parent */
+&lt;/div&gt;&lt;div id="demo6.13" class="lines"&gt;&lt;a href="#demo6.13"&gt;&lt;/a&gt;    bottom: 0;
+&lt;/div&gt;&lt;div id="demo6.14" class="lines"&gt;&lt;a href="#demo6.14"&gt;&lt;/a&gt;    right: -1.2em;
+&lt;/div&gt;&lt;div id="demo6.15" class="lines"&gt;&lt;a href="#demo6.15"&gt;&lt;/a&gt;    background-image:
+&lt;/div&gt;&lt;div id="demo6.16" class="lines"&gt;&lt;a href="#demo6.16"&gt;&lt;/a&gt;        url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
+&lt;/div&gt;&lt;div id="demo6.17" class="lines"&gt;&lt;a href="#demo6.17"&gt;&lt;/a&gt;        no-repeat repeat;
+&lt;/div&gt;&lt;div id="demo6.18" class="lines"&gt;&lt;a href="#demo6.18"&gt;&lt;/a&gt;    background-size: 1.2em 1.2em;
+&lt;/div&gt;&lt;div id="demo6.19" class="lines"&gt;&lt;a href="#demo6.19"&gt;&lt;/a&gt;    margin-bottom: 0;
+&lt;/div&gt;&lt;div id="demo6.20" class="lines"&gt;&lt;a href="#demo6.20"&gt;&lt;/a&gt;    clip: rect(1.2em 1.2em 100vh 0);
+&lt;/div&gt;&lt;div id="demo6.21" class="lines"&gt;&lt;a href="#demo6.21"&gt;&lt;/a&gt;    opacity: .5;
+&lt;/div&gt;&lt;div id="demo6.22" class="lines"&gt;&lt;a href="#demo6.22"&gt;&lt;/a&gt;}&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The only tricky part in the added lines is the &lt;code&gt;clip: rect(1.2em 1.2em 100vh
 0)&lt;/code&gt; line.  The &lt;code&gt;clip&lt;/code&gt; property defines the visible rectangle the browser should
@@ -450,31 +450,31 @@ this is exactly what we want :).&lt;/p&gt;
 &lt;h2 id="bonus-round"&gt;Bonus Round&lt;/h2&gt;
 &lt;p&gt;It should be mentioned, it is also possible to apply the same approach to the
 left side of the lines with a bit of a twist.&lt;/p&gt;
-&lt;pre id="demo7" class="highlight"&gt;&lt;code class="language-css"&gt;pre div.line {
-    position: relative; /* so we could position the child */
-    min-height: 1em;    /* to avoid collapsing empty lines */
-    line-height: 1.2;   /* set the height explicitly */
-    text-indent: -1.2em;    /* first line indent */
-    padding-left: 1.2em;    /* padding for the line */
-}
-
-pre div.line::before {
-    content: '';        /* we need content for pseudo elements */
-    position: absolute;
-    display: block;
-    width: 1.2em;       /* without width it will be invisible */
-    height: 100%;       /* to match the height of the parent */
-    top: 0;
-    left: 0;
-    background:
-        url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
-        no-repeat repeat;
-    background-size: 1.2em 1.2em;
-    clip: rect(1.2em 1.2em 100vh 0);
-    opacity: .5;
-    transform: rotateY(180deg); /* mirror the arrow */
-    transform-origin: left;
-}&lt;/code&gt;&lt;/pre&gt;
+&lt;pre id="demo7" class="highlight"&gt;&lt;code class="language-css"&gt;&lt;div id="demo7.1" class="lines"&gt;&lt;a href="#demo7.1"&gt;&lt;/a&gt;pre div.line {
+&lt;/div&gt;&lt;div id="demo7.2" class="lines"&gt;&lt;a href="#demo7.2"&gt;&lt;/a&gt;    position: relative; /* so we could position the child */
+&lt;/div&gt;&lt;div id="demo7.3" class="lines"&gt;&lt;a href="#demo7.3"&gt;&lt;/a&gt;    min-height: 1em;    /* to avoid collapsing empty lines */
+&lt;/div&gt;&lt;div id="demo7.4" class="lines"&gt;&lt;a href="#demo7.4"&gt;&lt;/a&gt;    line-height: 1.2;   /* set the height explicitly */
+&lt;/div&gt;&lt;div id="demo7.5" class="lines"&gt;&lt;a href="#demo7.5"&gt;&lt;/a&gt;    text-indent: -1.2em;    /* first line indent */
+&lt;/div&gt;&lt;div id="demo7.6" class="lines"&gt;&lt;a href="#demo7.6"&gt;&lt;/a&gt;    padding-left: 1.2em;    /* padding for the line */
+&lt;/div&gt;&lt;div id="demo7.7" class="lines"&gt;&lt;a href="#demo7.7"&gt;&lt;/a&gt;}
+&lt;/div&gt;&lt;div id="demo7.8" class="lines"&gt;&lt;a href="#demo7.8"&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div id="demo7.9" class="lines"&gt;&lt;a href="#demo7.9"&gt;&lt;/a&gt;pre div.line::before {
+&lt;/div&gt;&lt;div id="demo7.10" class="lines"&gt;&lt;a href="#demo7.10"&gt;&lt;/a&gt;    content: '';        /* we need content for pseudo elements */
+&lt;/div&gt;&lt;div id="demo7.11" class="lines"&gt;&lt;a href="#demo7.11"&gt;&lt;/a&gt;    position: absolute;
+&lt;/div&gt;&lt;div id="demo7.12" class="lines"&gt;&lt;a href="#demo7.12"&gt;&lt;/a&gt;    display: block;
+&lt;/div&gt;&lt;div id="demo7.13" class="lines"&gt;&lt;a href="#demo7.13"&gt;&lt;/a&gt;    width: 1.2em;       /* without width it will be invisible */
+&lt;/div&gt;&lt;div id="demo7.14" class="lines"&gt;&lt;a href="#demo7.14"&gt;&lt;/a&gt;    height: 100%;       /* to match the height of the parent */
+&lt;/div&gt;&lt;div id="demo7.15" class="lines"&gt;&lt;a href="#demo7.15"&gt;&lt;/a&gt;    top: 0;
+&lt;/div&gt;&lt;div id="demo7.16" class="lines"&gt;&lt;a href="#demo7.16"&gt;&lt;/a&gt;    left: 0;
+&lt;/div&gt;&lt;div id="demo7.17" class="lines"&gt;&lt;a href="#demo7.17"&gt;&lt;/a&gt;    background:
+&lt;/div&gt;&lt;div id="demo7.18" class="lines"&gt;&lt;a href="#demo7.18"&gt;&lt;/a&gt;        url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
+&lt;/div&gt;&lt;div id="demo7.19" class="lines"&gt;&lt;a href="#demo7.19"&gt;&lt;/a&gt;        no-repeat repeat;
+&lt;/div&gt;&lt;div id="demo7.20" class="lines"&gt;&lt;a href="#demo7.20"&gt;&lt;/a&gt;    background-size: 1.2em 1.2em;
+&lt;/div&gt;&lt;div id="demo7.21" class="lines"&gt;&lt;a href="#demo7.21"&gt;&lt;/a&gt;    clip: rect(1.2em 1.2em 100vh 0);
+&lt;/div&gt;&lt;div id="demo7.22" class="lines"&gt;&lt;a href="#demo7.22"&gt;&lt;/a&gt;    opacity: .5;
+&lt;/div&gt;&lt;div id="demo7.23" class="lines"&gt;&lt;a href="#demo7.23"&gt;&lt;/a&gt;    transform: rotateY(180deg); /* mirror the arrow */
+&lt;/div&gt;&lt;div id="demo7.24" class="lines"&gt;&lt;a href="#demo7.24"&gt;&lt;/a&gt;    transform-origin: left;
+&lt;/div&gt;&lt;div id="demo7.25" class="lines"&gt;&lt;a href="#demo7.25"&gt;&lt;/a&gt;}&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The trick here is the play between &lt;code&gt;padding-left&lt;/code&gt; and &lt;code&gt;text-indent&lt;/code&gt; for the
 &lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt; element since &lt;code&gt;text-indent&lt;/code&gt; will be applied to the first line only

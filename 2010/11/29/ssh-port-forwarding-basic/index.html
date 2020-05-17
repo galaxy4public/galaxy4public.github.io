@@ -144,7 +144,7 @@ another machine, you may want to bind MySQL to some internal interface &ndash; t
 network that links your servers only, e.g. 192.168.1.1:3306), and then use the
 SSH port-forwarding feature to setup a tunnel between your remote database and
 your local computer:</p>
-<pre class="highlight" data-user="root"><code class="language-shell">[root@localhost ~]# ssh -L3306:127.0.0.1:3306 user@server</code></pre>
+<pre class="highlight" data-user="root"><code class="language-shell"><div class="lines"><a></a>[root@localhost ~]# ssh -L3306:127.0.0.1:3306 user@server</div></code></pre>
 
 <p>Here, <code>-L3306:127.0.0.1:3306</code> says that we want <code>127.0.0.1:3306</code> to be &ldquo;mapped&rdquo;
 to our local host to port <code>3306</code>. While the SSH session is active any packet
