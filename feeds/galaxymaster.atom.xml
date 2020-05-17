@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - (GalaxyMaster)</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"></link><link href="https://dmitry.khlebnikov.net/feeds/galaxymaster.atom.xml" rel="self"></link><id>https://dmitry.khlebnikov.net/</id><updated>2020-05-17T22:13:06+10:00</updated><entry><title>Automating Static Website Deployment</title><link href="https://dmitry.khlebnikov.net/2020/05/17/automating-static-website-deployment/" rel="alternate"></link><published>2020-05-17T21:32:00+10:00</published><updated>2020-05-17T22:13:06+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-17:/2020/05/17/automating-static-website-deployment/</id><summary type="html">&lt;div class="toc"&gt;&lt;span class="toctitle"&gt;Table of Contents&lt;/span&gt;&lt;ul&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - (GalaxyMaster)</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"></link><link href="https://dmitry.khlebnikov.net/feeds/galaxymaster.atom.xml" rel="self"></link><id>https://dmitry.khlebnikov.net/</id><updated>2020-05-18T04:53:28+10:00</updated><entry><title>Automating Static Website Deployment</title><link href="https://dmitry.khlebnikov.net/2020/05/17/automating-static-website-deployment/" rel="alternate"></link><published>2020-05-17T21:32:00+10:00</published><updated>2020-05-17T22:13:06+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-17:/2020/05/17/automating-static-website-deployment/</id><summary type="html">&lt;div class="toc"&gt;&lt;span class="toctitle"&gt;Table of Contents&lt;/span&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a href="#setting-up-github-pages"&gt;Setting up GitHub Pages&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#setting-up-the-private-code-repository"&gt;Setting up the private, code repository&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#configuring-the-github-action-for-publishing"&gt;Configuring the GitHub Action for publishing&lt;/a&gt;&lt;/li&gt;
@@ -483,7 +483,7 @@ want to re-use it you will need to replace a few things, namely:&lt;/p&gt;
 Action is structured and what each step is doing.&lt;/p&gt;
 &lt;p&gt;It all starts with the definition of the action itself and the conditions of
 how it is triggered and how does it run.&lt;/p&gt;
-&lt;p&gt;[I ran out of time for this session :(, will update the post with more details shortly ]&lt;/p&gt;</content><category term="blog"></category><category term="pelican"></category><category term="blog"></category><category term="github"></category></entry><entry><title>Wrap indicator in &lt;pre&gt; blocks</title><link href="https://dmitry.khlebnikov.net/2020/05/10/wrap-indicator-in-pre-blocks/" rel="alternate"></link><published>2020-05-10T21:00:00+10:00</published><updated>2020-05-17T20:25:15+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-10:/2020/05/10/wrap-indicator-in-pre-blocks/</id><summary type="html">&lt;p&gt;I am not a front-end developer, not a UI designer, nor a UX guru, but I am an
+&lt;p&gt;[I ran out of time for this session :(, will update the post with more details shortly ]&lt;/p&gt;</content><category term="blog"></category><category term="pelican"></category><category term="blog"></category><category term="github"></category></entry><entry><title>Wrap indicator in &lt;pre&gt; blocks</title><link href="https://dmitry.khlebnikov.net/2020/05/10/wrap-indicator-in-pre-blocks/" rel="alternate"></link><published>2020-05-10T21:00:00+10:00</published><updated>2020-05-18T04:53:28+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-10:/2020/05/10/wrap-indicator-in-pre-blocks/</id><summary type="html">&lt;p&gt;I am not a front-end developer, not a UI designer, nor a UX guru, but I am an
 engineer, so when I face a puzzle worth solving my brain switches on and I
 cannot let it go until I find a satisfactory solution to the puzzle.&lt;/p&gt;
 &lt;p&gt;My blog heavily relies on me sharing session dumps and file excerpts using the
@@ -1039,11 +1039,16 @@ preserved the rest of lines intact.i&lt;/del&gt;&lt;/p&gt;
 have for working with lines expect semantic markup of the lines inside the
 block.  Therefore, I spent some time and came up with a plugin that does it
 &amp;ldquo;right&amp;rdquo;.&lt;/p&gt;
-&lt;p&gt;It is highly likely, that my plugin will get merged into the Prism tree
-(see the corresponding &lt;a href="https://github.com/PrismJS/prism/pull/2389"&gt;Pull Request&lt;/a&gt;).  However, if for some reason it would
+&lt;p&gt;&lt;del&gt;It is highly likely, that my plugin will get merged into the Prism tree
+(see the corresponding &lt;a href="https://github.com/PrismJS/prism/pull/2389"&gt;Pull Request&lt;/a&gt;).&lt;/del&gt;  After a discussion with upstream, it
+seems they want to rework a large chunk of the project to use the proposed
+functionality and make it a library of some sort.  I do not have time to
+actively see it through, so one of Prism developers will continue the
+integration of my idea into Prism and something comparable will be
+implemented in Prism in near future.  However, if for some reason it would
 not be or you need the functionality &amp;ldquo;here &amp;amp; now&amp;rdquo;, you can always get it
-from my &lt;a href="https://github.com/galaxy4public/prism/tree/plugin-lines"&gt;fork of PrismJS&lt;/a&gt; (I will keep the &lt;code&gt;plugin-lines&lt;/code&gt; branch until it
-is merged upstream).&lt;/p&gt;
+from my &lt;a href="https://github.com/galaxy4public/prism/tree/plugin-lines"&gt;fork of PrismJS&lt;/a&gt; (I will keep the &lt;code&gt;plugin-lines&lt;/code&gt; branch until &lt;del&gt;it
+is merged upstream&lt;/del&gt; upstream decides how to incorporate my idea).&lt;/p&gt;
 &lt;p&gt;By the way, my Lines plugin is the primary working horse for all syntax
 highlighted blocks on this site (so you have already seen it in action).&lt;/p&gt;
 &lt;/li&gt;

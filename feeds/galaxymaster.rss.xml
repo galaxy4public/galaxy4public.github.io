@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>Mind Drops - (GalaxyMaster)</title><link>https://dmitry.khlebnikov.net/</link><description></description><lastBuildDate>Sun, 17 May 2020 22:13:06 +1000</lastBuildDate><item><title>Automating Static Website Deployment</title><link>https://dmitry.khlebnikov.net/2020/05/17/automating-static-website-deployment/</link><description>&lt;div class="toc"&gt;&lt;span class="toctitle"&gt;Table of Contents&lt;/span&gt;&lt;ul&gt;
+<rss version="2.0"><channel><title>Mind Drops - (GalaxyMaster)</title><link>https://dmitry.khlebnikov.net/</link><description></description><lastBuildDate>Mon, 18 May 2020 04:53:28 +1000</lastBuildDate><item><title>Automating Static Website Deployment</title><link>https://dmitry.khlebnikov.net/2020/05/17/automating-static-website-deployment/</link><description>&lt;div class="toc"&gt;&lt;span class="toctitle"&gt;Table of Contents&lt;/span&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a href="#setting-up-github-pages"&gt;Setting up GitHub Pages&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#setting-up-the-private-code-repository"&gt;Setting up the private, code repository&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#configuring-the-github-action-for-publishing"&gt;Configuring the GitHub Action for publishing&lt;/a&gt;&lt;/li&gt;
