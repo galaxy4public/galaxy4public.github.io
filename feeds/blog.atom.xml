@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - blog</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"></link><link href="https://dmitry.khlebnikov.net/feeds/blog.atom.xml" rel="self"></link><id>https://dmitry.khlebnikov.net/</id><updated>2020-06-07T17:25:20+10:00</updated><entry><title>Automating Static Website Deployment</title><link href="https://dmitry.khlebnikov.net/2020/05/17/automating-static-website-deployment/" rel="alternate"></link><published>2020-05-17T21:32:00+10:00</published><updated>2020-06-07T17:25:20+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-17:/2020/05/17/automating-static-website-deployment/</id><summary type="html">&lt;div class="toc"&gt;&lt;span class="toctitle"&gt;Table of Contents&lt;/span&gt;&lt;ul&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - blog</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"></link><link href="https://dmitry.khlebnikov.net/feeds/blog.atom.xml" rel="self"></link><id>https://dmitry.khlebnikov.net/</id><updated>2020-06-07T17:37:34+10:00</updated><entry><title>Automating Static Website Deployment</title><link href="https://dmitry.khlebnikov.net/2020/05/17/automating-static-website-deployment/" rel="alternate"></link><published>2020-05-17T21:32:00+10:00</published><updated>2020-06-07T17:37:34+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-17:/2020/05/17/automating-static-website-deployment/</id><summary type="html">&lt;div class="toc"&gt;&lt;span class="toctitle"&gt;Table of Contents&lt;/span&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a href="#setting-up-github-pages"&gt;Setting up GitHub Pages&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#setting-up-the-private-code-repository"&gt;Setting up the private, code repository&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#configuring-the-github-action-for-publishing"&gt;Configuring the GitHub Action for publishing&lt;/a&gt;&lt;/li&gt;
@@ -383,9 +383,12 @@ ever hit these limits).&lt;/p&gt;
 &lt;p&gt;Each GitHub Action is associated with a specific repository and is defined
 using quite a simple YAML configuration file that instructs GitHub on how to
 provision a required compute environment and what to run inside that
-environment.&lt;/p&gt;
-&lt;p&gt;The GitHub Action I am using for my blog web site is the following (we will
-dissect it further down the post):&lt;/p&gt;
+environment.  The YAML file can be arbitrarily named and resides in the
+&lt;code&gt;.github/workflows/&lt;/code&gt; subdirectory (starting from the root of the corresponding
+repository).&lt;/p&gt;
+&lt;p&gt;The GitHub Action I am using for my blog web site is stored in
+&lt;code&gt;.github/workflows/pelican.yml&lt;/code&gt; and contains the following (we will dissect it
+further down the post):&lt;/p&gt;
 &lt;pre id="code8" class="highlight" data-file=".github/workflows/pelican.yml"&gt;&lt;code class="language-yaml"&gt;&lt;div id="code8.1" class="lines"&gt;&lt;a href="#code8.1"&gt;&lt;/a&gt;name: Static Website Generator
 &lt;/div&gt;&lt;div id="code8.2" class="lines"&gt;&lt;a href="#code8.2"&gt;&lt;/a&gt;
 &lt;/div&gt;&lt;div id="code8.3" class="lines"&gt;&lt;a href="#code8.3"&gt;&lt;/a&gt;on:
@@ -514,8 +517,8 @@ to do its job reliably and I changed it to be a full history clone.&lt;/p&gt;
 &lt;p&gt;Since &lt;code&gt;git&lt;/code&gt; &lt;a href="https://git.wiki.kernel.org/index.php/GitFaq#Why_isn.27t_Git_preserving_modification_time_on_files.3F"&gt;does not store timestamps&lt;/a&gt; for the files and directories under its
 control, yet Pelican relies on timestamps to populate the modification time of
 the artefacts &amp;ndash; we need to find a way to reconstruct at least file timestamps
-after the three was checked out.  One of the possible approaches would be to
-create a plugin that would determine whether we are inside a &lt;code&gt;git&lt;/code&gt; working tree
+after the tree was checked out.  One of the possible approaches would be to
+create a plugin that could determine whether we are inside a &lt;code&gt;git&lt;/code&gt; working tree
 or not and depending on that apply different timestamp extraction policies, but
 I thought that a much easier way would be to prepare the checked out tree,
 hence making it compatible with the way Pelican expects things to be.&lt;/p&gt;
@@ -549,8 +552,8 @@ variable correctly just before we call &lt;code&gt;pelican&lt;/code&gt;.  Withou
 may fail or if it does not it will produce UTC based date and times, which
 would be undesirable (at least for me, since my time zone is in Australia).&lt;/p&gt;
 &lt;p&gt;The final step is to push the updated content to the public blog repository,
-which will make it visible via GitHub Pages.  A couple of things to notice
-there is:&lt;/p&gt;
+which will make it visible via GitHub Pages.  Several things to notice there
+are:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;In the &lt;code&gt;env:&lt;/code&gt; section we are setting up the &lt;code&gt;DEPLOY_KEY&lt;/code&gt; variable &amp;ndash; this
      syntax is used to retrieve a named secret value from the associated secret
