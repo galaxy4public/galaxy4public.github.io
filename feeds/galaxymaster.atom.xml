@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - (GalaxyMaster)</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"></link><link href="https://dmitry.khlebnikov.net/feeds/galaxymaster.atom.xml" rel="self"></link><id>https://dmitry.khlebnikov.net/</id><updated>2020-05-18T04:53:28+10:00</updated><entry><title>Automating Static Website Deployment</title><link href="https://dmitry.khlebnikov.net/2020/05/17/automating-static-website-deployment/" rel="alternate"></link><published>2020-05-17T21:32:00+10:00</published><updated>2020-05-17T22:13:06+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-17:/2020/05/17/automating-static-website-deployment/</id><summary type="html">&lt;div class="toc"&gt;&lt;span class="toctitle"&gt;Table of Contents&lt;/span&gt;&lt;ul&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - (GalaxyMaster)</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"></link><link href="https://dmitry.khlebnikov.net/feeds/galaxymaster.atom.xml" rel="self"></link><id>https://dmitry.khlebnikov.net/</id><updated>2020-06-07T17:25:20+10:00</updated><entry><title>Automating Static Website Deployment</title><link href="https://dmitry.khlebnikov.net/2020/05/17/automating-static-website-deployment/" rel="alternate"></link><published>2020-05-17T21:32:00+10:00</published><updated>2020-06-07T17:25:20+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-17:/2020/05/17/automating-static-website-deployment/</id><summary type="html">&lt;div class="toc"&gt;&lt;span class="toctitle"&gt;Table of Contents&lt;/span&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a href="#setting-up-github-pages"&gt;Setting up GitHub Pages&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#setting-up-the-private-code-repository"&gt;Setting up the private, code repository&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#configuring-the-github-action-for-publishing"&gt;Configuring the GitHub Action for publishing&lt;/a&gt;&lt;/li&gt;
@@ -359,6 +359,18 @@ directory is our newly created local repository):&lt;/p&gt;
 &lt;/div&gt;&lt;div id="code7.11" class="lines"&gt;&lt;a href="#code7.11"&gt;&lt;/a&gt; * [new branch]      master -&amp;gt; master
 &lt;/div&gt;&lt;div id="code7.12" class="lines"&gt;&lt;a href="#code7.12"&gt;&lt;/a&gt;Branch 'master' set up to track remote branch 'master' from 'origin'.&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 
+&lt;p&gt;Do you remember how we generated a deploy key pair earlier and installed the
+public key part into the public blog repository, so GitHub would allow the
+bearer of the private key to authenticate and deploy changes to the public blog
+repository?  Well, since the purpose of this article is to introduce the full
+automation, the bearer of the key would be the GitHub Action associated with
+the private repository, hence we need to provide the action with the private
+key somehow.&lt;/p&gt;
+&lt;p&gt;GitHub has a feature called &amp;ldquo;repository secrets&amp;rdquo; and it is a perfect candidate
+to pass the private key to the GitHub Action.  We need to follow the &lt;a href="https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets#creating-encrypted-secrets-for-a-repository"&gt;official
+documentation for the feature&lt;/a&gt; and create a secret called &amp;ldquo;DEPLOY_KEY&amp;rdquo; with the
+content of the private part of the deploy key.  This will be used in the last step
+of the GitHub Action we are about to define.&lt;/p&gt;
 &lt;h2 id="configuring-the-github-action-for-publishing"&gt;Configuring the GitHub Action for publishing&lt;/h2&gt;
 &lt;p&gt;Everything is well and good, but &amp;ldquo;where is the automation?&amp;rdquo; you may ask.  After
 all, I suspect this was the primary reason you are reading this post.  Well, we
@@ -482,8 +494,83 @@ want to re-use it you will need to replace a few things, namely:&lt;/p&gt;
 &lt;p&gt;This being sorted, let&amp;rsquo;s look a bit more closely to understand how this GitHub
 Action is structured and what each step is doing.&lt;/p&gt;
 &lt;p&gt;It all starts with the definition of the action itself and the conditions of
-how it is triggered and how does it run.&lt;/p&gt;
-&lt;p&gt;[I ran out of time for this session :(, will update the post with more details shortly ]&lt;/p&gt;</content><category term="blog"></category><category term="pelican"></category><category term="blog"></category><category term="github"></category></entry><entry><title>Wrap indicator in &lt;pre&gt; blocks</title><link href="https://dmitry.khlebnikov.net/2020/05/10/wrap-indicator-in-pre-blocks/" rel="alternate"></link><published>2020-05-10T21:00:00+10:00</published><updated>2020-05-18T04:53:28+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-10:/2020/05/10/wrap-indicator-in-pre-blocks/</id><summary type="html">&lt;p&gt;I am not a front-end developer, not a UI designer, nor a UX guru, but I am an
+how it is triggered and how does it run, you can get a formal description of
+the YAML structure of this configuration file in the official GitHub
+documentation on &lt;a href="https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions"&gt;Workflows&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Here, we are only going to focus on steps defined under the &amp;ldquo;jobs:&amp;rdquo; section of
+the file since these steps are defining the logic we are after.&lt;/p&gt;
+&lt;p&gt;The &amp;ldquo;Initialise locale&amp;rdquo; step is quite important for Pelican since with a
+misconfigured locale Pelican tends to produce incorrect output (which is kind
+of expected).  So in this step we are trying to determine whether the user (us
+:) ) has supplied the &lt;code&gt;LANG&lt;/code&gt; variable and if they did we update
+&lt;code&gt;/etc/locale.gen&lt;/code&gt; file, then run the &lt;code&gt;locale-gen&lt;/code&gt; command to update the
+corresponding files, and finally we set the locale of the container to the
+requested locale.&lt;/p&gt;
+&lt;p&gt;The &amp;ldquo;Checkout the primary repo&amp;rdquo; step is leveraging the official &amp;ldquo;Checkout V2&amp;rdquo;
+Action and checks out a full copy of the source code repository of our blog
+and all the linked submodules.  Initially, I was using a shalow copy using
+&lt;code&gt;fetch-depth: 1&lt;/code&gt;, but the next step was requiring the full repository history
+to do its job reliably and I changed it to be a full history clone.&lt;/p&gt;
+&lt;p&gt;Since &lt;code&gt;git&lt;/code&gt; &lt;a href="https://git.wiki.kernel.org/index.php/GitFaq#Why_isn.27t_Git_preserving_modification_time_on_files.3F"&gt;does not store timestamps&lt;/a&gt; for the files and directories under its
+control, yet Pelican relies on timestamps to populate the modification time of
+the artefacts &amp;ndash; we need to find a way to reconstruct at least file timestamps
+after the three was checked out.  One of the possible approaches would be to
+create a plugin that would determine whether we are inside a &lt;code&gt;git&lt;/code&gt; working tree
+or not and depending on that apply different timestamp extraction policies, but
+I thought that a much easier way would be to prepare the checked out tree,
+hence making it compatible with the way Pelican expects things to be.&lt;/p&gt;
+&lt;p&gt;The &amp;ldquo;Restore modification times for content&amp;rdquo; step is my variant of how one
+could reconstruct the timestamps for files close enough to make it possible to
+use with Pelican.  The approach relies on the fact that &lt;code&gt;git&lt;/code&gt; records the
+timestamp of each commit including adding, updating, and deleting files.  We
+create a list of all these file events using &lt;code&gt;git log&lt;/code&gt; for file trees under
+&amp;ldquo;content&amp;rdquo; (where our blog content lives) and &amp;ldquo;themes/mind-drops/content&amp;rdquo; (where
+my custom theme injects some content such as the Web service worker script),
+then we use &lt;code&gt;sed&lt;/code&gt; to filter and to re-arrange the output a bit, followed by
+reverse sorting to help to remove the entries that were introduced and later
+deleted.  In the end, we have a list of file names with timestamps, so we go
+through the list in a loop and set the timestamps to files using &lt;code&gt;touch&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The &amp;ldquo;Checkout Pages repo&amp;rdquo; step is cloning the public blog repository into the
+&amp;ldquo;output&amp;rdquo; directory where Pelican will put the generated files.  This is needed
+to ensure that we can track the changes to the public repository, since Pelican
+is careful enough (if not instructed otherwise) only to update the files it
+generates and leave everything else in place as is.  We use this later to
+determine whether any new content has been generated or not.&lt;/p&gt;
+&lt;p&gt;The &amp;ldquo;Set up Python&amp;rdquo; and the &amp;ldquo;Install dependencies&amp;rdquo; steps are pretty generic:
+the former is using the official GitHub Action to install and configure the
+latest available version of Python 3.x and the latter is leveraging &lt;code&gt;pip&lt;/code&gt; to
+install all blog&amp;rsquo;s dependencies (including Pelican itself).&lt;/p&gt;
+&lt;p&gt;The &amp;ldquo;Generate the website&amp;rdquo; step is running &lt;code&gt;pelican&lt;/code&gt; to process our articles
+and pages and to generate the result in the &amp;ldquo;output&amp;rdquo; directory.  There are a couple of tricks with this step, though.&lt;/p&gt;
+&lt;p&gt;The first trick, which is not that obvious is that we are removing the content of the &amp;ldquo;output&amp;rdquo; directory.  It seems a bit weird since we just checked it out several steps before, is not it?  Well, we are removing everything &lt;strong&gt;except&lt;/strong&gt; hidden files and directories, which happen to contain the &amp;ldquo;.git&amp;rdquo; subdirectory with all the actual data about the repository.  Why do we do it?  It is simple, this helps us to determine a situation if some file or directory was removed, so we could propagate this knowledge to the public blog repository.  If we did not clean up the content of the &amp;ldquo;output&amp;rdquo; directory we would only append new changes and would never remove anything &amp;ndash; this is how it was before I stumbled upon the problem, by the way. :)&lt;/p&gt;
+&lt;p&gt;The second trick of the &amp;ldquo;Generate the website&amp;rdquo; step is the extraction of the
+time zone information from the configuration files and is setting the &lt;code&gt;TZ&lt;/code&gt;
+variable correctly just before we call &lt;code&gt;pelican&lt;/code&gt;.  Without this either Pelican
+may fail or if it does not it will produce UTC based date and times, which
+would be undesirable (at least for me, since my time zone is in Australia).&lt;/p&gt;
+&lt;p&gt;The final step is to push the updated content to the public blog repository,
+which will make it visible via GitHub Pages.  A couple of things to notice
+there is:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;In the &lt;code&gt;env:&lt;/code&gt; section we are setting up the &lt;code&gt;DEPLOY_KEY&lt;/code&gt; variable &amp;ndash; this
+     syntax is used to retrieve a named secret value from the associated secret
+     key for a repository.  We store the private part of the deploy key we
+     specifically generated for this purpose at the beginning of this article
+     in the private repository secret. &lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git status&lt;/code&gt; is used to determine whether there are any changes between
+     what we have in the working tree and the repository index.  If no changes
+     were detected we just exit gracefully.&lt;/li&gt;
+&lt;li&gt;If any change to the generated content was detected, we temporarily load
+     the private part of the deploy key into the &lt;code&gt;ssh-agent&lt;/code&gt; (for 5 minutes),
+     push changes to the public blog repository, then clean up the key from
+     the agent and kill the agent itself.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;From this point on, any push to the private codebase repository will trigger
+the GitHub Action and if the change has resulted in any updated content such
+content will be published to GitHub Pages!&lt;/p&gt;
+&lt;p&gt;There are quite a few thing we could improve such as introducing the broken
+links check, doing some sanity checks, etc. &amp;ndash; but this would be for another
+article, I guess. :)&lt;/p&gt;</content><category term="blog"></category><category term="pelican"></category><category term="blog"></category><category term="github"></category></entry><entry><title>Wrap indicator in &lt;pre&gt; blocks</title><link href="https://dmitry.khlebnikov.net/2020/05/10/wrap-indicator-in-pre-blocks/" rel="alternate"></link><published>2020-05-10T21:00:00+10:00</published><updated>2020-05-18T04:53:28+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-10:/2020/05/10/wrap-indicator-in-pre-blocks/</id><summary type="html">&lt;p&gt;I am not a front-end developer, not a UI designer, nor a UX guru, but I am an
 engineer, so when I face a puzzle worth solving my brain switches on and I
 cannot let it go until I find a satisfactory solution to the puzzle.&lt;/p&gt;
 &lt;p&gt;My blog heavily relies on me sharing session dumps and file excerpts using the

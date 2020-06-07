@@ -460,6 +460,18 @@ directory is our newly created local repository):</p>
 </div><div id="code7.11" class="lines"><a href="#code7.11"></a> * [new branch]      master -&gt; master
 </div><div id="code7.12" class="lines"><a href="#code7.12"></a>Branch 'master' set up to track remote branch 'master' from 'origin'.</div></code></pre>
 
+<p>Do you remember how we generated a deploy key pair earlier and installed the
+public key part into the public blog repository, so GitHub would allow the
+bearer of the private key to authenticate and deploy changes to the public blog
+repository?  Well, since the purpose of this article is to introduce the full
+automation, the bearer of the key would be the GitHub Action associated with
+the private repository, hence we need to provide the action with the private
+key somehow.</p>
+<p>GitHub has a feature called &ldquo;repository secrets&rdquo; and it is a perfect candidate
+to pass the private key to the GitHub Action.  We need to follow the <a href="https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets#creating-encrypted-secrets-for-a-repository">official
+documentation for the feature</a> and create a secret called &ldquo;DEPLOY_KEY&rdquo; with the
+content of the private part of the deploy key.  This will be used in the last step
+of the GitHub Action we are about to define.</p>
 <h2 id="configuring-the-github-action-for-publishing">Configuring the GitHub Action for publishing</h2>
 <p>Everything is well and good, but &ldquo;where is the automation?&rdquo; you may ask.  After
 all, I suspect this was the primary reason you are reading this post.  Well, we
@@ -583,8 +595,83 @@ want to re-use it you will need to replace a few things, namely:</p>
 <p>This being sorted, let&rsquo;s look a bit more closely to understand how this GitHub
 Action is structured and what each step is doing.</p>
 <p>It all starts with the definition of the action itself and the conditions of
-how it is triggered and how does it run.</p>
-<p>[I ran out of time for this session :(, will update the post with more details shortly ]</p>
+how it is triggered and how does it run, you can get a formal description of
+the YAML structure of this configuration file in the official GitHub
+documentation on <a href="https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions">Workflows</a>.</p>
+<p>Here, we are only going to focus on steps defined under the &ldquo;jobs:&rdquo; section of
+the file since these steps are defining the logic we are after.</p>
+<p>The &ldquo;Initialise locale&rdquo; step is quite important for Pelican since with a
+misconfigured locale Pelican tends to produce incorrect output (which is kind
+of expected).  So in this step we are trying to determine whether the user (us
+:) ) has supplied the <code>LANG</code> variable and if they did we update
+<code>/etc/locale.gen</code> file, then run the <code>locale-gen</code> command to update the
+corresponding files, and finally we set the locale of the container to the
+requested locale.</p>
+<p>The &ldquo;Checkout the primary repo&rdquo; step is leveraging the official &ldquo;Checkout V2&rdquo;
+Action and checks out a full copy of the source code repository of our blog
+and all the linked submodules.  Initially, I was using a shalow copy using
+<code>fetch-depth: 1</code>, but the next step was requiring the full repository history
+to do its job reliably and I changed it to be a full history clone.</p>
+<p>Since <code>git</code> <a href="https://git.wiki.kernel.org/index.php/GitFaq#Why_isn.27t_Git_preserving_modification_time_on_files.3F">does not store timestamps</a> for the files and directories under its
+control, yet Pelican relies on timestamps to populate the modification time of
+the artefacts &ndash; we need to find a way to reconstruct at least file timestamps
+after the three was checked out.  One of the possible approaches would be to
+create a plugin that would determine whether we are inside a <code>git</code> working tree
+or not and depending on that apply different timestamp extraction policies, but
+I thought that a much easier way would be to prepare the checked out tree,
+hence making it compatible with the way Pelican expects things to be.</p>
+<p>The &ldquo;Restore modification times for content&rdquo; step is my variant of how one
+could reconstruct the timestamps for files close enough to make it possible to
+use with Pelican.  The approach relies on the fact that <code>git</code> records the
+timestamp of each commit including adding, updating, and deleting files.  We
+create a list of all these file events using <code>git log</code> for file trees under
+&ldquo;content&rdquo; (where our blog content lives) and &ldquo;themes/mind-drops/content&rdquo; (where
+my custom theme injects some content such as the Web service worker script),
+then we use <code>sed</code> to filter and to re-arrange the output a bit, followed by
+reverse sorting to help to remove the entries that were introduced and later
+deleted.  In the end, we have a list of file names with timestamps, so we go
+through the list in a loop and set the timestamps to files using <code>touch</code>.</p>
+<p>The &ldquo;Checkout Pages repo&rdquo; step is cloning the public blog repository into the
+&ldquo;output&rdquo; directory where Pelican will put the generated files.  This is needed
+to ensure that we can track the changes to the public repository, since Pelican
+is careful enough (if not instructed otherwise) only to update the files it
+generates and leave everything else in place as is.  We use this later to
+determine whether any new content has been generated or not.</p>
+<p>The &ldquo;Set up Python&rdquo; and the &ldquo;Install dependencies&rdquo; steps are pretty generic:
+the former is using the official GitHub Action to install and configure the
+latest available version of Python 3.x and the latter is leveraging <code>pip</code> to
+install all blog&rsquo;s dependencies (including Pelican itself).</p>
+<p>The &ldquo;Generate the website&rdquo; step is running <code>pelican</code> to process our articles
+and pages and to generate the result in the &ldquo;output&rdquo; directory.  There are a couple of tricks with this step, though.</p>
+<p>The first trick, which is not that obvious is that we are removing the content of the &ldquo;output&rdquo; directory.  It seems a bit weird since we just checked it out several steps before, is not it?  Well, we are removing everything <strong>except</strong> hidden files and directories, which happen to contain the &ldquo;.git&rdquo; subdirectory with all the actual data about the repository.  Why do we do it?  It is simple, this helps us to determine a situation if some file or directory was removed, so we could propagate this knowledge to the public blog repository.  If we did not clean up the content of the &ldquo;output&rdquo; directory we would only append new changes and would never remove anything &ndash; this is how it was before I stumbled upon the problem, by the way. :)</p>
+<p>The second trick of the &ldquo;Generate the website&rdquo; step is the extraction of the
+time zone information from the configuration files and is setting the <code>TZ</code>
+variable correctly just before we call <code>pelican</code>.  Without this either Pelican
+may fail or if it does not it will produce UTC based date and times, which
+would be undesirable (at least for me, since my time zone is in Australia).</p>
+<p>The final step is to push the updated content to the public blog repository,
+which will make it visible via GitHub Pages.  A couple of things to notice
+there is:</p>
+<ol>
+<li>In the <code>env:</code> section we are setting up the <code>DEPLOY_KEY</code> variable &ndash; this
+     syntax is used to retrieve a named secret value from the associated secret
+     key for a repository.  We store the private part of the deploy key we
+     specifically generated for this purpose at the beginning of this article
+     in the private repository secret. </li>
+<li><code>git status</code> is used to determine whether there are any changes between
+     what we have in the working tree and the repository index.  If no changes
+     were detected we just exit gracefully.</li>
+<li>If any change to the generated content was detected, we temporarily load
+     the private part of the deploy key into the <code>ssh-agent</code> (for 5 minutes),
+     push changes to the public blog repository, then clean up the key from
+     the agent and kill the agent itself.</li>
+</ol>
+<p>From this point on, any push to the private codebase repository will trigger
+the GitHub Action and if the change has resulted in any updated content such
+content will be published to GitHub Pages!</p>
+<p>There are quite a few thing we could improve such as introducing the broken
+links check, doing some sanity checks, etc. &ndash; but this would be for another
+article, I guess. :)</p>
 					<ul class="tags">
 						<li class="tag">
 							<div>
