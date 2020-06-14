@@ -99,6 +99,62 @@
 		<!-- Content -->
 		<div id="content">
 			<div class="inner">
+				<article id="truly-responsive-pagination" class="box post post-excerpt">
+								<header>
+									<h1><a href="/2020/06/14/truly-responsive-pagination/">Truly Responsive Pagination</a></h1>
+								</header>
+								<div class="info">
+									<span class="date">
+										<span class="day">14</span>
+										<span class="month"><a href="/2020/06/">Jun<span class="month full">e</span></a></span>
+										<span class="year"><a href="/2020/">2020</a></span>
+									</span>
+									<ul class="stats">
+										<li><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" rel="nofollow" class="icon twitter" aria-label="Twitter" data-tweet-id="None">0</a></li>
+									</ul>
+								</div>
+								<!-- Here we rely on the fact that Pelican always closes summary with '</p>' -->
+								<div class="summary"><p>Searching the web for an example of a fully responsive pagination widget I
+found that either people consider &ldquo;responsive&rdquo; to be something else or that it
+is a non-trivial problem to solve.  In any case, I decided to to have a crack
+at it myself.</p>
+<p><img alt="A sketch of how pagination widget should work" class="figure" src="https://dmitry.khlebnikov.net/2020/06/14/truly-responsive-pagination/images/paginator-sketch.png"></p>
+<p>My definition of a responsive pagination widget is pretty simple: such a widget
+should maintain its look and feel when the viewport (or a window) changes the
+size, yet the excessive information such as page numbers in the middle should
+be omitted if there is no space for them.</p>
+<p>In this post I am going <span class="truncated"></span>
+									<span class="readmore">…
+										<a href="/2020/06/14/truly-responsive-pagination/#continue" class="icon fa-forward">read
+											<span class="readtime">time 7 min.</span>
+										</a>
+									</span>
+								</div>
+					<ul class="tags">
+						<li class="tag">
+							<div>
+								<a href="/tag/html/" class="tag name">html</a>
+							</div>
+							<a href="/tag/html/" class="tag count">2</a>
+						</li>
+						<li class="tag">
+							<div>
+								<a href="/tag/css/" class="tag name">css</a>
+							</div>
+							<a href="/tag/css/" class="tag count">2</a>
+						</li>
+						<li class="tag">
+							<div>
+								<a href="/tag/design/" class="tag name">design</a>
+							</div>
+							<a href="/tag/design/" class="tag count">2</a>
+						</li>
+					</ul>
+					<footer>
+						Offloaded on
+						<time datetime="2020-06-14 20:07:00+10:00">Sun, 14/06/2020 at 20:07 (<a href="https://time.is/AEST" target="_blank" rel="noreferrer">AEST</a>)</time>
+						<span class="category-tag"><a href="/category/web-design">web design</a></span>
+					</footer>				</article>
 				<article id="automating-static-website-deployment" class="box post post-excerpt">
 								<header>
 									<h1><a href="/2020/05/17/automating-static-website-deployment/">Automating Static Website Deployment</a></h1>
@@ -194,19 +250,19 @@ code blocks are not designed to be truly responsive, for instance &ndash; when <
 							<div>
 								<a href="/tag/html/" class="tag name">html</a>
 							</div>
-							<a href="/tag/html/" class="tag count">1</a>
+							<a href="/tag/html/" class="tag count">2</a>
 						</li>
 						<li class="tag">
 							<div>
 								<a href="/tag/css/" class="tag name">css</a>
 							</div>
-							<a href="/tag/css/" class="tag count">1</a>
+							<a href="/tag/css/" class="tag count">2</a>
 						</li>
 						<li class="tag">
 							<div>
 								<a href="/tag/design/" class="tag name">design</a>
 							</div>
-							<a href="/tag/design/" class="tag count">1</a>
+							<a href="/tag/design/" class="tag count">2</a>
 						</li>
 					</ul>
 					<footer>
@@ -261,56 +317,6 @@ estimate how much effort is required.  The <span class="truncated"></span>
 						Offloaded on
 						<time datetime="2020-05-01 20:00:00+10:00">Fri, 01/05/2020 at 20:00 (<a href="https://time.is/AEST" target="_blank" rel="noreferrer">AEST</a>)</time>
 						<span class="category-tag"><a href="/category/blog">blog</a></span>
-					</footer>				</article>
-				<article id="nginx-a-backend-with-a-dynamic-ip-eg-aws-elb" class="box post post-excerpt">
-								<header>
-									<h1><a href="/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/">nginx + a backend with a dynamic IP (e.g. AWS ELB)</a></h1>
-								</header>
-								<div class="info">
-									<span class="date">
-										<span class="day">13</span>
-										<span class="month"><a href="/2017/01/">Jan<span class="month full">uary</span></a></span>
-										<span class="year"><a href="/2017/">2017</a></span>
-									</span>
-									<ul class="stats">
-										<li><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" rel="nofollow" class="icon twitter" aria-label="Twitter" data-tweet-id="1257348803042164738">0</a></li>
-									</ul>
-								</div>
-								<!-- Here we rely on the fact that Pelican always closes summary with '</p>' -->
-								<div class="summary"><p>Recently, I wrote about <a href="https://dmitry.khlebnikov.net/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/">the dynamic resolution of upstream servers</a> in
-nginx which was achieved by quite an intrusive patch to the core nginx module.
-The patch was invented a while ago and was working very well up until recent
-nginx versions were released.</p>
-<p>With the release of nginx 1.10 it was noticed that the patch crashes some
-workers under heavy load and this was unacceptable for the production load,
-hence a new approach was implemented.</p>
-<p>The beauty of the new solution is that it is non-intrusive and works with any
-services that communicate via sockets.</p>
-<p>In a nutshell <span class="truncated"></span>
-									<span class="readmore">…
-										<a href="/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/#continue" class="icon fa-forward">read
-											<span class="readtime">time 9 min.</span>
-										</a>
-									</span>
-								</div>
-					<ul class="tags">
-						<li class="tag">
-							<div>
-								<a href="/tag/nginx/" class="tag name">nginx</a>
-							</div>
-							<a href="/tag/nginx/" class="tag count">2</a>
-						</li>
-						<li class="tag">
-							<div>
-								<a href="/tag/patch/" class="tag name">patch</a>
-							</div>
-							<a href="/tag/patch/" class="tag count">2</a>
-						</li>
-					</ul>
-					<footer>
-						Offloaded on
-						<time datetime="2017-01-13 10:00:00+11:00">Fri, 13/01/2017 at 10:00 (<a href="https://time.is/AEDT" target="_blank" rel="noreferrer">AEDT</a>)</time>
-						<span class="category-tag"><a href="/category/hacking">hacking</a></span>
 					</footer>				</article>
 <p class="paginator">
     <span>1 / 4</span>

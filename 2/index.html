@@ -99,6 +99,56 @@
 		<!-- Content -->
 		<div id="content">
 			<div class="inner">
+				<article id="nginx-a-backend-with-a-dynamic-ip-eg-aws-elb" class="box post post-excerpt">
+								<header>
+									<h1><a href="/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/">nginx + a backend with a dynamic IP (e.g. AWS ELB)</a></h1>
+								</header>
+								<div class="info">
+									<span class="date">
+										<span class="day">13</span>
+										<span class="month"><a href="/2017/01/">Jan<span class="month full">uary</span></a></span>
+										<span class="year"><a href="/2017/">2017</a></span>
+									</span>
+									<ul class="stats">
+										<li><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" rel="nofollow" class="icon twitter" aria-label="Twitter" data-tweet-id="1257348803042164738">0</a></li>
+									</ul>
+								</div>
+								<!-- Here we rely on the fact that Pelican always closes summary with '</p>' -->
+								<div class="summary"><p>Recently, I wrote about <a href="https://dmitry.khlebnikov.net/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/">the dynamic resolution of upstream servers</a> in
+nginx which was achieved by quite an intrusive patch to the core nginx module.
+The patch was invented a while ago and was working very well up until recent
+nginx versions were released.</p>
+<p>With the release of nginx 1.10 it was noticed that the patch crashes some
+workers under heavy load and this was unacceptable for the production load,
+hence a new approach was implemented.</p>
+<p>The beauty of the new solution is that it is non-intrusive and works with any
+services that communicate via sockets.</p>
+<p>In a nutshell <span class="truncated"></span>
+									<span class="readmore">…
+										<a href="/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/#continue" class="icon fa-forward">read
+											<span class="readtime">time 9 min.</span>
+										</a>
+									</span>
+								</div>
+					<ul class="tags">
+						<li class="tag">
+							<div>
+								<a href="/tag/nginx/" class="tag name">nginx</a>
+							</div>
+							<a href="/tag/nginx/" class="tag count">2</a>
+						</li>
+						<li class="tag">
+							<div>
+								<a href="/tag/patch/" class="tag name">patch</a>
+							</div>
+							<a href="/tag/patch/" class="tag count">2</a>
+						</li>
+					</ul>
+					<footer>
+						Offloaded on
+						<time datetime="2017-01-13 10:00:00+11:00">Fri, 13/01/2017 at 10:00 (<a href="https://time.is/AEDT" target="_blank" rel="noreferrer">AEDT</a>)</time>
+						<span class="category-tag"><a href="/category/hacking">hacking</a></span>
+					</footer>				</article>
 				<article id="dynamic-resolution-of-upstream-servers-in-nginx" class="box post post-excerpt">
 								<header>
 									<h1><a href="/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/">Dynamic resolution of upstream servers in nginx</a></h1>
@@ -256,67 +306,6 @@ for their ssh config file, so the functionality of sshephalopod would be <span c
 						Offloaded on
 						<time datetime="2016-07-25 10:00:00+10:00">Mon, 25/07/2016 at 10:00 (<a href="https://time.is/AEST" target="_blank" rel="noreferrer">AEST</a>)</time>
 						<span class="category-tag"><a href="/category/ssh">ssh</a></span>
-					</footer>				</article>
-				<article id="raspberry-pi-3-toolchain-on-centos-7" class="box post post-excerpt">
-								<header>
-									<h1><a href="/2016/05/22/raspberry-pi-3-toolchain-on-centos-7/">Raspberry Pi 3 toolchain on CentOS 7</a></h1>
-								</header>
-								<div class="info">
-									<span class="date">
-										<span class="day">22</span>
-										<span class="month"><a href="/2016/05/">May<span class="month full"></span></a></span>
-										<span class="year"><a href="/2016/">2016</a></span>
-									</span>
-									<ul class="stats">
-										<li><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" rel="nofollow" class="icon twitter" aria-label="Twitter" data-tweet-id="1257348806024269824">1</a></li>
-									</ul>
-								</div>
-								<!-- Here we rely on the fact that Pelican always closes summary with '</p>' -->
-								<div class="summary"><p>I heard a lot about Raspberry Pi boards but until now I had no need nor time to
-work with one.</p>
-<p>However, recently I purchased a Dodge Journey R/T and found that although I
-love the car I am so disappointed with its software and hard-wired logic that I
-decided to experiment a bit and fix the most annoying things.</p>
-<p>Since almost everything inside the car is talking over the CAN bus I needed
-some kind of a enclave inside the car where I could run my code and
-inject/intercept CAN messages.</p>
-<p>I looked around and found that <span class="truncated"></span>
-									<span class="readmore">…
-										<a href="/2016/05/22/raspberry-pi-3-toolchain-on-centos-7/#continue" class="icon fa-forward">read
-											<span class="readtime">time 5 min.</span>
-										</a>
-									</span>
-								</div>
-					<ul class="tags">
-						<li class="tag">
-							<div>
-								<a href="/tag/console/" class="tag name">console</a>
-							</div>
-							<a href="/tag/console/" class="tag count">7</a>
-						</li>
-						<li class="tag">
-							<div>
-								<a href="/tag/howto/" class="tag name">howto</a>
-							</div>
-							<a href="/tag/howto/" class="tag count">4</a>
-						</li>
-						<li class="tag">
-							<div>
-								<a href="/tag/linux/" class="tag name">linux</a>
-							</div>
-							<a href="/tag/linux/" class="tag count">2</a>
-						</li>
-						<li class="tag">
-							<div>
-								<a href="/tag/raspberry-pi/" class="tag name">raspberry pi</a>
-							</div>
-							<a href="/tag/raspberry-pi/" class="tag count">1</a>
-						</li>
-					</ul>
-					<footer>
-						Offloaded on
-						<time datetime="2016-05-22 12:00:00+10:00">Sun, 22/05/2016 at 12:00 (<a href="https://time.is/AEST" target="_blank" rel="noreferrer">AEST</a>)</time>
-						<span class="category-tag"><a href="/category/linux">linux</a></span>
 					</footer>				</article>
 <p class="paginator">
         <a href="/" class="previous">&laquo;</a>

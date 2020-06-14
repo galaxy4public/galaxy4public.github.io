@@ -5,7 +5,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://dmitry.khlebnikov.net/</loc>
-<lastmod>2020-06-12T14:21:28-00:00</lastmod>
+<lastmod>2020-06-14T20:09:30-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.75</priority>
 </url>
@@ -42,6 +42,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <loc>https://dmitry.khlebnikov.net/legal/terms-of-service/</loc>
 <lastmod>2020-05-05T02:01:58+10:00</lastmod>
 <changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://dmitry.khlebnikov.net/2020/06/14/truly-responsive-pagination/</loc>
+<lastmod>2020-06-14T20:08:33+10:00</lastmod>
+<changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
@@ -138,7 +145,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://dmitry.khlebnikov.net/2010/11/24/howto-vmware-player-as-a-remote-console-vnc/</loc>
-<lastmod>2020-05-17T20:25:15+10:00</lastmod>
+<lastmod>2020-06-14T20:08:33+10:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>

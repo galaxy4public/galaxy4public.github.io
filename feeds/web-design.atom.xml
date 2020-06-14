@@ -1,5 +1,468 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - web design</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"></link><link href="https://dmitry.khlebnikov.net/feeds/web-design.atom.xml" rel="self"></link><id>https://dmitry.khlebnikov.net/</id><updated>2020-05-18T04:53:28+10:00</updated><entry><title>Wrap indicator in &lt;pre&gt; blocks</title><link href="https://dmitry.khlebnikov.net/2020/05/10/wrap-indicator-in-pre-blocks/" rel="alternate"></link><published>2020-05-10T21:00:00+10:00</published><updated>2020-05-18T04:53:28+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-10:/2020/05/10/wrap-indicator-in-pre-blocks/</id><summary type="html">&lt;p&gt;I am not a front-end developer, not a UI designer, nor a UX guru, but I am an
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - web design</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"></link><link href="https://dmitry.khlebnikov.net/feeds/web-design.atom.xml" rel="self"></link><id>https://dmitry.khlebnikov.net/</id><updated>2020-06-14T20:08:33+10:00</updated><entry><title>Truly Responsive Pagination</title><link href="https://dmitry.khlebnikov.net/2020/06/14/truly-responsive-pagination/" rel="alternate"></link><published>2020-06-14T20:07:00+10:00</published><updated>2020-06-14T20:08:33+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-06-14:/2020/06/14/truly-responsive-pagination/</id><summary type="html">&lt;p&gt;Searching the web for an example of a fully responsive pagination widget I
+found that either people consider &amp;ldquo;responsive&amp;rdquo; to be something else or that it
+is a non-trivial problem to solve.  In any case, I decided to to have a crack
+at it myself.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="A sketch of how pagination widget should work" class="figure" src="https://dmitry.khlebnikov.net/2020/06/14/truly-responsive-pagination/images/paginator-sketch.png"&gt;&lt;/p&gt;
+&lt;p&gt;My definition of a responsive pagination widget is pretty simple: such a widget
+should maintain its look and feel when the viewport (or a window) changes the
+size, yet the excessive information such as page numbers in the middle should
+be omitted if there is no space for them.&lt;/p&gt;
+&lt;p&gt;In this post I am going &lt;span class="truncated"&gt;&lt;/span&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;Searching the web for an example of a fully responsive pagination widget I
+found that either people consider &amp;ldquo;responsive&amp;rdquo; to be something else or that it
+is a non-trivial problem to solve.  In any case, I decided to to have a crack
+at it myself.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="A sketch of how pagination widget should work" class="figure" src="https://dmitry.khlebnikov.net/2020/06/14/truly-responsive-pagination/images/paginator-sketch.png"&gt;&lt;/p&gt;
+&lt;p&gt;My definition of a responsive pagination widget is pretty simple: such a widget
+should maintain its look and feel when the viewport (or a window) changes the
+size, yet the excessive information such as page numbers in the middle should
+be omitted if there is no space for them.&lt;/p&gt;
+&lt;p&gt;In this post I am going to describe my journey on the topic and the solution I
+ended up with.&lt;/p&gt;
+&lt;p&gt;My starting point was pretty simple &amp;ndash; I had the following HTML markup
+structure that was representing the page numbers in a pagination widget:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-html"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;&amp;lt;span class=&amp;quot;paginator&amp;quot;&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    &amp;lt;ul&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;&amp;amp;lt;&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;1&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;2&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;3&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;4&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;5&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;6&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;7&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;8&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;9&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;10&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;&amp;amp;gt;&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    &amp;lt;/ul&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;&amp;lt;/span&amp;gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The goal was to create a fully responsive widget using pure CSS and HTML and to
+try to avoid messing up the HTML structure unnecessarily, since I needed to
+preserve the &amp;ldquo;cleanness&amp;rdquo; of navigation for screen readers (i.e. accessibility
+is important!).&lt;/p&gt;
+&lt;p&gt;After a bit of brainstorming I ended up with two candidates for the
+implementation of my idea:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;the &amp;ldquo;old-school&amp;rdquo; approach of presenting a list as a line of &lt;code&gt;inline-block&lt;/code&gt; elements &lt;code&gt;float&lt;/code&gt;ing next to each other;&lt;/li&gt;
+&lt;li&gt;the recently new trend in web design to use the flexbox model.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Since I did not use &lt;code&gt;display: flex&lt;/code&gt; before, I decided to try the flexbox layout
+first.  The idea was that I could use two flex rows which wrap when the width
+was shrinking.  The challenge was that I wanted to implement two visual
+effects:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;the currently selected page should be in the middle of the pagination
+     widget and the wrapping of the rows should be adjacent to that selected
+     page number;&lt;/li&gt;
+&lt;li&gt;it should be visually unambiguous that the ranges of off-screen pages were
+     omitted.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;After thinking a bit I realised that the above description demands to have
+three logically separate components: a part before the selected page number (I
+call it &amp;ldquo;head&amp;rdquo;), a part containing the selected page number (I call it
+&amp;ldquo;middle&amp;rdquo;), and a part following the selected page number (I call it &amp;ldquo;tail&amp;rdquo;).
+Hence, my HTML markup became:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-html"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;&amp;lt;span class=&amp;quot;paginator&amp;quot;&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    &amp;lt;ul class=&amp;quot;head&amp;quot;&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;&amp;amp;lt;&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;1&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;2&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;3&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;4&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    &amp;lt;/ul&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    &amp;lt;ul class=&amp;quot;middle&amp;quot;&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;5&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    &amp;lt;/ul&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    &amp;lt;ul class=&amp;quot;tail&amp;quot;&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;6&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;7&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;8&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;9&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;10&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;&amp;amp;gt;&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    &amp;lt;/ul&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;&amp;lt;/span&amp;gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Initially, I just laid out the lists in a line just to see how it looks and
+whether I like the mechanics of it, so I started with the following style
+definitions:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-css"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;.paginator {
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    /* width: 50%; */
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    /* margin: 0 auto; */
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    display: flex;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    white-space: nowrap;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    overflow: hidden;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    min-width: 15em;    /* 5 items 3em each */
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;}
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;ul {
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    display: flex;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    position: relative;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    flex-flow: row wrap;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    list-style: none;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    margin: 0;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    padding: 0;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    line-height: 1.2;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    height: 3.2em;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    overflow: hidden;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    min-width: 6em;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;}
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;ul li {
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    display: block;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    width: 3em;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    height: 3em;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    line-height: 3;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;}
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;ul li a {
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    display: block;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    text-align: center;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    text-decoration: none;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;}
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;ul.middle {
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    min-width: 3em;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;}&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The above produced the following result (the example is wrapped in a resizable
+&lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt;, so if you are using a browser that supports it, like Chrome, you
+should be able to play with it right away):&lt;/p&gt;
+&lt;div class="demo1 resizable"&gt;
+&lt;style&gt;
+    div[class^='demo'].resizable {
+        position: relative;
+        overflow: auto;
+        resize: horizontal;
+        border: solid 0.25em rgba(0,0,0,0.5);
+        max-width: 100%;
+        min-width: 18.5em;
+        padding: 0.6em 1.2em;
+        border-radius: 0.5em;
+        margin-bottom: 1.5em;
+    }
+
+    .demo1 .paginator {
+        /* width: 50%; */
+        /* margin: 0 auto; */
+        display: flex;
+        white-space: nowrap;
+        overflow: hidden;
+        min-width: 15em;    /* 5 items 3em each */
+    }
+
+    .demo1 ul {
+        display: flex;
+        position: relative;
+        flex-flow: row wrap;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        line-height: 1.2;
+        height: 3.2em;
+        overflow: hidden;
+        min-width: 6em;
+    }
+
+    .demo1 ul li {
+        display: block;
+        width: 3em;
+        height: 3em;
+        line-height: 3;
+        margin: 0;
+    }
+
+    .demo1 ul li a {
+        display: block;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    .demo1 ul.middle {
+        min-width: 3em;
+    }
+&lt;/style&gt;
+    &lt;span class="paginator"&gt;
+        &lt;ul class="head"&gt;
+            &lt;li&gt;&lt;a href="#"&gt;&amp;lt;&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;1&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;2&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;3&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;4&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;ul class="middle"&gt;
+            &lt;li&gt;&lt;a href="#"&gt;5&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;ul class="tail"&gt;
+            &lt;li&gt;&lt;a href="#"&gt;6&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;7&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;8&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;9&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;10&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;&amp;gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/span&gt;
+&lt;/div&gt;
+
+&lt;p&gt;There are two issues which are immediately manifesting themselves when you
+resize the widget:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;The &amp;ldquo;tail&amp;rdquo; section wraps at the end truncating the list of the available
+     pages and making it impossible to jump to the last page number in the
+     list;&lt;/li&gt;
+&lt;li&gt;There is no visual guidance whatsoever that the page number were omitted.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The first issue is a difficult one since in the flexbox model we cannot easily
+control which side of the row is used for wrapping.  However, if we adjust our
+HTML markup and leverage not so often used &lt;code&gt;row-reverse&lt;/code&gt; value of the flexbox,
+then achieve the desired effect.&lt;/p&gt;
+&lt;p&gt;So, in the HTML markup I reversed the &amp;ldquo;tail&amp;rdquo; list:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-html"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    &amp;lt;ul class=&amp;quot;tail&amp;quot;&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;&amp;amp;gt;&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;10&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;9&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;8&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;7&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;6&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    &amp;lt;/ul&amp;gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;and I adjusted the style of the &amp;ldquo;tail&amp;rdquo; list to apply &lt;code&gt;row-reverse&lt;/code&gt; (which basically
+visually presents the list in the reverse order):&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-css"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;ul.tail {
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    flex-flow: row-reverse wrap;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;}&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;With the above changes applied the result looks much more closer to what we
+want:&lt;/p&gt;
+&lt;div class="demo2 resizable"&gt;
+&lt;style&gt;
+    .demo2 .paginator {
+        /* width: 50%; */
+        /* margin: 0 auto; */
+        display: flex;
+        white-space: nowrap;
+        overflow: hidden;
+        min-width: 15em;    /* 5 items 3em each */
+    }
+
+    .demo2 ul {
+        display: flex;
+        position: relative;
+        flex-flow: row wrap;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        line-height: 1.2;
+        height: 3.2em;
+        overflow: hidden;
+        min-width: 6em;
+    }
+
+    .demo2 ul li {
+        display: block;
+        width: 3em;
+        height: 3em;
+        line-height: 3;
+        margin: 0;
+    }
+
+    .demo2 ul li a {
+        display: block;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    .demo2 ul.middle {
+        min-width: 3em;
+    }
+
+    .demo2 ul.tail {
+        flex-flow: row-reverse wrap;
+    }
+&lt;/style&gt;
+    &lt;span class="paginator"&gt;
+        &lt;ul class="head"&gt;
+            &lt;li&gt;&lt;a href="#"&gt;&amp;lt;&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;1&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;2&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;3&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;4&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;ul class="middle"&gt;
+            &lt;li&gt;&lt;a href="#"&gt;5&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;ul class="tail"&gt;
+            &lt;li&gt;&lt;a href="#"&gt;&amp;gt;&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;10&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;9&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;8&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;7&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;6&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/span&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Now, to tackle with the visual guidance for the omitted page numbers we can do
+something like the following: we can display dots in space when the page number
+is being wrapped.  To do so we could use pseudo-elements for the &amp;ldquo;middle&amp;rdquo; list:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-css"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;ul.middle::before {
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    content: '';
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    width: 300%;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    height: 1em;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    position: absolute;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    z-index: -1;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    border-top: dotted;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    left: -100%;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    top: 1.5em;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;}&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;A few things to note: we are creating a pseudo-element which is three times
+wider than its parent, we position it absolutely, shift it 1/3 to the left and
+half way down.  With the only border defined to be the top border we are
+getting a dotted line that goes through the middle of our &amp;ldquo;middle&amp;rdquo; list.&lt;/p&gt;
+&lt;p&gt;However, to make this work we also need to ensure that the border we created
+can extend beyond the box defined by the &amp;ldquo;middle&amp;rdquo; list, hence we need to set
+&lt;code&gt;overflow&lt;/code&gt; to &lt;code&gt;visible&lt;/code&gt; and let the border overflow the boundaries:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-css"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;ul.middle {
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    overflow: visible;  /* show the background dot line */
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;}&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Finally, some additional cosmetic touches are required:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;the list items have transparent background and the border line is visible
+    behind the page numbers, so to address this we need to explicitly set the
+    &lt;code&gt;background&lt;/code&gt; property for list items;&lt;/li&gt;
+&lt;li&gt;to overlay our explicitly defined background on top of the border line we
+    need to bump our list items up in the rendering order by setting &lt;code&gt;z-index&lt;/code&gt;
+    to be higher;&lt;/li&gt;
+&lt;li&gt;we need to handle a situation when the widget is compressed to its minimal
+    size so there are just three page numbers: the first, the current, and the
+    last page number &amp;ndash; in this situation we would not have any space between
+    list items, yet we need to indicate that the page ranges were omitted &amp;ndash; we
+    can do this by playing with &lt;code&gt;min-width&lt;/code&gt; for the &amp;ldquo;head&amp;rdquo; and &amp;ldquo;tail&amp;rdquo; lists.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The above translates to the following styling rules:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-css"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;ul li {
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    z-index: 1;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    background: whitesmoke;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;}
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;ul.head,
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;ul.tail {
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    min-width: 6.5em;
+&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;}&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;OK, it is time to see the result of all these changes:&lt;/p&gt;
+&lt;div class="demo3 resizable"&gt;
+&lt;style&gt;
+    .demo3 .paginator {
+        /* width: 50%; */
+        /* margin: 0 auto; */
+        display: flex;
+        white-space: nowrap;
+        overflow: hidden;
+        min-width: 15em;    /* 5 items 3em each */
+    }
+
+    .demo3 ul {
+        display: flex;
+        position: relative;
+        flex-flow: row wrap;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        line-height: 1.2;
+        height: 3.2em;
+        overflow: hidden;
+        min-width: 6em;
+    }
+
+    .demo3 ul li {
+        display: block;
+        width: 3em;
+        height: 3em;
+        line-height: 3;
+        margin: 0;
+        z-index: 1;
+        background: whitesmoke;
+    }
+
+    .demo3 ul li a {
+        display: block;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    .demo3 ul.middle::before {
+        content: '';
+        width: 300%;
+        height: 1em;
+        position: absolute;
+        border-top: dotted;
+        left: -100%;
+        top: 1.5em;
+    }
+
+    .demo3 ul.middle {
+        min-width: 3em;
+        overflow: visible;
+    }
+
+    .demo3 ul.tail {
+        flex-flow: row-reverse wrap;
+    }
+
+    .demo3 ul.head,
+    .demo3 ul.tail {
+        min-width: 6.5em;
+    }
+&lt;/style&gt;
+    &lt;span class="paginator"&gt;
+        &lt;ul class="head"&gt;
+            &lt;li&gt;&lt;a href="#"&gt;&amp;lt;&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;1&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;2&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;3&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;4&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;ul class="middle"&gt;
+            &lt;li&gt;&lt;a href="#"&gt;5&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;ul class="tail"&gt;
+            &lt;li&gt;&lt;a href="#"&gt;&amp;gt;&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;10&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;9&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;8&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;7&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;6&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/span&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Although the result looks promising and is a workable solution, there are still
+a couple of issues left unsolved:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;The biggest concern I have with this solution is that it requires
+     reordering of the &amp;ldquo;tail&amp;rdquo; list and it is messing up the screen readers,
+     therefore making it much harder for people with assistive technologies to
+     use it;&lt;/li&gt;
+&lt;li&gt;I also discovered an edge case if the current page was adjacent to &amp;ldquo;head&amp;rdquo;
+     (e.g. the second page) or to &amp;ldquo;tail&amp;rdquo; (e.g. the second to last page) the
+     range dots would be still present in that case since they are regulated by
+     that &lt;code&gt;.5em&lt;/code&gt; space I left for the &amp;ldquo;head&amp;rdquo; and &amp;ldquo;tail&amp;rdquo; lists in the
+     &lt;code&gt;min-width&lt;/code&gt; attribute.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The first issue may be solved by introducing a shadow copy of the pagination
+widget that is designed specifically for the screen readers while making this
+visually pleasing widget hidden from the screen readers.&lt;/p&gt;
+&lt;p&gt;The second issue is much more puzzling and so far I could not find a pure HTML
++ CSS solution for it.  It can be addressed by a bit of JavaScript, but I did
+not want to go that route for my blog.  Most likely, since my blog is
+statically generated I will address it using the logic of the generator itself.&lt;/p&gt;
+&lt;p&gt;Still, I think the techniques I demonstrated here may be quite useful to some
+people who are designing pure HTML and CSS adaptive widgets.&lt;/p&gt;</content><category term="web design"></category><category term="html"></category><category term="css"></category><category term="design"></category></entry><entry><title>Wrap indicator in &lt;pre&gt; blocks</title><link href="https://dmitry.khlebnikov.net/2020/05/10/wrap-indicator-in-pre-blocks/" rel="alternate"></link><published>2020-05-10T21:00:00+10:00</published><updated>2020-05-18T04:53:28+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-10:/2020/05/10/wrap-indicator-in-pre-blocks/</id><summary type="html">&lt;p&gt;I am not a front-end developer, not a UI designer, nor a UX guru, but I am an
 engineer, so when I face a puzzle worth solving my brain switches on and I
 cannot let it go until I find a satisfactory solution to the puzzle.&lt;/p&gt;
 &lt;p&gt;My blog heavily relies on me sharing session dumps and file excerpts using the

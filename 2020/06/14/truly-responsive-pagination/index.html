@@ -1,0 +1,608 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Security-Policy" content="	default-src 'self';object-src 'none';script-src 'self' https://www.googletagmanager.com/gtag/js 'sha256-TelA7VsuYAMqhOKGk7CHgJyuqSJdmqZEp+hn6PWVRwQ=' https://www.google-analytics.com/analytics.js;img-src 'self' data: https://www.google-analytics.com/r/collect https://www.google-analytics.com/collect https://stats.g.doubleclick.net/r/collect https://*/ads/ga-audiences https://www.googletagmanager.com/a;style-src 'self' 'sha256-fszvBX/J9dhPxFSJ5wUrq/Pvg6HrnTkWyshMZpaxSQY=' 'sha256-X63tsLxZ666HvGjs1YuRyp7HYdYx/wyORGXIpJm3m8c=' 'sha256-Fhm1+nBYn8lYU7dBqxHnbjm4L3ZuERi+2Yy3EfIK8GE=' 'sha256-+VXdhoFi9H+UeLqew9Z/G5N2QpjFHXKjtWmrRzMmPw0=';connect-src 'self' https://www.google-analytics.com/j/collect https://stats.g.doubleclick.net/j/collect; " />
+		<title>Mind Drops</title>
+		<script src="/theme/js/persistence.js" defer></script>
+		<meta charset="utf-8" />
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content="#535353" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<meta name="apple-mobile-web-app-title" content="Mind Drops" />
+		<meta name="description" content="">
+		<link rel="apple-touch-icon" href="/theme/images/icons/mind-drops-192x192.png" />
+		<link rel="manifest" type="text/json" href="/manifest.json" />
+		<link rel="alternate" type="application/atom+xml" href="https://dmitry.khlebnikov.net/feeds/all.atom.xml" title="Mind Drops Full Atom Feed" />
+		<link rel="alternate" type="application/atom+xml" href="https://dmitry.khlebnikov.net/feeds/web-design.atom.xml" title="Mind Drops Categories Atom Feed" />
+		<link rel="dns-prefetch" href="https://www.google.com" />
+		<link rel="preconnect" href="https://www.google.com" crossorigin />
+		<link rel="dns-prefetch" href="https://www.google-analytics.com" />
+		<link rel="preconnect" href="https://www.google-analytics.com" crossorigin />
+		<link rel="dns-prefetch" href="https://www.googletagmanager.com">
+		<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+		<link rel="dns-prefetch" href="https://stats.g.doubleclick.net" />
+		<link rel="preconnect" href="https://stats.g.doubleclick.net" crossorigin />
+		<link rel="preload" as="style" href="/theme/css/reset.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Icons.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Exo2.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/Oswald.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/DancingScript.css" />
+		<link rel="preload" as="style" href="/theme/css/fonts/FiraCode.css" />
+		<link rel="preload" as="style" href="/theme/css/base.css" />
+		<link rel="preload" as="script" href="/theme/js/persistence.js" />
+		<link rel="preload" as="script" href="/theme/js/visited.js" />
+		<link rel="preload" as="script" href="/theme/js/service.js" />
+		<link rel="preload" as="script" href="https://www.googletagmanager.com/gtag/js?id=UA-165060547-1" />
+		<link rel="icon" type="image/png" href="/images/galaxy.png" />
+		<script src="/theme/js/loader.js" defer></script>
+
+		<meta name="keywords" content="html css design" />
+		<link rel="stylesheet" type="text/css" href="/theme/css/article.css" />
+		<link rel="canonical" href="/2020/06/14/truly-responsive-pagination/" />
+	</head>
+	<body>
+
+		<input type="radio" name="menu-toggle" id="menu-toggle-full" value="full" tabindex="-1" checked />
+		<input type="radio" name="menu-toggle" id="menu-toggle-mini" value="mini" tabindex="-1" />
+		<input type="radio" name="menu-toggle" id="menu-toggle-hide" value="hide" tabindex="-1" />
+		<label for="menu-toggle-full" class="icon menu" role="radio" tabindex="0">Show the full menu panel on the screen</label>
+		<aside id="sidebar">
+			<label for="menu-toggle-mini" class="icon left-big" role="radio" tabindex="0">Show the minimised menu panel on the screen</label>
+			<label for="menu-toggle-hide" class="icon eye-off" role="radio" tabindex="0">Remove the menu panel off the screen</label>
+			<div class="title">Mind Drops</div>
+			<div id="logo" class="box shadow">
+				<picture>
+					<source srcset="/images/galaxy.png.webp" type="image/webp">
+					<img src="/images/galaxy.png" alt="Logo">
+				</picture>
+			</div>
+
+			<!-- Search -->
+			<section class="box search">
+				<form name="google search" class="icon search" method="get" action="/search">
+					<label for="search" class="offscreen">Search</label>
+					<input id="search" type="text" class="text" name="q" placeholder="Search" />
+				</form>
+			</section>
+
+			<nav>
+				<ul>
+					<li>
+						<a class="icon home" href="/">Home</a>
+					</li>
+					<li>
+						<a class="icon user" href="/about">About</a>
+					</li>
+					<li>
+						<a class="icon phone" href="/contact">Contact</a>
+					</li>
+				</ul>
+			</nav>
+
+			<!-- Text -->
+			<section class="box text-style1">
+				<div class="inner">
+					<p>
+						<strong>Mind Drops:</strong>: A place to unload all these assorted bits.
+					</p>
+				</div>
+			</section>
+
+			<!-- Copyright -->
+			<ul id="copyright">
+				<li>&copy; Openwall Pty Ltd 2020 </li>
+				<li><a href="/legal/terms-of-service">Terms of Service</a></li>
+			</ul>
+		</aside>
+
+		<!-- Content -->
+		<div id="content">
+			<div class="inner">
+				<article id="truly-responsive-pagination" class="box post">
+					<header>
+						<h1><a name="top">Truly Responsive Pagination</a></h1>
+					</header>
+					<div class="info">
+						<span class="date">
+							<span class="day">14</span>
+							<span class="month"><a href="/2020/06/">Jun<span class="month full">e</span></a></span>
+							<span class="year"><a href="/2020/">2020</a></span>
+						</span>
+						<ul class="stats">
+							<li><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="icon twitter" aria-label="Twitter" data-tweet-id="None">0</a></li>
+						</ul>
+					</div>
+					<p>Searching the web for an example of a fully responsive pagination widget I
+found that either people consider &ldquo;responsive&rdquo; to be something else or that it
+is a non-trivial problem to solve.  In any case, I decided to to have a crack
+at it myself.</p>
+<p><img alt="A sketch of how pagination widget should work" class="figure" src="https://dmitry.khlebnikov.net/2020/06/14/truly-responsive-pagination/images/paginator-sketch.png"></p>
+<p>My definition of a responsive pagination widget is pretty simple: such a widget
+should maintain its look and feel when the viewport (or a window) changes the
+size, yet the excessive information such as page numbers in the middle should
+be omitted if there is no space for them.</p>
+<p>In this post I am going to describe my journey on the topic and the solution I
+ended up with.</p>
+<p>My starting point was pretty simple &ndash; I had the following HTML markup
+structure that was representing the page numbers in a pagination widget:</p>
+<pre class="highlight"><code class="language-html"><div class="lines"><a></a>&lt;span class=&quot;paginator&quot;&gt;
+</div><div class="lines"><a></a>    &lt;ul&gt;
+</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&amp;lt;&lt;/a&gt;&lt;/li&gt;
+</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;1&lt;/a&gt;&lt;/li&gt;
+</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;2&lt;/a&gt;&lt;/li&gt;
+</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;3&lt;/a&gt;&lt;/li&gt;
+</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;4&lt;/a&gt;&lt;/li&gt;
+</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;5&lt;/a&gt;&lt;/li&gt;
+</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;6&lt;/a&gt;&lt;/li&gt;
+</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;7&lt;/a&gt;&lt;/li&gt;
+</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;8&lt;/a&gt;&lt;/li&gt;
+</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;9&lt;/a&gt;&lt;/li&gt;
+</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;10&lt;/a&gt;&lt;/li&gt;
+</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&amp;gt;&lt;/a&gt;&lt;/li&gt;
+</div><div class="lines"><a></a>    &lt;/ul&gt;
+</div><div class="lines"><a></a>&lt;/span&gt;</div></code></pre>
+
+<p>The goal was to create a fully responsive widget using pure CSS and HTML and to
+try to avoid messing up the HTML structure unnecessarily, since I needed to
+preserve the &ldquo;cleanness&rdquo; of navigation for screen readers (i.e. accessibility
+is important!).</p>
+<p>After a bit of brainstorming I ended up with two candidates for the
+implementation of my idea:</p>
+<ol>
+<li>the &ldquo;old-school&rdquo; approach of presenting a list as a line of <code>inline-block</code> elements <code>float</code>ing next to each other;</li>
+<li>the recently new trend in web design to use the flexbox model.</li>
+</ol>
+<p>Since I did not use <code>display: flex</code> before, I decided to try the flexbox layout
+first.  The idea was that I could use two flex rows which wrap when the width
+was shrinking.  The challenge was that I wanted to implement two visual
+effects:</p>
+<ol>
+<li>the currently selected page should be in the middle of the pagination
+     widget and the wrapping of the rows should be adjacent to that selected
+     page number;</li>
+<li>it should be visually unambiguous that the ranges of off-screen pages were
+     omitted.</li>
+</ol>
+<p>After thinking a bit I realised that the above description demands to have
+three logically separate components: a part before the selected page number (I
+call it &ldquo;head&rdquo;), a part containing the selected page number (I call it
+&ldquo;middle&rdquo;), and a part following the selected page number (I call it &ldquo;tail&rdquo;).
+Hence, my HTML markup became:</p>
+<pre class="highlight"><code class="language-html"><div class="lines"><a></a>&lt;span class=&quot;paginator&quot;&gt;
+</div><div class="lines"><a></a>    &lt;ul class=&quot;head&quot;&gt;
+</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&amp;lt;&lt;/a&gt;&lt;/li&gt;
+</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;1&lt;/a&gt;&lt;/li&gt;
+</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;2&lt;/a&gt;&lt;/li&gt;
+</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;3&lt;/a&gt;&lt;/li&gt;
+</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;4&lt;/a&gt;&lt;/li&gt;
+</div><div class="lines"><a></a>    &lt;/ul&gt;
+</div><div class="lines"><a></a>    &lt;ul class=&quot;middle&quot;&gt;
+</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;5&lt;/a&gt;&lt;/li&gt;
+</div><div class="lines"><a></a>    &lt;/ul&gt;
+</div><div class="lines"><a></a>    &lt;ul class=&quot;tail&quot;&gt;
+</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;6&lt;/a&gt;&lt;/li&gt;
+</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;7&lt;/a&gt;&lt;/li&gt;
+</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;8&lt;/a&gt;&lt;/li&gt;
+</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;9&lt;/a&gt;&lt;/li&gt;
+</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;10&lt;/a&gt;&lt;/li&gt;
+</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&amp;gt;&lt;/a&gt;&lt;/li&gt;
+</div><div class="lines"><a></a>    &lt;/ul&gt;
+</div><div class="lines"><a></a>&lt;/span&gt;</div></code></pre>
+
+<p>Initially, I just laid out the lists in a line just to see how it looks and
+whether I like the mechanics of it, so I started with the following style
+definitions:</p>
+<pre class="highlight"><code class="language-css"><div class="lines"><a></a>.paginator {
+</div><div class="lines"><a></a>    /* width: 50%; */
+</div><div class="lines"><a></a>    /* margin: 0 auto; */
+</div><div class="lines"><a></a>    display: flex;
+</div><div class="lines"><a></a>    white-space: nowrap;
+</div><div class="lines"><a></a>    overflow: hidden;
+</div><div class="lines"><a></a>    min-width: 15em;    /* 5 items 3em each */
+</div><div class="lines"><a></a>}
+</div><div class="lines"><a></a>
+</div><div class="lines"><a></a>ul {
+</div><div class="lines"><a></a>    display: flex;
+</div><div class="lines"><a></a>    position: relative;
+</div><div class="lines"><a></a>    flex-flow: row wrap;
+</div><div class="lines"><a></a>    list-style: none;
+</div><div class="lines"><a></a>    margin: 0;
+</div><div class="lines"><a></a>    padding: 0;
+</div><div class="lines"><a></a>    line-height: 1.2;
+</div><div class="lines"><a></a>    height: 3.2em;
+</div><div class="lines"><a></a>    overflow: hidden;
+</div><div class="lines"><a></a>    min-width: 6em;
+</div><div class="lines"><a></a>}
+</div><div class="lines"><a></a>
+</div><div class="lines"><a></a>ul li {
+</div><div class="lines"><a></a>    display: block;
+</div><div class="lines"><a></a>    width: 3em;
+</div><div class="lines"><a></a>    height: 3em;
+</div><div class="lines"><a></a>    line-height: 3;
+</div><div class="lines"><a></a>}
+</div><div class="lines"><a></a>
+</div><div class="lines"><a></a>ul li a {
+</div><div class="lines"><a></a>    display: block;
+</div><div class="lines"><a></a>    text-align: center;
+</div><div class="lines"><a></a>    text-decoration: none;
+</div><div class="lines"><a></a>}
+</div><div class="lines"><a></a>
+</div><div class="lines"><a></a>ul.middle {
+</div><div class="lines"><a></a>    min-width: 3em;
+</div><div class="lines"><a></a>}</div></code></pre>
+
+<p>The above produced the following result (the example is wrapped in a resizable
+<code>&lt;div&gt;</code>, so if you are using a browser that supports it, like Chrome, you
+should be able to play with it right away):</p>
+<div class="demo1 resizable">
+<style>
+    div[class^='demo'].resizable {
+        position: relative;
+        overflow: auto;
+        resize: horizontal;
+        border: solid 0.25em rgba(0,0,0,0.5);
+        max-width: 100%;
+        min-width: 18.5em;
+        padding: 0.6em 1.2em;
+        border-radius: 0.5em;
+        margin-bottom: 1.5em;
+    }
+
+    .demo1 .paginator {
+        /* width: 50%; */
+        /* margin: 0 auto; */
+        display: flex;
+        white-space: nowrap;
+        overflow: hidden;
+        min-width: 15em;    /* 5 items 3em each */
+    }
+
+    .demo1 ul {
+        display: flex;
+        position: relative;
+        flex-flow: row wrap;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        line-height: 1.2;
+        height: 3.2em;
+        overflow: hidden;
+        min-width: 6em;
+    }
+
+    .demo1 ul li {
+        display: block;
+        width: 3em;
+        height: 3em;
+        line-height: 3;
+        margin: 0;
+    }
+
+    .demo1 ul li a {
+        display: block;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    .demo1 ul.middle {
+        min-width: 3em;
+    }
+</style>
+    <span class="paginator">
+        <ul class="head">
+            <li><a href="#">&lt;</a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+        </ul>
+        <ul class="middle">
+            <li><a href="#">5</a></li>
+        </ul>
+        <ul class="tail">
+            <li><a href="#">6</a></li>
+            <li><a href="#">7</a></li>
+            <li><a href="#">8</a></li>
+            <li><a href="#">9</a></li>
+            <li><a href="#">10</a></li>
+            <li><a href="#">&gt;</a></li>
+        </ul>
+    </span>
+</div>
+
+<p>There are two issues which are immediately manifesting themselves when you
+resize the widget:</p>
+<ol>
+<li>The &ldquo;tail&rdquo; section wraps at the end truncating the list of the available
+     pages and making it impossible to jump to the last page number in the
+     list;</li>
+<li>There is no visual guidance whatsoever that the page number were omitted.</li>
+</ol>
+<p>The first issue is a difficult one since in the flexbox model we cannot easily
+control which side of the row is used for wrapping.  However, if we adjust our
+HTML markup and leverage not so often used <code>row-reverse</code> value of the flexbox,
+then achieve the desired effect.</p>
+<p>So, in the HTML markup I reversed the &ldquo;tail&rdquo; list:</p>
+<pre class="highlight"><code class="language-html"><div class="lines"><a></a>    &lt;ul class=&quot;tail&quot;&gt;
+</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&amp;gt;&lt;/a&gt;&lt;/li&gt;
+</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;10&lt;/a&gt;&lt;/li&gt;
+</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;9&lt;/a&gt;&lt;/li&gt;
+</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;8&lt;/a&gt;&lt;/li&gt;
+</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;7&lt;/a&gt;&lt;/li&gt;
+</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;6&lt;/a&gt;&lt;/li&gt;
+</div><div class="lines"><a></a>    &lt;/ul&gt;</div></code></pre>
+
+<p>and I adjusted the style of the &ldquo;tail&rdquo; list to apply <code>row-reverse</code> (which basically
+visually presents the list in the reverse order):</p>
+<pre class="highlight"><code class="language-css"><div class="lines"><a></a>ul.tail {
+</div><div class="lines"><a></a>    flex-flow: row-reverse wrap;
+</div><div class="lines"><a></a>}</div></code></pre>
+
+<p>With the above changes applied the result looks much more closer to what we
+want:</p>
+<div class="demo2 resizable">
+<style>
+    .demo2 .paginator {
+        /* width: 50%; */
+        /* margin: 0 auto; */
+        display: flex;
+        white-space: nowrap;
+        overflow: hidden;
+        min-width: 15em;    /* 5 items 3em each */
+    }
+
+    .demo2 ul {
+        display: flex;
+        position: relative;
+        flex-flow: row wrap;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        line-height: 1.2;
+        height: 3.2em;
+        overflow: hidden;
+        min-width: 6em;
+    }
+
+    .demo2 ul li {
+        display: block;
+        width: 3em;
+        height: 3em;
+        line-height: 3;
+        margin: 0;
+    }
+
+    .demo2 ul li a {
+        display: block;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    .demo2 ul.middle {
+        min-width: 3em;
+    }
+
+    .demo2 ul.tail {
+        flex-flow: row-reverse wrap;
+    }
+</style>
+    <span class="paginator">
+        <ul class="head">
+            <li><a href="#">&lt;</a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+        </ul>
+        <ul class="middle">
+            <li><a href="#">5</a></li>
+        </ul>
+        <ul class="tail">
+            <li><a href="#">&gt;</a></li>
+            <li><a href="#">10</a></li>
+            <li><a href="#">9</a></li>
+            <li><a href="#">8</a></li>
+            <li><a href="#">7</a></li>
+            <li><a href="#">6</a></li>
+        </ul>
+    </span>
+</div>
+
+<p>Now, to tackle with the visual guidance for the omitted page numbers we can do
+something like the following: we can display dots in space when the page number
+is being wrapped.  To do so we could use pseudo-elements for the &ldquo;middle&rdquo; list:</p>
+<pre class="highlight"><code class="language-css"><div class="lines"><a></a>ul.middle::before {
+</div><div class="lines"><a></a>    content: '';
+</div><div class="lines"><a></a>    width: 300%;
+</div><div class="lines"><a></a>    height: 1em;
+</div><div class="lines"><a></a>    position: absolute;
+</div><div class="lines"><a></a>    z-index: -1;
+</div><div class="lines"><a></a>    border-top: dotted;
+</div><div class="lines"><a></a>    left: -100%;
+</div><div class="lines"><a></a>    top: 1.5em;
+</div><div class="lines"><a></a>}</div></code></pre>
+
+<p>A few things to note: we are creating a pseudo-element which is three times
+wider than its parent, we position it absolutely, shift it 1/3 to the left and
+half way down.  With the only border defined to be the top border we are
+getting a dotted line that goes through the middle of our &ldquo;middle&rdquo; list.</p>
+<p>However, to make this work we also need to ensure that the border we created
+can extend beyond the box defined by the &ldquo;middle&rdquo; list, hence we need to set
+<code>overflow</code> to <code>visible</code> and let the border overflow the boundaries:</p>
+<pre class="highlight"><code class="language-css"><div class="lines"><a></a>ul.middle {
+</div><div class="lines"><a></a>    overflow: visible;  /* show the background dot line */
+</div><div class="lines"><a></a>}</div></code></pre>
+
+<p>Finally, some additional cosmetic touches are required:</p>
+<ul>
+<li>the list items have transparent background and the border line is visible
+    behind the page numbers, so to address this we need to explicitly set the
+    <code>background</code> property for list items;</li>
+<li>to overlay our explicitly defined background on top of the border line we
+    need to bump our list items up in the rendering order by setting <code>z-index</code>
+    to be higher;</li>
+<li>we need to handle a situation when the widget is compressed to its minimal
+    size so there are just three page numbers: the first, the current, and the
+    last page number &ndash; in this situation we would not have any space between
+    list items, yet we need to indicate that the page ranges were omitted &ndash; we
+    can do this by playing with <code>min-width</code> for the &ldquo;head&rdquo; and &ldquo;tail&rdquo; lists.</li>
+</ul>
+<p>The above translates to the following styling rules:</p>
+<pre class="highlight"><code class="language-css"><div class="lines"><a></a>ul li {
+</div><div class="lines"><a></a>    z-index: 1;
+</div><div class="lines"><a></a>    background: whitesmoke;
+</div><div class="lines"><a></a>}
+</div><div class="lines"><a></a>
+</div><div class="lines"><a></a>ul.head,
+</div><div class="lines"><a></a>ul.tail {
+</div><div class="lines"><a></a>    min-width: 6.5em;
+</div><div class="lines"><a></a>}</div></code></pre>
+
+<p>OK, it is time to see the result of all these changes:</p>
+<div class="demo3 resizable">
+<style>
+    .demo3 .paginator {
+        /* width: 50%; */
+        /* margin: 0 auto; */
+        display: flex;
+        white-space: nowrap;
+        overflow: hidden;
+        min-width: 15em;    /* 5 items 3em each */
+    }
+
+    .demo3 ul {
+        display: flex;
+        position: relative;
+        flex-flow: row wrap;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        line-height: 1.2;
+        height: 3.2em;
+        overflow: hidden;
+        min-width: 6em;
+    }
+
+    .demo3 ul li {
+        display: block;
+        width: 3em;
+        height: 3em;
+        line-height: 3;
+        margin: 0;
+        z-index: 1;
+        background: whitesmoke;
+    }
+
+    .demo3 ul li a {
+        display: block;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    .demo3 ul.middle::before {
+        content: '';
+        width: 300%;
+        height: 1em;
+        position: absolute;
+        border-top: dotted;
+        left: -100%;
+        top: 1.5em;
+    }
+
+    .demo3 ul.middle {
+        min-width: 3em;
+        overflow: visible;
+    }
+
+    .demo3 ul.tail {
+        flex-flow: row-reverse wrap;
+    }
+
+    .demo3 ul.head,
+    .demo3 ul.tail {
+        min-width: 6.5em;
+    }
+</style>
+    <span class="paginator">
+        <ul class="head">
+            <li><a href="#">&lt;</a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+        </ul>
+        <ul class="middle">
+            <li><a href="#">5</a></li>
+        </ul>
+        <ul class="tail">
+            <li><a href="#">&gt;</a></li>
+            <li><a href="#">10</a></li>
+            <li><a href="#">9</a></li>
+            <li><a href="#">8</a></li>
+            <li><a href="#">7</a></li>
+            <li><a href="#">6</a></li>
+        </ul>
+    </span>
+</div>
+
+<p>Although the result looks promising and is a workable solution, there are still
+a couple of issues left unsolved:</p>
+<ol>
+<li>The biggest concern I have with this solution is that it requires
+     reordering of the &ldquo;tail&rdquo; list and it is messing up the screen readers,
+     therefore making it much harder for people with assistive technologies to
+     use it;</li>
+<li>I also discovered an edge case if the current page was adjacent to &ldquo;head&rdquo;
+     (e.g. the second page) or to &ldquo;tail&rdquo; (e.g. the second to last page) the
+     range dots would be still present in that case since they are regulated by
+     that <code>.5em</code> space I left for the &ldquo;head&rdquo; and &ldquo;tail&rdquo; lists in the
+     <code>min-width</code> attribute.</li>
+</ol>
+<p>The first issue may be solved by introducing a shadow copy of the pagination
+widget that is designed specifically for the screen readers while making this
+visually pleasing widget hidden from the screen readers.</p>
+<p>The second issue is much more puzzling and so far I could not find a pure HTML
++ CSS solution for it.  It can be addressed by a bit of JavaScript, but I did
+not want to go that route for my blog.  Most likely, since my blog is
+statically generated I will address it using the logic of the generator itself.</p>
+<p>Still, I think the techniques I demonstrated here may be quite useful to some
+people who are designing pure HTML and CSS adaptive widgets.</p>
+					<ul class="tags">
+						<li class="tag">
+							<div>
+								<a href="/tag/html/" class="tag name">html</a>
+							</div>
+							<a href="/tag/html/" class="tag count">2</a>
+						</li>
+						<li class="tag">
+							<div>
+								<a href="/tag/css/" class="tag name">css</a>
+							</div>
+							<a href="/tag/css/" class="tag count">2</a>
+						</li>
+						<li class="tag">
+							<div>
+								<a href="/tag/design/" class="tag name">design</a>
+							</div>
+							<a href="/tag/design/" class="tag count">2</a>
+						</li>
+					</ul>
+					<footer>
+						Offloaded on
+						<time datetime="2020-06-14 20:07:00+10:00">Sun, 14/06/2020 at 20:07 (<a href="https://time.is/AEST" target="_blank" rel="noreferrer">AEST</a>)</time>
+						<span class="category-tag"><a href="/category/web-design">web design</a></span>
+					</footer>				</article>
+			</div>
+		</div>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-165060547-1"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'UA-165060547-1');
+		</script>
+	</body>
+</html>

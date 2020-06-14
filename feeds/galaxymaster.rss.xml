@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>Mind Drops - (GalaxyMaster)</title><link>https://dmitry.khlebnikov.net/</link><description></description><lastBuildDate>Sun, 07 Jun 2020 17:37:34 +1000</lastBuildDate><item><title>Automating Static Website Deployment</title><link>https://dmitry.khlebnikov.net/2020/05/17/automating-static-website-deployment/</link><description>&lt;div class="toc"&gt;&lt;span class="toctitle"&gt;Table of Contents&lt;/span&gt;&lt;ul&gt;
+<rss version="2.0"><channel><title>Mind Drops - (GalaxyMaster)</title><link>https://dmitry.khlebnikov.net/</link><description></description><lastBuildDate>Sun, 14 Jun 2020 20:08:33 +1000</lastBuildDate><item><title>Truly Responsive Pagination</title><link>https://dmitry.khlebnikov.net/2020/06/14/truly-responsive-pagination/</link><description>&lt;p&gt;Searching the web for an example of a fully responsive pagination widget I
+found that either people consider &amp;ldquo;responsive&amp;rdquo; to be something else or that it
+is a non-trivial problem to solve.  In any case, I decided to to have a crack
+at it myself.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="A sketch of how pagination widget should work" class="figure" src="https://dmitry.khlebnikov.net/2020/06/14/truly-responsive-pagination/images/paginator-sketch.png"&gt;&lt;/p&gt;
+&lt;p&gt;My definition of a responsive pagination widget is pretty simple: such a widget
+should maintain its look and feel when the viewport (or a window) changes the
+size, yet the excessive information such as page numbers in the middle should
+be omitted if there is no space for them.&lt;/p&gt;
+&lt;p&gt;In this post I am going &lt;span class="truncated"&gt;&lt;/span&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">(GalaxyMaster)</dc:creator><pubDate>Sun, 14 Jun 2020 20:07:00 +1000</pubDate><guid isPermaLink="false">tag:dmitry.khlebnikov.net,2020-06-14:/2020/06/14/truly-responsive-pagination/</guid><category>web design</category><category>html</category><category>css</category><category>design</category></item><item><title>Automating Static Website Deployment</title><link>https://dmitry.khlebnikov.net/2020/05/17/automating-static-website-deployment/</link><description>&lt;div class="toc"&gt;&lt;span class="toctitle"&gt;Table of Contents&lt;/span&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a href="#setting-up-github-pages"&gt;Setting up GitHub Pages&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#setting-up-the-private-code-repository"&gt;Setting up the private, code repository&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#configuring-the-github-action-for-publishing"&gt;Configuring the GitHub Action for publishing&lt;/a&gt;&lt;/li&gt;
