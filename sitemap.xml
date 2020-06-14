@@ -5,7 +5,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://dmitry.khlebnikov.net/</loc>
-<lastmod>2020-06-14T20:09:30-00:00</lastmod>
+<lastmod>2020-06-14T20:12:45-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.75</priority>
 </url>
@@ -47,7 +47,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://dmitry.khlebnikov.net/2020/06/14/truly-responsive-pagination/</loc>
-<lastmod>2020-06-14T20:08:33+10:00</lastmod>
+<lastmod>2020-06-14T20:12:20+10:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
