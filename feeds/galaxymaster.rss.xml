@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>Mind Drops - (GalaxyMaster)</title><link>https://dmitry.khlebnikov.net/</link><description></description><lastBuildDate>Sun, 14 Jun 2020 20:12:20 +1000</lastBuildDate><item><title>Truly Responsive Pagination</title><link>https://dmitry.khlebnikov.net/2020/06/14/truly-responsive-pagination/</link><description>&lt;p&gt;Searching the web for an example of a fully responsive pagination widget I
+<rss version="2.0"><channel><title>Mind Drops - (GalaxyMaster)</title><link>https://dmitry.khlebnikov.net/</link><description></description><lastBuildDate>Sun, 14 Jun 2020 20:15:57 +1000</lastBuildDate><item><title>Truly Responsive Pagination</title><link>https://dmitry.khlebnikov.net/2020/06/14/truly-responsive-pagination/</link><description>&lt;p&gt;Searching the web for an example of a fully responsive pagination widget I
 found that either people consider &amp;ldquo;responsive&amp;rdquo; to be something else or that it
 is a non-trivial problem to solve.  In any case, I decided to have a crack at
 it myself.&lt;/p&gt;

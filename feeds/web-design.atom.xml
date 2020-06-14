@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - web design</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"></link><link href="https://dmitry.khlebnikov.net/feeds/web-design.atom.xml" rel="self"></link><id>https://dmitry.khlebnikov.net/</id><updated>2020-06-14T20:12:20+10:00</updated><entry><title>Truly Responsive Pagination</title><link href="https://dmitry.khlebnikov.net/2020/06/14/truly-responsive-pagination/" rel="alternate"></link><published>2020-06-14T20:07:00+10:00</published><updated>2020-06-14T20:12:20+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-06-14:/2020/06/14/truly-responsive-pagination/</id><summary type="html">&lt;p&gt;Searching the web for an example of a fully responsive pagination widget I
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - web design</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"></link><link href="https://dmitry.khlebnikov.net/feeds/web-design.atom.xml" rel="self"></link><id>https://dmitry.khlebnikov.net/</id><updated>2020-06-14T20:15:57+10:00</updated><entry><title>Truly Responsive Pagination</title><link href="https://dmitry.khlebnikov.net/2020/06/14/truly-responsive-pagination/" rel="alternate"></link><published>2020-06-14T20:07:00+10:00</published><updated>2020-06-14T20:15:57+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-06-14:/2020/06/14/truly-responsive-pagination/</id><summary type="html">&lt;p&gt;Searching the web for an example of a fully responsive pagination widget I
 found that either people consider &amp;ldquo;responsive&amp;rdquo; to be something else or that it
 is a non-trivial problem to solve.  In any case, I decided to have a crack at
 it myself.&lt;/p&gt;
@@ -441,7 +441,7 @@ can extend beyond the box defined by the &amp;ldquo;middle&amp;rdquo; list, henc
     &lt;/span&gt;
 &lt;/div&gt;
 
-&lt;p&gt;Although the result looks promising and is a workable solution, there are still
+&lt;p&gt;Although the result looks promising and is a workable solution, there is still
 a couple of issues left unsolved:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;The biggest concern I have with this solution is that it requires
