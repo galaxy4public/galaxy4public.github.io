@@ -1,121 +1,122 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta http-equiv="Content-Security-Policy" content="	default-src 'self';object-src 'none';script-src 'self' https://www.googletagmanager.com/gtag/js 'sha256-TelA7VsuYAMqhOKGk7CHgJyuqSJdmqZEp+hn6PWVRwQ=' https://www.google-analytics.com/analytics.js;img-src 'self' data: https://www.google-analytics.com/r/collect https://www.google-analytics.com/collect https://stats.g.doubleclick.net/r/collect https://*/ads/ga-audiences https://www.googletagmanager.com/a;style-src 'self' 'sha256-fszvBX/J9dhPxFSJ5wUrq/Pvg6HrnTkWyshMZpaxSQY=';connect-src 'self' https://www.google-analytics.com/j/collect https://stats.g.doubleclick.net/j/collect; " />
-		<title>Mind Drops</title>
-		<script src="/theme/js/persistence.js" defer></script>
-		<meta charset="utf-8" />
-		<meta name="description" content="" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="theme-color" content="#535353" />
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="format-detection" content="telephone=no" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-		<meta name="apple-mobile-web-app-title" content="Mind Drops" />
-		<meta name="description" content="">
-		<link rel="apple-touch-icon" href="/theme/images/icons/mind-drops-192x192.png" />
-		<link rel="manifest" type="text/json" href="/manifest.json" />
-		<link rel="alternate" type="application/atom+xml" href="https://dmitry.khlebnikov.net/feeds/all.atom.xml" title="Mind Drops Full Atom Feed" />
-		<link rel="alternate" type="application/atom+xml" href="https://dmitry.khlebnikov.net/feeds/ssh.atom.xml" title="Mind Drops Categories Atom Feed" />
-		<link rel="dns-prefetch" href="https://www.google.com" />
-		<link rel="preconnect" href="https://www.google.com" crossorigin />
-		<link rel="dns-prefetch" href="https://www.google-analytics.com" />
-		<link rel="preconnect" href="https://www.google-analytics.com" crossorigin />
-		<link rel="dns-prefetch" href="https://www.googletagmanager.com">
-		<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
-		<link rel="dns-prefetch" href="https://stats.g.doubleclick.net" />
-		<link rel="preconnect" href="https://stats.g.doubleclick.net" crossorigin />
-		<link rel="preload" as="style" href="/theme/css/reset.css" />
-		<link rel="preload" as="style" href="/theme/css/fonts/Icons.css" />
-		<link rel="preload" as="style" href="/theme/css/fonts/Exo2.css" />
-		<link rel="preload" as="style" href="/theme/css/fonts/Oswald.css" />
-		<link rel="preload" as="style" href="/theme/css/fonts/DancingScript.css" />
-		<link rel="preload" as="style" href="/theme/css/fonts/FiraCode.css" />
-		<link rel="preload" as="style" href="/theme/css/base.css" />
-		<link rel="preload" as="script" href="/theme/js/persistence.js" />
-		<link rel="preload" as="script" href="/theme/js/visited.js" />
-		<link rel="preload" as="script" href="/theme/js/service.js" />
-		<link rel="preload" as="script" href="https://www.googletagmanager.com/gtag/js?id=UA-165060547-1" />
-		<link rel="icon" type="image/png" href="/images/galaxy.png" />
-		<script src="/theme/js/loader.js" defer></script>
+<head>
+	<title>Mind Drops :: assorted bits of wit</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1" />
+	<link rel="stylesheet" href="/theme/css/fonts/Icons.css" />
+	<link rel="stylesheet" href="/theme/css/fonts/Exo2.css" />
+	<link rel="stylesheet" href="/theme/css/fonts/Oswald.css" />
+	<link rel="stylesheet" href="/theme/css/fonts/DancingScript.css" />
+	<link rel="stylesheet" href="/theme/css/base.css" />
+	<link rel="stylesheet" href="/theme/css/pygments/default.css" />
+	<link rel="canonical" href="/2016/07/26/transparent-ssh-host-jumping-expert/" />
 
-		<meta name="keywords" content="console ssh howto" />
-		<link rel="stylesheet" type="text/css" href="/theme/css/article.css" />
-		<link rel="canonical" href="/2016/07/26/transparent-ssh-host-jumping-expert/" />
-	</head>
-	<body>
+	<script type="application/ld+json">
+	{
+		"@context" : "https://schema.org",
+		"@type" : "Article",
+		"author": "(GalaxyMaster)",
+		"name" : "Transparent SSH host-jumping (Expert)",
+		"datePublished" : "2016-07-26T10:00:00+10:00",
+		"dateModified" : "2020-05-17T04:45:11+10:00",
+		"image" : "https://dmitry.khlebnikov.net/2020/06/14/truly-responsive-pagination/images/paginator-sketch.png",
+		"headline" : "headline",
+		"abstract": "abstract goes here",
+		"articleSection": "ssh",
+		"interactionStatistic":
+		[
+			{
+				"@type": "InteractionCounter",
+				"interactionService":
+				{
+					"@type": "WebSite",
+					"name": "Twitter",
+					"url": "http://www.twitter.com"
+				},
+				"interactionType": "http://schema.org/ShareAction",
+				"userInteractionCount": "1203"
+			},
+			{
+				"@type": "InteractionCounter",
+				"interactionType": "http://schema.org/CommentAction",
+				"userInteractionCount": "78"
+			}
+		],
+		"discussionUrl": "https://github.com/"
+	}
+	</script>
+</head>
 
-		<input type="radio" name="menu-toggle" id="menu-toggle-full" value="full" tabindex="-1" checked />
-		<input type="radio" name="menu-toggle" id="menu-toggle-mini" value="mini" tabindex="-1" />
-		<input type="radio" name="menu-toggle" id="menu-toggle-hide" value="hide" tabindex="-1" />
-		<label for="menu-toggle-full" class="icon menu" role="radio" tabindex="0">Show the full menu panel on the screen</label>
-		<aside id="sidebar">
-			<label for="menu-toggle-mini" class="icon left-big" role="radio" tabindex="0">Show the minimised menu panel on the screen</label>
-			<label for="menu-toggle-hide" class="icon eye-off" role="radio" tabindex="0">Remove the menu panel off the screen</label>
-			<div class="title">Mind Drops</div>
-			<div id="logo" class="box shadow">
+<body>
+	<header>
+		<span class="flex">
+			<!--
+			<button class="menu-toggle" type="button" tabindex="0" aria-label="Menu Toggle"><div></div></button>
+			-->
+			<div class="menu-toggle" tabindex="0" aria-label="Menu Toggle"><div></div></div>
+			<a href="/" class="logo">
 				<picture>
-					<source srcset="/images/galaxy.png.webp" type="image/webp">
-					<img src="/images/galaxy.png" alt="Logo">
+					<source srcset="/images/logo.svg" type="image/svg+xml">
+					<source srcset="/images/.svg" type="image/svg+xml">
+					<source srcset="/images/.webp" type="image/webp">
+					<img src="/images/" alt="Logo">
 				</picture>
-			</div>
-
-			<!-- Search -->
-			<section class="box search">
-				<form name="google search" class="icon search" method="get" action="/search">
-					<label for="search" class="offscreen">Search</label>
-					<input id="search" type="text" class="text" name="q" placeholder="Search" />
-				</form>
-			</section>
-
+				<span class="title">Mind Drops</span>
+			</a>
 			<nav>
 				<ul>
-					<li>
-						<a class="icon home" href="/">Home</a>
-					</li>
-					<li>
-						<a class="icon user" href="/about">About</a>
-					</li>
-					<li>
-						<a class="icon phone" href="/contact">Contact</a>
-					</li>
+					<li><a class="icon home" href="/">Home</a></li>
+					<li><a class="icon user" href="/about">About</a></li>
+					<li><a class="icon phone" href="/contact">Contact</a></li>
 				</ul>
 			</nav>
-
-			<!-- Text -->
-			<section class="box text-style1">
-				<div class="inner">
-					<p>
-						<strong>Mind Drops:</strong>: A place to unload all these assorted bits.
-					</p>
+			<form id="search" role="search" autocomplete="off" method="get" action="/search">
+				<label for="q" class="icon search">Search</label>
+				<input type="text" name="q" id="q" placeholder="Search..." />
+				<div class="help" aria-label="Search ">
+					<dl>
+						<dt>"search terms"</dt><dd>exact-match</dd>
+						<dt>term1 | term2</dt><dd>term1 or term2</dd>
+						<dt>term1 * term2</dt><dd>term1 followed by term2</dd>
+						<dt>-term</dt><dd>exclude term</dd>
+						<dt>(search terms)</dt><dd>groups terms</dd>
+						<dt>ext:pdf</dt><dd>file type</dd>
+					</dl>
 				</div>
-			</section>
-
-			<!-- Copyright -->
-			<ul id="copyright">
-				<li>&copy; Openwall Pty Ltd 2020 </li>
-				<li><a href="/legal/terms-of-service">Terms of Service</a></li>
+			</form>
+			<ul class="taskbar">
+				<li class="search-toggle"><label for="q" class="icon search offscreen" title="Toggle the search bar">Search</label></li>
+				<!-- Not Implemented Yet
+				<li><a href="#bug-report" class="icon bug offscreen" title="Report a spotted bug on the page">Report a bug</a></li>
+				<li><a href="#preferences" class="icon cog offscreen" title="Configure personal preferences">Preferences</a></li>
+				 -->
 			</ul>
-		</aside>
-
-		<!-- Content -->
-		<div id="content">
-			<div class="inner">
-				<article id="transparent-ssh-host-jumping-expert" class="box post">
-					<header>
-						<h1><a name="top">Transparent SSH host-jumping (Expert)</a></h1>
-					</header>
-					<div class="info">
-						<span class="date">
-							<span class="day">26</span>
-							<span class="month"><a href="/2016/07/">Jul<span class="month full">y</span></a></span>
-							<span class="year"><a href="/2016/">2016</a></span>
-						</span>
-						<ul class="stats">
-							<li><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="icon twitter" aria-label="Twitter" data-tweet-id="1257348804568928258">0</a></li>
-						</ul>
-					</div>
-					<p>A while ago in the <a href="https://dmitry.khlebnikov.net/2015/08/06/transparent-ssh-host-jumping-advanced/">Transparent SSH host-jumping (Advanced)</a> post I
+		</span>
+	</header>
+	<aside class="modal">
+		<div id="bug-report">
+			<a href="#" class="close"></a>
+			<div class="content">
+				<h1>Bug report</h1>
+				<form id="bug-report-form" autocomplete="off">
+					<textarea id="bug-report-body" name="bug-report-body">
+					</textarea>
+					<input type="submit" value="Submit">
+				</form>
+			</div>
+		</div>
+		<div id="preferences">
+		</div>
+	</aside>
+	<main>
+			<article id="transparent-ssh-host-jumping-expert">
+				<header>
+					<h1><a href="/2016/07/26/transparent-ssh-host-jumping-expert/" rel="bookmark" title="Permalink to Transparent SSH host-jumping (Expert)">Transparent SSH host-jumping (Expert)</a></h1>
+				</header>
+				<aside>
+				</aside>
+				<p>A while ago in the <a href="https://dmitry.khlebnikov.net/2015/08/06/transparent-ssh-host-jumping-advanced/">Transparent SSH host-jumping (Advanced)</a> post I
 described a technique on how one could jump quite effortlessly through a chain
 of intermediate hosts. However, there was a catch: the user names and ports
 across the whole chain should be the same and there was no easy way to change
@@ -127,8 +128,7 @@ will allow one to tweak parameters for the hosts in the chain.</p>
 technique works, here I am only going to provide the proxy script and the
 corresponding ssh config parameter block to use the script.</p>
 <p>The goal was to support the following syntax:</p>
-<pre class="highlight" data-user="user"><code class="language-shell"><div class="lines"><a></a>[user@localhost ~]$ ssh default_user@userA^hostA/userB^hostB:port/hostC</div></code></pre>
-
+<pre class="highlight" data-user="user"><code class="language-console"><div class="line"><a></a><span class="gp">[user@localhost ~]$ </span>ssh default_user@userA^hostA/userB^hostB:port/hostC</div></code></pre>
 <p>It was a little challenge to come up with the character for identifying the
 user part for intermediate hosts:</p>
 <ul>
@@ -148,96 +148,92 @@ port is omitted, it will use the global port configuration (usually 22/tcp but
 can be changed with the <code>-p</code> argument to ssh).  The script is a bit not optimised
 (bash is really slow on string processing, but I decided to stick with pure
 bash where it was possible):</p>
-<pre class="highlight" data-file="~/bin/ssh-helper.sh"><code class="language-bash"><div class="lines"><a></a>#!/bin/bash
-</div><div class="lines"><a></a>set -eu -o pipefail
-</div><div class="lines"><a></a>exec 10&lt;&amp;0 11&gt;&amp;1 0&lt;&amp;2 1&gt;&amp;2
-</div><div class="lines"><a></a>DEFAULT_USER=&quot;$1&quot;
-</div><div class="lines"><a></a>DEFAULT_PORT=&quot;$3&quot;
-</div><div class="lines"><a></a>HOST_CHAIN=&quot;$2&quot;
-</div><div class="lines"><a></a>HOST_NEXT=&quot;${HOST_CHAIN%%/*}&quot;
-</div><div class="lines"><a></a>HOST_USER=&quot;${HOST_NEXT%%^*}&quot;
-</div><div class="lines"><a></a>[ &quot;$HOST_USER&quot; == &quot;$HOST_NEXT&quot; ] &amp;&amp; HOST_USER=&quot;$DEFAULT_USER&quot; ||:
-</div><div class="lines"><a></a>HOST_PORT=&quot;${HOST_NEXT##*:}&quot;
-</div><div class="lines"><a></a>[ &quot;$HOST_PORT&quot; == &quot;$HOST_NEXT&quot; ] &amp;&amp; HOST_PORT=&quot;$DEFAULT_PORT&quot; ||:
-</div><div class="lines"><a></a>TARGET_HOST=&quot;${HOST_CHAIN##*/}&quot;
-</div><div class="lines"><a></a>TARGET_PORT=&quot;${TARGET_HOST##*:}&quot;
-</div><div class="lines"><a></a>TARGET_HOST=&quot;${TARGET_HOST%:*}&quot;
-</div><div class="lines"><a></a>[ &quot;$TARGET_PORT&quot; == &quot;$TARGET_HOST&quot; ] &amp;&amp; TARGET_PORT=&quot;$DEFAULT_PORT&quot; ||:
-</div><div class="lines"><a></a>TARGET_HOST=&quot;${TARGET_HOST#*^}&quot;
-</div><div class="lines"><a></a>HOST_NEXT=&quot;${HOST_NEXT#*^}&quot;
-</div><div class="lines"><a></a>HOST_NEXT=&quot;${HOST_NEXT%:*}&quot;
-</div><div class="lines"><a></a>HOST_CHAIN=&quot;${HOST_CHAIN%/*}&quot;
-</div><div class="lines"><a></a>[ &quot;$HOST_CHAIN&quot; == &quot;${HOST_CHAIN#*/}&quot; ] &amp;&amp; HOST_CHAIN= || HOST_CHAIN=&quot;${HOST_CHAIN#*/}&quot;
-</div><div class="lines"><a></a>HOST_CHAIN=&quot;$HOST_NEXT${HOST_CHAIN:+/$HOST_CHAIN}&quot;
-</div><div class="lines"><a></a>
-</div><div class="lines"><a></a>if [ ! -d &quot;$HOME/.ssh/.sessions&quot; ]; then
-</div><div class="lines"><a></a>    echo &quot;Creating the sessions directory&quot; &gt;&amp;2
-</div><div class="lines"><a></a>    mkdir -m700 &quot;$HOME/.ssh/.sessions&quot;
-</div><div class="lines"><a></a>fi
-</div><div class="lines"><a></a>
-</div><div class="lines"><a></a>CONTROL_SOCKET=$(printf &quot;$HOST_USER@HOST_CHAIN:$HOST_PORT\n&quot; | shasum | cut -f1 -d' ')
-</div><div class="lines"><a></a>
-</div><div class="lines"><a></a>exec 0&lt;&amp;10 1&gt;&amp;11
-</div><div class="lines"><a></a>exec ssh \
-</div><div class="lines"><a></a>    -o &quot;ControlMaster auto&quot; \
-</div><div class="lines"><a></a>    -o &quot;ControlPath ~/.ssh/.sessions/$CONTROL_SOCKET&quot; \
-</div><div class="lines"><a></a>    -o &quot;ControlPersist 120s&quot; \
-</div><div class="lines"><a></a>    -l &quot;$HOST_USER&quot; \
-</div><div class="lines"><a></a>    -p &quot;$HOST_PORT&quot; \
-</div><div class="lines"><a></a>    &quot;$HOST_CHAIN&quot; \
-</div><div class="lines"><a></a>    -W &quot;$TARGET_HOST&quot;:&quot;$TARGET_PORT&quot;</div></code></pre>
-
+<pre class="highlight" data-file="~/bin/ssh-helper.sh"><code class="language-bash"><div class="line"><a></a><span class="ch">#!/bin/bash</span>
+</div><div class="line"><a></a><span class="nb">set</span> -eu -o pipefail
+</div><div class="line"><a></a><span class="nb">exec</span> <span class="m">10</span>&lt;<span class="p">&amp;</span><span class="m">0</span> <span class="m">11</span>&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="m">0</span>&lt;<span class="p">&amp;</span><span class="m">2</span> <span class="m">1</span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+</div><div class="line"><a></a><span class="nv">DEFAULT_USER</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
+</div><div class="line"><a></a><span class="nv">DEFAULT_PORT</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$3</span><span class="s2">&quot;</span>
+</div><div class="line"><a></a><span class="nv">HOST_CHAIN</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span>
+</div><div class="line"><a></a><span class="nv">HOST_NEXT</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">HOST_CHAIN</span><span class="p">%%/*</span><span class="si">}</span><span class="s2">&quot;</span>
+</div><div class="line"><a></a><span class="nv">HOST_USER</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">HOST_NEXT</span><span class="p">%%^*</span><span class="si">}</span><span class="s2">&quot;</span>
+</div><div class="line"><a></a><span class="o">[</span> <span class="s2">&quot;</span><span class="nv">$HOST_USER</span><span class="s2">&quot;</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="nv">$HOST_NEXT</span><span class="s2">&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nv">HOST_USER</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$DEFAULT_USER</span><span class="s2">&quot;</span> <span class="o">||</span>:
+</div><div class="line"><a></a><span class="nv">HOST_PORT</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">HOST_NEXT</span><span class="p">##*:</span><span class="si">}</span><span class="s2">&quot;</span>
+</div><div class="line"><a></a><span class="o">[</span> <span class="s2">&quot;</span><span class="nv">$HOST_PORT</span><span class="s2">&quot;</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="nv">$HOST_NEXT</span><span class="s2">&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nv">HOST_PORT</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$DEFAULT_PORT</span><span class="s2">&quot;</span> <span class="o">||</span>:
+</div><div class="line"><a></a><span class="nv">TARGET_HOST</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">HOST_CHAIN</span><span class="p">##*/</span><span class="si">}</span><span class="s2">&quot;</span>
+</div><div class="line"><a></a><span class="nv">TARGET_PORT</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">TARGET_HOST</span><span class="p">##*:</span><span class="si">}</span><span class="s2">&quot;</span>
+</div><div class="line"><a></a><span class="nv">TARGET_HOST</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">TARGET_HOST</span><span class="p">%:*</span><span class="si">}</span><span class="s2">&quot;</span>
+</div><div class="line"><a></a><span class="o">[</span> <span class="s2">&quot;</span><span class="nv">$TARGET_PORT</span><span class="s2">&quot;</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="nv">$TARGET_HOST</span><span class="s2">&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nv">TARGET_PORT</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$DEFAULT_PORT</span><span class="s2">&quot;</span> <span class="o">||</span>:
+</div><div class="line"><a></a><span class="nv">TARGET_HOST</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">TARGET_HOST</span><span class="p">#*^</span><span class="si">}</span><span class="s2">&quot;</span>
+</div><div class="line"><a></a><span class="nv">HOST_NEXT</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">HOST_NEXT</span><span class="p">#*^</span><span class="si">}</span><span class="s2">&quot;</span>
+</div><div class="line"><a></a><span class="nv">HOST_NEXT</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">HOST_NEXT</span><span class="p">%:*</span><span class="si">}</span><span class="s2">&quot;</span>
+</div><div class="line"><a></a><span class="nv">HOST_CHAIN</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">HOST_CHAIN</span><span class="p">%/*</span><span class="si">}</span><span class="s2">&quot;</span>
+</div><div class="line"><a></a><span class="o">[</span> <span class="s2">&quot;</span><span class="nv">$HOST_CHAIN</span><span class="s2">&quot;</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">HOST_CHAIN</span><span class="p">#*/</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nv">HOST_CHAIN</span><span class="o">=</span> <span class="o">||</span> <span class="nv">HOST_CHAIN</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">HOST_CHAIN</span><span class="p">#*/</span><span class="si">}</span><span class="s2">&quot;</span>
+</div><div class="line"><a></a><span class="nv">HOST_CHAIN</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOST_NEXT</span><span class="si">${</span><span class="nv">HOST_CHAIN</span><span class="p">:+/</span><span class="nv">$HOST_CHAIN</span><span class="si">}</span><span class="s2">&quot;</span>
+</div><div class="line"><a></a>
+</div><div class="line"><a></a><span class="k">if</span> <span class="o">[</span> ! -d <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.ssh/.sessions&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</div><div class="line"><a></a>    <span class="nb">echo</span> <span class="s2">&quot;Creating the sessions directory&quot;</span> &gt;<span class="p">&amp;</span><span class="m">2</span>
+</div><div class="line"><a></a>    mkdir -m700 <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.ssh/.sessions&quot;</span>
+</div><div class="line"><a></a><span class="k">fi</span>
+</div><div class="line"><a></a>
+</div><div class="line"><a></a><span class="nv">CONTROL_SOCKET</span><span class="o">=</span><span class="k">$(</span><span class="nb">printf</span> <span class="s2">&quot;</span><span class="nv">$HOST_USER</span><span class="s2">@HOST_CHAIN:</span><span class="nv">$HOST_PORT</span><span class="s2">\n&quot;</span> <span class="p">|</span> shasum <span class="p">|</span> cut -f1 -d<span class="s1">&#39; &#39;</span><span class="k">)</span>
+</div><div class="line"><a></a>
+</div><div class="line"><a></a><span class="nb">exec</span> <span class="m">0</span>&lt;<span class="p">&amp;</span><span class="m">10</span> <span class="m">1</span>&gt;<span class="p">&amp;</span><span class="m">11</span>
+</div><div class="line"><a></a><span class="nb">exec</span> ssh <span class="se">\</span>
+</div><div class="line"><a></a>    -o <span class="s2">&quot;ControlMaster auto&quot;</span> <span class="se">\</span>
+</div><div class="line"><a></a>    -o <span class="s2">&quot;ControlPath ~/.ssh/.sessions/</span><span class="nv">$CONTROL_SOCKET</span><span class="s2">&quot;</span> <span class="se">\</span>
+</div><div class="line"><a></a>    -o <span class="s2">&quot;ControlPersist 120s&quot;</span> <span class="se">\</span>
+</div><div class="line"><a></a>    -l <span class="s2">&quot;</span><span class="nv">$HOST_USER</span><span class="s2">&quot;</span> <span class="se">\</span>
+</div><div class="line"><a></a>    -p <span class="s2">&quot;</span><span class="nv">$HOST_PORT</span><span class="s2">&quot;</span> <span class="se">\</span>
+</div><div class="line"><a></a>    <span class="s2">&quot;</span><span class="nv">$HOST_CHAIN</span><span class="s2">&quot;</span> <span class="se">\</span>
+</div><div class="line"><a></a>    -W <span class="s2">&quot;</span><span class="nv">$TARGET_HOST</span><span class="s2">&quot;</span>:<span class="s2">&quot;</span><span class="nv">$TARGET_PORT</span><span class="s2">&quot;</span></div></code></pre>
 <p>The above is a proof of the concept and it &ldquo;works for me&rdquo; :). I am using it
 every day when I need to access boxes behind a bastion host. Your mileage may
 vary and you are free to create your own version of the script that would
 perform better (I would be really glad if a version of such a script could be
 shared with me).</p>
 <p>The corresponding configuration block in the ssh config file looks as follows:</p>
-<pre class="highlight" data-file="~/.ssh/config"><code class="language-ssh_config"><div class="lines"><a></a>Host */*
-</div><div class="lines"><a></a>    # if you uncomment ControlPath you also need to uncomment ControlMaster
-</div><div class="lines"><a></a>    #ControlMaster auto
-</div><div class="lines"><a></a>    # For OpenSSH &lt; 6.7 you may uncomment the following, but long chains will fail:
-</div><div class="lines"><a></a>    #ControlPath   ~/.ssh/.sessions/%r@%h:%p
-</div><div class="lines"><a></a>    # For OpenSSH &gt;= 6.7 you should uncomment the following:
-</div><div class="lines"><a></a>    #ControlPath   ~/.ssh/.sessions/%C
-</div><div class="lines"><a></a>    ProxyCommand ~/bin/ssh-helper.sh %r %h %p</div></code></pre>
-
+<pre class="highlight" data-file="~/.ssh/config"><code class="language-ssh_config"><div class="line"><a></a><span class="nt">Host</span> <span class="o">*/*</span>
+</div><div class="line"><a></a>    <span class="err">#</span> <span class="nt">if</span> <span class="nt">you</span> <span class="nt">uncomment</span> <span class="nt">ControlPath</span> <span class="nt">you</span> <span class="nt">also</span> <span class="nt">need</span> <span class="nt">to</span> <span class="nt">uncomment</span> <span class="nt">ControlMaster</span>
+</div><div class="line"><a></a>    <span class="p">#</span><span class="nn">ControlMaster</span> <span class="nt">auto</span>
+</div><div class="line"><a></a>    <span class="err">#</span> <span class="nt">For</span> <span class="nt">OpenSSH</span> <span class="o">&lt;</span> <span class="nt">6</span><span class="p">.</span><span class="nc">7</span> <span class="nt">you</span> <span class="nt">may</span> <span class="nt">uncomment</span> <span class="nt">the</span> <span class="nt">following</span><span class="o">,</span> <span class="nt">but</span> <span class="nt">long</span> <span class="nt">chains</span> <span class="nt">will</span> <span class="nt">fail</span><span class="o">:</span>
+</div><div class="line"><a></a>    <span class="p">#</span><span class="nn">ControlPath</span>   <span class="o">~/</span><span class="p">.</span><span class="nc">ssh</span><span class="o">/</span><span class="p">.</span><span class="nc">sessions</span><span class="o">/%</span><span class="nt">r</span><span class="o">@%</span><span class="nt">h</span><span class="o">:%</span><span class="nt">p</span>
+</div><div class="line"><a></a>    <span class="err">#</span> <span class="nt">For</span> <span class="nt">OpenSSH</span> <span class="o">&gt;=</span> <span class="nt">6</span><span class="p">.</span><span class="nc">7</span> <span class="nt">you</span> <span class="nt">should</span> <span class="nt">uncomment</span> <span class="nt">the</span> <span class="nt">following</span><span class="o">:</span>
+</div><div class="line"><a></a>    <span class="p">#</span><span class="nn">ControlPath</span>   <span class="o">~/</span><span class="p">.</span><span class="nc">ssh</span><span class="o">/</span><span class="p">.</span><span class="nc">sessions</span><span class="o">/%</span><span class="nt">C</span>
+</div><div class="line"><a></a>    <span class="nt">ProxyCommand</span> <span class="o">~/</span><span class="nt">bin</span><span class="o">/</span><span class="nt">ssh-helper</span><span class="p">.</span><span class="nc">sh</span> <span class="o">%</span><span class="nt">r</span> <span class="o">%</span><span class="nt">h</span> <span class="o">%</span><span class="nt">p</span></div></code></pre>
 <p>Well, this is a bit messy since OpenSSH introduced the <code>%C</code> macro in version 6.7
 and without <code>%C</code> the <code>ControlPath</code> string gets too long for OpenSSH to create a
 socket on the filesystem for long chains of hosts.</p>
+				<footer>
+					<span><span class="contextual">Offloaded on </span><time datetime="2016-07-26T10:00:00+10:00">
+						<span class="month"><a href="/2016/07/" title="A link to the archives for July of 2016">Jul<span class="month full">y</span></a></span>
+						<span class="day">26</span>
+						<span class="year"><a href="/2016/" title="A link to the archives for the year of 2016">2016</a></span>
+					</time></span>
+						<span class="contextual">into </span><span class="category"><a href="/category/ssh/" title="A link to a collection of articles in the 'ssh' category">ssh</a></span>
+					<span class="contextual">and tagged with:</span>
 					<ul class="tags">
 						<li class="tag">
-							<div>
-								<a href="/tag/console/" class="tag name">console</a>
-							</div>
-							<a href="/tag/console/" class="tag count">7</a>
+							<span>
+								<a href="/tag/console/" rel="tag" title="A link to the collection tagged with 'console'" data-count="7" ><span>console</span></a>
+							</span>
 						</li>
 						<li class="tag">
-							<div>
-								<a href="/tag/ssh/" class="tag name">ssh</a>
-							</div>
-							<a href="/tag/ssh/" class="tag count">4</a>
+							<span>
+								<a href="/tag/ssh/" rel="tag" title="A link to the collection tagged with 'ssh'" data-count="4" ><span>ssh</span></a>
+							</span>
 						</li>
 						<li class="tag">
-							<div>
-								<a href="/tag/howto/" class="tag name">howto</a>
-							</div>
-							<a href="/tag/howto/" class="tag count">4</a>
+							<span>
+								<a href="/tag/howto/" rel="tag" title="A link to the collection tagged with 'howto'" data-count="4" ><span>howto</span></a>
+							</span>
 						</li>
-					</ul>
-					<footer>
-						Offloaded on
-						<time datetime="2016-07-26 10:00:00+10:00">Tue, 26/07/2016 at 10:00 (<a href="https://time.is/AEST" target="_blank" rel="noreferrer">AEST</a>)</time>
-						<span class="category-tag"><a href="/category/ssh">ssh</a></span>
-					</footer>				</article>
-			</div>
-		</div>
-		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-165060547-1"></script>
-		<script>
-			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments);}
-			gtag('js', new Date());
-			gtag('config', 'UA-165060547-1');
-		</script>
-	</body>
+						</ul>
+				</footer>
+			</article>
+		<footer>
+		</footer>
+	</main>
+	<footer>
+	</footer>
+</body>
 </html>

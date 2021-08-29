@@ -1,221 +1,165 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta http-equiv="Content-Security-Policy" content="default-src 'self'; object-src 'none'; script-src 'self' https://www.googletagmanager.com/gtag/js 'sha256-TelA7VsuYAMqhOKGk7CHgJyuqSJdmqZEp+hn6PWVRwQ=' https://www.google-analytics.com/analytics.js ; img-src 'self' data: https://www.google-analytics.com/r/collect https://www.google-analytics.com/collect https://stats.g.doubleclick.net/r/collect https://*/ads/ga-audiences https://www.googletagmanager.com/a ; style-src 'self' 'sha256-fszvBX/J9dhPxFSJ5wUrq/Pvg6HrnTkWyshMZpaxSQY=' ; connect-src 'self' https://www.google-analytics.com/j/collect https://stats.g.doubleclick.net/j/collect ; " />
-		<title>Mind Drops</title>
-		<script src="/theme/js/persistence.js" defer></script>
-		<meta charset="utf-8" />
-		<meta name="description" content="" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="theme-color" content="#535353" />
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="format-detection" content="telephone=no" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-		<meta name="apple-mobile-web-app-title" content="Mind Drops" />
-		<meta name="description" content="">
-		<link rel="apple-touch-icon" href="/theme/images/icons/mind-drops-192x192.png" />
-		<link rel="manifest" type="text/json" href="/manifest.json" />
-		<link rel="alternate" type="application/atom+xml" href="https://dmitry.khlebnikov.net/feeds/all.atom.xml" title="Mind Drops Full Atom Feed" />
-		<link rel="dns-prefetch" href="https://www.google.com" />
-		<link rel="preconnect" href="https://www.google.com" crossorigin />
-		<link rel="dns-prefetch" href="https://www.google-analytics.com" />
-		<link rel="preconnect" href="https://www.google-analytics.com" crossorigin />
-		<link rel="dns-prefetch" href="https://www.googletagmanager.com">
-		<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
-		<link rel="dns-prefetch" href="https://stats.g.doubleclick.net" />
-		<link rel="preconnect" href="https://stats.g.doubleclick.net" crossorigin />
-		<link rel="preload" as="style" href="/theme/css/reset.css" />
-		<link rel="preload" as="style" href="/theme/css/fonts/Icons.css" />
-		<link rel="preload" as="style" href="/theme/css/fonts/Exo2.css" />
-		<link rel="preload" as="style" href="/theme/css/fonts/Oswald.css" />
-		<link rel="preload" as="style" href="/theme/css/fonts/DancingScript.css" />
-		<link rel="preload" as="style" href="/theme/css/fonts/FiraCode.css" />
-		<link rel="preload" as="style" href="/theme/css/base.css" />
-		<link rel="preload" as="script" href="/theme/js/persistence.js" />
-		<link rel="preload" as="script" href="/theme/js/visited.js" />
-		<link rel="preload" as="script" href="/theme/js/service.js" />
-		<link rel="preload" as="script" href="https://www.googletagmanager.com/gtag/js?id=UA-165060547-1" />
-		<link rel="icon" type="image/png" href="/images/galaxy.png" />
-		<script src="/theme/js/loader.js" defer></script>
-	</head>
-	<body>
+<head>
+	<title>Mind Drops - design tag</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1" />
+	<link rel="stylesheet" href="/theme/css/fonts/Icons.css" />
+	<link rel="stylesheet" href="/theme/css/fonts/Exo2.css" />
+	<link rel="stylesheet" href="/theme/css/fonts/Oswald.css" />
+	<link rel="stylesheet" href="/theme/css/fonts/DancingScript.css" />
+	<link rel="stylesheet" href="/theme/css/base.css" />
+	<link rel="stylesheet" href="/theme/css/pygments/default.css" /></head>
 
-		<input type="radio" name="menu-toggle" id="menu-toggle-full" value="full" tabindex="-1" checked />
-		<input type="radio" name="menu-toggle" id="menu-toggle-mini" value="mini" tabindex="-1" />
-		<input type="radio" name="menu-toggle" id="menu-toggle-hide" value="hide" tabindex="-1" />
-		<label for="menu-toggle-full" class="icon menu" role="radio" tabindex="0">Show the full menu panel on the screen</label>
-		<aside id="sidebar">
-			<label for="menu-toggle-mini" class="icon left-big" role="radio" tabindex="0">Show the minimised menu panel on the screen</label>
-			<label for="menu-toggle-hide" class="icon eye-off" role="radio" tabindex="0">Remove the menu panel off the screen</label>
-			<div class="title">Mind Drops</div>
-			<div id="logo" class="box shadow">
+<body>
+	<header>
+		<span class="flex">
+			<!--
+			<button class="menu-toggle" type="button" tabindex="0" aria-label="Menu Toggle"><div></div></button>
+			-->
+			<div class="menu-toggle" tabindex="0" aria-label="Menu Toggle"><div></div></div>
+			<a href="/" class="logo">
 				<picture>
-					<source srcset="/images/galaxy.png.webp" type="image/webp">
-					<img src="/images/galaxy.png" alt="Logo">
+					<source srcset="/images/logo.svg" type="image/svg+xml">
+					<source srcset="/images/.svg" type="image/svg+xml">
+					<source srcset="/images/.webp" type="image/webp">
+					<img src="/images/" alt="Logo">
 				</picture>
-			</div>
-
-			<!-- Search -->
-			<section class="box search">
-				<form name="google search" class="icon search" method="get" action="/search">
-					<label for="search" class="offscreen">Search</label>
-					<input id="search" type="text" class="text" name="q" placeholder="Search" />
-				</form>
-			</section>
-
+				<span class="title">Mind Drops</span>
+			</a>
 			<nav>
 				<ul>
-					<li>
-						<a class="icon home" href="/">Home</a>
-					</li>
-					<li>
-						<a class="icon user" href="/about">About</a>
-					</li>
-					<li>
-						<a class="icon phone" href="/contact">Contact</a>
-					</li>
+					<li><a class="icon home" href="/">Home</a></li>
+					<li><a class="icon user" href="/about">About</a></li>
+					<li><a class="icon phone" href="/contact">Contact</a></li>
 				</ul>
 			</nav>
-
-			<!-- Text -->
-			<section class="box text-style1">
-				<div class="inner">
-					<p>
-						<strong>Mind Drops:</strong>: A place to unload all these assorted bits.
-					</p>
+			<form id="search" role="search" autocomplete="off" method="get" action="/search">
+				<label for="q" class="icon search">Search</label>
+				<input type="text" name="q" id="q" placeholder="Search..." />
+				<div class="help" aria-label="Search ">
+					<dl>
+						<dt>"search terms"</dt><dd>exact-match</dd>
+						<dt>term1 | term2</dt><dd>term1 or term2</dd>
+						<dt>term1 * term2</dt><dd>term1 followed by term2</dd>
+						<dt>-term</dt><dd>exclude term</dd>
+						<dt>(search terms)</dt><dd>groups terms</dd>
+						<dt>ext:pdf</dt><dd>file type</dd>
+					</dl>
 				</div>
-			</section>
-
-			<!-- Copyright -->
-			<ul id="copyright">
-				<li>&copy; Openwall Pty Ltd 2020 </li>
-				<li><a href="/legal/terms-of-service">Terms of Service</a></li>
+			</form>
+			<ul class="taskbar">
+				<li class="search-toggle"><label for="q" class="icon search offscreen" title="Toggle the search bar">Search</label></li>
+				<!-- Not Implemented Yet
+				<li><a href="#bug-report" class="icon bug offscreen" title="Report a spotted bug on the page">Report a bug</a></li>
+				<li><a href="#preferences" class="icon cog offscreen" title="Configure personal preferences">Preferences</a></li>
+				 -->
 			</ul>
-		</aside>
-
-		<!-- Content -->
-		<div id="content">
-			<div class="inner">
-	<div class="page-title">
-		<h1>design</h1>
-	</div>
-				<article id="truly-responsive-pagination" class="box post post-excerpt">
-								<header>
-									<h1><a href="/2020/06/14/truly-responsive-pagination/">Truly Responsive Pagination</a></h1>
-								</header>
-								<div class="info">
-									<span class="date">
-										<span class="day">14</span>
-										<span class="month"><a href="/2020/06/">Jun<span class="month full">e</span></a></span>
-										<span class="year"><a href="/2020/">2020</a></span>
-									</span>
-									<ul class="stats">
-										<li><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" rel="nofollow" class="icon twitter" aria-label="Twitter" data-tweet-id="None">0</a></li>
-									</ul>
-								</div>
-								<!-- Here we rely on the fact that Pelican always closes summary with '</p>' -->
-								<div class="summary"><p>Searching the web for an example of a fully responsive pagination widget I
+		</span>
+	</header>
+	<aside class="modal">
+		<div id="bug-report">
+			<a href="#" class="close"></a>
+			<div class="content">
+				<h1>Bug report</h1>
+				<form id="bug-report-form" autocomplete="off">
+					<textarea id="bug-report-body" name="bug-report-body">
+					</textarea>
+					<input type="submit" value="Submit">
+				</form>
+			</div>
+		</div>
+		<div id="preferences">
+		</div>
+	</aside>
+	<main>
+		<ol>
+			<li><article id="truly-responsive-pagination">
+				<header>
+					<h1><a href="/2020/06/14/truly-responsive-pagination/" rel="bookmark" title="Permalink to Truly Responsive Pagination">Truly Responsive Pagination</a></h1>
+				</header>
+				<aside>
+				</aside>
+				<p>Searching the web for an example of a fully responsive pagination widget I
 found that either people consider &ldquo;responsive&rdquo; to be something else or that it
 is a non-trivial problem to solve.  In any case, I decided to have a crack at
 it myself.</p>
 <p><img alt="A sketch of how pagination widget should work" class="figure" src="https://dmitry.khlebnikov.net/2020/06/14/truly-responsive-pagination/images/paginator-sketch.png"></p>
-<p>My definition of a responsive pagination widget is pretty simple: such a widget
-should maintain its look and feel when the viewport (or a window) changes the
-size, yet the excessive information such as page numbers in the middle should
-be omitted if there is no space for them.</p>
-<p>In this post I am going to <span class="truncated"></span>
-									<span class="readmore">…
-										<a href="/2020/06/14/truly-responsive-pagination/#continue" class="icon fa-forward">read
-											<span class="readtime">time 7 min.</span>
-										</a>
-									</span>
-								</div>
+<p>My definition of a responsive pagination <span class="readmore">… <a href="/2020/06/14/truly-responsive-pagination/#continue" class="icon fa-forward">read <span class="readtime">time 7 min.</span></a></span></p>
+
+				<footer>
+					<span><span class="contextual">Offloaded on </span><time datetime="2020-06-14T20:07:00+10:00">
+						<span class="month"><a href="/2020/06/" title="A link to the archives for June of 2020">Jun<span class="month full">e</span></a></span>
+						<span class="day">14</span>
+						<span class="year"><a href="/2020/" title="A link to the archives for the year of 2020">2020</a></span>
+					</time></span>
+						<span class="contextual">into </span><span class="category"><a href="/category/web-design/" title="A link to a collection of articles in the 'web design' category">web design</a></span>
+					<span class="contextual">and tagged with:</span>
 					<ul class="tags">
 						<li class="tag">
-							<div>
-								<a href="/tag/html/" class="tag name">html</a>
-							</div>
-							<a href="/tag/html/" class="tag count">2</a>
+							<span>
+								<a href="/tag/html/" rel="tag" title="A link to the collection tagged with 'html'" data-count="2" ><span>html</span></a>
+							</span>
 						</li>
 						<li class="tag">
-							<div>
-								<a href="/tag/css/" class="tag name">css</a>
-							</div>
-							<a href="/tag/css/" class="tag count">2</a>
+							<span>
+								<a href="/tag/css/" rel="tag" title="A link to the collection tagged with 'css'" data-count="2" ><span>css</span></a>
+							</span>
 						</li>
 						<li class="tag">
-							<div>
-								<a href="/tag/design/" class="tag name">design</a>
-							</div>
-							<a href="/tag/design/" class="tag count">2</a>
+							<span>
+								<a href="/tag/design/" rel="tag" title="A link to the collection tagged with 'design'" data-count="2" ><span>design</span></a>
+							</span>
 						</li>
-					</ul>
-					<footer>
-						Offloaded on
-						<time datetime="2020-06-14 20:07:00+10:00">Sun, 14/06/2020 at 20:07 (<a href="https://time.is/AEST" target="_blank" rel="noreferrer">AEST</a>)</time>
-						<span class="category-tag"><a href="/category/web-design">web design</a></span>
-					</footer>				</article>
-				<article id="wrap-indicator-in-pre-blocks" class="box post post-excerpt">
-								<header>
-									<h1><a href="/2020/05/10/wrap-indicator-in-pre-blocks/">Wrap indicator in &lt;pre&gt; blocks</a></h1>
-								</header>
-								<div class="info">
-									<span class="date">
-										<span class="day">10</span>
-										<span class="month"><a href="/2020/05/">May<span class="month full"></span></a></span>
-										<span class="year"><a href="/2020/">2020</a></span>
-									</span>
-									<ul class="stats">
-										<li><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" rel="nofollow" class="icon twitter" aria-label="Twitter" data-tweet-id="None">0</a></li>
-									</ul>
-								</div>
-								<!-- Here we rely on the fact that Pelican always closes summary with '</p>' -->
-								<div class="summary"><p>I am not a front-end developer, not a UI designer, nor a UX guru, but I am an
+						</ul>
+				</footer>
+			</article></li>
+			<li><article id="wrap-indicator-in-pre-blocks">
+				<header>
+					<h1><a href="/2020/05/10/wrap-indicator-in-pre-blocks/" rel="bookmark" title="Permalink to Wrap indicator in <pre> blocks">Wrap indicator in &lt;pre&gt; blocks</a></h1>
+				</header>
+				<aside>
+				</aside>
+				<p>I am not a front-end developer, not a UI designer, nor a UX guru, but I am an
 engineer, so when I face a puzzle worth solving my brain switches on and I
 cannot let it go until I find a satisfactory solution to the puzzle.</p>
-<p>My blog heavily relies on me sharing session dumps and file excerpts using the
-code blocks.  I am using <a href="https://prismjs.com">PrismJS</a> to highlight syntax in these blocks.  However,
-after a while I found that there is one thing that really irritates me: these
-code blocks are not designed to be truly responsive, for instance &ndash; when <span class="truncated"></span>
-									<span class="readmore">…
-										<a href="/2020/05/10/wrap-indicator-in-pre-blocks/#continue" class="icon fa-forward">read
-											<span class="readtime">time 18 min.</span>
-										</a>
-									</span>
-								</div>
+<p>My blog heavily relies <span class="readmore">… <a href="/2020/05/10/wrap-indicator-in-pre-blocks/#continue" class="icon fa-forward">read <span class="readtime">time 18 min.</span></a></span></p>
+
+				<footer>
+					<span><span class="contextual">Offloaded on </span><time datetime="2020-05-10T21:00:00+10:00">
+						<span class="month"><a href="/2020/05/" title="A link to the archives for May of 2020">May<span class="month full"></span></a></span>
+						<span class="day">10</span>
+						<span class="year"><a href="/2020/" title="A link to the archives for the year of 2020">2020</a></span>
+					</time></span>
+						<span class="contextual">into </span><span class="category"><a href="/category/web-design/" title="A link to a collection of articles in the 'web design' category">web design</a></span>
+					<span class="contextual">and tagged with:</span>
 					<ul class="tags">
 						<li class="tag">
-							<div>
-								<a href="/tag/html/" class="tag name">html</a>
-							</div>
-							<a href="/tag/html/" class="tag count">2</a>
+							<span>
+								<a href="/tag/html/" rel="tag" title="A link to the collection tagged with 'html'" data-count="2" ><span>html</span></a>
+							</span>
 						</li>
 						<li class="tag">
-							<div>
-								<a href="/tag/css/" class="tag name">css</a>
-							</div>
-							<a href="/tag/css/" class="tag count">2</a>
+							<span>
+								<a href="/tag/css/" rel="tag" title="A link to the collection tagged with 'css'" data-count="2" ><span>css</span></a>
+							</span>
 						</li>
 						<li class="tag">
-							<div>
-								<a href="/tag/design/" class="tag name">design</a>
-							</div>
-							<a href="/tag/design/" class="tag count">2</a>
+							<span>
+								<a href="/tag/design/" rel="tag" title="A link to the collection tagged with 'design'" data-count="2" ><span>design</span></a>
+							</span>
 						</li>
-					</ul>
-					<footer>
-						Offloaded on
-						<time datetime="2020-05-10 21:00:00+10:00">Sun, 10/05/2020 at 21:00 (<a href="https://time.is/AEST" target="_blank" rel="noreferrer">AEST</a>)</time>
-						<span class="category-tag"><a href="/category/web-design">web design</a></span>
-					</footer>				</article>
-			</div>
-		</div>
-		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-165060547-1"></script>
-		<script>
-			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments);}
-			gtag('js', new Date());
-			gtag('config', 'UA-165060547-1');
-		</script>
-	</body>
+						</ul>
+				</footer>
+			</article></li>
+		</ol>
+		<footer>
+		<span class="pagination"><ul class="middle">
+				<li class="current"><a href="/tag/design/" title="Link to page 1">1</a></li>
+			</ul></span>
+		</footer>
+	</main>
+	<footer>
+	</footer>
+</body>
 </html>

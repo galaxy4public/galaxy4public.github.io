@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - linux</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"></link><link href="https://dmitry.khlebnikov.net/feeds/linux.atom.xml" rel="self"></link><id>https://dmitry.khlebnikov.net/</id><updated>2020-05-17T20:25:15+10:00</updated><entry><title>Raspberry Pi 3 toolchain on CentOS 7</title><link href="https://dmitry.khlebnikov.net/2016/05/22/raspberry-pi-3-toolchain-on-centos-7/" rel="alternate"></link><published>2016-05-22T12:00:00+10:00</published><updated>2020-05-17T04:45:11+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2016-05-22:/2016/05/22/raspberry-pi-3-toolchain-on-centos-7/</id><summary type="html">&lt;p&gt;I heard a lot about Raspberry Pi boards but until now I had no need nor time to
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - linux</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"></link><link href="https://dmitry.khlebnikov.net/feeds/linux.atom.xml" rel="self"></link><id>https://dmitry.khlebnikov.net/</id><updated>2021-08-29T22:26:10+10:00</updated><subtitle>assorted bits of wit</subtitle><subtitle>assorted bits of wit</subtitle><entry><title>Raspberry Pi 3 toolchain on CentOS 7</title><link href="https://dmitry.khlebnikov.net/2016/05/22/raspberry-pi-3-toolchain-on-centos-7/" rel="alternate"></link><published>2016-05-22T12:00:00+10:00</published><updated>2020-05-17T04:45:11+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2016-05-22:/2016/05/22/raspberry-pi-3-toolchain-on-centos-7/</id><summary type="html">&lt;p&gt;I heard a lot about Raspberry Pi boards but until now I had no need nor time to
 work with one.&lt;/p&gt;
 &lt;p&gt;However, recently I purchased a Dodge Journey R/T and found that although I
 love the car I am so disappointed with its software and hard-wired logic that I
@@ -7,7 +7,7 @@ decided to experiment a bit and fix the most annoying things.&lt;/p&gt;
 &lt;p&gt;Since almost everything inside the car is talking over the CAN bus I needed
 some kind of a enclave inside the car where I could run my code and
 inject/intercept CAN messages.&lt;/p&gt;
-&lt;p&gt;I looked around and found that &lt;span class="truncated"&gt;&lt;/span&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;I heard a lot about Raspberry Pi boards but until now I had no need nor time to
+&lt;p&gt;I looked around and found that …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I heard a lot about Raspberry Pi boards but until now I had no need nor time to
 work with one.&lt;/p&gt;
 &lt;p&gt;However, recently I purchased a Dodge Journey R/T and found that although I
 love the car I am so disappointed with its software and hard-wired logic that I
@@ -27,73 +27,68 @@ on an AWS EC2 instance which was running a minimal CentOS 7 as its OS.&lt;/p&gt;
 &lt;p&gt;I spawned an EC2 instance (you need at least 8GB of free space there to be able
 to build the toolchain), logged in, and ensured that my system is up to date
 (and update it if it was not):&lt;/p&gt;
-&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[root@localhost ~]# yum -y update
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Loaded plugins: at-exit, fastestmirror, post-transaction-actions
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Loading mirror speeds from cached hostfile
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt; * base: mirror.domain.tld
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt; * extras: mirror.domain.tld
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt; * updates: mirror.domain.tld
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;No packages marked for update&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
-
+&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-console"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp"&gt;[root@localhost ~]# &lt;/span&gt;yum -y update
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;Loaded plugins: at-exit, fastestmirror, post-transaction-actions&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;Loading mirror speeds from cached hostfile&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt; * base: mirror.domain.tld&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt; * extras: mirror.domain.tld&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt; * updates: mirror.domain.tld&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;No packages marked for update&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The easiest way to build a toolchain is to use the crosstool-ng project, so I
 went ahead and downloaded the latest version with the corresponding GPG
 signature, verified the signature (although the verification was very
 superficial since Bryan Hundven is not in my Web of Trust and the crosstool-ng
 website was not providing an HTTPS page to confirm the fingerprint of the key),
 and unpacked the sources:&lt;/p&gt;
-&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[root@localhost ~]# yum -y install bison bzip2 flex gcc gcc-c++ glibc-static gperf help2man libstdc++-static libtool make ncurses-devel texinfo wget
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[root@localhost ~]# useradd -m build
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[root@localhost ~]# su - build
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ wget -q 'http://crosstool-ng.org/download/crosstool-ng/crosstool-ng-1.22.0.tar.xz'
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ wget -q 'http://crosstool-ng.org/download/crosstool-ng/crosstool-ng-1.22.0.tar.xz.sig'
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ gpg --recv-keys 35B871D1 --keyserver pgp.surfnet.nl
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg: &amp;quot;--keyserver&amp;quot; not a key ID: skipping
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg: &amp;quot;pgp.surfnet.nl&amp;quot; not a key ID: skipping
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg: requesting key 35B871D1 from hkp server keys.gnupg.net
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg: /home/build/.gnupg/trustdb.gpg: trustdb created
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg: key 35B871D1: public key &amp;quot;Bryan Hundven &amp;quot; imported
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg: Total number processed: 1
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg:               imported: 1  (RSA: 1)
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ gpg --verify crosstool-ng-1.22.0.tar.xz.sig
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg: Signature made Fri Nov 20 13:09:26 2015 UTC using RSA key ID 35B871D1
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg: Good signature from &amp;quot;Bryan Hundven &amp;quot;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg:                 aka &amp;quot;Bryan Hundven &amp;quot;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg:                 aka &amp;quot;Bryan Hundven &amp;quot;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg:                 aka &amp;quot;Bryan Hundven &amp;quot;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg:                 aka &amp;quot;[jpeg image of size 3080]&amp;quot;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg:                 aka &amp;quot;[jpeg image of size 16246]&amp;quot;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg: WARNING: This key is not certified with a trusted signature!
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;gpg:          There is no indication that the signature belongs to the owner.
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Primary key fingerprint: 561E D9B6 2095 88ED 23C6  8329 CAD7 C8FC 35B8 71D1
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ tar xJSf crosstool-ng-1.22.0.tar.xz
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ rm crosstool-ng-1.22.0.tar.xz*&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
-
+&lt;pre class="highlight" data-user="root"&gt;&lt;code class="language-console"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp"&gt;[root@localhost ~]# &lt;/span&gt;yum -y install bison bzip2 flex gcc gcc-c++ glibc-static gperf help2man libstdc++-static libtool make ncurses-devel texinfo wget
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp"&gt;[root@localhost ~]# &lt;/span&gt;useradd -m build
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp"&gt;[root@localhost ~]# &lt;/span&gt;su - build
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp"&gt;[build@localhost ~]$ &lt;/span&gt;wget -q &lt;span class="s1"&gt;&amp;#39;http://crosstool-ng.org/download/crosstool-ng/crosstool-ng-1.22.0.tar.xz&amp;#39;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp"&gt;[build@localhost ~]$ &lt;/span&gt;wget -q &lt;span class="s1"&gt;&amp;#39;http://crosstool-ng.org/download/crosstool-ng/crosstool-ng-1.22.0.tar.xz.sig&amp;#39;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp"&gt;[build@localhost ~]$ &lt;/span&gt;gpg --recv-keys 35B871D1 --keyserver pgp.surfnet.nl
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;gpg: &amp;quot;--keyserver&amp;quot; not a key ID: skipping&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;gpg: &amp;quot;pgp.surfnet.nl&amp;quot; not a key ID: skipping&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;gpg: requesting key 35B871D1 from hkp server keys.gnupg.net&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;gpg: /home/build/.gnupg/trustdb.gpg: trustdb created&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;gpg: key 35B871D1: public key &amp;quot;Bryan Hundven &amp;quot; imported&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;gpg: Total number processed: 1&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;gpg:               imported: 1  (RSA: 1)&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp"&gt;[build@localhost ~]$ &lt;/span&gt;gpg --verify crosstool-ng-1.22.0.tar.xz.sig
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;gpg: Signature made Fri Nov 20 13:09:26 2015 UTC using RSA key ID 35B871D1&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;gpg: Good signature from &amp;quot;Bryan Hundven &amp;quot;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;gpg:                 aka &amp;quot;Bryan Hundven &amp;quot;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;gpg:                 aka &amp;quot;Bryan Hundven &amp;quot;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;gpg:                 aka &amp;quot;Bryan Hundven &amp;quot;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;gpg:                 aka &amp;quot;[jpeg image of size 3080]&amp;quot;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;gpg:                 aka &amp;quot;[jpeg image of size 16246]&amp;quot;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;gpg: WARNING: This key is not certified with a trusted signature!&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;gpg:          There is no indication that the signature belongs to the owner.&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;Primary key fingerprint: 561E D9B6 2095 88ED 23C6  8329 CAD7 C8FC 35B8 71D1&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp"&gt;[build@localhost ~]$ &lt;/span&gt;tar xJSf crosstool-ng-1.22.0.tar.xz
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp"&gt;[build@localhost ~]$ &lt;/span&gt;rm crosstool-ng-1.22.0.tar.xz*&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The next step was to prepare the environment for the crosstool-ng build process:&lt;/p&gt;
-&lt;pre class="highlight" data-user="build"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ cd crosstool-ng
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ /configure --prefix=$HOME/ct-ng
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;checking build system type... x86_64-pc-linux-gnu
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[skipped]
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;configure: creating ./config.status
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;config.status: creating Makefile
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ make
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;  SED    'ct-ng'
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[skipped]
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;  SED    'docs/ct-ng.1'
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;  GZIP   'docs/ct-ng.1.gz'
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ make install
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;  GEN    'config/configure.in'
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[skipped]&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
-
+&lt;pre class="highlight" data-user="build"&gt;&lt;code class="language-console"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp"&gt;[build@localhost ~]$ &lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; crosstool-ng
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp"&gt;[build@localhost ~]$ &lt;/span&gt;/configure --prefix&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$HOME&lt;/span&gt;/ct-ng
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;checking build system type... x86_64-pc-linux-gnu&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;[skipped]&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;configure: creating ./config.status&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;config.status: creating Makefile&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp"&gt;[build@localhost ~]$ &lt;/span&gt;make
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;  SED    &amp;#39;ct-ng&amp;#39;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;[skipped]&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;  SED    &amp;#39;docs/ct-ng.1&amp;#39;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;  GZIP   &amp;#39;docs/ct-ng.1.gz&amp;#39;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp"&gt;[build@localhost ~]$ &lt;/span&gt;make install
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;  GEN    &amp;#39;config/configure.in&amp;#39;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;[skipped]&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;For auto-completion, do not forget to install &lt;code&gt;ct-ng.comp&lt;/code&gt; into your &lt;code&gt;bash&lt;/code&gt;
 completion directory (usually &lt;code&gt;/etc/bash_completion.d/&lt;/code&gt;)&lt;/p&gt;
-&lt;pre class="highlight" data-user="build"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ export PATH=$HOME/ct-ng/bin:$PATH
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ cd&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
-
+&lt;pre class="highlight" data-user="build"&gt;&lt;code class="language-console"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp"&gt;[build@localhost ~]$ &lt;/span&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;PATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$HOME&lt;/span&gt;/ct-ng/bin:&lt;span class="nv"&gt;$PATH&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp"&gt;[build@localhost ~]$ &lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Once the above was done we are ready to actually configure and build our toolchain:&lt;/p&gt;
-&lt;pre class="highlight" data-user="build"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ mkdir ~/builddir
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ cd ~/builddir
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ ct-ng menuconfig&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
-
+&lt;pre class="highlight" data-user="build"&gt;&lt;code class="language-console"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp"&gt;[build@localhost ~]$ &lt;/span&gt;mkdir ~/builddir
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp"&gt;[build@localhost ~]$ &lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/builddir
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp"&gt;[build@localhost ~]$ &lt;/span&gt;ct-ng menuconfig&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;I was quite happy with the defaults and the only changes I made were the
 following:&lt;/p&gt;
 &lt;ul&gt;
@@ -148,59 +143,57 @@ binaries would not be properly linked to work with the OS on the board&lt;/p&gt;
 &lt;p&gt;Once we are comfortable with the configuration of the future toolchain we exit
 the configuration menu (saving the changes) and launch the build process (it
 would take approximately an hour on AWS t2.small instance):&lt;/p&gt;
-&lt;pre class="highlight" data-user="build" data-prompt=""[build@localhost"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;configuration written to .config
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;*** End of the configuration.
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;*** Execute 'ct-ng build' to start the build or try 'ct-ng help'.
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ ct-ng build
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[INFO ]  Performing some trivial sanity checks
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[INFO ]  Build started 20160522.070915
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[skipped]
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[INFO ]  Build completed at 20160522.080629
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[INFO ]  (elapsed: 57:14.18)
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[INFO ]  Finishing installation (may take a few seconds)...
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[57:15] /&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
-
+&lt;pre class="highlight" data-user="build" data-prompt=""[build@localhost"&gt;&lt;code class="language-console"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;configuration written to .config&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;*** End of the configuration.&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;*** Execute &amp;#39;ct-ng build&amp;#39; to start the build or try &amp;#39;ct-ng help&amp;#39;.&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp"&gt;[build@localhost ~]$ &lt;/span&gt;ct-ng build
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;[INFO ]  Performing some trivial sanity checks&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;[INFO ]  Build started 20160522.070915&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;[skipped]&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;[INFO ]  Build completed at 20160522.080629&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;[INFO ]  (elapsed: 57:14.18)&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;[INFO ]  Finishing installation (may take a few seconds)...&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;[57:15] /&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Seems that our Raspberry Pi 3 toolchain is ready to be used. Let&amp;rsquo;s compile
 something and see how it goes:&lt;/p&gt;
-&lt;pre class="highlight" data-user="build"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ export PATH=$HOME/x-tools/aarch64-rpi3-linux-gnueabi/bin:$PATH
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ aarch64-rpi3-linux-gnueabi-gcc --version
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;aarch64-rpi3-linux-gnueabi-gcc (crosstool-NG crosstool-ng-1.22.0) 5.2.0
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;Copyright (C) 2015 Free Software Foundation, Inc.
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;This is free software; see the source for copying conditions.  There is NO
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ printf '#include \nint main(){printf(&amp;quot;Hello\\n&amp;quot;); return 0;}\n' &amp;gt; sample.c
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ aarch64-rpi3-linux-gnueabi-gcc -o sample sample.c
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ ls -l sample
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-rwxr-xr-x. 1 build build 7672 May 22 08:19 sample
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[build@localhost ~]$ file sample
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;sample: ELF 64-bit LSB executable, ARM aarch64, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 4.3.0, not stripped&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
-
+&lt;pre class="highlight" data-user="build"&gt;&lt;code class="language-console"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp"&gt;[build@localhost ~]$ &lt;/span&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;PATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$HOME&lt;/span&gt;/x-tools/aarch64-rpi3-linux-gnueabi/bin:&lt;span class="nv"&gt;$PATH&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp"&gt;[build@localhost ~]$ &lt;/span&gt;aarch64-rpi3-linux-gnueabi-gcc --version
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;aarch64-rpi3-linux-gnueabi-gcc (crosstool-NG crosstool-ng-1.22.0) 5.2.0&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;Copyright (C) 2015 Free Software Foundation, Inc.&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;This is free software; see the source for copying conditions.  There is NO&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp"&gt;[build@localhost ~]$ &lt;/span&gt;&lt;span class="nb"&gt;printf&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;#include \nint main(){printf(&amp;quot;Hello\\n&amp;quot;); return 0;}\n&amp;#39;&lt;/span&gt; &amp;gt; sample.c
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp"&gt;[build@localhost ~]$ &lt;/span&gt;aarch64-rpi3-linux-gnueabi-gcc -o sample sample.c
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp"&gt;[build@localhost ~]$ &lt;/span&gt;ls -l sample
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;-rwxr-xr-x. 1 build build 7672 May 22 08:19 sample&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp"&gt;[build@localhost ~]$ &lt;/span&gt;file sample
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;sample: ELF 64-bit LSB executable, ARM aarch64, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 4.3.0, not stripped&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Well, it is time to build some awesome stuff for Raspberry Pi 3, I guess, but
-this will be in another post. :)&lt;/p&gt;</content><category term="linux"></category><category term="console"></category><category term="howto"></category><category term="linux"></category><category term="raspberry pi"></category></entry><entry><title>Building a firewall? Simple and easy!</title><link href="https://dmitry.khlebnikov.net/2016/05/22/building-a-firewall-simple-and-easy/" rel="alternate"></link><published>2016-05-22T10:00:00+10:00</published><updated>2020-05-17T20:25:15+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2016-05-22:/2016/05/22/building-a-firewall-simple-and-easy/</id><summary type="html">&lt;p&gt;I strive for simplicity since I am a strong believer that achieving a goal with
+this will be in another post. :)&lt;/p&gt;</content><category term="linux"></category><category term="console"></category><category term="howto"></category><category term="linux"></category><category term="raspberry pi"></category></entry><entry><title>Building a firewall? Simple and easy!</title><link href="https://dmitry.khlebnikov.net/2016/05/22/building-a-firewall-simple-and-easy/" rel="alternate"></link><published>2016-05-22T10:00:00+10:00</published><updated>2021-08-29T22:26:10+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2016-05-22:/2016/05/22/building-a-firewall-simple-and-easy/</id><summary type="html">&lt;p&gt;I strive for simplicity since I am a strong believer that achieving a goal with
 the most simplest solution looks elegant, proves that you have deep knowledge
 on the subject, and overall is beautiful by itself.  Additionally to this, a
 simple solution is easier to comprehend and to audit, hence it is much easier
 to ensure the security of such a solution.&lt;/p&gt;
-&lt;p&gt;Over the last decade I stumbled upon numerous complicated firewalls erected on
+&lt;p&gt;Over the last decade, I stumbled upon numerous complicated firewalls erected on
 the NAT boxes with tens (sometimes, hundreds!) of rules describing the traffic
-flows and punched holes for some edge cases.  Every time I wondered what kind &lt;span class="truncated"&gt;&lt;/span&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;I strive for simplicity since I am a strong believer that achieving a goal with
+flows and punched holes for some edge cases.  Every time I wondered: what kind …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I strive for simplicity since I am a strong believer that achieving a goal with
 the most simplest solution looks elegant, proves that you have deep knowledge
 on the subject, and overall is beautiful by itself.  Additionally to this, a
 simple solution is easier to comprehend and to audit, hence it is much easier
 to ensure the security of such a solution.&lt;/p&gt;
-&lt;p&gt;Over the last decade I stumbled upon numerous complicated firewalls erected on
+&lt;p&gt;Over the last decade, I stumbled upon numerous complicated firewalls erected on
 the NAT boxes with tens (sometimes, hundreds!) of rules describing the traffic
-flows and punched holes for some edge cases.  Every time I wondered what kind
+flows and punched holes for some edge cases.  Every time I wondered: what kind
 of a bug has bitten the person who composed such a convoluted ruleset that is a
-nightmare to manage.&lt;/p&gt;
-&lt;p&gt;In 99% of the cases I was able to come up with a ruleset of usually less than
+nightmare to manage?&lt;/p&gt;
+&lt;p&gt;In 99% of the cases, I was able to come up with a ruleset of usually less than
 20 rules for the whole firewall to achieve exactly the same result.  So, in
 this article I will explain my approach on building firewalls that are easy to
 support and to understand.&lt;/p&gt;
-&lt;p&gt;Before you dive into optimising (or creating) your firewall there are some
+&lt;p&gt;Before you dive into optimising (or creating) your firewall, there are some
 things you need to have a clear understanding of:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -325,42 +318,41 @@ your goals &amp;ndash; you will be able to optimise the result at a later stage.
 used as the skeleton for the iptables ruleset on systems I manage (this snippet
 assumes that 192.168.0.0/16 is the internal network and that the ruleset is
 installed on the NAT instance which is a gateway to the Internet):&lt;/p&gt;
-&lt;pre class="highlight" data-file="/etc/sysconfig/iptables"&gt;&lt;code class="language-iptables"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;*filter
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;:INPUT ACCEPT [0:0]
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;:FORWARD ACCEPT [0:0]
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;:OUTPUT ACCEPT [0:0]
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-A INPUT -m state --state INVALID -j DROP
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# If it was already established pass bits through
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# Allow for the local traffic
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-A INPUT -i lo -j ACCEPT
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# Let's MTU discovery and other network management to work properly
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-A INPUT -p icmp -m icmp --icmp-type any -j ACCEPT
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# Allow remote SSH logins on the specified port (should be &amp;lt;1024 and would require sshd re-configuration if the port is not standard)
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# Allow DHCP client to get its information
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-A INPUT -i eth0 -p udp -m state --state NEW -m udp --sport 67:68 --dport 67:68 -j ACCEPT
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# Reject anything that we did not specifically allow above
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-A INPUT -j REJECT --reject-with icmp-host-prohibited
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# This is a NAT box, so we accept packets from our network designated to the world, but reject any other forwarding attempts.
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-A FORWARD -i eth0 -s 192.168.0.0/22 ! -d 192.168.0.0/22 -j ACCEPT
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-A FORWARD -i eth0 ! -s 192.168.0.0/22 -d 192.168.0.0/22 -j ACCEPT
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# If there is a MTU mismatch between the NAT box and hosts behind it we want to allow ICMP for the MTU discovery
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-A FORWARD -i eth0 -p icmp -m icmp --icmp-type any -s 192.168.0.0/22 -d 192.168.0.0/22 -j ACCEPT
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# We may be interested in anything that is rejected in this chain, so let's log it
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-A FORWARD -j LOG
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;# We do not allow to forward anything else
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-A FORWARD -j REJECT --reject-with icmp-host-prohibited
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;COMMIT
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;*nat
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;:POSTROUTING ACCEPT [0:0]
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;-A POSTROUTING -s 192.168.0.0/22 ! -d 192.168.0.0/22 -j MASQUERADE
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;COMMIT&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
-
+&lt;pre class="highlight" data-file="/etc/sysconfig/iptables"&gt;&lt;code class="language-iptables"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="nt"&gt;filter&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nd"&gt;INPUT&lt;/span&gt; &lt;span class="nt"&gt;ACCEPT&lt;/span&gt; &lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nd"&gt;FORWARD&lt;/span&gt; &lt;span class="nt"&gt;ACCEPT&lt;/span&gt; &lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nd"&gt;OUTPUT&lt;/span&gt; &lt;span class="nt"&gt;ACCEPT&lt;/span&gt; &lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="nt"&gt;-A&lt;/span&gt; &lt;span class="nt"&gt;INPUT&lt;/span&gt; &lt;span class="nt"&gt;-m&lt;/span&gt; &lt;span class="nt"&gt;state&lt;/span&gt; &lt;span class="nt"&gt;--state&lt;/span&gt; &lt;span class="nt"&gt;INVALID&lt;/span&gt; &lt;span class="nt"&gt;-j&lt;/span&gt; &lt;span class="nt"&gt;DROP&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="nt"&gt;If&lt;/span&gt; &lt;span class="nt"&gt;it&lt;/span&gt; &lt;span class="nt"&gt;was&lt;/span&gt; &lt;span class="nt"&gt;already&lt;/span&gt; &lt;span class="nt"&gt;established&lt;/span&gt; &lt;span class="nt"&gt;pass&lt;/span&gt; &lt;span class="nt"&gt;bits&lt;/span&gt; &lt;span class="nt"&gt;through&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="nt"&gt;-A&lt;/span&gt; &lt;span class="nt"&gt;INPUT&lt;/span&gt; &lt;span class="nt"&gt;-m&lt;/span&gt; &lt;span class="nt"&gt;state&lt;/span&gt; &lt;span class="nt"&gt;--state&lt;/span&gt; &lt;span class="nt"&gt;RELATED&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="nt"&gt;ESTABLISHED&lt;/span&gt; &lt;span class="nt"&gt;-j&lt;/span&gt; &lt;span class="nt"&gt;ACCEPT&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="nt"&gt;Allow&lt;/span&gt; &lt;span class="nt"&gt;for&lt;/span&gt; &lt;span class="nt"&gt;the&lt;/span&gt; &lt;span class="nt"&gt;local&lt;/span&gt; &lt;span class="nt"&gt;traffic&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="nt"&gt;-A&lt;/span&gt; &lt;span class="nt"&gt;INPUT&lt;/span&gt; &lt;span class="nt"&gt;-i&lt;/span&gt; &lt;span class="nt"&gt;lo&lt;/span&gt; &lt;span class="nt"&gt;-j&lt;/span&gt; &lt;span class="nt"&gt;ACCEPT&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="nt"&gt;Let&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;s MTU discovery and other network management to work properly&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="s1"&gt;-A INPUT -p icmp -m icmp --icmp-type any -j ACCEPT&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="s1"&gt;# Allow remote SSH logins on the specified port (should be &amp;lt;1024 and would require sshd re-configuration if the port is not standard)&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="s1"&gt;-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="s1"&gt;# Allow DHCP client to get its information&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="s1"&gt;-A INPUT -i eth0 -p udp -m state --state NEW -m udp --sport 67:68 --dport 67:68 -j ACCEPT&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="s1"&gt;# Reject anything that we did not specifically allow above&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="s1"&gt;-A INPUT -j REJECT --reject-with icmp-host-prohibited&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="s1"&gt;# This is a NAT box, so we accept packets from our network designated to the world, but reject any other forwarding attempts.&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="s1"&gt;-A FORWARD -i eth0 -s 192.168.0.0/22 ! -d 192.168.0.0/22 -j ACCEPT&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="s1"&gt;-A FORWARD -i eth0 ! -s 192.168.0.0/22 -d 192.168.0.0/22 -j ACCEPT&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="s1"&gt;# If there is a MTU mismatch between the NAT box and hosts behind it we want to allow ICMP for the MTU discovery&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="s1"&gt;-A FORWARD -i eth0 -p icmp -m icmp --icmp-type any -s 192.168.0.0/22 -d 192.168.0.0/22 -j ACCEPT&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="s1"&gt;# We may be interested in anything that is rejected in this chain, so let&amp;#39;&lt;/span&gt;&lt;span class="nt"&gt;s&lt;/span&gt; &lt;span class="nt"&gt;log&lt;/span&gt; &lt;span class="nt"&gt;it&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="nt"&gt;-A&lt;/span&gt; &lt;span class="nt"&gt;FORWARD&lt;/span&gt; &lt;span class="nt"&gt;-j&lt;/span&gt; &lt;span class="nt"&gt;LOG&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="nt"&gt;We&lt;/span&gt; &lt;span class="nt"&gt;do&lt;/span&gt; &lt;span class="nt"&gt;not&lt;/span&gt; &lt;span class="nt"&gt;allow&lt;/span&gt; &lt;span class="nt"&gt;to&lt;/span&gt; &lt;span class="nt"&gt;forward&lt;/span&gt; &lt;span class="nt"&gt;anything&lt;/span&gt; &lt;span class="nt"&gt;else&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="nt"&gt;-A&lt;/span&gt; &lt;span class="nt"&gt;FORWARD&lt;/span&gt; &lt;span class="nt"&gt;-j&lt;/span&gt; &lt;span class="nt"&gt;REJECT&lt;/span&gt; &lt;span class="nt"&gt;--reject-with&lt;/span&gt; &lt;span class="nt"&gt;icmp-host-prohibited&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="nt"&gt;COMMIT&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="nt"&gt;nat&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nd"&gt;POSTROUTING&lt;/span&gt; &lt;span class="nt"&gt;ACCEPT&lt;/span&gt; &lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="nt"&gt;-A&lt;/span&gt; &lt;span class="nt"&gt;POSTROUTING&lt;/span&gt; &lt;span class="nt"&gt;-s&lt;/span&gt; &lt;span class="nt"&gt;192&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;168&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;0&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;22&lt;/span&gt; &lt;span class="o"&gt;!&lt;/span&gt; &lt;span class="nt"&gt;-d&lt;/span&gt; &lt;span class="nt"&gt;192&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;168&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;0&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;22&lt;/span&gt; &lt;span class="nt"&gt;-j&lt;/span&gt; &lt;span class="nt"&gt;MASQUERADE&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="nt"&gt;COMMIT&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;There are a few things to note:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;

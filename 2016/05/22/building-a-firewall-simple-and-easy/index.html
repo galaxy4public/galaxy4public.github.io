@@ -1,135 +1,136 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta http-equiv="Content-Security-Policy" content="	default-src 'self';object-src 'none';script-src 'self' https://www.googletagmanager.com/gtag/js 'sha256-TelA7VsuYAMqhOKGk7CHgJyuqSJdmqZEp+hn6PWVRwQ=' https://www.google-analytics.com/analytics.js;img-src 'self' data: https://www.google-analytics.com/r/collect https://www.google-analytics.com/collect https://stats.g.doubleclick.net/r/collect https://*/ads/ga-audiences https://www.googletagmanager.com/a;style-src 'self' 'sha256-fszvBX/J9dhPxFSJ5wUrq/Pvg6HrnTkWyshMZpaxSQY=';connect-src 'self' https://www.google-analytics.com/j/collect https://stats.g.doubleclick.net/j/collect; " />
-		<title>Mind Drops</title>
-		<script src="/theme/js/persistence.js" defer></script>
-		<meta charset="utf-8" />
-		<meta name="description" content="" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="theme-color" content="#535353" />
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="format-detection" content="telephone=no" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-		<meta name="apple-mobile-web-app-title" content="Mind Drops" />
-		<meta name="description" content="">
-		<link rel="apple-touch-icon" href="/theme/images/icons/mind-drops-192x192.png" />
-		<link rel="manifest" type="text/json" href="/manifest.json" />
-		<link rel="alternate" type="application/atom+xml" href="https://dmitry.khlebnikov.net/feeds/all.atom.xml" title="Mind Drops Full Atom Feed" />
-		<link rel="alternate" type="application/atom+xml" href="https://dmitry.khlebnikov.net/feeds/linux.atom.xml" title="Mind Drops Categories Atom Feed" />
-		<link rel="dns-prefetch" href="https://www.google.com" />
-		<link rel="preconnect" href="https://www.google.com" crossorigin />
-		<link rel="dns-prefetch" href="https://www.google-analytics.com" />
-		<link rel="preconnect" href="https://www.google-analytics.com" crossorigin />
-		<link rel="dns-prefetch" href="https://www.googletagmanager.com">
-		<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
-		<link rel="dns-prefetch" href="https://stats.g.doubleclick.net" />
-		<link rel="preconnect" href="https://stats.g.doubleclick.net" crossorigin />
-		<link rel="preload" as="style" href="/theme/css/reset.css" />
-		<link rel="preload" as="style" href="/theme/css/fonts/Icons.css" />
-		<link rel="preload" as="style" href="/theme/css/fonts/Exo2.css" />
-		<link rel="preload" as="style" href="/theme/css/fonts/Oswald.css" />
-		<link rel="preload" as="style" href="/theme/css/fonts/DancingScript.css" />
-		<link rel="preload" as="style" href="/theme/css/fonts/FiraCode.css" />
-		<link rel="preload" as="style" href="/theme/css/base.css" />
-		<link rel="preload" as="script" href="/theme/js/persistence.js" />
-		<link rel="preload" as="script" href="/theme/js/visited.js" />
-		<link rel="preload" as="script" href="/theme/js/service.js" />
-		<link rel="preload" as="script" href="https://www.googletagmanager.com/gtag/js?id=UA-165060547-1" />
-		<link rel="icon" type="image/png" href="/images/galaxy.png" />
-		<script src="/theme/js/loader.js" defer></script>
+<head>
+	<title>Mind Drops :: assorted bits of wit</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1" />
+	<link rel="stylesheet" href="/theme/css/fonts/Icons.css" />
+	<link rel="stylesheet" href="/theme/css/fonts/Exo2.css" />
+	<link rel="stylesheet" href="/theme/css/fonts/Oswald.css" />
+	<link rel="stylesheet" href="/theme/css/fonts/DancingScript.css" />
+	<link rel="stylesheet" href="/theme/css/base.css" />
+	<link rel="stylesheet" href="/theme/css/pygments/default.css" />
+	<link rel="canonical" href="/2016/05/22/building-a-firewall-simple-and-easy/" />
 
-		<meta name="keywords" content="console howto iptables linux security" />
-		<link rel="stylesheet" type="text/css" href="/theme/css/article.css" />
-		<link rel="canonical" href="/2016/05/22/building-a-firewall-simple-and-easy/" />
-	</head>
-	<body>
+	<script type="application/ld+json">
+	{
+		"@context" : "https://schema.org",
+		"@type" : "Article",
+		"author": "(GalaxyMaster)",
+		"name" : "Building a firewall? Simple and easy!",
+		"datePublished" : "2016-05-22T10:00:00+10:00",
+		"dateModified" : "2021-08-29T22:26:10+10:00",
+		"image" : "https://dmitry.khlebnikov.net/2020/06/14/truly-responsive-pagination/images/paginator-sketch.png",
+		"headline" : "headline",
+		"abstract": "abstract goes here",
+		"articleSection": "linux",
+		"interactionStatistic":
+		[
+			{
+				"@type": "InteractionCounter",
+				"interactionService":
+				{
+					"@type": "WebSite",
+					"name": "Twitter",
+					"url": "http://www.twitter.com"
+				},
+				"interactionType": "http://schema.org/ShareAction",
+				"userInteractionCount": "1203"
+			},
+			{
+				"@type": "InteractionCounter",
+				"interactionType": "http://schema.org/CommentAction",
+				"userInteractionCount": "78"
+			}
+		],
+		"discussionUrl": "https://github.com/"
+	}
+	</script>
+</head>
 
-		<input type="radio" name="menu-toggle" id="menu-toggle-full" value="full" tabindex="-1" checked />
-		<input type="radio" name="menu-toggle" id="menu-toggle-mini" value="mini" tabindex="-1" />
-		<input type="radio" name="menu-toggle" id="menu-toggle-hide" value="hide" tabindex="-1" />
-		<label for="menu-toggle-full" class="icon menu" role="radio" tabindex="0">Show the full menu panel on the screen</label>
-		<aside id="sidebar">
-			<label for="menu-toggle-mini" class="icon left-big" role="radio" tabindex="0">Show the minimised menu panel on the screen</label>
-			<label for="menu-toggle-hide" class="icon eye-off" role="radio" tabindex="0">Remove the menu panel off the screen</label>
-			<div class="title">Mind Drops</div>
-			<div id="logo" class="box shadow">
+<body>
+	<header>
+		<span class="flex">
+			<!--
+			<button class="menu-toggle" type="button" tabindex="0" aria-label="Menu Toggle"><div></div></button>
+			-->
+			<div class="menu-toggle" tabindex="0" aria-label="Menu Toggle"><div></div></div>
+			<a href="/" class="logo">
 				<picture>
-					<source srcset="/images/galaxy.png.webp" type="image/webp">
-					<img src="/images/galaxy.png" alt="Logo">
+					<source srcset="/images/logo.svg" type="image/svg+xml">
+					<source srcset="/images/.svg" type="image/svg+xml">
+					<source srcset="/images/.webp" type="image/webp">
+					<img src="/images/" alt="Logo">
 				</picture>
-			</div>
-
-			<!-- Search -->
-			<section class="box search">
-				<form name="google search" class="icon search" method="get" action="/search">
-					<label for="search" class="offscreen">Search</label>
-					<input id="search" type="text" class="text" name="q" placeholder="Search" />
-				</form>
-			</section>
-
+				<span class="title">Mind Drops</span>
+			</a>
 			<nav>
 				<ul>
-					<li>
-						<a class="icon home" href="/">Home</a>
-					</li>
-					<li>
-						<a class="icon user" href="/about">About</a>
-					</li>
-					<li>
-						<a class="icon phone" href="/contact">Contact</a>
-					</li>
+					<li><a class="icon home" href="/">Home</a></li>
+					<li><a class="icon user" href="/about">About</a></li>
+					<li><a class="icon phone" href="/contact">Contact</a></li>
 				</ul>
 			</nav>
-
-			<!-- Text -->
-			<section class="box text-style1">
-				<div class="inner">
-					<p>
-						<strong>Mind Drops:</strong>: A place to unload all these assorted bits.
-					</p>
+			<form id="search" role="search" autocomplete="off" method="get" action="/search">
+				<label for="q" class="icon search">Search</label>
+				<input type="text" name="q" id="q" placeholder="Search..." />
+				<div class="help" aria-label="Search ">
+					<dl>
+						<dt>"search terms"</dt><dd>exact-match</dd>
+						<dt>term1 | term2</dt><dd>term1 or term2</dd>
+						<dt>term1 * term2</dt><dd>term1 followed by term2</dd>
+						<dt>-term</dt><dd>exclude term</dd>
+						<dt>(search terms)</dt><dd>groups terms</dd>
+						<dt>ext:pdf</dt><dd>file type</dd>
+					</dl>
 				</div>
-			</section>
-
-			<!-- Copyright -->
-			<ul id="copyright">
-				<li>&copy; Openwall Pty Ltd 2020 </li>
-				<li><a href="/legal/terms-of-service">Terms of Service</a></li>
+			</form>
+			<ul class="taskbar">
+				<li class="search-toggle"><label for="q" class="icon search offscreen" title="Toggle the search bar">Search</label></li>
+				<!-- Not Implemented Yet
+				<li><a href="#bug-report" class="icon bug offscreen" title="Report a spotted bug on the page">Report a bug</a></li>
+				<li><a href="#preferences" class="icon cog offscreen" title="Configure personal preferences">Preferences</a></li>
+				 -->
 			</ul>
-		</aside>
-
-		<!-- Content -->
-		<div id="content">
-			<div class="inner">
-				<article id="building-a-firewall-simple-and-easy" class="box post">
-					<header>
-						<h1><a name="top">Building a firewall? Simple and easy!</a></h1>
-					</header>
-					<div class="info">
-						<span class="date">
-							<span class="day">22</span>
-							<span class="month"><a href="/2016/05/">May<span class="month full"></span></a></span>
-							<span class="year"><a href="/2016/">2016</a></span>
-						</span>
-						<ul class="stats">
-							<li><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="icon twitter" aria-label="Twitter" data-tweet-id="1257348806808657923">0</a></li>
-						</ul>
-					</div>
-					<p>I strive for simplicity since I am a strong believer that achieving a goal with
+		</span>
+	</header>
+	<aside class="modal">
+		<div id="bug-report">
+			<a href="#" class="close"></a>
+			<div class="content">
+				<h1>Bug report</h1>
+				<form id="bug-report-form" autocomplete="off">
+					<textarea id="bug-report-body" name="bug-report-body">
+					</textarea>
+					<input type="submit" value="Submit">
+				</form>
+			</div>
+		</div>
+		<div id="preferences">
+		</div>
+	</aside>
+	<main>
+			<article id="building-a-firewall-simple-and-easy">
+				<header>
+					<h1><a href="/2016/05/22/building-a-firewall-simple-and-easy/" rel="bookmark" title="Permalink to Building a firewall? Simple and easy!">Building a firewall? Simple and easy!</a></h1>
+				</header>
+				<aside>
+				</aside>
+				<p>I strive for simplicity since I am a strong believer that achieving a goal with
 the most simplest solution looks elegant, proves that you have deep knowledge
 on the subject, and overall is beautiful by itself.  Additionally to this, a
 simple solution is easier to comprehend and to audit, hence it is much easier
 to ensure the security of such a solution.</p>
-<p>Over the last decade I stumbled upon numerous complicated firewalls erected on
+<p>Over the last decade, I stumbled upon numerous complicated firewalls erected on
 the NAT boxes with tens (sometimes, hundreds!) of rules describing the traffic
-flows and punched holes for some edge cases.  Every time I wondered what kind
+flows and punched holes for some edge cases.  Every time I wondered: what kind
 of a bug has bitten the person who composed such a convoluted ruleset that is a
-nightmare to manage.</p>
-<p>In 99% of the cases I was able to come up with a ruleset of usually less than
+nightmare to manage?</p>
+<p>In 99% of the cases, I was able to come up with a ruleset of usually less than
 20 rules for the whole firewall to achieve exactly the same result.  So, in
 this article I will explain my approach on building firewalls that are easy to
 support and to understand.</p>
-<p>Before you dive into optimising (or creating) your firewall there are some
+<p>Before you dive into optimising (or creating) your firewall, there are some
 things you need to have a clear understanding of:</p>
 <ul>
 <li>
@@ -254,42 +255,41 @@ your goals &ndash; you will be able to optimise the result at a later stage.</p>
 used as the skeleton for the iptables ruleset on systems I manage (this snippet
 assumes that 192.168.0.0/16 is the internal network and that the ruleset is
 installed on the NAT instance which is a gateway to the Internet):</p>
-<pre class="highlight" data-file="/etc/sysconfig/iptables"><code class="language-iptables"><div class="lines"><a></a>*filter
-</div><div class="lines"><a></a>:INPUT ACCEPT [0:0]
-</div><div class="lines"><a></a>:FORWARD ACCEPT [0:0]
-</div><div class="lines"><a></a>:OUTPUT ACCEPT [0:0]
-</div><div class="lines"><a></a>-A INPUT -m state --state INVALID -j DROP
-</div><div class="lines"><a></a># If it was already established pass bits through
-</div><div class="lines"><a></a>-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
-</div><div class="lines"><a></a># Allow for the local traffic
-</div><div class="lines"><a></a>-A INPUT -i lo -j ACCEPT
-</div><div class="lines"><a></a># Let's MTU discovery and other network management to work properly
-</div><div class="lines"><a></a>-A INPUT -p icmp -m icmp --icmp-type any -j ACCEPT
-</div><div class="lines"><a></a># Allow remote SSH logins on the specified port (should be &lt;1024 and would require sshd re-configuration if the port is not standard)
-</div><div class="lines"><a></a>-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT
-</div><div class="lines"><a></a># Allow DHCP client to get its information
-</div><div class="lines"><a></a>-A INPUT -i eth0 -p udp -m state --state NEW -m udp --sport 67:68 --dport 67:68 -j ACCEPT
-</div><div class="lines"><a></a>
-</div><div class="lines"><a></a># Reject anything that we did not specifically allow above
-</div><div class="lines"><a></a>-A INPUT -j REJECT --reject-with icmp-host-prohibited
-</div><div class="lines"><a></a>
-</div><div class="lines"><a></a># This is a NAT box, so we accept packets from our network designated to the world, but reject any other forwarding attempts.
-</div><div class="lines"><a></a>-A FORWARD -i eth0 -s 192.168.0.0/22 ! -d 192.168.0.0/22 -j ACCEPT
-</div><div class="lines"><a></a>-A FORWARD -i eth0 ! -s 192.168.0.0/22 -d 192.168.0.0/22 -j ACCEPT
-</div><div class="lines"><a></a># If there is a MTU mismatch between the NAT box and hosts behind it we want to allow ICMP for the MTU discovery
-</div><div class="lines"><a></a>-A FORWARD -i eth0 -p icmp -m icmp --icmp-type any -s 192.168.0.0/22 -d 192.168.0.0/22 -j ACCEPT
-</div><div class="lines"><a></a># We may be interested in anything that is rejected in this chain, so let's log it
-</div><div class="lines"><a></a>-A FORWARD -j LOG
-</div><div class="lines"><a></a>
-</div><div class="lines"><a></a># We do not allow to forward anything else
-</div><div class="lines"><a></a>-A FORWARD -j REJECT --reject-with icmp-host-prohibited
-</div><div class="lines"><a></a>COMMIT
-</div><div class="lines"><a></a>
-</div><div class="lines"><a></a>*nat
-</div><div class="lines"><a></a>:POSTROUTING ACCEPT [0:0]
-</div><div class="lines"><a></a>-A POSTROUTING -s 192.168.0.0/22 ! -d 192.168.0.0/22 -j MASQUERADE
-</div><div class="lines"><a></a>COMMIT</div></code></pre>
-
+<pre class="highlight" data-file="/etc/sysconfig/iptables"><code class="language-iptables"><div class="line"><a></a><span class="o">*</span><span class="nt">filter</span>
+</div><div class="line"><a></a><span class="p">:</span><span class="nd">INPUT</span> <span class="nt">ACCEPT</span> <span class="cp">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">0</span><span class="cp">]</span>
+</div><div class="line"><a></a><span class="p">:</span><span class="nd">FORWARD</span> <span class="nt">ACCEPT</span> <span class="cp">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">0</span><span class="cp">]</span>
+</div><div class="line"><a></a><span class="p">:</span><span class="nd">OUTPUT</span> <span class="nt">ACCEPT</span> <span class="cp">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">0</span><span class="cp">]</span>
+</div><div class="line"><a></a><span class="nt">-A</span> <span class="nt">INPUT</span> <span class="nt">-m</span> <span class="nt">state</span> <span class="nt">--state</span> <span class="nt">INVALID</span> <span class="nt">-j</span> <span class="nt">DROP</span>
+</div><div class="line"><a></a><span class="err">#</span> <span class="nt">If</span> <span class="nt">it</span> <span class="nt">was</span> <span class="nt">already</span> <span class="nt">established</span> <span class="nt">pass</span> <span class="nt">bits</span> <span class="nt">through</span>
+</div><div class="line"><a></a><span class="nt">-A</span> <span class="nt">INPUT</span> <span class="nt">-m</span> <span class="nt">state</span> <span class="nt">--state</span> <span class="nt">RELATED</span><span class="o">,</span><span class="nt">ESTABLISHED</span> <span class="nt">-j</span> <span class="nt">ACCEPT</span>
+</div><div class="line"><a></a><span class="err">#</span> <span class="nt">Allow</span> <span class="nt">for</span> <span class="nt">the</span> <span class="nt">local</span> <span class="nt">traffic</span>
+</div><div class="line"><a></a><span class="nt">-A</span> <span class="nt">INPUT</span> <span class="nt">-i</span> <span class="nt">lo</span> <span class="nt">-j</span> <span class="nt">ACCEPT</span>
+</div><div class="line"><a></a><span class="err">#</span> <span class="nt">Let</span><span class="s1">&#39;s MTU discovery and other network management to work properly</span>
+</div><div class="line"><a></a><span class="s1">-A INPUT -p icmp -m icmp --icmp-type any -j ACCEPT</span>
+</div><div class="line"><a></a><span class="s1"># Allow remote SSH logins on the specified port (should be &lt;1024 and would require sshd re-configuration if the port is not standard)</span>
+</div><div class="line"><a></a><span class="s1">-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT</span>
+</div><div class="line"><a></a><span class="s1"># Allow DHCP client to get its information</span>
+</div><div class="line"><a></a><span class="s1">-A INPUT -i eth0 -p udp -m state --state NEW -m udp --sport 67:68 --dport 67:68 -j ACCEPT</span>
+</div><div class="line"><a></a>
+</div><div class="line"><a></a><span class="s1"># Reject anything that we did not specifically allow above</span>
+</div><div class="line"><a></a><span class="s1">-A INPUT -j REJECT --reject-with icmp-host-prohibited</span>
+</div><div class="line"><a></a>
+</div><div class="line"><a></a><span class="s1"># This is a NAT box, so we accept packets from our network designated to the world, but reject any other forwarding attempts.</span>
+</div><div class="line"><a></a><span class="s1">-A FORWARD -i eth0 -s 192.168.0.0/22 ! -d 192.168.0.0/22 -j ACCEPT</span>
+</div><div class="line"><a></a><span class="s1">-A FORWARD -i eth0 ! -s 192.168.0.0/22 -d 192.168.0.0/22 -j ACCEPT</span>
+</div><div class="line"><a></a><span class="s1"># If there is a MTU mismatch between the NAT box and hosts behind it we want to allow ICMP for the MTU discovery</span>
+</div><div class="line"><a></a><span class="s1">-A FORWARD -i eth0 -p icmp -m icmp --icmp-type any -s 192.168.0.0/22 -d 192.168.0.0/22 -j ACCEPT</span>
+</div><div class="line"><a></a><span class="s1"># We may be interested in anything that is rejected in this chain, so let&#39;</span><span class="nt">s</span> <span class="nt">log</span> <span class="nt">it</span>
+</div><div class="line"><a></a><span class="nt">-A</span> <span class="nt">FORWARD</span> <span class="nt">-j</span> <span class="nt">LOG</span>
+</div><div class="line"><a></a>
+</div><div class="line"><a></a><span class="err">#</span> <span class="nt">We</span> <span class="nt">do</span> <span class="nt">not</span> <span class="nt">allow</span> <span class="nt">to</span> <span class="nt">forward</span> <span class="nt">anything</span> <span class="nt">else</span>
+</div><div class="line"><a></a><span class="nt">-A</span> <span class="nt">FORWARD</span> <span class="nt">-j</span> <span class="nt">REJECT</span> <span class="nt">--reject-with</span> <span class="nt">icmp-host-prohibited</span>
+</div><div class="line"><a></a><span class="nt">COMMIT</span>
+</div><div class="line"><a></a>
+</div><div class="line"><a></a><span class="o">*</span><span class="nt">nat</span>
+</div><div class="line"><a></a><span class="p">:</span><span class="nd">POSTROUTING</span> <span class="nt">ACCEPT</span> <span class="cp">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">0</span><span class="cp">]</span>
+</div><div class="line"><a></a><span class="nt">-A</span> <span class="nt">POSTROUTING</span> <span class="nt">-s</span> <span class="nt">192</span><span class="p">.</span><span class="nc">168</span><span class="p">.</span><span class="nc">0</span><span class="p">.</span><span class="nc">0</span><span class="o">/</span><span class="nt">22</span> <span class="o">!</span> <span class="nt">-d</span> <span class="nt">192</span><span class="p">.</span><span class="nc">168</span><span class="p">.</span><span class="nc">0</span><span class="p">.</span><span class="nc">0</span><span class="o">/</span><span class="nt">22</span> <span class="nt">-j</span> <span class="nt">MASQUERADE</span>
+</div><div class="line"><a></a><span class="nt">COMMIT</span></div></code></pre>
 <p>There are a few things to note:</p>
 <ul>
 <li>
@@ -318,51 +318,47 @@ installed on the NAT instance which is a gateway to the Internet):</p>
 </li>
 </ul>
 <p>So, here you have it a solid firewall ruleset consisting of just 13 rules.</p>
+				<footer>
+					<span><span class="contextual">Offloaded on </span><time datetime="2016-05-22T10:00:00+10:00">
+						<span class="month"><a href="/2016/05/" title="A link to the archives for May of 2016">May<span class="month full"></span></a></span>
+						<span class="day">22</span>
+						<span class="year"><a href="/2016/" title="A link to the archives for the year of 2016">2016</a></span>
+					</time></span>
+						<span class="contextual">into </span><span class="category"><a href="/category/linux/" title="A link to a collection of articles in the 'linux' category">linux</a></span>
+					<span class="contextual">and tagged with:</span>
 					<ul class="tags">
 						<li class="tag">
-							<div>
-								<a href="/tag/console/" class="tag name">console</a>
-							</div>
-							<a href="/tag/console/" class="tag count">7</a>
+							<span>
+								<a href="/tag/console/" rel="tag" title="A link to the collection tagged with 'console'" data-count="7" ><span>console</span></a>
+							</span>
 						</li>
 						<li class="tag">
-							<div>
-								<a href="/tag/howto/" class="tag name">howto</a>
-							</div>
-							<a href="/tag/howto/" class="tag count">4</a>
+							<span>
+								<a href="/tag/howto/" rel="tag" title="A link to the collection tagged with 'howto'" data-count="4" ><span>howto</span></a>
+							</span>
 						</li>
 						<li class="tag">
-							<div>
-								<a href="/tag/iptables/" class="tag name">iptables</a>
-							</div>
-							<a href="/tag/iptables/" class="tag count">1</a>
+							<span>
+								<a href="/tag/iptables/" rel="tag" title="A link to the collection tagged with 'iptables'" data-count="1" ><span>iptables</span></a>
+							</span>
 						</li>
 						<li class="tag">
-							<div>
-								<a href="/tag/linux/" class="tag name">linux</a>
-							</div>
-							<a href="/tag/linux/" class="tag count">2</a>
+							<span>
+								<a href="/tag/linux/" rel="tag" title="A link to the collection tagged with 'linux'" data-count="2" ><span>linux</span></a>
+							</span>
 						</li>
 						<li class="tag">
-							<div>
-								<a href="/tag/security/" class="tag name">security</a>
-							</div>
-							<a href="/tag/security/" class="tag count">1</a>
+							<span>
+								<a href="/tag/security/" rel="tag" title="A link to the collection tagged with 'security'" data-count="1" ><span>security</span></a>
+							</span>
 						</li>
-					</ul>
-					<footer>
-						Offloaded on
-						<time datetime="2016-05-22 10:00:00+10:00">Sun, 22/05/2016 at 10:00 (<a href="https://time.is/AEST" target="_blank" rel="noreferrer">AEST</a>)</time>
-						<span class="category-tag"><a href="/category/linux">linux</a></span>
-					</footer>				</article>
-			</div>
-		</div>
-		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-165060547-1"></script>
-		<script>
-			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments);}
-			gtag('js', new Date());
-			gtag('config', 'UA-165060547-1');
-		</script>
-	</body>
+						</ul>
+				</footer>
+			</article>
+		<footer>
+		</footer>
+	</main>
+	<footer>
+	</footer>
+</body>
 </html>

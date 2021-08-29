@@ -1,121 +1,122 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta http-equiv="Content-Security-Policy" content="	default-src 'self';object-src 'none';script-src 'self' https://www.googletagmanager.com/gtag/js 'sha256-TelA7VsuYAMqhOKGk7CHgJyuqSJdmqZEp+hn6PWVRwQ=' https://www.google-analytics.com/analytics.js;img-src 'self' data: https://www.google-analytics.com/r/collect https://www.google-analytics.com/collect https://stats.g.doubleclick.net/r/collect https://*/ads/ga-audiences https://www.googletagmanager.com/a;style-src 'self' 'sha256-fszvBX/J9dhPxFSJ5wUrq/Pvg6HrnTkWyshMZpaxSQY=' 'sha256-X63tsLxZ666HvGjs1YuRyp7HYdYx/wyORGXIpJm3m8c=' 'sha256-Fhm1+nBYn8lYU7dBqxHnbjm4L3ZuERi+2Yy3EfIK8GE=' 'sha256-+VXdhoFi9H+UeLqew9Z/G5N2QpjFHXKjtWmrRzMmPw0=';connect-src 'self' https://www.google-analytics.com/j/collect https://stats.g.doubleclick.net/j/collect; " />
-		<title>Mind Drops</title>
-		<script src="/theme/js/persistence.js" defer></script>
-		<meta charset="utf-8" />
-		<meta name="description" content="" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="theme-color" content="#535353" />
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="format-detection" content="telephone=no" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-		<meta name="apple-mobile-web-app-title" content="Mind Drops" />
-		<meta name="description" content="">
-		<link rel="apple-touch-icon" href="/theme/images/icons/mind-drops-192x192.png" />
-		<link rel="manifest" type="text/json" href="/manifest.json" />
-		<link rel="alternate" type="application/atom+xml" href="https://dmitry.khlebnikov.net/feeds/all.atom.xml" title="Mind Drops Full Atom Feed" />
-		<link rel="alternate" type="application/atom+xml" href="https://dmitry.khlebnikov.net/feeds/web-design.atom.xml" title="Mind Drops Categories Atom Feed" />
-		<link rel="dns-prefetch" href="https://www.google.com" />
-		<link rel="preconnect" href="https://www.google.com" crossorigin />
-		<link rel="dns-prefetch" href="https://www.google-analytics.com" />
-		<link rel="preconnect" href="https://www.google-analytics.com" crossorigin />
-		<link rel="dns-prefetch" href="https://www.googletagmanager.com">
-		<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
-		<link rel="dns-prefetch" href="https://stats.g.doubleclick.net" />
-		<link rel="preconnect" href="https://stats.g.doubleclick.net" crossorigin />
-		<link rel="preload" as="style" href="/theme/css/reset.css" />
-		<link rel="preload" as="style" href="/theme/css/fonts/Icons.css" />
-		<link rel="preload" as="style" href="/theme/css/fonts/Exo2.css" />
-		<link rel="preload" as="style" href="/theme/css/fonts/Oswald.css" />
-		<link rel="preload" as="style" href="/theme/css/fonts/DancingScript.css" />
-		<link rel="preload" as="style" href="/theme/css/fonts/FiraCode.css" />
-		<link rel="preload" as="style" href="/theme/css/base.css" />
-		<link rel="preload" as="script" href="/theme/js/persistence.js" />
-		<link rel="preload" as="script" href="/theme/js/visited.js" />
-		<link rel="preload" as="script" href="/theme/js/service.js" />
-		<link rel="preload" as="script" href="https://www.googletagmanager.com/gtag/js?id=UA-165060547-1" />
-		<link rel="icon" type="image/png" href="/images/galaxy.png" />
-		<script src="/theme/js/loader.js" defer></script>
+<head>
+	<title>Mind Drops :: assorted bits of wit</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1" />
+	<link rel="stylesheet" href="/theme/css/fonts/Icons.css" />
+	<link rel="stylesheet" href="/theme/css/fonts/Exo2.css" />
+	<link rel="stylesheet" href="/theme/css/fonts/Oswald.css" />
+	<link rel="stylesheet" href="/theme/css/fonts/DancingScript.css" />
+	<link rel="stylesheet" href="/theme/css/base.css" />
+	<link rel="stylesheet" href="/theme/css/pygments/default.css" />
+	<link rel="canonical" href="/2020/06/14/truly-responsive-pagination/" />
 
-		<meta name="keywords" content="html css design" />
-		<link rel="stylesheet" type="text/css" href="/theme/css/article.css" />
-		<link rel="canonical" href="/2020/06/14/truly-responsive-pagination/" />
-	</head>
-	<body>
+	<script type="application/ld+json">
+	{
+		"@context" : "https://schema.org",
+		"@type" : "Article",
+		"author": "(GalaxyMaster)",
+		"name" : "Truly Responsive Pagination",
+		"datePublished" : "2020-06-14T20:07:00+10:00",
+		"dateModified" : "2020-06-14T20:15:57+10:00",
+		"image" : "https://dmitry.khlebnikov.net/2020/06/14/truly-responsive-pagination/images/paginator-sketch.png",
+		"headline" : "headline",
+		"abstract": "abstract goes here",
+		"articleSection": "web design",
+		"interactionStatistic":
+		[
+			{
+				"@type": "InteractionCounter",
+				"interactionService":
+				{
+					"@type": "WebSite",
+					"name": "Twitter",
+					"url": "http://www.twitter.com"
+				},
+				"interactionType": "http://schema.org/ShareAction",
+				"userInteractionCount": "1203"
+			},
+			{
+				"@type": "InteractionCounter",
+				"interactionType": "http://schema.org/CommentAction",
+				"userInteractionCount": "78"
+			}
+		],
+		"discussionUrl": "https://github.com/"
+	}
+	</script>
+</head>
 
-		<input type="radio" name="menu-toggle" id="menu-toggle-full" value="full" tabindex="-1" checked />
-		<input type="radio" name="menu-toggle" id="menu-toggle-mini" value="mini" tabindex="-1" />
-		<input type="radio" name="menu-toggle" id="menu-toggle-hide" value="hide" tabindex="-1" />
-		<label for="menu-toggle-full" class="icon menu" role="radio" tabindex="0">Show the full menu panel on the screen</label>
-		<aside id="sidebar">
-			<label for="menu-toggle-mini" class="icon left-big" role="radio" tabindex="0">Show the minimised menu panel on the screen</label>
-			<label for="menu-toggle-hide" class="icon eye-off" role="radio" tabindex="0">Remove the menu panel off the screen</label>
-			<div class="title">Mind Drops</div>
-			<div id="logo" class="box shadow">
+<body>
+	<header>
+		<span class="flex">
+			<!--
+			<button class="menu-toggle" type="button" tabindex="0" aria-label="Menu Toggle"><div></div></button>
+			-->
+			<div class="menu-toggle" tabindex="0" aria-label="Menu Toggle"><div></div></div>
+			<a href="/" class="logo">
 				<picture>
-					<source srcset="/images/galaxy.png.webp" type="image/webp">
-					<img src="/images/galaxy.png" alt="Logo">
+					<source srcset="/images/logo.svg" type="image/svg+xml">
+					<source srcset="/images/.svg" type="image/svg+xml">
+					<source srcset="/images/.webp" type="image/webp">
+					<img src="/images/" alt="Logo">
 				</picture>
-			</div>
-
-			<!-- Search -->
-			<section class="box search">
-				<form name="google search" class="icon search" method="get" action="/search">
-					<label for="search" class="offscreen">Search</label>
-					<input id="search" type="text" class="text" name="q" placeholder="Search" />
-				</form>
-			</section>
-
+				<span class="title">Mind Drops</span>
+			</a>
 			<nav>
 				<ul>
-					<li>
-						<a class="icon home" href="/">Home</a>
-					</li>
-					<li>
-						<a class="icon user" href="/about">About</a>
-					</li>
-					<li>
-						<a class="icon phone" href="/contact">Contact</a>
-					</li>
+					<li><a class="icon home" href="/">Home</a></li>
+					<li><a class="icon user" href="/about">About</a></li>
+					<li><a class="icon phone" href="/contact">Contact</a></li>
 				</ul>
 			</nav>
-
-			<!-- Text -->
-			<section class="box text-style1">
-				<div class="inner">
-					<p>
-						<strong>Mind Drops:</strong>: A place to unload all these assorted bits.
-					</p>
+			<form id="search" role="search" autocomplete="off" method="get" action="/search">
+				<label for="q" class="icon search">Search</label>
+				<input type="text" name="q" id="q" placeholder="Search..." />
+				<div class="help" aria-label="Search ">
+					<dl>
+						<dt>"search terms"</dt><dd>exact-match</dd>
+						<dt>term1 | term2</dt><dd>term1 or term2</dd>
+						<dt>term1 * term2</dt><dd>term1 followed by term2</dd>
+						<dt>-term</dt><dd>exclude term</dd>
+						<dt>(search terms)</dt><dd>groups terms</dd>
+						<dt>ext:pdf</dt><dd>file type</dd>
+					</dl>
 				</div>
-			</section>
-
-			<!-- Copyright -->
-			<ul id="copyright">
-				<li>&copy; Openwall Pty Ltd 2020 </li>
-				<li><a href="/legal/terms-of-service">Terms of Service</a></li>
+			</form>
+			<ul class="taskbar">
+				<li class="search-toggle"><label for="q" class="icon search offscreen" title="Toggle the search bar">Search</label></li>
+				<!-- Not Implemented Yet
+				<li><a href="#bug-report" class="icon bug offscreen" title="Report a spotted bug on the page">Report a bug</a></li>
+				<li><a href="#preferences" class="icon cog offscreen" title="Configure personal preferences">Preferences</a></li>
+				 -->
 			</ul>
-		</aside>
-
-		<!-- Content -->
-		<div id="content">
-			<div class="inner">
-				<article id="truly-responsive-pagination" class="box post">
-					<header>
-						<h1><a name="top">Truly Responsive Pagination</a></h1>
-					</header>
-					<div class="info">
-						<span class="date">
-							<span class="day">14</span>
-							<span class="month"><a href="/2020/06/">Jun<span class="month full">e</span></a></span>
-							<span class="year"><a href="/2020/">2020</a></span>
-						</span>
-						<ul class="stats">
-							<li><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="icon twitter" aria-label="Twitter" data-tweet-id="None">0</a></li>
-						</ul>
-					</div>
-					<p>Searching the web for an example of a fully responsive pagination widget I
+		</span>
+	</header>
+	<aside class="modal">
+		<div id="bug-report">
+			<a href="#" class="close"></a>
+			<div class="content">
+				<h1>Bug report</h1>
+				<form id="bug-report-form" autocomplete="off">
+					<textarea id="bug-report-body" name="bug-report-body">
+					</textarea>
+					<input type="submit" value="Submit">
+				</form>
+			</div>
+		</div>
+		<div id="preferences">
+		</div>
+	</aside>
+	<main>
+			<article id="truly-responsive-pagination">
+				<header>
+					<h1><a href="/2020/06/14/truly-responsive-pagination/" rel="bookmark" title="Permalink to Truly Responsive Pagination">Truly Responsive Pagination</a></h1>
+				</header>
+				<aside>
+				</aside>
+				<p>Searching the web for an example of a fully responsive pagination widget I
 found that either people consider &ldquo;responsive&rdquo; to be something else or that it
 is a non-trivial problem to solve.  In any case, I decided to have a crack at
 it myself.</p>
@@ -128,23 +129,22 @@ be omitted if there is no space for them.</p>
 ended up with.</p>
 <p>My starting point was pretty simple &ndash; I had the following HTML markup
 structure that was representing the page numbers in a pagination widget:</p>
-<pre class="highlight"><code class="language-html"><div class="lines"><a></a>&lt;span class=&quot;paginator&quot;&gt;
-</div><div class="lines"><a></a>    &lt;ul&gt;
-</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&amp;lt;&lt;/a&gt;&lt;/li&gt;
-</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;1&lt;/a&gt;&lt;/li&gt;
-</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;2&lt;/a&gt;&lt;/li&gt;
-</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;3&lt;/a&gt;&lt;/li&gt;
-</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;4&lt;/a&gt;&lt;/li&gt;
-</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;5&lt;/a&gt;&lt;/li&gt;
-</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;6&lt;/a&gt;&lt;/li&gt;
-</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;7&lt;/a&gt;&lt;/li&gt;
-</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;8&lt;/a&gt;&lt;/li&gt;
-</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;9&lt;/a&gt;&lt;/li&gt;
-</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;10&lt;/a&gt;&lt;/li&gt;
-</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&amp;gt;&lt;/a&gt;&lt;/li&gt;
-</div><div class="lines"><a></a>    &lt;/ul&gt;
-</div><div class="lines"><a></a>&lt;/span&gt;</div></code></pre>
-
+<pre class="highlight"><code class="language-html"><div class="line"><a></a><span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;paginator&quot;</span><span class="p">&gt;</span>
+</div><div class="line"><a></a>    <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+</div><div class="line"><a></a>        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span><span class="ni">&amp;lt;</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</div><div class="line"><a></a>        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>1<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</div><div class="line"><a></a>        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>2<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</div><div class="line"><a></a>        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>3<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</div><div class="line"><a></a>        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>4<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</div><div class="line"><a></a>        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>5<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</div><div class="line"><a></a>        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>6<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</div><div class="line"><a></a>        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>7<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</div><div class="line"><a></a>        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>8<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</div><div class="line"><a></a>        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>9<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</div><div class="line"><a></a>        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>10<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</div><div class="line"><a></a>        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span><span class="ni">&amp;gt;</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</div><div class="line"><a></a>    <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+</div><div class="line"><a></a><span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span></div></code></pre>
 <p>The goal was to create a fully responsive widget using pure CSS and HTML and to
 try to avoid messing up the HTML structure unnecessarily, since I needed to
 preserve the &ldquo;cleanness&rdquo; of navigation for screen readers (i.e. accessibility
@@ -171,69 +171,67 @@ three logically separate components: a part before the selected page number (I
 call it &ldquo;head&rdquo;), a part containing the selected page number (I call it
 &ldquo;middle&rdquo;), and a part following the selected page number (I call it &ldquo;tail&rdquo;).
 Hence, my HTML markup became:</p>
-<pre class="highlight"><code class="language-html"><div class="lines"><a></a>&lt;span class=&quot;paginator&quot;&gt;
-</div><div class="lines"><a></a>    &lt;ul class=&quot;head&quot;&gt;
-</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&amp;lt;&lt;/a&gt;&lt;/li&gt;
-</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;1&lt;/a&gt;&lt;/li&gt;
-</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;2&lt;/a&gt;&lt;/li&gt;
-</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;3&lt;/a&gt;&lt;/li&gt;
-</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;4&lt;/a&gt;&lt;/li&gt;
-</div><div class="lines"><a></a>    &lt;/ul&gt;
-</div><div class="lines"><a></a>    &lt;ul class=&quot;middle&quot;&gt;
-</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;5&lt;/a&gt;&lt;/li&gt;
-</div><div class="lines"><a></a>    &lt;/ul&gt;
-</div><div class="lines"><a></a>    &lt;ul class=&quot;tail&quot;&gt;
-</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;6&lt;/a&gt;&lt;/li&gt;
-</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;7&lt;/a&gt;&lt;/li&gt;
-</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;8&lt;/a&gt;&lt;/li&gt;
-</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;9&lt;/a&gt;&lt;/li&gt;
-</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;10&lt;/a&gt;&lt;/li&gt;
-</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&amp;gt;&lt;/a&gt;&lt;/li&gt;
-</div><div class="lines"><a></a>    &lt;/ul&gt;
-</div><div class="lines"><a></a>&lt;/span&gt;</div></code></pre>
-
+<pre class="highlight"><code class="language-html"><div class="line"><a></a><span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;paginator&quot;</span><span class="p">&gt;</span>
+</div><div class="line"><a></a>    <span class="p">&lt;</span><span class="nt">ul</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;head&quot;</span><span class="p">&gt;</span>
+</div><div class="line"><a></a>        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span><span class="ni">&amp;lt;</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</div><div class="line"><a></a>        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>1<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</div><div class="line"><a></a>        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>2<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</div><div class="line"><a></a>        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>3<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</div><div class="line"><a></a>        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>4<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</div><div class="line"><a></a>    <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+</div><div class="line"><a></a>    <span class="p">&lt;</span><span class="nt">ul</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;middle&quot;</span><span class="p">&gt;</span>
+</div><div class="line"><a></a>        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>5<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</div><div class="line"><a></a>    <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+</div><div class="line"><a></a>    <span class="p">&lt;</span><span class="nt">ul</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;tail&quot;</span><span class="p">&gt;</span>
+</div><div class="line"><a></a>        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>6<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</div><div class="line"><a></a>        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>7<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</div><div class="line"><a></a>        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>8<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</div><div class="line"><a></a>        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>9<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</div><div class="line"><a></a>        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>10<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</div><div class="line"><a></a>        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span><span class="ni">&amp;gt;</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</div><div class="line"><a></a>    <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+</div><div class="line"><a></a><span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span></div></code></pre>
 <p>Initially, I just laid out the lists in a line just to see how it looks and
 whether I like the mechanics of it, so I started with the following style
 definitions:</p>
-<pre class="highlight"><code class="language-css"><div class="lines"><a></a>.paginator {
-</div><div class="lines"><a></a>    /* width: 50%; */
-</div><div class="lines"><a></a>    /* margin: 0 auto; */
-</div><div class="lines"><a></a>    display: flex;
-</div><div class="lines"><a></a>    white-space: nowrap;
-</div><div class="lines"><a></a>    overflow: hidden;
-</div><div class="lines"><a></a>    min-width: 15em;    /* 5 items 3em each */
-</div><div class="lines"><a></a>}
-</div><div class="lines"><a></a>
-</div><div class="lines"><a></a>ul {
-</div><div class="lines"><a></a>    display: flex;
-</div><div class="lines"><a></a>    position: relative;
-</div><div class="lines"><a></a>    flex-flow: row wrap;
-</div><div class="lines"><a></a>    list-style: none;
-</div><div class="lines"><a></a>    margin: 0;
-</div><div class="lines"><a></a>    padding: 0;
-</div><div class="lines"><a></a>    line-height: 1.2;
-</div><div class="lines"><a></a>    height: 3.2em;
-</div><div class="lines"><a></a>    overflow: hidden;
-</div><div class="lines"><a></a>    min-width: 6em;
-</div><div class="lines"><a></a>}
-</div><div class="lines"><a></a>
-</div><div class="lines"><a></a>ul li {
-</div><div class="lines"><a></a>    display: block;
-</div><div class="lines"><a></a>    width: 3em;
-</div><div class="lines"><a></a>    height: 3em;
-</div><div class="lines"><a></a>    line-height: 3;
-</div><div class="lines"><a></a>}
-</div><div class="lines"><a></a>
-</div><div class="lines"><a></a>ul li a {
-</div><div class="lines"><a></a>    display: block;
-</div><div class="lines"><a></a>    text-align: center;
-</div><div class="lines"><a></a>    text-decoration: none;
-</div><div class="lines"><a></a>}
-</div><div class="lines"><a></a>
-</div><div class="lines"><a></a>ul.middle {
-</div><div class="lines"><a></a>    min-width: 3em;
-</div><div class="lines"><a></a>}</div></code></pre>
-
+<pre class="highlight"><code class="language-css"><div class="line"><a></a><span class="p">.</span><span class="nc">paginator</span> <span class="p">{</span>
+</div><div class="line"><a></a>    <span class="c">/* width: 50%; */</span>
+</div><div class="line"><a></a>    <span class="c">/* margin: 0 auto; */</span>
+</div><div class="line"><a></a>    <span class="k">display</span><span class="p">:</span> <span class="kc">flex</span><span class="p">;</span>
+</div><div class="line"><a></a>    <span class="k">white-space</span><span class="p">:</span> <span class="kc">nowrap</span><span class="p">;</span>
+</div><div class="line"><a></a>    <span class="k">overflow</span><span class="p">:</span> <span class="kc">hidden</span><span class="p">;</span>
+</div><div class="line"><a></a>    <span class="k">min-width</span><span class="p">:</span> <span class="mi">15</span><span class="kt">em</span><span class="p">;</span>    <span class="c">/* 5 items 3em each */</span>
+</div><div class="line"><a></a><span class="p">}</span>
+</div><div class="line"><a></a>
+</div><div class="line"><a></a><span class="nt">ul</span> <span class="p">{</span>
+</div><div class="line"><a></a>    <span class="k">display</span><span class="p">:</span> <span class="kc">flex</span><span class="p">;</span>
+</div><div class="line"><a></a>    <span class="k">position</span><span class="p">:</span> <span class="kc">relative</span><span class="p">;</span>
+</div><div class="line"><a></a>    <span class="k">flex-flow</span><span class="p">:</span> <span class="kc">row</span> <span class="kc">wrap</span><span class="p">;</span>
+</div><div class="line"><a></a>    <span class="k">list-style</span><span class="p">:</span> <span class="kc">none</span><span class="p">;</span>
+</div><div class="line"><a></a>    <span class="k">margin</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+</div><div class="line"><a></a>    <span class="k">padding</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+</div><div class="line"><a></a>    <span class="k">line-height</span><span class="p">:</span> <span class="mf">1.2</span><span class="p">;</span>
+</div><div class="line"><a></a>    <span class="k">height</span><span class="p">:</span> <span class="mf">3.2</span><span class="kt">em</span><span class="p">;</span>
+</div><div class="line"><a></a>    <span class="k">overflow</span><span class="p">:</span> <span class="kc">hidden</span><span class="p">;</span>
+</div><div class="line"><a></a>    <span class="k">min-width</span><span class="p">:</span> <span class="mi">6</span><span class="kt">em</span><span class="p">;</span>
+</div><div class="line"><a></a><span class="p">}</span>
+</div><div class="line"><a></a>
+</div><div class="line"><a></a><span class="nt">ul</span> <span class="nt">li</span> <span class="p">{</span>
+</div><div class="line"><a></a>    <span class="k">display</span><span class="p">:</span> <span class="kc">block</span><span class="p">;</span>
+</div><div class="line"><a></a>    <span class="k">width</span><span class="p">:</span> <span class="mi">3</span><span class="kt">em</span><span class="p">;</span>
+</div><div class="line"><a></a>    <span class="k">height</span><span class="p">:</span> <span class="mi">3</span><span class="kt">em</span><span class="p">;</span>
+</div><div class="line"><a></a>    <span class="k">line-height</span><span class="p">:</span> <span class="mi">3</span><span class="p">;</span>
+</div><div class="line"><a></a><span class="p">}</span>
+</div><div class="line"><a></a>
+</div><div class="line"><a></a><span class="nt">ul</span> <span class="nt">li</span> <span class="nt">a</span> <span class="p">{</span>
+</div><div class="line"><a></a>    <span class="k">display</span><span class="p">:</span> <span class="kc">block</span><span class="p">;</span>
+</div><div class="line"><a></a>    <span class="k">text-align</span><span class="p">:</span> <span class="kc">center</span><span class="p">;</span>
+</div><div class="line"><a></a>    <span class="k">text-decoration</span><span class="p">:</span> <span class="kc">none</span><span class="p">;</span>
+</div><div class="line"><a></a><span class="p">}</span>
+</div><div class="line"><a></a>
+</div><div class="line"><a></a><span class="nt">ul</span><span class="p">.</span><span class="nc">middle</span> <span class="p">{</span>
+</div><div class="line"><a></a>    <span class="k">min-width</span><span class="p">:</span> <span class="mi">3</span><span class="kt">em</span><span class="p">;</span>
+</div><div class="line"><a></a><span class="p">}</span></div></code></pre>
 <p>The above produced the following result (the example is wrapped in a resizable
 <code>&lt;div&gt;</code>, so if you are using a browser that supports it, like Chrome, you
 should be able to play with it right away):</p>
@@ -326,21 +324,19 @@ control which side of the row is used for wrapping.  However, if we adjust our
 HTML markup and leverage not so often used <code>row-reverse</code> value of the flexbox,
 then achieve the desired effect.</p>
 <p>So, in the HTML markup I reversed the &ldquo;tail&rdquo; list:</p>
-<pre class="highlight"><code class="language-html"><div class="lines"><a></a>    &lt;ul class=&quot;tail&quot;&gt;
-</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&amp;gt;&lt;/a&gt;&lt;/li&gt;
-</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;10&lt;/a&gt;&lt;/li&gt;
-</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;9&lt;/a&gt;&lt;/li&gt;
-</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;8&lt;/a&gt;&lt;/li&gt;
-</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;7&lt;/a&gt;&lt;/li&gt;
-</div><div class="lines"><a></a>        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;6&lt;/a&gt;&lt;/li&gt;
-</div><div class="lines"><a></a>    &lt;/ul&gt;</div></code></pre>
-
+<pre class="highlight"><code class="language-html"><div class="line"><a></a><span class="p">&lt;</span><span class="nt">ul</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;tail&quot;</span><span class="p">&gt;</span>
+</div><div class="line"><a></a>        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span><span class="ni">&amp;gt;</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</div><div class="line"><a></a>        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>10<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</div><div class="line"><a></a>        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>9<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</div><div class="line"><a></a>        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>8<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</div><div class="line"><a></a>        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>7<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</div><div class="line"><a></a>        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>6<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</div><div class="line"><a></a>    <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span></div></code></pre>
 <p>and I adjusted the style of the &ldquo;tail&rdquo; list to apply <code>row-reverse</code> (which basically
 visually presents the list in the reverse order):</p>
-<pre class="highlight"><code class="language-css"><div class="lines"><a></a>ul.tail {
-</div><div class="lines"><a></a>    flex-flow: row-reverse wrap;
-</div><div class="lines"><a></a>}</div></code></pre>
-
+<pre class="highlight"><code class="language-css"><div class="line"><a></a><span class="nt">ul</span><span class="p">.</span><span class="nc">tail</span> <span class="p">{</span>
+</div><div class="line"><a></a>    <span class="k">flex-flow</span><span class="p">:</span> <span class="kc">row-reverse</span> <span class="kc">wrap</span><span class="p">;</span>
+</div><div class="line"><a></a><span class="p">}</span></div></code></pre>
 <p>With the above changes applied the result looks much more closer to what we
 want:</p>
 <div class="demo2 resizable">
@@ -414,17 +410,16 @@ want:</p>
 <p>Now, to tackle with the visual guidance for the omitted page numbers we can do
 something like the following: we can display dots in space when the page number
 is being wrapped.  To do so we could use pseudo-elements for the &ldquo;middle&rdquo; list:</p>
-<pre class="highlight"><code class="language-css"><div class="lines"><a></a>ul.middle::before {
-</div><div class="lines"><a></a>    content: '';
-</div><div class="lines"><a></a>    width: 300%;
-</div><div class="lines"><a></a>    height: 1em;
-</div><div class="lines"><a></a>    position: absolute;
-</div><div class="lines"><a></a>    z-index: -1;
-</div><div class="lines"><a></a>    border-top: dotted;
-</div><div class="lines"><a></a>    left: -100%;
-</div><div class="lines"><a></a>    top: 1.5em;
-</div><div class="lines"><a></a>}</div></code></pre>
-
+<pre class="highlight"><code class="language-css"><div class="line"><a></a><span class="nt">ul</span><span class="p">.</span><span class="nc">middle</span><span class="p">::</span><span class="nd">before</span> <span class="p">{</span>
+</div><div class="line"><a></a>    <span class="k">content</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</div><div class="line"><a></a>    <span class="k">width</span><span class="p">:</span> <span class="mi">300</span><span class="kt">%</span><span class="p">;</span>
+</div><div class="line"><a></a>    <span class="k">height</span><span class="p">:</span> <span class="mi">1</span><span class="kt">em</span><span class="p">;</span>
+</div><div class="line"><a></a>    <span class="k">position</span><span class="p">:</span> <span class="kc">absolute</span><span class="p">;</span>
+</div><div class="line"><a></a>    <span class="k">z-index</span><span class="p">:</span> <span class="mi">-1</span><span class="p">;</span>
+</div><div class="line"><a></a>    <span class="k">border-top</span><span class="p">:</span> <span class="kc">dotted</span><span class="p">;</span>
+</div><div class="line"><a></a>    <span class="k">left</span><span class="p">:</span> <span class="mi">-100</span><span class="kt">%</span><span class="p">;</span>
+</div><div class="line"><a></a>    <span class="k">top</span><span class="p">:</span> <span class="mf">1.5</span><span class="kt">em</span><span class="p">;</span>
+</div><div class="line"><a></a><span class="p">}</span></div></code></pre>
 <p>A few things to note: we are creating a pseudo-element which is three times
 wider than its parent, we position it absolutely, shift it 1/3 to the left and
 half way down.  With the only border defined to be the top border we are
@@ -432,10 +427,9 @@ getting a dotted line that goes through the middle of our &ldquo;middle&rdquo; l
 <p>However, to make this work we also need to ensure that the border we created
 can extend beyond the box defined by the &ldquo;middle&rdquo; list, hence we need to set
 <code>overflow</code> to <code>visible</code> and let the border overflow the boundaries:</p>
-<pre class="highlight"><code class="language-css"><div class="lines"><a></a>ul.middle {
-</div><div class="lines"><a></a>    overflow: visible;  /* show the background dot line */
-</div><div class="lines"><a></a>}</div></code></pre>
-
+<pre class="highlight"><code class="language-css"><div class="line"><a></a><span class="nt">ul</span><span class="p">.</span><span class="nc">middle</span> <span class="p">{</span>
+</div><div class="line"><a></a>    <span class="k">overflow</span><span class="p">:</span> <span class="kc">visible</span><span class="p">;</span>  <span class="c">/* show the background dot line */</span>
+</div><div class="line"><a></a><span class="p">}</span></div></code></pre>
 <p>Finally, some additional cosmetic touches are required:</p>
 <ul>
 <li>the list items have transparent background and the border line is visible
@@ -451,16 +445,15 @@ can extend beyond the box defined by the &ldquo;middle&rdquo; list, hence we nee
     can do this by playing with <code>min-width</code> for the &ldquo;head&rdquo; and &ldquo;tail&rdquo; lists.</li>
 </ul>
 <p>The above translates to the following styling rules:</p>
-<pre class="highlight"><code class="language-css"><div class="lines"><a></a>ul li {
-</div><div class="lines"><a></a>    z-index: 1;
-</div><div class="lines"><a></a>    background: whitesmoke;
-</div><div class="lines"><a></a>}
-</div><div class="lines"><a></a>
-</div><div class="lines"><a></a>ul.head,
-</div><div class="lines"><a></a>ul.tail {
-</div><div class="lines"><a></a>    min-width: 6.5em;
-</div><div class="lines"><a></a>}</div></code></pre>
-
+<pre class="highlight"><code class="language-css"><div class="line"><a></a><span class="nt">ul</span> <span class="nt">li</span> <span class="p">{</span>
+</div><div class="line"><a></a>    <span class="k">z-index</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span>
+</div><div class="line"><a></a>    <span class="k">background</span><span class="p">:</span> <span class="kc">whitesmoke</span><span class="p">;</span>
+</div><div class="line"><a></a><span class="p">}</span>
+</div><div class="line"><a></a>
+</div><div class="line"><a></a><span class="nt">ul</span><span class="p">.</span><span class="nc">head</span><span class="o">,</span>
+</div><div class="line"><a></a><span class="nt">ul</span><span class="p">.</span><span class="nc">tail</span> <span class="p">{</span>
+</div><div class="line"><a></a>    <span class="k">min-width</span><span class="p">:</span> <span class="mf">6.5</span><span class="kt">em</span><span class="p">;</span>
+</div><div class="line"><a></a><span class="p">}</span></div></code></pre>
 <p>OK, it is time to see the result of all these changes:</p>
 <div class="demo3 resizable">
 <style>
@@ -570,39 +563,37 @@ not want to go that route for my blog.  Most likely, since my blog is
 statically generated I will address it using the logic of the generator itself.</p>
 <p>Still, I think the techniques I demonstrated here may be quite useful to some
 people who are designing pure HTML and CSS adaptive widgets.</p>
+				<footer>
+					<span><span class="contextual">Offloaded on </span><time datetime="2020-06-14T20:07:00+10:00">
+						<span class="month"><a href="/2020/06/" title="A link to the archives for June of 2020">Jun<span class="month full">e</span></a></span>
+						<span class="day">14</span>
+						<span class="year"><a href="/2020/" title="A link to the archives for the year of 2020">2020</a></span>
+					</time></span>
+						<span class="contextual">into </span><span class="category"><a href="/category/web-design/" title="A link to a collection of articles in the 'web design' category">web design</a></span>
+					<span class="contextual">and tagged with:</span>
 					<ul class="tags">
 						<li class="tag">
-							<div>
-								<a href="/tag/html/" class="tag name">html</a>
-							</div>
-							<a href="/tag/html/" class="tag count">2</a>
+							<span>
+								<a href="/tag/html/" rel="tag" title="A link to the collection tagged with 'html'" data-count="2" ><span>html</span></a>
+							</span>
 						</li>
 						<li class="tag">
-							<div>
-								<a href="/tag/css/" class="tag name">css</a>
-							</div>
-							<a href="/tag/css/" class="tag count">2</a>
+							<span>
+								<a href="/tag/css/" rel="tag" title="A link to the collection tagged with 'css'" data-count="2" ><span>css</span></a>
+							</span>
 						</li>
 						<li class="tag">
-							<div>
-								<a href="/tag/design/" class="tag name">design</a>
-							</div>
-							<a href="/tag/design/" class="tag count">2</a>
+							<span>
+								<a href="/tag/design/" rel="tag" title="A link to the collection tagged with 'design'" data-count="2" ><span>design</span></a>
+							</span>
 						</li>
-					</ul>
-					<footer>
-						Offloaded on
-						<time datetime="2020-06-14 20:07:00+10:00">Sun, 14/06/2020 at 20:07 (<a href="https://time.is/AEST" target="_blank" rel="noreferrer">AEST</a>)</time>
-						<span class="category-tag"><a href="/category/web-design">web design</a></span>
-					</footer>				</article>
-			</div>
-		</div>
-		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-165060547-1"></script>
-		<script>
-			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments);}
-			gtag('js', new Date());
-			gtag('config', 'UA-165060547-1');
-		</script>
-	</body>
+						</ul>
+				</footer>
+			</article>
+		<footer>
+		</footer>
+	</main>
+	<footer>
+	</footer>
+</body>
 </html>

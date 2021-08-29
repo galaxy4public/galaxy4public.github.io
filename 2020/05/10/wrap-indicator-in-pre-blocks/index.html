@@ -1,121 +1,122 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta http-equiv="Content-Security-Policy" content="	default-src 'self';object-src 'none';script-src 'self' https://www.googletagmanager.com/gtag/js 'sha256-TelA7VsuYAMqhOKGk7CHgJyuqSJdmqZEp+hn6PWVRwQ=' https://www.google-analytics.com/analytics.js;img-src 'self' data: https://www.google-analytics.com/r/collect https://www.google-analytics.com/collect https://stats.g.doubleclick.net/r/collect https://*/ads/ga-audiences https://www.googletagmanager.com/a data:;style-src 'self' 'sha256-fszvBX/J9dhPxFSJ5wUrq/Pvg6HrnTkWyshMZpaxSQY=' 'sha256-Fvx9M61e9e0u1bU/b4F/gvva+rsq9KRBqq6VvEBeC/A=' 'sha256-X9/7LgWmEw7NlPLxcc3SDr7+BAy0aPPPvaAWDaWFSg8=' 'sha256-qwQxpLFpY1RSbHcY3MelF07N45deGrhGoFCZJVyu4rQ=' 'sha256-Tmgyaho1GhddVxwLgWj7bKT7jjjBrIZQ6I8U2GvttJI=' 'sha256-8tl3rbL69gF7zbbflFNLOMNv50Jvvc6RFxYvwhDA5JA=' 'sha256-jgSB52jMr0ri6YSE+tSQ/V0+b0I9gAOCsZPJBDmfa/8=';connect-src 'self' https://www.google-analytics.com/j/collect https://stats.g.doubleclick.net/j/collect; " />
-		<title>Mind Drops</title>
-		<script src="/theme/js/persistence.js" defer></script>
-		<meta charset="utf-8" />
-		<meta name="description" content="" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="theme-color" content="#535353" />
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="format-detection" content="telephone=no" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-		<meta name="apple-mobile-web-app-title" content="Mind Drops" />
-		<meta name="description" content="">
-		<link rel="apple-touch-icon" href="/theme/images/icons/mind-drops-192x192.png" />
-		<link rel="manifest" type="text/json" href="/manifest.json" />
-		<link rel="alternate" type="application/atom+xml" href="https://dmitry.khlebnikov.net/feeds/all.atom.xml" title="Mind Drops Full Atom Feed" />
-		<link rel="alternate" type="application/atom+xml" href="https://dmitry.khlebnikov.net/feeds/web-design.atom.xml" title="Mind Drops Categories Atom Feed" />
-		<link rel="dns-prefetch" href="https://www.google.com" />
-		<link rel="preconnect" href="https://www.google.com" crossorigin />
-		<link rel="dns-prefetch" href="https://www.google-analytics.com" />
-		<link rel="preconnect" href="https://www.google-analytics.com" crossorigin />
-		<link rel="dns-prefetch" href="https://www.googletagmanager.com">
-		<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
-		<link rel="dns-prefetch" href="https://stats.g.doubleclick.net" />
-		<link rel="preconnect" href="https://stats.g.doubleclick.net" crossorigin />
-		<link rel="preload" as="style" href="/theme/css/reset.css" />
-		<link rel="preload" as="style" href="/theme/css/fonts/Icons.css" />
-		<link rel="preload" as="style" href="/theme/css/fonts/Exo2.css" />
-		<link rel="preload" as="style" href="/theme/css/fonts/Oswald.css" />
-		<link rel="preload" as="style" href="/theme/css/fonts/DancingScript.css" />
-		<link rel="preload" as="style" href="/theme/css/fonts/FiraCode.css" />
-		<link rel="preload" as="style" href="/theme/css/base.css" />
-		<link rel="preload" as="script" href="/theme/js/persistence.js" />
-		<link rel="preload" as="script" href="/theme/js/visited.js" />
-		<link rel="preload" as="script" href="/theme/js/service.js" />
-		<link rel="preload" as="script" href="https://www.googletagmanager.com/gtag/js?id=UA-165060547-1" />
-		<link rel="icon" type="image/png" href="/images/galaxy.png" />
-		<script src="/theme/js/loader.js" defer></script>
+<head>
+	<title>Mind Drops :: assorted bits of wit</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1" />
+	<link rel="stylesheet" href="/theme/css/fonts/Icons.css" />
+	<link rel="stylesheet" href="/theme/css/fonts/Exo2.css" />
+	<link rel="stylesheet" href="/theme/css/fonts/Oswald.css" />
+	<link rel="stylesheet" href="/theme/css/fonts/DancingScript.css" />
+	<link rel="stylesheet" href="/theme/css/base.css" />
+	<link rel="stylesheet" href="/theme/css/pygments/default.css" />
+	<link rel="canonical" href="/2020/05/10/wrap-indicator-in-pre-blocks/" />
 
-		<meta name="keywords" content="html css design" />
-		<link rel="stylesheet" type="text/css" href="/theme/css/article.css" />
-		<link rel="canonical" href="/2020/05/10/wrap-indicator-in-pre-blocks/" />
-	</head>
-	<body>
+	<script type="application/ld+json">
+	{
+		"@context" : "https://schema.org",
+		"@type" : "Article",
+		"author": "(GalaxyMaster)",
+		"name" : "Wrap indicator in &lt;pre&gt; blocks",
+		"datePublished" : "2020-05-10T21:00:00+10:00",
+		"dateModified" : "2020-05-18T04:53:28+10:00",
+		"image" : "https://dmitry.khlebnikov.net/2020/06/14/truly-responsive-pagination/images/paginator-sketch.png",
+		"headline" : "headline",
+		"abstract": "abstract goes here",
+		"articleSection": "web design",
+		"interactionStatistic":
+		[
+			{
+				"@type": "InteractionCounter",
+				"interactionService":
+				{
+					"@type": "WebSite",
+					"name": "Twitter",
+					"url": "http://www.twitter.com"
+				},
+				"interactionType": "http://schema.org/ShareAction",
+				"userInteractionCount": "1203"
+			},
+			{
+				"@type": "InteractionCounter",
+				"interactionType": "http://schema.org/CommentAction",
+				"userInteractionCount": "78"
+			}
+		],
+		"discussionUrl": "https://github.com/"
+	}
+	</script>
+</head>
 
-		<input type="radio" name="menu-toggle" id="menu-toggle-full" value="full" tabindex="-1" checked />
-		<input type="radio" name="menu-toggle" id="menu-toggle-mini" value="mini" tabindex="-1" />
-		<input type="radio" name="menu-toggle" id="menu-toggle-hide" value="hide" tabindex="-1" />
-		<label for="menu-toggle-full" class="icon menu" role="radio" tabindex="0">Show the full menu panel on the screen</label>
-		<aside id="sidebar">
-			<label for="menu-toggle-mini" class="icon left-big" role="radio" tabindex="0">Show the minimised menu panel on the screen</label>
-			<label for="menu-toggle-hide" class="icon eye-off" role="radio" tabindex="0">Remove the menu panel off the screen</label>
-			<div class="title">Mind Drops</div>
-			<div id="logo" class="box shadow">
+<body>
+	<header>
+		<span class="flex">
+			<!--
+			<button class="menu-toggle" type="button" tabindex="0" aria-label="Menu Toggle"><div></div></button>
+			-->
+			<div class="menu-toggle" tabindex="0" aria-label="Menu Toggle"><div></div></div>
+			<a href="/" class="logo">
 				<picture>
-					<source srcset="/images/galaxy.png.webp" type="image/webp">
-					<img src="/images/galaxy.png" alt="Logo">
+					<source srcset="/images/logo.svg" type="image/svg+xml">
+					<source srcset="/images/.svg" type="image/svg+xml">
+					<source srcset="/images/.webp" type="image/webp">
+					<img src="/images/" alt="Logo">
 				</picture>
-			</div>
-
-			<!-- Search -->
-			<section class="box search">
-				<form name="google search" class="icon search" method="get" action="/search">
-					<label for="search" class="offscreen">Search</label>
-					<input id="search" type="text" class="text" name="q" placeholder="Search" />
-				</form>
-			</section>
-
+				<span class="title">Mind Drops</span>
+			</a>
 			<nav>
 				<ul>
-					<li>
-						<a class="icon home" href="/">Home</a>
-					</li>
-					<li>
-						<a class="icon user" href="/about">About</a>
-					</li>
-					<li>
-						<a class="icon phone" href="/contact">Contact</a>
-					</li>
+					<li><a class="icon home" href="/">Home</a></li>
+					<li><a class="icon user" href="/about">About</a></li>
+					<li><a class="icon phone" href="/contact">Contact</a></li>
 				</ul>
 			</nav>
-
-			<!-- Text -->
-			<section class="box text-style1">
-				<div class="inner">
-					<p>
-						<strong>Mind Drops:</strong>: A place to unload all these assorted bits.
-					</p>
+			<form id="search" role="search" autocomplete="off" method="get" action="/search">
+				<label for="q" class="icon search">Search</label>
+				<input type="text" name="q" id="q" placeholder="Search..." />
+				<div class="help" aria-label="Search ">
+					<dl>
+						<dt>"search terms"</dt><dd>exact-match</dd>
+						<dt>term1 | term2</dt><dd>term1 or term2</dd>
+						<dt>term1 * term2</dt><dd>term1 followed by term2</dd>
+						<dt>-term</dt><dd>exclude term</dd>
+						<dt>(search terms)</dt><dd>groups terms</dd>
+						<dt>ext:pdf</dt><dd>file type</dd>
+					</dl>
 				</div>
-			</section>
-
-			<!-- Copyright -->
-			<ul id="copyright">
-				<li>&copy; Openwall Pty Ltd 2020 </li>
-				<li><a href="/legal/terms-of-service">Terms of Service</a></li>
+			</form>
+			<ul class="taskbar">
+				<li class="search-toggle"><label for="q" class="icon search offscreen" title="Toggle the search bar">Search</label></li>
+				<!-- Not Implemented Yet
+				<li><a href="#bug-report" class="icon bug offscreen" title="Report a spotted bug on the page">Report a bug</a></li>
+				<li><a href="#preferences" class="icon cog offscreen" title="Configure personal preferences">Preferences</a></li>
+				 -->
 			</ul>
-		</aside>
-
-		<!-- Content -->
-		<div id="content">
-			<div class="inner">
-				<article id="wrap-indicator-in-pre-blocks" class="box post">
-					<header>
-						<h1><a name="top">Wrap indicator in &lt;pre&gt; blocks</a></h1>
-					</header>
-					<div class="info">
-						<span class="date">
-							<span class="day">10</span>
-							<span class="month"><a href="/2020/05/">May<span class="month full"></span></a></span>
-							<span class="year"><a href="/2020/">2020</a></span>
-						</span>
-						<ul class="stats">
-							<li><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="icon twitter" aria-label="Twitter" data-tweet-id="None">0</a></li>
-						</ul>
-					</div>
-					<p>I am not a front-end developer, not a UI designer, nor a UX guru, but I am an
+		</span>
+	</header>
+	<aside class="modal">
+		<div id="bug-report">
+			<a href="#" class="close"></a>
+			<div class="content">
+				<h1>Bug report</h1>
+				<form id="bug-report-form" autocomplete="off">
+					<textarea id="bug-report-body" name="bug-report-body">
+					</textarea>
+					<input type="submit" value="Submit">
+				</form>
+			</div>
+		</div>
+		<div id="preferences">
+		</div>
+	</aside>
+	<main>
+			<article id="wrap-indicator-in-pre-blocks">
+				<header>
+					<h1><a href="/2020/05/10/wrap-indicator-in-pre-blocks/" rel="bookmark" title="Permalink to Wrap indicator in <pre> blocks">Wrap indicator in &lt;pre&gt; blocks</a></h1>
+				</header>
+				<aside>
+				</aside>
+				<p>I am not a front-end developer, not a UI designer, nor a UX guru, but I am an
 engineer, so when I face a puzzle worth solving my brain switches on and I
 cannot let it go until I find a satisfactory solution to the puzzle.</p>
 <p>My blog heavily relies on me sharing session dumps and file excerpts using the
@@ -287,22 +288,21 @@ this is what we wanted to achieve at this step!</p>
 marker should occupy the exactly the same height as the line block we are
 attaching it to.  Well, this can be easily done with the <code>::after</code>
 pseudo-element:</p>
-<pre id="demo3" class="highlight line-numbers"><code class="language-css"><div id="demo3.1" class="lines"><a href="#demo3.1"></a>pre div.line {
-</div><div id="demo3.2" class="lines"><a href="#demo3.2"></a>    position: relative; /* so we could position the child */
-</div><div id="demo3.3" class="lines"><a href="#demo3.3"></a>    min-height: 1em;    /* to avoid collapsing empty lines */
-</div><div id="demo3.4" class="lines"><a href="#demo3.4"></a>}
-</div><div id="demo3.5" class="lines"><a href="#demo3.5"></a>
-</div><div id="demo3.6" class="lines"><a href="#demo3.6"></a>pre div.line::after {
-</div><div id="demo3.7" class="lines"><a href="#demo3.7"></a>    content: '';        /* we need content for pseudo elements */
-</div><div id="demo3.8" class="lines"><a href="#demo3.8"></a>    position: absolute;
-</div><div id="demo3.9" class="lines"><a href="#demo3.9"></a>    display: block;
-</div><div id="demo3.10" class="lines"><a href="#demo3.10"></a>    width: 1em;     /* without width it will be invisible */
-</div><div id="demo3.11" class="lines"><a href="#demo3.11"></a>    height: 100%;       /* to match the height of the parent */
-</div><div id="demo3.12" class="lines"><a href="#demo3.12"></a>    top: 0;
-</div><div id="demo3.13" class="lines"><a href="#demo3.13"></a>    right: -1em;
-</div><div id="demo3.14" class="lines"><a href="#demo3.14"></a>    background-color: blue; /* temporary, to make it visible */
-</div><div id="demo3.15" class="lines"><a href="#demo3.15"></a>}</div></code></pre>
-
+<pre id="demo3" class="highlight line-numbers"><code class="language-css"><div id="demo3.1" class="line"><a href="#demo3.1" aria-hidden="true"></a><span class="nt">pre</span> <span class="nt">div</span><span class="p">.</span><span class="nc">line</span> <span class="p">{</span>
+</div><div id="demo3.2" class="line"><a href="#demo3.2" aria-hidden="true"></a>    <span class="k">position</span><span class="p">:</span> <span class="kc">relative</span><span class="p">;</span> <span class="c">/* so we could position the child */</span>
+</div><div id="demo3.3" class="line"><a href="#demo3.3" aria-hidden="true"></a>    <span class="k">min-height</span><span class="p">:</span> <span class="mi">1</span><span class="kt">em</span><span class="p">;</span>    <span class="c">/* to avoid collapsing empty lines */</span>
+</div><div id="demo3.4" class="line"><a href="#demo3.4" aria-hidden="true"></a><span class="p">}</span>
+</div><div id="demo3.5" class="line"><a href="#demo3.5" aria-hidden="true"></a>
+</div><div id="demo3.6" class="line"><a href="#demo3.6" aria-hidden="true"></a><span class="nt">pre</span> <span class="nt">div</span><span class="p">.</span><span class="nc">line</span><span class="p">::</span><span class="nd">after</span> <span class="p">{</span>
+</div><div id="demo3.7" class="line"><a href="#demo3.7" aria-hidden="true"></a>    <span class="k">content</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>        <span class="c">/* we need content for pseudo elements */</span>
+</div><div id="demo3.8" class="line"><a href="#demo3.8" aria-hidden="true"></a>    <span class="k">position</span><span class="p">:</span> <span class="kc">absolute</span><span class="p">;</span>
+</div><div id="demo3.9" class="line"><a href="#demo3.9" aria-hidden="true"></a>    <span class="k">display</span><span class="p">:</span> <span class="kc">block</span><span class="p">;</span>
+</div><div id="demo3.10" class="line"><a href="#demo3.10" aria-hidden="true"></a>    <span class="k">width</span><span class="p">:</span> <span class="mi">1</span><span class="kt">em</span><span class="p">;</span>     <span class="c">/* without width it will be invisible */</span>
+</div><div id="demo3.11" class="line"><a href="#demo3.11" aria-hidden="true"></a>    <span class="k">height</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span>       <span class="c">/* to match the height of the parent */</span>
+</div><div id="demo3.12" class="line"><a href="#demo3.12" aria-hidden="true"></a>    <span class="k">top</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+</div><div id="demo3.13" class="line"><a href="#demo3.13" aria-hidden="true"></a>    <span class="k">right</span><span class="p">:</span> <span class="mi">-1</span><span class="kt">em</span><span class="p">;</span>
+</div><div id="demo3.14" class="line"><a href="#demo3.14" aria-hidden="true"></a>    <span class="k">background-color</span><span class="p">:</span> <span class="kc">blue</span><span class="p">;</span> <span class="c">/* temporary, to make it visible */</span>
+</div><div id="demo3.15" class="line"><a href="#demo3.15" aria-hidden="true"></a><span class="p">}</span></div></code></pre>
 <p>Note that we also introduced <code>position: relative</code> to our <code>&lt;div&gt;</code>&lsquo;s.  It is
 needed since if we want to position our pseudo-element relative to its parent,
 the parent needs to have the position attribute set to anything but <code>static</code>.
@@ -346,12 +346,11 @@ choose SVG everytime.</p>
 <p>Ideally, I did not want to use an image, but I could not figure out how I could
 put a repeating text block next to my lines, hence I found the following
 compromise (this is the content of the SVG file I created):</p>
-<pre class="highlight"><code class="language-svg"><div class="lines"><a></a>&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot;
-</div><div class="lines"><a></a>        version=&quot;1.1&quot;
-</div><div class="lines"><a></a>        viewBox=&quot;0 0 24 24&quot;&gt;
-</div><div class="lines"><a></a>    &lt;text x=&quot;0&quot; y=&quot;19&quot;&gt;&amp;#x23ce;&lt;/text&gt;
-</div><div class="lines"><a></a>&lt;/svg&gt;</div></code></pre>
-
+<pre class="highlight"><code class="language-svg"><div class="line"><a></a><span class="o">&lt;</span><span class="nt">svg</span> <span class="nt">xmlns</span><span class="o">=</span><span class="s2">&quot;http://www.w3.org/2000/svg&quot;</span>
+</div><div class="line"><a></a>        <span class="nt">version</span><span class="o">=</span><span class="s2">&quot;1.1&quot;</span>
+</div><div class="line"><a></a>        <span class="nt">viewBox</span><span class="o">=</span><span class="s2">&quot;0 0 24 24&quot;</span><span class="o">&gt;</span>
+</div><div class="line"><a></a>    <span class="o">&lt;</span><span class="nt">text</span> <span class="nt">x</span><span class="o">=</span><span class="s2">&quot;0&quot;</span> <span class="nt">y</span><span class="o">=</span><span class="s2">&quot;19&quot;</span><span class="o">&gt;&amp;</span><span class="p">#</span><span class="nn">x23ce</span><span class="o">;&lt;/</span><span class="nt">text</span><span class="o">&gt;</span>
+</div><div class="line"><a></a><span class="o">&lt;/</span><span class="nt">svg</span><span class="o">&gt;</span></div></code></pre>
 <p>The first two lines are mandatory and describe to a browser that it works with
 an SVG image file.</p>
 <p>The third line (<code>viewBox=</code>) is really important since it allows the SVG image
@@ -365,39 +364,37 @@ adequate symbol to represent a line wrap point.</p>
 but since the content of the SVG file is so small and I did not want to host it
 externally (it would be an additional fetch request and more maintenance), I
 just did the following:</p>
-<pre class="highlight" data-user="user"><code class="language-shell"><div class="lines"><a></a>[user@localhost ~]$ cat nl.svg 
-</div><div class="lines"><a></a>&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot;
-</div><div class="lines"><a></a>        version=&quot;1.1&quot;
-</div><div class="lines"><a></a>        viewBox=&quot;0 0 24 24&quot;&gt;
-</div><div class="lines"><a></a>    &lt;text x=&quot;0&quot; y=&quot;19&quot;&gt;&amp;#x23ce;&lt;/text&gt;
-</div><div class="lines"><a></a>&lt;/svg&gt;
-</div><div class="lines"><a></a>[user@localhost ~]$ sed -n '1{h;d};$!H;${H;x;s,\s\+, ,g;s,&gt;\s*&lt;,&gt;&lt;,g;p}' nl.svg | base64 -w 0 ; echo
-</div><div class="lines"><a></a>PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==</div></code></pre>
-
+<pre class="highlight" data-user="user"><code class="language-console"><div class="line"><a></a><span class="gp">[user@localhost ~]$ </span>cat nl.svg 
+</div><div class="line"><a></a><span class="go">&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot;</span>
+</div><div class="line"><a></a><span class="go">        version=&quot;1.1&quot;</span>
+</div><div class="line"><a></a><span class="go">        viewBox=&quot;0 0 24 24&quot;&gt;</span>
+</div><div class="line"><a></a><span class="go">    &lt;text x=&quot;0&quot; y=&quot;19&quot;&gt;&amp;#x23ce;&lt;/text&gt;</span>
+</div><div class="line"><a></a><span class="go">&lt;/svg&gt;</span>
+</div><div class="line"><a></a><span class="gp">[user@localhost ~]$ </span>sed -n <span class="s1">&#39;1{h;d};$!H;${H;x;s,\s\+, ,g;s,&gt;\s*&lt;,&gt;&lt;,g;p}&#39;</span> nl.svg <span class="p">|</span> base64 -w <span class="m">0</span> <span class="p">;</span> <span class="nb">echo</span>
+</div><div class="line"><a></a><span class="go">PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==</span></div></code></pre>
 <p>In other words, I removed all the white space, then deleted all line breaks, so
 I got a single line SVG body, and I converted it to Base64.  The resulting line
 is usable as the inline definition of an image.  Let&rsquo;s update our stylesheet
 with the new values (we just replaced the last line to change the <code>background</code>
 to <code>background-image</code>) and added dimensions for the background itself:</p>
-<pre id="demo4" class="highlight line-numbers"><code class="language-css"><div id="demo4.1" class="lines"><a href="#demo4.1"></a>pre div.line {
-</div><div id="demo4.2" class="lines"><a href="#demo4.2"></a>    position: relative; /* so we could position the child */
-</div><div id="demo4.3" class="lines"><a href="#demo4.3"></a>    min-height: 1em;    /* to avoid collapsing empty lines */
-</div><div id="demo4.4" class="lines"><a href="#demo4.4"></a>}
-</div><div id="demo4.5" class="lines"><a href="#demo4.5"></a>
-</div><div id="demo4.6" class="lines"><a href="#demo4.6"></a>pre div.line::after {
-</div><div id="demo4.7" class="lines"><a href="#demo4.7"></a>    content: '';        /* we need content for pseudo elements */
-</div><div id="demo4.8" class="lines"><a href="#demo4.8"></a>    position: absolute;
-</div><div id="demo4.9" class="lines"><a href="#demo4.9"></a>    display: block;
-</div><div id="demo4.10" class="lines"><a href="#demo4.10"></a>    width: 1em;     /* without width it will be invisible */
-</div><div id="demo4.11" class="lines"><a href="#demo4.11"></a>    height: 100%;       /* to match the height of the parent */
-</div><div id="demo4.12" class="lines"><a href="#demo4.12"></a>    top: 0;
-</div><div id="demo4.13" class="lines"><a href="#demo4.13"></a>    right: -1em;
-</div><div id="demo4.14" class="lines"><a href="#demo4.14"></a>    background-image:
-</div><div id="demo4.15" class="lines"><a href="#demo4.15"></a>        url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
-</div><div id="demo4.16" class="lines"><a href="#demo4.16"></a>        no-repeat repeat;
-</div><div id="demo4.17" class="lines"><a href="#demo4.17"></a>    background-size: 1em 1em;
-</div><div id="demo4.18" class="lines"><a href="#demo4.18"></a>}</div></code></pre>
-
+<pre id="demo4" class="highlight line-numbers"><code class="language-css"><div id="demo4.1" class="line"><a href="#demo4.1" aria-hidden="true"></a><span class="nt">pre</span> <span class="nt">div</span><span class="p">.</span><span class="nc">line</span> <span class="p">{</span>
+</div><div id="demo4.2" class="line"><a href="#demo4.2" aria-hidden="true"></a>    <span class="k">position</span><span class="p">:</span> <span class="kc">relative</span><span class="p">;</span> <span class="c">/* so we could position the child */</span>
+</div><div id="demo4.3" class="line"><a href="#demo4.3" aria-hidden="true"></a>    <span class="k">min-height</span><span class="p">:</span> <span class="mi">1</span><span class="kt">em</span><span class="p">;</span>    <span class="c">/* to avoid collapsing empty lines */</span>
+</div><div id="demo4.4" class="line"><a href="#demo4.4" aria-hidden="true"></a><span class="p">}</span>
+</div><div id="demo4.5" class="line"><a href="#demo4.5" aria-hidden="true"></a>
+</div><div id="demo4.6" class="line"><a href="#demo4.6" aria-hidden="true"></a><span class="nt">pre</span> <span class="nt">div</span><span class="p">.</span><span class="nc">line</span><span class="p">::</span><span class="nd">after</span> <span class="p">{</span>
+</div><div id="demo4.7" class="line"><a href="#demo4.7" aria-hidden="true"></a>    <span class="k">content</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>        <span class="c">/* we need content for pseudo elements */</span>
+</div><div id="demo4.8" class="line"><a href="#demo4.8" aria-hidden="true"></a>    <span class="k">position</span><span class="p">:</span> <span class="kc">absolute</span><span class="p">;</span>
+</div><div id="demo4.9" class="line"><a href="#demo4.9" aria-hidden="true"></a>    <span class="k">display</span><span class="p">:</span> <span class="kc">block</span><span class="p">;</span>
+</div><div id="demo4.10" class="line"><a href="#demo4.10" aria-hidden="true"></a>    <span class="k">width</span><span class="p">:</span> <span class="mi">1</span><span class="kt">em</span><span class="p">;</span>     <span class="c">/* without width it will be invisible */</span>
+</div><div id="demo4.11" class="line"><a href="#demo4.11" aria-hidden="true"></a>    <span class="k">height</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span>       <span class="c">/* to match the height of the parent */</span>
+</div><div id="demo4.12" class="line"><a href="#demo4.12" aria-hidden="true"></a>    <span class="k">top</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+</div><div id="demo4.13" class="line"><a href="#demo4.13" aria-hidden="true"></a>    <span class="k">right</span><span class="p">:</span> <span class="mi">-1</span><span class="kt">em</span><span class="p">;</span>
+</div><div id="demo4.14" class="line"><a href="#demo4.14" aria-hidden="true"></a>    <span class="k">background-image</span><span class="p">:</span>
+</div><div id="demo4.15" class="line"><a href="#demo4.15" aria-hidden="true"></a>        <span class="nb">url</span><span class="p">(</span><span class="sx">data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==</span><span class="p">)</span>
+</div><div id="demo4.16" class="line"><a href="#demo4.16" aria-hidden="true"></a>        <span class="kc">no-repeat</span> <span class="kc">repeat</span><span class="p">;</span>
+</div><div id="demo4.17" class="line"><a href="#demo4.17" aria-hidden="true"></a>    <span class="k">background-size</span><span class="p">:</span> <span class="mi">1</span><span class="kt">em</span> <span class="mi">1</span><span class="kt">em</span><span class="p">;</span>
+</div><div id="demo4.18" class="line"><a href="#demo4.18" aria-hidden="true"></a><span class="p">}</span></div></code></pre>
 <div class="demo4 resizable">
     <style>
         div.demo4 pre div.line {
@@ -439,26 +436,25 @@ our lines (reading documentation you may find that the default value is
 <code>normal</code> and you can also find that <code>normal</code> equals <code>1.2</code> for the majority of
 browsers, but relying on that, I think is a bad idea).  We also need to adjust
 our markers with the new information we have got:</p>
-<pre id="demo5" class="highlight"><code class="language-css"><div id="demo5.1" class="lines"><a href="#demo5.1"></a>pre div.line {
-</div><div id="demo5.2" class="lines"><a href="#demo5.2"></a>    position: relative; /* so we could position the child */
-</div><div id="demo5.3" class="lines"><a href="#demo5.3"></a>    min-height: 1em;    /* to avoid collapsing empty lines */
-</div><div id="demo5.4" class="lines"><a href="#demo5.4"></a>    line-height: 1.2;   /* set the height explicitly */
-</div><div id="demo5.5" class="lines"><a href="#demo5.5"></a>}
-</div><div id="demo5.6" class="lines"><a href="#demo5.6"></a>
-</div><div id="demo5.7" class="lines"><a href="#demo5.7"></a>pre div.line::after {
-</div><div id="demo5.8" class="lines"><a href="#demo5.8"></a>    content: '';        /* we need content for pseudo elements */
-</div><div id="demo5.9" class="lines"><a href="#demo5.9"></a>    position: absolute;
-</div><div id="demo5.10" class="lines"><a href="#demo5.10"></a>    display: block;
-</div><div id="demo5.11" class="lines"><a href="#demo5.11"></a>    width: 1.2em;       /* without width it will be invisible */
-</div><div id="demo5.12" class="lines"><a href="#demo5.12"></a>    height: 100%;       /* to match the height of the parent */
-</div><div id="demo5.13" class="lines"><a href="#demo5.13"></a>    top: 0;
-</div><div id="demo5.14" class="lines"><a href="#demo5.14"></a>    right: -1.2em;
-</div><div id="demo5.15" class="lines"><a href="#demo5.15"></a>    background-image:
-</div><div id="demo5.16" class="lines"><a href="#demo5.16"></a>        url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
-</div><div id="demo5.17" class="lines"><a href="#demo5.17"></a>        no-repeat repeat;
-</div><div id="demo5.18" class="lines"><a href="#demo5.18"></a>    background-size: 1.2em 1.2em;
-</div><div id="demo5.19" class="lines"><a href="#demo5.19"></a>}</div></code></pre>
-
+<pre id="demo5" class="highlight"><code class="language-css"><div id="demo5.1" class="line"><a href="#demo5.1" aria-hidden="true"></a><span class="nt">pre</span> <span class="nt">div</span><span class="p">.</span><span class="nc">line</span> <span class="p">{</span>
+</div><div id="demo5.2" class="line"><a href="#demo5.2" aria-hidden="true"></a>    <span class="k">position</span><span class="p">:</span> <span class="kc">relative</span><span class="p">;</span> <span class="c">/* so we could position the child */</span>
+</div><div id="demo5.3" class="line"><a href="#demo5.3" aria-hidden="true"></a>    <span class="k">min-height</span><span class="p">:</span> <span class="mi">1</span><span class="kt">em</span><span class="p">;</span>    <span class="c">/* to avoid collapsing empty lines */</span>
+</div><div id="demo5.4" class="line"><a href="#demo5.4" aria-hidden="true"></a>    <span class="k">line-height</span><span class="p">:</span> <span class="mf">1.2</span><span class="p">;</span>   <span class="c">/* set the height explicitly */</span>
+</div><div id="demo5.5" class="line"><a href="#demo5.5" aria-hidden="true"></a><span class="p">}</span>
+</div><div id="demo5.6" class="line"><a href="#demo5.6" aria-hidden="true"></a>
+</div><div id="demo5.7" class="line"><a href="#demo5.7" aria-hidden="true"></a><span class="nt">pre</span> <span class="nt">div</span><span class="p">.</span><span class="nc">line</span><span class="p">::</span><span class="nd">after</span> <span class="p">{</span>
+</div><div id="demo5.8" class="line"><a href="#demo5.8" aria-hidden="true"></a>    <span class="k">content</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>        <span class="c">/* we need content for pseudo elements */</span>
+</div><div id="demo5.9" class="line"><a href="#demo5.9" aria-hidden="true"></a>    <span class="k">position</span><span class="p">:</span> <span class="kc">absolute</span><span class="p">;</span>
+</div><div id="demo5.10" class="line"><a href="#demo5.10" aria-hidden="true"></a>    <span class="k">display</span><span class="p">:</span> <span class="kc">block</span><span class="p">;</span>
+</div><div id="demo5.11" class="line"><a href="#demo5.11" aria-hidden="true"></a>    <span class="k">width</span><span class="p">:</span> <span class="mf">1.2</span><span class="kt">em</span><span class="p">;</span>       <span class="c">/* without width it will be invisible */</span>
+</div><div id="demo5.12" class="line"><a href="#demo5.12" aria-hidden="true"></a>    <span class="k">height</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span>       <span class="c">/* to match the height of the parent */</span>
+</div><div id="demo5.13" class="line"><a href="#demo5.13" aria-hidden="true"></a>    <span class="k">top</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+</div><div id="demo5.14" class="line"><a href="#demo5.14" aria-hidden="true"></a>    <span class="k">right</span><span class="p">:</span> <span class="mf">-1.2</span><span class="kt">em</span><span class="p">;</span>
+</div><div id="demo5.15" class="line"><a href="#demo5.15" aria-hidden="true"></a>    <span class="k">background-image</span><span class="p">:</span>
+</div><div id="demo5.16" class="line"><a href="#demo5.16" aria-hidden="true"></a>        <span class="nb">url</span><span class="p">(</span><span class="sx">data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==</span><span class="p">)</span>
+</div><div id="demo5.17" class="line"><a href="#demo5.17" aria-hidden="true"></a>        <span class="kc">no-repeat</span> <span class="kc">repeat</span><span class="p">;</span>
+</div><div id="demo5.18" class="line"><a href="#demo5.18" aria-hidden="true"></a>    <span class="k">background-size</span><span class="p">:</span> <span class="mf">1.2</span><span class="kt">em</span> <span class="mf">1.2</span><span class="kt">em</span><span class="p">;</span>
+</div><div id="demo5.19" class="line"><a href="#demo5.19" aria-hidden="true"></a><span class="p">}</span></div></code></pre>
 <div class="demo5 resizable">
     <style>
         div.demo5 pre div.line {
@@ -493,29 +489,28 @@ it done:</p>
 <p>To address the latter a simple play with the <code>opacity</code> attribute will suffice,
 e.g. I think 50% transparency should make the marker less distracting.</p>
 <p>The former, however, requires some thinking.  Given that the post is already too long, I will just state that out of multiple options I had I chose the following: raise the background image by one <code>line-height</code> from the bottom, and clip a square 1x1 <code>line-height</code> at the top to compensate, as follows:</p>
-<pre id="demo6" class="highlight"><code class="language-css"><div id="demo6.1" class="lines"><a href="#demo6.1"></a>pre div.line {
-</div><div id="demo6.2" class="lines"><a href="#demo6.2"></a>    position: relative; /* so we could position the child */
-</div><div id="demo6.3" class="lines"><a href="#demo6.3"></a>    min-height: 1em;    /* to avoid collapsing empty lines */
-</div><div id="demo6.4" class="lines"><a href="#demo6.4"></a>    line-height: 1.2;   /* set the height explicitly */
-</div><div id="demo6.5" class="lines"><a href="#demo6.5"></a>}
-</div><div id="demo6.6" class="lines"><a href="#demo6.6"></a>
-</div><div id="demo6.7" class="lines"><a href="#demo6.7"></a>pre div.line::after {
-</div><div id="demo6.8" class="lines"><a href="#demo6.8"></a>    content: '';        /* we need content for pseudo elements */
-</div><div id="demo6.9" class="lines"><a href="#demo6.9"></a>    position: absolute;
-</div><div id="demo6.10" class="lines"><a href="#demo6.10"></a>    display: block;
-</div><div id="demo6.11" class="lines"><a href="#demo6.11"></a>    width: 1.2em;       /* without width it will be invisible */
-</div><div id="demo6.12" class="lines"><a href="#demo6.12"></a>    height: 100%;       /* to match the height of the parent */
-</div><div id="demo6.13" class="lines"><a href="#demo6.13"></a>    bottom: 0;
-</div><div id="demo6.14" class="lines"><a href="#demo6.14"></a>    right: -1.2em;
-</div><div id="demo6.15" class="lines"><a href="#demo6.15"></a>    background-image:
-</div><div id="demo6.16" class="lines"><a href="#demo6.16"></a>        url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
-</div><div id="demo6.17" class="lines"><a href="#demo6.17"></a>        no-repeat repeat;
-</div><div id="demo6.18" class="lines"><a href="#demo6.18"></a>    background-size: 1.2em 1.2em;
-</div><div id="demo6.19" class="lines"><a href="#demo6.19"></a>    margin-bottom: 0;
-</div><div id="demo6.20" class="lines"><a href="#demo6.20"></a>    clip: rect(1.2em 1.2em 100vh 0);
-</div><div id="demo6.21" class="lines"><a href="#demo6.21"></a>    opacity: .5;
-</div><div id="demo6.22" class="lines"><a href="#demo6.22"></a>}</div></code></pre>
-
+<pre id="demo6" class="highlight"><code class="language-css"><div id="demo6.1" class="line"><a href="#demo6.1" aria-hidden="true"></a><span class="nt">pre</span> <span class="nt">div</span><span class="p">.</span><span class="nc">line</span> <span class="p">{</span>
+</div><div id="demo6.2" class="line"><a href="#demo6.2" aria-hidden="true"></a>    <span class="k">position</span><span class="p">:</span> <span class="kc">relative</span><span class="p">;</span> <span class="c">/* so we could position the child */</span>
+</div><div id="demo6.3" class="line"><a href="#demo6.3" aria-hidden="true"></a>    <span class="k">min-height</span><span class="p">:</span> <span class="mi">1</span><span class="kt">em</span><span class="p">;</span>    <span class="c">/* to avoid collapsing empty lines */</span>
+</div><div id="demo6.4" class="line"><a href="#demo6.4" aria-hidden="true"></a>    <span class="k">line-height</span><span class="p">:</span> <span class="mf">1.2</span><span class="p">;</span>   <span class="c">/* set the height explicitly */</span>
+</div><div id="demo6.5" class="line"><a href="#demo6.5" aria-hidden="true"></a><span class="p">}</span>
+</div><div id="demo6.6" class="line"><a href="#demo6.6" aria-hidden="true"></a>
+</div><div id="demo6.7" class="line"><a href="#demo6.7" aria-hidden="true"></a><span class="nt">pre</span> <span class="nt">div</span><span class="p">.</span><span class="nc">line</span><span class="p">::</span><span class="nd">after</span> <span class="p">{</span>
+</div><div id="demo6.8" class="line"><a href="#demo6.8" aria-hidden="true"></a>    <span class="k">content</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>        <span class="c">/* we need content for pseudo elements */</span>
+</div><div id="demo6.9" class="line"><a href="#demo6.9" aria-hidden="true"></a>    <span class="k">position</span><span class="p">:</span> <span class="kc">absolute</span><span class="p">;</span>
+</div><div id="demo6.10" class="line"><a href="#demo6.10" aria-hidden="true"></a>    <span class="k">display</span><span class="p">:</span> <span class="kc">block</span><span class="p">;</span>
+</div><div id="demo6.11" class="line"><a href="#demo6.11" aria-hidden="true"></a>    <span class="k">width</span><span class="p">:</span> <span class="mf">1.2</span><span class="kt">em</span><span class="p">;</span>       <span class="c">/* without width it will be invisible */</span>
+</div><div id="demo6.12" class="line"><a href="#demo6.12" aria-hidden="true"></a>    <span class="k">height</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span>       <span class="c">/* to match the height of the parent */</span>
+</div><div id="demo6.13" class="line"><a href="#demo6.13" aria-hidden="true"></a>    <span class="k">bottom</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+</div><div id="demo6.14" class="line"><a href="#demo6.14" aria-hidden="true"></a>    <span class="k">right</span><span class="p">:</span> <span class="mf">-1.2</span><span class="kt">em</span><span class="p">;</span>
+</div><div id="demo6.15" class="line"><a href="#demo6.15" aria-hidden="true"></a>    <span class="k">background-image</span><span class="p">:</span>
+</div><div id="demo6.16" class="line"><a href="#demo6.16" aria-hidden="true"></a>        <span class="nb">url</span><span class="p">(</span><span class="sx">data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==</span><span class="p">)</span>
+</div><div id="demo6.17" class="line"><a href="#demo6.17" aria-hidden="true"></a>        <span class="kc">no-repeat</span> <span class="kc">repeat</span><span class="p">;</span>
+</div><div id="demo6.18" class="line"><a href="#demo6.18" aria-hidden="true"></a>    <span class="k">background-size</span><span class="p">:</span> <span class="mf">1.2</span><span class="kt">em</span> <span class="mf">1.2</span><span class="kt">em</span><span class="p">;</span>
+</div><div id="demo6.19" class="line"><a href="#demo6.19" aria-hidden="true"></a>    <span class="k">margin-bottom</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+</div><div id="demo6.20" class="line"><a href="#demo6.20" aria-hidden="true"></a>    <span class="k">clip</span><span class="p">:</span> <span class="nb">rect</span><span class="p">(</span><span class="mf">1.2</span><span class="kt">em</span> <span class="mf">1.2</span><span class="kt">em</span> <span class="mi">100</span><span class="kt">vh</span> <span class="mi">0</span><span class="p">);</span>
+</div><div id="demo6.21" class="line"><a href="#demo6.21" aria-hidden="true"></a>    <span class="k">opacity</span><span class="p">:</span> <span class="mf">.5</span><span class="p">;</span>
+</div><div id="demo6.22" class="line"><a href="#demo6.22" aria-hidden="true"></a><span class="p">}</span></div></code></pre>
 <p>The only tricky part in the added lines is the <code>clip: rect(1.2em 1.2em 100vh
 0)</code> line.  The <code>clip</code> property defines the visible rectangle the browser should
 preserve, but there is a conundrum: the height of the wrapped line is variable,
@@ -560,32 +555,31 @@ this is exactly what we want :).</p>
 <h2 id="bonus-round">Bonus Round</h2>
 <p>It should be mentioned, it is also possible to apply the same approach to the
 left side of the lines with a bit of a twist.</p>
-<pre id="demo7" class="highlight"><code class="language-css"><div id="demo7.1" class="lines"><a href="#demo7.1"></a>pre div.line {
-</div><div id="demo7.2" class="lines"><a href="#demo7.2"></a>    position: relative; /* so we could position the child */
-</div><div id="demo7.3" class="lines"><a href="#demo7.3"></a>    min-height: 1em;    /* to avoid collapsing empty lines */
-</div><div id="demo7.4" class="lines"><a href="#demo7.4"></a>    line-height: 1.2;   /* set the height explicitly */
-</div><div id="demo7.5" class="lines"><a href="#demo7.5"></a>    text-indent: -1.2em;    /* first line indent */
-</div><div id="demo7.6" class="lines"><a href="#demo7.6"></a>    padding-left: 1.2em;    /* padding for the line */
-</div><div id="demo7.7" class="lines"><a href="#demo7.7"></a>}
-</div><div id="demo7.8" class="lines"><a href="#demo7.8"></a>
-</div><div id="demo7.9" class="lines"><a href="#demo7.9"></a>pre div.line::before {
-</div><div id="demo7.10" class="lines"><a href="#demo7.10"></a>    content: '';        /* we need content for pseudo elements */
-</div><div id="demo7.11" class="lines"><a href="#demo7.11"></a>    position: absolute;
-</div><div id="demo7.12" class="lines"><a href="#demo7.12"></a>    display: block;
-</div><div id="demo7.13" class="lines"><a href="#demo7.13"></a>    width: 1.2em;       /* without width it will be invisible */
-</div><div id="demo7.14" class="lines"><a href="#demo7.14"></a>    height: 100%;       /* to match the height of the parent */
-</div><div id="demo7.15" class="lines"><a href="#demo7.15"></a>    top: 0;
-</div><div id="demo7.16" class="lines"><a href="#demo7.16"></a>    left: 0;
-</div><div id="demo7.17" class="lines"><a href="#demo7.17"></a>    background:
-</div><div id="demo7.18" class="lines"><a href="#demo7.18"></a>        url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
-</div><div id="demo7.19" class="lines"><a href="#demo7.19"></a>        no-repeat repeat;
-</div><div id="demo7.20" class="lines"><a href="#demo7.20"></a>    background-size: 1.2em 1.2em;
-</div><div id="demo7.21" class="lines"><a href="#demo7.21"></a>    clip: rect(1.2em 1.2em 100vh 0);
-</div><div id="demo7.22" class="lines"><a href="#demo7.22"></a>    opacity: .5;
-</div><div id="demo7.23" class="lines"><a href="#demo7.23"></a>    transform: rotateY(180deg); /* mirror the arrow */
-</div><div id="demo7.24" class="lines"><a href="#demo7.24"></a>    transform-origin: left;
-</div><div id="demo7.25" class="lines"><a href="#demo7.25"></a>}</div></code></pre>
-
+<pre id="demo7" class="highlight"><code class="language-css"><div id="demo7.1" class="line"><a href="#demo7.1" aria-hidden="true"></a><span class="nt">pre</span> <span class="nt">div</span><span class="p">.</span><span class="nc">line</span> <span class="p">{</span>
+</div><div id="demo7.2" class="line"><a href="#demo7.2" aria-hidden="true"></a>    <span class="k">position</span><span class="p">:</span> <span class="kc">relative</span><span class="p">;</span> <span class="c">/* so we could position the child */</span>
+</div><div id="demo7.3" class="line"><a href="#demo7.3" aria-hidden="true"></a>    <span class="k">min-height</span><span class="p">:</span> <span class="mi">1</span><span class="kt">em</span><span class="p">;</span>    <span class="c">/* to avoid collapsing empty lines */</span>
+</div><div id="demo7.4" class="line"><a href="#demo7.4" aria-hidden="true"></a>    <span class="k">line-height</span><span class="p">:</span> <span class="mf">1.2</span><span class="p">;</span>   <span class="c">/* set the height explicitly */</span>
+</div><div id="demo7.5" class="line"><a href="#demo7.5" aria-hidden="true"></a>    <span class="k">text-indent</span><span class="p">:</span> <span class="mf">-1.2</span><span class="kt">em</span><span class="p">;</span>    <span class="c">/* first line indent */</span>
+</div><div id="demo7.6" class="line"><a href="#demo7.6" aria-hidden="true"></a>    <span class="k">padding-left</span><span class="p">:</span> <span class="mf">1.2</span><span class="kt">em</span><span class="p">;</span>    <span class="c">/* padding for the line */</span>
+</div><div id="demo7.7" class="line"><a href="#demo7.7" aria-hidden="true"></a><span class="p">}</span>
+</div><div id="demo7.8" class="line"><a href="#demo7.8" aria-hidden="true"></a>
+</div><div id="demo7.9" class="line"><a href="#demo7.9" aria-hidden="true"></a><span class="nt">pre</span> <span class="nt">div</span><span class="p">.</span><span class="nc">line</span><span class="p">::</span><span class="nd">before</span> <span class="p">{</span>
+</div><div id="demo7.10" class="line"><a href="#demo7.10" aria-hidden="true"></a>    <span class="k">content</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>        <span class="c">/* we need content for pseudo elements */</span>
+</div><div id="demo7.11" class="line"><a href="#demo7.11" aria-hidden="true"></a>    <span class="k">position</span><span class="p">:</span> <span class="kc">absolute</span><span class="p">;</span>
+</div><div id="demo7.12" class="line"><a href="#demo7.12" aria-hidden="true"></a>    <span class="k">display</span><span class="p">:</span> <span class="kc">block</span><span class="p">;</span>
+</div><div id="demo7.13" class="line"><a href="#demo7.13" aria-hidden="true"></a>    <span class="k">width</span><span class="p">:</span> <span class="mf">1.2</span><span class="kt">em</span><span class="p">;</span>       <span class="c">/* without width it will be invisible */</span>
+</div><div id="demo7.14" class="line"><a href="#demo7.14" aria-hidden="true"></a>    <span class="k">height</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span>       <span class="c">/* to match the height of the parent */</span>
+</div><div id="demo7.15" class="line"><a href="#demo7.15" aria-hidden="true"></a>    <span class="k">top</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+</div><div id="demo7.16" class="line"><a href="#demo7.16" aria-hidden="true"></a>    <span class="k">left</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+</div><div id="demo7.17" class="line"><a href="#demo7.17" aria-hidden="true"></a>    <span class="k">background</span><span class="p">:</span>
+</div><div id="demo7.18" class="line"><a href="#demo7.18" aria-hidden="true"></a>        <span class="nb">url</span><span class="p">(</span><span class="sx">data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==</span><span class="p">)</span>
+</div><div id="demo7.19" class="line"><a href="#demo7.19" aria-hidden="true"></a>        <span class="kc">no-repeat</span> <span class="kc">repeat</span><span class="p">;</span>
+</div><div id="demo7.20" class="line"><a href="#demo7.20" aria-hidden="true"></a>    <span class="k">background-size</span><span class="p">:</span> <span class="mf">1.2</span><span class="kt">em</span> <span class="mf">1.2</span><span class="kt">em</span><span class="p">;</span>
+</div><div id="demo7.21" class="line"><a href="#demo7.21" aria-hidden="true"></a>    <span class="k">clip</span><span class="p">:</span> <span class="nb">rect</span><span class="p">(</span><span class="mf">1.2</span><span class="kt">em</span> <span class="mf">1.2</span><span class="kt">em</span> <span class="mi">100</span><span class="kt">vh</span> <span class="mi">0</span><span class="p">);</span>
+</div><div id="demo7.22" class="line"><a href="#demo7.22" aria-hidden="true"></a>    <span class="k">opacity</span><span class="p">:</span> <span class="mf">.5</span><span class="p">;</span>
+</div><div id="demo7.23" class="line"><a href="#demo7.23" aria-hidden="true"></a>    <span class="k">transform</span><span class="p">:</span> <span class="nb">rotateY</span><span class="p">(</span><span class="mi">180</span><span class="kt">deg</span><span class="p">);</span> <span class="c">/* mirror the arrow */</span>
+</div><div id="demo7.24" class="line"><a href="#demo7.24" aria-hidden="true"></a>    <span class="k">transform-origin</span><span class="p">:</span> <span class="kc">left</span><span class="p">;</span>
+</div><div id="demo7.25" class="line"><a href="#demo7.25" aria-hidden="true"></a><span class="p">}</span></div></code></pre>
 <p>The trick here is the play between <code>padding-left</code> and <code>text-indent</code> for the
 <code>&lt;div&gt;</code> element since <code>text-indent</code> will be applied to the first line only
 (effectively negating the padding set for the whole element), thus the rest of
@@ -682,39 +676,37 @@ highlighted blocks on this site (so you have already seen it in action).</p>
 <p>I hope this helped you and you learnt something :).  If you have any
 constructive feedback, I would appreciate it, specifically if you have ideas on
 how to improve the presented solution.</p>
+				<footer>
+					<span><span class="contextual">Offloaded on </span><time datetime="2020-05-10T21:00:00+10:00">
+						<span class="month"><a href="/2020/05/" title="A link to the archives for May of 2020">May<span class="month full"></span></a></span>
+						<span class="day">10</span>
+						<span class="year"><a href="/2020/" title="A link to the archives for the year of 2020">2020</a></span>
+					</time></span>
+						<span class="contextual">into </span><span class="category"><a href="/category/web-design/" title="A link to a collection of articles in the 'web design' category">web design</a></span>
+					<span class="contextual">and tagged with:</span>
 					<ul class="tags">
 						<li class="tag">
-							<div>
-								<a href="/tag/html/" class="tag name">html</a>
-							</div>
-							<a href="/tag/html/" class="tag count">2</a>
+							<span>
+								<a href="/tag/html/" rel="tag" title="A link to the collection tagged with 'html'" data-count="2" ><span>html</span></a>
+							</span>
 						</li>
 						<li class="tag">
-							<div>
-								<a href="/tag/css/" class="tag name">css</a>
-							</div>
-							<a href="/tag/css/" class="tag count">2</a>
+							<span>
+								<a href="/tag/css/" rel="tag" title="A link to the collection tagged with 'css'" data-count="2" ><span>css</span></a>
+							</span>
 						</li>
 						<li class="tag">
-							<div>
-								<a href="/tag/design/" class="tag name">design</a>
-							</div>
-							<a href="/tag/design/" class="tag count">2</a>
+							<span>
+								<a href="/tag/design/" rel="tag" title="A link to the collection tagged with 'design'" data-count="2" ><span>design</span></a>
+							</span>
 						</li>
-					</ul>
-					<footer>
-						Offloaded on
-						<time datetime="2020-05-10 21:00:00+10:00">Sun, 10/05/2020 at 21:00 (<a href="https://time.is/AEST" target="_blank" rel="noreferrer">AEST</a>)</time>
-						<span class="category-tag"><a href="/category/web-design">web design</a></span>
-					</footer>				</article>
-			</div>
-		</div>
-		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-165060547-1"></script>
-		<script>
-			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments);}
-			gtag('js', new Date());
-			gtag('config', 'UA-165060547-1');
-		</script>
-	</body>
+						</ul>
+				</footer>
+			</article>
+		<footer>
+		</footer>
+	</main>
+	<footer>
+	</footer>
+</body>
 </html>

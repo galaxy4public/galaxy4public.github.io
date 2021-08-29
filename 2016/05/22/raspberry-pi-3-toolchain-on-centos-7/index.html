@@ -1,121 +1,122 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta http-equiv="Content-Security-Policy" content="	default-src 'self';object-src 'none';script-src 'self' https://www.googletagmanager.com/gtag/js 'sha256-TelA7VsuYAMqhOKGk7CHgJyuqSJdmqZEp+hn6PWVRwQ=' https://www.google-analytics.com/analytics.js;img-src 'self' data: https://www.google-analytics.com/r/collect https://www.google-analytics.com/collect https://stats.g.doubleclick.net/r/collect https://*/ads/ga-audiences https://www.googletagmanager.com/a;style-src 'self' 'sha256-fszvBX/J9dhPxFSJ5wUrq/Pvg6HrnTkWyshMZpaxSQY=';connect-src 'self' https://www.google-analytics.com/j/collect https://stats.g.doubleclick.net/j/collect; " />
-		<title>Mind Drops</title>
-		<script src="/theme/js/persistence.js" defer></script>
-		<meta charset="utf-8" />
-		<meta name="description" content="" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="theme-color" content="#535353" />
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="format-detection" content="telephone=no" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-		<meta name="apple-mobile-web-app-title" content="Mind Drops" />
-		<meta name="description" content="">
-		<link rel="apple-touch-icon" href="/theme/images/icons/mind-drops-192x192.png" />
-		<link rel="manifest" type="text/json" href="/manifest.json" />
-		<link rel="alternate" type="application/atom+xml" href="https://dmitry.khlebnikov.net/feeds/all.atom.xml" title="Mind Drops Full Atom Feed" />
-		<link rel="alternate" type="application/atom+xml" href="https://dmitry.khlebnikov.net/feeds/linux.atom.xml" title="Mind Drops Categories Atom Feed" />
-		<link rel="dns-prefetch" href="https://www.google.com" />
-		<link rel="preconnect" href="https://www.google.com" crossorigin />
-		<link rel="dns-prefetch" href="https://www.google-analytics.com" />
-		<link rel="preconnect" href="https://www.google-analytics.com" crossorigin />
-		<link rel="dns-prefetch" href="https://www.googletagmanager.com">
-		<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
-		<link rel="dns-prefetch" href="https://stats.g.doubleclick.net" />
-		<link rel="preconnect" href="https://stats.g.doubleclick.net" crossorigin />
-		<link rel="preload" as="style" href="/theme/css/reset.css" />
-		<link rel="preload" as="style" href="/theme/css/fonts/Icons.css" />
-		<link rel="preload" as="style" href="/theme/css/fonts/Exo2.css" />
-		<link rel="preload" as="style" href="/theme/css/fonts/Oswald.css" />
-		<link rel="preload" as="style" href="/theme/css/fonts/DancingScript.css" />
-		<link rel="preload" as="style" href="/theme/css/fonts/FiraCode.css" />
-		<link rel="preload" as="style" href="/theme/css/base.css" />
-		<link rel="preload" as="script" href="/theme/js/persistence.js" />
-		<link rel="preload" as="script" href="/theme/js/visited.js" />
-		<link rel="preload" as="script" href="/theme/js/service.js" />
-		<link rel="preload" as="script" href="https://www.googletagmanager.com/gtag/js?id=UA-165060547-1" />
-		<link rel="icon" type="image/png" href="/images/galaxy.png" />
-		<script src="/theme/js/loader.js" defer></script>
+<head>
+	<title>Mind Drops :: assorted bits of wit</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1" />
+	<link rel="stylesheet" href="/theme/css/fonts/Icons.css" />
+	<link rel="stylesheet" href="/theme/css/fonts/Exo2.css" />
+	<link rel="stylesheet" href="/theme/css/fonts/Oswald.css" />
+	<link rel="stylesheet" href="/theme/css/fonts/DancingScript.css" />
+	<link rel="stylesheet" href="/theme/css/base.css" />
+	<link rel="stylesheet" href="/theme/css/pygments/default.css" />
+	<link rel="canonical" href="/2016/05/22/raspberry-pi-3-toolchain-on-centos-7/" />
 
-		<meta name="keywords" content="console howto linux raspberry pi" />
-		<link rel="stylesheet" type="text/css" href="/theme/css/article.css" />
-		<link rel="canonical" href="/2016/05/22/raspberry-pi-3-toolchain-on-centos-7/" />
-	</head>
-	<body>
+	<script type="application/ld+json">
+	{
+		"@context" : "https://schema.org",
+		"@type" : "Article",
+		"author": "(GalaxyMaster)",
+		"name" : "Raspberry Pi 3 toolchain on CentOS 7",
+		"datePublished" : "2016-05-22T12:00:00+10:00",
+		"dateModified" : "2020-05-17T04:45:11+10:00",
+		"image" : "https://dmitry.khlebnikov.net/2020/06/14/truly-responsive-pagination/images/paginator-sketch.png",
+		"headline" : "headline",
+		"abstract": "abstract goes here",
+		"articleSection": "linux",
+		"interactionStatistic":
+		[
+			{
+				"@type": "InteractionCounter",
+				"interactionService":
+				{
+					"@type": "WebSite",
+					"name": "Twitter",
+					"url": "http://www.twitter.com"
+				},
+				"interactionType": "http://schema.org/ShareAction",
+				"userInteractionCount": "1203"
+			},
+			{
+				"@type": "InteractionCounter",
+				"interactionType": "http://schema.org/CommentAction",
+				"userInteractionCount": "78"
+			}
+		],
+		"discussionUrl": "https://github.com/"
+	}
+	</script>
+</head>
 
-		<input type="radio" name="menu-toggle" id="menu-toggle-full" value="full" tabindex="-1" checked />
-		<input type="radio" name="menu-toggle" id="menu-toggle-mini" value="mini" tabindex="-1" />
-		<input type="radio" name="menu-toggle" id="menu-toggle-hide" value="hide" tabindex="-1" />
-		<label for="menu-toggle-full" class="icon menu" role="radio" tabindex="0">Show the full menu panel on the screen</label>
-		<aside id="sidebar">
-			<label for="menu-toggle-mini" class="icon left-big" role="radio" tabindex="0">Show the minimised menu panel on the screen</label>
-			<label for="menu-toggle-hide" class="icon eye-off" role="radio" tabindex="0">Remove the menu panel off the screen</label>
-			<div class="title">Mind Drops</div>
-			<div id="logo" class="box shadow">
+<body>
+	<header>
+		<span class="flex">
+			<!--
+			<button class="menu-toggle" type="button" tabindex="0" aria-label="Menu Toggle"><div></div></button>
+			-->
+			<div class="menu-toggle" tabindex="0" aria-label="Menu Toggle"><div></div></div>
+			<a href="/" class="logo">
 				<picture>
-					<source srcset="/images/galaxy.png.webp" type="image/webp">
-					<img src="/images/galaxy.png" alt="Logo">
+					<source srcset="/images/logo.svg" type="image/svg+xml">
+					<source srcset="/images/.svg" type="image/svg+xml">
+					<source srcset="/images/.webp" type="image/webp">
+					<img src="/images/" alt="Logo">
 				</picture>
-			</div>
-
-			<!-- Search -->
-			<section class="box search">
-				<form name="google search" class="icon search" method="get" action="/search">
-					<label for="search" class="offscreen">Search</label>
-					<input id="search" type="text" class="text" name="q" placeholder="Search" />
-				</form>
-			</section>
-
+				<span class="title">Mind Drops</span>
+			</a>
 			<nav>
 				<ul>
-					<li>
-						<a class="icon home" href="/">Home</a>
-					</li>
-					<li>
-						<a class="icon user" href="/about">About</a>
-					</li>
-					<li>
-						<a class="icon phone" href="/contact">Contact</a>
-					</li>
+					<li><a class="icon home" href="/">Home</a></li>
+					<li><a class="icon user" href="/about">About</a></li>
+					<li><a class="icon phone" href="/contact">Contact</a></li>
 				</ul>
 			</nav>
-
-			<!-- Text -->
-			<section class="box text-style1">
-				<div class="inner">
-					<p>
-						<strong>Mind Drops:</strong>: A place to unload all these assorted bits.
-					</p>
+			<form id="search" role="search" autocomplete="off" method="get" action="/search">
+				<label for="q" class="icon search">Search</label>
+				<input type="text" name="q" id="q" placeholder="Search..." />
+				<div class="help" aria-label="Search ">
+					<dl>
+						<dt>"search terms"</dt><dd>exact-match</dd>
+						<dt>term1 | term2</dt><dd>term1 or term2</dd>
+						<dt>term1 * term2</dt><dd>term1 followed by term2</dd>
+						<dt>-term</dt><dd>exclude term</dd>
+						<dt>(search terms)</dt><dd>groups terms</dd>
+						<dt>ext:pdf</dt><dd>file type</dd>
+					</dl>
 				</div>
-			</section>
-
-			<!-- Copyright -->
-			<ul id="copyright">
-				<li>&copy; Openwall Pty Ltd 2020 </li>
-				<li><a href="/legal/terms-of-service">Terms of Service</a></li>
+			</form>
+			<ul class="taskbar">
+				<li class="search-toggle"><label for="q" class="icon search offscreen" title="Toggle the search bar">Search</label></li>
+				<!-- Not Implemented Yet
+				<li><a href="#bug-report" class="icon bug offscreen" title="Report a spotted bug on the page">Report a bug</a></li>
+				<li><a href="#preferences" class="icon cog offscreen" title="Configure personal preferences">Preferences</a></li>
+				 -->
 			</ul>
-		</aside>
-
-		<!-- Content -->
-		<div id="content">
-			<div class="inner">
-				<article id="raspberry-pi-3-toolchain-on-centos-7" class="box post">
-					<header>
-						<h1><a name="top">Raspberry Pi 3 toolchain on CentOS 7</a></h1>
-					</header>
-					<div class="info">
-						<span class="date">
-							<span class="day">22</span>
-							<span class="month"><a href="/2016/05/">May<span class="month full"></span></a></span>
-							<span class="year"><a href="/2016/">2016</a></span>
-						</span>
-						<ul class="stats">
-							<li><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="icon twitter" aria-label="Twitter" data-tweet-id="1257348806024269824">1</a></li>
-						</ul>
-					</div>
-					<p>I heard a lot about Raspberry Pi boards but until now I had no need nor time to
+		</span>
+	</header>
+	<aside class="modal">
+		<div id="bug-report">
+			<a href="#" class="close"></a>
+			<div class="content">
+				<h1>Bug report</h1>
+				<form id="bug-report-form" autocomplete="off">
+					<textarea id="bug-report-body" name="bug-report-body">
+					</textarea>
+					<input type="submit" value="Submit">
+				</form>
+			</div>
+		</div>
+		<div id="preferences">
+		</div>
+	</aside>
+	<main>
+			<article id="raspberry-pi-3-toolchain-on-centos-7">
+				<header>
+					<h1><a href="/2016/05/22/raspberry-pi-3-toolchain-on-centos-7/" rel="bookmark" title="Permalink to Raspberry Pi 3 toolchain on CentOS 7">Raspberry Pi 3 toolchain on CentOS 7</a></h1>
+				</header>
+				<aside>
+				</aside>
+				<p>I heard a lot about Raspberry Pi boards but until now I had no need nor time to
 work with one.</p>
 <p>However, recently I purchased a Dodge Journey R/T and found that although I
 love the car I am so disappointed with its software and hard-wired logic that I
@@ -135,73 +136,68 @@ on an AWS EC2 instance which was running a minimal CentOS 7 as its OS.</p>
 <p>I spawned an EC2 instance (you need at least 8GB of free space there to be able
 to build the toolchain), logged in, and ensured that my system is up to date
 (and update it if it was not):</p>
-<pre class="highlight" data-user="root"><code class="language-shell"><div class="lines"><a></a>[root@localhost ~]# yum -y update
-</div><div class="lines"><a></a>Loaded plugins: at-exit, fastestmirror, post-transaction-actions
-</div><div class="lines"><a></a>Loading mirror speeds from cached hostfile
-</div><div class="lines"><a></a> * base: mirror.domain.tld
-</div><div class="lines"><a></a> * extras: mirror.domain.tld
-</div><div class="lines"><a></a> * updates: mirror.domain.tld
-</div><div class="lines"><a></a>No packages marked for update</div></code></pre>
-
+<pre class="highlight" data-user="root"><code class="language-console"><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>yum -y update
+</div><div class="line"><a></a><span class="go">Loaded plugins: at-exit, fastestmirror, post-transaction-actions</span>
+</div><div class="line"><a></a><span class="go">Loading mirror speeds from cached hostfile</span>
+</div><div class="line"><a></a><span class="go"> * base: mirror.domain.tld</span>
+</div><div class="line"><a></a><span class="go"> * extras: mirror.domain.tld</span>
+</div><div class="line"><a></a><span class="go"> * updates: mirror.domain.tld</span>
+</div><div class="line"><a></a><span class="go">No packages marked for update</span></div></code></pre>
 <p>The easiest way to build a toolchain is to use the crosstool-ng project, so I
 went ahead and downloaded the latest version with the corresponding GPG
 signature, verified the signature (although the verification was very
 superficial since Bryan Hundven is not in my Web of Trust and the crosstool-ng
 website was not providing an HTTPS page to confirm the fingerprint of the key),
 and unpacked the sources:</p>
-<pre class="highlight" data-user="root"><code class="language-shell"><div class="lines"><a></a>[root@localhost ~]# yum -y install bison bzip2 flex gcc gcc-c++ glibc-static gperf help2man libstdc++-static libtool make ncurses-devel texinfo wget
-</div><div class="lines"><a></a>[root@localhost ~]# useradd -m build
-</div><div class="lines"><a></a>[root@localhost ~]# su - build
-</div><div class="lines"><a></a>[build@localhost ~]$ wget -q 'http://crosstool-ng.org/download/crosstool-ng/crosstool-ng-1.22.0.tar.xz'
-</div><div class="lines"><a></a>[build@localhost ~]$ wget -q 'http://crosstool-ng.org/download/crosstool-ng/crosstool-ng-1.22.0.tar.xz.sig'
-</div><div class="lines"><a></a>[build@localhost ~]$ gpg --recv-keys 35B871D1 --keyserver pgp.surfnet.nl
-</div><div class="lines"><a></a>gpg: &quot;--keyserver&quot; not a key ID: skipping
-</div><div class="lines"><a></a>gpg: &quot;pgp.surfnet.nl&quot; not a key ID: skipping
-</div><div class="lines"><a></a>gpg: requesting key 35B871D1 from hkp server keys.gnupg.net
-</div><div class="lines"><a></a>gpg: /home/build/.gnupg/trustdb.gpg: trustdb created
-</div><div class="lines"><a></a>gpg: key 35B871D1: public key &quot;Bryan Hundven &quot; imported
-</div><div class="lines"><a></a>gpg: Total number processed: 1
-</div><div class="lines"><a></a>gpg:               imported: 1  (RSA: 1)
-</div><div class="lines"><a></a>[build@localhost ~]$ gpg --verify crosstool-ng-1.22.0.tar.xz.sig
-</div><div class="lines"><a></a>gpg: Signature made Fri Nov 20 13:09:26 2015 UTC using RSA key ID 35B871D1
-</div><div class="lines"><a></a>gpg: Good signature from &quot;Bryan Hundven &quot;
-</div><div class="lines"><a></a>gpg:                 aka &quot;Bryan Hundven &quot;
-</div><div class="lines"><a></a>gpg:                 aka &quot;Bryan Hundven &quot;
-</div><div class="lines"><a></a>gpg:                 aka &quot;Bryan Hundven &quot;
-</div><div class="lines"><a></a>gpg:                 aka &quot;[jpeg image of size 3080]&quot;
-</div><div class="lines"><a></a>gpg:                 aka &quot;[jpeg image of size 16246]&quot;
-</div><div class="lines"><a></a>gpg: WARNING: This key is not certified with a trusted signature!
-</div><div class="lines"><a></a>gpg:          There is no indication that the signature belongs to the owner.
-</div><div class="lines"><a></a>Primary key fingerprint: 561E D9B6 2095 88ED 23C6  8329 CAD7 C8FC 35B8 71D1
-</div><div class="lines"><a></a>[build@localhost ~]$ tar xJSf crosstool-ng-1.22.0.tar.xz
-</div><div class="lines"><a></a>[build@localhost ~]$ rm crosstool-ng-1.22.0.tar.xz*</div></code></pre>
-
+<pre class="highlight" data-user="root"><code class="language-console"><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>yum -y install bison bzip2 flex gcc gcc-c++ glibc-static gperf help2man libstdc++-static libtool make ncurses-devel texinfo wget
+</div><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>useradd -m build
+</div><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>su - build
+</div><div class="line"><a></a><span class="gp">[build@localhost ~]$ </span>wget -q <span class="s1">&#39;http://crosstool-ng.org/download/crosstool-ng/crosstool-ng-1.22.0.tar.xz&#39;</span>
+</div><div class="line"><a></a><span class="gp">[build@localhost ~]$ </span>wget -q <span class="s1">&#39;http://crosstool-ng.org/download/crosstool-ng/crosstool-ng-1.22.0.tar.xz.sig&#39;</span>
+</div><div class="line"><a></a><span class="gp">[build@localhost ~]$ </span>gpg --recv-keys 35B871D1 --keyserver pgp.surfnet.nl
+</div><div class="line"><a></a><span class="go">gpg: &quot;--keyserver&quot; not a key ID: skipping</span>
+</div><div class="line"><a></a><span class="go">gpg: &quot;pgp.surfnet.nl&quot; not a key ID: skipping</span>
+</div><div class="line"><a></a><span class="go">gpg: requesting key 35B871D1 from hkp server keys.gnupg.net</span>
+</div><div class="line"><a></a><span class="go">gpg: /home/build/.gnupg/trustdb.gpg: trustdb created</span>
+</div><div class="line"><a></a><span class="go">gpg: key 35B871D1: public key &quot;Bryan Hundven &quot; imported</span>
+</div><div class="line"><a></a><span class="go">gpg: Total number processed: 1</span>
+</div><div class="line"><a></a><span class="go">gpg:               imported: 1  (RSA: 1)</span>
+</div><div class="line"><a></a><span class="gp">[build@localhost ~]$ </span>gpg --verify crosstool-ng-1.22.0.tar.xz.sig
+</div><div class="line"><a></a><span class="go">gpg: Signature made Fri Nov 20 13:09:26 2015 UTC using RSA key ID 35B871D1</span>
+</div><div class="line"><a></a><span class="go">gpg: Good signature from &quot;Bryan Hundven &quot;</span>
+</div><div class="line"><a></a><span class="go">gpg:                 aka &quot;Bryan Hundven &quot;</span>
+</div><div class="line"><a></a><span class="go">gpg:                 aka &quot;Bryan Hundven &quot;</span>
+</div><div class="line"><a></a><span class="go">gpg:                 aka &quot;Bryan Hundven &quot;</span>
+</div><div class="line"><a></a><span class="go">gpg:                 aka &quot;[jpeg image of size 3080]&quot;</span>
+</div><div class="line"><a></a><span class="go">gpg:                 aka &quot;[jpeg image of size 16246]&quot;</span>
+</div><div class="line"><a></a><span class="go">gpg: WARNING: This key is not certified with a trusted signature!</span>
+</div><div class="line"><a></a><span class="go">gpg:          There is no indication that the signature belongs to the owner.</span>
+</div><div class="line"><a></a><span class="go">Primary key fingerprint: 561E D9B6 2095 88ED 23C6  8329 CAD7 C8FC 35B8 71D1</span>
+</div><div class="line"><a></a><span class="gp">[build@localhost ~]$ </span>tar xJSf crosstool-ng-1.22.0.tar.xz
+</div><div class="line"><a></a><span class="gp">[build@localhost ~]$ </span>rm crosstool-ng-1.22.0.tar.xz*</div></code></pre>
 <p>The next step was to prepare the environment for the crosstool-ng build process:</p>
-<pre class="highlight" data-user="build"><code class="language-shell"><div class="lines"><a></a>[build@localhost ~]$ cd crosstool-ng
-</div><div class="lines"><a></a>[build@localhost ~]$ /configure --prefix=$HOME/ct-ng
-</div><div class="lines"><a></a>checking build system type... x86_64-pc-linux-gnu
-</div><div class="lines"><a></a>[skipped]
-</div><div class="lines"><a></a>configure: creating ./config.status
-</div><div class="lines"><a></a>config.status: creating Makefile
-</div><div class="lines"><a></a>[build@localhost ~]$ make
-</div><div class="lines"><a></a>  SED    'ct-ng'
-</div><div class="lines"><a></a>[skipped]
-</div><div class="lines"><a></a>  SED    'docs/ct-ng.1'
-</div><div class="lines"><a></a>  GZIP   'docs/ct-ng.1.gz'
-</div><div class="lines"><a></a>[build@localhost ~]$ make install
-</div><div class="lines"><a></a>  GEN    'config/configure.in'
-</div><div class="lines"><a></a>[skipped]</div></code></pre>
-
+<pre class="highlight" data-user="build"><code class="language-console"><div class="line"><a></a><span class="gp">[build@localhost ~]$ </span><span class="nb">cd</span> crosstool-ng
+</div><div class="line"><a></a><span class="gp">[build@localhost ~]$ </span>/configure --prefix<span class="o">=</span><span class="nv">$HOME</span>/ct-ng
+</div><div class="line"><a></a><span class="go">checking build system type... x86_64-pc-linux-gnu</span>
+</div><div class="line"><a></a><span class="go">[skipped]</span>
+</div><div class="line"><a></a><span class="go">configure: creating ./config.status</span>
+</div><div class="line"><a></a><span class="go">config.status: creating Makefile</span>
+</div><div class="line"><a></a><span class="gp">[build@localhost ~]$ </span>make
+</div><div class="line"><a></a><span class="go">  SED    &#39;ct-ng&#39;</span>
+</div><div class="line"><a></a><span class="go">[skipped]</span>
+</div><div class="line"><a></a><span class="go">  SED    &#39;docs/ct-ng.1&#39;</span>
+</div><div class="line"><a></a><span class="go">  GZIP   &#39;docs/ct-ng.1.gz&#39;</span>
+</div><div class="line"><a></a><span class="gp">[build@localhost ~]$ </span>make install
+</div><div class="line"><a></a><span class="go">  GEN    &#39;config/configure.in&#39;</span>
+</div><div class="line"><a></a><span class="go">[skipped]</span></div></code></pre>
 <p>For auto-completion, do not forget to install <code>ct-ng.comp</code> into your <code>bash</code>
 completion directory (usually <code>/etc/bash_completion.d/</code>)</p>
-<pre class="highlight" data-user="build"><code class="language-shell"><div class="lines"><a></a>[build@localhost ~]$ export PATH=$HOME/ct-ng/bin:$PATH
-</div><div class="lines"><a></a>[build@localhost ~]$ cd</div></code></pre>
-
+<pre class="highlight" data-user="build"><code class="language-console"><div class="line"><a></a><span class="gp">[build@localhost ~]$ </span><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$HOME</span>/ct-ng/bin:<span class="nv">$PATH</span>
+</div><div class="line"><a></a><span class="gp">[build@localhost ~]$ </span><span class="nb">cd</span></div></code></pre>
 <p>Once the above was done we are ready to actually configure and build our toolchain:</p>
-<pre class="highlight" data-user="build"><code class="language-shell"><div class="lines"><a></a>[build@localhost ~]$ mkdir ~/builddir
-</div><div class="lines"><a></a>[build@localhost ~]$ cd ~/builddir
-</div><div class="lines"><a></a>[build@localhost ~]$ ct-ng menuconfig</div></code></pre>
-
+<pre class="highlight" data-user="build"><code class="language-console"><div class="line"><a></a><span class="gp">[build@localhost ~]$ </span>mkdir ~/builddir
+</div><div class="line"><a></a><span class="gp">[build@localhost ~]$ </span><span class="nb">cd</span> ~/builddir
+</div><div class="line"><a></a><span class="gp">[build@localhost ~]$ </span>ct-ng menuconfig</div></code></pre>
 <p>I was quite happy with the defaults and the only changes I made were the
 following:</p>
 <ul>
@@ -256,77 +252,72 @@ binaries would not be properly linked to work with the OS on the board</p>
 <p>Once we are comfortable with the configuration of the future toolchain we exit
 the configuration menu (saving the changes) and launch the build process (it
 would take approximately an hour on AWS t2.small instance):</p>
-<pre class="highlight" data-user="build" data-prompt=""[build@localhost"><code class="language-shell"><div class="lines"><a></a>configuration written to .config
-</div><div class="lines"><a></a>
-</div><div class="lines"><a></a>*** End of the configuration.
-</div><div class="lines"><a></a>*** Execute 'ct-ng build' to start the build or try 'ct-ng help'.
-</div><div class="lines"><a></a>
-</div><div class="lines"><a></a>[build@localhost ~]$ ct-ng build
-</div><div class="lines"><a></a>[INFO ]  Performing some trivial sanity checks
-</div><div class="lines"><a></a>[INFO ]  Build started 20160522.070915
-</div><div class="lines"><a></a>[skipped]
-</div><div class="lines"><a></a>[INFO ]  Build completed at 20160522.080629
-</div><div class="lines"><a></a>[INFO ]  (elapsed: 57:14.18)
-</div><div class="lines"><a></a>[INFO ]  Finishing installation (may take a few seconds)...
-</div><div class="lines"><a></a>[57:15] /</div></code></pre>
-
+<pre class="highlight" data-user="build" data-prompt=""[build@localhost"><code class="language-console"><div class="line"><a></a><span class="go">configuration written to .config</span>
+</div><div class="line"><a></a>
+</div><div class="line"><a></a><span class="go">*** End of the configuration.</span>
+</div><div class="line"><a></a><span class="go">*** Execute &#39;ct-ng build&#39; to start the build or try &#39;ct-ng help&#39;.</span>
+</div><div class="line"><a></a>
+</div><div class="line"><a></a><span class="gp">[build@localhost ~]$ </span>ct-ng build
+</div><div class="line"><a></a><span class="go">[INFO ]  Performing some trivial sanity checks</span>
+</div><div class="line"><a></a><span class="go">[INFO ]  Build started 20160522.070915</span>
+</div><div class="line"><a></a><span class="go">[skipped]</span>
+</div><div class="line"><a></a><span class="go">[INFO ]  Build completed at 20160522.080629</span>
+</div><div class="line"><a></a><span class="go">[INFO ]  (elapsed: 57:14.18)</span>
+</div><div class="line"><a></a><span class="go">[INFO ]  Finishing installation (may take a few seconds)...</span>
+</div><div class="line"><a></a><span class="go">[57:15] /</span></div></code></pre>
 <p>Seems that our Raspberry Pi 3 toolchain is ready to be used. Let&rsquo;s compile
 something and see how it goes:</p>
-<pre class="highlight" data-user="build"><code class="language-shell"><div class="lines"><a></a>[build@localhost ~]$ export PATH=$HOME/x-tools/aarch64-rpi3-linux-gnueabi/bin:$PATH
-</div><div class="lines"><a></a>[build@localhost ~]$ aarch64-rpi3-linux-gnueabi-gcc --version
-</div><div class="lines"><a></a>aarch64-rpi3-linux-gnueabi-gcc (crosstool-NG crosstool-ng-1.22.0) 5.2.0
-</div><div class="lines"><a></a>Copyright (C) 2015 Free Software Foundation, Inc.
-</div><div class="lines"><a></a>This is free software; see the source for copying conditions.  There is NO
-</div><div class="lines"><a></a>warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-</div><div class="lines"><a></a>
-</div><div class="lines"><a></a>[build@localhost ~]$ printf '#include \nint main(){printf(&quot;Hello\\n&quot;); return 0;}\n' &gt; sample.c
-</div><div class="lines"><a></a>[build@localhost ~]$ aarch64-rpi3-linux-gnueabi-gcc -o sample sample.c
-</div><div class="lines"><a></a>[build@localhost ~]$ ls -l sample
-</div><div class="lines"><a></a>-rwxr-xr-x. 1 build build 7672 May 22 08:19 sample
-</div><div class="lines"><a></a>[build@localhost ~]$ file sample
-</div><div class="lines"><a></a>sample: ELF 64-bit LSB executable, ARM aarch64, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 4.3.0, not stripped</div></code></pre>
-
+<pre class="highlight" data-user="build"><code class="language-console"><div class="line"><a></a><span class="gp">[build@localhost ~]$ </span><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$HOME</span>/x-tools/aarch64-rpi3-linux-gnueabi/bin:<span class="nv">$PATH</span>
+</div><div class="line"><a></a><span class="gp">[build@localhost ~]$ </span>aarch64-rpi3-linux-gnueabi-gcc --version
+</div><div class="line"><a></a><span class="go">aarch64-rpi3-linux-gnueabi-gcc (crosstool-NG crosstool-ng-1.22.0) 5.2.0</span>
+</div><div class="line"><a></a><span class="go">Copyright (C) 2015 Free Software Foundation, Inc.</span>
+</div><div class="line"><a></a><span class="go">This is free software; see the source for copying conditions.  There is NO</span>
+</div><div class="line"><a></a><span class="go">warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</span>
+</div><div class="line"><a></a>
+</div><div class="line"><a></a><span class="gp">[build@localhost ~]$ </span><span class="nb">printf</span> <span class="s1">&#39;#include \nint main(){printf(&quot;Hello\\n&quot;); return 0;}\n&#39;</span> &gt; sample.c
+</div><div class="line"><a></a><span class="gp">[build@localhost ~]$ </span>aarch64-rpi3-linux-gnueabi-gcc -o sample sample.c
+</div><div class="line"><a></a><span class="gp">[build@localhost ~]$ </span>ls -l sample
+</div><div class="line"><a></a><span class="go">-rwxr-xr-x. 1 build build 7672 May 22 08:19 sample</span>
+</div><div class="line"><a></a><span class="gp">[build@localhost ~]$ </span>file sample
+</div><div class="line"><a></a><span class="go">sample: ELF 64-bit LSB executable, ARM aarch64, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 4.3.0, not stripped</span></div></code></pre>
 <p>Well, it is time to build some awesome stuff for Raspberry Pi 3, I guess, but
 this will be in another post. :)</p>
+				<footer>
+					<span><span class="contextual">Offloaded on </span><time datetime="2016-05-22T12:00:00+10:00">
+						<span class="month"><a href="/2016/05/" title="A link to the archives for May of 2016">May<span class="month full"></span></a></span>
+						<span class="day">22</span>
+						<span class="year"><a href="/2016/" title="A link to the archives for the year of 2016">2016</a></span>
+					</time></span>
+						<span class="contextual">into </span><span class="category"><a href="/category/linux/" title="A link to a collection of articles in the 'linux' category">linux</a></span>
+					<span class="contextual">and tagged with:</span>
 					<ul class="tags">
 						<li class="tag">
-							<div>
-								<a href="/tag/console/" class="tag name">console</a>
-							</div>
-							<a href="/tag/console/" class="tag count">7</a>
+							<span>
+								<a href="/tag/console/" rel="tag" title="A link to the collection tagged with 'console'" data-count="7" ><span>console</span></a>
+							</span>
 						</li>
 						<li class="tag">
-							<div>
-								<a href="/tag/howto/" class="tag name">howto</a>
-							</div>
-							<a href="/tag/howto/" class="tag count">4</a>
+							<span>
+								<a href="/tag/howto/" rel="tag" title="A link to the collection tagged with 'howto'" data-count="4" ><span>howto</span></a>
+							</span>
 						</li>
 						<li class="tag">
-							<div>
-								<a href="/tag/linux/" class="tag name">linux</a>
-							</div>
-							<a href="/tag/linux/" class="tag count">2</a>
+							<span>
+								<a href="/tag/linux/" rel="tag" title="A link to the collection tagged with 'linux'" data-count="2" ><span>linux</span></a>
+							</span>
 						</li>
 						<li class="tag">
-							<div>
-								<a href="/tag/raspberry-pi/" class="tag name">raspberry pi</a>
-							</div>
-							<a href="/tag/raspberry-pi/" class="tag count">1</a>
+							<span>
+								<a href="/tag/raspberry-pi/" rel="tag" title="A link to the collection tagged with 'raspberry pi'" data-count="1" ><span>raspberry pi</span></a>
+							</span>
 						</li>
-					</ul>
-					<footer>
-						Offloaded on
-						<time datetime="2016-05-22 12:00:00+10:00">Sun, 22/05/2016 at 12:00 (<a href="https://time.is/AEST" target="_blank" rel="noreferrer">AEST</a>)</time>
-						<span class="category-tag"><a href="/category/linux">linux</a></span>
-					</footer>				</article>
-			</div>
-		</div>
-		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-165060547-1"></script>
-		<script>
-			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments);}
-			gtag('js', new Date());
-			gtag('config', 'UA-165060547-1');
-		</script>
-	</body>
+						</ul>
+				</footer>
+			</article>
+		<footer>
+		</footer>
+	</main>
+	<footer>
+	</footer>
+</body>
 </html>

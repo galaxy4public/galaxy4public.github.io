@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - web design</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"></link><link href="https://dmitry.khlebnikov.net/feeds/web-design.atom.xml" rel="self"></link><id>https://dmitry.khlebnikov.net/</id><updated>2020-06-14T20:15:57+10:00</updated><entry><title>Truly Responsive Pagination</title><link href="https://dmitry.khlebnikov.net/2020/06/14/truly-responsive-pagination/" rel="alternate"></link><published>2020-06-14T20:07:00+10:00</published><updated>2020-06-14T20:15:57+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-06-14:/2020/06/14/truly-responsive-pagination/</id><summary type="html">&lt;p&gt;Searching the web for an example of a fully responsive pagination widget I
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - web design</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"></link><link href="https://dmitry.khlebnikov.net/feeds/web-design.atom.xml" rel="self"></link><id>https://dmitry.khlebnikov.net/</id><updated>2020-06-14T20:15:57+10:00</updated><subtitle>assorted bits of wit</subtitle><subtitle>assorted bits of wit</subtitle><entry><title>Truly Responsive Pagination</title><link href="https://dmitry.khlebnikov.net/2020/06/14/truly-responsive-pagination/" rel="alternate"></link><published>2020-06-14T20:07:00+10:00</published><updated>2020-06-14T20:15:57+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-06-14:/2020/06/14/truly-responsive-pagination/</id><summary type="html">&lt;p&gt;Searching the web for an example of a fully responsive pagination widget I
 found that either people consider &amp;ldquo;responsive&amp;rdquo; to be something else or that it
 is a non-trivial problem to solve.  In any case, I decided to have a crack at
 it myself.&lt;/p&gt;
@@ -8,7 +8,7 @@ it myself.&lt;/p&gt;
 should maintain its look and feel when the viewport (or a window) changes the
 size, yet the excessive information such as page numbers in the middle should
 be omitted if there is no space for them.&lt;/p&gt;
-&lt;p&gt;In this post I am going to &lt;span class="truncated"&gt;&lt;/span&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;Searching the web for an example of a fully responsive pagination widget I
+&lt;p&gt;In this post I am going to …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Searching the web for an example of a fully responsive pagination widget I
 found that either people consider &amp;ldquo;responsive&amp;rdquo; to be something else or that it
 is a non-trivial problem to solve.  In any case, I decided to have a crack at
 it myself.&lt;/p&gt;
@@ -21,23 +21,22 @@ be omitted if there is no space for them.&lt;/p&gt;
 ended up with.&lt;/p&gt;
 &lt;p&gt;My starting point was pretty simple &amp;ndash; I had the following HTML markup
 structure that was representing the page numbers in a pagination widget:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-html"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;&amp;lt;span class=&amp;quot;paginator&amp;quot;&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    &amp;lt;ul&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;&amp;amp;lt;&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;1&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;2&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;3&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;4&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;5&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;6&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;7&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;8&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;9&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;10&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;&amp;amp;gt;&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    &amp;lt;/ul&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;&amp;lt;/span&amp;gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
-
+&lt;pre class="highlight"&gt;&lt;code class="language-html"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;span&lt;/span&gt; &lt;span class="na"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;paginator&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;ul&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;#&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;&lt;span class="ni"&gt;&amp;amp;lt;&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;#&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;1&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;#&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;2&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;#&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;3&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;#&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;4&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;#&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;5&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;#&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;6&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;#&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;7&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;#&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;8&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;#&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;9&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;#&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;10&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;#&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;&lt;span class="ni"&gt;&amp;amp;gt;&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;ul&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;span&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The goal was to create a fully responsive widget using pure CSS and HTML and to
 try to avoid messing up the HTML structure unnecessarily, since I needed to
 preserve the &amp;ldquo;cleanness&amp;rdquo; of navigation for screen readers (i.e. accessibility
@@ -64,69 +63,67 @@ three logically separate components: a part before the selected page number (I
 call it &amp;ldquo;head&amp;rdquo;), a part containing the selected page number (I call it
 &amp;ldquo;middle&amp;rdquo;), and a part following the selected page number (I call it &amp;ldquo;tail&amp;rdquo;).
 Hence, my HTML markup became:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-html"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;&amp;lt;span class=&amp;quot;paginator&amp;quot;&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    &amp;lt;ul class=&amp;quot;head&amp;quot;&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;&amp;amp;lt;&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;1&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;2&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;3&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;4&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    &amp;lt;/ul&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    &amp;lt;ul class=&amp;quot;middle&amp;quot;&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;5&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    &amp;lt;/ul&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    &amp;lt;ul class=&amp;quot;tail&amp;quot;&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;6&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;7&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;8&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;9&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;10&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;&amp;amp;gt;&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    &amp;lt;/ul&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;&amp;lt;/span&amp;gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
-
+&lt;pre class="highlight"&gt;&lt;code class="language-html"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;span&lt;/span&gt; &lt;span class="na"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;paginator&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;ul&lt;/span&gt; &lt;span class="na"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;head&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;#&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;&lt;span class="ni"&gt;&amp;amp;lt;&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;#&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;1&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;#&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;2&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;#&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;3&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;#&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;4&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;ul&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;ul&lt;/span&gt; &lt;span class="na"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;middle&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;#&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;5&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;ul&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;ul&lt;/span&gt; &lt;span class="na"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;tail&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;#&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;6&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;#&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;7&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;#&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;8&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;#&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;9&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;#&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;10&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;#&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;&lt;span class="ni"&gt;&amp;amp;gt;&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;ul&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;span&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Initially, I just laid out the lists in a line just to see how it looks and
 whether I like the mechanics of it, so I started with the following style
 definitions:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-css"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;.paginator {
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    /* width: 50%; */
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    /* margin: 0 auto; */
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    display: flex;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    white-space: nowrap;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    overflow: hidden;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    min-width: 15em;    /* 5 items 3em each */
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;}
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;ul {
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    display: flex;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    position: relative;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    flex-flow: row wrap;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    list-style: none;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    margin: 0;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    padding: 0;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    line-height: 1.2;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    height: 3.2em;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    overflow: hidden;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    min-width: 6em;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;}
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;ul li {
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    display: block;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    width: 3em;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    height: 3em;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    line-height: 3;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;}
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;ul li a {
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    display: block;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    text-align: center;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    text-decoration: none;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;}
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;ul.middle {
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    min-width: 3em;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;}&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
-
+&lt;pre class="highlight"&gt;&lt;code class="language-css"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;paginator&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="c"&gt;/* width: 50%; */&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="c"&gt;/* margin: 0 auto; */&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="k"&gt;display&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;flex&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="k"&gt;white-space&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;nowrap&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="k"&gt;overflow&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;hidden&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="k"&gt;min-width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;15&lt;/span&gt;&lt;span class="kt"&gt;em&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;    &lt;span class="c"&gt;/* 5 items 3em each */&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="nt"&gt;ul&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="k"&gt;display&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;flex&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="k"&gt;position&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;relative&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="k"&gt;flex-flow&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;row&lt;/span&gt; &lt;span class="kc"&gt;wrap&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="k"&gt;list-style&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;none&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="k"&gt;margin&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="k"&gt;padding&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="k"&gt;line-height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;1.2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="k"&gt;height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;3.2&lt;/span&gt;&lt;span class="kt"&gt;em&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="k"&gt;overflow&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;hidden&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="k"&gt;min-width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="kt"&gt;em&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="nt"&gt;ul&lt;/span&gt; &lt;span class="nt"&gt;li&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="k"&gt;display&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;block&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="k"&gt;width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="kt"&gt;em&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="k"&gt;height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="kt"&gt;em&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="k"&gt;line-height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="nt"&gt;ul&lt;/span&gt; &lt;span class="nt"&gt;li&lt;/span&gt; &lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="k"&gt;display&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;block&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="k"&gt;text-align&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;center&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="k"&gt;text-decoration&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;none&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="nt"&gt;ul&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;middle&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="k"&gt;min-width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="kt"&gt;em&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The above produced the following result (the example is wrapped in a resizable
 &lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt;, so if you are using a browser that supports it, like Chrome, you
 should be able to play with it right away):&lt;/p&gt;
@@ -219,21 +216,19 @@ control which side of the row is used for wrapping.  However, if we adjust our
 HTML markup and leverage not so often used &lt;code&gt;row-reverse&lt;/code&gt; value of the flexbox,
 then achieve the desired effect.&lt;/p&gt;
 &lt;p&gt;So, in the HTML markup I reversed the &amp;ldquo;tail&amp;rdquo; list:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-html"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    &amp;lt;ul class=&amp;quot;tail&amp;quot;&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;&amp;amp;gt;&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;10&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;9&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;8&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;7&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;6&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    &amp;lt;/ul&amp;gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
-
+&lt;pre class="highlight"&gt;&lt;code class="language-html"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;ul&lt;/span&gt; &lt;span class="na"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;tail&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;#&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;&lt;span class="ni"&gt;&amp;amp;gt;&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;#&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;10&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;#&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;9&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;#&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;8&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;#&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;7&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;#&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;6&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;ul&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;and I adjusted the style of the &amp;ldquo;tail&amp;rdquo; list to apply &lt;code&gt;row-reverse&lt;/code&gt; (which basically
 visually presents the list in the reverse order):&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-css"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;ul.tail {
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    flex-flow: row-reverse wrap;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;}&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
-
+&lt;pre class="highlight"&gt;&lt;code class="language-css"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="nt"&gt;ul&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;tail&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="k"&gt;flex-flow&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;row-reverse&lt;/span&gt; &lt;span class="kc"&gt;wrap&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;With the above changes applied the result looks much more closer to what we
 want:&lt;/p&gt;
 &lt;div class="demo2 resizable"&gt;
@@ -307,17 +302,16 @@ want:&lt;/p&gt;
 &lt;p&gt;Now, to tackle with the visual guidance for the omitted page numbers we can do
 something like the following: we can display dots in space when the page number
 is being wrapped.  To do so we could use pseudo-elements for the &amp;ldquo;middle&amp;rdquo; list:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-css"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;ul.middle::before {
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    content: '';
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    width: 300%;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    height: 1em;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    position: absolute;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    z-index: -1;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    border-top: dotted;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    left: -100%;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    top: 1.5em;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;}&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
-
+&lt;pre class="highlight"&gt;&lt;code class="language-css"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="nt"&gt;ul&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;middle&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="nd"&gt;before&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="k"&gt;content&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="k"&gt;width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;300&lt;/span&gt;&lt;span class="kt"&gt;%&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="k"&gt;height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="kt"&gt;em&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="k"&gt;position&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;absolute&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="k"&gt;z-index&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;-1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="k"&gt;border-top&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;dotted&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="k"&gt;left&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;-100&lt;/span&gt;&lt;span class="kt"&gt;%&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="k"&gt;top&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;1.5&lt;/span&gt;&lt;span class="kt"&gt;em&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;A few things to note: we are creating a pseudo-element which is three times
 wider than its parent, we position it absolutely, shift it 1/3 to the left and
 half way down.  With the only border defined to be the top border we are
@@ -325,10 +319,9 @@ getting a dotted line that goes through the middle of our &amp;ldquo;middle&amp;
 &lt;p&gt;However, to make this work we also need to ensure that the border we created
 can extend beyond the box defined by the &amp;ldquo;middle&amp;rdquo; list, hence we need to set
 &lt;code&gt;overflow&lt;/code&gt; to &lt;code&gt;visible&lt;/code&gt; and let the border overflow the boundaries:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-css"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;ul.middle {
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    overflow: visible;  /* show the background dot line */
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;}&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
-
+&lt;pre class="highlight"&gt;&lt;code class="language-css"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="nt"&gt;ul&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;middle&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="k"&gt;overflow&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;visible&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;  &lt;span class="c"&gt;/* show the background dot line */&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Finally, some additional cosmetic touches are required:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;the list items have transparent background and the border line is visible
@@ -344,16 +337,15 @@ can extend beyond the box defined by the &amp;ldquo;middle&amp;rdquo; list, henc
     can do this by playing with &lt;code&gt;min-width&lt;/code&gt; for the &amp;ldquo;head&amp;rdquo; and &amp;ldquo;tail&amp;rdquo; lists.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;The above translates to the following styling rules:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-css"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;ul li {
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    z-index: 1;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    background: whitesmoke;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;}
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;ul.head,
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;ul.tail {
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    min-width: 6.5em;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;}&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
-
+&lt;pre class="highlight"&gt;&lt;code class="language-css"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="nt"&gt;ul&lt;/span&gt; &lt;span class="nt"&gt;li&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="k"&gt;z-index&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="k"&gt;background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;whitesmoke&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="nt"&gt;ul&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;head&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="nt"&gt;ul&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;tail&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="k"&gt;min-width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;6.5&lt;/span&gt;&lt;span class="kt"&gt;em&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;OK, it is time to see the result of all these changes:&lt;/p&gt;
 &lt;div class="demo3 resizable"&gt;
 &lt;style&gt;
@@ -468,7 +460,7 @@ cannot let it go until I find a satisfactory solution to the puzzle.&lt;/p&gt;
 &lt;p&gt;My blog heavily relies on me sharing session dumps and file excerpts using the
 code blocks.  I am using &lt;a href="https://prismjs.com"&gt;PrismJS&lt;/a&gt; to highlight syntax in these blocks.  However,
 after a while I found that there is one thing that really irritates me: these
-code blocks are not designed to be truly responsive, for instance &amp;ndash; when &lt;span class="truncated"&gt;&lt;/span&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;I am not a front-end developer, not a UI designer, nor a UX guru, but I am an
+code blocks are not designed to be truly responsive, for instance &amp;ndash; when …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I am not a front-end developer, not a UI designer, nor a UX guru, but I am an
 engineer, so when I face a puzzle worth solving my brain switches on and I
 cannot let it go until I find a satisfactory solution to the puzzle.&lt;/p&gt;
 &lt;p&gt;My blog heavily relies on me sharing session dumps and file excerpts using the
@@ -640,22 +632,21 @@ this is what we wanted to achieve at this step!&lt;/p&gt;
 marker should occupy the exactly the same height as the line block we are
 attaching it to.  Well, this can be easily done with the &lt;code&gt;::after&lt;/code&gt;
 pseudo-element:&lt;/p&gt;
-&lt;pre id="demo3" class="highlight line-numbers"&gt;&lt;code class="language-css"&gt;&lt;div id="demo3.1" class="lines"&gt;&lt;a href="#demo3.1"&gt;&lt;/a&gt;pre div.line {
-&lt;/div&gt;&lt;div id="demo3.2" class="lines"&gt;&lt;a href="#demo3.2"&gt;&lt;/a&gt;    position: relative; /* so we could position the child */
-&lt;/div&gt;&lt;div id="demo3.3" class="lines"&gt;&lt;a href="#demo3.3"&gt;&lt;/a&gt;    min-height: 1em;    /* to avoid collapsing empty lines */
-&lt;/div&gt;&lt;div id="demo3.4" class="lines"&gt;&lt;a href="#demo3.4"&gt;&lt;/a&gt;}
-&lt;/div&gt;&lt;div id="demo3.5" class="lines"&gt;&lt;a href="#demo3.5"&gt;&lt;/a&gt;
-&lt;/div&gt;&lt;div id="demo3.6" class="lines"&gt;&lt;a href="#demo3.6"&gt;&lt;/a&gt;pre div.line::after {
-&lt;/div&gt;&lt;div id="demo3.7" class="lines"&gt;&lt;a href="#demo3.7"&gt;&lt;/a&gt;    content: '';        /* we need content for pseudo elements */
-&lt;/div&gt;&lt;div id="demo3.8" class="lines"&gt;&lt;a href="#demo3.8"&gt;&lt;/a&gt;    position: absolute;
-&lt;/div&gt;&lt;div id="demo3.9" class="lines"&gt;&lt;a href="#demo3.9"&gt;&lt;/a&gt;    display: block;
-&lt;/div&gt;&lt;div id="demo3.10" class="lines"&gt;&lt;a href="#demo3.10"&gt;&lt;/a&gt;    width: 1em;     /* without width it will be invisible */
-&lt;/div&gt;&lt;div id="demo3.11" class="lines"&gt;&lt;a href="#demo3.11"&gt;&lt;/a&gt;    height: 100%;       /* to match the height of the parent */
-&lt;/div&gt;&lt;div id="demo3.12" class="lines"&gt;&lt;a href="#demo3.12"&gt;&lt;/a&gt;    top: 0;
-&lt;/div&gt;&lt;div id="demo3.13" class="lines"&gt;&lt;a href="#demo3.13"&gt;&lt;/a&gt;    right: -1em;
-&lt;/div&gt;&lt;div id="demo3.14" class="lines"&gt;&lt;a href="#demo3.14"&gt;&lt;/a&gt;    background-color: blue; /* temporary, to make it visible */
-&lt;/div&gt;&lt;div id="demo3.15" class="lines"&gt;&lt;a href="#demo3.15"&gt;&lt;/a&gt;}&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
-
+&lt;pre id="demo3" class="highlight line-numbers"&gt;&lt;code class="language-css"&gt;&lt;div id="demo3.1" class="line"&gt;&lt;a href="#demo3.1" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="nt"&gt;pre&lt;/span&gt; &lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;line&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo3.2" class="line"&gt;&lt;a href="#demo3.2" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;position&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;relative&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c"&gt;/* so we could position the child */&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo3.3" class="line"&gt;&lt;a href="#demo3.3" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;min-height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="kt"&gt;em&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;    &lt;span class="c"&gt;/* to avoid collapsing empty lines */&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo3.4" class="line"&gt;&lt;a href="#demo3.4" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo3.5" class="line"&gt;&lt;a href="#demo3.5" aria-hidden="true"&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div id="demo3.6" class="line"&gt;&lt;a href="#demo3.6" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="nt"&gt;pre&lt;/span&gt; &lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;line&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="nd"&gt;after&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo3.7" class="line"&gt;&lt;a href="#demo3.7" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;content&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;        &lt;span class="c"&gt;/* we need content for pseudo elements */&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo3.8" class="line"&gt;&lt;a href="#demo3.8" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;position&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;absolute&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo3.9" class="line"&gt;&lt;a href="#demo3.9" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;display&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;block&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo3.10" class="line"&gt;&lt;a href="#demo3.10" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="kt"&gt;em&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;     &lt;span class="c"&gt;/* without width it will be invisible */&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo3.11" class="line"&gt;&lt;a href="#demo3.11" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="kt"&gt;%&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;       &lt;span class="c"&gt;/* to match the height of the parent */&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo3.12" class="line"&gt;&lt;a href="#demo3.12" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;top&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo3.13" class="line"&gt;&lt;a href="#demo3.13" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;right&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;-1&lt;/span&gt;&lt;span class="kt"&gt;em&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo3.14" class="line"&gt;&lt;a href="#demo3.14" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;background-color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;blue&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c"&gt;/* temporary, to make it visible */&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo3.15" class="line"&gt;&lt;a href="#demo3.15" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Note that we also introduced &lt;code&gt;position: relative&lt;/code&gt; to our &lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt;&amp;lsquo;s.  It is
 needed since if we want to position our pseudo-element relative to its parent,
 the parent needs to have the position attribute set to anything but &lt;code&gt;static&lt;/code&gt;.
@@ -699,12 +690,11 @@ choose SVG everytime.&lt;/p&gt;
 &lt;p&gt;Ideally, I did not want to use an image, but I could not figure out how I could
 put a repeating text block next to my lines, hence I found the following
 compromise (this is the content of the SVG file I created):&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-svg"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;&amp;lt;svg xmlns=&amp;quot;http://www.w3.org/2000/svg&amp;quot;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        version=&amp;quot;1.1&amp;quot;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        viewBox=&amp;quot;0 0 24 24&amp;quot;&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    &amp;lt;text x=&amp;quot;0&amp;quot; y=&amp;quot;19&amp;quot;&amp;gt;&amp;amp;#x23ce;&amp;lt;/text&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;&amp;lt;/svg&amp;gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
-
+&lt;pre class="highlight"&gt;&lt;code class="language-svg"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;svg&lt;/span&gt; &lt;span class="nt"&gt;xmlns&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;http://www.w3.org/2000/svg&amp;quot;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;        &lt;span class="nt"&gt;version&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;1.1&amp;quot;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;        &lt;span class="nt"&gt;viewBox&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;0 0 24 24&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;text&lt;/span&gt; &lt;span class="nt"&gt;x&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;0&amp;quot;&lt;/span&gt; &lt;span class="nt"&gt;y&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;19&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;amp;&lt;/span&gt;&lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="nn"&gt;x23ce&lt;/span&gt;&lt;span class="o"&gt;;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;text&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="o"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;svg&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The first two lines are mandatory and describe to a browser that it works with
 an SVG image file.&lt;/p&gt;
 &lt;p&gt;The third line (&lt;code&gt;viewBox=&lt;/code&gt;) is really important since it allows the SVG image
@@ -718,39 +708,37 @@ adequate symbol to represent a line wrap point.&lt;/p&gt;
 but since the content of the SVG file is so small and I did not want to host it
 externally (it would be an additional fetch request and more maintenance), I
 just did the following:&lt;/p&gt;
-&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-shell"&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[user@localhost ~]$ cat nl.svg 
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;&amp;lt;svg xmlns=&amp;quot;http://www.w3.org/2000/svg&amp;quot;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        version=&amp;quot;1.1&amp;quot;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;        viewBox=&amp;quot;0 0 24 24&amp;quot;&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;    &amp;lt;text x=&amp;quot;0&amp;quot; y=&amp;quot;19&amp;quot;&amp;gt;&amp;amp;#x23ce;&amp;lt;/text&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;&amp;lt;/svg&amp;gt;
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;[user@localhost ~]$ sed -n '1{h;d};$!H;${H;x;s,\s\+, ,g;s,&amp;gt;\s*&amp;lt;,&amp;gt;&amp;lt;,g;p}' nl.svg | base64 -w 0 ; echo
-&lt;/div&gt;&lt;div class="lines"&gt;&lt;a&gt;&lt;/a&gt;PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
-
+&lt;pre class="highlight" data-user="user"&gt;&lt;code class="language-console"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp"&gt;[user@localhost ~]$ &lt;/span&gt;cat nl.svg 
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;&amp;lt;svg xmlns=&amp;quot;http://www.w3.org/2000/svg&amp;quot;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;        version=&amp;quot;1.1&amp;quot;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;        viewBox=&amp;quot;0 0 24 24&amp;quot;&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;    &amp;lt;text x=&amp;quot;0&amp;quot; y=&amp;quot;19&amp;quot;&amp;gt;&amp;amp;#x23ce;&amp;lt;/text&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;&amp;lt;/svg&amp;gt;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp"&gt;[user@localhost ~]$ &lt;/span&gt;sed -n &lt;span class="s1"&gt;&amp;#39;1{h;d};$!H;${H;x;s,\s\+, ,g;s,&amp;gt;\s*&amp;lt;,&amp;gt;&amp;lt;,g;p}&amp;#39;&lt;/span&gt; nl.svg &lt;span class="p"&gt;|&lt;/span&gt; base64 -w &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;In other words, I removed all the white space, then deleted all line breaks, so
 I got a single line SVG body, and I converted it to Base64.  The resulting line
 is usable as the inline definition of an image.  Let&amp;rsquo;s update our stylesheet
 with the new values (we just replaced the last line to change the &lt;code&gt;background&lt;/code&gt;
 to &lt;code&gt;background-image&lt;/code&gt;) and added dimensions for the background itself:&lt;/p&gt;
-&lt;pre id="demo4" class="highlight line-numbers"&gt;&lt;code class="language-css"&gt;&lt;div id="demo4.1" class="lines"&gt;&lt;a href="#demo4.1"&gt;&lt;/a&gt;pre div.line {
-&lt;/div&gt;&lt;div id="demo4.2" class="lines"&gt;&lt;a href="#demo4.2"&gt;&lt;/a&gt;    position: relative; /* so we could position the child */
-&lt;/div&gt;&lt;div id="demo4.3" class="lines"&gt;&lt;a href="#demo4.3"&gt;&lt;/a&gt;    min-height: 1em;    /* to avoid collapsing empty lines */
-&lt;/div&gt;&lt;div id="demo4.4" class="lines"&gt;&lt;a href="#demo4.4"&gt;&lt;/a&gt;}
-&lt;/div&gt;&lt;div id="demo4.5" class="lines"&gt;&lt;a href="#demo4.5"&gt;&lt;/a&gt;
-&lt;/div&gt;&lt;div id="demo4.6" class="lines"&gt;&lt;a href="#demo4.6"&gt;&lt;/a&gt;pre div.line::after {
-&lt;/div&gt;&lt;div id="demo4.7" class="lines"&gt;&lt;a href="#demo4.7"&gt;&lt;/a&gt;    content: '';        /* we need content for pseudo elements */
-&lt;/div&gt;&lt;div id="demo4.8" class="lines"&gt;&lt;a href="#demo4.8"&gt;&lt;/a&gt;    position: absolute;
-&lt;/div&gt;&lt;div id="demo4.9" class="lines"&gt;&lt;a href="#demo4.9"&gt;&lt;/a&gt;    display: block;
-&lt;/div&gt;&lt;div id="demo4.10" class="lines"&gt;&lt;a href="#demo4.10"&gt;&lt;/a&gt;    width: 1em;     /* without width it will be invisible */
-&lt;/div&gt;&lt;div id="demo4.11" class="lines"&gt;&lt;a href="#demo4.11"&gt;&lt;/a&gt;    height: 100%;       /* to match the height of the parent */
-&lt;/div&gt;&lt;div id="demo4.12" class="lines"&gt;&lt;a href="#demo4.12"&gt;&lt;/a&gt;    top: 0;
-&lt;/div&gt;&lt;div id="demo4.13" class="lines"&gt;&lt;a href="#demo4.13"&gt;&lt;/a&gt;    right: -1em;
-&lt;/div&gt;&lt;div id="demo4.14" class="lines"&gt;&lt;a href="#demo4.14"&gt;&lt;/a&gt;    background-image:
-&lt;/div&gt;&lt;div id="demo4.15" class="lines"&gt;&lt;a href="#demo4.15"&gt;&lt;/a&gt;        url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
-&lt;/div&gt;&lt;div id="demo4.16" class="lines"&gt;&lt;a href="#demo4.16"&gt;&lt;/a&gt;        no-repeat repeat;
-&lt;/div&gt;&lt;div id="demo4.17" class="lines"&gt;&lt;a href="#demo4.17"&gt;&lt;/a&gt;    background-size: 1em 1em;
-&lt;/div&gt;&lt;div id="demo4.18" class="lines"&gt;&lt;a href="#demo4.18"&gt;&lt;/a&gt;}&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
-
+&lt;pre id="demo4" class="highlight line-numbers"&gt;&lt;code class="language-css"&gt;&lt;div id="demo4.1" class="line"&gt;&lt;a href="#demo4.1" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="nt"&gt;pre&lt;/span&gt; &lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;line&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo4.2" class="line"&gt;&lt;a href="#demo4.2" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;position&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;relative&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c"&gt;/* so we could position the child */&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo4.3" class="line"&gt;&lt;a href="#demo4.3" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;min-height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="kt"&gt;em&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;    &lt;span class="c"&gt;/* to avoid collapsing empty lines */&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo4.4" class="line"&gt;&lt;a href="#demo4.4" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo4.5" class="line"&gt;&lt;a href="#demo4.5" aria-hidden="true"&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div id="demo4.6" class="line"&gt;&lt;a href="#demo4.6" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="nt"&gt;pre&lt;/span&gt; &lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;line&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="nd"&gt;after&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo4.7" class="line"&gt;&lt;a href="#demo4.7" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;content&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;        &lt;span class="c"&gt;/* we need content for pseudo elements */&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo4.8" class="line"&gt;&lt;a href="#demo4.8" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;position&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;absolute&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo4.9" class="line"&gt;&lt;a href="#demo4.9" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;display&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;block&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo4.10" class="line"&gt;&lt;a href="#demo4.10" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="kt"&gt;em&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;     &lt;span class="c"&gt;/* without width it will be invisible */&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo4.11" class="line"&gt;&lt;a href="#demo4.11" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="kt"&gt;%&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;       &lt;span class="c"&gt;/* to match the height of the parent */&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo4.12" class="line"&gt;&lt;a href="#demo4.12" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;top&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo4.13" class="line"&gt;&lt;a href="#demo4.13" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;right&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;-1&lt;/span&gt;&lt;span class="kt"&gt;em&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo4.14" class="line"&gt;&lt;a href="#demo4.14" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;background-image&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo4.15" class="line"&gt;&lt;a href="#demo4.15" aria-hidden="true"&gt;&lt;/a&gt;        &lt;span class="nb"&gt;url&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sx"&gt;data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo4.16" class="line"&gt;&lt;a href="#demo4.16" aria-hidden="true"&gt;&lt;/a&gt;        &lt;span class="kc"&gt;no-repeat&lt;/span&gt; &lt;span class="kc"&gt;repeat&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo4.17" class="line"&gt;&lt;a href="#demo4.17" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;background-size&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="kt"&gt;em&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="kt"&gt;em&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo4.18" class="line"&gt;&lt;a href="#demo4.18" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;div class="demo4 resizable"&gt;
     &lt;style&gt;
         div.demo4 pre div.line {
@@ -792,26 +780,25 @@ our lines (reading documentation you may find that the default value is
 &lt;code&gt;normal&lt;/code&gt; and you can also find that &lt;code&gt;normal&lt;/code&gt; equals &lt;code&gt;1.2&lt;/code&gt; for the majority of
 browsers, but relying on that, I think is a bad idea).  We also need to adjust
 our markers with the new information we have got:&lt;/p&gt;
-&lt;pre id="demo5" class="highlight"&gt;&lt;code class="language-css"&gt;&lt;div id="demo5.1" class="lines"&gt;&lt;a href="#demo5.1"&gt;&lt;/a&gt;pre div.line {
-&lt;/div&gt;&lt;div id="demo5.2" class="lines"&gt;&lt;a href="#demo5.2"&gt;&lt;/a&gt;    position: relative; /* so we could position the child */
-&lt;/div&gt;&lt;div id="demo5.3" class="lines"&gt;&lt;a href="#demo5.3"&gt;&lt;/a&gt;    min-height: 1em;    /* to avoid collapsing empty lines */
-&lt;/div&gt;&lt;div id="demo5.4" class="lines"&gt;&lt;a href="#demo5.4"&gt;&lt;/a&gt;    line-height: 1.2;   /* set the height explicitly */
-&lt;/div&gt;&lt;div id="demo5.5" class="lines"&gt;&lt;a href="#demo5.5"&gt;&lt;/a&gt;}
-&lt;/div&gt;&lt;div id="demo5.6" class="lines"&gt;&lt;a href="#demo5.6"&gt;&lt;/a&gt;
-&lt;/div&gt;&lt;div id="demo5.7" class="lines"&gt;&lt;a href="#demo5.7"&gt;&lt;/a&gt;pre div.line::after {
-&lt;/div&gt;&lt;div id="demo5.8" class="lines"&gt;&lt;a href="#demo5.8"&gt;&lt;/a&gt;    content: '';        /* we need content for pseudo elements */
-&lt;/div&gt;&lt;div id="demo5.9" class="lines"&gt;&lt;a href="#demo5.9"&gt;&lt;/a&gt;    position: absolute;
-&lt;/div&gt;&lt;div id="demo5.10" class="lines"&gt;&lt;a href="#demo5.10"&gt;&lt;/a&gt;    display: block;
-&lt;/div&gt;&lt;div id="demo5.11" class="lines"&gt;&lt;a href="#demo5.11"&gt;&lt;/a&gt;    width: 1.2em;       /* without width it will be invisible */
-&lt;/div&gt;&lt;div id="demo5.12" class="lines"&gt;&lt;a href="#demo5.12"&gt;&lt;/a&gt;    height: 100%;       /* to match the height of the parent */
-&lt;/div&gt;&lt;div id="demo5.13" class="lines"&gt;&lt;a href="#demo5.13"&gt;&lt;/a&gt;    top: 0;
-&lt;/div&gt;&lt;div id="demo5.14" class="lines"&gt;&lt;a href="#demo5.14"&gt;&lt;/a&gt;    right: -1.2em;
-&lt;/div&gt;&lt;div id="demo5.15" class="lines"&gt;&lt;a href="#demo5.15"&gt;&lt;/a&gt;    background-image:
-&lt;/div&gt;&lt;div id="demo5.16" class="lines"&gt;&lt;a href="#demo5.16"&gt;&lt;/a&gt;        url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
-&lt;/div&gt;&lt;div id="demo5.17" class="lines"&gt;&lt;a href="#demo5.17"&gt;&lt;/a&gt;        no-repeat repeat;
-&lt;/div&gt;&lt;div id="demo5.18" class="lines"&gt;&lt;a href="#demo5.18"&gt;&lt;/a&gt;    background-size: 1.2em 1.2em;
-&lt;/div&gt;&lt;div id="demo5.19" class="lines"&gt;&lt;a href="#demo5.19"&gt;&lt;/a&gt;}&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
-
+&lt;pre id="demo5" class="highlight"&gt;&lt;code class="language-css"&gt;&lt;div id="demo5.1" class="line"&gt;&lt;a href="#demo5.1" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="nt"&gt;pre&lt;/span&gt; &lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;line&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo5.2" class="line"&gt;&lt;a href="#demo5.2" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;position&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;relative&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c"&gt;/* so we could position the child */&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo5.3" class="line"&gt;&lt;a href="#demo5.3" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;min-height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="kt"&gt;em&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;    &lt;span class="c"&gt;/* to avoid collapsing empty lines */&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo5.4" class="line"&gt;&lt;a href="#demo5.4" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;line-height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;1.2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;   &lt;span class="c"&gt;/* set the height explicitly */&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo5.5" class="line"&gt;&lt;a href="#demo5.5" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo5.6" class="line"&gt;&lt;a href="#demo5.6" aria-hidden="true"&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div id="demo5.7" class="line"&gt;&lt;a href="#demo5.7" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="nt"&gt;pre&lt;/span&gt; &lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;line&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="nd"&gt;after&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo5.8" class="line"&gt;&lt;a href="#demo5.8" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;content&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;        &lt;span class="c"&gt;/* we need content for pseudo elements */&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo5.9" class="line"&gt;&lt;a href="#demo5.9" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;position&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;absolute&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo5.10" class="line"&gt;&lt;a href="#demo5.10" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;display&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;block&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo5.11" class="line"&gt;&lt;a href="#demo5.11" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;1.2&lt;/span&gt;&lt;span class="kt"&gt;em&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;       &lt;span class="c"&gt;/* without width it will be invisible */&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo5.12" class="line"&gt;&lt;a href="#demo5.12" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="kt"&gt;%&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;       &lt;span class="c"&gt;/* to match the height of the parent */&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo5.13" class="line"&gt;&lt;a href="#demo5.13" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;top&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo5.14" class="line"&gt;&lt;a href="#demo5.14" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;right&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;-1.2&lt;/span&gt;&lt;span class="kt"&gt;em&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo5.15" class="line"&gt;&lt;a href="#demo5.15" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;background-image&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo5.16" class="line"&gt;&lt;a href="#demo5.16" aria-hidden="true"&gt;&lt;/a&gt;        &lt;span class="nb"&gt;url&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sx"&gt;data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo5.17" class="line"&gt;&lt;a href="#demo5.17" aria-hidden="true"&gt;&lt;/a&gt;        &lt;span class="kc"&gt;no-repeat&lt;/span&gt; &lt;span class="kc"&gt;repeat&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo5.18" class="line"&gt;&lt;a href="#demo5.18" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;background-size&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;1.2&lt;/span&gt;&lt;span class="kt"&gt;em&lt;/span&gt; &lt;span class="mf"&gt;1.2&lt;/span&gt;&lt;span class="kt"&gt;em&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo5.19" class="line"&gt;&lt;a href="#demo5.19" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;div class="demo5 resizable"&gt;
     &lt;style&gt;
         div.demo5 pre div.line {
@@ -846,29 +833,28 @@ it done:&lt;/p&gt;
 &lt;p&gt;To address the latter a simple play with the &lt;code&gt;opacity&lt;/code&gt; attribute will suffice,
 e.g. I think 50% transparency should make the marker less distracting.&lt;/p&gt;
 &lt;p&gt;The former, however, requires some thinking.  Given that the post is already too long, I will just state that out of multiple options I had I chose the following: raise the background image by one &lt;code&gt;line-height&lt;/code&gt; from the bottom, and clip a square 1x1 &lt;code&gt;line-height&lt;/code&gt; at the top to compensate, as follows:&lt;/p&gt;
-&lt;pre id="demo6" class="highlight"&gt;&lt;code class="language-css"&gt;&lt;div id="demo6.1" class="lines"&gt;&lt;a href="#demo6.1"&gt;&lt;/a&gt;pre div.line {
-&lt;/div&gt;&lt;div id="demo6.2" class="lines"&gt;&lt;a href="#demo6.2"&gt;&lt;/a&gt;    position: relative; /* so we could position the child */
-&lt;/div&gt;&lt;div id="demo6.3" class="lines"&gt;&lt;a href="#demo6.3"&gt;&lt;/a&gt;    min-height: 1em;    /* to avoid collapsing empty lines */
-&lt;/div&gt;&lt;div id="demo6.4" class="lines"&gt;&lt;a href="#demo6.4"&gt;&lt;/a&gt;    line-height: 1.2;   /* set the height explicitly */
-&lt;/div&gt;&lt;div id="demo6.5" class="lines"&gt;&lt;a href="#demo6.5"&gt;&lt;/a&gt;}
-&lt;/div&gt;&lt;div id="demo6.6" class="lines"&gt;&lt;a href="#demo6.6"&gt;&lt;/a&gt;
-&lt;/div&gt;&lt;div id="demo6.7" class="lines"&gt;&lt;a href="#demo6.7"&gt;&lt;/a&gt;pre div.line::after {
-&lt;/div&gt;&lt;div id="demo6.8" class="lines"&gt;&lt;a href="#demo6.8"&gt;&lt;/a&gt;    content: '';        /* we need content for pseudo elements */
-&lt;/div&gt;&lt;div id="demo6.9" class="lines"&gt;&lt;a href="#demo6.9"&gt;&lt;/a&gt;    position: absolute;
-&lt;/div&gt;&lt;div id="demo6.10" class="lines"&gt;&lt;a href="#demo6.10"&gt;&lt;/a&gt;    display: block;
-&lt;/div&gt;&lt;div id="demo6.11" class="lines"&gt;&lt;a href="#demo6.11"&gt;&lt;/a&gt;    width: 1.2em;       /* without width it will be invisible */
-&lt;/div&gt;&lt;div id="demo6.12" class="lines"&gt;&lt;a href="#demo6.12"&gt;&lt;/a&gt;    height: 100%;       /* to match the height of the parent */
-&lt;/div&gt;&lt;div id="demo6.13" class="lines"&gt;&lt;a href="#demo6.13"&gt;&lt;/a&gt;    bottom: 0;
-&lt;/div&gt;&lt;div id="demo6.14" class="lines"&gt;&lt;a href="#demo6.14"&gt;&lt;/a&gt;    right: -1.2em;
-&lt;/div&gt;&lt;div id="demo6.15" class="lines"&gt;&lt;a href="#demo6.15"&gt;&lt;/a&gt;    background-image:
-&lt;/div&gt;&lt;div id="demo6.16" class="lines"&gt;&lt;a href="#demo6.16"&gt;&lt;/a&gt;        url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
-&lt;/div&gt;&lt;div id="demo6.17" class="lines"&gt;&lt;a href="#demo6.17"&gt;&lt;/a&gt;        no-repeat repeat;
-&lt;/div&gt;&lt;div id="demo6.18" class="lines"&gt;&lt;a href="#demo6.18"&gt;&lt;/a&gt;    background-size: 1.2em 1.2em;
-&lt;/div&gt;&lt;div id="demo6.19" class="lines"&gt;&lt;a href="#demo6.19"&gt;&lt;/a&gt;    margin-bottom: 0;
-&lt;/div&gt;&lt;div id="demo6.20" class="lines"&gt;&lt;a href="#demo6.20"&gt;&lt;/a&gt;    clip: rect(1.2em 1.2em 100vh 0);
-&lt;/div&gt;&lt;div id="demo6.21" class="lines"&gt;&lt;a href="#demo6.21"&gt;&lt;/a&gt;    opacity: .5;
-&lt;/div&gt;&lt;div id="demo6.22" class="lines"&gt;&lt;a href="#demo6.22"&gt;&lt;/a&gt;}&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
-
+&lt;pre id="demo6" class="highlight"&gt;&lt;code class="language-css"&gt;&lt;div id="demo6.1" class="line"&gt;&lt;a href="#demo6.1" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="nt"&gt;pre&lt;/span&gt; &lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;line&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo6.2" class="line"&gt;&lt;a href="#demo6.2" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;position&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;relative&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c"&gt;/* so we could position the child */&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo6.3" class="line"&gt;&lt;a href="#demo6.3" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;min-height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="kt"&gt;em&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;    &lt;span class="c"&gt;/* to avoid collapsing empty lines */&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo6.4" class="line"&gt;&lt;a href="#demo6.4" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;line-height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;1.2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;   &lt;span class="c"&gt;/* set the height explicitly */&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo6.5" class="line"&gt;&lt;a href="#demo6.5" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo6.6" class="line"&gt;&lt;a href="#demo6.6" aria-hidden="true"&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div id="demo6.7" class="line"&gt;&lt;a href="#demo6.7" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="nt"&gt;pre&lt;/span&gt; &lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;line&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="nd"&gt;after&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo6.8" class="line"&gt;&lt;a href="#demo6.8" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;content&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;        &lt;span class="c"&gt;/* we need content for pseudo elements */&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo6.9" class="line"&gt;&lt;a href="#demo6.9" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;position&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;absolute&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo6.10" class="line"&gt;&lt;a href="#demo6.10" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;display&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;block&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo6.11" class="line"&gt;&lt;a href="#demo6.11" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;1.2&lt;/span&gt;&lt;span class="kt"&gt;em&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;       &lt;span class="c"&gt;/* without width it will be invisible */&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo6.12" class="line"&gt;&lt;a href="#demo6.12" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="kt"&gt;%&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;       &lt;span class="c"&gt;/* to match the height of the parent */&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo6.13" class="line"&gt;&lt;a href="#demo6.13" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;bottom&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo6.14" class="line"&gt;&lt;a href="#demo6.14" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;right&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;-1.2&lt;/span&gt;&lt;span class="kt"&gt;em&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo6.15" class="line"&gt;&lt;a href="#demo6.15" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;background-image&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo6.16" class="line"&gt;&lt;a href="#demo6.16" aria-hidden="true"&gt;&lt;/a&gt;        &lt;span class="nb"&gt;url&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sx"&gt;data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo6.17" class="line"&gt;&lt;a href="#demo6.17" aria-hidden="true"&gt;&lt;/a&gt;        &lt;span class="kc"&gt;no-repeat&lt;/span&gt; &lt;span class="kc"&gt;repeat&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo6.18" class="line"&gt;&lt;a href="#demo6.18" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;background-size&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;1.2&lt;/span&gt;&lt;span class="kt"&gt;em&lt;/span&gt; &lt;span class="mf"&gt;1.2&lt;/span&gt;&lt;span class="kt"&gt;em&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo6.19" class="line"&gt;&lt;a href="#demo6.19" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;margin-bottom&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo6.20" class="line"&gt;&lt;a href="#demo6.20" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;clip&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;rect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;1.2&lt;/span&gt;&lt;span class="kt"&gt;em&lt;/span&gt; &lt;span class="mf"&gt;1.2&lt;/span&gt;&lt;span class="kt"&gt;em&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="kt"&gt;vh&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo6.21" class="line"&gt;&lt;a href="#demo6.21" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;opacity&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;.5&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo6.22" class="line"&gt;&lt;a href="#demo6.22" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The only tricky part in the added lines is the &lt;code&gt;clip: rect(1.2em 1.2em 100vh
 0)&lt;/code&gt; line.  The &lt;code&gt;clip&lt;/code&gt; property defines the visible rectangle the browser should
 preserve, but there is a conundrum: the height of the wrapped line is variable,
@@ -913,32 +899,31 @@ this is exactly what we want :).&lt;/p&gt;
 &lt;h2 id="bonus-round"&gt;Bonus Round&lt;/h2&gt;
 &lt;p&gt;It should be mentioned, it is also possible to apply the same approach to the
 left side of the lines with a bit of a twist.&lt;/p&gt;
-&lt;pre id="demo7" class="highlight"&gt;&lt;code class="language-css"&gt;&lt;div id="demo7.1" class="lines"&gt;&lt;a href="#demo7.1"&gt;&lt;/a&gt;pre div.line {
-&lt;/div&gt;&lt;div id="demo7.2" class="lines"&gt;&lt;a href="#demo7.2"&gt;&lt;/a&gt;    position: relative; /* so we could position the child */
-&lt;/div&gt;&lt;div id="demo7.3" class="lines"&gt;&lt;a href="#demo7.3"&gt;&lt;/a&gt;    min-height: 1em;    /* to avoid collapsing empty lines */
-&lt;/div&gt;&lt;div id="demo7.4" class="lines"&gt;&lt;a href="#demo7.4"&gt;&lt;/a&gt;    line-height: 1.2;   /* set the height explicitly */
-&lt;/div&gt;&lt;div id="demo7.5" class="lines"&gt;&lt;a href="#demo7.5"&gt;&lt;/a&gt;    text-indent: -1.2em;    /* first line indent */
-&lt;/div&gt;&lt;div id="demo7.6" class="lines"&gt;&lt;a href="#demo7.6"&gt;&lt;/a&gt;    padding-left: 1.2em;    /* padding for the line */
-&lt;/div&gt;&lt;div id="demo7.7" class="lines"&gt;&lt;a href="#demo7.7"&gt;&lt;/a&gt;}
-&lt;/div&gt;&lt;div id="demo7.8" class="lines"&gt;&lt;a href="#demo7.8"&gt;&lt;/a&gt;
-&lt;/div&gt;&lt;div id="demo7.9" class="lines"&gt;&lt;a href="#demo7.9"&gt;&lt;/a&gt;pre div.line::before {
-&lt;/div&gt;&lt;div id="demo7.10" class="lines"&gt;&lt;a href="#demo7.10"&gt;&lt;/a&gt;    content: '';        /* we need content for pseudo elements */
-&lt;/div&gt;&lt;div id="demo7.11" class="lines"&gt;&lt;a href="#demo7.11"&gt;&lt;/a&gt;    position: absolute;
-&lt;/div&gt;&lt;div id="demo7.12" class="lines"&gt;&lt;a href="#demo7.12"&gt;&lt;/a&gt;    display: block;
-&lt;/div&gt;&lt;div id="demo7.13" class="lines"&gt;&lt;a href="#demo7.13"&gt;&lt;/a&gt;    width: 1.2em;       /* without width it will be invisible */
-&lt;/div&gt;&lt;div id="demo7.14" class="lines"&gt;&lt;a href="#demo7.14"&gt;&lt;/a&gt;    height: 100%;       /* to match the height of the parent */
-&lt;/div&gt;&lt;div id="demo7.15" class="lines"&gt;&lt;a href="#demo7.15"&gt;&lt;/a&gt;    top: 0;
-&lt;/div&gt;&lt;div id="demo7.16" class="lines"&gt;&lt;a href="#demo7.16"&gt;&lt;/a&gt;    left: 0;
-&lt;/div&gt;&lt;div id="demo7.17" class="lines"&gt;&lt;a href="#demo7.17"&gt;&lt;/a&gt;    background:
-&lt;/div&gt;&lt;div id="demo7.18" class="lines"&gt;&lt;a href="#demo7.18"&gt;&lt;/a&gt;        url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
-&lt;/div&gt;&lt;div id="demo7.19" class="lines"&gt;&lt;a href="#demo7.19"&gt;&lt;/a&gt;        no-repeat repeat;
-&lt;/div&gt;&lt;div id="demo7.20" class="lines"&gt;&lt;a href="#demo7.20"&gt;&lt;/a&gt;    background-size: 1.2em 1.2em;
-&lt;/div&gt;&lt;div id="demo7.21" class="lines"&gt;&lt;a href="#demo7.21"&gt;&lt;/a&gt;    clip: rect(1.2em 1.2em 100vh 0);
-&lt;/div&gt;&lt;div id="demo7.22" class="lines"&gt;&lt;a href="#demo7.22"&gt;&lt;/a&gt;    opacity: .5;
-&lt;/div&gt;&lt;div id="demo7.23" class="lines"&gt;&lt;a href="#demo7.23"&gt;&lt;/a&gt;    transform: rotateY(180deg); /* mirror the arrow */
-&lt;/div&gt;&lt;div id="demo7.24" class="lines"&gt;&lt;a href="#demo7.24"&gt;&lt;/a&gt;    transform-origin: left;
-&lt;/div&gt;&lt;div id="demo7.25" class="lines"&gt;&lt;a href="#demo7.25"&gt;&lt;/a&gt;}&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
-
+&lt;pre id="demo7" class="highlight"&gt;&lt;code class="language-css"&gt;&lt;div id="demo7.1" class="line"&gt;&lt;a href="#demo7.1" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="nt"&gt;pre&lt;/span&gt; &lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;line&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo7.2" class="line"&gt;&lt;a href="#demo7.2" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;position&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;relative&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c"&gt;/* so we could position the child */&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo7.3" class="line"&gt;&lt;a href="#demo7.3" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;min-height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="kt"&gt;em&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;    &lt;span class="c"&gt;/* to avoid collapsing empty lines */&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo7.4" class="line"&gt;&lt;a href="#demo7.4" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;line-height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;1.2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;   &lt;span class="c"&gt;/* set the height explicitly */&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo7.5" class="line"&gt;&lt;a href="#demo7.5" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;text-indent&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;-1.2&lt;/span&gt;&lt;span class="kt"&gt;em&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;    &lt;span class="c"&gt;/* first line indent */&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo7.6" class="line"&gt;&lt;a href="#demo7.6" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;padding-left&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;1.2&lt;/span&gt;&lt;span class="kt"&gt;em&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;    &lt;span class="c"&gt;/* padding for the line */&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo7.7" class="line"&gt;&lt;a href="#demo7.7" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo7.8" class="line"&gt;&lt;a href="#demo7.8" aria-hidden="true"&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div id="demo7.9" class="line"&gt;&lt;a href="#demo7.9" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="nt"&gt;pre&lt;/span&gt; &lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;line&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="nd"&gt;before&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo7.10" class="line"&gt;&lt;a href="#demo7.10" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;content&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;        &lt;span class="c"&gt;/* we need content for pseudo elements */&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo7.11" class="line"&gt;&lt;a href="#demo7.11" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;position&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;absolute&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo7.12" class="line"&gt;&lt;a href="#demo7.12" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;display&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;block&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo7.13" class="line"&gt;&lt;a href="#demo7.13" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;1.2&lt;/span&gt;&lt;span class="kt"&gt;em&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;       &lt;span class="c"&gt;/* without width it will be invisible */&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo7.14" class="line"&gt;&lt;a href="#demo7.14" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="kt"&gt;%&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;       &lt;span class="c"&gt;/* to match the height of the parent */&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo7.15" class="line"&gt;&lt;a href="#demo7.15" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;top&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo7.16" class="line"&gt;&lt;a href="#demo7.16" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;left&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo7.17" class="line"&gt;&lt;a href="#demo7.17" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo7.18" class="line"&gt;&lt;a href="#demo7.18" aria-hidden="true"&gt;&lt;/a&gt;        &lt;span class="nb"&gt;url&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sx"&gt;data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo7.19" class="line"&gt;&lt;a href="#demo7.19" aria-hidden="true"&gt;&lt;/a&gt;        &lt;span class="kc"&gt;no-repeat&lt;/span&gt; &lt;span class="kc"&gt;repeat&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo7.20" class="line"&gt;&lt;a href="#demo7.20" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;background-size&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;1.2&lt;/span&gt;&lt;span class="kt"&gt;em&lt;/span&gt; &lt;span class="mf"&gt;1.2&lt;/span&gt;&lt;span class="kt"&gt;em&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo7.21" class="line"&gt;&lt;a href="#demo7.21" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;clip&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;rect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;1.2&lt;/span&gt;&lt;span class="kt"&gt;em&lt;/span&gt; &lt;span class="mf"&gt;1.2&lt;/span&gt;&lt;span class="kt"&gt;em&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="kt"&gt;vh&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo7.22" class="line"&gt;&lt;a href="#demo7.22" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;opacity&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;.5&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo7.23" class="line"&gt;&lt;a href="#demo7.23" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;transform&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;rotateY&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;180&lt;/span&gt;&lt;span class="kt"&gt;deg&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; &lt;span class="c"&gt;/* mirror the arrow */&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo7.24" class="line"&gt;&lt;a href="#demo7.24" aria-hidden="true"&gt;&lt;/a&gt;    &lt;span class="k"&gt;transform-origin&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;left&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/div&gt;&lt;div id="demo7.25" class="line"&gt;&lt;a href="#demo7.25" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The trick here is the play between &lt;code&gt;padding-left&lt;/code&gt; and &lt;code&gt;text-indent&lt;/code&gt; for the
 &lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt; element since &lt;code&gt;text-indent&lt;/code&gt; will be applied to the first line only
 (effectively negating the padding set for the whole element), thus the rest of

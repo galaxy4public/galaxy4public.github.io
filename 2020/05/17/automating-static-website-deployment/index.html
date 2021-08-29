@@ -1,121 +1,122 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta http-equiv="Content-Security-Policy" content="	default-src 'self';object-src 'none';script-src 'self' https://www.googletagmanager.com/gtag/js 'sha256-TelA7VsuYAMqhOKGk7CHgJyuqSJdmqZEp+hn6PWVRwQ=' https://www.google-analytics.com/analytics.js;img-src 'self' data: https://www.google-analytics.com/r/collect https://www.google-analytics.com/collect https://stats.g.doubleclick.net/r/collect https://*/ads/ga-audiences https://www.googletagmanager.com/a;style-src 'self' 'sha256-fszvBX/J9dhPxFSJ5wUrq/Pvg6HrnTkWyshMZpaxSQY=';connect-src 'self' https://www.google-analytics.com/j/collect https://stats.g.doubleclick.net/j/collect; " />
-		<title>Mind Drops</title>
-		<script src="/theme/js/persistence.js" defer></script>
-		<meta charset="utf-8" />
-		<meta name="description" content="" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="theme-color" content="#535353" />
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="format-detection" content="telephone=no" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-		<meta name="apple-mobile-web-app-title" content="Mind Drops" />
-		<meta name="description" content="">
-		<link rel="apple-touch-icon" href="/theme/images/icons/mind-drops-192x192.png" />
-		<link rel="manifest" type="text/json" href="/manifest.json" />
-		<link rel="alternate" type="application/atom+xml" href="https://dmitry.khlebnikov.net/feeds/all.atom.xml" title="Mind Drops Full Atom Feed" />
-		<link rel="alternate" type="application/atom+xml" href="https://dmitry.khlebnikov.net/feeds/blog.atom.xml" title="Mind Drops Categories Atom Feed" />
-		<link rel="dns-prefetch" href="https://www.google.com" />
-		<link rel="preconnect" href="https://www.google.com" crossorigin />
-		<link rel="dns-prefetch" href="https://www.google-analytics.com" />
-		<link rel="preconnect" href="https://www.google-analytics.com" crossorigin />
-		<link rel="dns-prefetch" href="https://www.googletagmanager.com">
-		<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
-		<link rel="dns-prefetch" href="https://stats.g.doubleclick.net" />
-		<link rel="preconnect" href="https://stats.g.doubleclick.net" crossorigin />
-		<link rel="preload" as="style" href="/theme/css/reset.css" />
-		<link rel="preload" as="style" href="/theme/css/fonts/Icons.css" />
-		<link rel="preload" as="style" href="/theme/css/fonts/Exo2.css" />
-		<link rel="preload" as="style" href="/theme/css/fonts/Oswald.css" />
-		<link rel="preload" as="style" href="/theme/css/fonts/DancingScript.css" />
-		<link rel="preload" as="style" href="/theme/css/fonts/FiraCode.css" />
-		<link rel="preload" as="style" href="/theme/css/base.css" />
-		<link rel="preload" as="script" href="/theme/js/persistence.js" />
-		<link rel="preload" as="script" href="/theme/js/visited.js" />
-		<link rel="preload" as="script" href="/theme/js/service.js" />
-		<link rel="preload" as="script" href="https://www.googletagmanager.com/gtag/js?id=UA-165060547-1" />
-		<link rel="icon" type="image/png" href="/images/galaxy.png" />
-		<script src="/theme/js/loader.js" defer></script>
+<head>
+	<title>Mind Drops :: assorted bits of wit</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1" />
+	<link rel="stylesheet" href="/theme/css/fonts/Icons.css" />
+	<link rel="stylesheet" href="/theme/css/fonts/Exo2.css" />
+	<link rel="stylesheet" href="/theme/css/fonts/Oswald.css" />
+	<link rel="stylesheet" href="/theme/css/fonts/DancingScript.css" />
+	<link rel="stylesheet" href="/theme/css/base.css" />
+	<link rel="stylesheet" href="/theme/css/pygments/default.css" />
+	<link rel="canonical" href="/2020/05/17/automating-static-website-deployment/" />
 
-		<meta name="keywords" content="pelican blog github" />
-		<link rel="stylesheet" type="text/css" href="/theme/css/article.css" />
-		<link rel="canonical" href="/2020/05/17/automating-static-website-deployment/" />
-	</head>
-	<body>
+	<script type="application/ld+json">
+	{
+		"@context" : "https://schema.org",
+		"@type" : "Article",
+		"author": "(GalaxyMaster)",
+		"name" : "Automating Static Website Deployment",
+		"datePublished" : "2020-05-17T21:32:00+10:00",
+		"dateModified" : "2021-08-29T22:26:10+10:00",
+		"image" : "https://dmitry.khlebnikov.net/2020/06/14/truly-responsive-pagination/images/paginator-sketch.png",
+		"headline" : "headline",
+		"abstract": "abstract goes here",
+		"articleSection": "blog",
+		"interactionStatistic":
+		[
+			{
+				"@type": "InteractionCounter",
+				"interactionService":
+				{
+					"@type": "WebSite",
+					"name": "Twitter",
+					"url": "http://www.twitter.com"
+				},
+				"interactionType": "http://schema.org/ShareAction",
+				"userInteractionCount": "1203"
+			},
+			{
+				"@type": "InteractionCounter",
+				"interactionType": "http://schema.org/CommentAction",
+				"userInteractionCount": "78"
+			}
+		],
+		"discussionUrl": "https://github.com/"
+	}
+	</script>
+</head>
 
-		<input type="radio" name="menu-toggle" id="menu-toggle-full" value="full" tabindex="-1" checked />
-		<input type="radio" name="menu-toggle" id="menu-toggle-mini" value="mini" tabindex="-1" />
-		<input type="radio" name="menu-toggle" id="menu-toggle-hide" value="hide" tabindex="-1" />
-		<label for="menu-toggle-full" class="icon menu" role="radio" tabindex="0">Show the full menu panel on the screen</label>
-		<aside id="sidebar">
-			<label for="menu-toggle-mini" class="icon left-big" role="radio" tabindex="0">Show the minimised menu panel on the screen</label>
-			<label for="menu-toggle-hide" class="icon eye-off" role="radio" tabindex="0">Remove the menu panel off the screen</label>
-			<div class="title">Mind Drops</div>
-			<div id="logo" class="box shadow">
+<body>
+	<header>
+		<span class="flex">
+			<!--
+			<button class="menu-toggle" type="button" tabindex="0" aria-label="Menu Toggle"><div></div></button>
+			-->
+			<div class="menu-toggle" tabindex="0" aria-label="Menu Toggle"><div></div></div>
+			<a href="/" class="logo">
 				<picture>
-					<source srcset="/images/galaxy.png.webp" type="image/webp">
-					<img src="/images/galaxy.png" alt="Logo">
+					<source srcset="/images/logo.svg" type="image/svg+xml">
+					<source srcset="/images/.svg" type="image/svg+xml">
+					<source srcset="/images/.webp" type="image/webp">
+					<img src="/images/" alt="Logo">
 				</picture>
-			</div>
-
-			<!-- Search -->
-			<section class="box search">
-				<form name="google search" class="icon search" method="get" action="/search">
-					<label for="search" class="offscreen">Search</label>
-					<input id="search" type="text" class="text" name="q" placeholder="Search" />
-				</form>
-			</section>
-
+				<span class="title">Mind Drops</span>
+			</a>
 			<nav>
 				<ul>
-					<li>
-						<a class="icon home" href="/">Home</a>
-					</li>
-					<li>
-						<a class="icon user" href="/about">About</a>
-					</li>
-					<li>
-						<a class="icon phone" href="/contact">Contact</a>
-					</li>
+					<li><a class="icon home" href="/">Home</a></li>
+					<li><a class="icon user" href="/about">About</a></li>
+					<li><a class="icon phone" href="/contact">Contact</a></li>
 				</ul>
 			</nav>
-
-			<!-- Text -->
-			<section class="box text-style1">
-				<div class="inner">
-					<p>
-						<strong>Mind Drops:</strong>: A place to unload all these assorted bits.
-					</p>
+			<form id="search" role="search" autocomplete="off" method="get" action="/search">
+				<label for="q" class="icon search">Search</label>
+				<input type="text" name="q" id="q" placeholder="Search..." />
+				<div class="help" aria-label="Search ">
+					<dl>
+						<dt>"search terms"</dt><dd>exact-match</dd>
+						<dt>term1 | term2</dt><dd>term1 or term2</dd>
+						<dt>term1 * term2</dt><dd>term1 followed by term2</dd>
+						<dt>-term</dt><dd>exclude term</dd>
+						<dt>(search terms)</dt><dd>groups terms</dd>
+						<dt>ext:pdf</dt><dd>file type</dd>
+					</dl>
 				</div>
-			</section>
-
-			<!-- Copyright -->
-			<ul id="copyright">
-				<li>&copy; Openwall Pty Ltd 2020 </li>
-				<li><a href="/legal/terms-of-service">Terms of Service</a></li>
+			</form>
+			<ul class="taskbar">
+				<li class="search-toggle"><label for="q" class="icon search offscreen" title="Toggle the search bar">Search</label></li>
+				<!-- Not Implemented Yet
+				<li><a href="#bug-report" class="icon bug offscreen" title="Report a spotted bug on the page">Report a bug</a></li>
+				<li><a href="#preferences" class="icon cog offscreen" title="Configure personal preferences">Preferences</a></li>
+				 -->
 			</ul>
-		</aside>
-
-		<!-- Content -->
-		<div id="content">
-			<div class="inner">
-				<article id="automating-static-website-deployment" class="box post">
-					<header>
-						<h1><a name="top">Automating Static Website Deployment</a></h1>
-					</header>
-					<div class="info">
-						<span class="date">
-							<span class="day">17</span>
-							<span class="month"><a href="/2020/05/">May<span class="month full"></span></a></span>
-							<span class="year"><a href="/2020/">2020</a></span>
-						</span>
-						<ul class="stats">
-							<li><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="icon twitter" aria-label="Twitter" data-tweet-id="None">0</a></li>
-						</ul>
-					</div>
-					<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+		</span>
+	</header>
+	<aside class="modal">
+		<div id="bug-report">
+			<a href="#" class="close"></a>
+			<div class="content">
+				<h1>Bug report</h1>
+				<form id="bug-report-form" autocomplete="off">
+					<textarea id="bug-report-body" name="bug-report-body">
+					</textarea>
+					<input type="submit" value="Submit">
+				</form>
+			</div>
+		</div>
+		<div id="preferences">
+		</div>
+	</aside>
+	<main>
+			<article id="automating-static-website-deployment">
+				<header>
+					<h1><a href="/2020/05/17/automating-static-website-deployment/" rel="bookmark" title="Permalink to Automating Static Website Deployment">Automating Static Website Deployment</a></h1>
+				</header>
+				<aside>
+				</aside>
+				<div class="toc"><span class="toctitle">Table of Contents</span><ul>
 <li><a href="#setting-up-github-pages">Setting up GitHub Pages</a></li>
 <li><a href="#setting-up-the-private-code-repository">Setting up the private, code repository</a></li>
 <li><a href="#configuring-the-github-action-for-publishing">Configuring the GitHub Action for publishing</a></li>
@@ -135,7 +136,7 @@ offers on a free plan.</p>
 </li>
 <li>
 <p>The code to generate the website should be private</p>
-<p>I do a lot of work on the SSG (which is Pelican in my case) itself: extend
+<p>I do a lot of work on the <abbr title="Static Site Generator">SSG</abbr> (which is Pelican in my case) itself: extend
 it with plug-ins that may contain <abbr title="Application Programming Interface">API</abbr> tokens to reach out to some third
 party <span><abbr title="Application Programming Interface">API</abbr></span>s, hack the core code when I want to quickly test stuff, etc. &ndash;
 so, I really did not have any desire to publish publicly all the commotions
@@ -182,34 +183,33 @@ documentation a listed below:</p>
 <ul>
 <li>
 <p>GitHub&rsquo;s documentation assumes use of Jekyll for site generation.</p>
-<p>It is not obvious how to use a different SSG (like Pelican).  As far as I
+<p>It is not obvious how to use a different <abbr title="Static Site Generator">SSG</abbr> (like Pelican).  As far as I
 understand there are multiple triggers for GitHub to consider that the
 web site is in &ldquo;published&rdquo; state, so just ignore any references to Jekyll
 in the documentation: you will trip one of the triggers sooner or later,
 for example by pushing HTML files into your repository.</p>
 </li>
 <li>
-<p>Configure your DNS <em>before</em> setting the custom domain name in GitHub Pages.</p>
+<p>Configure your <abbr title="Domain Name System">DNS</abbr> <em>before</em> setting the custom domain name in GitHub Pages.</p>
 <p>Pushing the <code>CNAME</code> file with the name of your custom domain within will
-trigger a DNS check from GitHub to see that your custom domain name is
+trigger a <abbr title="Domain Name System">DNS</abbr> check from GitHub to see that your custom domain name is
 pointing back to GitHub Pages.</p>
-<p>DNS heavily relies on caching and depending on the TTL settings in your
+<p><abbr title="Domain Name System">DNS</abbr> heavily relies on caching and depending on the <abbr title="Time To Live">TTL</abbr> settings in your
 zone if a negative check is performed (that is, when GitHub fails to
 retrieve the corresponding record) you will likely need to wait for quite a
 while for GitHub to retry.</p>
-<p>Setting up the CNAME record in advance and then verifying it with a query
+<p>Setting up the <code>CNAME</code> record in advance and then verifying it with a query
 <em>before</em> you commit the <code>CNAME</code> file to your repository ensures that you
 will get the quickest validation response from GitHub, e.g. I set up my
-CNAME records and then verified it from the command line (before)
+<code>CNAME</code> records and then verified it from the command line (before)
 submitting the request to GitHub:</p>
-<pre id="code1" class="highlight" data-user="user"><code class="language-shell"><div id="code1.1" class="lines"><a href="#code1.1"></a>[user@localhost ~]$ host -t cname dmitry.khlebnikov.net 8.8.8.8
-</div><div id="code1.2" class="lines"><a href="#code1.2"></a>Using domain server:
-</div><div id="code1.3" class="lines"><a href="#code1.3"></a>Name: 8.8.8.8
-</div><div id="code1.4" class="lines"><a href="#code1.4"></a>Address: 8.8.8.8#53
-</div><div id="code1.5" class="lines"><a href="#code1.5"></a>Aliases:
-</div><div id="code1.6" class="lines"><a href="#code1.6"></a>
-</div><div id="code1.7" class="lines"><a href="#code1.7"></a>dmitry.khlebnikov.net is an alias for galaxy4public.github.io.</div></code></pre>
-
+<pre id="code1" class="highlight" data-user="user"><code class="language-console"><div id="code1.1" class="line"><a href="#code1.1" aria-hidden="true"></a><span class="gp">[user@localhost ~]$ </span>host -t cname dmitry.khlebnikov.net <span class="m">8</span>.8.8.8
+</div><div id="code1.2" class="line"><a href="#code1.2" aria-hidden="true"></a><span class="go">Using domain server:</span>
+</div><div id="code1.3" class="line"><a href="#code1.3" aria-hidden="true"></a><span class="go">Name: 8.8.8.8</span>
+</div><div id="code1.4" class="line"><a href="#code1.4" aria-hidden="true"></a><span class="go">Address: 8.8.8.8#53</span>
+</div><div id="code1.5" class="line"><a href="#code1.5" aria-hidden="true"></a><span class="go">Aliases:</span>
+</div><div id="code1.6" class="line"><a href="#code1.6" aria-hidden="true"></a>
+</div><div id="code1.7" class="line"><a href="#code1.7" aria-hidden="true"></a><span class="go">dmitry.khlebnikov.net is an alias for galaxy4public.github.io.</span></div></code></pre>
 </li>
 <li>
 <p>There are some shenanigans with the &ldquo;Enforce HTTPS&rdquo; option.</p>
@@ -219,9 +219,9 @@ custom domains on GitHub&rsquo;s side is dependent on the several things:</p>
 <li>before the checkbox is enabled your custom domain name should be
     confirmed by GitHub (your <code>CNAME</code> file is in place and the repository
     settings show that the name was recognised);</li>
-<li>the CNAME record should point to your &ldquo;<strong>&lt;<username>&gt;</strong>.github.io.&rdquo;
-    DNS record (or, you can point it directly to GitHub Pages IP addresses
-    if you want to conceal the repository name in the DNS output);</li>
+<li>the <code>CNAME</code> record should point to your &ldquo;<strong>&lt;username&gt;</strong>.github.io.&rdquo;
+    <abbr title="Domain Name System">DNS</abbr> record (or, you can point it directly to GitHub Pages IP addresses
+    if you want to conceal the repository name in the <abbr title="Domain Name System">DNS</abbr> output);</li>
 <li>if GitHub did not like something and you adjusted anything in the above
     dot points the <strong>only</strong> way to trigger the enforcement of HTTPS is to
     re-submit the <code>CNAME</code> file to the repository (yes, you read it right:
@@ -240,11 +240,11 @@ steps I would do to achieve the results.  This helps me to see patterns and to
 understand what I can easily automate and what will require some brain-storming
 to resolve.</p>
 <p>In the case of updating the repository it is quite trivial: if I were to push
-updates manually all I need is a private SSH key with the corresponding public
-SSH key configured with write privileges for the repository and I could push
+updates manually all I need is a private <abbr title="Secure Shell">SSH</abbr> key with the corresponding public
+<abbr title="Secure Shell">SSH</abbr> key configured with write privileges for the repository and I could push
 with <code>git push</code> from my local copy of the repository.</p>
 <blockquote>
-<p><a name="quote-private-keys" href="#quote-private-keys"></a> &hellip; private keys are called &ldquo;private&rdquo; for a reason &ndash; they are not supposed
+<p><a name="quote-private-keys" href="#quote-private-keys" aria-hidden="true"></a> &hellip; private keys are called &ldquo;private&rdquo; for a reason &ndash; they are not supposed
 to leave the device under any circumstances. [&hellip;] please pay attention when
 you read of hear somebody advising you to upload your private keys somewhere,
 it is usually bad advice.</p>
@@ -255,7 +255,7 @@ storing them in a safe).  So, please pay attention when you read or hear
 somebody advising you to upload your private keys somewhere, it is usually
 bad advice.</p>
 <p>For the integration purposes, GitHub provides so-called &ldquo;Deploy keys&rdquo; and
-&ldquo;Personal access tokens&rdquo;.  The former is just an SSH key pair associated with a
+&ldquo;Personal access tokens&rdquo;.  The former is just an <abbr title="Secure Shell">SSH</abbr> key pair associated with a
 particular repository (you can configure it in repository&rsquo;s setting) while the
 latter is an OAuth access token associated with <em>your</em> account.</p>
 <p>While you can successfully use both, I would recommend to use the &ldquo;Deploy keys&rdquo;
@@ -265,26 +265,25 @@ look like <em>you</em> are executing them.</p>
 <p>To configure a &ldquo;Deploy key&rdquo; we need to do two things:</p>
 <ol>
 <li>
-<p>Generate an SSH key pair, e.g.:</p>
-<pre id="code2" class="highlight" data-user="user"><code class="language-shell"><div id="code2.1" class="lines"><a href="#code2.1"></a>[user@localhost ~]$ ssh-keygen -t ed25519 -N '' -C 'Updating the blog from GH Action' -f ~/gh-action
-</div><div id="code2.2" class="lines"><a href="#code2.2"></a>Generating public/private ed25519 key pair.
-</div><div id="code2.3" class="lines"><a href="#code2.3"></a>Your identification has been saved in /home/user/gh-action
-</div><div id="code2.4" class="lines"><a href="#code2.4"></a>Your public key has been saved in /home/user/gh-action.pub
-</div><div id="code2.5" class="lines"><a href="#code2.5"></a>The key fingerprint is:
-</div><div id="code2.6" class="lines"><a href="#code2.6"></a>SHA256:7W9pUV5IlrRVE0RAVkjLgKJz4RdtVbH7GKQu8AfYITw Updating the blog from GH Action
-</div><div id="code2.7" class="lines"><a href="#code2.7"></a>The key's randomart image is:
-</div><div id="code2.8" class="lines"><a href="#code2.8"></a>+--[ED25519 256]--+
-</div><div id="code2.9" class="lines"><a href="#code2.9"></a>|          o.+BOX*|
-</div><div id="code2.10" class="lines"><a href="#code2.10"></a>|       + o o+.=oo|
-</div><div id="code2.11" class="lines"><a href="#code2.11"></a>|      o E +  =oo |
-</div><div id="code2.12" class="lines"><a href="#code2.12"></a>|     o o B . oo o|
-</div><div id="code2.13" class="lines"><a href="#code2.13"></a>|      o S + .o.o |
-</div><div id="code2.14" class="lines"><a href="#code2.14"></a>|         + o. .o.|
-</div><div id="code2.15" class="lines"><a href="#code2.15"></a>|          + oo. .|
-</div><div id="code2.16" class="lines"><a href="#code2.16"></a>|           ++    |
-</div><div id="code2.17" class="lines"><a href="#code2.17"></a>|           o.    |
-</div><div id="code2.18" class="lines"><a href="#code2.18"></a>+----[SHA256]-----+</div></code></pre>
-
+<p>Generate an <abbr title="Secure Shell">SSH</abbr> key pair, e.g.:</p>
+<pre id="code2" class="highlight" data-user="user"><code class="language-console"><div id="code2.1" class="line"><a href="#code2.1" aria-hidden="true"></a><span class="gp">[user@localhost ~]$ </span>ssh-keygen -t ed25519 -N <span class="s1">&#39;&#39;</span> -C <span class="s1">&#39;Updating the blog from GH Action&#39;</span> -f ~/gh-action
+</div><div id="code2.2" class="line"><a href="#code2.2" aria-hidden="true"></a><span class="go">Generating public/private ed25519 key pair.</span>
+</div><div id="code2.3" class="line"><a href="#code2.3" aria-hidden="true"></a><span class="go">Your identification has been saved in /home/user/gh-action</span>
+</div><div id="code2.4" class="line"><a href="#code2.4" aria-hidden="true"></a><span class="go">Your public key has been saved in /home/user/gh-action.pub</span>
+</div><div id="code2.5" class="line"><a href="#code2.5" aria-hidden="true"></a><span class="go">The key fingerprint is:</span>
+</div><div id="code2.6" class="line"><a href="#code2.6" aria-hidden="true"></a><span class="go">SHA256:7W9pUV5IlrRVE0RAVkjLgKJz4RdtVbH7GKQu8AfYITw Updating the blog from GH Action</span>
+</div><div id="code2.7" class="line"><a href="#code2.7" aria-hidden="true"></a><span class="go">The key&#39;s randomart image is:</span>
+</div><div id="code2.8" class="line"><a href="#code2.8" aria-hidden="true"></a><span class="go">+--[ED25519 256]--+</span>
+</div><div id="code2.9" class="line"><a href="#code2.9" aria-hidden="true"></a><span class="go">|          o.+BOX*|</span>
+</div><div id="code2.10" class="line"><a href="#code2.10" aria-hidden="true"></a><span class="go">|       + o o+.=oo|</span>
+</div><div id="code2.11" class="line"><a href="#code2.11" aria-hidden="true"></a><span class="go">|      o E +  =oo |</span>
+</div><div id="code2.12" class="line"><a href="#code2.12" aria-hidden="true"></a><span class="go">|     o o B . oo o|</span>
+</div><div id="code2.13" class="line"><a href="#code2.13" aria-hidden="true"></a><span class="go">|      o S + .o.o |</span>
+</div><div id="code2.14" class="line"><a href="#code2.14" aria-hidden="true"></a><span class="go">|         + o. .o.|</span>
+</div><div id="code2.15" class="line"><a href="#code2.15" aria-hidden="true"></a><span class="go">|          + oo. .|</span>
+</div><div id="code2.16" class="line"><a href="#code2.16" aria-hidden="true"></a><span class="go">|           ++    |</span>
+</div><div id="code2.17" class="line"><a href="#code2.17" aria-hidden="true"></a><span class="go">|           o.    |</span>
+</div><div id="code2.18" class="line"><a href="#code2.18" aria-hidden="true"></a><span class="go">+----[SHA256]-----+</span></div></code></pre>
 <p>Here, I chose the <code>ed25519</code> key type since it is the shortest from the
 GitHub supported key types at the moment, yet it is strong enough.</p>
 <p>I also made the key pair passphrase-less (<code>-N ''</code>) since the purpose of the
@@ -306,8 +305,7 @@ the <code>.pub</code> suffix appended to it.</p>
  from GH Action&rdquo;) and copy and paste the recently generated <em>public</em> key.
  GitHub does not allow you to upload files over there, so you need to copy
  the content of the <strong>public</strong> key file and paste it into the form, e.g.:</p>
-<pre id="code3" class="highlight" data-file="~/gh-action.pub"><code class="language-text"><div id="code3.1" class="lines"><a href="#code3.1"></a>ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGHCy+stVCBjsrVO2ld1DwKCwcKL9+i1sjxcZu4u4lFQ Updating the blog from GH Action</div></code></pre>
-
+<pre id="code3" class="highlight" data-file="~/gh-action.pub"><code class="language-text"><div id="code3.1" class="line"><a href="#code3.1" aria-hidden="true"></a>ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGHCy+stVCBjsrVO2ld1DwKCwcKL9+i1sjxcZu4u4lFQ Updating the blog from GH Action</div></code></pre>
 <p><strong>NOTE</strong>: You need to ensure that you tick the &ldquo;Allow write access&rdquo; checkbox,
  otherwise we would not be able to push to the repository with the
  corresponding private key.</p>
@@ -332,52 +330,51 @@ files, but the result will be limited, hence I call the <code>pelicanconf.py</co
 (which is the default name for the configuration file) to be &ldquo;semi-mandatory&rdquo;.
 The name of the configuration file can be also anything you like, however, I
 suggest to stick with the default for now.</p>
-<p>Basically, you can quickly start by following the Pelican documentation, by
+<p>Basically, you can quickly start by following the Pelican documentation and
 doing something as follows:</p>
-<pre id="code3" class="highlight" data-user="user"><code class="language-shell"><div id="code3.1" class="lines"><a href="#code3.1"></a>[user@localhost ~]$ virtualenv ~/venv/pelican
-</div><div id="code3.2" class="lines"><a href="#code3.2"></a>created virtual environment CPython3.8.2.final.0-64 in 477ms
-</div><div id="code3.3" class="lines"><a href="#code3.3"></a>  creator CPython3Posix(dest=/home/user/venv/pelican, clear=False, global=False)
-</div><div id="code3.4" class="lines"><a href="#code3.4"></a>  seeder FromAppData(download=False, pip=latest, setuptools=latest, wheel=latest, via=copy, app_data_dir=/home/user/.local/share/virtualenv/seed-app-data/v1.0.1)
-</div><div id="code3.5" class="lines"><a href="#code3.5"></a>  activators BashActivator,CShellActivator,FishActivator,PowerShellActivator,PythonActivator,XonshActivator
-</div><div id="code3.6" class="lines"><a href="#code3.6"></a>[user@localhost ~]$ . ~/venv/pelican/bin/activate
-</div><div id="code3.7" class="lines"><a href="#code3.7"></a>(pelican) $ mkdir ~/blog
-</div><div id="code3.8" class="lines"><a href="#code3.8"></a>(pelican) $ cd ~/blog
-</div><div id="code3.9" class="lines"><a href="#code3.9"></a>(pelican) $ git init
-</div><div id="code3.10" class="lines"><a href="#code3.10"></a>Initialized empty Git repository in /home/user/blog/.git/
-</div><div id="code3.11" class="lines"><a href="#code3.11"></a>(pelican) $ git config --local user.email &quot;your@github-email.here&quot;
-</div><div id="code3.12" class="lines"><a href="#code3.12"></a>(pelican) $ git config --local user.name &quot;Joe Happy&quot;
-</div><div id="code3.13" class="lines"><a href="#code3.13"></a>(pelican) $ pelican-quickstart 
-</div><div id="code3.14" class="lines"><a href="#code3.14"></a>Welcome to pelican-quickstart v4.2.0.
-</div><div id="code3.15" class="lines"><a href="#code3.15"></a>
-</div><div id="code3.16" class="lines"><a href="#code3.16"></a>This script will help you create a new Pelican-based website.
-</div><div id="code3.17" class="lines"><a href="#code3.17"></a>
-</div><div id="code3.18" class="lines"><a href="#code3.18"></a>Please answer the following questions so this script can generate the files
-</div><div id="code3.19" class="lines"><a href="#code3.19"></a>needed by Pelican.
-</div><div id="code3.20" class="lines"><a href="#code3.20"></a>
-</div><div id="code3.21" class="lines"><a href="#code3.21"></a>
-</div><div id="code3.22" class="lines"><a href="#code3.22"></a>&gt; Where do you want to create your new web site? [.] 
-</div><div id="code3.23" class="lines"><a href="#code3.23"></a>&gt; What will be the title of this web site? My Awesome Blog
-</div><div id="code3.24" class="lines"><a href="#code3.24"></a>&gt; Who will be the author of this web site? Joe Happy
-</div><div id="code3.25" class="lines"><a href="#code3.25"></a>&gt; What will be the default language of this web site? [en] 
-</div><div id="code3.26" class="lines"><a href="#code3.26"></a>&gt; Do you want to specify a URL prefix? e.g., https://example.com   (Y/n) n
-</div><div id="code3.27" class="lines"><a href="#code3.27"></a>&gt; Do you want to enable article pagination? (Y/n) 
-</div><div id="code3.28" class="lines"><a href="#code3.28"></a>&gt; How many articles per page do you want? [10] 
-</div><div id="code3.29" class="lines"><a href="#code3.29"></a>&gt; What is your time zone? [Europe/Paris] Australia/Melbourne
-</div><div id="code3.30" class="lines"><a href="#code3.30"></a>&gt; Do you want to generate a tasks.py/Makefile to automate generation and publishing? (Y/n) n
-</div><div id="code3.31" class="lines"><a href="#code3.31"></a>Done. Your new project is available at /home/user/blog
-</div><div id="code3.32" class="lines"><a href="#code3.32"></a>(pelican) $ ls -l
-</div><div id="code3.33" class="lines"><a href="#code3.33"></a>total 16
-</div><div id="code3.34" class="lines"><a href="#code3.34"></a>drwxr-xr-x 2   user   user 4096 May 10 00:31 content
-</div><div id="code3.35" class="lines"><a href="#code3.35"></a>drwxr-xr-x 2   user   user 4096 May 10 00:31 output
-</div><div id="code3.36" class="lines"><a href="#code3.36"></a>-rw-r--r-- 1   user   user  869 May 10 00:31 pelicanconf.py
-</div><div id="code3.37" class="lines"><a href="#code3.37"></a>-rw-r--r-- 1   user   user  589 May 10 00:31 publishconf.py
-</div><div id="code3.38" class="lines"><a href="#code3.38"></a>(pelican) $ rm -rf output publishconf.py
-</div><div id="code3.39" class="lines"><a href="#code3.39"></a>(pelican) $ git add content pelicanconf.py 
-</div><div id="code3.40" class="lines"><a href="#code3.40"></a>(pelican) $ git commit -m 'Initial commit'
-</div><div id="code3.41" class="lines"><a href="#code3.41"></a>[master (root-commit) f077002] Initial commit
-</div><div id="code3.42" class="lines"><a href="#code3.42"></a> 1 file changed, 35 insertions(+)
-</div><div id="code3.43" class="lines"><a href="#code3.43"></a> create mode 100644 pelicanconf.py</div></code></pre>
-
+<pre id="code4" class="highlight" data-user="user"><code class="language-console"><div id="code4.1" class="line"><a href="#code4.1" aria-hidden="true"></a><span class="gp">[user@localhost ~]$ </span>virtualenv ~/venv/pelican
+</div><div id="code4.2" class="line"><a href="#code4.2" aria-hidden="true"></a><span class="go">created virtual environment CPython3.8.2.final.0-64 in 477ms</span>
+</div><div id="code4.3" class="line"><a href="#code4.3" aria-hidden="true"></a><span class="go">  creator CPython3Posix(dest=/home/user/venv/pelican, clear=False, global=False)</span>
+</div><div id="code4.4" class="line"><a href="#code4.4" aria-hidden="true"></a><span class="go">  seeder FromAppData(download=False, pip=latest, setuptools=latest, wheel=latest, via=copy, app_data_dir=/home/user/.local/share/virtualenv/seed-app-data/v1.0.1)</span>
+</div><div id="code4.5" class="line"><a href="#code4.5" aria-hidden="true"></a><span class="go">  activators BashActivator,CShellActivator,FishActivator,PowerShellActivator,PythonActivator,XonshActivator</span>
+</div><div id="code4.6" class="line"><a href="#code4.6" aria-hidden="true"></a><span class="gp">[user@localhost ~]$ </span>. ~/venv/pelican/bin/activate
+</div><div id="code4.7" class="line"><a href="#code4.7" aria-hidden="true"></a><span class="gp gp-VirtualEnv">(pelican)</span> <span class="gp">$ </span>mkdir ~/blog
+</div><div id="code4.8" class="line"><a href="#code4.8" aria-hidden="true"></a><span class="gp gp-VirtualEnv">(pelican)</span> <span class="gp">$ </span><span class="nb">cd</span> ~/blog
+</div><div id="code4.9" class="line"><a href="#code4.9" aria-hidden="true"></a><span class="gp gp-VirtualEnv">(pelican)</span> <span class="gp">$ </span>git init
+</div><div id="code4.10" class="line"><a href="#code4.10" aria-hidden="true"></a><span class="go">Initialized empty Git repository in /home/user/blog/.git/</span>
+</div><div id="code4.11" class="line"><a href="#code4.11" aria-hidden="true"></a><span class="gp gp-VirtualEnv">(pelican)</span> <span class="gp">$ </span>git config --local user.email <span class="s2">&quot;your@github-email.here&quot;</span>
+</div><div id="code4.12" class="line"><a href="#code4.12" aria-hidden="true"></a><span class="gp gp-VirtualEnv">(pelican)</span> <span class="gp">$ </span>git config --local user.name <span class="s2">&quot;Joe Happy&quot;</span>
+</div><div id="code4.13" class="line"><a href="#code4.13" aria-hidden="true"></a><span class="gp gp-VirtualEnv">(pelican)</span> <span class="gp">$ </span>pelican-quickstart 
+</div><div id="code4.14" class="line"><a href="#code4.14" aria-hidden="true"></a><span class="go">Welcome to pelican-quickstart v4.2.0.</span>
+</div><div id="code4.15" class="line"><a href="#code4.15" aria-hidden="true"></a>
+</div><div id="code4.16" class="line"><a href="#code4.16" aria-hidden="true"></a><span class="go">This script will help you create a new Pelican-based website.</span>
+</div><div id="code4.17" class="line"><a href="#code4.17" aria-hidden="true"></a>
+</div><div id="code4.18" class="line"><a href="#code4.18" aria-hidden="true"></a><span class="go">Please answer the following questions so this script can generate the files</span>
+</div><div id="code4.19" class="line"><a href="#code4.19" aria-hidden="true"></a><span class="go">needed by Pelican.</span>
+</div><div id="code4.20" class="line"><a href="#code4.20" aria-hidden="true"></a>
+</div><div id="code4.21" class="line"><a href="#code4.21" aria-hidden="true"></a>
+</div><div id="code4.22" class="line"><a href="#code4.22" aria-hidden="true"></a><span class="go">&gt; Where do you want to create your new web site? [.] </span>
+</div><div id="code4.23" class="line"><a href="#code4.23" aria-hidden="true"></a><span class="go">&gt; What will be the title of this web site? My Awesome Blog</span>
+</div><div id="code4.24" class="line"><a href="#code4.24" aria-hidden="true"></a><span class="go">&gt; Who will be the author of this web site? Joe Happy</span>
+</div><div id="code4.25" class="line"><a href="#code4.25" aria-hidden="true"></a><span class="go">&gt; What will be the default language of this web site? [en] </span>
+</div><div id="code4.26" class="line"><a href="#code4.26" aria-hidden="true"></a><span class="go">&gt; Do you want to specify a URL prefix? e.g., https://example.com   (Y/n) n</span>
+</div><div id="code4.27" class="line"><a href="#code4.27" aria-hidden="true"></a><span class="go">&gt; Do you want to enable article pagination? (Y/n) </span>
+</div><div id="code4.28" class="line"><a href="#code4.28" aria-hidden="true"></a><span class="go">&gt; How many articles per page do you want? [10] </span>
+</div><div id="code4.29" class="line"><a href="#code4.29" aria-hidden="true"></a><span class="go">&gt; What is your time zone? [Europe/Paris] Australia/Melbourne</span>
+</div><div id="code4.30" class="line"><a href="#code4.30" aria-hidden="true"></a><span class="go">&gt; Do you want to generate a tasks.py/Makefile to automate generation and publishing? (Y/n) n</span>
+</div><div id="code4.31" class="line"><a href="#code4.31" aria-hidden="true"></a><span class="go">Done. Your new project is available at /home/user/blog</span>
+</div><div id="code4.32" class="line"><a href="#code4.32" aria-hidden="true"></a><span class="gp gp-VirtualEnv">(pelican)</span> <span class="gp">$ </span>ls -l
+</div><div id="code4.33" class="line"><a href="#code4.33" aria-hidden="true"></a><span class="go">total 16</span>
+</div><div id="code4.34" class="line"><a href="#code4.34" aria-hidden="true"></a><span class="go">drwxr-xr-x 2   user   user 4096 May 10 00:31 content</span>
+</div><div id="code4.35" class="line"><a href="#code4.35" aria-hidden="true"></a><span class="go">drwxr-xr-x 2   user   user 4096 May 10 00:31 output</span>
+</div><div id="code4.36" class="line"><a href="#code4.36" aria-hidden="true"></a><span class="go">-rw-r--r-- 1   user   user  869 May 10 00:31 pelicanconf.py</span>
+</div><div id="code4.37" class="line"><a href="#code4.37" aria-hidden="true"></a><span class="go">-rw-r--r-- 1   user   user  589 May 10 00:31 publishconf.py</span>
+</div><div id="code4.38" class="line"><a href="#code4.38" aria-hidden="true"></a><span class="gp gp-VirtualEnv">(pelican)</span> <span class="gp">$ </span>rm -rf output publishconf.py
+</div><div id="code4.39" class="line"><a href="#code4.39" aria-hidden="true"></a><span class="gp gp-VirtualEnv">(pelican)</span> <span class="gp">$ </span>git add content pelicanconf.py 
+</div><div id="code4.40" class="line"><a href="#code4.40" aria-hidden="true"></a><span class="gp gp-VirtualEnv">(pelican)</span> <span class="gp">$ </span>git commit -m <span class="s1">&#39;Initial commit&#39;</span>
+</div><div id="code4.41" class="line"><a href="#code4.41" aria-hidden="true"></a><span class="go">[master (root-commit) f077002] Initial commit</span>
+</div><div id="code4.42" class="line"><a href="#code4.42" aria-hidden="true"></a><span class="go"> 1 file changed, 35 insertions(+)</span>
+</div><div id="code4.43" class="line"><a href="#code4.43" aria-hidden="true"></a><span class="go"> create mode 100644 pelicanconf.py</span></div></code></pre>
 <p>A short break down of the above session snippet is:</p>
 <ul>
 <li>On line 1 we create a virtual Python environment, so we could install Pelican locally;</li>
@@ -387,35 +384,33 @@ doing something as follows:</p>
 <li>Finally, we commit the generated skeleton to Git.</li>
 </ul>
 <p>A good test at this stage would be to ensure that Pelican is working and likes our structure:</p>
-<pre id="code4" class="highlight" data-user="user"><code class="language-shell"><div id="code4.1" class="lines"><a href="#code4.1"></a>[user@localhost ~]$ pelican
-</div><div id="code4.2" class="lines"><a href="#code4.2"></a>WARNING: No valid files found in content for the active readers:
-</div><div id="code4.3" class="lines"><a href="#code4.3"></a>  | BaseReader (static)
-</div><div id="code4.4" class="lines"><a href="#code4.4"></a>  | HTMLReader (htm, html)
-</div><div id="code4.5" class="lines"><a href="#code4.5"></a>  | MarkdownReader (md, markdown, mkd, mdown)
-</div><div id="code4.6" class="lines"><a href="#code4.6"></a>  | RstReader (rst)
-</div><div id="code4.7" class="lines"><a href="#code4.7"></a>Done: Processed 0 articles, 0 drafts, 0 pages, 0 hidden pages and 0 draft pages in 0.07 seconds.</div></code></pre>
-
+<pre id="code5" class="highlight" data-user="user"><code class="language-console"><div id="code5.1" class="line"><a href="#code5.1" aria-hidden="true"></a><span class="gp">[user@localhost ~]$ </span>pelican
+</div><div id="code5.2" class="line"><a href="#code5.2" aria-hidden="true"></a><span class="go">WARNING: No valid files found in content for the active readers:</span>
+</div><div id="code5.3" class="line"><a href="#code5.3" aria-hidden="true"></a><span class="go">  | BaseReader (static)</span>
+</div><div id="code5.4" class="line"><a href="#code5.4" aria-hidden="true"></a><span class="go">  | HTMLReader (htm, html)</span>
+</div><div id="code5.5" class="line"><a href="#code5.5" aria-hidden="true"></a><span class="go">  | MarkdownReader (md, markdown, mkd, mdown)</span>
+</div><div id="code5.6" class="line"><a href="#code5.6" aria-hidden="true"></a><span class="go">  | RstReader (rst)</span>
+</div><div id="code5.7" class="line"><a href="#code5.7" aria-hidden="true"></a><span class="go">Done: Processed 0 articles, 0 drafts, 0 pages, 0 hidden pages and 0 draft pages in 0.07 seconds.</span></div></code></pre>
 <p>So far so good, but it is not a real test since there are no source files to generate something from, so let&rsquo;s give Pelican something to work on:</p>
-<pre id="code5" class="highlight" data-user="user"><code class="language-shell"><div id="code5.1" class="lines"><a href="#code5.1"></a>[user@localhost ~]$ printf 'Title: First Post\nDate: 2020-05-10\n\n#First post\nPelican is awesome!' &gt; content/first.md
-</div><div id="code5.2" class="lines"><a href="#code5.2"></a>[user@localhost ~]$ pelican
-</div><div id="code5.3" class="lines"><a href="#code5.3"></a>Done: Processed 1 article, 0 drafts, 0 pages, 0 hidden pages and 0 draft pages in 0.12 seconds.
-</div><div id="code5.4" class="lines"><a href="#code5.4"></a>[user@localhost ~]$ elinks -dump output/index.html 
-</div><div id="code5.5" class="lines"><a href="#code5.5"></a>                               [1]My Awesome Blog
-</div><div id="code5.6" class="lines"><a href="#code5.6"></a>
-</div><div id="code5.7" class="lines"><a href="#code5.7"></a>     • [2]misc
-</div><div id="code5.8" class="lines"><a href="#code5.8"></a>
-</div><div id="code5.9" class="lines"><a href="#code5.9"></a>                                 [3]First Post
-</div><div id="code5.10" class="lines"><a href="#code5.10"></a>
-</div><div id="code5.11" class="lines"><a href="#code5.11"></a>   Published: Sun 10 May 2020
-</div><div id="code5.12" class="lines"><a href="#code5.12"></a>
-</div><div id="code5.13" class="lines"><a href="#code5.13"></a>    By [4]Joe Happy
-</div><div id="code5.14" class="lines"><a href="#code5.14"></a>
-</div><div id="code5.15" class="lines"><a href="#code5.15"></a>   In [5]misc.
-</div><div id="code5.16" class="lines"><a href="#code5.16"></a>
-</div><div id="code5.17" class="lines"><a href="#code5.17"></a>                                   First post
-</div><div id="code5.18" class="lines"><a href="#code5.18"></a>
-</div><div id="code5.19" class="lines"><a href="#code5.19"></a>   Pelican is awesome!</div></code></pre>
-
+<pre id="code6" class="highlight" data-user="user"><code class="language-console"><div id="code6.1" class="line"><a href="#code6.1" aria-hidden="true"></a><span class="gp">[user@localhost ~]$ </span><span class="nb">printf</span> <span class="s1">&#39;Title: First Post\nDate: 2020-05-10\n\n#First post\nPelican is awesome!&#39;</span> &gt; content/first.md
+</div><div id="code6.2" class="line"><a href="#code6.2" aria-hidden="true"></a><span class="gp">[user@localhost ~]$ </span>pelican
+</div><div id="code6.3" class="line"><a href="#code6.3" aria-hidden="true"></a><span class="go">Done: Processed 1 article, 0 drafts, 0 pages, 0 hidden pages and 0 draft pages in 0.12 seconds.</span>
+</div><div id="code6.4" class="line"><a href="#code6.4" aria-hidden="true"></a><span class="gp">[user@localhost ~]$ </span>elinks -dump output/index.html 
+</div><div id="code6.5" class="line"><a href="#code6.5" aria-hidden="true"></a><span class="go">                               [1]My Awesome Blog</span>
+</div><div id="code6.6" class="line"><a href="#code6.6" aria-hidden="true"></a>
+</div><div id="code6.7" class="line"><a href="#code6.7" aria-hidden="true"></a><span class="go">     • [2]misc</span>
+</div><div id="code6.8" class="line"><a href="#code6.8" aria-hidden="true"></a>
+</div><div id="code6.9" class="line"><a href="#code6.9" aria-hidden="true"></a><span class="go">                                 [3]First Post</span>
+</div><div id="code6.10" class="line"><a href="#code6.10" aria-hidden="true"></a>
+</div><div id="code6.11" class="line"><a href="#code6.11" aria-hidden="true"></a><span class="go">   Published: Sun 10 May 2020</span>
+</div><div id="code6.12" class="line"><a href="#code6.12" aria-hidden="true"></a>
+</div><div id="code6.13" class="line"><a href="#code6.13" aria-hidden="true"></a><span class="go">    By [4]Joe Happy</span>
+</div><div id="code6.14" class="line"><a href="#code6.14" aria-hidden="true"></a>
+</div><div id="code6.15" class="line"><a href="#code6.15" aria-hidden="true"></a><span class="go">   In [5]misc.</span>
+</div><div id="code6.16" class="line"><a href="#code6.16" aria-hidden="true"></a>
+</div><div id="code6.17" class="line"><a href="#code6.17" aria-hidden="true"></a><span class="go">                                   First post</span>
+</div><div id="code6.18" class="line"><a href="#code6.18" aria-hidden="true"></a>
+</div><div id="code6.19" class="line"><a href="#code6.19" aria-hidden="true"></a><span class="go">   Pelican is awesome!</span></div></code></pre>
 <p>The output from <code>elinks</code> was truncated on purpose since I just wanted to
 showcase that Pelican has indeed generated the structure for a static website
 from just one article file we created.</p>
@@ -423,14 +418,13 @@ from just one article file we created.</p>
 keeping first, such as create the <code>.gitignore</code> file and list the temporary
 things we do not want Git to track.  A good enough version of the <code>.gitignore</code>
 file I am using for my code repository is the following:</p>
-<pre id="code6" class="highlight" data-file=".gitignore"><code class="language-txt"><div id="code6.1" class="lines"><a href="#code6.1"></a>*~
-</div><div id="code6.2" class="lines"><a href="#code6.2"></a>*.pyc
-</div><div id="code6.3" class="lines"><a href="#code6.3"></a>.*.swp
-</div><div id="code6.4" class="lines"><a href="#code6.4"></a>
-</div><div id="code6.5" class="lines"><a href="#code6.5"></a>**/__pycache__
-</div><div id="code6.6" class="lines"><a href="#code6.6"></a>
-</div><div id="code6.7" class="lines"><a href="#code6.7"></a>/output</div></code></pre>
-
+<pre id="code7" class="highlight" data-file=".gitignore"><code class="language-txt"><div id="code7.1" class="line"><a href="#code7.1" aria-hidden="true"></a>*~
+</div><div id="code7.2" class="line"><a href="#code7.2" aria-hidden="true"></a>*.pyc
+</div><div id="code7.3" class="line"><a href="#code7.3" aria-hidden="true"></a>.*.swp
+</div><div id="code7.4" class="line"><a href="#code7.4" aria-hidden="true"></a>
+</div><div id="code7.5" class="line"><a href="#code7.5" aria-hidden="true"></a>**/__pycache__
+</div><div id="code7.6" class="line"><a href="#code7.6" aria-hidden="true"></a>
+</div><div id="code7.7" class="line"><a href="#code7.7" aria-hidden="true"></a>/output</div></code></pre>
 <p>Do not forget to actually commit that <code>.gitignore</code> file to your local
 repository using the <code>git add .gitignore &amp;&amp; git commit -m 'Added .gitignore'</code>,
 by the way.</p>
@@ -447,19 +441,18 @@ session dump of what you will need to do.  In the following session snippet
 <code>blog</code> is the repository name I chose for my private code repository and you
 will need to replace it with your private repository name (the working
 directory is our newly created local repository):</p>
-<pre id="code7" class="highlight" data-user="user"><code class="language-shell"><div id="code7.1" class="lines"><a href="#code7.1"></a>[user@localhost ~]$ git remote add origin git@github.com:galaxy4public/blog.git
-</div><div id="code7.2" class="lines"><a href="#code7.2"></a>[user@localhost ~]$ git push -u origin master
-</div><div id="code7.3" class="lines"><a href="#code7.3"></a>Enter passphrase for key '/home/user/.ssh/keys/github': 
-</div><div id="code7.4" class="lines"><a href="#code7.4"></a>Enumerating objects: 6, done.
-</div><div id="code7.5" class="lines"><a href="#code7.5"></a>Counting objects: 100% (6/6), done.
-</div><div id="code7.6" class="lines"><a href="#code7.6"></a>Delta compression using up to 4 threads
-</div><div id="code7.7" class="lines"><a href="#code7.7"></a>Compressing objects: 100% (4/4), done.
-</div><div id="code7.8" class="lines"><a href="#code7.8"></a>Writing objects: 100% (6/6), 1008 bytes | 1008.00 KiB/s, done.
-</div><div id="code7.9" class="lines"><a href="#code7.9"></a>Total 6 (delta 0), reused 0 (delta 0), pack-reused 0
-</div><div id="code7.10" class="lines"><a href="#code7.10"></a>To github.com:galaxy4public/blog.git
-</div><div id="code7.11" class="lines"><a href="#code7.11"></a> * [new branch]      master -&gt; master
-</div><div id="code7.12" class="lines"><a href="#code7.12"></a>Branch 'master' set up to track remote branch 'master' from 'origin'.</div></code></pre>
-
+<pre id="code8" class="highlight" data-user="user"><code class="language-console"><div id="code8.1" class="line"><a href="#code8.1" aria-hidden="true"></a><span class="gp">[user@localhost ~]$ </span>git remote add origin git@github.com:galaxy4public/blog.git
+</div><div id="code8.2" class="line"><a href="#code8.2" aria-hidden="true"></a><span class="gp">[user@localhost ~]$ </span>git push -u origin master
+</div><div id="code8.3" class="line"><a href="#code8.3" aria-hidden="true"></a><span class="go">Enter passphrase for key &#39;/home/user/.ssh/keys/github&#39;: </span>
+</div><div id="code8.4" class="line"><a href="#code8.4" aria-hidden="true"></a><span class="go">Enumerating objects: 6, done.</span>
+</div><div id="code8.5" class="line"><a href="#code8.5" aria-hidden="true"></a><span class="go">Counting objects: 100% (6/6), done.</span>
+</div><div id="code8.6" class="line"><a href="#code8.6" aria-hidden="true"></a><span class="go">Delta compression using up to 4 threads</span>
+</div><div id="code8.7" class="line"><a href="#code8.7" aria-hidden="true"></a><span class="go">Compressing objects: 100% (4/4), done.</span>
+</div><div id="code8.8" class="line"><a href="#code8.8" aria-hidden="true"></a><span class="go">Writing objects: 100% (6/6), 1008 bytes | 1008.00 KiB/s, done.</span>
+</div><div id="code8.9" class="line"><a href="#code8.9" aria-hidden="true"></a><span class="go">Total 6 (delta 0), reused 0 (delta 0), pack-reused 0</span>
+</div><div id="code8.10" class="line"><a href="#code8.10" aria-hidden="true"></a><span class="go">To github.com:galaxy4public/blog.git</span>
+</div><div id="code8.11" class="line"><a href="#code8.11" aria-hidden="true"></a><span class="go"> * [new branch]      master -&gt; master</span>
+</div><div id="code8.12" class="line"><a href="#code8.12" aria-hidden="true"></a><span class="go">Branch &#39;master&#39; set up to track remote branch &#39;master&#39; from &#39;origin&#39;.</span></div></code></pre>
 <p>Do you remember how we generated a deploy key pair earlier and installed the
 public key part into the public blog repository, so GitHub would allow the
 bearer of the private key to authenticate and deploy changes to the public blog
@@ -482,107 +475,106 @@ GitHub Action is free compute resource provided by GitHub (there are some
 limits, but for the purposes of a personal blog it is unlikely that you will
 ever hit these limits).</p>
 <p>Each GitHub Action is associated with a specific repository and is defined
-using quite a simple YAML configuration file that instructs GitHub on how to
+using quite a simple <abbr title="YAML Ain't Markup Language">YAML</abbr> configuration file that instructs GitHub on how to
 provision a required compute environment and what to run inside that
-environment.  The YAML file can be arbitrarily named and resides in the
+environment.  The <abbr title="YAML Ain't Markup Language">YAML</abbr> file can be arbitrarily named and resides in the
 <code>.github/workflows/</code> subdirectory (starting from the root of the corresponding
 repository).</p>
 <p>The GitHub Action I am using for my blog web site is stored in
 <code>.github/workflows/pelican.yml</code> and contains the following (we will dissect it
 further down the post):</p>
-<pre id="code8" class="highlight" data-file=".github/workflows/pelican.yml"><code class="language-yaml"><div id="code8.1" class="lines"><a href="#code8.1"></a>name: Static Website Generator
-</div><div id="code8.2" class="lines"><a href="#code8.2"></a>
-</div><div id="code8.3" class="lines"><a href="#code8.3"></a>on:
-</div><div id="code8.4" class="lines"><a href="#code8.4"></a>  push:
-</div><div id="code8.5" class="lines"><a href="#code8.5"></a>    branches: [ master ]
-</div><div id="code8.6" class="lines"><a href="#code8.6"></a>
-</div><div id="code8.7" class="lines"><a href="#code8.7"></a>env:
-</div><div id="code8.8" class="lines"><a href="#code8.8"></a>  LANG: en_AU.UTF-8
-</div><div id="code8.9" class="lines"><a href="#code8.9"></a>
-</div><div id="code8.10" class="lines"><a href="#code8.10"></a>jobs:
-</div><div id="code8.11" class="lines"><a href="#code8.11"></a>  build:
-</div><div id="code8.12" class="lines"><a href="#code8.12"></a>
-</div><div id="code8.13" class="lines"><a href="#code8.13"></a>    runs-on: ubuntu-latest
-</div><div id="code8.14" class="lines"><a href="#code8.14"></a>
-</div><div id="code8.15" class="lines"><a href="#code8.15"></a>    steps:
-</div><div id="code8.16" class="lines"><a href="#code8.16"></a>    - name: Initialise locale
-</div><div id="code8.17" class="lines"><a href="#code8.17"></a>      run: |
-</div><div id="code8.18" class="lines"><a href="#code8.18"></a>        if [ &quot;$LANG&quot; != 'C' -a &quot;{$LANG:0:2}&quot; != 'C.' ]; then
-</div><div id="code8.19" class="lines"><a href="#code8.19"></a>          CP=&quot;${LANG#*.}&quot; &amp;&amp; [ -z &quot;$CP&quot; ] &amp;&amp; CP=UTF-8 ||:
-</div><div id="code8.20" class="lines"><a href="#code8.20"></a>          sudo sed -i -E &quot;/^\s*$LANG(\s|\$)/{:a;n;ba;q};\$a$LANG $CP&quot; /etc/locale.gen
-</div><div id="code8.21" class="lines"><a href="#code8.21"></a>          sudo locale-gen
-</div><div id="code8.22" class="lines"><a href="#code8.22"></a>          sudo localectl set-locale LANG=&quot;${LANG:-C.UTF-8}&quot;
-</div><div id="code8.23" class="lines"><a href="#code8.23"></a>        fi
-</div><div id="code8.24" class="lines"><a href="#code8.24"></a>        locale -a
-</div><div id="code8.25" class="lines"><a href="#code8.25"></a>    - name: Checkout the primary repo
-</div><div id="code8.26" class="lines"><a href="#code8.26"></a>      uses: actions/checkout@v2
-</div><div id="code8.27" class="lines"><a href="#code8.27"></a>      with:
-</div><div id="code8.28" class="lines"><a href="#code8.28"></a>        fetch-depth: 0
-</div><div id="code8.29" class="lines"><a href="#code8.29"></a>        submodules: recursive
-</div><div id="code8.30" class="lines"><a href="#code8.30"></a>    - name: Restore modification times for content
-</div><div id="code8.31" class="lines"><a href="#code8.31"></a>      run: |
-</div><div id="code8.32" class="lines"><a href="#code8.32"></a>        git log --pretty=tformat:&quot;%at&quot; --name-status --no-merges -- \
-</div><div id="code8.33" class="lines"><a href="#code8.33"></a>            content \
-</div><div id="code8.34" class="lines"><a href="#code8.34"></a>            themes/mind-drops/content \
-</div><div id="code8.35" class="lines"><a href="#code8.35"></a>        | sed -nE '
-</div><div id="code8.36" class="lines"><a href="#code8.36"></a>            /^\s*$/d;/^[[:digit:]]+$/{h;d};
-</div><div id="code8.37" class="lines"><a href="#code8.37"></a>            /^[UXB]/d;
-</div><div id="code8.38" class="lines"><a href="#code8.38"></a>            /^[AMT]/{s,^\S\s+,,;G;s,^(.+)\n(.+),\2 \1,;p};
-</div><div id="code8.39" class="lines"><a href="#code8.39"></a>            /^[DR]/{
-</div><div id="code8.40" class="lines"><a href="#code8.40"></a>              s,^(D|[CR][[:digit:]]+)\s+,\1 ,;G;
-</div><div id="code8.41" class="lines"><a href="#code8.41"></a>              s,^(\S+) ([^[=\t=]]+[[=\t=]])?(.*)\n(.+),\4\1 \3,;
-</div><div id="code8.42" class="lines"><a href="#code8.42"></a>              p
-</div><div id="code8.43" class="lines"><a href="#code8.43"></a>            }' \
-</div><div id="code8.44" class="lines"><a href="#code8.44"></a>        | LC_ALL=C sort -k2 -k1rn | uniq -f1 \
-</div><div id="code8.45" class="lines"><a href="#code8.45"></a>        | sed -E '/^[[:digit:]]+D /d' \
-</div><div id="code8.46" class="lines"><a href="#code8.46"></a>        | while read TSTAMP FILE; do
-</div><div id="code8.47" class="lines"><a href="#code8.47"></a>            if [ -f &quot;$FILE&quot; ]; then
-</div><div id="code8.48" class="lines"><a href="#code8.48"></a>                echo &quot;$FILE =&gt; $(date -d @$TSTAMP)&quot;
-</div><div id="code8.49" class="lines"><a href="#code8.49"></a>                touch -m -d &quot;@$TSTAMP&quot; -- &quot;$FILE&quot;
-</div><div id="code8.50" class="lines"><a href="#code8.50"></a>            fi
-</div><div id="code8.51" class="lines"><a href="#code8.51"></a>        done
-</div><div id="code8.52" class="lines"><a href="#code8.52"></a>    - name: Checkout Pages repo
-</div><div id="code8.53" class="lines"><a href="#code8.53"></a>      uses: actions/checkout@v2
-</div><div id="code8.54" class="lines"><a href="#code8.54"></a>      with:
-</div><div id="code8.55" class="lines"><a href="#code8.55"></a>        repository: galaxy4public/galaxy4public.github.io
-</div><div id="code8.56" class="lines"><a href="#code8.56"></a>        path: output
-</div><div id="code8.57" class="lines"><a href="#code8.57"></a>    - name: Set up Python
-</div><div id="code8.58" class="lines"><a href="#code8.58"></a>      uses: actions/setup-python@v2
-</div><div id="code8.59" class="lines"><a href="#code8.59"></a>      with:
-</div><div id="code8.60" class="lines"><a href="#code8.60"></a>        python-version: 3.x
-</div><div id="code8.61" class="lines"><a href="#code8.61"></a>    - name: Install dependencies
-</div><div id="code8.62" class="lines"><a href="#code8.62"></a>      run: |
-</div><div id="code8.63" class="lines"><a href="#code8.63"></a>        python -m pip install --upgrade pip
-</div><div id="code8.64" class="lines"><a href="#code8.64"></a>        pip install -r requirements.txt
-</div><div id="code8.65" class="lines"><a href="#code8.65"></a>    - name: Generate the website
-</div><div id="code8.66" class="lines"><a href="#code8.66"></a>      run: |
-</div><div id="code8.67" class="lines"><a href="#code8.67"></a>        ls -laR content/
-</div><div id="code8.68" class="lines"><a href="#code8.68"></a>        rm -rf output/*
-</div><div id="code8.69" class="lines"><a href="#code8.69"></a>        ls -la output/
-</div><div id="code8.70" class="lines"><a href="#code8.70"></a>        TIMEZONE=$(sed -nE 's|^\s*TIMEZONE\s*=\s*['&quot;'&quot;'&quot;]([^'&quot;'&quot;'&quot;]+)['&quot;'&quot;'&quot;].*|\1|;T;p' pelicanconf.py)
-</div><div id="code8.71" class="lines"><a href="#code8.71"></a>        TZ=&quot;${TIMEZONE:-UTC}&quot; pelican
-</div><div id="code8.72" class="lines"><a href="#code8.72"></a>    - name: Publish to GitHub Pages
-</div><div id="code8.73" class="lines"><a href="#code8.73"></a>      env:
-</div><div id="code8.74" class="lines"><a href="#code8.74"></a>        DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
-</div><div id="code8.75" class="lines"><a href="#code8.75"></a>      run: |
-</div><div id="code8.76" class="lines"><a href="#code8.76"></a>        cd output
-</div><div id="code8.77" class="lines"><a href="#code8.77"></a>        git config --local user.email &quot;action@github.com&quot;
-</div><div id="code8.78" class="lines"><a href="#code8.78"></a>        git config --local user.name &quot;GitHub Action&quot;
-</div><div id="code8.79" class="lines"><a href="#code8.79"></a>        if output=$(git status --porcelain) &amp;&amp; [ -z &quot;$output&quot; ]; then
-</div><div id="code8.80" class="lines"><a href="#code8.80"></a>          echo &quot;No new content was generated, exiting gracefully&quot;
-</div><div id="code8.81" class="lines"><a href="#code8.81"></a>        else 
-</div><div id="code8.82" class="lines"><a href="#code8.82"></a>          git add -A
-</div><div id="code8.83" class="lines"><a href="#code8.83"></a>          git commit -m &quot;Updated content on $(date)&quot;
-</div><div id="code8.84" class="lines"><a href="#code8.84"></a>          eval $(ssh-agent)
-</div><div id="code8.85" class="lines"><a href="#code8.85"></a>          echo &quot;$DEPLOY_KEY&quot; | ssh-add -t 5m /dev/stdin
-</div><div id="code8.86" class="lines"><a href="#code8.86"></a>          ssh-add -l
-</div><div id="code8.87" class="lines"><a href="#code8.87"></a>          git push git@github.com:galaxy4public/galaxy4public.github.io.git
-</div><div id="code8.88" class="lines"><a href="#code8.88"></a>          ssh-add -D
-</div><div id="code8.89" class="lines"><a href="#code8.89"></a>          ssh-agent -k
-</div><div id="code8.90" class="lines"><a href="#code8.90"></a>        fi
-</div><div id="code8.91" class="lines"><a href="#code8.91"></a>        cd ..
-</div><div id="code8.92" class="lines"><a href="#code8.92"></a>        echo Completed</div></code></pre>
-
+<pre id="code9" class="highlight" data-file=".github/workflows/pelican.yml"><code class="language-yaml"><div id="code9.1" class="line"><a href="#code9.1" aria-hidden="true"></a><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Static Website Generator</span>
+</div><div id="code9.2" class="line"><a href="#code9.2" aria-hidden="true"></a>
+</div><div id="code9.3" class="line"><a href="#code9.3" aria-hidden="true"></a><span class="nt">on</span><span class="p">:</span>
+</div><div id="code9.4" class="line"><a href="#code9.4" aria-hidden="true"></a>  <span class="nt">push</span><span class="p">:</span>
+</div><div id="code9.5" class="line"><a href="#code9.5" aria-hidden="true"></a>    <span class="nt">branches</span><span class="p">:</span> <span class="p p-Indicator">[</span> <span class="nv">master</span> <span class="p p-Indicator">]</span>
+</div><div id="code9.6" class="line"><a href="#code9.6" aria-hidden="true"></a>
+</div><div id="code9.7" class="line"><a href="#code9.7" aria-hidden="true"></a><span class="nt">env</span><span class="p">:</span>
+</div><div id="code9.8" class="line"><a href="#code9.8" aria-hidden="true"></a>  <span class="nt">LANG</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">en_AU.UTF-8</span>
+</div><div id="code9.9" class="line"><a href="#code9.9" aria-hidden="true"></a>
+</div><div id="code9.10" class="line"><a href="#code9.10" aria-hidden="true"></a><span class="nt">jobs</span><span class="p">:</span>
+</div><div id="code9.11" class="line"><a href="#code9.11" aria-hidden="true"></a>  <span class="nt">build</span><span class="p">:</span>
+</div><div id="code9.12" class="line"><a href="#code9.12" aria-hidden="true"></a>
+</div><div id="code9.13" class="line"><a href="#code9.13" aria-hidden="true"></a>    <span class="nt">runs-on</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+</div><div id="code9.14" class="line"><a href="#code9.14" aria-hidden="true"></a>
+</div><div id="code9.15" class="line"><a href="#code9.15" aria-hidden="true"></a>    <span class="nt">steps</span><span class="p">:</span>
+</div><div id="code9.16" class="line"><a href="#code9.16" aria-hidden="true"></a>    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Initialise locale</span>
+</div><div id="code9.17" class="line"><a href="#code9.17" aria-hidden="true"></a>      <span class="nt">run</span><span class="p">:</span> <span class="p p-Indicator">|</span>
+</div><div id="code9.18" class="line"><a href="#code9.18" aria-hidden="true"></a>        <span class="no">if [ &quot;$LANG&quot; != &#39;C&#39; -a &quot;{$LANG:0:2}&quot; != &#39;C.&#39; ]; then</span>
+</div><div id="code9.19" class="line"><a href="#code9.19" aria-hidden="true"></a>          <span class="no">CP=&quot;${LANG#*.}&quot; &amp;&amp; [ -z &quot;$CP&quot; ] &amp;&amp; CP=UTF-8 ||:</span>
+</div><div id="code9.20" class="line"><a href="#code9.20" aria-hidden="true"></a>          <span class="no">sudo sed -i -E &quot;/^\s*$LANG(\s|\$)/{:a;n;ba;q};\$a$LANG $CP&quot; /etc/locale.gen</span>
+</div><div id="code9.21" class="line"><a href="#code9.21" aria-hidden="true"></a>          <span class="no">sudo locale-gen</span>
+</div><div id="code9.22" class="line"><a href="#code9.22" aria-hidden="true"></a>          <span class="no">sudo localectl set-locale LANG=&quot;${LANG:-C.UTF-8}&quot;</span>
+</div><div id="code9.23" class="line"><a href="#code9.23" aria-hidden="true"></a>        <span class="no">fi</span>
+</div><div id="code9.24" class="line"><a href="#code9.24" aria-hidden="true"></a>        <span class="no">locale -a</span>
+</div><div id="code9.25" class="line"><a href="#code9.25" aria-hidden="true"></a>    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Checkout the primary repo</span>
+</div><div id="code9.26" class="line"><a href="#code9.26" aria-hidden="true"></a>      <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">actions/checkout@v2</span>
+</div><div id="code9.27" class="line"><a href="#code9.27" aria-hidden="true"></a>      <span class="nt">with</span><span class="p">:</span>
+</div><div id="code9.28" class="line"><a href="#code9.28" aria-hidden="true"></a>        <span class="nt">fetch-depth</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
+</div><div id="code9.29" class="line"><a href="#code9.29" aria-hidden="true"></a>        <span class="nt">submodules</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">recursive</span>
+</div><div id="code9.30" class="line"><a href="#code9.30" aria-hidden="true"></a>    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Restore modification times for content</span>
+</div><div id="code9.31" class="line"><a href="#code9.31" aria-hidden="true"></a>      <span class="nt">run</span><span class="p">:</span> <span class="p p-Indicator">|</span>
+</div><div id="code9.32" class="line"><a href="#code9.32" aria-hidden="true"></a>        <span class="no">git log --pretty=tformat:&quot;%at&quot; --name-status --no-merges -- \</span>
+</div><div id="code9.33" class="line"><a href="#code9.33" aria-hidden="true"></a>            <span class="no">content \</span>
+</div><div id="code9.34" class="line"><a href="#code9.34" aria-hidden="true"></a>            <span class="no">themes/mind-drops/content \</span>
+</div><div id="code9.35" class="line"><a href="#code9.35" aria-hidden="true"></a>        <span class="no">| sed -nE &#39;</span>
+</div><div id="code9.36" class="line"><a href="#code9.36" aria-hidden="true"></a>            <span class="no">/^\s*$/d;/^[[:digit:]]+$/{h;d};</span>
+</div><div id="code9.37" class="line"><a href="#code9.37" aria-hidden="true"></a>            <span class="no">/^[UXB]/d;</span>
+</div><div id="code9.38" class="line"><a href="#code9.38" aria-hidden="true"></a>            <span class="no">/^[AMT]/{s,^\S\s+,,;G;s,^(.+)\n(.+),\2 \1,;p};</span>
+</div><div id="code9.39" class="line"><a href="#code9.39" aria-hidden="true"></a>            <span class="no">/^[DR]/{</span>
+</div><div id="code9.40" class="line"><a href="#code9.40" aria-hidden="true"></a>              <span class="no">s,^(D|[CR][[:digit:]]+)\s+,\1 ,;G;</span>
+</div><div id="code9.41" class="line"><a href="#code9.41" aria-hidden="true"></a>              <span class="no">s,^(\S+) ([^[=\t=]]+[[=\t=]])?(.*)\n(.+),\4\1 \3,;</span>
+</div><div id="code9.42" class="line"><a href="#code9.42" aria-hidden="true"></a>              <span class="no">p</span>
+</div><div id="code9.43" class="line"><a href="#code9.43" aria-hidden="true"></a>            <span class="no">}&#39; \</span>
+</div><div id="code9.44" class="line"><a href="#code9.44" aria-hidden="true"></a>        <span class="no">| LC_ALL=C sort -k2 -k1rn | uniq -f1 \</span>
+</div><div id="code9.45" class="line"><a href="#code9.45" aria-hidden="true"></a>        <span class="no">| sed -E &#39;/^[[:digit:]]+D /d&#39; \</span>
+</div><div id="code9.46" class="line"><a href="#code9.46" aria-hidden="true"></a>        <span class="no">| while read TSTAMP FILE; do</span>
+</div><div id="code9.47" class="line"><a href="#code9.47" aria-hidden="true"></a>            <span class="no">if [ -f &quot;$FILE&quot; ]; then</span>
+</div><div id="code9.48" class="line"><a href="#code9.48" aria-hidden="true"></a>                <span class="no">echo &quot;$FILE =&gt; $(date -d @$TSTAMP)&quot;</span>
+</div><div id="code9.49" class="line"><a href="#code9.49" aria-hidden="true"></a>                <span class="no">touch -m -d &quot;@$TSTAMP&quot; -- &quot;$FILE&quot;</span>
+</div><div id="code9.50" class="line"><a href="#code9.50" aria-hidden="true"></a>            <span class="no">fi</span>
+</div><div id="code9.51" class="line"><a href="#code9.51" aria-hidden="true"></a>        <span class="no">done</span>
+</div><div id="code9.52" class="line"><a href="#code9.52" aria-hidden="true"></a>    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Checkout Pages repo</span>
+</div><div id="code9.53" class="line"><a href="#code9.53" aria-hidden="true"></a>      <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">actions/checkout@v2</span>
+</div><div id="code9.54" class="line"><a href="#code9.54" aria-hidden="true"></a>      <span class="nt">with</span><span class="p">:</span>
+</div><div id="code9.55" class="line"><a href="#code9.55" aria-hidden="true"></a>        <span class="nt">repository</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">galaxy4public/galaxy4public.github.io</span>
+</div><div id="code9.56" class="line"><a href="#code9.56" aria-hidden="true"></a>        <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">output</span>
+</div><div id="code9.57" class="line"><a href="#code9.57" aria-hidden="true"></a>    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Set up Python</span>
+</div><div id="code9.58" class="line"><a href="#code9.58" aria-hidden="true"></a>      <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">actions/setup-python@v2</span>
+</div><div id="code9.59" class="line"><a href="#code9.59" aria-hidden="true"></a>      <span class="nt">with</span><span class="p">:</span>
+</div><div id="code9.60" class="line"><a href="#code9.60" aria-hidden="true"></a>        <span class="nt">python-version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">3.x</span>
+</div><div id="code9.61" class="line"><a href="#code9.61" aria-hidden="true"></a>    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Install dependencies</span>
+</div><div id="code9.62" class="line"><a href="#code9.62" aria-hidden="true"></a>      <span class="nt">run</span><span class="p">:</span> <span class="p p-Indicator">|</span>
+</div><div id="code9.63" class="line"><a href="#code9.63" aria-hidden="true"></a>        <span class="no">python -m pip install --upgrade pip</span>
+</div><div id="code9.64" class="line"><a href="#code9.64" aria-hidden="true"></a>        <span class="no">pip install -r requirements.txt</span>
+</div><div id="code9.65" class="line"><a href="#code9.65" aria-hidden="true"></a>    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Generate the website</span>
+</div><div id="code9.66" class="line"><a href="#code9.66" aria-hidden="true"></a>      <span class="nt">run</span><span class="p">:</span> <span class="p p-Indicator">|</span>
+</div><div id="code9.67" class="line"><a href="#code9.67" aria-hidden="true"></a>        <span class="no">ls -laR content/</span>
+</div><div id="code9.68" class="line"><a href="#code9.68" aria-hidden="true"></a>        <span class="no">rm -rf output/*</span>
+</div><div id="code9.69" class="line"><a href="#code9.69" aria-hidden="true"></a>        <span class="no">ls -la output/</span>
+</div><div id="code9.70" class="line"><a href="#code9.70" aria-hidden="true"></a>        <span class="no">TIMEZONE=$(sed -nE &#39;s|^\s*TIMEZONE\s*=\s*[&#39;&quot;&#39;&quot;&#39;&quot;]([^&#39;&quot;&#39;&quot;&#39;&quot;]+)[&#39;&quot;&#39;&quot;&#39;&quot;].*|\1|;T;p&#39; pelicanconf.py)</span>
+</div><div id="code9.71" class="line"><a href="#code9.71" aria-hidden="true"></a>        <span class="no">TZ=&quot;${TIMEZONE:-UTC}&quot; pelican</span>
+</div><div id="code9.72" class="line"><a href="#code9.72" aria-hidden="true"></a>    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Publish to GitHub Pages</span>
+</div><div id="code9.73" class="line"><a href="#code9.73" aria-hidden="true"></a>      <span class="nt">env</span><span class="p">:</span>
+</div><div id="code9.74" class="line"><a href="#code9.74" aria-hidden="true"></a>        <span class="nt">DEPLOY_KEY</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ secrets.DEPLOY_KEY }}</span>
+</div><div id="code9.75" class="line"><a href="#code9.75" aria-hidden="true"></a>      <span class="nt">run</span><span class="p">:</span> <span class="p p-Indicator">|</span>
+</div><div id="code9.76" class="line"><a href="#code9.76" aria-hidden="true"></a>        <span class="no">cd output</span>
+</div><div id="code9.77" class="line"><a href="#code9.77" aria-hidden="true"></a>        <span class="no">git config --local user.email &quot;action@github.com&quot;</span>
+</div><div id="code9.78" class="line"><a href="#code9.78" aria-hidden="true"></a>        <span class="no">git config --local user.name &quot;GitHub Action&quot;</span>
+</div><div id="code9.79" class="line"><a href="#code9.79" aria-hidden="true"></a>        <span class="no">if output=$(git status --porcelain) &amp;&amp; [ -z &quot;$output&quot; ]; then</span>
+</div><div id="code9.80" class="line"><a href="#code9.80" aria-hidden="true"></a>          <span class="no">echo &quot;No new content was generated, exiting gracefully&quot;</span>
+</div><div id="code9.81" class="line"><a href="#code9.81" aria-hidden="true"></a>        <span class="no">else </span>
+</div><div id="code9.82" class="line"><a href="#code9.82" aria-hidden="true"></a>          <span class="no">git add -A</span>
+</div><div id="code9.83" class="line"><a href="#code9.83" aria-hidden="true"></a>          <span class="no">git commit -m &quot;Updated content on $(date)&quot;</span>
+</div><div id="code9.84" class="line"><a href="#code9.84" aria-hidden="true"></a>          <span class="no">eval $(ssh-agent)</span>
+</div><div id="code9.85" class="line"><a href="#code9.85" aria-hidden="true"></a>          <span class="no">echo &quot;$DEPLOY_KEY&quot; | ssh-add -t 5m /dev/stdin</span>
+</div><div id="code9.86" class="line"><a href="#code9.86" aria-hidden="true"></a>          <span class="no">ssh-add -l</span>
+</div><div id="code9.87" class="line"><a href="#code9.87" aria-hidden="true"></a>          <span class="no">git push git@github.com:galaxy4public/galaxy4public.github.io.git</span>
+</div><div id="code9.88" class="line"><a href="#code9.88" aria-hidden="true"></a>          <span class="no">ssh-add -D</span>
+</div><div id="code9.89" class="line"><a href="#code9.89" aria-hidden="true"></a>          <span class="no">ssh-agent -k</span>
+</div><div id="code9.90" class="line"><a href="#code9.90" aria-hidden="true"></a>        <span class="no">fi</span>
+</div><div id="code9.91" class="line"><a href="#code9.91" aria-hidden="true"></a>        <span class="no">cd ..</span>
+</div><div id="code9.92" class="line"><a href="#code9.92" aria-hidden="true"></a>        <span class="no">echo Completed</span></div></code></pre>
 <p>This is a copy of my live GitHub Action for deploying my blog that you are most
 likely reading right now, and I decided not to edit anything, so if you just
 want to re-use it you will need to replace a few things, namely:</p>
@@ -599,7 +591,7 @@ want to re-use it you will need to replace a few things, namely:</p>
 Action is structured and what each step is doing.</p>
 <p>It all starts with the definition of the action itself and the conditions of
 how it is triggered and how does it run, you can get a formal description of
-the YAML structure of this configuration file in the official GitHub
+the <abbr title="YAML Ain't Markup Language">YAML</abbr> structure of this configuration file in the official GitHub
 documentation on <a href="https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions">Workflows</a>.</p>
 <p>Here, we are only going to focus on steps defined under the &ldquo;jobs:&rdquo; section of
 the file since these steps are defining the logic we are after.</p>
@@ -612,7 +604,7 @@ corresponding files, and finally we set the locale of the container to the
 requested locale.</p>
 <p>The &ldquo;Checkout the primary repo&rdquo; step is leveraging the official &ldquo;Checkout V2&rdquo;
 Action and checks out a full copy of the source code repository of our blog
-and all the linked submodules.  Initially, I was using a shalow copy using
+and all the linked submodules.  Initially, I was using a shallow copy using
 <code>fetch-depth: 1</code>, but the next step was requiring the full repository history
 to do its job reliably and I changed it to be a full history clone.</p>
 <p>Since <code>git</code> <a href="https://git.wiki.kernel.org/index.php/GitFaq#Why_isn.27t_Git_preserving_modification_time_on_files.3F">does not store timestamps</a> for the files and directories under its
@@ -650,7 +642,7 @@ and pages and to generate the result in the &ldquo;output&rdquo; directory.  The
 <p>The second trick of the &ldquo;Generate the website&rdquo; step is the extraction of the
 time zone information from the configuration files and is setting the <code>TZ</code>
 variable correctly just before we call <code>pelican</code>.  Without this either Pelican
-may fail or if it does not it will produce UTC based date and times, which
+may fail or if it does not it will produce <abbr title="Coordinated Universal Time">UTC</abbr> based date and times, which
 would be undesirable (at least for me, since my time zone is in Australia).</p>
 <p>The final step is to push the updated content to the public blog repository,
 which will make it visible via GitHub Pages.  Several things to notice there
@@ -672,42 +664,40 @@ are:</p>
 <p>From this point on, any push to the private codebase repository will trigger
 the GitHub Action and if the change has resulted in any updated content such
 content will be published to GitHub Pages!</p>
-<p>There are quite a few thing we could improve such as introducing the broken
+<p>There are quite a few things we could improve: such as introducing a broken
 links check, doing some sanity checks, etc. &ndash; but this would be for another
 article, I guess. :)</p>
+				<footer>
+					<span><span class="contextual">Offloaded on </span><time datetime="2020-05-17T21:32:00+10:00">
+						<span class="month"><a href="/2020/05/" title="A link to the archives for May of 2020">May<span class="month full"></span></a></span>
+						<span class="day">17</span>
+						<span class="year"><a href="/2020/" title="A link to the archives for the year of 2020">2020</a></span>
+					</time></span>
+						<span class="contextual">into </span><span class="category"><a href="/category/blog/" title="A link to a collection of articles in the 'blog' category">blog</a></span>
+					<span class="contextual">and tagged with:</span>
 					<ul class="tags">
 						<li class="tag">
-							<div>
-								<a href="/tag/pelican/" class="tag name">pelican</a>
-							</div>
-							<a href="/tag/pelican/" class="tag count">2</a>
+							<span>
+								<a href="/tag/pelican/" rel="tag" title="A link to the collection tagged with 'pelican'" data-count="2" ><span>pelican</span></a>
+							</span>
 						</li>
 						<li class="tag">
-							<div>
-								<a href="/tag/blog/" class="tag name">blog</a>
-							</div>
-							<a href="/tag/blog/" class="tag count">2</a>
+							<span>
+								<a href="/tag/blog/" rel="tag" title="A link to the collection tagged with 'blog'" data-count="2" ><span>blog</span></a>
+							</span>
 						</li>
 						<li class="tag">
-							<div>
-								<a href="/tag/github/" class="tag name">github</a>
-							</div>
-							<a href="/tag/github/" class="tag count">1</a>
+							<span>
+								<a href="/tag/github/" rel="tag" title="A link to the collection tagged with 'github'" data-count="1" ><span>github</span></a>
+							</span>
 						</li>
-					</ul>
-					<footer>
-						Offloaded on
-						<time datetime="2020-05-17 21:32:00+10:00">Sun, 17/05/2020 at 21:32 (<a href="https://time.is/AEST" target="_blank" rel="noreferrer">AEST</a>)</time>
-						<span class="category-tag"><a href="/category/blog">blog</a></span>
-					</footer>				</article>
-			</div>
-		</div>
-		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-165060547-1"></script>
-		<script>
-			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments);}
-			gtag('js', new Date());
-			gtag('config', 'UA-165060547-1');
-		</script>
-	</body>
+						</ul>
+				</footer>
+			</article>
+		<footer>
+		</footer>
+	</main>
+	<footer>
+	</footer>
+</body>
 </html>

@@ -1,239 +1,180 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta http-equiv="Content-Security-Policy" content="default-src 'self'; object-src 'none'; script-src 'self' https://www.googletagmanager.com/gtag/js 'sha256-TelA7VsuYAMqhOKGk7CHgJyuqSJdmqZEp+hn6PWVRwQ=' https://www.google-analytics.com/analytics.js ; img-src 'self' data: https://www.google-analytics.com/r/collect https://www.google-analytics.com/collect https://stats.g.doubleclick.net/r/collect https://*/ads/ga-audiences https://www.googletagmanager.com/a ; style-src 'self' 'sha256-fszvBX/J9dhPxFSJ5wUrq/Pvg6HrnTkWyshMZpaxSQY=' ; connect-src 'self' https://www.google-analytics.com/j/collect https://stats.g.doubleclick.net/j/collect ; " />
-		<title>Mind Drops</title>
-		<script src="/theme/js/persistence.js" defer></script>
-		<meta charset="utf-8" />
-		<meta name="description" content="" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="theme-color" content="#535353" />
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="format-detection" content="telephone=no" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-		<meta name="apple-mobile-web-app-title" content="Mind Drops" />
-		<meta name="description" content="">
-		<link rel="apple-touch-icon" href="/theme/images/icons/mind-drops-192x192.png" />
-		<link rel="manifest" type="text/json" href="/manifest.json" />
-		<link rel="alternate" type="application/atom+xml" href="https://dmitry.khlebnikov.net/feeds/all.atom.xml" title="Mind Drops Full Atom Feed" />
-		<link rel="dns-prefetch" href="https://www.google.com" />
-		<link rel="preconnect" href="https://www.google.com" crossorigin />
-		<link rel="dns-prefetch" href="https://www.google-analytics.com" />
-		<link rel="preconnect" href="https://www.google-analytics.com" crossorigin />
-		<link rel="dns-prefetch" href="https://www.googletagmanager.com">
-		<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
-		<link rel="dns-prefetch" href="https://stats.g.doubleclick.net" />
-		<link rel="preconnect" href="https://stats.g.doubleclick.net" crossorigin />
-		<link rel="preload" as="style" href="/theme/css/reset.css" />
-		<link rel="preload" as="style" href="/theme/css/fonts/Icons.css" />
-		<link rel="preload" as="style" href="/theme/css/fonts/Exo2.css" />
-		<link rel="preload" as="style" href="/theme/css/fonts/Oswald.css" />
-		<link rel="preload" as="style" href="/theme/css/fonts/DancingScript.css" />
-		<link rel="preload" as="style" href="/theme/css/fonts/FiraCode.css" />
-		<link rel="preload" as="style" href="/theme/css/base.css" />
-		<link rel="preload" as="script" href="/theme/js/persistence.js" />
-		<link rel="preload" as="script" href="/theme/js/visited.js" />
-		<link rel="preload" as="script" href="/theme/js/service.js" />
-		<link rel="preload" as="script" href="https://www.googletagmanager.com/gtag/js?id=UA-165060547-1" />
-		<link rel="icon" type="image/png" href="/images/galaxy.png" />
-		<script src="/theme/js/loader.js" defer></script>
+<head>
+	<title>Mind Drops :: assorted bits of wit</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1" />
+	<link rel="stylesheet" href="/theme/css/fonts/Icons.css" />
+	<link rel="stylesheet" href="/theme/css/fonts/Exo2.css" />
+	<link rel="stylesheet" href="/theme/css/fonts/Oswald.css" />
+	<link rel="stylesheet" href="/theme/css/fonts/DancingScript.css" />
+	<link rel="stylesheet" href="/theme/css/base.css" />
+	<link rel="stylesheet" href="/theme/css/pygments/default.css" /></head>
 
-		<link rel="stylesheet" type="text/css" href="/theme/css/article.css" />
-		<link rel="stylesheet" type="text/css" href="/theme/css/index.css" />
-	</head>
-	<body>
-
-		<input type="radio" name="menu-toggle" id="menu-toggle-full" value="full" tabindex="-1" checked />
-		<input type="radio" name="menu-toggle" id="menu-toggle-mini" value="mini" tabindex="-1" />
-		<input type="radio" name="menu-toggle" id="menu-toggle-hide" value="hide" tabindex="-1" />
-		<label for="menu-toggle-full" class="icon menu" role="radio" tabindex="0">Show the full menu panel on the screen</label>
-		<aside id="sidebar">
-			<label for="menu-toggle-mini" class="icon left-big" role="radio" tabindex="0">Show the minimised menu panel on the screen</label>
-			<label for="menu-toggle-hide" class="icon eye-off" role="radio" tabindex="0">Remove the menu panel off the screen</label>
-			<div class="title">Mind Drops</div>
-			<div id="logo" class="box shadow">
+<body>
+	<header>
+		<span class="flex">
+			<!--
+			<button class="menu-toggle" type="button" tabindex="0" aria-label="Menu Toggle"><div></div></button>
+			-->
+			<div class="menu-toggle" tabindex="0" aria-label="Menu Toggle"><div></div></div>
+			<a href="/" class="logo">
 				<picture>
-					<source srcset="/images/galaxy.png.webp" type="image/webp">
-					<img src="/images/galaxy.png" alt="Logo">
+					<source srcset="/images/logo.svg" type="image/svg+xml">
+					<source srcset="/images/.svg" type="image/svg+xml">
+					<source srcset="/images/.webp" type="image/webp">
+					<img src="/images/" alt="Logo">
 				</picture>
-			</div>
-
-			<!-- Search -->
-			<section class="box search">
-				<form name="google search" class="icon search" method="get" action="/search">
-					<label for="search" class="offscreen">Search</label>
-					<input id="search" type="text" class="text" name="q" placeholder="Search" />
-				</form>
-			</section>
-
+				<span class="title">Mind Drops</span>
+			</a>
 			<nav>
 				<ul>
-					<li>
-						<a class="icon home" href="/">Home</a>
-					</li>
-					<li>
-						<a class="icon user" href="/about">About</a>
-					</li>
-					<li>
-						<a class="icon phone" href="/contact">Contact</a>
-					</li>
+					<li><a class="icon home" href="/">Home</a></li>
+					<li><a class="icon user" href="/about">About</a></li>
+					<li><a class="icon phone" href="/contact">Contact</a></li>
 				</ul>
 			</nav>
-
-			<!-- Text -->
-			<section class="box text-style1">
-				<div class="inner">
-					<p>
-						<strong>Mind Drops:</strong>: A place to unload all these assorted bits.
-					</p>
+			<form id="search" role="search" autocomplete="off" method="get" action="/search">
+				<label for="q" class="icon search">Search</label>
+				<input type="text" name="q" id="q" placeholder="Search..." />
+				<div class="help" aria-label="Search ">
+					<dl>
+						<dt>"search terms"</dt><dd>exact-match</dd>
+						<dt>term1 | term2</dt><dd>term1 or term2</dd>
+						<dt>term1 * term2</dt><dd>term1 followed by term2</dd>
+						<dt>-term</dt><dd>exclude term</dd>
+						<dt>(search terms)</dt><dd>groups terms</dd>
+						<dt>ext:pdf</dt><dd>file type</dd>
+					</dl>
 				</div>
-			</section>
-
-			<!-- Copyright -->
-			<ul id="copyright">
-				<li>&copy; Openwall Pty Ltd 2020 </li>
-				<li><a href="/legal/terms-of-service">Terms of Service</a></li>
+			</form>
+			<ul class="taskbar">
+				<li class="search-toggle"><label for="q" class="icon search offscreen" title="Toggle the search bar">Search</label></li>
+				<!-- Not Implemented Yet
+				<li><a href="#bug-report" class="icon bug offscreen" title="Report a spotted bug on the page">Report a bug</a></li>
+				<li><a href="#preferences" class="icon cog offscreen" title="Configure personal preferences">Preferences</a></li>
+				 -->
 			</ul>
-		</aside>
-
-		<!-- Content -->
-		<div id="content">
-			<div class="inner">
-				<article id="ssh-port-forwarding-intermediate" class="box post post-excerpt">
-								<header>
-									<h1><a href="/2010/12/10/ssh-port-forwarding-intermediate/">SSH port-forwarding (Intermediate)</a></h1>
-								</header>
-								<div class="info">
-									<span class="date">
-										<span class="day">10</span>
-										<span class="month"><a href="/2010/12/">Dec<span class="month full">ember</span></a></span>
-										<span class="year"><a href="/2010/">2010</a></span>
-									</span>
-									<ul class="stats">
-										<li><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" rel="nofollow" class="icon twitter" aria-label="Twitter" data-tweet-id="1257348809199321089">0</a></li>
-									</ul>
-								</div>
-								<!-- Here we rely on the fact that Pelican always closes summary with '</p>' -->
-								<div class="summary"><p>In my previous blog entry I described some basic functionality of SSH in terms
+		</span>
+	</header>
+	<aside class="modal">
+		<div id="bug-report">
+			<a href="#" class="close"></a>
+			<div class="content">
+				<h1>Bug report</h1>
+				<form id="bug-report-form" autocomplete="off">
+					<textarea id="bug-report-body" name="bug-report-body">
+					</textarea>
+					<input type="submit" value="Submit">
+				</form>
+			</div>
+		</div>
+		<div id="preferences">
+		</div>
+	</aside>
+	<main>
+		<ol>
+			<li><article id="ssh-port-forwarding-intermediate">
+				<header>
+					<h1><a href="/2010/12/10/ssh-port-forwarding-intermediate/" rel="bookmark" title="Permalink to SSH port-forwarding (Intermediate)">SSH port-forwarding (Intermediate)</a></h1>
+				</header>
+				<aside>
+				</aside>
+				<p>In my previous blog entry I described some basic functionality of SSH in terms
 of port-forwarding. Now it&rsquo;s time for a little bit more complex stuff.</p>
 <p>In this article I will highlight:</p>
 <ul>
 <li>(forward) piercing of a firewall (getting access to resources behind it);</li>
 <li>dynamic port-forwarding (AKA proxy);</li>
-<li>(reverse) piercing of a firewall (exposing your local services on the remote side).</li>
-</ul>
-<h2 id="forward-firewall-piercing">Forward firewall piercing</h2>
-<p>Let&rsquo;s start with the forward firewall piercing, since it is the easiest and was
-somewhat already described in my previous blog entry on this topic. Now,
-imagine that you already have SSH access to some <span class="truncated"></span>
-									<span class="readmore">…
-										<a href="/2010/12/10/ssh-port-forwarding-intermediate/#continue" class="icon fa-forward">read
-											<span class="readtime">time 4 min.</span>
-										</a>
-									</span>
-								</div>
+<li>(reverse) piercing <span class="readmore">… <a href="/2010/12/10/ssh-port-forwarding-intermediate/#continue" class="icon fa-forward">read <span class="readtime">time 4 min.</span></a></span></li></ul>
+
+				<footer>
+					<span><span class="contextual">Offloaded on </span><time datetime="2010-12-10T10:00:00+11:00">
+						<span class="month"><a href="/2010/12/" title="A link to the archives for December of 2010">Dec<span class="month full">ember</span></a></span>
+						<span class="day">10</span>
+						<span class="year"><a href="/2010/" title="A link to the archives for the year of 2010">2010</a></span>
+					</time></span>
+						<span class="contextual">into </span><span class="category"><a href="/category/ssh/" title="A link to a collection of articles in the 'ssh' category">ssh</a></span>
+					<span class="contextual">and tagged with:</span>
 					<ul class="tags">
-					</ul>
-					<footer>
-						Offloaded on
-						<time datetime="2010-12-10 10:00:00+11:00">Fri, 10/12/2010 at 10:00 (<a href="https://time.is/AEDT" target="_blank" rel="noreferrer">AEDT</a>)</time>
-						<span class="category-tag"><a href="/category/ssh">ssh</a></span>
-					</footer>				</article>
-				<article id="ssh-port-forwarding-basic" class="box post post-excerpt">
-								<header>
-									<h1><a href="/2010/11/29/ssh-port-forwarding-basic/">SSH port-forwarding (Basic)</a></h1>
-								</header>
-								<div class="info">
-									<span class="date">
-										<span class="day">29</span>
-										<span class="month"><a href="/2010/11/">Nov<span class="month full">ember</span></a></span>
-										<span class="year"><a href="/2010/">2010</a></span>
-									</span>
-									<ul class="stats">
-										<li><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" rel="nofollow" class="icon twitter" aria-label="Twitter" data-tweet-id="1257348809916665859">0</a></li>
-									</ul>
-								</div>
-								<!-- Here we rely on the fact that Pelican always closes summary with '</p>' -->
-								<div class="summary"><p>I think all of you are using SSH in your daily routines. However, do you use
+						</ul>
+				</footer>
+			</article></li>
+			<li><article id="ssh-port-forwarding-basic">
+				<header>
+					<h1><a href="/2010/11/29/ssh-port-forwarding-basic/" rel="bookmark" title="Permalink to SSH port-forwarding (Basic)">SSH port-forwarding (Basic)</a></h1>
+				</header>
+				<aside>
+				</aside>
+				<p>I think all of you are using SSH in your daily routines. However, do you use
 its full potential? Today&rsquo;s topic is the SSH port-forwarding feature and how
 it can be use to achieve some interesting configurations.</p>
-<p>I&rsquo;m sure most of you are aware of the feature, but how many of you are using
-it? Personally, I&rsquo;m a bit obsessed with it and have found numerous cases where
-this feature of SSH is a real life saver.</p>
-<p>Let&rsquo;s start with simple things and imagine that you have a server where you
-are running MySQL (as a <span class="truncated"></span>
-									<span class="readmore">…
-										<a href="/2010/11/29/ssh-port-forwarding-basic/#continue" class="icon fa-forward">read
-											<span class="readtime">time 2 min.</span>
-										</a>
-									</span>
-								</div>
+<p>I&rsquo;m sure most of you are aware of the feature, but <span class="readmore">… <a href="/2010/11/29/ssh-port-forwarding-basic/#continue" class="icon fa-forward">read <span class="readtime">time 2 min.</span></a></span></p>
+
+				<footer>
+					<span><span class="contextual">Offloaded on </span><time datetime="2010-11-29T10:00:00+11:00">
+						<span class="month"><a href="/2010/11/" title="A link to the archives for November of 2010">Nov<span class="month full">ember</span></a></span>
+						<span class="day">29</span>
+						<span class="year"><a href="/2010/" title="A link to the archives for the year of 2010">2010</a></span>
+					</time></span>
+						<span class="contextual">into </span><span class="category"><a href="/category/ssh/" title="A link to a collection of articles in the 'ssh' category">ssh</a></span>
+					<span class="contextual">and tagged with:</span>
 					<ul class="tags">
 						<li class="tag">
-							<div>
-								<a href="/tag/ssh/" class="tag name">ssh</a>
-							</div>
-							<a href="/tag/ssh/" class="tag count">4</a>
+							<span>
+								<a href="/tag/ssh/" rel="tag" title="A link to the collection tagged with 'ssh'" data-count="4" ><span>ssh</span></a>
+							</span>
 						</li>
 						<li class="tag">
-							<div>
-								<a href="/tag/console/" class="tag name">console</a>
-							</div>
-							<a href="/tag/console/" class="tag count">7</a>
+							<span>
+								<a href="/tag/console/" rel="tag" title="A link to the collection tagged with 'console'" data-count="7" ><span>console</span></a>
+							</span>
 						</li>
 						<li class="tag">
-							<div>
-								<a href="/tag/bastion/" class="tag name">bastion</a>
-							</div>
-							<a href="/tag/bastion/" class="tag count">1</a>
+							<span>
+								<a href="/tag/bastion/" rel="tag" title="A link to the collection tagged with 'bastion'" data-count="1" ><span>bastion</span></a>
+							</span>
 						</li>
-					</ul>
-					<footer>
-						Offloaded on
-						<time datetime="2010-11-29 10:00:00+11:00">Mon, 29/11/2010 at 10:00 (<a href="https://time.is/AEDT" target="_blank" rel="noreferrer">AEDT</a>)</time>
-						<span class="category-tag"><a href="/category/ssh">ssh</a></span>
-					</footer>				</article>
-				<article id="howto-vmware-player-as-a-remote-console-vnc" class="box post post-excerpt">
-								<header>
-									<h1><a href="/2010/11/24/howto-vmware-player-as-a-remote-console-vnc/">HOWTO: VMware Player as a remote console (VNC)</a></h1>
-								</header>
-								<div class="info">
-									<span class="date">
-										<span class="day">24</span>
-										<span class="month"><a href="/2010/11/">Nov<span class="month full">ember</span></a></span>
-										<span class="year"><a href="/2010/">2010</a></span>
-									</span>
-									<ul class="stats">
-										<li><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" rel="nofollow" class="icon twitter" aria-label="Twitter" data-tweet-id="1257348810696790024">0</a></li>
-									</ul>
-								</div>
-								<!-- Here we rely on the fact that Pelican always closes summary with '</p>' -->
-								<div class="summary"><p>Turning VMware Player into a non-privileged VNC client to access VMware VMs from a Linux-based PC</p>
-									<span class="readmore">…
-										<a href="/2010/11/24/howto-vmware-player-as-a-remote-console-vnc/#continue" class="icon fa-forward">read
-											<span class="readtime">time 14 min.</span>
-										</a>
-									</span>
-								</div>
+						</ul>
+				</footer>
+			</article></li>
+			<li><article id="howto-vmware-player-as-a-remote-console-vnc">
+				<header>
+					<h1><a href="/2010/11/24/howto-vmware-player-as-a-remote-console-vnc/" rel="bookmark" title="Permalink to HOWTO: VMware Player as a remote console (VNC)">HOWTO: VMware Player as a remote console (VNC)</a></h1>
+				</header>
+				<aside>
+				</aside>
+				<p>Since I am doing a lot of remote systems administration tasks due to the nature
+of my IT consulting work and since I am also running Linux on all my computers
+I was looking for a native way how to get a remote console to VMware VMs from
+linux.</p>
+<p>After <span class="readmore">… <a href="/2010/11/24/howto-vmware-player-as-a-remote-console-vnc/#continue" class="icon fa-forward">read <span class="readtime">time 14 min.</span></a></span></p>
+
+				<footer>
+					<span><span class="contextual">Offloaded on </span><time datetime="2010-11-24T10:00:00+11:00">
+						<span class="month"><a href="/2010/11/" title="A link to the archives for November of 2010">Nov<span class="month full">ember</span></a></span>
+						<span class="day">24</span>
+						<span class="year"><a href="/2010/" title="A link to the archives for the year of 2010">2010</a></span>
+					</time></span>
+						<span class="contextual">into </span><span class="category"><a href="/category/hacking/" title="A link to a collection of articles in the 'hacking' category">hacking</a></span>
+					<span class="contextual">and tagged with:</span>
 					<ul class="tags">
-					</ul>
-					<footer>
-						Offloaded on
-						<time datetime="2010-11-24 10:00:00+11:00">Wed, 24/11/2010 at 10:00 (<a href="https://time.is/AEDT" target="_blank" rel="noreferrer">AEDT</a>)</time>
-						<span class="category-tag"><a href="/category/hacking">hacking</a></span>
-					</footer>				</article>
-<p class="paginator">
-        <a href="/3/" class="previous">&laquo;</a>
-    <span>4 / 4</span>
-</p>
-			</div>
-		</div>
-		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-165060547-1"></script>
-		<script>
-			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments);}
-			gtag('js', new Date());
-			gtag('config', 'UA-165060547-1');
-		</script>
-	</body>
+						</ul>
+				</footer>
+			</article></li>
+		</ol>
+		<footer>
+		<span class="pagination">			<ul class="head">
+				<li><a class="previous icon left-open" href="/3/" title="Link to the previous page"><span class="contextual">Previous page</span></a></li>				<li><a href="/" title="Link to page 1">1</a></li>
+				<li><a href="/2/" title="Link to page 2">2</a></li>
+				<li><a href="/3/" title="Link to page 3">3</a></li>
+</ul>
+<ul class="middle">
+				<li class="current"><a href="/4/" title="Link to page 4">4</a></li>
+			</ul></span>
+		</footer>
+	</main>
+	<footer>
+	</footer>
+</body>
 </html>
