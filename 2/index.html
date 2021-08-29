@@ -74,90 +74,22 @@
 	</aside>
 	<main>
 		<ol>
-			<li><article id="nginx-a-backend-with-a-dynamic-ip-eg-aws-elb">
+			<li><article id="transparent-ssh-host-jumping-advanced">
 				<header>
-					<h1><a href="/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/" rel="bookmark" title="Permalink to nginx + a backend with a dynamic IP (e.g. AWS ELB)">nginx + a backend with a dynamic IP (e.g. AWS ELB)</a></h1>
+					<h1><a href="/2015/08/06/transparent-ssh-host-jumping-advanced/" rel="bookmark" title="Permalink to Transparent SSH host-jumping (Advanced)">Transparent SSH host-jumping (Advanced)</a></h1>
 				</header>
 				<aside>
 				</aside>
-				<p>Recently, I wrote about <a href="https://dmitry.khlebnikov.net/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/">the dynamic resolution of upstream servers</a> in
-nginx which was achieved by quite an intrusive patch to the core nginx module.
-The patch was invented a while ago and was working very well up until recent
-nginx versions were released.</p>
-<p>With the release of nginx 1 <span class="readmore">… <a href="/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/#continue" class="icon fa-forward">read <span class="readtime">time 9 min.</span></a></span></p>
+				<p>In this brief article I am going to describe how I resolved a nagging issue I
+had with setting up access to hosts which are not directly reachable, but where
+you need to forward your connection through an intermediate host.</p>
+<p><a href="https://dmitry.khlebnikov.net/2010/12/10/ssh-port-forwarding-intermediate/">Previously</a>, I was using the local SSH port-forwarding technique (although <span class="readmore">… <a href="/2015/08/06/transparent-ssh-host-jumping-advanced/#continue" class="icon fa-forward">read <span class="readtime">time 6 min.</span></a></span></p>
 
 				<footer>
-					<span><span class="contextual">Offloaded on </span><time datetime="2017-01-13T10:00:00+11:00">
-						<span class="month"><a href="/2017/01/" title="A link to the archives for January of 2017">Jan<span class="month full">uary</span></a></span>
-						<span class="day">13</span>
-						<span class="year"><a href="/2017/" title="A link to the archives for the year of 2017">2017</a></span>
-					</time></span>
-						<span class="contextual">into </span><span class="category"><a href="/category/hacking/" title="A link to a collection of articles in the 'hacking' category">hacking</a></span>
-					<span class="contextual">and tagged with:</span>
-					<ul class="tags">
-						<li class="tag">
-							<span>
-								<a href="/tag/nginx/" rel="tag" title="A link to the collection tagged with 'nginx'" data-count="2" ><span>nginx</span></a>
-							</span>
-						</li>
-						<li class="tag">
-							<span>
-								<a href="/tag/patch/" rel="tag" title="A link to the collection tagged with 'patch'" data-count="2" ><span>patch</span></a>
-							</span>
-						</li>
-						</ul>
-				</footer>
-			</article></li>
-			<li><article id="dynamic-resolution-of-upstream-servers-in-nginx">
-				<header>
-					<h1><a href="/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/" rel="bookmark" title="Permalink to Dynamic resolution of upstream servers in nginx">Dynamic resolution of upstream servers in nginx</a></h1>
-				</header>
-				<aside>
-				</aside>
-				<p>UPDATE: This approach was superseded by the <a href="https://dmitry.khlebnikov.net/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/">proxying through
-systemd-socket-proxyd</a> approach.</p>
-<p>Many of my clients are running application stacks consisting of nginx plus some
-kind of scripting engine behind it (be it PHP, Ruby, or something else).</p>
-<p>The architecture I designed for this kind of workload involves at least two <span class="readmore">… <a href="/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/#continue" class="icon fa-forward">read <span class="readtime">time 1 min.</span></a></span></p>
-
-				<footer>
-					<span><span class="contextual">Offloaded on </span><time datetime="2016-09-20T10:00:00+10:00">
-						<span class="month"><a href="/2016/09/" title="A link to the archives for September of 2016">Sep<span class="month full">tember</span></a></span>
-						<span class="day">20</span>
-						<span class="year"><a href="/2016/" title="A link to the archives for the year of 2016">2016</a></span>
-					</time></span>
-						<span class="contextual">into </span><span class="category"><a href="/category/hacking/" title="A link to a collection of articles in the 'hacking' category">hacking</a></span>
-					<span class="contextual">and tagged with:</span>
-					<ul class="tags">
-						<li class="tag">
-							<span>
-								<a href="/tag/nginx/" rel="tag" title="A link to the collection tagged with 'nginx'" data-count="2" ><span>nginx</span></a>
-							</span>
-						</li>
-						<li class="tag">
-							<span>
-								<a href="/tag/patch/" rel="tag" title="A link to the collection tagged with 'patch'" data-count="2" ><span>patch</span></a>
-							</span>
-						</li>
-						</ul>
-				</footer>
-			</article></li>
-			<li><article id="transparent-ssh-host-jumping-expert">
-				<header>
-					<h1><a href="/2016/07/26/transparent-ssh-host-jumping-expert/" rel="bookmark" title="Permalink to Transparent SSH host-jumping (Expert)">Transparent SSH host-jumping (Expert)</a></h1>
-				</header>
-				<aside>
-				</aside>
-				<p>A while ago in the <a href="https://dmitry.khlebnikov.net/2015/08/06/transparent-ssh-host-jumping-advanced/">Transparent SSH host-jumping (Advanced)</a> post I
-described a technique on how one could jump quite effortlessly through a chain
-of intermediate hosts. However, there was a catch: the user names and ports
-across the whole chain should be the same and there was no easy <span class="readmore">… <a href="/2016/07/26/transparent-ssh-host-jumping-expert/#continue" class="icon fa-forward">read <span class="readtime">time 3 min.</span></a></span></p>
-
-				<footer>
-					<span><span class="contextual">Offloaded on </span><time datetime="2016-07-26T10:00:00+10:00">
-						<span class="month"><a href="/2016/07/" title="A link to the archives for July of 2016">Jul<span class="month full">y</span></a></span>
-						<span class="day">26</span>
-						<span class="year"><a href="/2016/" title="A link to the archives for the year of 2016">2016</a></span>
+					<span><span class="contextual">Offloaded on </span><time datetime="2015-08-06T10:00:00+10:00">
+						<span class="month"><a href="/2015/08/" title="A link to the archives for August of 2015">Aug<span class="month full">ust</span></a></span>
+						<span class="day">06</span>
+						<span class="year"><a href="/2015/" title="A link to the archives for the year of 2015">2015</a></span>
 					</time></span>
 						<span class="contextual">into </span><span class="category"><a href="/category/ssh/" title="A link to a collection of articles in the 'ssh' category">ssh</a></span>
 					<span class="contextual">and tagged with:</span>
@@ -180,23 +112,86 @@ across the whole chain should be the same and there was no easy <span class="rea
 						</ul>
 				</footer>
 			</article></li>
-			<li><article id="ssh-interactive-proxycommand">
+			<li><article id="should-we-use-sudo-for-day-to-day-activities">
 				<header>
-					<h1><a href="/2016/07/25/ssh-interactive-proxycommand/" rel="bookmark" title="Permalink to SSH: Interactive ProxyCommand">SSH: Interactive ProxyCommand</a></h1>
+					<h1><a href="/2015/07/18/should-we-use-sudo-for-day-to-day-activities/" rel="bookmark" title="Permalink to Should we use "sudo" for day-to-day activities?">Should we use "sudo" for day-to-day activities?</a></h1>
 				</header>
 				<aside>
 				</aside>
-				<p>I was involved in the creation of the <a href="https://github.com/realestate-com-au/sshephalopod">sshephalopod</a> project, which was an
-attempt to build an enterprise level authentication framework for SSH
-authentication using the SSH <abbr title="Certificate Authority">CA</abbr> feature.</p>
-<p>The project is based on a wrapper script that signs a user via a <abbr title="Security Assertion Markup Language">SAML</abbr> identity
-provider and gets user&rsquo;s <span class="readmore">… <a href="/2016/07/25/ssh-interactive-proxycommand/#continue" class="icon fa-forward">read <span class="readtime">time 5 min.</span></a></span></p>
+				<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#history">History</a></li>
+<li><a href="#people-are-saying-sudo-is-good-is-it-true">People are saying &ldquo;sudo&rdquo; is good. Is it true?</a></li>
+<li><a href="#what-is-the-problem-with-the-sudo-approach">What is the problem with the &ldquo;sudo&rdquo; approach?</a></li>
+<li><a href="#the-light-side-of-sudo-is-there-one">The light side of &ldquo;sudo&rdquo;. Is there one?</a></li>
+<li><a href="#how-can-we-improve-the-security-of-our-systems-in-relation-to-the-sudo-usage">How can we improve the security of our systems in relation to the &ldquo;sudo&rdquo; usage?</a></li>
+</ul>
+</div>
+<p>None of the systems I administer <span class="readmore">… <a href="/2015/07/18/should-we-use-sudo-for-day-to-day-activities/#continue" class="icon fa-forward">read <span class="readtime">time 15 min.</span></a></span></p>
 
 				<footer>
-					<span><span class="contextual">Offloaded on </span><time datetime="2016-07-25T10:00:00+10:00">
-						<span class="month"><a href="/2016/07/" title="A link to the archives for July of 2016">Jul<span class="month full">y</span></a></span>
-						<span class="day">25</span>
-						<span class="year"><a href="/2016/" title="A link to the archives for the year of 2016">2016</a></span>
+					<span><span class="contextual">Offloaded on </span><time datetime="2015-07-18T20:04:00+10:00">
+						<span class="month"><a href="/2015/07/" title="A link to the archives for July of 2015">Jul<span class="month full">y</span></a></span>
+						<span class="day">18</span>
+						<span class="year"><a href="/2015/" title="A link to the archives for the year of 2015">2015</a></span>
+					</time></span>
+						<span class="contextual">into </span><span class="category"><a href="/category/sudo/" title="A link to a collection of articles in the 'sudo' category">sudo</a></span>
+					<span class="contextual">and tagged with:</span>
+					<ul class="tags">
+						<li class="tag">
+							<span>
+								<a href="/tag/sudo/" rel="tag" title="A link to the collection tagged with 'sudo'" data-count="1" ><span>sudo</span></a>
+							</span>
+						</li>
+						<li class="tag">
+							<span>
+								<a href="/tag/console/" rel="tag" title="A link to the collection tagged with 'console'" data-count="7" ><span>console</span></a>
+							</span>
+						</li>
+						</ul>
+				</footer>
+			</article></li>
+			<li><article id="ssh-port-forwarding-intermediate">
+				<header>
+					<h1><a href="/2010/12/10/ssh-port-forwarding-intermediate/" rel="bookmark" title="Permalink to SSH port-forwarding (Intermediate)">SSH port-forwarding (Intermediate)</a></h1>
+				</header>
+				<aside>
+				</aside>
+				<p>In my previous blog entry I described some basic functionality of SSH in terms
+of port-forwarding. Now it&rsquo;s time for a little bit more complex stuff.</p>
+<p>In this article I will highlight:</p>
+<ul>
+<li>(forward) piercing of a firewall (getting access to resources behind it);</li>
+<li>dynamic port-forwarding (AKA proxy);</li>
+<li>(reverse) piercing <span class="readmore">… <a href="/2010/12/10/ssh-port-forwarding-intermediate/#continue" class="icon fa-forward">read <span class="readtime">time 4 min.</span></a></span></li></ul>
+
+				<footer>
+					<span><span class="contextual">Offloaded on </span><time datetime="2010-12-10T10:00:00+11:00">
+						<span class="month"><a href="/2010/12/" title="A link to the archives for December of 2010">Dec<span class="month full">ember</span></a></span>
+						<span class="day">10</span>
+						<span class="year"><a href="/2010/" title="A link to the archives for the year of 2010">2010</a></span>
+					</time></span>
+						<span class="contextual">into </span><span class="category"><a href="/category/ssh/" title="A link to a collection of articles in the 'ssh' category">ssh</a></span>
+					<span class="contextual">and tagged with:</span>
+					<ul class="tags">
+						</ul>
+				</footer>
+			</article></li>
+			<li><article id="ssh-port-forwarding-basic">
+				<header>
+					<h1><a href="/2010/11/29/ssh-port-forwarding-basic/" rel="bookmark" title="Permalink to SSH port-forwarding (Basic)">SSH port-forwarding (Basic)</a></h1>
+				</header>
+				<aside>
+				</aside>
+				<p>I think all of you are using SSH in your daily routines. However, do you use
+its full potential? Today&rsquo;s topic is the SSH port-forwarding feature and how
+it can be use to achieve some interesting configurations.</p>
+<p>I&rsquo;m sure most of you are aware of the feature, but <span class="readmore">… <a href="/2010/11/29/ssh-port-forwarding-basic/#continue" class="icon fa-forward">read <span class="readtime">time 2 min.</span></a></span></p>
+
+				<footer>
+					<span><span class="contextual">Offloaded on </span><time datetime="2010-11-29T10:00:00+11:00">
+						<span class="month"><a href="/2010/11/" title="A link to the archives for November of 2010">Nov<span class="month full">ember</span></a></span>
+						<span class="day">29</span>
+						<span class="year"><a href="/2010/" title="A link to the archives for the year of 2010">2010</a></span>
 					</time></span>
 						<span class="contextual">into </span><span class="category"><a href="/category/ssh/" title="A link to a collection of articles in the 'ssh' category">ssh</a></span>
 					<span class="contextual">and tagged with:</span>
@@ -211,6 +206,35 @@ provider and gets user&rsquo;s <span class="readmore">… <a href="/2016/07/25/s
 								<a href="/tag/console/" rel="tag" title="A link to the collection tagged with 'console'" data-count="7" ><span>console</span></a>
 							</span>
 						</li>
+						<li class="tag">
+							<span>
+								<a href="/tag/bastion/" rel="tag" title="A link to the collection tagged with 'bastion'" data-count="1" ><span>bastion</span></a>
+							</span>
+						</li>
+						</ul>
+				</footer>
+			</article></li>
+			<li><article id="howto-vmware-player-as-a-remote-console-vnc">
+				<header>
+					<h1><a href="/2010/11/24/howto-vmware-player-as-a-remote-console-vnc/" rel="bookmark" title="Permalink to HOWTO: VMware Player as a remote console (VNC)">HOWTO: VMware Player as a remote console (VNC)</a></h1>
+				</header>
+				<aside>
+				</aside>
+				<p>Since I am doing a lot of remote systems administration tasks due to the nature
+of my IT consulting work and since I am also running Linux on all my computers
+I was looking for a native way how to get a remote console to VMware VMs from
+linux.</p>
+<p>After <span class="readmore">… <a href="/2010/11/24/howto-vmware-player-as-a-remote-console-vnc/#continue" class="icon fa-forward">read <span class="readtime">time 14 min.</span></a></span></p>
+
+				<footer>
+					<span><span class="contextual">Offloaded on </span><time datetime="2010-11-24T10:00:00+11:00">
+						<span class="month"><a href="/2010/11/" title="A link to the archives for November of 2010">Nov<span class="month full">ember</span></a></span>
+						<span class="day">24</span>
+						<span class="year"><a href="/2010/" title="A link to the archives for the year of 2010">2010</a></span>
+					</time></span>
+						<span class="contextual">into </span><span class="category"><a href="/category/hacking/" title="A link to a collection of articles in the 'hacking' category">hacking</a></span>
+					<span class="contextual">and tagged with:</span>
+					<ul class="tags">
 						</ul>
 				</footer>
 			</article></li>
@@ -221,11 +245,7 @@ provider and gets user&rsquo;s <span class="readmore">… <a href="/2016/07/25/s
 </ul>
 <ul class="middle">
 				<li class="current"><a href="/2/" title="Link to page 2">2</a></li>
-			</ul>			<ul class="tail">
-				<li><a class="next icon right-open" href="/3/" title="Link to the next page"><span class="contextual">Next page</span></a></li>				<li><a href="/4/" title="Link to page 4">4</a></li>
-				<li><a href="/3/" title="Link to page 3">3</a></li>
-</ul>
-</span>
+			</ul></span>
 		</footer>
 	</main>
 	<footer>
