@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"></link><link href="https://dmitry.khlebnikov.net/feeds/all-en.atom.xml" rel="self"></link><id>https://dmitry.khlebnikov.net/</id><updated>2021-08-29T22:26:10+10:00</updated><subtitle>assorted bits of wit</subtitle><subtitle>assorted bits of wit</subtitle><entry><title>Truly Responsive Pagination</title><link href="https://dmitry.khlebnikov.net/2020/06/14/truly-responsive-pagination/" rel="alternate"></link><published>2020-06-14T20:07:00+10:00</published><updated>2020-06-14T20:15:57+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-06-14:/2020/06/14/truly-responsive-pagination/</id><summary type="html">&lt;p&gt;Searching the web for an example of a fully responsive pagination widget I
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"></link><link href="https://dmitry.khlebnikov.net/feeds/all-en.atom.xml" rel="self"></link><id>https://dmitry.khlebnikov.net/</id><updated>2021-08-30T00:08:59+10:00</updated><subtitle>assorted bits of wit</subtitle><subtitle>assorted bits of wit</subtitle><entry><title>Truly Responsive Pagination</title><link href="https://dmitry.khlebnikov.net/2020/06/14/truly-responsive-pagination/" rel="alternate"></link><published>2020-06-14T20:07:00+10:00</published><updated>2020-06-14T20:15:57+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-06-14:/2020/06/14/truly-responsive-pagination/</id><summary type="html">&lt;p&gt;Searching the web for an example of a fully responsive pagination widget I
 found that either people consider &amp;ldquo;responsive&amp;rdquo; to be something else or that it
 is a non-trivial problem to solve.  In any case, I decided to have a crack at
 it myself.&lt;/p&gt;
@@ -454,7 +454,7 @@ visually pleasing widget hidden from the screen readers.&lt;/p&gt;
 not want to go that route for my blog.  Most likely, since my blog is
 statically generated I will address it using the logic of the generator itself.&lt;/p&gt;
 &lt;p&gt;Still, I think the techniques I demonstrated here may be quite useful to some
-people who are designing pure HTML and CSS adaptive widgets.&lt;/p&gt;</content><category term="web design"></category><category term="html"></category><category term="css"></category><category term="design"></category></entry><entry><title>Automating Static Website Deployment</title><link href="https://dmitry.khlebnikov.net/2020/05/17/automating-static-website-deployment/" rel="alternate"></link><published>2020-05-17T21:32:00+10:00</published><updated>2021-08-29T22:26:10+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-17:/2020/05/17/automating-static-website-deployment/</id><summary type="html">&lt;div class="toc"&gt;&lt;span class="toctitle"&gt;Table of Contents&lt;/span&gt;&lt;ul&gt;
+people who are designing pure HTML and CSS adaptive widgets.&lt;/p&gt;</content><category term="web design"></category><category term="html"></category><category term="css"></category><category term="design"></category></entry><entry><title>Automating Static Website Deployment</title><link href="https://dmitry.khlebnikov.net/2020/05/17/automating-static-website-deployment/" rel="alternate"></link><published>2020-05-17T21:32:00+10:00</published><updated>2021-08-30T00:08:59+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-17:/2020/05/17/automating-static-website-deployment/</id><summary type="html">&lt;div class="toc"&gt;&lt;span class="toctitle"&gt;Table of Contents&lt;/span&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a href="#setting-up-github-pages"&gt;Setting up GitHub Pages&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#setting-up-the-private-code-repository"&gt;Setting up the private, code repository&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#configuring-the-github-action-for-publishing"&gt;Configuring the GitHub Action for publishing&lt;/a&gt;&lt;/li&gt;
@@ -516,7 +516,7 @@ preferably, that &amp;ldquo;publishing&amp;rdquo; should happen on GitHub&amp;rs
 time ago and as long as it is not abused according to their terms and
 conditions, it is a perfect vehicle for what I am trying to do, in my opinion.&lt;/p&gt;
 &lt;h2 id="setting-up-github-pages"&gt;Setting up GitHub Pages&lt;/h2&gt;
-&lt;p&gt;There are multiple howtos and tutorials in the Internet on how to set GitHub
+&lt;p&gt;There are multiple howtos and tutorials on the Internet on how to set GitHub
 Pages up, including &lt;a href="https://help.github.com/en/github/working-with-github-pages/getting-started-with-github-pages"&gt;the official help section on this topic&lt;/a&gt;, so I will
 only elaborate on details where I did something specific for the purposes of
 achieving my goals.&lt;/p&gt;

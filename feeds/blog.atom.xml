@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - blog</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"></link><link href="https://dmitry.khlebnikov.net/feeds/blog.atom.xml" rel="self"></link><id>https://dmitry.khlebnikov.net/</id><updated>2021-08-29T22:26:10+10:00</updated><subtitle>assorted bits of wit</subtitle><subtitle>assorted bits of wit</subtitle><entry><title>Automating Static Website Deployment</title><link href="https://dmitry.khlebnikov.net/2020/05/17/automating-static-website-deployment/" rel="alternate"></link><published>2020-05-17T21:32:00+10:00</published><updated>2021-08-29T22:26:10+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-17:/2020/05/17/automating-static-website-deployment/</id><summary type="html">&lt;div class="toc"&gt;&lt;span class="toctitle"&gt;Table of Contents&lt;/span&gt;&lt;ul&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - blog</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"></link><link href="https://dmitry.khlebnikov.net/feeds/blog.atom.xml" rel="self"></link><id>https://dmitry.khlebnikov.net/</id><updated>2021-08-30T00:08:59+10:00</updated><subtitle>assorted bits of wit</subtitle><subtitle>assorted bits of wit</subtitle><entry><title>Automating Static Website Deployment</title><link href="https://dmitry.khlebnikov.net/2020/05/17/automating-static-website-deployment/" rel="alternate"></link><published>2020-05-17T21:32:00+10:00</published><updated>2021-08-30T00:08:59+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-17:/2020/05/17/automating-static-website-deployment/</id><summary type="html">&lt;div class="toc"&gt;&lt;span class="toctitle"&gt;Table of Contents&lt;/span&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a href="#setting-up-github-pages"&gt;Setting up GitHub Pages&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#setting-up-the-private-code-repository"&gt;Setting up the private, code repository&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#configuring-the-github-action-for-publishing"&gt;Configuring the GitHub Action for publishing&lt;/a&gt;&lt;/li&gt;
@@ -61,7 +61,7 @@ preferably, that &amp;ldquo;publishing&amp;rdquo; should happen on GitHub&amp;rs
 time ago and as long as it is not abused according to their terms and
 conditions, it is a perfect vehicle for what I am trying to do, in my opinion.&lt;/p&gt;
 &lt;h2 id="setting-up-github-pages"&gt;Setting up GitHub Pages&lt;/h2&gt;
-&lt;p&gt;There are multiple howtos and tutorials in the Internet on how to set GitHub
+&lt;p&gt;There are multiple howtos and tutorials on the Internet on how to set GitHub
 Pages up, including &lt;a href="https://help.github.com/en/github/working-with-github-pages/getting-started-with-github-pages"&gt;the official help section on this topic&lt;/a&gt;, so I will
 only elaborate on details where I did something specific for the purposes of
 achieving my goals.&lt;/p&gt;
