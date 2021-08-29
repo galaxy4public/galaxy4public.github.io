@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"></link><link href="https://dmitry.khlebnikov.net/feeds/all-en.atom.xml" rel="self"></link><id>https://dmitry.khlebnikov.net/</id><updated>2021-08-30T00:08:59+10:00</updated><subtitle>assorted bits of wit</subtitle><subtitle>assorted bits of wit</subtitle><entry><title>Truly Responsive Pagination</title><link href="https://dmitry.khlebnikov.net/2020/06/14/truly-responsive-pagination/" rel="alternate"></link><published>2020-06-14T20:07:00+10:00</published><updated>2020-06-14T20:15:57+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-06-14:/2020/06/14/truly-responsive-pagination/</id><summary type="html">&lt;p&gt;Searching the web for an example of a fully responsive pagination widget I
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"></link><link href="https://dmitry.khlebnikov.net/feeds/all-en.atom.xml" rel="self"></link><id>https://dmitry.khlebnikov.net/</id><updated>2021-08-30T00:09:47+10:00</updated><subtitle>assorted bits of wit</subtitle><subtitle>assorted bits of wit</subtitle><entry><title>Truly Responsive Pagination</title><link href="https://dmitry.khlebnikov.net/2020/06/14/truly-responsive-pagination/" rel="alternate"></link><published>2020-06-14T20:07:00+10:00</published><updated>2020-06-14T20:15:57+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-06-14:/2020/06/14/truly-responsive-pagination/</id><summary type="html">&lt;p&gt;Searching the web for an example of a fully responsive pagination widget I
 found that either people consider &amp;ldquo;responsive&amp;rdquo; to be something else or that it
 is a non-trivial problem to solve.  In any case, I decided to have a crack at
 it myself.&lt;/p&gt;
@@ -454,7 +454,7 @@ visually pleasing widget hidden from the screen readers.&lt;/p&gt;
 not want to go that route for my blog.  Most likely, since my blog is
 statically generated I will address it using the logic of the generator itself.&lt;/p&gt;
 &lt;p&gt;Still, I think the techniques I demonstrated here may be quite useful to some
-people who are designing pure HTML and CSS adaptive widgets.&lt;/p&gt;</content><category term="web design"></category><category term="html"></category><category term="css"></category><category term="design"></category></entry><entry><title>Automating Static Website Deployment</title><link href="https://dmitry.khlebnikov.net/2020/05/17/automating-static-website-deployment/" rel="alternate"></link><published>2020-05-17T21:32:00+10:00</published><updated>2021-08-30T00:08:59+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-17:/2020/05/17/automating-static-website-deployment/</id><summary type="html">&lt;div class="toc"&gt;&lt;span class="toctitle"&gt;Table of Contents&lt;/span&gt;&lt;ul&gt;
+people who are designing pure HTML and CSS adaptive widgets.&lt;/p&gt;</content><category term="web design"></category><category term="html"></category><category term="css"></category><category term="design"></category></entry><entry><title>Automating Static Website Deployment</title><link href="https://dmitry.khlebnikov.net/2020/05/17/automating-static-website-deployment/" rel="alternate"></link><published>2020-05-17T21:32:00+10:00</published><updated>2021-08-30T00:09:47+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-17:/2020/05/17/automating-static-website-deployment/</id><summary type="html">&lt;div class="toc"&gt;&lt;span class="toctitle"&gt;Table of Contents&lt;/span&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a href="#setting-up-github-pages"&gt;Setting up GitHub Pages&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#setting-up-the-private-code-repository"&gt;Setting up the private, code repository&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#configuring-the-github-action-for-publishing"&gt;Configuring the GitHub Action for publishing&lt;/a&gt;&lt;/li&gt;
@@ -516,7 +516,7 @@ preferably, that &amp;ldquo;publishing&amp;rdquo; should happen on GitHub&amp;rs
 time ago and as long as it is not abused according to their terms and
 conditions, it is a perfect vehicle for what I am trying to do, in my opinion.&lt;/p&gt;
 &lt;h2 id="setting-up-github-pages"&gt;Setting up GitHub Pages&lt;/h2&gt;
-&lt;p&gt;There are multiple howtos and tutorials on the Internet on how to set GitHub
+&lt;p&gt;There are multiple howtos and tutorials on the Internet regarding how to set GitHub
 Pages up, including &lt;a href="https://help.github.com/en/github/working-with-github-pages/getting-started-with-github-pages"&gt;the official help section on this topic&lt;/a&gt;, so I will
 only elaborate on details where I did something specific for the purposes of
 achieving my goals.&lt;/p&gt;
@@ -531,14 +531,14 @@ of the existing repository), but for the purposes of this article I am assuming
 that we are working with the user level GitHub pages which are residing in the
 repository named &amp;ldquo;&lt;strong&gt;&amp;lt;username&amp;gt;&lt;/strong&gt;.github.io&amp;rdquo; (where &lt;strong&gt;&amp;lt;username&amp;gt;&lt;/strong&gt;
 is your GitHub user name) as per the official documentation.&lt;/p&gt;
-&lt;p&gt;A few caveat I found and spent some time solving after following the official
-documentation a listed below:&lt;/p&gt;
+&lt;p&gt;A few caveats I found and spent some time solving after following the official
+documentation are listed below:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;GitHub&amp;rsquo;s documentation assumes use of Jekyll for site generation.&lt;/p&gt;
+&lt;p&gt;GitHub&amp;rsquo;s documentation assumes use of Jekyll for the site generation.&lt;/p&gt;
 &lt;p&gt;It is not obvious how to use a different &lt;abbr title="Static Site Generator"&gt;SSG&lt;/abbr&gt; (like Pelican).  As far as I
-understand there are multiple triggers for GitHub to consider that the
-web site is in &amp;ldquo;published&amp;rdquo; state, so just ignore any references to Jekyll
+understand, there are multiple triggers for GitHub to consider that the
+web site is in a &amp;ldquo;published&amp;rdquo; state, so just ignore any references to Jekyll
 in the documentation: you will trip one of the triggers sooner or later,
 for example by pushing HTML files into your repository.&lt;/p&gt;
 &lt;/li&gt;
@@ -548,7 +548,7 @@ for example by pushing HTML files into your repository.&lt;/p&gt;
 trigger a &lt;abbr title="Domain Name System"&gt;DNS&lt;/abbr&gt; check from GitHub to see that your custom domain name is
 pointing back to GitHub Pages.&lt;/p&gt;
 &lt;p&gt;&lt;abbr title="Domain Name System"&gt;DNS&lt;/abbr&gt; heavily relies on caching and depending on the &lt;abbr title="Time To Live"&gt;TTL&lt;/abbr&gt; settings in your
-zone if a negative check is performed (that is, when GitHub fails to
+zone: if a negative check is performed (that is, when GitHub fails to
 retrieve the corresponding record) you will likely need to wait for quite a
 while for GitHub to retry.&lt;/p&gt;
 &lt;p&gt;Setting up the &lt;code&gt;CNAME&lt;/code&gt; record in advance and then verifying it with a query
@@ -593,7 +593,7 @@ steps I would do to achieve the results.  This helps me to see patterns and to
 understand what I can easily automate and what will require some brain-storming
 to resolve.&lt;/p&gt;
 &lt;p&gt;In the case of updating the repository it is quite trivial: if I were to push
-updates manually all I need is a private &lt;abbr title="Secure Shell"&gt;SSH&lt;/abbr&gt; key with the corresponding public
+updates manually, all I need is a private &lt;abbr title="Secure Shell"&gt;SSH&lt;/abbr&gt; key with the corresponding public
 &lt;abbr title="Secure Shell"&gt;SSH&lt;/abbr&gt; key configured with write privileges for the repository and I could push
 with &lt;code&gt;git push&lt;/code&gt; from my local copy of the repository.&lt;/p&gt;
 &lt;blockquote&gt;
@@ -612,10 +612,10 @@ bad advice.&lt;/p&gt;
 particular repository (you can configure it in repository&amp;rsquo;s setting) while the
 latter is an OAuth access token associated with &lt;em&gt;your&lt;/em&gt; account.&lt;/p&gt;
 &lt;p&gt;While you can successfully use both, I would recommend to use the &amp;ldquo;Deploy keys&amp;rdquo;
-only, since despite that you can try to scope access down for a personal token
+only: despite that you can try to scope access down for a personal token,
 it would not be good enough and the actions performed using that token will
 look like &lt;em&gt;you&lt;/em&gt; are executing them.&lt;/p&gt;
-&lt;p&gt;To configure a &amp;ldquo;Deploy key&amp;rdquo; we need to do two things:&lt;/p&gt;
+&lt;p&gt;To configure a &amp;ldquo;Deploy key&amp;rdquo; we need two things:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;Generate an &lt;abbr title="Secure Shell"&gt;SSH&lt;/abbr&gt; key pair, e.g.:&lt;/p&gt;
@@ -641,15 +641,15 @@ look like &lt;em&gt;you&lt;/em&gt; are executing them.&lt;/p&gt;
 GitHub supported key types at the moment, yet it is strong enough.&lt;/p&gt;
 &lt;p&gt;I also made the key pair passphrase-less (&lt;code&gt;-N ''&lt;/code&gt;) since the purpose of the
 key pair is to automate things in the unattended fashion and there will be
-no one to type in the passphrase.&lt;/p&gt;
-&lt;p&gt;The key pair comment just makes it easier to maintain your keys, but optional.&lt;/p&gt;
+nobody to type in the passphrase.&lt;/p&gt;
+&lt;p&gt;The key pair comment just makes it easier to maintain your keys, but is optional.&lt;/p&gt;
 &lt;p&gt;Finally, the &lt;code&gt;-f ~/gh-action&lt;/code&gt; option specifies where the generated private
 key is going to be stored.  The public counterpart will use the same path with
 the &lt;code&gt;.pub&lt;/code&gt; suffix appended to it.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Set the newly generated &lt;em&gt;public&lt;/em&gt; key up as the &amp;ldquo;Deploy key&amp;rdquo;:&lt;/p&gt;
-&lt;p&gt;All you need to do is to go to the repository setting for the public
+&lt;p&gt;All you need to do is to go to the repository settings page for the public
  repository you created for GitHub Pages, click on &amp;ldquo;Deploy keys&amp;rdquo; in the
  left side menu, then click on the &amp;ldquo;Add deploy key&amp;rdquo; button in the upper
  right corner.&lt;/p&gt;
@@ -660,7 +660,7 @@ the &lt;code&gt;.pub&lt;/code&gt; suffix appended to it.&lt;/p&gt;
  the content of the &lt;strong&gt;public&lt;/strong&gt; key file and paste it into the form, e.g.:&lt;/p&gt;
 &lt;pre id="code3" class="highlight" data-file="~/gh-action.pub"&gt;&lt;code class="language-text"&gt;&lt;div id="code3.1" class="line"&gt;&lt;a href="#code3.1" aria-hidden="true"&gt;&lt;/a&gt;ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGHCy+stVCBjsrVO2ld1DwKCwcKL9+i1sjxcZu4u4lFQ Updating the blog from GH Action&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;: You need to ensure that you tick the &amp;ldquo;Allow write access&amp;rdquo; checkbox,
- otherwise we would not be able to push to the repository with the
+ otherwise it would not be possible to push to the repository with the
  corresponding private key.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
@@ -669,7 +669,7 @@ now &amp;ndash; in later articles I will document how one could leverage the rep
 Issues for managing comments on the web site and maintain the counters for
 likes on the pages, but it would be a completely separate post :).&lt;/p&gt;
 &lt;h2 id="setting-up-the-private-code-repository"&gt;Setting up the private, code repository&lt;/h2&gt;
-&lt;p&gt;A typical Pelican repository layout is quite simple and comprises of one
+&lt;p&gt;A typical Pelican repository layout is quite simple and comprises one
 mandatory directory, one semi-mandatory file, and everything else is optional,
 but could be used to enhance your experience.&lt;/p&gt;
 &lt;p&gt;The mandatory directory is the so-called
@@ -744,7 +744,7 @@ doing something as follows:&lt;/p&gt;
 &lt;/div&gt;&lt;div id="code5.5" class="line"&gt;&lt;a href="#code5.5" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;  | MarkdownReader (md, markdown, mkd, mdown)&lt;/span&gt;
 &lt;/div&gt;&lt;div id="code5.6" class="line"&gt;&lt;a href="#code5.6" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;  | RstReader (rst)&lt;/span&gt;
 &lt;/div&gt;&lt;div id="code5.7" class="line"&gt;&lt;a href="#code5.7" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;Done: Processed 0 articles, 0 drafts, 0 pages, 0 hidden pages and 0 draft pages in 0.07 seconds.&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;So far so good, but it is not a real test since there are no source files to generate something from, so let&amp;rsquo;s give Pelican something to work on:&lt;/p&gt;
+&lt;p&gt;So far so good, but it is not a real test, since there are no source files to generate something from, so let&amp;rsquo;s give Pelican something to work on:&lt;/p&gt;
 &lt;pre id="code6" class="highlight" data-user="user"&gt;&lt;code class="language-console"&gt;&lt;div id="code6.1" class="line"&gt;&lt;a href="#code6.1" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="gp"&gt;[user@localhost ~]$ &lt;/span&gt;&lt;span class="nb"&gt;printf&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Title: First Post\nDate: 2020-05-10\n\n#First post\nPelican is awesome!&amp;#39;&lt;/span&gt; &amp;gt; content/first.md
 &lt;/div&gt;&lt;div id="code6.2" class="line"&gt;&lt;a href="#code6.2" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="gp"&gt;[user@localhost ~]$ &lt;/span&gt;pelican
 &lt;/div&gt;&lt;div id="code6.3" class="line"&gt;&lt;a href="#code6.3" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;Done: Processed 1 article, 0 drafts, 0 pages, 0 hidden pages and 0 draft pages in 0.12 seconds.&lt;/span&gt;
@@ -768,7 +768,7 @@ doing something as follows:&lt;/p&gt;
 showcase that Pelican has indeed generated the structure for a static website
 from just one article file we created.&lt;/p&gt;
 &lt;p&gt;Before we push our local repository to GitHub we may want to do some house
-keeping first, such as create the &lt;code&gt;.gitignore&lt;/code&gt; file and list the temporary
+keeping first, e.g. create the &lt;code&gt;.gitignore&lt;/code&gt; file and list the temporary
 things we do not want Git to track.  A good enough version of the &lt;code&gt;.gitignore&lt;/code&gt;
 file I am using for my code repository is the following:&lt;/p&gt;
 &lt;pre id="code7" class="highlight" data-file=".gitignore"&gt;&lt;code class="language-txt"&gt;&lt;div id="code7.1" class="line"&gt;&lt;a href="#code7.1" aria-hidden="true"&gt;&lt;/a&gt;*~
@@ -824,11 +824,11 @@ all, I suspect this was the primary reason you are reading this post.  Well, we
 are about to start to look into the automation part and it is rather short in
 comparison to all the steps we did to set repositories up.&lt;/p&gt;
 &lt;p&gt;Our automation relies on the GitHub Action feature of GitHub.  In plain terms,
-GitHub Action is free compute resource provided by GitHub (there are some
+GitHub Action is a free compute resource provided by GitHub (there are some
 limits, but for the purposes of a personal blog it is unlikely that you will
 ever hit these limits).&lt;/p&gt;
 &lt;p&gt;Each GitHub Action is associated with a specific repository and is defined
-using quite a simple &lt;abbr title="YAML Ain't Markup Language"&gt;YAML&lt;/abbr&gt; configuration file that instructs GitHub on how to
+using quite a simple &lt;abbr title="YAML Ain't Markup Language"&gt;YAML&lt;/abbr&gt; configuration file which instructs GitHub on how to
 provision a required compute environment and what to run inside that
 environment.  The &lt;abbr title="YAML Ain't Markup Language"&gt;YAML&lt;/abbr&gt; file can be arbitrarily named and resides in the
 &lt;code&gt;.github/workflows/&lt;/code&gt; subdirectory (starting from the root of the corresponding
@@ -929,7 +929,7 @@ further down the post):&lt;/p&gt;
 &lt;/div&gt;&lt;div id="code9.91" class="line"&gt;&lt;a href="#code9.91" aria-hidden="true"&gt;&lt;/a&gt;        &lt;span class="no"&gt;cd ..&lt;/span&gt;
 &lt;/div&gt;&lt;div id="code9.92" class="line"&gt;&lt;a href="#code9.92" aria-hidden="true"&gt;&lt;/a&gt;        &lt;span class="no"&gt;echo Completed&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;This is a copy of my live GitHub Action for deploying my blog that you are most
-likely reading right now, and I decided not to edit anything, so if you just
+likely reading right now and I decided not to edit anything, so if you just
 want to re-use it you will need to replace a few things, namely:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;en_AU.UTF-8&lt;/code&gt; =&amp;gt; to a locale you are using (you can run &lt;code&gt;locale -a&lt;/code&gt; if you
@@ -940,10 +940,10 @@ want to re-use it you will need to replace a few things, namely:&lt;/p&gt;
     my theme&amp;rsquo;s content directory and you would not have it;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;galaxy4public/galaxy4public.github.io&lt;/code&gt; =&amp;gt; to &lt;strong&gt;&amp;lt;your_username/your_blog_repo_name&amp;gt;&lt;/strong&gt;, obviously :)&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;This being sorted, let&amp;rsquo;s look a bit more closely to understand how this GitHub
-Action is structured and what each step is doing.&lt;/p&gt;
-&lt;p&gt;It all starts with the definition of the action itself and the conditions of
-how it is triggered and how does it run, you can get a formal description of
+&lt;p&gt;Let&amp;rsquo;s look a bit more closely to understand how this GitHub Action is
+structured and what each step is doing.&lt;/p&gt;
+&lt;p&gt;It all starts with the definition of the action itself, the conditions of
+how it is triggered, and how it runs: you can get a formal description of
 the &lt;abbr title="YAML Ain't Markup Language"&gt;YAML&lt;/abbr&gt; structure of this configuration file in the official GitHub
 documentation on &lt;a href="https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions"&gt;Workflows&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Here, we are only going to focus on steps defined under the &amp;ldquo;jobs:&amp;rdquo; section of
@@ -952,8 +952,8 @@ the file since these steps are defining the logic we are after.&lt;/p&gt;
 misconfigured locale Pelican tends to produce incorrect output (which is kind
 of expected).  So in this step we are trying to determine whether the user (us
 :) ) has supplied the &lt;code&gt;LANG&lt;/code&gt; variable and if they did we update
-&lt;code&gt;/etc/locale.gen&lt;/code&gt; file, then run the &lt;code&gt;locale-gen&lt;/code&gt; command to update the
-corresponding files, and finally we set the locale of the container to the
+&lt;code&gt;/etc/locale.gen&lt;/code&gt; file, run the &lt;code&gt;locale-gen&lt;/code&gt; command to update the
+corresponding files, and set the locale of the container to the
 requested locale.&lt;/p&gt;
 &lt;p&gt;The &amp;ldquo;Checkout the primary repo&amp;rdquo; step is leveraging the official &amp;ldquo;Checkout V2&amp;rdquo;
 Action and checks out a full copy of the source code repository of our blog
@@ -990,8 +990,18 @@ the former is using the official GitHub Action to install and configure the
 latest available version of Python 3.x and the latter is leveraging &lt;code&gt;pip&lt;/code&gt; to
 install all blog&amp;rsquo;s dependencies (including Pelican itself).&lt;/p&gt;
 &lt;p&gt;The &amp;ldquo;Generate the website&amp;rdquo; step is running &lt;code&gt;pelican&lt;/code&gt; to process our articles
-and pages and to generate the result in the &amp;ldquo;output&amp;rdquo; directory.  There are a couple of tricks with this step, though.&lt;/p&gt;
-&lt;p&gt;The first trick, which is not that obvious is that we are removing the content of the &amp;ldquo;output&amp;rdquo; directory.  It seems a bit weird since we just checked it out several steps before, is not it?  Well, we are removing everything &lt;strong&gt;except&lt;/strong&gt; hidden files and directories, which happen to contain the &amp;ldquo;.git&amp;rdquo; subdirectory with all the actual data about the repository.  Why do we do it?  It is simple, this helps us to determine a situation if some file or directory was removed, so we could propagate this knowledge to the public blog repository.  If we did not clean up the content of the &amp;ldquo;output&amp;rdquo; directory we would only append new changes and would never remove anything &amp;ndash; this is how it was before I stumbled upon the problem, by the way. :)&lt;/p&gt;
+and pages and to generate the result in the &amp;ldquo;output&amp;rdquo; directory.  There are a
+couple of tricks with this step, though.&lt;/p&gt;
+&lt;p&gt;The first trick, which is not that obvious, is that we are removing the content
+of the &amp;ldquo;output&amp;rdquo; directory.  It seems a bit weird since we just checked it out
+several steps before, does not it?  Well, we are removing everything &lt;strong&gt;except&lt;/strong&gt;
+hidden files and directories which happen to contain the &amp;ldquo;.git&amp;rdquo; subdirectory
+with all the actual data about the repository.  Why do we do it?  It is simple,
+this helps us to determine a situation if some file or directory was removed,
+so we could propagate that knowledge to the public blog repository.  If we did
+not clean up the content of the &amp;ldquo;output&amp;rdquo; directory we would only append new
+changes and would never remove anything &amp;ndash; this is how it was before I stumbled
+upon the problem, by the way. :)&lt;/p&gt;
 &lt;p&gt;The second trick of the &amp;ldquo;Generate the website&amp;rdquo; step is the extraction of the
 time zone information from the configuration files and is setting the &lt;code&gt;TZ&lt;/code&gt;
 variable correctly just before we call &lt;code&gt;pelican&lt;/code&gt;.  Without this either Pelican
@@ -1005,7 +1015,7 @@ are:&lt;/p&gt;
      syntax is used to retrieve a named secret value from the associated secret
      key for a repository.  We store the private part of the deploy key we
      specifically generated for this purpose at the beginning of this article
-     in the private repository secret. &lt;/li&gt;
+     in the private repository secret.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;git status&lt;/code&gt; is used to determine whether there are any changes between
      what we have in the working tree and the repository index.  If no changes
      were detected we just exit gracefully.&lt;/li&gt;
