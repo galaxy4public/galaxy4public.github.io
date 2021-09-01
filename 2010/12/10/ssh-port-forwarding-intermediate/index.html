@@ -136,7 +136,7 @@ standard firewall/NAT router.</p>
 <p>Now, how can you access port 12345 on host behind the firewall given that this
 port is not &ldquo;exported&rdquo; by the NAT on the firewall? This is quite simple. Open a
 terminal window on your local computer and type the following:</p>
-<pre class="highlight" data-user="user"><input type="radio" name="code_menu6988521446271610555" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu6988521446271610555" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="go">[user@localhost ~] ssh -L12345:192.168.1.2:12345 joe@firewall.domain.tld</span></div></code></pre>
+<pre class="highlight" data-user="user"><input type="radio" name="code_menu6185715431856332782" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu6185715431856332782" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="go">[user@localhost ~] ssh -L12345:192.168.1.2:12345 joe@firewall.domain.tld</span></div></code></pre>
 <p>From now on, as long as your SSH session is up and running you will be able to
 reach <code>192.168.1.2:12345</code> by connecting to <code>localhost:12345</code> (i.e. the <code>12345</code>
 port on your local computer). Indeed, for this to work you need SSH access
@@ -154,7 +154,7 @@ requests to many ports useful:</p>
   physically in Australia</li>
 </ul>
 <p>In both cases, you use the following SSH command in your terminal window:</p>
-<pre class="highlight" data-user="user"><input type="radio" name="code_menu567886748934253365" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu567886748934253365" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[user@localhost ~]$ </span>ssh -D3128 joe@relay.domain.tld</div></code></pre>
+<pre class="highlight" data-user="user"><input type="radio" name="code_menu2898231591812495394" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu2898231591812495394" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[user@localhost ~]$ </span>ssh -D3128 joe@relay.domain.tld</div></code></pre>
 <p>As long as you SSH session is active, you can use port <code>3128</code> on your local
 machine as SOCKS4/SOCKS5 proxy (e.g. you can configure proxy settings in your
 browser to use <code>localhost:3128</code>) and browse the Net through your SSH connection,
@@ -173,7 +173,7 @@ to folks from WikiLeaks&hellip; just kidding :) )?</p>
 Google for &ldquo;free ssh account&rdquo; and you will surely find one for yourself).</p>
 <p>Now, when you have the account, you can execute the following on your local
 computer (which is inside that highly secure network :) ):</p>
-<pre class="highlight" data-user="user"><input type="radio" name="code_menu-5324675061453033129" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu-5324675061453033129" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[user@localhost ~]$ </span>ssh -R:60000:127.0.0.1:22 joe@friendly.domain.tld</div></code></pre>
+<pre class="highlight" data-user="user"><input type="radio" name="code_menu5865666386361805420" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu5865666386361805420" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[user@localhost ~]$ </span>ssh -R:60000:127.0.0.1:22 joe@friendly.domain.tld</div></code></pre>
 <p>The above command will setup such a configuration that connecting on port <code>60000</code>
 at <code>friendly.domain.tld</code> will forward traffic to your local machine&rsquo;s port 22
 (which is behind a firewall) &ndash; this will work as long as your SSH session to
@@ -195,11 +195,11 @@ way you want it!</p>
 <p>Anyway, even if you fail to find a host that allows you to expose your service
 to the public, you still should be able to access it yourself &ndash; using the
 forward firewall piercing technique described at the beginning of this post:</p>
-<pre class="highlight" data-user="user" data-prompt=""[user@localhost"><input type="radio" name="code_menu-575755752557895931" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu-575755752557895931" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp"># </span>from your home computer
+<pre class="highlight" data-user="user" data-prompt=""[user@localhost"><input type="radio" name="code_menu8154405440690340361" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu8154405440690340361" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp"># </span>from your home computer
 </div><div class="line"><a></a><span class="gp">[user@localhost ~]$ </span>ssh -L60000:127.0.0.1:60000 joe@friendly.domain.tld</div></code></pre>
 <p>Once it is done your computer in the highly secure network should be reachable
 via SSH on your <code>localhost:60000</code>, e.g.</p>
-<pre class="highlight" data-user="user"><input type="radio" name="code_menu8882301160798151683" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu8882301160798151683" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="go">[user@localhost ~] ssh -p6000 my_account@localhost</span></div></code></pre>
+<pre class="highlight" data-user="user"><input type="radio" name="code_menu-5993315963260969334" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu-5993315963260969334" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="go">[user@localhost ~] ssh -p6000 my_account@localhost</span></div></code></pre>
 <p>Where <code>my_account</code> is a user allowed to SSH into your computer in the highly
 secure network.</p>
 				<footer>

@@ -128,7 +128,7 @@ will allow one to tweak parameters for the hosts in the chain.</p>
 technique works, here I am only going to provide the proxy script and the
 corresponding ssh config parameter block to use the script.</p>
 <p>The goal was to support the following syntax:</p>
-<pre class="highlight" data-user="user"><input type="radio" name="code_menu4242703549122639693" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu4242703549122639693" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[user@localhost ~]$ </span>ssh default_user@userA^hostA/userB^hostB:port/hostC</div></code></pre>
+<pre class="highlight" data-user="user"><input type="radio" name="code_menu-5567484618208759064" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu-5567484618208759064" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[user@localhost ~]$ </span>ssh default_user@userA^hostA/userB^hostB:port/hostC</div></code></pre>
 <p>It was a little challenge to come up with the character for identifying the
 user part for intermediate hosts:</p>
 <ul>
@@ -148,7 +148,7 @@ port is omitted, it will use the global port configuration (usually 22/tcp but
 can be changed with the <code>-p</code> argument to ssh).  The script is a bit not optimised
 (bash is really slow on string processing, but I decided to stick with pure
 bash where it was possible):</p>
-<pre class="highlight"><input type="radio" name="code_menu-8463056452696526375" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu-8463056452696526375" class="line-numbers icon list-numbered"><code class="language-bash" data-file="~/bin/ssh-helper.sh"><div class="line"><a></a><span class="ch">#!/bin/bash</span>
+<pre class="highlight"><input type="radio" name="code_menu7506346262390609011" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu7506346262390609011" class="line-numbers icon list-numbered"><code class="language-bash" data-file="~/bin/ssh-helper.sh"><div class="line"><a></a><span class="ch">#!/bin/bash</span>
 </div><div class="line"><a></a><span class="nb">set</span> -eu -o pipefail
 </div><div class="line"><a></a><span class="nb">exec</span> <span class="m">10</span>&lt;<span class="p">&amp;</span><span class="m">0</span> <span class="m">11</span>&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="m">0</span>&lt;<span class="p">&amp;</span><span class="m">2</span> <span class="m">1</span>&gt;<span class="p">&amp;</span><span class="m">2</span>
 </div><div class="line"><a></a><span class="nv">DEFAULT_USER</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
@@ -192,7 +192,7 @@ vary and you are free to create your own version of the script that would
 perform better (I would be really glad if a version of such a script could be
 shared with me).</p>
 <p>The corresponding configuration block in the ssh config file looks as follows:</p>
-<pre class="highlight"><input type="radio" name="code_menu7006133392691046141" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu7006133392691046141" class="line-numbers icon list-numbered"><code class="language-ssh_config" data-file="~/.ssh/config"><div class="line"><a></a><span class="nt">Host</span> <span class="o">*/*</span>
+<pre class="highlight"><input type="radio" name="code_menu-1413866116309652795" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu-1413866116309652795" class="line-numbers icon list-numbered"><code class="language-ssh_config" data-file="~/.ssh/config"><div class="line"><a></a><span class="nt">Host</span> <span class="o">*/*</span>
 </div><div class="line"><a></a>    <span class="err">#</span> <span class="nt">if</span> <span class="nt">you</span> <span class="nt">uncomment</span> <span class="nt">ControlPath</span> <span class="nt">you</span> <span class="nt">also</span> <span class="nt">need</span> <span class="nt">to</span> <span class="nt">uncomment</span> <span class="nt">ControlMaster</span>
 </div><div class="line"><a></a>    <span class="p">#</span><span class="nn">ControlMaster</span> <span class="nt">auto</span>
 </div><div class="line"><a></a>    <span class="err">#</span> <span class="nt">For</span> <span class="nt">OpenSSH</span> <span class="o">&lt;</span> <span class="nt">6</span><span class="p">.</span><span class="nc">7</span> <span class="nt">you</span> <span class="nt">may</span> <span class="nt">uncomment</span> <span class="nt">the</span> <span class="nt">following</span><span class="o">,</span> <span class="nt">but</span> <span class="nt">long</span> <span class="nt">chains</span> <span class="nt">will</span> <span class="nt">fail</span><span class="o">:</span>

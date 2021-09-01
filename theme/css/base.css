@@ -743,8 +743,7 @@ ul.tags > li > span > a::after {
 	right: 0;
 	text-decoration: none;
 	color: transparent;
-	padding-left: 0.25em;
-	padding-right: 0.25em;
+	padding: .3875em .25em;
 	background: #56a3d5;
 	background: var(--counter-bg-color, #56a3d5);
 	border-radius: 0 0.25em 0.25em 0;
@@ -752,7 +751,7 @@ ul.tags > li > span > a::after {
 	max-width: 0;
 	overflow: hidden;
 	font-size: 0.75em;
-	line-height: 1.66667;
+	line-height: 1;
 	transition: max-width 0.5s ease-out;
 }
 

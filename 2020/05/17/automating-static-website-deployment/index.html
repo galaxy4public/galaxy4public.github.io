@@ -203,7 +203,7 @@ while for GitHub to retry.</p>
 will get the quickest validation response from GitHub, e.g. I set up my
 <code>CNAME</code> records and then verified it from the command line (before)
 submitting the request to GitHub:</p>
-<pre id="code1" class="highlight" data-user="user"><input type="radio" name="code_menu6757693968488637905" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu6757693968488637905" class="line-numbers icon list-numbered"><code class="language-console"><div id="code1.1" class="line"><a href="#code1.1" aria-hidden="true"></a><span class="gp">[user@localhost ~]$ </span>host -t cname dmitry.khlebnikov.net <span class="m">8</span>.8.8.8
+<pre id="code1" class="highlight" data-user="user"><input type="radio" name="code_menu3888374900887181748" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu3888374900887181748" class="line-numbers icon list-numbered"><code class="language-console"><div id="code1.1" class="line"><a href="#code1.1" aria-hidden="true"></a><span class="gp">[user@localhost ~]$ </span>host -t cname dmitry.khlebnikov.net <span class="m">8</span>.8.8.8
 </div><div id="code1.2" class="line"><a href="#code1.2" aria-hidden="true"></a><span class="go">Using domain server:</span>
 </div><div id="code1.3" class="line"><a href="#code1.3" aria-hidden="true"></a><span class="go">Name: 8.8.8.8</span>
 </div><div id="code1.4" class="line"><a href="#code1.4" aria-hidden="true"></a><span class="go">Address: 8.8.8.8#53</span>
@@ -266,7 +266,7 @@ look like <em>you</em> are executing them.</p>
 <ol>
 <li>
 <p>Generate an <abbr title="Secure Shell">SSH</abbr> key pair, e.g.:</p>
-<pre id="code2" class="highlight" data-user="user"><input type="radio" name="code_menu478645941427614380" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu478645941427614380" class="line-numbers icon list-numbered"><code class="language-console"><div id="code2.1" class="line"><a href="#code2.1" aria-hidden="true"></a><span class="gp">[user@localhost ~]$ </span>ssh-keygen -t ed25519 -N <span class="s1">&#39;&#39;</span> -C <span class="s1">&#39;Updating the blog from GH Action&#39;</span> -f ~/gh-action
+<pre id="code2" class="highlight" data-user="user"><input type="radio" name="code_menu-5609083657830801453" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu-5609083657830801453" class="line-numbers icon list-numbered"><code class="language-console"><div id="code2.1" class="line"><a href="#code2.1" aria-hidden="true"></a><span class="gp">[user@localhost ~]$ </span>ssh-keygen -t ed25519 -N <span class="s1">&#39;&#39;</span> -C <span class="s1">&#39;Updating the blog from GH Action&#39;</span> -f ~/gh-action
 </div><div id="code2.2" class="line"><a href="#code2.2" aria-hidden="true"></a><span class="go">Generating public/private ed25519 key pair.</span>
 </div><div id="code2.3" class="line"><a href="#code2.3" aria-hidden="true"></a><span class="go">Your identification has been saved in /home/user/gh-action</span>
 </div><div id="code2.4" class="line"><a href="#code2.4" aria-hidden="true"></a><span class="go">Your public key has been saved in /home/user/gh-action.pub</span>
@@ -305,7 +305,7 @@ the <code>.pub</code> suffix appended to it.</p>
  from GH Action&rdquo;) and copy and paste the recently generated <em>public</em> key.
  GitHub does not allow you to upload files over there, so you need to copy
  the content of the <strong>public</strong> key file and paste it into the form, e.g.:</p>
-<pre id="code3" class="highlight"><input type="radio" name="code_menu7820881380043454579" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu7820881380043454579" class="line-numbers icon list-numbered"><code class="language-text" data-file="~/gh-action.pub"><div id="code3.1" class="line"><a href="#code3.1" aria-hidden="true"></a>ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGHCy+stVCBjsrVO2ld1DwKCwcKL9+i1sjxcZu4u4lFQ Updating the blog from GH Action</div></code></pre>
+<pre id="code3" class="highlight"><input type="radio" name="code_menu4717014769068891321" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu4717014769068891321" class="line-numbers icon list-numbered"><code class="language-text" data-file="~/gh-action.pub"><div id="code3.1" class="line"><a href="#code3.1" aria-hidden="true"></a>ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGHCy+stVCBjsrVO2ld1DwKCwcKL9+i1sjxcZu4u4lFQ Updating the blog from GH Action</div></code></pre>
 <p><strong>NOTE</strong>: You need to ensure that you tick the &ldquo;Allow write access&rdquo; checkbox,
  otherwise it would not be possible to push to the repository with the
  corresponding private key.</p>
@@ -332,7 +332,7 @@ The name of the configuration file can be also anything you like, however, I
 suggest to stick with the default for now.</p>
 <p>Basically, you can quickly start by following the Pelican documentation and
 doing something as follows:</p>
-<pre id="code4" class="highlight" data-user="user"><input type="radio" name="code_menu2490257962463032027" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu2490257962463032027" class="line-numbers icon list-numbered"><code class="language-console"><div id="code4.1" class="line"><a href="#code4.1" aria-hidden="true"></a><span class="gp">[user@localhost ~]$ </span>virtualenv ~/venv/pelican
+<pre id="code4" class="highlight" data-user="user"><input type="radio" name="code_menu841632826016202862" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu841632826016202862" class="line-numbers icon list-numbered"><code class="language-console"><div id="code4.1" class="line"><a href="#code4.1" aria-hidden="true"></a><span class="gp">[user@localhost ~]$ </span>virtualenv ~/venv/pelican
 </div><div id="code4.2" class="line"><a href="#code4.2" aria-hidden="true"></a><span class="go">created virtual environment CPython3.8.2.final.0-64 in 477ms</span>
 </div><div id="code4.3" class="line"><a href="#code4.3" aria-hidden="true"></a><span class="go">  creator CPython3Posix(dest=/home/user/venv/pelican, clear=False, global=False)</span>
 </div><div id="code4.4" class="line"><a href="#code4.4" aria-hidden="true"></a><span class="go">  seeder FromAppData(download=False, pip=latest, setuptools=latest, wheel=latest, via=copy, app_data_dir=/home/user/.local/share/virtualenv/seed-app-data/v1.0.1)</span>
@@ -384,7 +384,7 @@ doing something as follows:</p>
 <li>Finally, we commit the generated skeleton to Git.</li>
 </ul>
 <p>A good test at this stage would be to ensure that Pelican is working and likes our structure:</p>
-<pre id="code5" class="highlight" data-user="user"><input type="radio" name="code_menu-6717450741669432140" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu-6717450741669432140" class="line-numbers icon list-numbered"><code class="language-console"><div id="code5.1" class="line"><a href="#code5.1" aria-hidden="true"></a><span class="gp">[user@localhost ~]$ </span>pelican
+<pre id="code5" class="highlight" data-user="user"><input type="radio" name="code_menu6456367262067619497" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu6456367262067619497" class="line-numbers icon list-numbered"><code class="language-console"><div id="code5.1" class="line"><a href="#code5.1" aria-hidden="true"></a><span class="gp">[user@localhost ~]$ </span>pelican
 </div><div id="code5.2" class="line"><a href="#code5.2" aria-hidden="true"></a><span class="go">WARNING: No valid files found in content for the active readers:</span>
 </div><div id="code5.3" class="line"><a href="#code5.3" aria-hidden="true"></a><span class="go">  | BaseReader (static)</span>
 </div><div id="code5.4" class="line"><a href="#code5.4" aria-hidden="true"></a><span class="go">  | HTMLReader (htm, html)</span>
@@ -392,7 +392,7 @@ doing something as follows:</p>
 </div><div id="code5.6" class="line"><a href="#code5.6" aria-hidden="true"></a><span class="go">  | RstReader (rst)</span>
 </div><div id="code5.7" class="line"><a href="#code5.7" aria-hidden="true"></a><span class="go">Done: Processed 0 articles, 0 drafts, 0 pages, 0 hidden pages and 0 draft pages in 0.07 seconds.</span></div></code></pre>
 <p>So far so good, but it is not a real test, since there are no source files to generate something from, so let&rsquo;s give Pelican something to work on:</p>
-<pre id="code6" class="highlight" data-user="user"><input type="radio" name="code_menu-3419053221736654695" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu-3419053221736654695" class="line-numbers icon list-numbered"><code class="language-console"><div id="code6.1" class="line"><a href="#code6.1" aria-hidden="true"></a><span class="gp">[user@localhost ~]$ </span><span class="nb">printf</span> <span class="s1">&#39;Title: First Post\nDate: 2020-05-10\n\n#First post\nPelican is awesome!&#39;</span> &gt; content/first.md
+<pre id="code6" class="highlight" data-user="user"><input type="radio" name="code_menu-698494815622288534" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu-698494815622288534" class="line-numbers icon list-numbered"><code class="language-console"><div id="code6.1" class="line"><a href="#code6.1" aria-hidden="true"></a><span class="gp">[user@localhost ~]$ </span><span class="nb">printf</span> <span class="s1">&#39;Title: First Post\nDate: 2020-05-10\n\n#First post\nPelican is awesome!&#39;</span> &gt; content/first.md
 </div><div id="code6.2" class="line"><a href="#code6.2" aria-hidden="true"></a><span class="gp">[user@localhost ~]$ </span>pelican
 </div><div id="code6.3" class="line"><a href="#code6.3" aria-hidden="true"></a><span class="go">Done: Processed 1 article, 0 drafts, 0 pages, 0 hidden pages and 0 draft pages in 0.12 seconds.</span>
 </div><div id="code6.4" class="line"><a href="#code6.4" aria-hidden="true"></a><span class="gp">[user@localhost ~]$ </span>elinks -dump output/index.html 
@@ -418,7 +418,7 @@ from just one article file we created.</p>
 keeping first, e.g. create the <code>.gitignore</code> file and list the temporary
 things we do not want Git to track.  A good enough version of the <code>.gitignore</code>
 file I am using for my code repository is the following:</p>
-<pre id="code7" class="highlight"><input type="radio" name="code_menu-6996803703597703791" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu-6996803703597703791" class="line-numbers icon list-numbered"><code class="language-txt" data-file=".gitignore"><div id="code7.1" class="line"><a href="#code7.1" aria-hidden="true"></a>*~
+<pre id="code7" class="highlight"><input type="radio" name="code_menu-7396010333227266666" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu-7396010333227266666" class="line-numbers icon list-numbered"><code class="language-txt" data-file=".gitignore"><div id="code7.1" class="line"><a href="#code7.1" aria-hidden="true"></a>*~
 </div><div id="code7.2" class="line"><a href="#code7.2" aria-hidden="true"></a>*.pyc
 </div><div id="code7.3" class="line"><a href="#code7.3" aria-hidden="true"></a>.*.swp
 </div><div id="code7.4" class="line"><a href="#code7.4" aria-hidden="true"></a>
@@ -441,7 +441,7 @@ session dump of what you will need to do.  In the following session snippet
 <code>blog</code> is the repository name I chose for my private code repository and you
 will need to replace it with your private repository name (the working
 directory is our newly created local repository):</p>
-<pre id="code8" class="highlight" data-user="user"><input type="radio" name="code_menu2928818613532599002" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu2928818613532599002" class="line-numbers icon list-numbered"><code class="language-console"><div id="code8.1" class="line"><a href="#code8.1" aria-hidden="true"></a><span class="gp">[user@localhost ~]$ </span>git remote add origin git@github.com:galaxy4public/blog.git
+<pre id="code8" class="highlight" data-user="user"><input type="radio" name="code_menu-4336745263350929710" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu-4336745263350929710" class="line-numbers icon list-numbered"><code class="language-console"><div id="code8.1" class="line"><a href="#code8.1" aria-hidden="true"></a><span class="gp">[user@localhost ~]$ </span>git remote add origin git@github.com:galaxy4public/blog.git
 </div><div id="code8.2" class="line"><a href="#code8.2" aria-hidden="true"></a><span class="gp">[user@localhost ~]$ </span>git push -u origin master
 </div><div id="code8.3" class="line"><a href="#code8.3" aria-hidden="true"></a><span class="go">Enter passphrase for key &#39;/home/user/.ssh/keys/github&#39;: </span>
 </div><div id="code8.4" class="line"><a href="#code8.4" aria-hidden="true"></a><span class="go">Enumerating objects: 6, done.</span>
@@ -483,7 +483,7 @@ repository).</p>
 <p>The GitHub Action I am using for my blog web site is stored in
 <code>.github/workflows/pelican.yml</code> and contains the following (we will dissect it
 further down the post):</p>
-<pre id="code9" class="highlight"><input type="radio" name="code_menu26249438265121689" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu26249438265121689" class="line-numbers icon list-numbered"><code class="language-yaml" data-file=".github/workflows/pelican.yml"><div id="code9.1" class="line"><a href="#code9.1" aria-hidden="true"></a><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Static Website Generator</span>
+<pre id="code9" class="highlight"><input type="radio" name="code_menu-578254288801699177" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu-578254288801699177" class="line-numbers icon list-numbered"><code class="language-yaml" data-file=".github/workflows/pelican.yml"><div id="code9.1" class="line"><a href="#code9.1" aria-hidden="true"></a><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Static Website Generator</span>
 </div><div id="code9.2" class="line"><a href="#code9.2" aria-hidden="true"></a>
 </div><div id="code9.3" class="line"><a href="#code9.3" aria-hidden="true"></a><span class="nt">on</span><span class="p">:</span>
 </div><div id="code9.4" class="line"><a href="#code9.4" aria-hidden="true"></a>  <span class="nt">push</span><span class="p">:</span>
