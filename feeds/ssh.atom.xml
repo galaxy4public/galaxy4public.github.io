@@ -39,7 +39,7 @@ port is omitted, it will use the global port configuration (usually 22/tcp but
 can be changed with the &lt;code&gt;-p&lt;/code&gt; argument to ssh).  The script is a bit not optimised
 (bash is really slow on string processing, but I decided to stick with pure
 bash where it was possible):&lt;/p&gt;
-&lt;pre class="highlight" data-file="~/bin/ssh-helper.sh"&gt;&lt;code class="language-bash"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-bash" data-file="~/bin/ssh-helper.sh"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
 &lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="nb"&gt;set&lt;/span&gt; -eu -o pipefail
 &lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="nb"&gt;exec&lt;/span&gt; &lt;span class="m"&gt;10&lt;/span&gt;&amp;lt;&lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;11&lt;/span&gt;&amp;gt;&lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;&amp;lt;&lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&amp;gt;&lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;
 &lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="nv"&gt;DEFAULT_USER&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$1&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
@@ -83,7 +83,7 @@ vary and you are free to create your own version of the script that would
 perform better (I would be really glad if a version of such a script could be
 shared with me).&lt;/p&gt;
 &lt;p&gt;The corresponding configuration block in the ssh config file looks as follows:&lt;/p&gt;
-&lt;pre class="highlight" data-file="~/.ssh/config"&gt;&lt;code class="language-ssh_config"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="nt"&gt;Host&lt;/span&gt; &lt;span class="o"&gt;*/*&lt;/span&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-ssh_config" data-file="~/.ssh/config"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="nt"&gt;Host&lt;/span&gt; &lt;span class="o"&gt;*/*&lt;/span&gt;
 &lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="nt"&gt;if&lt;/span&gt; &lt;span class="nt"&gt;you&lt;/span&gt; &lt;span class="nt"&gt;uncomment&lt;/span&gt; &lt;span class="nt"&gt;ControlPath&lt;/span&gt; &lt;span class="nt"&gt;you&lt;/span&gt; &lt;span class="nt"&gt;also&lt;/span&gt; &lt;span class="nt"&gt;need&lt;/span&gt; &lt;span class="nt"&gt;to&lt;/span&gt; &lt;span class="nt"&gt;uncomment&lt;/span&gt; &lt;span class="nt"&gt;ControlMaster&lt;/span&gt;
 &lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="nn"&gt;ControlMaster&lt;/span&gt; &lt;span class="nt"&gt;auto&lt;/span&gt;
 &lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;    &lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="nt"&gt;For&lt;/span&gt; &lt;span class="nt"&gt;OpenSSH&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="nt"&gt;6&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;7&lt;/span&gt; &lt;span class="nt"&gt;you&lt;/span&gt; &lt;span class="nt"&gt;may&lt;/span&gt; &lt;span class="nt"&gt;uncomment&lt;/span&gt; &lt;span class="nt"&gt;the&lt;/span&gt; &lt;span class="nt"&gt;following&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;but&lt;/span&gt; &lt;span class="nt"&gt;long&lt;/span&gt; &lt;span class="nt"&gt;chains&lt;/span&gt; &lt;span class="nt"&gt;will&lt;/span&gt; &lt;span class="nt"&gt;fail&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
@@ -127,7 +127,7 @@ expands to the port specified on the command line or to &amp;ldquo;22&amp;rdquo;
 &lt;p&gt;Since most of our research is going to be inside the interactive script you
 will see several incarnations of script&amp;rsquo;s body. The very first one was the
 following:&lt;/p&gt;
-&lt;pre class="highlight" data-file="~/bin/interactive.script.sh"&gt;&lt;code class="language-bash"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-bash" data-file="~/bin/interactive.script.sh"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
 &lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="nb"&gt;exec&lt;/span&gt; nc &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$1&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$2&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;At this point we just need to confirm that our test environment works as
 expected &amp;ndash; the ssh session should be proxied through the nc command and we
@@ -185,7 +185,7 @@ parent ssh process? Well, the answer is quite obvious:&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;The following version of the script demonstrates the implementation of the
 above logic:&lt;/p&gt;
-&lt;pre class="highlight" data-file="~/bin/interactive.script.sh"&gt;&lt;code class="language-bash"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-bash" data-file="~/bin/interactive.script.sh"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
 &lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="nb"&gt;exec&lt;/span&gt; &lt;span class="m"&gt;10&lt;/span&gt;&amp;lt;&lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;11&lt;/span&gt;&amp;gt;&lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;&amp;lt;&lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&amp;gt;&lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;
 &lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="c1"&gt;# start of the interactive behaviour&lt;/span&gt;
 &lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;lsof -p &lt;span class="nv"&gt;$$&lt;/span&gt;

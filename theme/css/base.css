@@ -789,6 +789,16 @@ pre.highlight {
 	border: .0125em solid hsla(0, 0%, 0%, .25);
 }
 
+code[data-file]::before {
+	content: " File: " attr(data-file);
+}
+
+pre.highlight > code[data-file]::before {
+	display: block;
+	background-color: #358ccb;
+	color: white;
+}
+
 pre.highlight > code {
 	display: block;
 	max-height: inherit;

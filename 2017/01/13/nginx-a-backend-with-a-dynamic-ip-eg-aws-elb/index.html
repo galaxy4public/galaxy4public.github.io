@@ -171,7 +171,7 @@ an extra mile and will define template units so the same configuration could be
 reused to launch multiple proxies using the same base templates.</p>
 <p>The first template file is for the systemd service which will provide the proxy
 capability:</p>
-<pre class="highlight" data-file="/etc/systemd/system/systemd-socket-proxyd@.service"><code class="language-systemd"><div class="line"><a></a><span class="k">[Unit]</span>
+<pre class="highlight"><code class="language-systemd" data-file="/etc/systemd/system/systemd-socket-proxyd@.service"><div class="line"><a></a><span class="k">[Unit]</span>
 </div><div class="line"><a></a><span class="na">Description</span><span class="o">=</span><span class="s">&quot;Generic Socket Proxy (%I)&quot;</span>
 </div><div class="line"><a></a><span class="na">Documentation</span><span class="o">=</span><span class="s">https://www.freedesktop.org/software/systemd/man/systemd-socket-proxyd.html</span>
 </div><div class="line"><a></a><span class="na">After</span><span class="o">=</span><span class="s">network.service</span>
@@ -201,7 +201,7 @@ protect this proxy service from being killed in the event the system is
 starving for memory &ndash; this may be something you do not need.</p>
 <p>The second template file is for the socket unit that would trigger the
 activation of the proxy service when a request arrives on the socket:</p>
-<pre class="highlight" data-file="/etc/systemd/system/systemd-socket-proxyd@.socket"><code class="language-systemd"><div class="line"><a></a><span class="k">[Unit]</span>
+<pre class="highlight"><code class="language-systemd" data-file="/etc/systemd/system/systemd-socket-proxyd@.socket"><div class="line"><a></a><span class="k">[Unit]</span>
 </div><div class="line"><a></a><span class="na">Description</span><span class="o">=</span><span class="s">&quot;Socket for Generic Socket Proxy (%I)&quot;</span>
 </div><div class="line"><a></a><span class="na">Documentation</span><span class="o">=</span><span class="s">https://www.freedesktop.org/software/systemd/man/systemd-socket-proxyd.html</span>
 </div><div class="line"><a></a>
@@ -227,14 +227,14 @@ instantiated using the template as shown later in this article.</p>
 <p>Since our goal is to connect nginx to the backend FastCGI service we need to
 ensure that the proxy socket is read/write accessible to nginx&rsquo;es workers, so
 we need to tweak the settings of the socket unit:</p>
-<pre class="highlight" data-file="/etc/systemd/system/systemd-socket-proxyd@fastcgi.socket.d/fastcgi.conf"><code class="language-systemd"><div class="line"><a></a><span class="k">[Socket]</span>
+<pre class="highlight"><code class="language-systemd" data-file="/etc/systemd/system/systemd-socket-proxyd@fastcgi.socket.d/fastcgi.conf"><div class="line"><a></a><span class="k">[Socket]</span>
 </div><div class="line"><a></a><span class="na">SocketGroup</span><span class="o">=</span><span class="s">nginx</span></div></code></pre>
 <p>Note how we extended the template for a specific named instance of the socket
 unit: we defined the <code>systemd-socket-proxyd@fastcgi.socket.d</code> sub-directory and
 put a drop-in configuration snippet there.</p>
 <p>Now, to achieve our goal we need to specify the target endpoint for our proxy
 service (the named instance we spawn using the template):</p>
-<pre class="highlight" data-file="/etc/systemd/system/systemd-socket-proxyd@fastcgi.service.d/fastcgi.conf"><code class="language-systemd"><div class="line"><a></a><span class="k">[Service]</span>
+<pre class="highlight"><code class="language-systemd" data-file="/etc/systemd/system/systemd-socket-proxyd@fastcgi.service.d/fastcgi.conf"><div class="line"><a></a><span class="k">[Service]</span>
 </div><div class="line"><a></a><span class="c1"># Reset the ExecStart, so we could override it</span>
 </div><div class="line"><a></a><span class="na">ExecStart</span><span class="o">=</span>
 </div><div class="line"><a></a><span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/lib/systemd/systemd-socket-proxyd remote.php.backend.domain.tld.:9000</span></div></code></pre>
@@ -273,7 +273,7 @@ loadable policy for the <code>systemd-socket-proxyd</code> service.</p>
 support file too, but for the purposes of this article we should be fine with
 the automatically generated one.</p>
 <p>The content of the systemd-socket-proxy.te file is listed below:</p>
-<pre class="highlight" data-file="systemd-socket-proxy.te"><code class="language-selinux"><div class="line"><a></a><span class="nt">policy_module</span><span class="o">(</span><span class="nt">systemd-socket-proxyd</span><span class="o">,</span> <span class="nt">1</span><span class="p">.</span><span class="nc">0</span><span class="o">)</span>
+<pre class="highlight"><code class="language-selinux" data-file="systemd-socket-proxy.te"><div class="line"><a></a><span class="nt">policy_module</span><span class="o">(</span><span class="nt">systemd-socket-proxyd</span><span class="o">,</span> <span class="nt">1</span><span class="p">.</span><span class="nc">0</span><span class="o">)</span>
 </div><div class="line"><a></a>
 </div><div class="line"><a></a><span class="err">##</span> <span class="o">&lt;</span><span class="nt">desc</span><span class="o">&gt;</span>
 </div><div class="line"><a></a><span class="err">##</span>  <span class="o">&lt;</span><span class="nt">p</span><span class="o">&gt;</span>
@@ -347,7 +347,7 @@ need to label the <code>systemd-socket-proxyd</code> binary with the
 <code>systemd_socket_proxyd_exec_t</code> label.</p>
 <p>The content of the systemd-socket-proxy.fc file that implements this behavior
 is as follows:</p>
-<pre class="highlight" data-file="systemd-socket-proxy.fc"><code class="language-selinux"><div class="line"><a></a>/(usr/lib|etc)/systemd/system/systemd-socket-proxyd\.service  gen_context(system_u:object_r:systemd_socket_proxyd_unit_file_t,s0)
+<pre class="highlight"><code class="language-selinux" data-file="systemd-socket-proxy.fc"><div class="line"><a></a>/(usr/lib|etc)/systemd/system/systemd-socket-proxyd\.service  gen_context(system_u:object_r:systemd_socket_proxyd_unit_file_t,s0)
 </div><div class="line"><a></a>/usr/lib/systemd/systemd-socket-proxyd -- gen_context(system_u:object_r:systemd_socket_proxyd_exec_t,s0)</div></code></pre>
 <p>At this point, we have everything we need to compile a policy module, so let&rsquo;s
 just do it now:</p>

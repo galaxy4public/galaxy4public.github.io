@@ -305,7 +305,7 @@ the <code>.pub</code> suffix appended to it.</p>
  from GH Action&rdquo;) and copy and paste the recently generated <em>public</em> key.
  GitHub does not allow you to upload files over there, so you need to copy
  the content of the <strong>public</strong> key file and paste it into the form, e.g.:</p>
-<pre id="code3" class="highlight" data-file="~/gh-action.pub"><code class="language-text"><div id="code3.1" class="line"><a href="#code3.1" aria-hidden="true"></a>ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGHCy+stVCBjsrVO2ld1DwKCwcKL9+i1sjxcZu4u4lFQ Updating the blog from GH Action</div></code></pre>
+<pre id="code3" class="highlight"><code class="language-text" data-file="~/gh-action.pub"><div id="code3.1" class="line"><a href="#code3.1" aria-hidden="true"></a>ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGHCy+stVCBjsrVO2ld1DwKCwcKL9+i1sjxcZu4u4lFQ Updating the blog from GH Action</div></code></pre>
 <p><strong>NOTE</strong>: You need to ensure that you tick the &ldquo;Allow write access&rdquo; checkbox,
  otherwise it would not be possible to push to the repository with the
  corresponding private key.</p>
@@ -418,7 +418,7 @@ from just one article file we created.</p>
 keeping first, e.g. create the <code>.gitignore</code> file and list the temporary
 things we do not want Git to track.  A good enough version of the <code>.gitignore</code>
 file I am using for my code repository is the following:</p>
-<pre id="code7" class="highlight" data-file=".gitignore"><code class="language-txt"><div id="code7.1" class="line"><a href="#code7.1" aria-hidden="true"></a>*~
+<pre id="code7" class="highlight"><code class="language-txt" data-file=".gitignore"><div id="code7.1" class="line"><a href="#code7.1" aria-hidden="true"></a>*~
 </div><div id="code7.2" class="line"><a href="#code7.2" aria-hidden="true"></a>*.pyc
 </div><div id="code7.3" class="line"><a href="#code7.3" aria-hidden="true"></a>.*.swp
 </div><div id="code7.4" class="line"><a href="#code7.4" aria-hidden="true"></a>
@@ -483,7 +483,7 @@ repository).</p>
 <p>The GitHub Action I am using for my blog web site is stored in
 <code>.github/workflows/pelican.yml</code> and contains the following (we will dissect it
 further down the post):</p>
-<pre id="code9" class="highlight" data-file=".github/workflows/pelican.yml"><code class="language-yaml"><div id="code9.1" class="line"><a href="#code9.1" aria-hidden="true"></a><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Static Website Generator</span>
+<pre id="code9" class="highlight"><code class="language-yaml" data-file=".github/workflows/pelican.yml"><div id="code9.1" class="line"><a href="#code9.1" aria-hidden="true"></a><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Static Website Generator</span>
 </div><div id="code9.2" class="line"><a href="#code9.2" aria-hidden="true"></a>
 </div><div id="code9.3" class="line"><a href="#code9.3" aria-hidden="true"></a><span class="nt">on</span><span class="p">:</span>
 </div><div id="code9.4" class="line"><a href="#code9.4" aria-hidden="true"></a>  <span class="nt">push</span><span class="p">:</span>

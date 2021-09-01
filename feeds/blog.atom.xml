@@ -203,7 +203,7 @@ the &lt;code&gt;.pub&lt;/code&gt; suffix appended to it.&lt;/p&gt;
  from GH Action&amp;rdquo;) and copy and paste the recently generated &lt;em&gt;public&lt;/em&gt; key.
  GitHub does not allow you to upload files over there, so you need to copy
  the content of the &lt;strong&gt;public&lt;/strong&gt; key file and paste it into the form, e.g.:&lt;/p&gt;
-&lt;pre id="code3" class="highlight" data-file="~/gh-action.pub"&gt;&lt;code class="language-text"&gt;&lt;div id="code3.1" class="line"&gt;&lt;a href="#code3.1" aria-hidden="true"&gt;&lt;/a&gt;ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGHCy+stVCBjsrVO2ld1DwKCwcKL9+i1sjxcZu4u4lFQ Updating the blog from GH Action&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre id="code3" class="highlight"&gt;&lt;code class="language-text" data-file="~/gh-action.pub"&gt;&lt;div id="code3.1" class="line"&gt;&lt;a href="#code3.1" aria-hidden="true"&gt;&lt;/a&gt;ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGHCy+stVCBjsrVO2ld1DwKCwcKL9+i1sjxcZu4u4lFQ Updating the blog from GH Action&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;: You need to ensure that you tick the &amp;ldquo;Allow write access&amp;rdquo; checkbox,
  otherwise it would not be possible to push to the repository with the
  corresponding private key.&lt;/p&gt;
@@ -316,7 +316,7 @@ from just one article file we created.&lt;/p&gt;
 keeping first, e.g. create the &lt;code&gt;.gitignore&lt;/code&gt; file and list the temporary
 things we do not want Git to track.  A good enough version of the &lt;code&gt;.gitignore&lt;/code&gt;
 file I am using for my code repository is the following:&lt;/p&gt;
-&lt;pre id="code7" class="highlight" data-file=".gitignore"&gt;&lt;code class="language-txt"&gt;&lt;div id="code7.1" class="line"&gt;&lt;a href="#code7.1" aria-hidden="true"&gt;&lt;/a&gt;*~
+&lt;pre id="code7" class="highlight"&gt;&lt;code class="language-txt" data-file=".gitignore"&gt;&lt;div id="code7.1" class="line"&gt;&lt;a href="#code7.1" aria-hidden="true"&gt;&lt;/a&gt;*~
 &lt;/div&gt;&lt;div id="code7.2" class="line"&gt;&lt;a href="#code7.2" aria-hidden="true"&gt;&lt;/a&gt;*.pyc
 &lt;/div&gt;&lt;div id="code7.3" class="line"&gt;&lt;a href="#code7.3" aria-hidden="true"&gt;&lt;/a&gt;.*.swp
 &lt;/div&gt;&lt;div id="code7.4" class="line"&gt;&lt;a href="#code7.4" aria-hidden="true"&gt;&lt;/a&gt;
@@ -381,7 +381,7 @@ repository).&lt;/p&gt;
 &lt;p&gt;The GitHub Action I am using for my blog web site is stored in
 &lt;code&gt;.github/workflows/pelican.yml&lt;/code&gt; and contains the following (we will dissect it
 further down the post):&lt;/p&gt;
-&lt;pre id="code9" class="highlight" data-file=".github/workflows/pelican.yml"&gt;&lt;code class="language-yaml"&gt;&lt;div id="code9.1" class="line"&gt;&lt;a href="#code9.1" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;Static Website Generator&lt;/span&gt;
+&lt;pre id="code9" class="highlight"&gt;&lt;code class="language-yaml" data-file=".github/workflows/pelican.yml"&gt;&lt;div id="code9.1" class="line"&gt;&lt;a href="#code9.1" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;Static Website Generator&lt;/span&gt;
 &lt;/div&gt;&lt;div id="code9.2" class="line"&gt;&lt;a href="#code9.2" aria-hidden="true"&gt;&lt;/a&gt;
 &lt;/div&gt;&lt;div id="code9.3" class="line"&gt;&lt;a href="#code9.3" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="nt"&gt;on&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
 &lt;/div&gt;&lt;div id="code9.4" class="line"&gt;&lt;a href="#code9.4" aria-hidden="true"&gt;&lt;/a&gt;  &lt;span class="nt"&gt;push&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;

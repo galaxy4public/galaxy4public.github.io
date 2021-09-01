@@ -143,7 +143,7 @@ expands to the port specified on the command line or to &ldquo;22&rdquo; otherwi
 <p>Since most of our research is going to be inside the interactive script you
 will see several incarnations of script&rsquo;s body. The very first one was the
 following:</p>
-<pre class="highlight" data-file="~/bin/interactive.script.sh"><code class="language-bash"><div class="line"><a></a><span class="ch">#!/bin/bash</span>
+<pre class="highlight"><code class="language-bash" data-file="~/bin/interactive.script.sh"><div class="line"><a></a><span class="ch">#!/bin/bash</span>
 </div><div class="line"><a></a><span class="nb">exec</span> nc <span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span> <span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span></div></code></pre>
 <p>At this point we just need to confirm that our test environment works as
 expected &ndash; the ssh session should be proxied through the nc command and we
@@ -201,7 +201,7 @@ parent ssh process? Well, the answer is quite obvious:</p>
 </ul>
 <p>The following version of the script demonstrates the implementation of the
 above logic:</p>
-<pre class="highlight" data-file="~/bin/interactive.script.sh"><code class="language-bash"><div class="line"><a></a><span class="ch">#!/bin/bash</span>
+<pre class="highlight"><code class="language-bash" data-file="~/bin/interactive.script.sh"><div class="line"><a></a><span class="ch">#!/bin/bash</span>
 </div><div class="line"><a></a><span class="nb">exec</span> <span class="m">10</span>&lt;<span class="p">&amp;</span><span class="m">0</span> <span class="m">11</span>&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="m">0</span>&lt;<span class="p">&amp;</span><span class="m">2</span> <span class="m">1</span>&gt;<span class="p">&amp;</span><span class="m">2</span>
 </div><div class="line"><a></a><span class="c1"># start of the interactive behaviour</span>
 </div><div class="line"><a></a>lsof -p <span class="nv">$$</span>

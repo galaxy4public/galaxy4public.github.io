@@ -63,7 +63,7 @@ an extra mile and will define template units so the same configuration could be
 reused to launch multiple proxies using the same base templates.&lt;/p&gt;
 &lt;p&gt;The first template file is for the systemd service which will provide the proxy
 capability:&lt;/p&gt;
-&lt;pre class="highlight" data-file="/etc/systemd/system/systemd-socket-proxyd@.service"&gt;&lt;code class="language-systemd"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="k"&gt;[Unit]&lt;/span&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-systemd" data-file="/etc/systemd/system/systemd-socket-proxyd@.service"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="k"&gt;[Unit]&lt;/span&gt;
 &lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="na"&gt;Description&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Generic Socket Proxy (%I)&amp;quot;&lt;/span&gt;
 &lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="na"&gt;Documentation&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;https://www.freedesktop.org/software/systemd/man/systemd-socket-proxyd.html&lt;/span&gt;
 &lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="na"&gt;After&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;network.service&lt;/span&gt;
@@ -93,7 +93,7 @@ protect this proxy service from being killed in the event the system is
 starving for memory &amp;ndash; this may be something you do not need.&lt;/p&gt;
 &lt;p&gt;The second template file is for the socket unit that would trigger the
 activation of the proxy service when a request arrives on the socket:&lt;/p&gt;
-&lt;pre class="highlight" data-file="/etc/systemd/system/systemd-socket-proxyd@.socket"&gt;&lt;code class="language-systemd"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="k"&gt;[Unit]&lt;/span&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-systemd" data-file="/etc/systemd/system/systemd-socket-proxyd@.socket"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="k"&gt;[Unit]&lt;/span&gt;
 &lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="na"&gt;Description&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Socket for Generic Socket Proxy (%I)&amp;quot;&lt;/span&gt;
 &lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="na"&gt;Documentation&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;https://www.freedesktop.org/software/systemd/man/systemd-socket-proxyd.html&lt;/span&gt;
 &lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;
@@ -119,14 +119,14 @@ instantiated using the template as shown later in this article.&lt;/p&gt;
 &lt;p&gt;Since our goal is to connect nginx to the backend FastCGI service we need to
 ensure that the proxy socket is read/write accessible to nginx&amp;rsquo;es workers, so
 we need to tweak the settings of the socket unit:&lt;/p&gt;
-&lt;pre class="highlight" data-file="/etc/systemd/system/systemd-socket-proxyd@fastcgi.socket.d/fastcgi.conf"&gt;&lt;code class="language-systemd"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="k"&gt;[Socket]&lt;/span&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-systemd" data-file="/etc/systemd/system/systemd-socket-proxyd@fastcgi.socket.d/fastcgi.conf"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="k"&gt;[Socket]&lt;/span&gt;
 &lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="na"&gt;SocketGroup&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;nginx&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Note how we extended the template for a specific named instance of the socket
 unit: we defined the &lt;code&gt;systemd-socket-proxyd@fastcgi.socket.d&lt;/code&gt; sub-directory and
 put a drop-in configuration snippet there.&lt;/p&gt;
 &lt;p&gt;Now, to achieve our goal we need to specify the target endpoint for our proxy
 service (the named instance we spawn using the template):&lt;/p&gt;
-&lt;pre class="highlight" data-file="/etc/systemd/system/systemd-socket-proxyd@fastcgi.service.d/fastcgi.conf"&gt;&lt;code class="language-systemd"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="k"&gt;[Service]&lt;/span&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-systemd" data-file="/etc/systemd/system/systemd-socket-proxyd@fastcgi.service.d/fastcgi.conf"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="k"&gt;[Service]&lt;/span&gt;
 &lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="c1"&gt;# Reset the ExecStart, so we could override it&lt;/span&gt;
 &lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="na"&gt;ExecStart&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;
 &lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="na"&gt;ExecStart&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;/usr/lib/systemd/systemd-socket-proxyd remote.php.backend.domain.tld.:9000&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
@@ -165,7 +165,7 @@ loadable policy for the &lt;code&gt;systemd-socket-proxyd&lt;/code&gt; service.&
 support file too, but for the purposes of this article we should be fine with
 the automatically generated one.&lt;/p&gt;
 &lt;p&gt;The content of the systemd-socket-proxy.te file is listed below:&lt;/p&gt;
-&lt;pre class="highlight" data-file="systemd-socket-proxy.te"&gt;&lt;code class="language-selinux"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="nt"&gt;policy_module&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;systemd-socket-proxyd&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;0&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-selinux" data-file="systemd-socket-proxy.te"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="nt"&gt;policy_module&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;systemd-socket-proxyd&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;0&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
 &lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;
 &lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="err"&gt;##&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;desc&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
 &lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="err"&gt;##&lt;/span&gt;  &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;p&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
@@ -239,7 +239,7 @@ need to label the &lt;code&gt;systemd-socket-proxyd&lt;/code&gt; binary with the
 &lt;code&gt;systemd_socket_proxyd_exec_t&lt;/code&gt; label.&lt;/p&gt;
 &lt;p&gt;The content of the systemd-socket-proxy.fc file that implements this behavior
 is as follows:&lt;/p&gt;
-&lt;pre class="highlight" data-file="systemd-socket-proxy.fc"&gt;&lt;code class="language-selinux"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;/(usr/lib|etc)/systemd/system/systemd-socket-proxyd\.service  gen_context(system_u:object_r:systemd_socket_proxyd_unit_file_t,s0)
+&lt;pre class="highlight"&gt;&lt;code class="language-selinux" data-file="systemd-socket-proxy.fc"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;/(usr/lib|etc)/systemd/system/systemd-socket-proxyd\.service  gen_context(system_u:object_r:systemd_socket_proxyd_unit_file_t,s0)
 &lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;/usr/lib/systemd/systemd-socket-proxyd -- gen_context(system_u:object_r:systemd_socket_proxyd_exec_t,s0)&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;At this point, we have everything we need to compile a policy module, so let&amp;rsquo;s
 just do it now:&lt;/p&gt;
@@ -569,7 +569,7 @@ this there are two things we need to do:&lt;/p&gt;
 &lt;p&gt;To accomplish the first thing we need to create a wrapper script around
 vmplayer and use this script for fine-tuning later. Here is the very basic
 script for this purpose (created as &lt;code&gt;~/vmrconsole/bin/loader.sh&lt;/code&gt;):&lt;/p&gt;
-&lt;pre class="highlight" data-file="~/vmrconsole/bin/loader.sh"&gt;&lt;code class="language-bash"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-bash" data-file="~/vmrconsole/bin/loader.sh"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
 &lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;
 &lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="c1"&gt;# We must run vmplayer from the directory it resides in since all&lt;/span&gt;
 &lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="c1"&gt;# relative paths are solved from there.&lt;/span&gt;
