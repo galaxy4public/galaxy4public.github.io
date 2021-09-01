@@ -247,7 +247,7 @@ through all of them and see if they are real benefits at all:</p>
 <p>The ability of logging is so limited in <code>sudo</code> that it cannot be used for
  anything except a substitute for the shell history. Just imagine the
  following scenario — a user executes:</p>
-<pre class="highlight"><code class="language-console"><div class="line"><a></a><span class="go">sudo less /var/log/messages</span></div></code></pre>
+<pre class="highlight"><input type="radio" name="code_menu-1113797593337590611" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu-1113797593337590611" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="go">sudo less /var/log/messages</span></div></code></pre>
 <p>and then types &ldquo;!&rdquo; followed by the Enter/Return key — the user effectively
  now in the root shell and what <code>sudo</code> will log into its logs has nothing
  to do with what user actually did.</p>
@@ -284,7 +284,7 @@ through all of them and see if they are real benefits at all:</p>
  account/password.  The truth is that nobody is limited by a single root
  account: you can create as many as you want and each of them could have
  their own distinct password, e.g.</p>
-<pre class="highlight" data-user="root"><code class="language-console"><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>useradd -om -o <span class="m">0</span> -g <span class="m">0</span> -s /bin/sh new_root
+<pre class="highlight" data-user="root"><input type="radio" name="code_menu-574929336710681927" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu-574929336710681927" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>useradd -om -o <span class="m">0</span> -g <span class="m">0</span> -s /bin/sh new_root
 </div><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>passwd new_root</div></code></pre>
 <p>Better yet, do not set the password and lock the account instead with
  <code>usermod -L new_root</code> since we are using keys, remember?</p>

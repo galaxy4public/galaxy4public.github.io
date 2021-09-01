@@ -154,7 +154,7 @@ what we are going to do and how:</p>
 address (in our example below it was <code>remote.php.backend.domain.tld.:9000</code>)
 with our local socket (we are using a unix socket at
 <code>/run/systemd-socket-proxyd/fastcgi.sock</code> in this example):</p>
-<pre class="highlight"><code class="language-nginx"><div class="line"><a></a><span class="k">upstream</span> <span class="s">php</span> <span class="p">{</span>
+<pre class="highlight"><input type="radio" name="code_menu5282932325635817323" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu5282932325635817323" class="line-numbers icon list-numbered"><code class="language-nginx"><div class="line"><a></a><span class="k">upstream</span> <span class="s">php</span> <span class="p">{</span>
 </div><div class="line"><a></a>    <span class="c1">#server remote.php.backend.domain.tld.:9000;</span>
 </div><div class="line"><a></a>    <span class="kn">server</span>  <span class="s">unix:/run/systemd-socket-proxyd/fastcgi.sock</span><span class="p">;</span>
 </div><div class="line"><a></a><span class="p">}</span>
@@ -171,7 +171,7 @@ an extra mile and will define template units so the same configuration could be
 reused to launch multiple proxies using the same base templates.</p>
 <p>The first template file is for the systemd service which will provide the proxy
 capability:</p>
-<pre class="highlight"><code class="language-systemd" data-file="/etc/systemd/system/systemd-socket-proxyd@.service"><div class="line"><a></a><span class="k">[Unit]</span>
+<pre class="highlight"><input type="radio" name="code_menu-2826155644506786486" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu-2826155644506786486" class="line-numbers icon list-numbered"><code class="language-systemd" data-file="/etc/systemd/system/systemd-socket-proxyd@.service"><div class="line"><a></a><span class="k">[Unit]</span>
 </div><div class="line"><a></a><span class="na">Description</span><span class="o">=</span><span class="s">&quot;Generic Socket Proxy (%I)&quot;</span>
 </div><div class="line"><a></a><span class="na">Documentation</span><span class="o">=</span><span class="s">https://www.freedesktop.org/software/systemd/man/systemd-socket-proxyd.html</span>
 </div><div class="line"><a></a><span class="na">After</span><span class="o">=</span><span class="s">network.service</span>
@@ -201,7 +201,7 @@ protect this proxy service from being killed in the event the system is
 starving for memory &ndash; this may be something you do not need.</p>
 <p>The second template file is for the socket unit that would trigger the
 activation of the proxy service when a request arrives on the socket:</p>
-<pre class="highlight"><code class="language-systemd" data-file="/etc/systemd/system/systemd-socket-proxyd@.socket"><div class="line"><a></a><span class="k">[Unit]</span>
+<pre class="highlight"><input type="radio" name="code_menu8911423467154627743" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu8911423467154627743" class="line-numbers icon list-numbered"><code class="language-systemd" data-file="/etc/systemd/system/systemd-socket-proxyd@.socket"><div class="line"><a></a><span class="k">[Unit]</span>
 </div><div class="line"><a></a><span class="na">Description</span><span class="o">=</span><span class="s">&quot;Socket for Generic Socket Proxy (%I)&quot;</span>
 </div><div class="line"><a></a><span class="na">Documentation</span><span class="o">=</span><span class="s">https://www.freedesktop.org/software/systemd/man/systemd-socket-proxyd.html</span>
 </div><div class="line"><a></a>
@@ -227,14 +227,14 @@ instantiated using the template as shown later in this article.</p>
 <p>Since our goal is to connect nginx to the backend FastCGI service we need to
 ensure that the proxy socket is read/write accessible to nginx&rsquo;es workers, so
 we need to tweak the settings of the socket unit:</p>
-<pre class="highlight"><code class="language-systemd" data-file="/etc/systemd/system/systemd-socket-proxyd@fastcgi.socket.d/fastcgi.conf"><div class="line"><a></a><span class="k">[Socket]</span>
+<pre class="highlight"><input type="radio" name="code_menu-6614811155203132772" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu-6614811155203132772" class="line-numbers icon list-numbered"><code class="language-systemd" data-file="/etc/systemd/system/systemd-socket-proxyd@fastcgi.socket.d/fastcgi.conf"><div class="line"><a></a><span class="k">[Socket]</span>
 </div><div class="line"><a></a><span class="na">SocketGroup</span><span class="o">=</span><span class="s">nginx</span></div></code></pre>
 <p>Note how we extended the template for a specific named instance of the socket
 unit: we defined the <code>systemd-socket-proxyd@fastcgi.socket.d</code> sub-directory and
 put a drop-in configuration snippet there.</p>
 <p>Now, to achieve our goal we need to specify the target endpoint for our proxy
 service (the named instance we spawn using the template):</p>
-<pre class="highlight"><code class="language-systemd" data-file="/etc/systemd/system/systemd-socket-proxyd@fastcgi.service.d/fastcgi.conf"><div class="line"><a></a><span class="k">[Service]</span>
+<pre class="highlight"><input type="radio" name="code_menu1647313148036011568" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu1647313148036011568" class="line-numbers icon list-numbered"><code class="language-systemd" data-file="/etc/systemd/system/systemd-socket-proxyd@fastcgi.service.d/fastcgi.conf"><div class="line"><a></a><span class="k">[Service]</span>
 </div><div class="line"><a></a><span class="c1"># Reset the ExecStart, so we could override it</span>
 </div><div class="line"><a></a><span class="na">ExecStart</span><span class="o">=</span>
 </div><div class="line"><a></a><span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/lib/systemd/systemd-socket-proxyd remote.php.backend.domain.tld.:9000</span></div></code></pre>
@@ -243,7 +243,7 @@ unit, but here we overrode the <code>ExecStart</code> command to specify the tar
 for the proxy.</p>
 <p>OK, we are done with the configuration of <code>systemd</code>, so it would be a good time
 to reload the <code>systemd</code> daemon:</p>
-<pre class="highlight" data-user="root"><code class="language-console"><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>systemctl daemon-reload</div></code></pre>
+<pre class="highlight" data-user="root"><input type="radio" name="code_menu-7696454266852297059" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu-7696454266852297059" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>systemctl daemon-reload</div></code></pre>
 <p>If you run a system where SELinux is disabled (why?!) you don&rsquo;t need to do
 anything additional and should be good, but if you are security conscious and
 want to ensure that you follow the least privilege principle, then read on :)</p>
@@ -259,7 +259,7 @@ VM for building/compiling policies since the only time you need that
 development stuff is when you are compiling the module from sources).</p>
 <p>On CentOS, you can install all the necessary bits to build a loadable SELinux
 module by installing the <code>selinux-policy-devel</code> package using <code>yum</code>:</p>
-<pre class="highlight" data-user="root"><code class="language-console"><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>yum -y install selinux-policy-devel</div></code></pre>
+<pre class="highlight" data-user="root"><input type="radio" name="code_menu-1646914975006143973" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu-1646914975006143973" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>yum -y install selinux-policy-devel</div></code></pre>
 <p>Note, I skipped the output of the command since it does not provide any useful
 information for the purposes of this article.</p>
 <p>Once the SELinux development framework is installed we can start designing our
@@ -273,7 +273,7 @@ loadable policy for the <code>systemd-socket-proxyd</code> service.</p>
 support file too, but for the purposes of this article we should be fine with
 the automatically generated one.</p>
 <p>The content of the systemd-socket-proxy.te file is listed below:</p>
-<pre class="highlight"><code class="language-selinux" data-file="systemd-socket-proxy.te"><div class="line"><a></a><span class="nt">policy_module</span><span class="o">(</span><span class="nt">systemd-socket-proxyd</span><span class="o">,</span> <span class="nt">1</span><span class="p">.</span><span class="nc">0</span><span class="o">)</span>
+<pre class="highlight"><input type="radio" name="code_menu-7660165633040647718" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu-7660165633040647718" class="line-numbers icon list-numbered"><code class="language-selinux" data-file="systemd-socket-proxy.te"><div class="line"><a></a><span class="nt">policy_module</span><span class="o">(</span><span class="nt">systemd-socket-proxyd</span><span class="o">,</span> <span class="nt">1</span><span class="p">.</span><span class="nc">0</span><span class="o">)</span>
 </div><div class="line"><a></a>
 </div><div class="line"><a></a><span class="err">##</span> <span class="o">&lt;</span><span class="nt">desc</span><span class="o">&gt;</span>
 </div><div class="line"><a></a><span class="err">##</span>  <span class="o">&lt;</span><span class="nt">p</span><span class="o">&gt;</span>
@@ -347,11 +347,11 @@ need to label the <code>systemd-socket-proxyd</code> binary with the
 <code>systemd_socket_proxyd_exec_t</code> label.</p>
 <p>The content of the systemd-socket-proxy.fc file that implements this behavior
 is as follows:</p>
-<pre class="highlight"><code class="language-selinux" data-file="systemd-socket-proxy.fc"><div class="line"><a></a>/(usr/lib|etc)/systemd/system/systemd-socket-proxyd\.service  gen_context(system_u:object_r:systemd_socket_proxyd_unit_file_t,s0)
+<pre class="highlight"><input type="radio" name="code_menu-1508277210950839914" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu-1508277210950839914" class="line-numbers icon list-numbered"><code class="language-selinux" data-file="systemd-socket-proxy.fc"><div class="line"><a></a>/(usr/lib|etc)/systemd/system/systemd-socket-proxyd\.service  gen_context(system_u:object_r:systemd_socket_proxyd_unit_file_t,s0)
 </div><div class="line"><a></a>/usr/lib/systemd/systemd-socket-proxyd -- gen_context(system_u:object_r:systemd_socket_proxyd_exec_t,s0)</div></code></pre>
 <p>At this point, we have everything we need to compile a policy module, so let&rsquo;s
 just do it now:</p>
-<pre class="highlight" data-user="root"><code class="language-console"><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>ls -l
+<pre class="highlight" data-user="root"><input type="radio" name="code_menu-4963962434364179469" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu-4963962434364179469" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>ls -l
 </div><div class="line"><a></a><span class="go">total 8</span>
 </div><div class="line"><a></a><span class="go">-rw-r--r--. 1 root root  235 Jan  5 05:21 systemd-socket-proxyd.fc</span>
 </div><div class="line"><a></a><span class="go">-rw-r--r--. 1 root root 1467 Jan  6 00:10 systemd-socket-proxyd.te</span>
@@ -374,18 +374,18 @@ where proxy is going to be running and only apply the last two commands
 <p>We approached the time when we need to perform the pre-flight checks before
 launching our new service :). First, we need to check whether the file context
 was applied to the <code>systemd-socket-proxyd binary</code>:</p>
-<pre class="highlight" data-user="root"><code class="language-console"><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>ls -ldZ /usr/lib/systemd/systemd-socket-proxyd 
+<pre class="highlight" data-user="root"><input type="radio" name="code_menu1895800887466825449" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu1895800887466825449" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>ls -ldZ /usr/lib/systemd/systemd-socket-proxyd 
 </div><div class="line"><a></a><span class="go">-rwxr-xr-x. root root system_u:object_r:systemd_socket_proxyd_exec_t:s0 /usr/lib/systemd/systemd-socket-proxyd</span></div></code></pre>
 <p>Looks good! Let&rsquo;s start the socket unit and check the permissions set on the
 socket file:</p>
-<pre class="highlight" data-user="root"><code class="language-console"><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>systemctl start systemd-socket-proxyd@fastcgi.socket
+<pre class="highlight" data-user="root"><input type="radio" name="code_menu-5546182323939564622" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu-5546182323939564622" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>systemctl start systemd-socket-proxyd@fastcgi.socket
 </div><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>ls -ldZ /run/systemd-socket-proxyd<span class="o">{</span>,/fastcgi.sock<span class="o">}</span>
 </div><div class="line"><a></a><span class="go">drwx--x--x. root root  system_u:object_r:var_run_t:s0   /run/systemd-socket-proxyd</span>
 </div><div class="line"><a></a><span class="go">srw-rw----. root nginx system_u:object_r:var_run_t:s0   /run/systemd-socket-proxyd/fastcgi.sock</span></div></code></pre>
 <p>This also looks as expected. The next test would be to check that our proxy
 service is running with the desired set of permissions and in the correct
 SELinux domain:</p>
-<pre class="highlight" data-user="root"><code class="language-console"><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>socat -v unix-client:/run/systemd-socket-proxyd/fastcgi.sock stdin
+<pre class="highlight" data-user="root"><input type="radio" name="code_menu7893513904830358614" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu7893513904830358614" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>socat -v unix-client:/run/systemd-socket-proxyd/fastcgi.sock stdin
 </div><div class="line"><a></a>
 </div><div class="line"><a></a><span class="go">&lt; 2017/01/13 00:59:22.987083  length=1 from=0 to=0</span>
 </div><div class="line"><a></a>
@@ -413,14 +413,14 @@ and within the <code>systemd_socket_proxyd_t</code> domain.</p>
 and there is no way the service could regain the escalated privileges back.</p>
 <p>Looks like we are all, so let&rsquo;s make our changes persistent. To achieve this we
 just need to enable the <code>systemd-socket-proxyd@fastcgi.socket</code> unit:</p>
-<pre class="highlight" data-user="root"><code class="language-console"><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>systemctl <span class="nb">enable</span> systemd-socket-proxyd@fastcgi.socket
+<pre class="highlight" data-user="root"><input type="radio" name="code_menu7812888100818483991" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu7812888100818483991" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>systemctl <span class="nb">enable</span> systemd-socket-proxyd@fastcgi.socket
 </div><div class="line"><a></a><span class="go">Created symlink from /etc/systemd/system/sockets.target.wants/systemd-socket-proxyd@fastcgi.socket to /etc/systemd/system/systemd-socket-proxyd@.socket.</span>
 </div><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>systemctl status systemd-socket-proxyd@fastcgi.socket <span class="p">|</span> fgrep Loaded:
 </div><div class="line"><a></a><span class="go">   Loaded: loaded (/etc/systemd/system/systemd-socket-proxyd@.socket; enabled; vendor preset: disabled)</span></div></code></pre>
 <p>Just to show that the configuration is working I set a simple lab up in a VM
 and followed this article with the only exception of the PHP/FPM location which
 I am running on the same VM:</p>
-<pre class="highlight" data-user="root"><code class="language-console"><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>cat /usr/share/nginx/html/test.php
+<pre class="highlight" data-user="root"><input type="radio" name="code_menu6561777503492724046" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu6561777503492724046" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>cat /usr/share/nginx/html/test.php
 </div><div class="line"><a></a><span class="go">&lt;?php echo &quot;This is the output from PHP\n&quot; ?&gt;</span>
 </div><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>cat /etc/nginx/conf.d/php-upstream.conf 
 </div><div class="line"><a></a><span class="go">upstream php {</span>
