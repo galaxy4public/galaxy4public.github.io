@@ -94,6 +94,7 @@
 			</ul>
 		</span>
 	</header>
+<!--
 	<aside class="modal">
 		<div id="bug-report">
 			<a href="#" class="close"></a>
@@ -109,6 +110,7 @@
 		<div id="preferences">
 		</div>
 	</aside>
+ -->
 	<main>
 			<article id="transparent-ssh-host-jumping-advanced">
 				<header>
@@ -125,7 +127,7 @@ using the command-line options). However, this approach turned out to be quite
 inconvenient since every time I wanted to connect to a new host (and, possibly,
 through a new intermediate host) I had to edit my SSH configuration file and
 add something like the following:</p>
-<pre class="highlight"><input type="radio" name="code_menu8825343106976911560" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu8825343106976911560" class="line-numbers icon list-numbered"><code class="language-ssh_config"><div class="line"><a></a>Host intermediate
+<pre class="highlight"><input type="radio" name="code_menu-4817975160622547213" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu-4817975160622547213" class="line-numbers icon list-numbered"><code class="language-ssh_config"><div class="line"><a></a>Host intermediate
 </div><div class="line"><a></a>    HostName 192.168.1.1
 </div><div class="line"><a></a>    HostKeyAlias intermediate
 </div><div class="line"><a></a>    LocalForward 10001 target:22
@@ -147,17 +149,17 @@ frustrated me the most:</p>
 tunnel through an intermediate host and found the approach quite convenient for
 the day-to-day use. So, I have added the following block into my <code>~/.ssh/config</code>
 file just before the <code>Host *</code> section:</p>
-<pre class="highlight"><input type="radio" name="code_menu1596076564314547543" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu1596076564314547543" class="line-numbers icon list-numbered"><code class="language-ssh_config"><div class="line"><a></a><span class="nv">Host</span> <span class="o">*/*</span>
+<pre class="highlight"><input type="radio" name="code_menu-5878604119165953700" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu-5878604119165953700" class="line-numbers icon list-numbered"><code class="language-ssh_config"><div class="line"><a></a><span class="nv">Host</span> <span class="o">*/*</span>
 </div><div class="line"><a></a>    <span class="nv">ProxyCommand</span> <span class="nv">ssh</span> $<span class="ss">(</span><span class="k">dirname</span> <span class="o">%</span><span class="nv">h</span><span class="ss">)</span> <span class="o">-</span><span class="nv">W</span> $<span class="ss">(</span><span class="k">basename</span> <span class="o">%</span><span class="nv">h</span><span class="ss">)</span>:<span class="o">%</span><span class="nv">p</span></div></code></pre>
 <p>From that point on, I could connect to a target host via an intermediate one
 by simply executing the following command:</p>
-<pre class="highlight"><input type="radio" name="code_menu1079336842986886071" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu1079336842986886071" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="go">ssh user@intemediate/target</span></div></code></pre>
+<pre class="highlight"><input type="radio" name="code_menu-4286112556935838062" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu-4286112556935838062" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="go">ssh user@intemediate/target</span></div></code></pre>
 <p>The configuration with the <code>ProxyCommand</code> directive was spawning two <code>ssh</code>
 processes with one connected to the intermediate host in the background and the
 other proxied through the intermediate host and connected to the target running
 in the foreground, so from my point of view I had just one terminal session
 open. The configuration allowed to chain as many hosts as I wanted, e.g.:</p>
-<pre class="highlight"><input type="radio" name="code_menu-5698923916725440786" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu-5698923916725440786" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="go">ssh user@hostA/hostB/hostC/hostD</span></div></code></pre>
+<pre class="highlight"><input type="radio" name="code_menu-2971828730796006818" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu-2971828730796006818" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="go">ssh user@hostA/hostB/hostC/hostD</span></div></code></pre>
 <p>The above would result in three <code>ssh</code> processes running in the background (the
 first connected to hostA, the second connected to <em>hostB</em> proxied through <em>hostA</em>,
 and the third connected to <em>hostC</em> proxied through <em>hostB</em>) and one foreground
@@ -175,23 +177,23 @@ was irritating enough and I decided to figure out whether it is possible to
 optimise it. After a bit of reading the documentation and a few attempts I came
 up with the following configuration block in my <code>~/.ssh/config</code> file (remember,
 this block should be placed <em>before</em> the <code>Host *</code> one):</p>
-<pre class="highlight"><input type="radio" name="code_menu1989354504068172912" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu1989354504068172912" class="line-numbers icon list-numbered"><code class="language-ssh_config"><div class="line"><a></a><span class="nt">Host</span> <span class="o">*/*</span>
+<pre class="highlight"><input type="radio" name="code_menu-2340196215851885450" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu-2340196215851885450" class="line-numbers icon list-numbered"><code class="language-ssh_config"><div class="line"><a></a><span class="nt">Host</span> <span class="o">*/*</span>
 </div><div class="line"><a></a>    <span class="nt">ControlMaster</span> <span class="nt">auto</span>
 </div><div class="line"><a></a>    <span class="nt">ControlPath</span>   <span class="o">~/</span><span class="p">.</span><span class="nc">ssh</span><span class="o">/</span><span class="p">.</span><span class="nc">sessions</span><span class="o">/%</span><span class="nt">r</span><span class="o">@%</span><span class="nt">h</span><span class="o">:%</span><span class="nt">p</span>
 </div><div class="line"><a></a>    <span class="nt">ProxyCommand</span> <span class="o">/</span><span class="nt">bin</span><span class="o">/</span><span class="nt">sh</span> <span class="nt">-c</span> <span class="s1">&#39;mkdir -p -m700 ~/.ssh/.sessions/&quot;%r@$(dirname %h)&quot; &amp;&amp; exec ssh -o &quot;ControlMaster auto&quot; -o &quot;ControlPath   ~/.ssh/.sessions/%r@$(dirname %h):%p&quot; -o &quot;ControlPersist 120s&quot; -l %r -p %p $(dirname %h) -W $(basename %h):%p&#39;</span></div></code></pre>
 <p>Let&rsquo;s review it line by line, so the logic is clear:</p>
-<pre class="highlight"><input type="radio" name="code_menu-3554623484165201662" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu-3554623484165201662" class="line-numbers icon list-numbered"><code class="language-ssh_config"><div class="line"><a></a>Host */*</div></code></pre>
+<pre class="highlight"><input type="radio" name="code_menu-6179106345062278317" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu-6179106345062278317" class="line-numbers icon list-numbered"><code class="language-ssh_config"><div class="line"><a></a>Host */*</div></code></pre>
 <p>This host definition block would catch any host specified on the <code>ssh</code> command
 line when the host name matches the <code>*/*</code> pattern, so <code>ssh hostA/hostB/hostC</code>
 will be matched as <code>hostA/hostB</code> being the first part before <code>/</code> and <code>hostC</code> as
 the second part after <code>/</code>. Due to a recursive call to <code>ssh</code> (see below) this
 block will be recursively applied to all hosts in the specified chain.</p>
-<pre class="highlight"><input type="radio" name="code_menu1366458248363358481" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu1366458248363358481" class="line-numbers icon list-numbered"><code class="language-ssh_config"><div class="line"><a></a>ControlMaster auto</div></code></pre>
+<pre class="highlight"><input type="radio" name="code_menu6994624731623235853" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu6994624731623235853" class="line-numbers icon list-numbered"><code class="language-ssh_config"><div class="line"><a></a>ControlMaster auto</div></code></pre>
 <p>This directive instructs <code>ssh</code> to try to reuse an existing control channel to
 communicate with the remote host, and if such a channel does not exist it will
 be created, so further connections to the same remote host would benefit from
 a speedup provided by the already established connection.</p>
-<pre class="highlight"><input type="radio" name="code_menu-8061402168190659821" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu-8061402168190659821" class="line-numbers icon list-numbered"><code class="language-ssh_config"><div class="line"><a></a>ControlPath ~/.ssh/.sessions/%r@%h:%p</div></code></pre>
+<pre class="highlight"><input type="radio" name="code_menu-9183844694927047072" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu-9183844694927047072" class="line-numbers icon list-numbered"><code class="language-ssh_config"><div class="line"><a></a>ControlPath ~/.ssh/.sessions/%r@%h:%p</div></code></pre>
 <p>This directive provides <code>ssh</code> with the location of the control channel socket
 file. The socket file should be unique for each remote host. Since we are
 reusing the existing connection and skipping the authentication the socket file
@@ -201,7 +203,7 @@ part of the file name. Please note that due to our usage of &ldquo;/&rdquo; as a
 separator in the chain the path constructed here will have a subdirectory
 defined in the middle of the %h expansion. <code>ssh</code> would not automatically create
 that subdirectory, so it is something we need to address (see below)</p>
-<pre class="highlight"><input type="radio" name="code_menu3593291580305353485" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu3593291580305353485" class="line-numbers icon list-numbered"><code class="language-ssh_config"><div class="line"><a></a>ProxyCommand …</div></code></pre>
+<pre class="highlight"><input type="radio" name="code_menu8912758785947053633" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu8912758785947053633" class="line-numbers icon list-numbered"><code class="language-ssh_config"><div class="line"><a></a>ProxyCommand …</div></code></pre>
 <p>This is the heart of the whole block. I am starting this proxy command with
 <code>/bin/sh -c '…'</code> since <code>ssh</code> is <code>exec()</code>uting the specified command (this
 replaces the spawned shell and makes it impossible to conditionally chain
@@ -256,7 +258,7 @@ following:</p>
 </li>
 <li>
 <p>the second part executes</p>
-<pre class="highlight"><input type="radio" name="code_menu-259936853754169042" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu-259936853754169042" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="go">ssh … -o &quot;ControlPath ~/.ssh/.sessions/user@hostA/hostB:22&quot; … hostA/hostB -W hostC:22</span></div></code></pre>
+<pre class="highlight"><input type="radio" name="code_menu-7758912850256169447" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu-7758912850256169447" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="go">ssh … -o &quot;ControlPath ~/.ssh/.sessions/user@hostA/hostB:22&quot; … hostA/hostB -W hostC:22</span></div></code></pre>
 <p>This will initiate another round of the above steps, but with a shorter chain
  and it will be recursive until there is just a single host left, e.g. when
  we ascend to <code>hostA</code> as the host to connect to.</p>

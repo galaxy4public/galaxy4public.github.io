@@ -28,6 +28,10 @@ html {
 	font-size: 0;
 }
 
+.contextual {
+	opacity: 0;
+}
+/*
 .contextual,
 .offscreen {
 	position: relative;
@@ -37,6 +41,12 @@ html {
 .offscreen::before {
 	position: absolute;
 	left: 99999em;
+}
+*/
+
+li.search-toggle label {
+	overflow: hidden;
+	white-space: nowrap;
 }
 
 h1, h2, h3, h4, h5, h6 {
