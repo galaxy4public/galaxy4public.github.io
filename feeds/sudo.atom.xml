@@ -142,7 +142,7 @@ through all of them and see if they are real benefits at all:&lt;/p&gt;
 &lt;p&gt;The ability of logging is so limited in &lt;code&gt;sudo&lt;/code&gt; that it cannot be used for
  anything except a substitute for the shell history. Just imagine the
  following scenario — a user executes:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;input type="radio" name="code_menu2417874594763860220" class="no-line-numbers icon list-numbered"&gt;&lt;input type="radio" name="code_menu2417874594763860220" class="line-numbers icon list-numbered"&gt;&lt;code class="language-console"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;sudo less /var/log/messages&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;input type="radio" name="code_menu22d170c99ac93a086a7602be42378054ff06028b" class="no-line-numbers icon list-numbered"&gt;&lt;input type="radio" name="code_menu22d170c99ac93a086a7602be42378054ff06028b" class="line-numbers icon list-numbered"&gt;&lt;code class="language-console"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;sudo less /var/log/messages&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;and then types &amp;ldquo;!&amp;rdquo; followed by the Enter/Return key — the user effectively
  now in the root shell and what &lt;code&gt;sudo&lt;/code&gt; will log into its logs has nothing
  to do with what user actually did.&lt;/p&gt;
@@ -179,7 +179,7 @@ through all of them and see if they are real benefits at all:&lt;/p&gt;
  account/password.  The truth is that nobody is limited by a single root
  account: you can create as many as you want and each of them could have
  their own distinct password, e.g.&lt;/p&gt;
-&lt;pre class="highlight" data-user="root"&gt;&lt;input type="radio" name="code_menu-74362103864419561" class="no-line-numbers icon list-numbered"&gt;&lt;input type="radio" name="code_menu-74362103864419561" class="line-numbers icon list-numbered"&gt;&lt;code class="language-console"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp"&gt;[root@localhost ~]# &lt;/span&gt;useradd -om -o &lt;span class="m"&gt;0&lt;/span&gt; -g &lt;span class="m"&gt;0&lt;/span&gt; -s /bin/sh new_root
+&lt;pre class="highlight" data-user="root"&gt;&lt;input type="radio" name="code_menu22fd675c697cbeb5ef752e76308f175f5de25e18" class="no-line-numbers icon list-numbered"&gt;&lt;input type="radio" name="code_menu22fd675c697cbeb5ef752e76308f175f5de25e18" class="line-numbers icon list-numbered"&gt;&lt;code class="language-console"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp"&gt;[root@localhost ~]# &lt;/span&gt;useradd -om -o &lt;span class="m"&gt;0&lt;/span&gt; -g &lt;span class="m"&gt;0&lt;/span&gt; -s /bin/sh new_root
 &lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp"&gt;[root@localhost ~]# &lt;/span&gt;passwd new_root&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Better yet, do not set the password and lock the account instead with
  &lt;code&gt;usermod -L new_root&lt;/code&gt; since we are using keys, remember?&lt;/p&gt;
