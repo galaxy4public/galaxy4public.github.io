@@ -131,7 +131,7 @@ be omitted if there is no space for them.</p>
 ended up with.</p>
 <p>My starting point was pretty simple &ndash; I had the following HTML markup
 structure that was representing the page numbers in a pagination widget:</p>
-<pre class="highlight"><input type="radio" name="code_menu4379744150773678716" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu4379744150773678716" class="line-numbers icon list-numbered"><code class="language-html"><div class="line"><a></a><span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;paginator&quot;</span><span class="p">&gt;</span>
+<pre class="highlight"><input type="radio" name="code_menu4322527538055219574" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu4322527538055219574" class="line-numbers icon list-numbered"><code class="language-html"><div class="line"><a></a><span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;paginator&quot;</span><span class="p">&gt;</span>
 </div><div class="line"><a></a>    <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
 </div><div class="line"><a></a>        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span><span class="ni">&amp;lt;</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
 </div><div class="line"><a></a>        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>1<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
@@ -173,7 +173,7 @@ three logically separate components: a part before the selected page number (I
 call it &ldquo;head&rdquo;), a part containing the selected page number (I call it
 &ldquo;middle&rdquo;), and a part following the selected page number (I call it &ldquo;tail&rdquo;).
 Hence, my HTML markup became:</p>
-<pre class="highlight"><input type="radio" name="code_menu958082452514695315" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu958082452514695315" class="line-numbers icon list-numbered"><code class="language-html"><div class="line"><a></a><span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;paginator&quot;</span><span class="p">&gt;</span>
+<pre class="highlight"><input type="radio" name="code_menu-1996794838235111364" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu-1996794838235111364" class="line-numbers icon list-numbered"><code class="language-html"><div class="line"><a></a><span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;paginator&quot;</span><span class="p">&gt;</span>
 </div><div class="line"><a></a>    <span class="p">&lt;</span><span class="nt">ul</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;head&quot;</span><span class="p">&gt;</span>
 </div><div class="line"><a></a>        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span><span class="ni">&amp;lt;</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
 </div><div class="line"><a></a>        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>1<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
@@ -196,7 +196,7 @@ Hence, my HTML markup became:</p>
 <p>Initially, I just laid out the lists in a line just to see how it looks and
 whether I like the mechanics of it, so I started with the following style
 definitions:</p>
-<pre class="highlight"><input type="radio" name="code_menu8913848251457712200" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu8913848251457712200" class="line-numbers icon list-numbered"><code class="language-css"><div class="line"><a></a><span class="p">.</span><span class="nc">paginator</span> <span class="p">{</span>
+<pre class="highlight"><input type="radio" name="code_menu1862837999133169637" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu1862837999133169637" class="line-numbers icon list-numbered"><code class="language-css"><div class="line"><a></a><span class="p">.</span><span class="nc">paginator</span> <span class="p">{</span>
 </div><div class="line"><a></a>    <span class="c">/* width: 50%; */</span>
 </div><div class="line"><a></a>    <span class="c">/* margin: 0 auto; */</span>
 </div><div class="line"><a></a>    <span class="k">display</span><span class="p">:</span> <span class="kc">flex</span><span class="p">;</span>
@@ -326,7 +326,7 @@ control which side of the row is used for wrapping.  However, if we adjust our
 HTML markup and leverage not so often used <code>row-reverse</code> value of the flexbox,
 then achieve the desired effect.</p>
 <p>So, in the HTML markup I reversed the &ldquo;tail&rdquo; list:</p>
-<pre class="highlight"><input type="radio" name="code_menu7548170626595722725" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu7548170626595722725" class="line-numbers icon list-numbered"><code class="language-html"><div class="line"><a></a><span class="p">&lt;</span><span class="nt">ul</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;tail&quot;</span><span class="p">&gt;</span>
+<pre class="highlight"><input type="radio" name="code_menu6776224368026065211" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu6776224368026065211" class="line-numbers icon list-numbered"><code class="language-html"><div class="line"><a></a><span class="p">&lt;</span><span class="nt">ul</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;tail&quot;</span><span class="p">&gt;</span>
 </div><div class="line"><a></a>        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span><span class="ni">&amp;gt;</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
 </div><div class="line"><a></a>        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>10<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
 </div><div class="line"><a></a>        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>9<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
@@ -336,7 +336,7 @@ then achieve the desired effect.</p>
 </div><div class="line"><a></a>    <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span></div></code></pre>
 <p>and I adjusted the style of the &ldquo;tail&rdquo; list to apply <code>row-reverse</code> (which basically
 visually presents the list in the reverse order):</p>
-<pre class="highlight"><input type="radio" name="code_menu7867539871920139077" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu7867539871920139077" class="line-numbers icon list-numbered"><code class="language-css"><div class="line"><a></a><span class="nt">ul</span><span class="p">.</span><span class="nc">tail</span> <span class="p">{</span>
+<pre class="highlight"><input type="radio" name="code_menu3109160705419159830" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu3109160705419159830" class="line-numbers icon list-numbered"><code class="language-css"><div class="line"><a></a><span class="nt">ul</span><span class="p">.</span><span class="nc">tail</span> <span class="p">{</span>
 </div><div class="line"><a></a>    <span class="k">flex-flow</span><span class="p">:</span> <span class="kc">row-reverse</span> <span class="kc">wrap</span><span class="p">;</span>
 </div><div class="line"><a></a><span class="p">}</span></div></code></pre>
 <p>With the above changes applied the result looks much more closer to what we
@@ -412,7 +412,7 @@ want:</p>
 <p>Now, to tackle with the visual guidance for the omitted page numbers we can do
 something like the following: we can display dots in space when the page number
 is being wrapped.  To do so we could use pseudo-elements for the &ldquo;middle&rdquo; list:</p>
-<pre class="highlight"><input type="radio" name="code_menu3727186739431711789" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu3727186739431711789" class="line-numbers icon list-numbered"><code class="language-css"><div class="line"><a></a><span class="nt">ul</span><span class="p">.</span><span class="nc">middle</span><span class="p">::</span><span class="nd">before</span> <span class="p">{</span>
+<pre class="highlight"><input type="radio" name="code_menu-4316700110148466345" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu-4316700110148466345" class="line-numbers icon list-numbered"><code class="language-css"><div class="line"><a></a><span class="nt">ul</span><span class="p">.</span><span class="nc">middle</span><span class="p">::</span><span class="nd">before</span> <span class="p">{</span>
 </div><div class="line"><a></a>    <span class="k">content</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
 </div><div class="line"><a></a>    <span class="k">width</span><span class="p">:</span> <span class="mi">300</span><span class="kt">%</span><span class="p">;</span>
 </div><div class="line"><a></a>    <span class="k">height</span><span class="p">:</span> <span class="mi">1</span><span class="kt">em</span><span class="p">;</span>
@@ -429,7 +429,7 @@ getting a dotted line that goes through the middle of our &ldquo;middle&rdquo; l
 <p>However, to make this work we also need to ensure that the border we created
 can extend beyond the box defined by the &ldquo;middle&rdquo; list, hence we need to set
 <code>overflow</code> to <code>visible</code> and let the border overflow the boundaries:</p>
-<pre class="highlight"><input type="radio" name="code_menu3042562869971087225" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu3042562869971087225" class="line-numbers icon list-numbered"><code class="language-css"><div class="line"><a></a><span class="nt">ul</span><span class="p">.</span><span class="nc">middle</span> <span class="p">{</span>
+<pre class="highlight"><input type="radio" name="code_menu-8320772200097746088" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu-8320772200097746088" class="line-numbers icon list-numbered"><code class="language-css"><div class="line"><a></a><span class="nt">ul</span><span class="p">.</span><span class="nc">middle</span> <span class="p">{</span>
 </div><div class="line"><a></a>    <span class="k">overflow</span><span class="p">:</span> <span class="kc">visible</span><span class="p">;</span>  <span class="c">/* show the background dot line */</span>
 </div><div class="line"><a></a><span class="p">}</span></div></code></pre>
 <p>Finally, some additional cosmetic touches are required:</p>
@@ -447,7 +447,7 @@ can extend beyond the box defined by the &ldquo;middle&rdquo; list, hence we nee
     can do this by playing with <code>min-width</code> for the &ldquo;head&rdquo; and &ldquo;tail&rdquo; lists.</li>
 </ul>
 <p>The above translates to the following styling rules:</p>
-<pre class="highlight"><input type="radio" name="code_menu-3990935013597401991" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu-3990935013597401991" class="line-numbers icon list-numbered"><code class="language-css"><div class="line"><a></a><span class="nt">ul</span> <span class="nt">li</span> <span class="p">{</span>
+<pre class="highlight"><input type="radio" name="code_menu-8780288138685582221" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu-8780288138685582221" class="line-numbers icon list-numbered"><code class="language-css"><div class="line"><a></a><span class="nt">ul</span> <span class="nt">li</span> <span class="p">{</span>
 </div><div class="line"><a></a>    <span class="k">z-index</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span>
 </div><div class="line"><a></a>    <span class="k">background</span><span class="p">:</span> <span class="kc">whitesmoke</span><span class="p">;</span>
 </div><div class="line"><a></a><span class="p">}</span>
