@@ -1,5 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - web design</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"></link><link href="https://dmitry.khlebnikov.net/feeds/web-design.atom.xml" rel="self"></link><id>https://dmitry.khlebnikov.net/</id><updated>2021-09-01T16:40:50+10:00</updated><subtitle>assorted bits of wit</subtitle><subtitle>assorted bits of wit</subtitle><entry><title>Truly Responsive Pagination</title><link href="https://dmitry.khlebnikov.net/2020/06/14/truly-responsive-pagination/" rel="alternate"></link><published>2020-06-14T20:07:00+10:00</published><updated>2020-06-14T20:15:57+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-06-14:/2020/06/14/truly-responsive-pagination/</id><summary type="html">&lt;p&gt;Searching the web for an example of a fully responsive pagination widget I
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - web design</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"></link><link href="https://dmitry.khlebnikov.net/feeds/web-design.atom.xml" rel="self"></link><id>https://dmitry.khlebnikov.net/</id><updated>2021-09-07T22:45:58+10:00</updated><subtitle>assorted bits of wit</subtitle><subtitle>assorted bits of wit</subtitle><entry><title>Fixing "Content wider than screen"</title><link href="https://dmitry.khlebnikov.net/2021/09/03/fixing-content-wider-than-screen/" rel="alternate"></link><published>2021-09-03T13:00:00+10:00</published><updated>2021-09-07T22:45:58+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2021-09-03:/2021/09/03/fixing-content-wider-than-screen/</id><summary type="html">&lt;p&gt;Recently, I started to get notifications from my &lt;a class="external" href="https://search.google.com/search-console" rel="nofollow"&gt;Google Search Console&lt;/a&gt; that
+some pages have their &lt;a class="external" href="https://support.google.com/webmasters/answer/9063469#content_not_sized_to_viewport" rel="nofollow"&gt;content wider than screen&lt;/a&gt; and that impacts Mobile
+Usability.  However, when I went to the affected pages and performed a test
+through &amp;ldquo;&lt;a class="external" href="https://search.google.com/test/mobile-friendly?url=https://dmitry.khlebnikov.net/2021/09/03/fixing-content-wider-than-screen/" rel="nofollow"&gt;TEST LIVE PAGE&lt;/a&gt;&amp;rdquo; no
+Mobile Usability issues were found.  Yet, the re-validation requests through
+Google Search Console were returning the error again and again.&lt;/p&gt;
+&lt;p&gt;I searched for possible root cause and suggested fixes on forums, but did not
+find any satisfactory approaches for investigating and fixing the issue.
+Below, is my process of hunting the root cause down, which resulted in
+resolving …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Recently, I started to get notifications from my &lt;a class="external" href="https://search.google.com/search-console" rel="nofollow"&gt;Google Search Console&lt;/a&gt; that
+some pages have their &lt;a class="external" href="https://support.google.com/webmasters/answer/9063469#content_not_sized_to_viewport" rel="nofollow"&gt;content wider than screen&lt;/a&gt; and that impacts Mobile
+Usability.  However, when I went to the affected pages and performed a test
+through &amp;ldquo;&lt;a class="external" href="https://search.google.com/test/mobile-friendly?url=https://dmitry.khlebnikov.net/2021/09/03/fixing-content-wider-than-screen/" rel="nofollow"&gt;TEST LIVE PAGE&lt;/a&gt;&amp;rdquo; no
+Mobile Usability issues were found.  Yet, the re-validation requests through
+Google Search Console were returning the error again and again.&lt;/p&gt;
+&lt;p&gt;I searched for possible root cause and suggested fixes on forums, but did not
+find any satisfactory approaches for investigating and fixing the issue.
+Below, is my process of hunting the root cause down, which resulted in
+resolving the issue of &amp;ldquo;Content wider than screen&amp;rdquo; in my Google Search Console.&lt;/p&gt;
+&lt;p&gt;Let me start by saying that the website the error was reported against does not
+have any visual issues on mobile devices: it renders fine, achieves &lt;a class="external" href="https://developers.google.com/speed/pagespeed/insights/?url=https://dmitry.khlebnikov.net/2021/09/03/fixing-content-wider-than-screen/&amp;amp;tab=mobile" rel="nofollow"&gt;92+ in
+PageSpeed Insights&lt;/a&gt;, and, overall, is very standards aligned.&lt;/p&gt;
+&lt;p&gt;So, how one can find what Google Search does not like about their seemingly
+perfect website?  In this particular case, I found &lt;a class="external" href="https://developer.chrome.com/docs/devtools/" rel="nofollow"&gt;Chrome DevTools&lt;/a&gt; to be an
+invaluable tool to investigate the issue, specifically its insight into how
+layers are composed.  To open the DevTools one need to simply right-click
+anywhere on the page they are about to analyse and choose the &amp;ldquo;Inspect&amp;rdquo; item at
+the bottom of the context menu.  Once we are inside the DevTools window, we
+need to the mobile view (by clicking on the &amp;ldquo;Toggle device toolbar&amp;rdquo; icon in the
+upper left corner of the DevTools window &amp;ndash; all in all, we are investigating
+the Mobile Usability issue.&lt;/p&gt;
+&lt;p&gt;&lt;a class="figure icon link-ext" href="https://dmitry.khlebnikov.net/2021/09/03/fixing-content-wider-than-screen/images/devtools-layers.png" target="_blank"&gt;&lt;img alt="A screenshot of Chrome DevTools with the More Tools menu selected" src="https://dmitry.khlebnikov.net/2021/09/03/fixing-content-wider-than-screen/images/devtools-layers.png"&gt;&lt;/a&gt;
+If you never used the Layers view of DevTools before, you can find that view by
+clicking on three vertical dots in the upper right corner of the DevTools
+window, then expand the &amp;ldquo;More tools&amp;rdquo; sub-menu, and select &amp;ldquo;Layers&amp;rdquo;.  This will
+switch your DevTools to a view representing how different layers are rendered
+by the web-browser engine.  The view is usually split in three distinctive
+panes: the layer hierarchy, the visual representation of layers, and the
+details pane for the currently selected layer.  Depending on whether you have
+the WebGL support or not, the representation of layers may be unavailable.  If
+it is unavailable, it would be a bit inconvenient, but not a big issue, since
+our primary working horse is the layer hierarchy pane.&lt;/p&gt;
+&lt;p&gt;&lt;a class="figure icon link-ext" href="https://dmitry.khlebnikov.net/2021/09/03/fixing-content-wider-than-screen/images/devtools-layers-view.png" target="_blank"&gt;&lt;img alt="A screenshot of Chrome DevTools with the Layers view" src="https://dmitry.khlebnikov.net/2021/09/03/fixing-content-wider-than-screen/images/devtools-layers-view.png"&gt;&lt;/a&gt;
+We should start with expanding the top level layer container and check the
+dimensions next to the first child, which is &lt;code&gt;#document&lt;/code&gt;.  In my example, the
+&lt;code&gt;#document&lt;/code&gt; layer has the size of &lt;code&gt;720&lt;/code&gt; by &lt;code&gt;8811&lt;/code&gt; pixels.  These dimensions
+represent the size of the viewport (assuming that your website visually fits
+into the mobile view with no horizontal scroll bars).  Looking at my example,
+we can immediately see an issue with the rendering: instead of a rectangle
+representing our page we only see a single line across the pane.  The pane is
+using auto scaling to fit all rendered layers inside the pane.  This means that
+some element (or elements) in out page are so wide or rendered so far away from
+the primary content that to represent all the layers Chrome needed to scale it
+down significantly.&lt;/p&gt;
+&lt;p&gt;&lt;a class="figure icon link-ext" href="https://dmitry.khlebnikov.net/2021/09/03/fixing-content-wider-than-screen/images/devtools-elements-header-expand.png" target="_blank"&gt;&lt;img alt="A screenshot of Chrome DevTools showcasing how to expand nested levels recursively" src="https://dmitry.khlebnikov.net/2021/09/03/fixing-content-wider-than-screen/images/devtools-elements-header-expand.png"&gt;&lt;/a&gt;
+Now that we know what is wrong with the page, how do we locate the offending
+element(s)?  First, we need to look at other layers in the layer hierarchy
+pane: any layer that is bigger horizontally (or vertically) than our
+&lt;code&gt;#document&lt;/code&gt; layer is the likely suspect for triggering the Mobile Usability
+error of content being wider than screen.  In my case, the &lt;code&gt;header&lt;/code&gt; layer is
+extremely wide: &lt;code&gt;3200060&lt;/code&gt; pixels wide, to be exact &amp;ndash; so, something inside the
+header container is responsible for this.  It is time to switch to the Elements
+view of DevTools and interrogate the DOM tree.  To make the search easier, once
+I located the header container, I recursively expanded all children of that
+container.&lt;/p&gt;
+&lt;p&gt;&lt;a class="figure icon link-ext" href="https://dmitry.khlebnikov.net/2021/09/03/fixing-content-wider-than-screen/images/devtools-elements-header-view.png" target="_blank"&gt;&lt;img alt="A screenshot of Chrome DevTools with the Elements view focused on the header element" src="https://dmitry.khlebnikov.net/2021/09/03/fixing-content-wider-than-screen/images/devtools-elements-header-view.png"&gt;&lt;/a&gt;
+This allows me to select the topmost container (in my case, it is &amp;ldquo;header&amp;rdquo;),
+select &amp;ldquo;Computed&amp;rdquo; tab to see the position and dimensions of the selected
+element, and then by pressing the down arrow key on my keyboard walk the tree
+until I find the offending element.  We start with the &amp;ldquo;header&amp;rdquo; element and, as
+you can see from the screenshot, its dimensions are reasonable and are smaller
+than the dimensions of the &amp;ldquo;body&amp;rdquo; element which represents our document.&lt;/p&gt;
+&lt;p&gt;&lt;a class="figure icon link-ext" href="https://dmitry.khlebnikov.net/2021/09/03/fixing-content-wider-than-screen/images/devtools-elements-offender.png" target="_blank"&gt;&lt;img alt="A screenshot of Chrome DevTools with the Element view focused on the offending element" src="https://dmitry.khlebnikov.net/2021/09/03/fixing-content-wider-than-screen/images/devtools-elements-offender.png"&gt;&lt;/a&gt;
+Basically, any child element of the &amp;ldquo;body&amp;rdquo; container should be equal or smaller
+than the dimensions of the &amp;ldquo;body&amp;rdquo; container.  In some extreme cases, it would
+require one to do some tedious maths each time you move down the tree, but in
+most cases skimming through will reveal a standout element like the label element
+I stumbled upon.&lt;/p&gt;
+&lt;p&gt;&lt;a class="figure icon link-ext" href="https://dmitry.khlebnikov.net/2021/09/03/fixing-content-wider-than-screen/images/devtools-elements-offender-styles.png" target="_blank"&gt;&lt;img alt="A screenshot of Chrome DevTools with the Styles view focused on the offending element" src="https://dmitry.khlebnikov.net/2021/09/03/fixing-content-wider-than-screen/images/devtools-elements-offender-styles.png"&gt;&lt;/a&gt;
+Despite that the size of this label element is just &lt;code&gt;40&lt;/code&gt; by &lt;code&gt;40&lt;/code&gt; pixels, its
+position is way to the left (by &lt;code&gt;1599980&lt;/code&gt; pixels, to be precise).  To understand
+why this element behaves like this we need to switch to the &amp;ldquo;Styles&amp;rdquo; tab to
+look at the associated CSS rules for the offending element.  Sure enough, after
+a bit of reading through the styles, I located the corresponding rule that was
+pushing the element to the far left side of the universe.&lt;/p&gt;
+&lt;p&gt;Once you find the offending element, you need to understand why it was
+implemented like that and what goal was pursued by the author.  When this is
+clear, you should be able to come up with an appropriate fix addressing the
+Mobile Usability issue while preserving the intended behaviour of the element.
+In my case, the author was me and this particular element was part of the UI.
+Since my website is responsive and tries to cater for different audiences
+(including people who are using screen readers), I needed to hide some text
+from the visual audiences (they are fine with icons) and present textual label
+to people who are using assistive technology like screen readers.
+Unfortunately, I followed one of the articles I found on the web, which
+suggested to hide elements by pushing them off the screen.  Therefore, my fix
+in this instance was to cut the overflowing label off using &lt;code&gt;overflow: hidden&lt;/code&gt;
+and &lt;code&gt;white-space: nowrap&lt;/code&gt;. I also used &lt;code&gt;opacity: 0&lt;/code&gt; for the &amp;ldquo;contextual&amp;rdquo; class,
+which was used by some static, non-interactive elements on the page.&lt;/p&gt;
+&lt;p&gt;I hope this small tutorial helped you to hunt down the source of your Google
+Search Console errors related to the content being outside the viewport.&lt;/p&gt;</content><category term="web design"></category><category term="html"></category><category term="css"></category><category term="design"></category></entry><entry><title>Truly Responsive Pagination</title><link href="https://dmitry.khlebnikov.net/2020/06/14/truly-responsive-pagination/" rel="alternate"></link><published>2020-06-14T20:07:00+10:00</published><updated>2020-06-14T20:15:57+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-06-14:/2020/06/14/truly-responsive-pagination/</id><summary type="html">&lt;p&gt;Searching the web for an example of a fully responsive pagination widget I
 found that either people consider &amp;ldquo;responsive&amp;rdquo; to be something else or that it
 is a non-trivial problem to solve.  In any case, I decided to have a crack at
 it myself.&lt;/p&gt;

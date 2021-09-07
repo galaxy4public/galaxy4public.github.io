@@ -1272,17 +1272,78 @@ footer .pagination ul li a.icon::before {
 	background: hsla(0, 0%, 75%, 1);
 }
 
-p:nth-of-type(odd) > picture.figure,
-p:nth-of-type(odd) > img.figure {
+p:nth-of-type(odd) > .figure {
 	float: left;
-	margin-right: .75em;
+	margin-right: 1em;
 }
 
-p:nth-of-type(even) > picture.figure,
-p:nth-of-type(even) > img.figure {
+p:nth-of-type(even) > .figure {
 	float: right;
-	margin-left: .75em;
+	margin-left: 1em;
 }
+
+.figure {
+	border: thin solid rgba(0,0,0,.25);
+	max-width: 40%;
+	padding: .25em;
+	margin-bottom: 1em;
+	box-shadow: .125em .125em .25em 0;
+}
+
+p:nth-of-type(odd) + p {
+	clear: left;
+}
+
+p:nth-of-type(even) + p {
+	clear: right;
+}
+
+a.figure {
+	position: relative;
+	color: unset;
+	text-decoration: none;
+}
+
+a.figure::before {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	opacity: 0;
+	font-size: 3em;
+	padding: 0 .25em .25em 0;
+}
+
+a.figure:hover::before {
+	opacity: .5
+}
+
+.figure img {
+	display: block;
+}
+
+/*
+a.figure:target {
+	position: fixed;
+	display: flex;
+	left: 0;
+	top: 0;
+	z-index: 1000;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,.8);
+}
+
+a.figure:target > img {
+	display: inline-block;
+	margin: auto auto;
+	padding: 0;
+	border: unset;
+	box-shadow: unset;
+	max-height: 90%;
+	max-width: 90%;
+	vertical-align: middle;
+}
+*/
 
 @media only screen and (max-width: 62em) {
 	body {

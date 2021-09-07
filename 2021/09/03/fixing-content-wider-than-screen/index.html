@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Mind Drops :: assorted bits of wit</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1" />
+	<link rel="stylesheet" href="/theme/css/fonts/Icons.css" />
+	<link rel="stylesheet" href="/theme/css/fonts/Exo2.css" />
+	<link rel="stylesheet" href="/theme/css/fonts/Oswald.css" />
+	<link rel="stylesheet" href="/theme/css/fonts/DancingScript.css" />
+	<link rel="stylesheet" href="/theme/css/base.css" />
+	<link rel="stylesheet" href="/theme/css/pygments/default.css" />
+	<link rel="canonical" href="/2021/09/03/fixing-content-wider-than-screen/" />
+
+	<script type="application/ld+json">
+	{
+		"@context" : "https://schema.org",
+		"@type" : "Article",
+		"author": "(GalaxyMaster)",
+		"name" : "Fixing "Content wider than screen"",
+		"datePublished" : "2021-09-03T13:00:00+10:00",
+		"dateModified" : "2021-09-07T22:45:58+10:00",
+		"image" : "https://dmitry.khlebnikov.net/2020/06/14/truly-responsive-pagination/images/paginator-sketch.png",
+		"headline" : "headline",
+		"abstract": "abstract goes here",
+		"articleSection": "web design",
+		"interactionStatistic":
+		[
+			{
+				"@type": "InteractionCounter",
+				"interactionService":
+				{
+					"@type": "WebSite",
+					"name": "Twitter",
+					"url": "http://www.twitter.com"
+				},
+				"interactionType": "http://schema.org/ShareAction",
+				"userInteractionCount": "1203"
+			},
+			{
+				"@type": "InteractionCounter",
+				"interactionType": "http://schema.org/CommentAction",
+				"userInteractionCount": "78"
+			}
+		],
+		"discussionUrl": "https://github.com/"
+	}
+	</script>
+</head>
+
+<body>
+	<header>
+		<span class="flex">
+			<!--
+			<button class="menu-toggle" type="button" tabindex="0" aria-label="Menu Toggle"><div></div></button>
+			-->
+			<div class="menu-toggle" tabindex="0" aria-label="Menu Toggle"><div></div></div>
+			<a href="/" class="logo">
+				<picture>
+					<source srcset="/images/logo.svg" type="image/svg+xml">
+					<source srcset="/images/.svg" type="image/svg+xml">
+					<source srcset="/images/.webp" type="image/webp">
+					<img src="/images/" alt="Logo">
+				</picture>
+				<span class="title">Mind Drops</span>
+			</a>
+			<nav>
+				<ul>
+					<li><a class="icon home" href="/">Home</a></li>
+					<li><a class="icon user" href="/about">About</a></li>
+					<li><a class="icon phone" href="/contact">Contact</a></li>
+				</ul>
+			</nav>
+			<form id="search" role="search" autocomplete="off" method="get" action="/search">
+				<label for="q" class="icon search">Search</label>
+				<input type="text" name="q" id="q" placeholder="Search..." />
+				<div class="help" aria-label="Search ">
+					<dl>
+						<dt>"search terms"</dt><dd>exact-match</dd>
+						<dt>term1 | term2</dt><dd>term1 or term2</dd>
+						<dt>term1 * term2</dt><dd>term1 followed by term2</dd>
+						<dt>-term</dt><dd>exclude term</dd>
+						<dt>(search terms)</dt><dd>groups terms</dd>
+						<dt>ext:pdf</dt><dd>file type</dd>
+					</dl>
+				</div>
+			</form>
+			<ul class="taskbar">
+				<li class="search-toggle"><label for="q" class="icon search offscreen" title="Toggle the search bar">Search</label></li>
+				<!-- Not Implemented Yet
+				<li><a href="#bug-report" class="icon bug offscreen" title="Report a spotted bug on the page">Report a bug</a></li>
+				<li><a href="#preferences" class="icon cog offscreen" title="Configure personal preferences">Preferences</a></li>
+				 -->
+			</ul>
+		</span>
+	</header>
+<!--
+	<aside class="modal">
+		<div id="bug-report">
+			<a href="#" class="close"></a>
+			<div class="content">
+				<h1>Bug report</h1>
+				<form id="bug-report-form" autocomplete="off">
+					<textarea id="bug-report-body" name="bug-report-body">
+					</textarea>
+					<input type="submit" value="Submit">
+				</form>
+			</div>
+		</div>
+		<div id="preferences">
+		</div>
+	</aside>
+ -->
+	<main>
+			<article id="fixing-content-wider-than-screen">
+				<header>
+					<h1><a href="/2021/09/03/fixing-content-wider-than-screen/" rel="bookmark" title="Permalink to Fixing "Content wider than screen"">Fixing "Content wider than screen"</a></h1>
+				</header>
+				<aside>
+				</aside>
+				<p>Recently, I started to get notifications from my <a class="external" href="https://search.google.com/search-console" rel="nofollow">Google Search Console</a> that
+some pages have their <a class="external" href="https://support.google.com/webmasters/answer/9063469#content_not_sized_to_viewport" rel="nofollow">content wider than screen</a> and that impacts Mobile
+Usability.  However, when I went to the affected pages and performed a test
+through &ldquo;<a class="external" href="https://search.google.com/test/mobile-friendly?url=https://dmitry.khlebnikov.net/2021/09/03/fixing-content-wider-than-screen/" rel="nofollow">TEST LIVE PAGE</a>&rdquo; no
+Mobile Usability issues were found.  Yet, the re-validation requests through
+Google Search Console were returning the error again and again.</p>
+<p>I searched for possible root cause and suggested fixes on forums, but did not
+find any satisfactory approaches for investigating and fixing the issue.
+Below, is my process of hunting the root cause down, which resulted in
+resolving the issue of &ldquo;Content wider than screen&rdquo; in my Google Search Console.</p>
+<p>Let me start by saying that the website the error was reported against does not
+have any visual issues on mobile devices: it renders fine, achieves <a class="external" href="https://developers.google.com/speed/pagespeed/insights/?url=https://dmitry.khlebnikov.net/2021/09/03/fixing-content-wider-than-screen/&amp;tab=mobile" rel="nofollow">92+ in
+PageSpeed Insights</a>, and, overall, is very standards aligned.</p>
+<p>So, how one can find what Google Search does not like about their seemingly
+perfect website?  In this particular case, I found <a class="external" href="https://developer.chrome.com/docs/devtools/" rel="nofollow">Chrome DevTools</a> to be an
+invaluable tool to investigate the issue, specifically its insight into how
+layers are composed.  To open the DevTools one need to simply right-click
+anywhere on the page they are about to analyse and choose the &ldquo;Inspect&rdquo; item at
+the bottom of the context menu.  Once we are inside the DevTools window, we
+need to the mobile view (by clicking on the &ldquo;Toggle device toolbar&rdquo; icon in the
+upper left corner of the DevTools window &ndash; all in all, we are investigating
+the Mobile Usability issue.</p>
+<p><a class="figure icon link-ext" href="../../../../2021/09/03/fixing-content-wider-than-screen/images/devtools-layers.png" target="_blank"><img alt="A screenshot of Chrome DevTools with the More Tools menu selected" src="../../../../2021/09/03/fixing-content-wider-than-screen/images/devtools-layers.png"></a>
+If you never used the Layers view of DevTools before, you can find that view by
+clicking on three vertical dots in the upper right corner of the DevTools
+window, then expand the &ldquo;More tools&rdquo; sub-menu, and select &ldquo;Layers&rdquo;.  This will
+switch your DevTools to a view representing how different layers are rendered
+by the web-browser engine.  The view is usually split in three distinctive
+panes: the layer hierarchy, the visual representation of layers, and the
+details pane for the currently selected layer.  Depending on whether you have
+the WebGL support or not, the representation of layers may be unavailable.  If
+it is unavailable, it would be a bit inconvenient, but not a big issue, since
+our primary working horse is the layer hierarchy pane.</p>
+<p><a class="figure icon link-ext" href="../../../../2021/09/03/fixing-content-wider-than-screen/images/devtools-layers-view.png" target="_blank"><img alt="A screenshot of Chrome DevTools with the Layers view" src="../../../../2021/09/03/fixing-content-wider-than-screen/images/devtools-layers-view.png"></a>
+We should start with expanding the top level layer container and check the
+dimensions next to the first child, which is <code>#document</code>.  In my example, the
+<code>#document</code> layer has the size of <code>720</code> by <code>8811</code> pixels.  These dimensions
+represent the size of the viewport (assuming that your website visually fits
+into the mobile view with no horizontal scroll bars).  Looking at my example,
+we can immediately see an issue with the rendering: instead of a rectangle
+representing our page we only see a single line across the pane.  The pane is
+using auto scaling to fit all rendered layers inside the pane.  This means that
+some element (or elements) in out page are so wide or rendered so far away from
+the primary content that to represent all the layers Chrome needed to scale it
+down significantly.</p>
+<p><a class="figure icon link-ext" href="../../../../2021/09/03/fixing-content-wider-than-screen/images/devtools-elements-header-expand.png" target="_blank"><img alt="A screenshot of Chrome DevTools showcasing how to expand nested levels recursively" src="../../../../2021/09/03/fixing-content-wider-than-screen/images/devtools-elements-header-expand.png"></a>
+Now that we know what is wrong with the page, how do we locate the offending
+element(s)?  First, we need to look at other layers in the layer hierarchy
+pane: any layer that is bigger horizontally (or vertically) than our
+<code>#document</code> layer is the likely suspect for triggering the Mobile Usability
+error of content being wider than screen.  In my case, the <code>header</code> layer is
+extremely wide: <code>3200060</code> pixels wide, to be exact &ndash; so, something inside the
+header container is responsible for this.  It is time to switch to the Elements
+view of DevTools and interrogate the DOM tree.  To make the search easier, once
+I located the header container, I recursively expanded all children of that
+container.</p>
+<p><a class="figure icon link-ext" href="../../../../2021/09/03/fixing-content-wider-than-screen/images/devtools-elements-header-view.png" target="_blank"><img alt="A screenshot of Chrome DevTools with the Elements view focused on the header element" src="../../../../2021/09/03/fixing-content-wider-than-screen/images/devtools-elements-header-view.png"></a>
+This allows me to select the topmost container (in my case, it is &ldquo;header&rdquo;),
+select &ldquo;Computed&rdquo; tab to see the position and dimensions of the selected
+element, and then by pressing the down arrow key on my keyboard walk the tree
+until I find the offending element.  We start with the &ldquo;header&rdquo; element and, as
+you can see from the screenshot, its dimensions are reasonable and are smaller
+than the dimensions of the &ldquo;body&rdquo; element which represents our document.</p>
+<p><a class="figure icon link-ext" href="../../../../2021/09/03/fixing-content-wider-than-screen/images/devtools-elements-offender.png" target="_blank"><img alt="A screenshot of Chrome DevTools with the Element view focused on the offending element" src="../../../../2021/09/03/fixing-content-wider-than-screen/images/devtools-elements-offender.png"></a>
+Basically, any child element of the &ldquo;body&rdquo; container should be equal or smaller
+than the dimensions of the &ldquo;body&rdquo; container.  In some extreme cases, it would
+require one to do some tedious maths each time you move down the tree, but in
+most cases skimming through will reveal a standout element like the label element
+I stumbled upon.</p>
+<p><a class="figure icon link-ext" href="../../../../2021/09/03/fixing-content-wider-than-screen/images/devtools-elements-offender-styles.png" target="_blank"><img alt="A screenshot of Chrome DevTools with the Styles view focused on the offending element" src="../../../../2021/09/03/fixing-content-wider-than-screen/images/devtools-elements-offender-styles.png"></a>
+Despite that the size of this label element is just <code>40</code> by <code>40</code> pixels, its
+position is way to the left (by <code>1599980</code> pixels, to be precise).  To understand
+why this element behaves like this we need to switch to the &ldquo;Styles&rdquo; tab to
+look at the associated CSS rules for the offending element.  Sure enough, after
+a bit of reading through the styles, I located the corresponding rule that was
+pushing the element to the far left side of the universe.</p>
+<p>Once you find the offending element, you need to understand why it was
+implemented like that and what goal was pursued by the author.  When this is
+clear, you should be able to come up with an appropriate fix addressing the
+Mobile Usability issue while preserving the intended behaviour of the element.
+In my case, the author was me and this particular element was part of the UI.
+Since my website is responsive and tries to cater for different audiences
+(including people who are using screen readers), I needed to hide some text
+from the visual audiences (they are fine with icons) and present textual label
+to people who are using assistive technology like screen readers.
+Unfortunately, I followed one of the articles I found on the web, which
+suggested to hide elements by pushing them off the screen.  Therefore, my fix
+in this instance was to cut the overflowing label off using <code>overflow: hidden</code>
+and <code>white-space: nowrap</code>. I also used <code>opacity: 0</code> for the &ldquo;contextual&rdquo; class,
+which was used by some static, non-interactive elements on the page.</p>
+<p>I hope this small tutorial helped you to hunt down the source of your Google
+Search Console errors related to the content being outside the viewport.</p>
+				<footer>
+					<span><span class="contextual">Offloaded on </span><time datetime="2021-09-03T13:00:00+10:00">
+						<span class="month"><a href="/2021/09/" title="A link to the archives for September of 2021">Sep<span class="month full">tember</span></a></span>
+						<span class="day">03</span>
+						<span class="year"><a href="/2021/" title="A link to the archives for the year of 2021">2021</a></span>
+					</time></span>
+						<span class="contextual">into </span><span class="category"><a href="/category/web-design/" title="A link to a collection of articles in the 'web design' category">web design</a></span>
+					<span class="contextual">and tagged with:</span>
+					<ul class="tags">
+						<li class="tag">
+							<span>
+								<a href="/tag/html/" rel="tag" title="A link to the collection tagged with 'html'" data-count="3" ><span>html</span></a>
+							</span>
+						</li>
+						<li class="tag">
+							<span>
+								<a href="/tag/css/" rel="tag" title="A link to the collection tagged with 'css'" data-count="3" ><span>css</span></a>
+							</span>
+						</li>
+						<li class="tag">
+							<span>
+								<a href="/tag/design/" rel="tag" title="A link to the collection tagged with 'design'" data-count="3" ><span>design</span></a>
+							</span>
+						</li>
+						</ul>
+				</footer>
+			</article>
+		<footer>
+		</footer>
+	</main>
+	<footer>
+	</footer>
+</body>
+</html>

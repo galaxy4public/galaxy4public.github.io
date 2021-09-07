@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>Mind Drops - (GalaxyMaster)</title><link>https://dmitry.khlebnikov.net/</link><description>assorted bits of wit</description><lastBuildDate>Wed, 01 Sep 2021 16:40:50 +1000</lastBuildDate><item><title>Truly Responsive Pagination</title><link>https://dmitry.khlebnikov.net/2020/06/14/truly-responsive-pagination/</link><description>&lt;p&gt;Searching the web for an example of a fully responsive pagination widget I
+<rss version="2.0"><channel><title>Mind Drops - (GalaxyMaster)</title><link>https://dmitry.khlebnikov.net/</link><description>assorted bits of wit</description><lastBuildDate>Tue, 07 Sep 2021 22:45:58 +1000</lastBuildDate><item><title>Fixing "Content wider than screen"</title><link>https://dmitry.khlebnikov.net/2021/09/03/fixing-content-wider-than-screen/</link><description>&lt;p&gt;Recently, I started to get notifications from my &lt;a class="external" href="https://search.google.com/search-console" rel="nofollow"&gt;Google Search Console&lt;/a&gt; that
+some pages have their &lt;a class="external" href="https://support.google.com/webmasters/answer/9063469#content_not_sized_to_viewport" rel="nofollow"&gt;content wider than screen&lt;/a&gt; and that impacts Mobile
+Usability.  However, when I went to the affected pages and performed a test
+through &amp;ldquo;&lt;a class="external" href="https://search.google.com/test/mobile-friendly?url=https://dmitry.khlebnikov.net/2021/09/03/fixing-content-wider-than-screen/" rel="nofollow"&gt;TEST LIVE PAGE&lt;/a&gt;&amp;rdquo; no
+Mobile Usability issues were found.  Yet, the re-validation requests through
+Google Search Console were returning the error again and again.&lt;/p&gt;
+&lt;p&gt;I searched for possible root cause and suggested fixes on forums, but did not
+find any satisfactory approaches for investigating and fixing the issue.
+Below, is my process of hunting the root cause down, which resulted in
+resolving …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">(GalaxyMaster)</dc:creator><pubDate>Fri, 03 Sep 2021 13:00:00 +1000</pubDate><guid isPermaLink="false">tag:dmitry.khlebnikov.net,2021-09-03:/2021/09/03/fixing-content-wider-than-screen/</guid><category>web design</category><category>html</category><category>css</category><category>design</category></item><item><title>Truly Responsive Pagination</title><link>https://dmitry.khlebnikov.net/2020/06/14/truly-responsive-pagination/</link><description>&lt;p&gt;Searching the web for an example of a fully responsive pagination widget I
 found that either people consider &amp;ldquo;responsive&amp;rdquo; to be something else or that it
 is a non-trivial problem to solve.  In any case, I decided to have a crack at
 it myself.&lt;/p&gt;
