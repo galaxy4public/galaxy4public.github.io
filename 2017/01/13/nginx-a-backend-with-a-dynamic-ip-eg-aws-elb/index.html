@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<title>Mind Drops :: assorted bits of wit</title>
-		<meta http-equiv="Content-Security-Policy" content="	default-src 'self';object-src 'none';script-src 'self' https://www.googletagmanager.com/gtag/js 'sha256-TelA7VsuYAMqhOKGk7CHgJyuqSJdmqZEp+hn6PWVRwQ=' https://www.google-analytics.com/analytics.js https://static.cloudflareinsights.com/beacon.min.js;img-src 'self' data: https://www.google-analytics.com/r/collect https://www.google-analytics.com/collect https://stats.g.doubleclick.net/r/collect https://*/ads/ga-audiences https://www.googletagmanager.com/a;style-src 'self' 'sha256-fszvBX/J9dhPxFSJ5wUrq/Pvg6HrnTkWyshMZpaxSQY=';connect-src 'self' https://www.google-analytics.com/j/collect https://stats.g.doubleclick.net/j/collect; " />
+		<meta http-equiv="Content-Security-Policy" content="	default-src 'self';object-src 'none';script-src 'self' https://www.googletagmanager.com/gtag/js 'sha256-TelA7VsuYAMqhOKGk7CHgJyuqSJdmqZEp+hn6PWVRwQ=' https://www.google-analytics.com/analytics.js https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194;img-src 'self' data: https://www.google-analytics.com/r/collect https://www.google-analytics.com/collect https://stats.g.doubleclick.net/r/collect https://*/ads/ga-audiences https://www.googletagmanager.com/a;style-src 'self' 'sha256-fszvBX/J9dhPxFSJ5wUrq/Pvg6HrnTkWyshMZpaxSQY=';connect-src 'self' https://www.google-analytics.com/j/collect https://stats.g.doubleclick.net/j/collect; " />
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1" />	<link rel="preload" href="/theme/fonts/Oswald/Oswald-VariableFont_wght.woff2" crossorigin="anonymous" as="font" type="font/woff2">
 	<link rel="preload" href="/theme/fonts/Exo2/Exo2-VariableFont_wght.woff2" crossorigin="anonymous" as="font" type="font/woff2">	<link rel="stylesheet" href="/theme/css/fonts/Icons.css" />
@@ -157,16 +157,16 @@ what we are going to do and how:</p>
 address (in our example below it was <code>remote.php.backend.domain.tld.:9000</code>)
 with our local socket (we are using a unix socket at
 <code>/run/systemd-socket-proxyd/fastcgi.sock</code> in this example):</p>
-<pre class="highlight"><input type="radio" name="code_menude6ee973ca878ff395f55fa6b4fac639626ff3bb" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menude6ee973ca878ff395f55fa6b4fac639626ff3bb" class="line-numbers icon list-numbered"><code class="language-nginx"><div class="line"><a></a><span class="k">upstream</span> <span class="s">php</span> <span class="p">{</span>
-</div><div class="line"><a></a>    <span class="c1">#server remote.php.backend.domain.tld.:9000;</span>
-</div><div class="line"><a></a>    <span class="kn">server</span>  <span class="s">unix:/run/systemd-socket-proxyd/fastcgi.sock</span><span class="p">;</span>
-</div><div class="line"><a></a><span class="p">}</span>
-</div><div class="line"><a></a><span class="k">location</span> <span class="p">~</span> <span class="sr">\.php$</span> <span class="p">{</span>
-</div><div class="line"><a></a>    <span class="kn">try_files</span>   <span class="nv">$uri</span> <span class="p">=</span> <span class="mi">404</span><span class="p">;</span>
-</div><div class="line"><a></a>    <span class="kn">fastcgi_pass</span>    <span class="s">php</span><span class="p">;</span>
-</div><div class="line"><a></a>    <span class="kn">fastcgi_index</span>   <span class="s">index.php</span><span class="p">;</span>
-</div><div class="line"><a></a>    <span class="kn">include</span>     <span class="s">fastcgi.conf</span><span class="p">;</span>
-</div><div class="line"><a></a><span class="p">}</span></div></code></pre>
+<pre class="highlight"><input type="radio" name="code_menuca9bbfbd8bf8d95cb4f87c5f6a3e4e2f8c88a9d9" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menuca9bbfbd8bf8d95cb4f87c5f6a3e4e2f8c88a9d9" class="line-numbers icon list-numbered"><code class="language-nginx"><div class="line"><a></a><span class="k">upstream</span><span class="w"> </span><span class="s">php</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+</div><div class="line"><a></a><span class="w">    </span><span class="c1">#server remote.php.backend.domain.tld.:9000;</span>
+</div><div class="line"><a></a><span class="w">    </span><span class="kn">server</span><span class="w">  </span><span class="s">unix:/run/systemd-socket-proxyd/fastcgi.sock</span><span class="p">;</span><span class="w"></span>
+</div><div class="line"><a></a><span class="p">}</span><span class="w"></span>
+</div><div class="line"><a></a><span class="k">location</span><span class="w"> </span><span class="p">~</span><span class="w"> </span><span class="sr">\.php$</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+</div><div class="line"><a></a><span class="w">    </span><span class="kn">try_files</span><span class="w">   </span><span class="nv">$uri</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">404</span><span class="p">;</span><span class="w"></span>
+</div><div class="line"><a></a><span class="w">    </span><span class="kn">fastcgi_pass</span><span class="w">    </span><span class="s">php</span><span class="p">;</span><span class="w"></span>
+</div><div class="line"><a></a><span class="w">    </span><span class="kn">fastcgi_index</span><span class="w">   </span><span class="s">index.php</span><span class="p">;</span><span class="w"></span>
+</div><div class="line"><a></a><span class="w">    </span><span class="kn">include</span><span class="w">     </span><span class="s">fastcgi.conf</span><span class="p">;</span><span class="w"></span>
+</div><div class="line"><a></a><span class="p">}</span><span class="w"></span></div></code></pre>
 <p>The next step is to define the socket activated proxy service. This generally
 requires creating two files in <code>/etc/system/systemd</code> directory: one for the
 socket and the other for the proxy itself. However, in this article we will go
@@ -174,29 +174,29 @@ an extra mile and will define template units so the same configuration could be
 reused to launch multiple proxies using the same base templates.</p>
 <p>The first template file is for the systemd service which will provide the proxy
 capability:</p>
-<pre class="highlight"><input type="radio" name="code_menu1175a0c0ab66cfab0aa9e2b9ec9c0e881777311a" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu1175a0c0ab66cfab0aa9e2b9ec9c0e881777311a" class="line-numbers icon list-numbered"><code class="language-systemd" data-file="/etc/systemd/system/systemd-socket-proxyd@.service"><div class="line"><a></a><span class="k">[Unit]</span>
-</div><div class="line"><a></a><span class="na">Description</span><span class="o">=</span><span class="s">&quot;Generic Socket Proxy (%I)&quot;</span>
-</div><div class="line"><a></a><span class="na">Documentation</span><span class="o">=</span><span class="s">https://www.freedesktop.org/software/systemd/man/systemd-socket-proxyd.html</span>
-</div><div class="line"><a></a><span class="na">After</span><span class="o">=</span><span class="s">network.service</span>
+<pre class="highlight"><input type="radio" name="code_menu276cb616d7d5282315a273649345aa0414d971c7" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu276cb616d7d5282315a273649345aa0414d971c7" class="line-numbers icon list-numbered"><code class="language-systemd" data-file="/etc/systemd/system/systemd-socket-proxyd@.service"><div class="line"><a></a><span class="k">[Unit]</span><span class="w"></span>
+</div><div class="line"><a></a><span class="na">Description</span><span class="o">=</span><span class="s">&quot;Generic Socket Proxy (%I)&quot;</span><span class="w"></span>
+</div><div class="line"><a></a><span class="na">Documentation</span><span class="o">=</span><span class="s">https://www.freedesktop.org/software/systemd/man/systemd-socket-proxyd.html</span><span class="w"></span>
+</div><div class="line"><a></a><span class="na">After</span><span class="o">=</span><span class="s">network.service</span><span class="w"></span>
 </div><div class="line"><a></a>
-</div><div class="line"><a></a><span class="k">[Service]</span>
-</div><div class="line"><a></a><span class="na">EnvironmentFile</span><span class="o">=</span><span class="s">-/etc/sysconfig/systemd-socket-proxyd.%i</span>
-</div><div class="line"><a></a><span class="na">User</span><span class="o">=</span><span class="s">nobody</span>
-</div><div class="line"><a></a><span class="na">Group</span><span class="o">=</span><span class="s">nobody</span>
-</div><div class="line"><a></a><span class="na">OOMScoreAdjust</span><span class="o">=</span><span class="s">-1000</span>
-</div><div class="line"><a></a><span class="na">UMask</span><span class="o">=</span><span class="s">077</span>
-</div><div class="line"><a></a><span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/lib/systemd/systemd-socket-proxyd $TARGET</span>
-</div><div class="line"><a></a><span class="na">Restart</span><span class="o">=</span><span class="s">on-failure</span>
-</div><div class="line"><a></a><span class="na">PrivateTmp</span><span class="o">=</span><span class="s">true</span>
-</div><div class="line"><a></a><span class="na">PrivateDevices</span><span class="o">=</span><span class="s">true</span>
-</div><div class="line"><a></a><span class="c1">#PrivateUsers=true</span>
-</div><div class="line"><a></a><span class="c1">#ProtectSystem=strict</span>
-</div><div class="line"><a></a><span class="na">ProtectSystem</span><span class="o">=</span><span class="s">full</span>
-</div><div class="line"><a></a><span class="c1">#ProtectKernelTunables=true</span>
-</div><div class="line"><a></a><span class="c1">#ProtectControlGroups=true</span>
-</div><div class="line"><a></a><span class="c1">#NoNewPrivileges=true</span>
-</div><div class="line"><a></a><span class="c1">#ProtectKernelModules=true</span>
-</div><div class="line"><a></a><span class="c1">#MemoryDenyWriteExecute=true</span></div></code></pre>
+</div><div class="line"><a></a><span class="k">[Service]</span><span class="w"></span>
+</div><div class="line"><a></a><span class="na">EnvironmentFile</span><span class="o">=</span><span class="s">-/etc/sysconfig/systemd-socket-proxyd.%i</span><span class="w"></span>
+</div><div class="line"><a></a><span class="na">User</span><span class="o">=</span><span class="s">nobody</span><span class="w"></span>
+</div><div class="line"><a></a><span class="na">Group</span><span class="o">=</span><span class="s">nobody</span><span class="w"></span>
+</div><div class="line"><a></a><span class="na">OOMScoreAdjust</span><span class="o">=</span><span class="s">-1000</span><span class="w"></span>
+</div><div class="line"><a></a><span class="na">UMask</span><span class="o">=</span><span class="s">077</span><span class="w"></span>
+</div><div class="line"><a></a><span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/lib/systemd/systemd-socket-proxyd $TARGET</span><span class="w"></span>
+</div><div class="line"><a></a><span class="na">Restart</span><span class="o">=</span><span class="s">on-failure</span><span class="w"></span>
+</div><div class="line"><a></a><span class="na">PrivateTmp</span><span class="o">=</span><span class="s">true</span><span class="w"></span>
+</div><div class="line"><a></a><span class="na">PrivateDevices</span><span class="o">=</span><span class="s">true</span><span class="w"></span>
+</div><div class="line"><a></a><span class="c1">#PrivateUsers=true</span><span class="w"></span>
+</div><div class="line"><a></a><span class="c1">#ProtectSystem=strict</span><span class="w"></span>
+</div><div class="line"><a></a><span class="na">ProtectSystem</span><span class="o">=</span><span class="s">full</span><span class="w"></span>
+</div><div class="line"><a></a><span class="c1">#ProtectKernelTunables=true</span><span class="w"></span>
+</div><div class="line"><a></a><span class="c1">#ProtectControlGroups=true</span><span class="w"></span>
+</div><div class="line"><a></a><span class="c1">#NoNewPrivileges=true</span><span class="w"></span>
+</div><div class="line"><a></a><span class="c1">#ProtectKernelModules=true</span><span class="w"></span>
+</div><div class="line"><a></a><span class="c1">#MemoryDenyWriteExecute=true</span><span class="w"></span></div></code></pre>
 <p>Depending on the version of your <code>systemd</code> manager you may be able to uncomment
 more lines than was shown in this example, which was tested on CentOS 7.3.1611.</p>
 <p>Also, in the example template given above we are using <code>OOMScoreAdjust=-1000</code> to
@@ -204,19 +204,19 @@ protect this proxy service from being killed in the event the system is
 starving for memory &ndash; this may be something you do not need.</p>
 <p>The second template file is for the socket unit that would trigger the
 activation of the proxy service when a request arrives on the socket:</p>
-<pre class="highlight"><input type="radio" name="code_menu4d81a796a4cae0ba3b1778d4e1226127746cc6c2" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu4d81a796a4cae0ba3b1778d4e1226127746cc6c2" class="line-numbers icon list-numbered"><code class="language-systemd" data-file="/etc/systemd/system/systemd-socket-proxyd@.socket"><div class="line"><a></a><span class="k">[Unit]</span>
-</div><div class="line"><a></a><span class="na">Description</span><span class="o">=</span><span class="s">&quot;Socket for Generic Socket Proxy (%I)&quot;</span>
-</div><div class="line"><a></a><span class="na">Documentation</span><span class="o">=</span><span class="s">https://www.freedesktop.org/software/systemd/man/systemd-socket-proxyd.html</span>
+<pre class="highlight"><input type="radio" name="code_menu0990e8efe08c7742262a0b71d3a8f2c3060d55ed" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu0990e8efe08c7742262a0b71d3a8f2c3060d55ed" class="line-numbers icon list-numbered"><code class="language-systemd" data-file="/etc/systemd/system/systemd-socket-proxyd@.socket"><div class="line"><a></a><span class="k">[Unit]</span><span class="w"></span>
+</div><div class="line"><a></a><span class="na">Description</span><span class="o">=</span><span class="s">&quot;Socket for Generic Socket Proxy (%I)&quot;</span><span class="w"></span>
+</div><div class="line"><a></a><span class="na">Documentation</span><span class="o">=</span><span class="s">https://www.freedesktop.org/software/systemd/man/systemd-socket-proxyd.html</span><span class="w"></span>
 </div><div class="line"><a></a>
-</div><div class="line"><a></a><span class="k">[Socket]</span>
-</div><div class="line"><a></a><span class="na">ListenStream</span><span class="o">=</span><span class="s">/run/systemd-socket-proxyd/%i.sock</span>
-</div><div class="line"><a></a><span class="na">SocketUser</span><span class="o">=</span><span class="s">root</span>
-</div><div class="line"><a></a><span class="na">SocketGroup</span><span class="o">=</span><span class="s">root</span>
-</div><div class="line"><a></a><span class="na">SocketMode</span><span class="o">=</span><span class="s">0660</span>
-</div><div class="line"><a></a><span class="na">DirectoryMode</span><span class="o">=</span><span class="s">0711</span>
+</div><div class="line"><a></a><span class="k">[Socket]</span><span class="w"></span>
+</div><div class="line"><a></a><span class="na">ListenStream</span><span class="o">=</span><span class="s">/run/systemd-socket-proxyd/%i.sock</span><span class="w"></span>
+</div><div class="line"><a></a><span class="na">SocketUser</span><span class="o">=</span><span class="s">root</span><span class="w"></span>
+</div><div class="line"><a></a><span class="na">SocketGroup</span><span class="o">=</span><span class="s">root</span><span class="w"></span>
+</div><div class="line"><a></a><span class="na">SocketMode</span><span class="o">=</span><span class="s">0660</span><span class="w"></span>
+</div><div class="line"><a></a><span class="na">DirectoryMode</span><span class="o">=</span><span class="s">0711</span><span class="w"></span>
 </div><div class="line"><a></a>
-</div><div class="line"><a></a><span class="k">[Install]</span>
-</div><div class="line"><a></a><span class="na">WantedBy</span><span class="o">=</span><span class="s">sockets.target</span></div></code></pre>
+</div><div class="line"><a></a><span class="k">[Install]</span><span class="w"></span>
+</div><div class="line"><a></a><span class="na">WantedBy</span><span class="o">=</span><span class="s">sockets.target</span><span class="w"></span></div></code></pre>
 <p>You may notice that the defaults are pretty strict:</p>
 <ul>
 <li>the socket is owned by root and only root is allowed to work with the
@@ -230,17 +230,17 @@ instantiated using the template as shown later in this article.</p>
 <p>Since our goal is to connect nginx to the backend FastCGI service we need to
 ensure that the proxy socket is read/write accessible to nginx&rsquo;es workers, so
 we need to tweak the settings of the socket unit:</p>
-<pre class="highlight"><input type="radio" name="code_menu27998f57d01bb24aa37caf31ea0999dcfa40b8f9" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu27998f57d01bb24aa37caf31ea0999dcfa40b8f9" class="line-numbers icon list-numbered"><code class="language-systemd" data-file="/etc/systemd/system/systemd-socket-proxyd@fastcgi.socket.d/fastcgi.conf"><div class="line"><a></a><span class="k">[Socket]</span>
-</div><div class="line"><a></a><span class="na">SocketGroup</span><span class="o">=</span><span class="s">nginx</span></div></code></pre>
+<pre class="highlight"><input type="radio" name="code_menu6c3ed2c2799dd212ee2eddb526dfe55453b89fbd" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu6c3ed2c2799dd212ee2eddb526dfe55453b89fbd" class="line-numbers icon list-numbered"><code class="language-systemd" data-file="/etc/systemd/system/systemd-socket-proxyd@fastcgi.socket.d/fastcgi.conf"><div class="line"><a></a><span class="k">[Socket]</span><span class="w"></span>
+</div><div class="line"><a></a><span class="na">SocketGroup</span><span class="o">=</span><span class="s">nginx</span><span class="w"></span></div></code></pre>
 <p>Note how we extended the template for a specific named instance of the socket
 unit: we defined the <code>systemd-socket-proxyd@fastcgi.socket.d</code> sub-directory and
 put a drop-in configuration snippet there.</p>
 <p>Now, to achieve our goal we need to specify the target endpoint for our proxy
 service (the named instance we spawn using the template):</p>
-<pre class="highlight"><input type="radio" name="code_menu12308524cbf428b281daf1f11567ffd99737e27b" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu12308524cbf428b281daf1f11567ffd99737e27b" class="line-numbers icon list-numbered"><code class="language-systemd" data-file="/etc/systemd/system/systemd-socket-proxyd@fastcgi.service.d/fastcgi.conf"><div class="line"><a></a><span class="k">[Service]</span>
-</div><div class="line"><a></a><span class="c1"># Reset the ExecStart, so we could override it</span>
-</div><div class="line"><a></a><span class="na">ExecStart</span><span class="o">=</span>
-</div><div class="line"><a></a><span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/lib/systemd/systemd-socket-proxyd remote.php.backend.domain.tld.:9000</span></div></code></pre>
+<pre class="highlight"><input type="radio" name="code_menu0e23732789574376d42ad692ba7e659906fb01b2" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu0e23732789574376d42ad692ba7e659906fb01b2" class="line-numbers icon list-numbered"><code class="language-systemd" data-file="/etc/systemd/system/systemd-socket-proxyd@fastcgi.service.d/fastcgi.conf"><div class="line"><a></a><span class="k">[Service]</span><span class="w"></span>
+</div><div class="line"><a></a><span class="c1"># Reset the ExecStart, so we could override it</span><span class="w"></span>
+</div><div class="line"><a></a><span class="na">ExecStart</span><span class="o">=</span><span class="w"></span>
+</div><div class="line"><a></a><span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/lib/systemd/systemd-socket-proxyd remote.php.backend.domain.tld.:9000</span><span class="w"></span></div></code></pre>
 <p>The mechanics behind extending the configuration is the same as for the socket
 unit, but here we overrode the <code>ExecStart</code> command to specify the target endpoint
 for the proxy.</p>
@@ -276,58 +276,58 @@ loadable policy for the <code>systemd-socket-proxyd</code> service.</p>
 support file too, but for the purposes of this article we should be fine with
 the automatically generated one.</p>
 <p>The content of the systemd-socket-proxy.te file is listed below:</p>
-<pre class="highlight"><input type="radio" name="code_menu8f8ea1febfc1ac0ed8fec62edaedc4c93f75f31c" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu8f8ea1febfc1ac0ed8fec62edaedc4c93f75f31c" class="line-numbers icon list-numbered"><code class="language-selinux" data-file="systemd-socket-proxy.te"><div class="line"><a></a><span class="nt">policy_module</span><span class="o">(</span><span class="nt">systemd-socket-proxyd</span><span class="o">,</span> <span class="nt">1</span><span class="p">.</span><span class="nc">0</span><span class="o">)</span>
+<pre class="highlight"><input type="radio" name="code_menu999663e418ac4917ffc6ba9b331576e3749359fc" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu999663e418ac4917ffc6ba9b331576e3749359fc" class="line-numbers icon list-numbered"><code class="language-selinux" data-file="systemd-socket-proxy.te"><div class="line"><a></a><span class="nt">policy_module</span><span class="o">(</span><span class="nt">systemd-socket-proxyd</span><span class="o">,</span><span class="w"> </span><span class="nt">1</span><span class="p">.</span><span class="nc">0</span><span class="o">)</span><span class="w"></span>
 </div><div class="line"><a></a>
-</div><div class="line"><a></a><span class="err">##</span> <span class="o">&lt;</span><span class="nt">desc</span><span class="o">&gt;</span>
-</div><div class="line"><a></a><span class="err">##</span>  <span class="o">&lt;</span><span class="nt">p</span><span class="o">&gt;</span>
-</div><div class="line"><a></a><span class="err">##</span>  <span class="nt">Allow</span> <span class="nt">systemd-socket-proxyd</span> <span class="nt">to</span> <span class="nt">bind</span> <span class="nt">any</span> <span class="nt">port</span> <span class="nt">instead</span> <span class="nt">of</span> <span class="nt">one</span> <span class="nt">labelled</span>
-</div><div class="line"><a></a><span class="err">##</span> <span class="nt">with</span> <span class="nt">systemd_socket_proxyd_port_t</span><span class="o">.</span>
-</div><div class="line"><a></a><span class="err">##</span>  <span class="o">&lt;/</span><span class="nt">p</span><span class="o">&gt;</span>
-</div><div class="line"><a></a><span class="err">##</span> <span class="o">&lt;/</span><span class="nt">desc</span><span class="o">&gt;</span>
-</div><div class="line"><a></a><span class="nt">gen_tunable</span><span class="o">(</span><span class="nt">systemd_socket_proxyd_bind_any</span><span class="o">,</span> <span class="nt">false</span><span class="o">)</span>
+</div><div class="line"><a></a><span class="err">##</span><span class="w"> </span><span class="o">&lt;</span><span class="nt">desc</span><span class="o">&gt;</span><span class="w"></span>
+</div><div class="line"><a></a><span class="err">##</span><span class="w">  </span><span class="o">&lt;</span><span class="nt">p</span><span class="o">&gt;</span><span class="w"></span>
+</div><div class="line"><a></a><span class="err">##</span><span class="w">  </span><span class="nt">Allow</span><span class="w"> </span><span class="nt">systemd-socket-proxyd</span><span class="w"> </span><span class="nt">to</span><span class="w"> </span><span class="nt">bind</span><span class="w"> </span><span class="nt">any</span><span class="w"> </span><span class="nt">port</span><span class="w"> </span><span class="nt">instead</span><span class="w"> </span><span class="nt">of</span><span class="w"> </span><span class="nt">one</span><span class="w"> </span><span class="nt">labelled</span><span class="w"></span>
+</div><div class="line"><a></a><span class="err">##</span><span class="w"> </span><span class="nt">with</span><span class="w"> </span><span class="nt">systemd_socket_proxyd_port_t</span><span class="o">.</span><span class="w"></span>
+</div><div class="line"><a></a><span class="err">##</span><span class="w">  </span><span class="o">&lt;/</span><span class="nt">p</span><span class="o">&gt;</span><span class="w"></span>
+</div><div class="line"><a></a><span class="err">##</span><span class="w"> </span><span class="o">&lt;/</span><span class="nt">desc</span><span class="o">&gt;</span><span class="w"></span>
+</div><div class="line"><a></a><span class="nt">gen_tunable</span><span class="o">(</span><span class="nt">systemd_socket_proxyd_bind_any</span><span class="o">,</span><span class="w"> </span><span class="nt">false</span><span class="o">)</span><span class="w"></span>
 </div><div class="line"><a></a>
-</div><div class="line"><a></a><span class="err">##</span> <span class="o">&lt;</span><span class="nt">desc</span><span class="o">&gt;</span>
-</div><div class="line"><a></a><span class="err">##</span> <span class="o">&lt;</span><span class="nt">p</span><span class="o">&gt;</span>
-</div><div class="line"><a></a><span class="err">##</span> <span class="nt">Allow</span> <span class="nt">systemd-socket-proxyd</span> <span class="nt">to</span> <span class="nt">connect</span> <span class="nt">to</span> <span class="nt">any</span> <span class="nt">port</span> <span class="nt">instead</span> <span class="nt">of</span>
-</div><div class="line"><a></a><span class="err">##</span> <span class="nt">labelled</span> <span class="nt">ones</span><span class="o">.</span>
-</div><div class="line"><a></a><span class="err">##</span> <span class="o">&lt;/</span><span class="nt">p</span><span class="o">&gt;</span>
-</div><div class="line"><a></a><span class="err">##</span> <span class="o">&lt;/</span><span class="nt">desc</span><span class="o">&gt;</span>
-</div><div class="line"><a></a><span class="nt">gen_tunable</span><span class="o">(</span><span class="nt">systemd_socket_proxyd_connect_any</span><span class="o">,</span> <span class="nt">false</span><span class="o">)</span>
+</div><div class="line"><a></a><span class="err">##</span><span class="w"> </span><span class="o">&lt;</span><span class="nt">desc</span><span class="o">&gt;</span><span class="w"></span>
+</div><div class="line"><a></a><span class="err">##</span><span class="w"> </span><span class="o">&lt;</span><span class="nt">p</span><span class="o">&gt;</span><span class="w"></span>
+</div><div class="line"><a></a><span class="err">##</span><span class="w"> </span><span class="nt">Allow</span><span class="w"> </span><span class="nt">systemd-socket-proxyd</span><span class="w"> </span><span class="nt">to</span><span class="w"> </span><span class="nt">connect</span><span class="w"> </span><span class="nt">to</span><span class="w"> </span><span class="nt">any</span><span class="w"> </span><span class="nt">port</span><span class="w"> </span><span class="nt">instead</span><span class="w"> </span><span class="nt">of</span><span class="w"></span>
+</div><div class="line"><a></a><span class="err">##</span><span class="w"> </span><span class="nt">labelled</span><span class="w"> </span><span class="nt">ones</span><span class="o">.</span><span class="w"></span>
+</div><div class="line"><a></a><span class="err">##</span><span class="w"> </span><span class="o">&lt;/</span><span class="nt">p</span><span class="o">&gt;</span><span class="w"></span>
+</div><div class="line"><a></a><span class="err">##</span><span class="w"> </span><span class="o">&lt;/</span><span class="nt">desc</span><span class="o">&gt;</span><span class="w"></span>
+</div><div class="line"><a></a><span class="nt">gen_tunable</span><span class="o">(</span><span class="nt">systemd_socket_proxyd_connect_any</span><span class="o">,</span><span class="w"> </span><span class="nt">false</span><span class="o">)</span><span class="w"></span>
 </div><div class="line"><a></a>
-</div><div class="line"><a></a><span class="nt">systemd_domain_template</span><span class="o">(</span><span class="nt">systemd_socket_proxyd</span><span class="o">)</span>
+</div><div class="line"><a></a><span class="nt">systemd_domain_template</span><span class="o">(</span><span class="nt">systemd_socket_proxyd</span><span class="o">)</span><span class="w"></span>
 </div><div class="line"><a></a>
-</div><div class="line"><a></a><span class="nt">type</span> <span class="nt">systemd_socket_proxyd_unit_file_t</span><span class="o">;</span>
-</div><div class="line"><a></a><span class="nt">systemd_unit_file</span><span class="o">(</span><span class="nt">systemd_socket_proxyd_unit_file_t</span><span class="o">)</span>
+</div><div class="line"><a></a><span class="nt">type</span><span class="w"> </span><span class="nt">systemd_socket_proxyd_unit_file_t</span><span class="o">;</span><span class="w"></span>
+</div><div class="line"><a></a><span class="nt">systemd_unit_file</span><span class="o">(</span><span class="nt">systemd_socket_proxyd_unit_file_t</span><span class="o">)</span><span class="w"></span>
 </div><div class="line"><a></a>
-</div><div class="line"><a></a><span class="nt">sysnet_dns_name_resolve</span><span class="o">(</span><span class="nt">systemd_socket_proxyd_t</span><span class="o">)</span>
+</div><div class="line"><a></a><span class="nt">sysnet_dns_name_resolve</span><span class="o">(</span><span class="nt">systemd_socket_proxyd_t</span><span class="o">)</span><span class="w"></span>
 </div><div class="line"><a></a>
-</div><div class="line"><a></a><span class="err">#</span> <span class="nt">resolver</span>
-</div><div class="line"><a></a><span class="nt">allow</span> <span class="nt">systemd_socket_proxyd_t</span> <span class="nt">self</span><span class="p">:</span><span class="nd">unix_dgram_socket</span> <span class="p">{</span> <span class="err">create</span> <span class="err">getopt</span> <span class="err">setopt</span> <span class="err">sendto</span> <span class="err">read</span> <span class="err">write</span> <span class="p">}</span><span class="o">;</span>
+</div><div class="line"><a></a><span class="err">#</span><span class="w"> </span><span class="nt">resolver</span><span class="w"></span>
+</div><div class="line"><a></a><span class="nt">allow</span><span class="w"> </span><span class="nt">systemd_socket_proxyd_t</span><span class="w"> </span><span class="nt">self</span><span class="p">:</span><span class="nd">unix_dgram_socket</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">create</span><span class="w"> </span><span class="err">getopt</span><span class="w"> </span><span class="err">setopt</span><span class="w"> </span><span class="err">sendto</span><span class="w"> </span><span class="err">read</span><span class="w"> </span><span class="err">write</span><span class="w"> </span><span class="p">}</span><span class="o">;</span><span class="w"></span>
 </div><div class="line"><a></a>
-</div><div class="line"><a></a><span class="err">#</span> <span class="nt">listener</span>
-</div><div class="line"><a></a><span class="nt">type</span> <span class="nt">systemd_socket_proxyd_port_t</span><span class="o">;</span>
-</div><div class="line"><a></a><span class="nt">corenet_port</span><span class="o">(</span><span class="nt">systemd_socket_proxyd_port_t</span><span class="o">);</span>
-</div><div class="line"><a></a><span class="nt">allow</span> <span class="nt">systemd_socket_proxyd_t</span> <span class="nt">self</span><span class="p">:</span><span class="nd">tcp_socket</span> <span class="nt">accept</span><span class="o">;</span>
+</div><div class="line"><a></a><span class="err">#</span><span class="w"> </span><span class="nt">listener</span><span class="w"></span>
+</div><div class="line"><a></a><span class="nt">type</span><span class="w"> </span><span class="nt">systemd_socket_proxyd_port_t</span><span class="o">;</span><span class="w"></span>
+</div><div class="line"><a></a><span class="nt">corenet_port</span><span class="o">(</span><span class="nt">systemd_socket_proxyd_port_t</span><span class="o">);</span><span class="w"></span>
+</div><div class="line"><a></a><span class="nt">allow</span><span class="w"> </span><span class="nt">systemd_socket_proxyd_t</span><span class="w"> </span><span class="nt">self</span><span class="p">:</span><span class="nd">tcp_socket</span><span class="w"> </span><span class="nt">accept</span><span class="o">;</span><span class="w"></span>
 </div><div class="line"><a></a>
 </div><div class="line"><a></a><span class="nt">tunable_policy</span><span class="o">(</span><span class="err">`</span><span class="o">!</span><span class="nt">systemd_socket_proxyd_bind_any</span><span class="s1">&#39;,`</span>
 </div><div class="line"><a></a><span class="s1"> allow systemd_socket_proxyd_t systemd_socket_proxyd_port_t:tcp_socket name_bind;</span>
-</div><div class="line"><a></a><span class="s1">&#39;</span><span class="o">)</span>
+</div><div class="line"><a></a><span class="s1">&#39;</span><span class="o">)</span><span class="w"></span>
 </div><div class="line"><a></a>
 </div><div class="line"><a></a><span class="nt">tunable_policy</span><span class="o">(</span><span class="err">`</span><span class="nt">systemd_socket_proxyd_bind_any</span><span class="s1">&#39;,`</span>
 </div><div class="line"><a></a><span class="s1"> corenet_tcp_bind_all_ports(systemd_socket_proxyd_t)</span>
-</div><div class="line"><a></a><span class="s1">&#39;</span><span class="o">)</span>
+</div><div class="line"><a></a><span class="s1">&#39;</span><span class="o">)</span><span class="w"></span>
 </div><div class="line"><a></a>
-</div><div class="line"><a></a><span class="err">#</span> <span class="nt">target</span>
+</div><div class="line"><a></a><span class="err">#</span><span class="w"> </span><span class="nt">target</span><span class="w"></span>
 </div><div class="line"><a></a><span class="nt">tunable_policy</span><span class="o">(</span><span class="err">`</span><span class="o">!</span><span class="nt">systemd_socket_proxyd_connect_any</span><span class="s1">&#39;,`</span>
 </div><div class="line"><a></a><span class="s1"> allow systemd_socket_proxyd_t port_type:tcp_socket name_connect;</span>
-</div><div class="line"><a></a><span class="s1">&#39;</span><span class="o">)</span>
+</div><div class="line"><a></a><span class="s1">&#39;</span><span class="o">)</span><span class="w"></span>
 </div><div class="line"><a></a>
 </div><div class="line"><a></a><span class="nt">tunable_policy</span><span class="o">(</span><span class="err">`</span><span class="nt">systemd_socket_proxyd_connect_any</span><span class="s1">&#39;,`</span>
 </div><div class="line"><a></a><span class="s1"> corenet_tcp_connect_all_ports(systemd_socket_proxyd_t)</span>
-</div><div class="line"><a></a><span class="s1">&#39;</span><span class="o">)</span>
+</div><div class="line"><a></a><span class="s1">&#39;</span><span class="o">)</span><span class="w"></span>
 </div><div class="line"><a></a>
-</div><div class="line"><a></a><span class="err">#</span> <span class="nt">consumer</span>
-</div><div class="line"><a></a><span class="nt">allow</span> <span class="nt">daemon</span> <span class="nt">systemd_socket_proxyd_t</span><span class="p">:</span><span class="nd">unix_stream_socket</span> <span class="nt">connectto</span><span class="o">;</span></div></code></pre>
+</div><div class="line"><a></a><span class="err">#</span><span class="w"> </span><span class="nt">consumer</span><span class="w"></span>
+</div><div class="line"><a></a><span class="nt">allow</span><span class="w"> </span><span class="nt">daemon</span><span class="w"> </span><span class="nt">systemd_socket_proxyd_t</span><span class="p">:</span><span class="nd">unix_stream_socket</span><span class="w"> </span><span class="nt">connectto</span><span class="o">;</span><span class="w"></span></div></code></pre>
 <p>This is still work in progress, but so far it works at least for my projects.
 Note that there are two SELinux booleans defined which affect the behaviour of
 the policy:</p>

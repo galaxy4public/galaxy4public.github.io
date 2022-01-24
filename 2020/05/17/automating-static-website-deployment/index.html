@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<title>Mind Drops :: assorted bits of wit</title>
-		<meta http-equiv="Content-Security-Policy" content="	default-src 'self';object-src 'none';script-src 'self' https://www.googletagmanager.com/gtag/js 'sha256-TelA7VsuYAMqhOKGk7CHgJyuqSJdmqZEp+hn6PWVRwQ=' https://www.google-analytics.com/analytics.js https://static.cloudflareinsights.com/beacon.min.js;img-src 'self' data: https://www.google-analytics.com/r/collect https://www.google-analytics.com/collect https://stats.g.doubleclick.net/r/collect https://*/ads/ga-audiences https://www.googletagmanager.com/a;style-src 'self' 'sha256-fszvBX/J9dhPxFSJ5wUrq/Pvg6HrnTkWyshMZpaxSQY=';connect-src 'self' https://www.google-analytics.com/j/collect https://stats.g.doubleclick.net/j/collect; " />
+		<meta http-equiv="Content-Security-Policy" content="	default-src 'self';object-src 'none';script-src 'self' https://www.googletagmanager.com/gtag/js 'sha256-TelA7VsuYAMqhOKGk7CHgJyuqSJdmqZEp+hn6PWVRwQ=' https://www.google-analytics.com/analytics.js https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194;img-src 'self' data: https://www.google-analytics.com/r/collect https://www.google-analytics.com/collect https://stats.g.doubleclick.net/r/collect https://*/ads/ga-audiences https://www.googletagmanager.com/a;style-src 'self' 'sha256-fszvBX/J9dhPxFSJ5wUrq/Pvg6HrnTkWyshMZpaxSQY=';connect-src 'self' https://www.google-analytics.com/j/collect https://stats.g.doubleclick.net/j/collect; " />
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1" />	<link rel="preload" href="/theme/fonts/Oswald/Oswald-VariableFont_wght.woff2" crossorigin="anonymous" as="font" type="font/woff2">
 	<link rel="preload" href="/theme/fonts/Exo2/Exo2-VariableFont_wght.woff2" crossorigin="anonymous" as="font" type="font/woff2">	<link rel="stylesheet" href="/theme/css/fonts/Icons.css" />
@@ -486,98 +486,98 @@ repository).</p>
 <p>The GitHub Action I am using for my blog web site is stored in
 <code>.github/workflows/pelican.yml</code> and contains the following (we will dissect it
 further down the post):</p>
-<pre id="code9" class="highlight"><input type="radio" name="code_menub8f3abae390b17dcafa299fe2f308c0ba9b98516" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menub8f3abae390b17dcafa299fe2f308c0ba9b98516" class="line-numbers icon list-numbered"><code class="language-yaml" data-file=".github/workflows/pelican.yml"><div id="code9.1" class="line"><a href="#code9.1" aria-hidden="true"></a><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Static Website Generator</span>
+<pre id="code9" class="highlight"><input type="radio" name="code_menucf078531ae5a9629600de700bc270965a0df7051" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menucf078531ae5a9629600de700bc270965a0df7051" class="line-numbers icon list-numbered"><code class="language-yaml" data-file=".github/workflows/pelican.yml"><div id="code9.1" class="line"><a href="#code9.1" aria-hidden="true"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Static Website Generator</span><span class="w"></span>
 </div><div id="code9.2" class="line"><a href="#code9.2" aria-hidden="true"></a>
-</div><div id="code9.3" class="line"><a href="#code9.3" aria-hidden="true"></a><span class="nt">on</span><span class="p">:</span>
-</div><div id="code9.4" class="line"><a href="#code9.4" aria-hidden="true"></a>  <span class="nt">push</span><span class="p">:</span>
-</div><div id="code9.5" class="line"><a href="#code9.5" aria-hidden="true"></a>    <span class="nt">branches</span><span class="p">:</span> <span class="p p-Indicator">[</span> <span class="nv">master</span> <span class="p p-Indicator">]</span>
+</div><div id="code9.3" class="line"><a href="#code9.3" aria-hidden="true"></a><span class="nt">on</span><span class="p">:</span><span class="w"></span>
+</div><div id="code9.4" class="line"><a href="#code9.4" aria-hidden="true"></a><span class="w">  </span><span class="nt">push</span><span class="p">:</span><span class="w"></span>
+</div><div id="code9.5" class="line"><a href="#code9.5" aria-hidden="true"></a><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">master</span><span class="w"> </span><span class="p p-Indicator">]</span><span class="w"></span>
 </div><div id="code9.6" class="line"><a href="#code9.6" aria-hidden="true"></a>
-</div><div id="code9.7" class="line"><a href="#code9.7" aria-hidden="true"></a><span class="nt">env</span><span class="p">:</span>
-</div><div id="code9.8" class="line"><a href="#code9.8" aria-hidden="true"></a>  <span class="nt">LANG</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">en_AU.UTF-8</span>
+</div><div id="code9.7" class="line"><a href="#code9.7" aria-hidden="true"></a><span class="nt">env</span><span class="p">:</span><span class="w"></span>
+</div><div id="code9.8" class="line"><a href="#code9.8" aria-hidden="true"></a><span class="w">  </span><span class="nt">LANG</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">en_AU.UTF-8</span><span class="w"></span>
 </div><div id="code9.9" class="line"><a href="#code9.9" aria-hidden="true"></a>
-</div><div id="code9.10" class="line"><a href="#code9.10" aria-hidden="true"></a><span class="nt">jobs</span><span class="p">:</span>
-</div><div id="code9.11" class="line"><a href="#code9.11" aria-hidden="true"></a>  <span class="nt">build</span><span class="p">:</span>
+</div><div id="code9.10" class="line"><a href="#code9.10" aria-hidden="true"></a><span class="nt">jobs</span><span class="p">:</span><span class="w"></span>
+</div><div id="code9.11" class="line"><a href="#code9.11" aria-hidden="true"></a><span class="w">  </span><span class="nt">build</span><span class="p">:</span><span class="w"></span>
 </div><div id="code9.12" class="line"><a href="#code9.12" aria-hidden="true"></a>
-</div><div id="code9.13" class="line"><a href="#code9.13" aria-hidden="true"></a>    <span class="nt">runs-on</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+</div><div id="code9.13" class="line"><a href="#code9.13" aria-hidden="true"></a><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span><span class="w"></span>
 </div><div id="code9.14" class="line"><a href="#code9.14" aria-hidden="true"></a>
-</div><div id="code9.15" class="line"><a href="#code9.15" aria-hidden="true"></a>    <span class="nt">steps</span><span class="p">:</span>
-</div><div id="code9.16" class="line"><a href="#code9.16" aria-hidden="true"></a>    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Initialise locale</span>
-</div><div id="code9.17" class="line"><a href="#code9.17" aria-hidden="true"></a>      <span class="nt">run</span><span class="p">:</span> <span class="p p-Indicator">|</span>
-</div><div id="code9.18" class="line"><a href="#code9.18" aria-hidden="true"></a>        <span class="no">if [ &quot;$LANG&quot; != &#39;C&#39; -a &quot;{$LANG:0:2}&quot; != &#39;C.&#39; ]; then</span>
-</div><div id="code9.19" class="line"><a href="#code9.19" aria-hidden="true"></a>          <span class="no">CP=&quot;${LANG#*.}&quot; &amp;&amp; [ -z &quot;$CP&quot; ] &amp;&amp; CP=UTF-8 ||:</span>
-</div><div id="code9.20" class="line"><a href="#code9.20" aria-hidden="true"></a>          <span class="no">sudo sed -i -E &quot;/^\s*$LANG(\s|\$)/{:a;n;ba;q};\$a$LANG $CP&quot; /etc/locale.gen</span>
-</div><div id="code9.21" class="line"><a href="#code9.21" aria-hidden="true"></a>          <span class="no">sudo locale-gen</span>
-</div><div id="code9.22" class="line"><a href="#code9.22" aria-hidden="true"></a>          <span class="no">sudo localectl set-locale LANG=&quot;${LANG:-C.UTF-8}&quot;</span>
-</div><div id="code9.23" class="line"><a href="#code9.23" aria-hidden="true"></a>        <span class="no">fi</span>
-</div><div id="code9.24" class="line"><a href="#code9.24" aria-hidden="true"></a>        <span class="no">locale -a</span>
-</div><div id="code9.25" class="line"><a href="#code9.25" aria-hidden="true"></a>    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Checkout the primary repo</span>
-</div><div id="code9.26" class="line"><a href="#code9.26" aria-hidden="true"></a>      <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">actions/checkout@v2</span>
-</div><div id="code9.27" class="line"><a href="#code9.27" aria-hidden="true"></a>      <span class="nt">with</span><span class="p">:</span>
-</div><div id="code9.28" class="line"><a href="#code9.28" aria-hidden="true"></a>        <span class="nt">fetch-depth</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
-</div><div id="code9.29" class="line"><a href="#code9.29" aria-hidden="true"></a>        <span class="nt">submodules</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">recursive</span>
-</div><div id="code9.30" class="line"><a href="#code9.30" aria-hidden="true"></a>    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Restore modification times for content</span>
-</div><div id="code9.31" class="line"><a href="#code9.31" aria-hidden="true"></a>      <span class="nt">run</span><span class="p">:</span> <span class="p p-Indicator">|</span>
-</div><div id="code9.32" class="line"><a href="#code9.32" aria-hidden="true"></a>        <span class="no">git log --pretty=tformat:&quot;%at&quot; --name-status --no-merges -- \</span>
-</div><div id="code9.33" class="line"><a href="#code9.33" aria-hidden="true"></a>            <span class="no">content \</span>
-</div><div id="code9.34" class="line"><a href="#code9.34" aria-hidden="true"></a>            <span class="no">themes/mind-drops/content \</span>
-</div><div id="code9.35" class="line"><a href="#code9.35" aria-hidden="true"></a>        <span class="no">| sed -nE &#39;</span>
-</div><div id="code9.36" class="line"><a href="#code9.36" aria-hidden="true"></a>            <span class="no">/^\s*$/d;/^[[:digit:]]+$/{h;d};</span>
-</div><div id="code9.37" class="line"><a href="#code9.37" aria-hidden="true"></a>            <span class="no">/^[UXB]/d;</span>
-</div><div id="code9.38" class="line"><a href="#code9.38" aria-hidden="true"></a>            <span class="no">/^[AMT]/{s,^\S\s+,,;G;s,^(.+)\n(.+),\2 \1,;p};</span>
-</div><div id="code9.39" class="line"><a href="#code9.39" aria-hidden="true"></a>            <span class="no">/^[DR]/{</span>
-</div><div id="code9.40" class="line"><a href="#code9.40" aria-hidden="true"></a>              <span class="no">s,^(D|[CR][[:digit:]]+)\s+,\1 ,;G;</span>
-</div><div id="code9.41" class="line"><a href="#code9.41" aria-hidden="true"></a>              <span class="no">s,^(\S+) ([^[=\t=]]+[[=\t=]])?(.*)\n(.+),\4\1 \3,;</span>
-</div><div id="code9.42" class="line"><a href="#code9.42" aria-hidden="true"></a>              <span class="no">p</span>
-</div><div id="code9.43" class="line"><a href="#code9.43" aria-hidden="true"></a>            <span class="no">}&#39; \</span>
-</div><div id="code9.44" class="line"><a href="#code9.44" aria-hidden="true"></a>        <span class="no">| LC_ALL=C sort -k2 -k1rn | uniq -f1 \</span>
-</div><div id="code9.45" class="line"><a href="#code9.45" aria-hidden="true"></a>        <span class="no">| sed -E &#39;/^[[:digit:]]+D /d&#39; \</span>
-</div><div id="code9.46" class="line"><a href="#code9.46" aria-hidden="true"></a>        <span class="no">| while read TSTAMP FILE; do</span>
-</div><div id="code9.47" class="line"><a href="#code9.47" aria-hidden="true"></a>            <span class="no">if [ -f &quot;$FILE&quot; ]; then</span>
-</div><div id="code9.48" class="line"><a href="#code9.48" aria-hidden="true"></a>                <span class="no">echo &quot;$FILE =&gt; $(date -d @$TSTAMP)&quot;</span>
-</div><div id="code9.49" class="line"><a href="#code9.49" aria-hidden="true"></a>                <span class="no">touch -m -d &quot;@$TSTAMP&quot; -- &quot;$FILE&quot;</span>
-</div><div id="code9.50" class="line"><a href="#code9.50" aria-hidden="true"></a>            <span class="no">fi</span>
-</div><div id="code9.51" class="line"><a href="#code9.51" aria-hidden="true"></a>        <span class="no">done</span>
-</div><div id="code9.52" class="line"><a href="#code9.52" aria-hidden="true"></a>    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Checkout Pages repo</span>
-</div><div id="code9.53" class="line"><a href="#code9.53" aria-hidden="true"></a>      <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">actions/checkout@v2</span>
-</div><div id="code9.54" class="line"><a href="#code9.54" aria-hidden="true"></a>      <span class="nt">with</span><span class="p">:</span>
-</div><div id="code9.55" class="line"><a href="#code9.55" aria-hidden="true"></a>        <span class="nt">repository</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">galaxy4public/galaxy4public.github.io</span>
-</div><div id="code9.56" class="line"><a href="#code9.56" aria-hidden="true"></a>        <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">output</span>
-</div><div id="code9.57" class="line"><a href="#code9.57" aria-hidden="true"></a>    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Set up Python</span>
-</div><div id="code9.58" class="line"><a href="#code9.58" aria-hidden="true"></a>      <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">actions/setup-python@v2</span>
-</div><div id="code9.59" class="line"><a href="#code9.59" aria-hidden="true"></a>      <span class="nt">with</span><span class="p">:</span>
-</div><div id="code9.60" class="line"><a href="#code9.60" aria-hidden="true"></a>        <span class="nt">python-version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">3.x</span>
-</div><div id="code9.61" class="line"><a href="#code9.61" aria-hidden="true"></a>    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Install dependencies</span>
-</div><div id="code9.62" class="line"><a href="#code9.62" aria-hidden="true"></a>      <span class="nt">run</span><span class="p">:</span> <span class="p p-Indicator">|</span>
-</div><div id="code9.63" class="line"><a href="#code9.63" aria-hidden="true"></a>        <span class="no">python -m pip install --upgrade pip</span>
-</div><div id="code9.64" class="line"><a href="#code9.64" aria-hidden="true"></a>        <span class="no">pip install -r requirements.txt</span>
-</div><div id="code9.65" class="line"><a href="#code9.65" aria-hidden="true"></a>    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Generate the website</span>
-</div><div id="code9.66" class="line"><a href="#code9.66" aria-hidden="true"></a>      <span class="nt">run</span><span class="p">:</span> <span class="p p-Indicator">|</span>
-</div><div id="code9.67" class="line"><a href="#code9.67" aria-hidden="true"></a>        <span class="no">ls -laR content/</span>
-</div><div id="code9.68" class="line"><a href="#code9.68" aria-hidden="true"></a>        <span class="no">rm -rf output/*</span>
-</div><div id="code9.69" class="line"><a href="#code9.69" aria-hidden="true"></a>        <span class="no">ls -la output/</span>
-</div><div id="code9.70" class="line"><a href="#code9.70" aria-hidden="true"></a>        <span class="no">TIMEZONE=$(sed -nE &#39;s|^\s*TIMEZONE\s*=\s*[&#39;&quot;&#39;&quot;&#39;&quot;]([^&#39;&quot;&#39;&quot;&#39;&quot;]+)[&#39;&quot;&#39;&quot;&#39;&quot;].*|\1|;T;p&#39; pelicanconf.py)</span>
-</div><div id="code9.71" class="line"><a href="#code9.71" aria-hidden="true"></a>        <span class="no">TZ=&quot;${TIMEZONE:-UTC}&quot; pelican</span>
-</div><div id="code9.72" class="line"><a href="#code9.72" aria-hidden="true"></a>    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Publish to GitHub Pages</span>
-</div><div id="code9.73" class="line"><a href="#code9.73" aria-hidden="true"></a>      <span class="nt">env</span><span class="p">:</span>
-</div><div id="code9.74" class="line"><a href="#code9.74" aria-hidden="true"></a>        <span class="nt">DEPLOY_KEY</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ secrets.DEPLOY_KEY }}</span>
-</div><div id="code9.75" class="line"><a href="#code9.75" aria-hidden="true"></a>      <span class="nt">run</span><span class="p">:</span> <span class="p p-Indicator">|</span>
-</div><div id="code9.76" class="line"><a href="#code9.76" aria-hidden="true"></a>        <span class="no">cd output</span>
-</div><div id="code9.77" class="line"><a href="#code9.77" aria-hidden="true"></a>        <span class="no">git config --local user.email &quot;action@github.com&quot;</span>
-</div><div id="code9.78" class="line"><a href="#code9.78" aria-hidden="true"></a>        <span class="no">git config --local user.name &quot;GitHub Action&quot;</span>
-</div><div id="code9.79" class="line"><a href="#code9.79" aria-hidden="true"></a>        <span class="no">if output=$(git status --porcelain) &amp;&amp; [ -z &quot;$output&quot; ]; then</span>
-</div><div id="code9.80" class="line"><a href="#code9.80" aria-hidden="true"></a>          <span class="no">echo &quot;No new content was generated, exiting gracefully&quot;</span>
-</div><div id="code9.81" class="line"><a href="#code9.81" aria-hidden="true"></a>        <span class="no">else </span>
-</div><div id="code9.82" class="line"><a href="#code9.82" aria-hidden="true"></a>          <span class="no">git add -A</span>
-</div><div id="code9.83" class="line"><a href="#code9.83" aria-hidden="true"></a>          <span class="no">git commit -m &quot;Updated content on $(date)&quot;</span>
-</div><div id="code9.84" class="line"><a href="#code9.84" aria-hidden="true"></a>          <span class="no">eval $(ssh-agent)</span>
-</div><div id="code9.85" class="line"><a href="#code9.85" aria-hidden="true"></a>          <span class="no">echo &quot;$DEPLOY_KEY&quot; | ssh-add -t 5m /dev/stdin</span>
-</div><div id="code9.86" class="line"><a href="#code9.86" aria-hidden="true"></a>          <span class="no">ssh-add -l</span>
-</div><div id="code9.87" class="line"><a href="#code9.87" aria-hidden="true"></a>          <span class="no">git push git@github.com:galaxy4public/galaxy4public.github.io.git</span>
-</div><div id="code9.88" class="line"><a href="#code9.88" aria-hidden="true"></a>          <span class="no">ssh-add -D</span>
-</div><div id="code9.89" class="line"><a href="#code9.89" aria-hidden="true"></a>          <span class="no">ssh-agent -k</span>
-</div><div id="code9.90" class="line"><a href="#code9.90" aria-hidden="true"></a>        <span class="no">fi</span>
-</div><div id="code9.91" class="line"><a href="#code9.91" aria-hidden="true"></a>        <span class="no">cd ..</span>
-</div><div id="code9.92" class="line"><a href="#code9.92" aria-hidden="true"></a>        <span class="no">echo Completed</span></div></code></pre>
+</div><div id="code9.15" class="line"><a href="#code9.15" aria-hidden="true"></a><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w"></span>
+</div><div id="code9.16" class="line"><a href="#code9.16" aria-hidden="true"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Initialise locale</span><span class="w"></span>
+</div><div id="code9.17" class="line"><a href="#code9.17" aria-hidden="true"></a><span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span><span class="w"></span>
+</div><div id="code9.18" class="line"><a href="#code9.18" aria-hidden="true"></a><span class="w">        </span><span class="no">if [ &quot;$LANG&quot; != &#39;C&#39; -a &quot;{$LANG:0:2}&quot; != &#39;C.&#39; ]; then</span><span class="w"></span>
+</div><div id="code9.19" class="line"><a href="#code9.19" aria-hidden="true"></a><span class="w">          </span><span class="no">CP=&quot;${LANG#*.}&quot; &amp;&amp; [ -z &quot;$CP&quot; ] &amp;&amp; CP=UTF-8 ||:</span><span class="w"></span>
+</div><div id="code9.20" class="line"><a href="#code9.20" aria-hidden="true"></a><span class="w">          </span><span class="no">sudo sed -i -E &quot;/^\s*$LANG(\s|\$)/{:a;n;ba;q};\$a$LANG $CP&quot; /etc/locale.gen</span><span class="w"></span>
+</div><div id="code9.21" class="line"><a href="#code9.21" aria-hidden="true"></a><span class="w">          </span><span class="no">sudo locale-gen</span><span class="w"></span>
+</div><div id="code9.22" class="line"><a href="#code9.22" aria-hidden="true"></a><span class="w">          </span><span class="no">sudo localectl set-locale LANG=&quot;${LANG:-C.UTF-8}&quot;</span><span class="w"></span>
+</div><div id="code9.23" class="line"><a href="#code9.23" aria-hidden="true"></a><span class="w">        </span><span class="no">fi</span><span class="w"></span>
+</div><div id="code9.24" class="line"><a href="#code9.24" aria-hidden="true"></a><span class="w">        </span><span class="no">locale -a</span><span class="w"></span>
+</div><div id="code9.25" class="line"><a href="#code9.25" aria-hidden="true"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Checkout the primary repo</span><span class="w"></span>
+</div><div id="code9.26" class="line"><a href="#code9.26" aria-hidden="true"></a><span class="w">      </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v2</span><span class="w"></span>
+</div><div id="code9.27" class="line"><a href="#code9.27" aria-hidden="true"></a><span class="w">      </span><span class="nt">with</span><span class="p">:</span><span class="w"></span>
+</div><div id="code9.28" class="line"><a href="#code9.28" aria-hidden="true"></a><span class="w">        </span><span class="nt">fetch-depth</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w"></span>
+</div><div id="code9.29" class="line"><a href="#code9.29" aria-hidden="true"></a><span class="w">        </span><span class="nt">submodules</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">recursive</span><span class="w"></span>
+</div><div id="code9.30" class="line"><a href="#code9.30" aria-hidden="true"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Restore modification times for content</span><span class="w"></span>
+</div><div id="code9.31" class="line"><a href="#code9.31" aria-hidden="true"></a><span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span><span class="w"></span>
+</div><div id="code9.32" class="line"><a href="#code9.32" aria-hidden="true"></a><span class="w">        </span><span class="no">git log --pretty=tformat:&quot;%at&quot; --name-status --no-merges -- \</span><span class="w"></span>
+</div><div id="code9.33" class="line"><a href="#code9.33" aria-hidden="true"></a><span class="w">            </span><span class="no">content \</span><span class="w"></span>
+</div><div id="code9.34" class="line"><a href="#code9.34" aria-hidden="true"></a><span class="w">            </span><span class="no">themes/mind-drops/content \</span><span class="w"></span>
+</div><div id="code9.35" class="line"><a href="#code9.35" aria-hidden="true"></a><span class="w">        </span><span class="no">| sed -nE &#39;</span><span class="w"></span>
+</div><div id="code9.36" class="line"><a href="#code9.36" aria-hidden="true"></a><span class="w">            </span><span class="no">/^\s*$/d;/^[[:digit:]]+$/{h;d};</span><span class="w"></span>
+</div><div id="code9.37" class="line"><a href="#code9.37" aria-hidden="true"></a><span class="w">            </span><span class="no">/^[UXB]/d;</span><span class="w"></span>
+</div><div id="code9.38" class="line"><a href="#code9.38" aria-hidden="true"></a><span class="w">            </span><span class="no">/^[AMT]/{s,^\S\s+,,;G;s,^(.+)\n(.+),\2 \1,;p};</span><span class="w"></span>
+</div><div id="code9.39" class="line"><a href="#code9.39" aria-hidden="true"></a><span class="w">            </span><span class="no">/^[DR]/{</span><span class="w"></span>
+</div><div id="code9.40" class="line"><a href="#code9.40" aria-hidden="true"></a><span class="w">              </span><span class="no">s,^(D|[CR][[:digit:]]+)\s+,\1 ,;G;</span><span class="w"></span>
+</div><div id="code9.41" class="line"><a href="#code9.41" aria-hidden="true"></a><span class="w">              </span><span class="no">s,^(\S+) ([^[=\t=]]+[[=\t=]])?(.*)\n(.+),\4\1 \3,;</span><span class="w"></span>
+</div><div id="code9.42" class="line"><a href="#code9.42" aria-hidden="true"></a><span class="w">              </span><span class="no">p</span><span class="w"></span>
+</div><div id="code9.43" class="line"><a href="#code9.43" aria-hidden="true"></a><span class="w">            </span><span class="no">}&#39; \</span><span class="w"></span>
+</div><div id="code9.44" class="line"><a href="#code9.44" aria-hidden="true"></a><span class="w">        </span><span class="no">| LC_ALL=C sort -k2 -k1rn | uniq -f1 \</span><span class="w"></span>
+</div><div id="code9.45" class="line"><a href="#code9.45" aria-hidden="true"></a><span class="w">        </span><span class="no">| sed -E &#39;/^[[:digit:]]+D /d&#39; \</span><span class="w"></span>
+</div><div id="code9.46" class="line"><a href="#code9.46" aria-hidden="true"></a><span class="w">        </span><span class="no">| while read TSTAMP FILE; do</span><span class="w"></span>
+</div><div id="code9.47" class="line"><a href="#code9.47" aria-hidden="true"></a><span class="w">            </span><span class="no">if [ -f &quot;$FILE&quot; ]; then</span><span class="w"></span>
+</div><div id="code9.48" class="line"><a href="#code9.48" aria-hidden="true"></a><span class="w">                </span><span class="no">echo &quot;$FILE =&gt; $(date -d @$TSTAMP)&quot;</span><span class="w"></span>
+</div><div id="code9.49" class="line"><a href="#code9.49" aria-hidden="true"></a><span class="w">                </span><span class="no">touch -m -d &quot;@$TSTAMP&quot; -- &quot;$FILE&quot;</span><span class="w"></span>
+</div><div id="code9.50" class="line"><a href="#code9.50" aria-hidden="true"></a><span class="w">            </span><span class="no">fi</span><span class="w"></span>
+</div><div id="code9.51" class="line"><a href="#code9.51" aria-hidden="true"></a><span class="w">        </span><span class="no">done</span><span class="w"></span>
+</div><div id="code9.52" class="line"><a href="#code9.52" aria-hidden="true"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Checkout Pages repo</span><span class="w"></span>
+</div><div id="code9.53" class="line"><a href="#code9.53" aria-hidden="true"></a><span class="w">      </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v2</span><span class="w"></span>
+</div><div id="code9.54" class="line"><a href="#code9.54" aria-hidden="true"></a><span class="w">      </span><span class="nt">with</span><span class="p">:</span><span class="w"></span>
+</div><div id="code9.55" class="line"><a href="#code9.55" aria-hidden="true"></a><span class="w">        </span><span class="nt">repository</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">galaxy4public/galaxy4public.github.io</span><span class="w"></span>
+</div><div id="code9.56" class="line"><a href="#code9.56" aria-hidden="true"></a><span class="w">        </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">output</span><span class="w"></span>
+</div><div id="code9.57" class="line"><a href="#code9.57" aria-hidden="true"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Set up Python</span><span class="w"></span>
+</div><div id="code9.58" class="line"><a href="#code9.58" aria-hidden="true"></a><span class="w">      </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/setup-python@v2</span><span class="w"></span>
+</div><div id="code9.59" class="line"><a href="#code9.59" aria-hidden="true"></a><span class="w">      </span><span class="nt">with</span><span class="p">:</span><span class="w"></span>
+</div><div id="code9.60" class="line"><a href="#code9.60" aria-hidden="true"></a><span class="w">        </span><span class="nt">python-version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.x</span><span class="w"></span>
+</div><div id="code9.61" class="line"><a href="#code9.61" aria-hidden="true"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Install dependencies</span><span class="w"></span>
+</div><div id="code9.62" class="line"><a href="#code9.62" aria-hidden="true"></a><span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span><span class="w"></span>
+</div><div id="code9.63" class="line"><a href="#code9.63" aria-hidden="true"></a><span class="w">        </span><span class="no">python -m pip install --upgrade pip</span><span class="w"></span>
+</div><div id="code9.64" class="line"><a href="#code9.64" aria-hidden="true"></a><span class="w">        </span><span class="no">pip install -r requirements.txt</span><span class="w"></span>
+</div><div id="code9.65" class="line"><a href="#code9.65" aria-hidden="true"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Generate the website</span><span class="w"></span>
+</div><div id="code9.66" class="line"><a href="#code9.66" aria-hidden="true"></a><span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span><span class="w"></span>
+</div><div id="code9.67" class="line"><a href="#code9.67" aria-hidden="true"></a><span class="w">        </span><span class="no">ls -laR content/</span><span class="w"></span>
+</div><div id="code9.68" class="line"><a href="#code9.68" aria-hidden="true"></a><span class="w">        </span><span class="no">rm -rf output/*</span><span class="w"></span>
+</div><div id="code9.69" class="line"><a href="#code9.69" aria-hidden="true"></a><span class="w">        </span><span class="no">ls -la output/</span><span class="w"></span>
+</div><div id="code9.70" class="line"><a href="#code9.70" aria-hidden="true"></a><span class="w">        </span><span class="no">TIMEZONE=$(sed -nE &#39;s|^\s*TIMEZONE\s*=\s*[&#39;&quot;&#39;&quot;&#39;&quot;]([^&#39;&quot;&#39;&quot;&#39;&quot;]+)[&#39;&quot;&#39;&quot;&#39;&quot;].*|\1|;T;p&#39; pelicanconf.py)</span><span class="w"></span>
+</div><div id="code9.71" class="line"><a href="#code9.71" aria-hidden="true"></a><span class="w">        </span><span class="no">TZ=&quot;${TIMEZONE:-UTC}&quot; pelican</span><span class="w"></span>
+</div><div id="code9.72" class="line"><a href="#code9.72" aria-hidden="true"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Publish to GitHub Pages</span><span class="w"></span>
+</div><div id="code9.73" class="line"><a href="#code9.73" aria-hidden="true"></a><span class="w">      </span><span class="nt">env</span><span class="p">:</span><span class="w"></span>
+</div><div id="code9.74" class="line"><a href="#code9.74" aria-hidden="true"></a><span class="w">        </span><span class="nt">DEPLOY_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.DEPLOY_KEY }}</span><span class="w"></span>
+</div><div id="code9.75" class="line"><a href="#code9.75" aria-hidden="true"></a><span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span><span class="w"></span>
+</div><div id="code9.76" class="line"><a href="#code9.76" aria-hidden="true"></a><span class="w">        </span><span class="no">cd output</span><span class="w"></span>
+</div><div id="code9.77" class="line"><a href="#code9.77" aria-hidden="true"></a><span class="w">        </span><span class="no">git config --local user.email &quot;action@github.com&quot;</span><span class="w"></span>
+</div><div id="code9.78" class="line"><a href="#code9.78" aria-hidden="true"></a><span class="w">        </span><span class="no">git config --local user.name &quot;GitHub Action&quot;</span><span class="w"></span>
+</div><div id="code9.79" class="line"><a href="#code9.79" aria-hidden="true"></a><span class="w">        </span><span class="no">if output=$(git status --porcelain) &amp;&amp; [ -z &quot;$output&quot; ]; then</span><span class="w"></span>
+</div><div id="code9.80" class="line"><a href="#code9.80" aria-hidden="true"></a><span class="w">          </span><span class="no">echo &quot;No new content was generated, exiting gracefully&quot;</span><span class="w"></span>
+</div><div id="code9.81" class="line"><a href="#code9.81" aria-hidden="true"></a><span class="w">        </span><span class="no">else </span><span class="w"></span>
+</div><div id="code9.82" class="line"><a href="#code9.82" aria-hidden="true"></a><span class="w">          </span><span class="no">git add -A</span><span class="w"></span>
+</div><div id="code9.83" class="line"><a href="#code9.83" aria-hidden="true"></a><span class="w">          </span><span class="no">git commit -m &quot;Updated content on $(date)&quot;</span><span class="w"></span>
+</div><div id="code9.84" class="line"><a href="#code9.84" aria-hidden="true"></a><span class="w">          </span><span class="no">eval $(ssh-agent)</span><span class="w"></span>
+</div><div id="code9.85" class="line"><a href="#code9.85" aria-hidden="true"></a><span class="w">          </span><span class="no">echo &quot;$DEPLOY_KEY&quot; | ssh-add -t 5m /dev/stdin</span><span class="w"></span>
+</div><div id="code9.86" class="line"><a href="#code9.86" aria-hidden="true"></a><span class="w">          </span><span class="no">ssh-add -l</span><span class="w"></span>
+</div><div id="code9.87" class="line"><a href="#code9.87" aria-hidden="true"></a><span class="w">          </span><span class="no">git push git@github.com:galaxy4public/galaxy4public.github.io.git</span><span class="w"></span>
+</div><div id="code9.88" class="line"><a href="#code9.88" aria-hidden="true"></a><span class="w">          </span><span class="no">ssh-add -D</span><span class="w"></span>
+</div><div id="code9.89" class="line"><a href="#code9.89" aria-hidden="true"></a><span class="w">          </span><span class="no">ssh-agent -k</span><span class="w"></span>
+</div><div id="code9.90" class="line"><a href="#code9.90" aria-hidden="true"></a><span class="w">        </span><span class="no">fi</span><span class="w"></span>
+</div><div id="code9.91" class="line"><a href="#code9.91" aria-hidden="true"></a><span class="w">        </span><span class="no">cd ..</span><span class="w"></span>
+</div><div id="code9.92" class="line"><a href="#code9.92" aria-hidden="true"></a><span class="w">        </span><span class="no">echo Completed</span><span class="w"></span></div></code></pre>
 <p>This is a copy of my live GitHub Action for deploying my blog that you are most
 likely reading right now and I decided not to edit anything, so if you just
 want to re-use it you will need to replace a few things, namely:</p>
