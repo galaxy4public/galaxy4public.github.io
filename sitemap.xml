@@ -5,7 +5,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://dmitry.khlebnikov.net/</loc>
-<lastmod>2022-01-24T15:32:55-00:00</lastmod>
+<lastmod>2023-02-21T20:15:11-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.75</priority>
 </url>
@@ -131,7 +131,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://dmitry.khlebnikov.net/2015/07/18/should-we-use-sudo-for-day-to-day-activities/</loc>
-<lastmod>2020-05-17T04:45:11+10:00</lastmod>
+<lastmod>2023-02-21T19:48:39+11:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>

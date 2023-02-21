@@ -157,7 +157,7 @@ requests to many ports useful:</p>
   physically in Australia</li>
 </ul>
 <p>In both cases, you use the following SSH command in your terminal window:</p>
-<pre class="highlight" data-user="user"><input type="radio" name="code_menudf70e580420267f10ac9554a35653e486ebc2f7a" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menudf70e580420267f10ac9554a35653e486ebc2f7a" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[user@localhost ~]$ </span>ssh -D3128 joe@relay.domain.tld</div></code></pre>
+<pre class="highlight" data-user="user"><input type="radio" name="code_menu0461f5eb29c7995922feee6d7515b3f847ea0412" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu0461f5eb29c7995922feee6d7515b3f847ea0412" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[user@localhost ~]$ </span>ssh<span class="w"> </span>-D3128<span class="w"> </span>joe@relay.domain.tld</div></code></pre>
 <p>As long as you SSH session is active, you can use port <code>3128</code> on your local
 machine as SOCKS4/SOCKS5 proxy (e.g. you can configure proxy settings in your
 browser to use <code>localhost:3128</code>) and browse the Net through your SSH connection,
@@ -176,7 +176,7 @@ to folks from WikiLeaks&hellip; just kidding :) )?</p>
 Google for &ldquo;free ssh account&rdquo; and you will surely find one for yourself).</p>
 <p>Now, when you have the account, you can execute the following on your local
 computer (which is inside that highly secure network :) ):</p>
-<pre class="highlight" data-user="user"><input type="radio" name="code_menued8f4a771f3410105e7973afab29aa82d006bb30" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menued8f4a771f3410105e7973afab29aa82d006bb30" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[user@localhost ~]$ </span>ssh -R:60000:127.0.0.1:22 joe@friendly.domain.tld</div></code></pre>
+<pre class="highlight" data-user="user"><input type="radio" name="code_menuc96f20bfd9632d6f274b97c5f42f1d00e1ba9109" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menuc96f20bfd9632d6f274b97c5f42f1d00e1ba9109" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[user@localhost ~]$ </span>ssh<span class="w"> </span>-R:60000:127.0.0.1:22<span class="w"> </span>joe@friendly.domain.tld</div></code></pre>
 <p>The above command will setup such a configuration that connecting on port <code>60000</code>
 at <code>friendly.domain.tld</code> will forward traffic to your local machine&rsquo;s port 22
 (which is behind a firewall) &ndash; this will work as long as your SSH session to
@@ -198,8 +198,8 @@ way you want it!</p>
 <p>Anyway, even if you fail to find a host that allows you to expose your service
 to the public, you still should be able to access it yourself &ndash; using the
 forward firewall piercing technique described at the beginning of this post:</p>
-<pre class="highlight" data-user="user" data-prompt=""[user@localhost"><input type="radio" name="code_menu024f471ebf3208a9427ca48e54619c96b0b34527" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu024f471ebf3208a9427ca48e54619c96b0b34527" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp"># </span>from your home computer
-</div><div class="line"><a></a><span class="gp">[user@localhost ~]$ </span>ssh -L60000:127.0.0.1:60000 joe@friendly.domain.tld</div></code></pre>
+<pre class="highlight" data-user="user" data-prompt=""[user@localhost"><input type="radio" name="code_menu79048bbafb540a4dbe2092403beb568a4d0e4775" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu79048bbafb540a4dbe2092403beb568a4d0e4775" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp"># </span>from<span class="w"> </span>your<span class="w"> </span>home<span class="w"> </span>computer
+</div><div class="line"><a></a><span class="gp">[user@localhost ~]$ </span>ssh<span class="w"> </span>-L60000:127.0.0.1:60000<span class="w"> </span>joe@friendly.domain.tld</div></code></pre>
 <p>Once it is done your computer in the highly secure network should be reachable
 via SSH on your <code>localhost:60000</code>, e.g.</p>
 <pre class="highlight" data-user="user"><input type="radio" name="code_menu002709e21abf8c28749cf117ba70a46c05e3ab4a" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu002709e21abf8c28749cf117ba70a46c05e3ab4a" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="go">[user@localhost ~] ssh -p6000 my_account@localhost</span></div></code></pre>

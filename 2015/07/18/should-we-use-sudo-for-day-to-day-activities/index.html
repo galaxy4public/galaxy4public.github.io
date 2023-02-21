@@ -20,7 +20,7 @@
 		"author": "(GalaxyMaster)",
 		"name" : "Should we use "sudo" for day-to-day activities?",
 		"datePublished" : "2015-07-18T20:04:00+10:00",
-		"dateModified" : "2020-05-17T04:45:11+10:00",
+		"dateModified" : "2023-02-21T19:48:39+11:00",
 		"image" : "https://dmitry.khlebnikov.net/2020/06/14/truly-responsive-pagination/images/paginator-sketch.png",
 		"headline" : "headline",
 		"abstract": "abstract goes here",
@@ -131,19 +131,19 @@
 SUID bit set.</p>
 <p>Every time I answer a question on how to do privileged work on these systems
 (i.e. do tasks that require administrator privileges) with a proposal to SSH
-under the privileged account directly to do such a work, whoever asked the
-question starts to blabber how insecure that is, that one should use <code>sudo</code>,
+under a privileged account directly to do such a work, whoever asked the
+question starts to blabber about how insecure that is, that one should use <code>sudo</code>,
 and that nobody should ever login directly as root.</p>
 <p>I have spent quite some time explaining the misconception behind so-called
 &ldquo;secure way to access systems through sudo&rdquo;, so I decided to write up an
 article that describes the issues of using that approach and why using <code>sudo</code>
-is actually <em>less secure</em> than a direct SSH access.</p>
+is actually <em>less secure</em> than a direct SSH access approach.</p>
 <h2 id="history">History</h2>
 <p>The following is based on my personal recollection of the history around early
 90’s with some references to documents I could quickly find.  Unfortunately, this
 is one of the topics that is not so easy to reconstruct in full detail.
 Although there may be minor inaccuracies, the outlined view on the history
-should be very close to the true events that took place.</p>
+should be pretty close to the true events that took place.</p>
 <p>Many years ago (but not that far in the past) system administrators were using
 <code>telnet</code> and <code>rsh</code> to access and administer their servers.  Networks were
 simpler and traffic sniffing techniques were common.  Therefore, it was very
@@ -237,7 +237,7 @@ through all of them and see if they are real benefits at all:</p>
 <p>In reality users are so used to prefix almost any failed command with
  <code>sudo</code> that this &ldquo;benefit&rdquo; can be considered as the quite opposite item,
  against <code>sudo</code>.</p>
-<p>On a properly configured environment you explicitly need to login as the
+<p>In a properly configured environment you explicitly need to login as the
  privileged account to do functions that require privileges.</p>
 </li>
 <li>
@@ -273,6 +273,10 @@ through all of them and see if they are real benefits at all:</p>
  firewall and allow remote access from a defined list of locations only
  (i.e. whitelist authorised locations) — this will shrink the possible
  attack surface of the SSH service considerably.</p>
+<p>Third, nobody actually prevents you from having a different user name with
+ uid 0.  The <code>root</code> account is just an accepted default, the system does not
+ really care since it works with numerical UIDs, not with names.  See the
+ next point for an option how to achieve that.</p>
 </li>
 <li>
 <p>Allows easy transfer for admin rights by adding and removing users from
@@ -287,8 +291,8 @@ through all of them and see if they are real benefits at all:</p>
  account/password.  The truth is that nobody is limited by a single root
  account: you can create as many as you want and each of them could have
  their own distinct password, e.g.</p>
-<pre class="highlight" data-user="root"><input type="radio" name="code_menu22fd675c697cbeb5ef752e76308f175f5de25e18" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu22fd675c697cbeb5ef752e76308f175f5de25e18" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>useradd -om -o <span class="m">0</span> -g <span class="m">0</span> -s /bin/sh new_root
-</div><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>passwd new_root</div></code></pre>
+<pre class="highlight" data-user="root"><input type="radio" name="code_menu80241711cfa88755cd6da161ef3c23749590471e" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu80241711cfa88755cd6da161ef3c23749590471e" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>useradd<span class="w"> </span>-om<span class="w"> </span>-u<span class="w"> </span><span class="m">0</span><span class="w"> </span>-g<span class="w"> </span><span class="m">0</span><span class="w"> </span>-s<span class="w"> </span>/bin/sh<span class="w"> </span>new_root
+</div><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>passwd<span class="w"> </span>new_root</div></code></pre>
 <p>Better yet, do not set the password and lock the account instead with
  <code>usermod -L new_root</code> since we are using keys, remember?</p>
 <p>This approach also provides additional accountability since users will
@@ -320,7 +324,7 @@ through all of them and see if they are real benefits at all:</p>
      terminal open indefinitely.</p>
 <p>This statement also compares <code>sudo</code> with something reader cannot compare
  to.  Moreover, it mixes up two logically unrelated things: the credentials
- expiration and terminal security.  While it is great that <code>sudo</code> implements
+ expiration and the terminal security.  While it is great that <code>sudo</code> implements
  the former, the latter is usually addressed by entirely different means:
  starting with auto-logout functionality, lock screen, physical security,
  etc.</p>
@@ -426,6 +430,18 @@ away:</p>
 <p>Unfortunately, personally, I failed to find any other justified applications of
 <code>sudo</code> in a secure environment and would be happy to get some feedback if you
 have something in mind worth including into the list above.</p>
+<p>It is worth to mention that in the first scenario (SELinux roles), <code>sudo</code> should
+not have the SUID bit set since normal SELinux users could assume roles with
+<code>newrole</code>.  The difficulty arises when an administrator tries to assume a user
+role (e.g. such a role transition is not prescribed in the policy).  One could
+argue that either the SELinux policy should be amended and, then, <code>newrole</code> could
+be used or such a behaviour of the administrator account should not be allowed at
+all.  However, in real life, administrators need to see the world through users&rsquo;
+eyes from time to time to expedite the troubleshooting process, in these cases
+<code>sudo</code> will help, but since it is going to be executed by an administrator (a
+privileged account) to switch to a user (a low privileged account) there is no
+need for any other permissions as <code>0100</code> (execute for the owner) on the <code>sudo</code>
+binary.</p>
 <h2 id="how-can-we-improve-the-security-of-our-systems-in-relation-to-the-sudo-usage">How can we improve the security of our systems in relation to the &ldquo;sudo&rdquo; usage?</h2>
 <p>OK, so we got to the point where we are standing at a crossroad and we kind
 of established that excessive usage of <code>sudo</code> is a bad thing (for
@@ -455,14 +471,14 @@ it would kind of defeat the purpose, so please resist this temptation. :)</p>
 <p>In line with the previous bullet point, these accounts must be used for
 these activities only (system updates, installing new software, modifying
 system-wide configuration).  The expectation is that the privileged
-accounts are used on occasion only;</p>
+accounts are used on an occasion only;</p>
 </li>
 <li>
 <p>privileged accounts during their activities should not cross the security
     boundary with the less privileged accounts.</p>
 <p>This is needed to avoid attacks from the less privileged accounts toward
 more privileged (e.g. process hijacking, file races, etc.). Unfortunately,
-this point is a bit confusing without a proper explanation that may take
+this point is a bit confusing without a proper explanation and that may take
 several blog posts to be fully covered, but in a nutshell it means that
 root should not touch anything writable by the less privileged account.
 Some examples of the bad and insecure behaviour include:</p>
@@ -485,9 +501,9 @@ generally it should be assumed</p>
     work purposes (no free time surfing on the leisure sites and stuff :) ),</li>
 <li>that proper firewall rules and protection techniques were used to secure
     the machine, and</li>
-<li>that the operator is security-minded and does everything they can to
-     ensure integrity and security of their machine and software installed
-     on it.</li>
+<li>that the operator is security-minded person and does everything they
+    can to ensure integrity and security of their machine and software
+    installed on it.</li>
 </ul>
 </li>
 </ul>
