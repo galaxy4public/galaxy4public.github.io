@@ -20,7 +20,7 @@
 		"author": "(GalaxyMaster)",
 		"name" : "Wrap indicator in &lt;pre&gt; blocks",
 		"datePublished" : "2020-05-10T21:00:00+10:00",
-		"dateModified" : "2021-09-01T16:40:50+10:00",
+		"dateModified" : "2023-02-21T20:44:20+11:00",
 		"image" : "https://dmitry.khlebnikov.net/2020/06/14/truly-responsive-pagination/images/paginator-sketch.png",
 		"headline" : "headline",
 		"abstract": "abstract goes here",
@@ -380,7 +380,7 @@ I got a single line SVG body, and I converted it to Base64.  The resulting line
 is usable as the inline definition of an image.  Let&rsquo;s update our stylesheet
 with the new values (we just replaced the last line to change the <code>background</code>
 to <code>background-image</code>) and added dimensions for the background itself:</p>
-<pre id="demo4" class="highlight line-numbers"><input type="radio" name="code_menu8b7c111b388665d18b14867c5e619e0f2ee1c4dd" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu8b7c111b388665d18b14867c5e619e0f2ee1c4dd" class="line-numbers icon list-numbered" checked><code class="language-css"><div id="demo4.1" class="line"><a href="#demo4.1" aria-hidden="true"></a><span class="nt">pre</span><span class="w"> </span><span class="nt">div</span><span class="p">.</span><span class="nc">line</span><span class="w"> </span><span class="p">{</span>
+<pre id="demo4" class="highlight line-numbers"><input type="radio" name="code_menuc4ca362f710da0cb9e9de275a8c552589ef0610c" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menuc4ca362f710da0cb9e9de275a8c552589ef0610c" class="line-numbers icon list-numbered" checked><code class="language-css"><div id="demo4.1" class="line"><a href="#demo4.1" aria-hidden="true"></a><span class="nt">pre</span><span class="w"> </span><span class="nt">div</span><span class="p">.</span><span class="nc">line</span><span class="w"> </span><span class="p">{</span>
 </div><div id="demo4.2" class="line"><a href="#demo4.2" aria-hidden="true"></a><span class="w">    </span><span class="k">position</span><span class="p">:</span><span class="w"> </span><span class="kc">relative</span><span class="p">;</span><span class="w"> </span><span class="c">/* so we could position the child */</span>
 </div><div id="demo4.3" class="line"><a href="#demo4.3" aria-hidden="true"></a><span class="w">    </span><span class="k">min-height</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">em</span><span class="p">;</span><span class="w">    </span><span class="c">/* to avoid collapsing empty lines */</span>
 </div><div id="demo4.4" class="line"><a href="#demo4.4" aria-hidden="true"></a><span class="p">}</span>
@@ -389,15 +389,13 @@ to <code>background-image</code>) and added dimensions for the background itself
 </div><div id="demo4.7" class="line"><a href="#demo4.7" aria-hidden="true"></a><span class="w">    </span><span class="k">content</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">;</span><span class="w">        </span><span class="c">/* we need content for pseudo elements */</span>
 </div><div id="demo4.8" class="line"><a href="#demo4.8" aria-hidden="true"></a><span class="w">    </span><span class="k">position</span><span class="p">:</span><span class="w"> </span><span class="kc">absolute</span><span class="p">;</span>
 </div><div id="demo4.9" class="line"><a href="#demo4.9" aria-hidden="true"></a><span class="w">    </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">block</span><span class="p">;</span>
-</div><div id="demo4.10" class="line"><a href="#demo4.10" aria-hidden="true"></a><span class="w">    </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">em</span><span class="p">;</span><span class="w">     </span><span class="c">/* without width it will be invisible */</span>
+</div><div id="demo4.10" class="line"><a href="#demo4.10" aria-hidden="true"></a><span class="w">    </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">em</span><span class="p">;</span><span class="w">         </span><span class="c">/* without width it will be invisible */</span>
 </div><div id="demo4.11" class="line"><a href="#demo4.11" aria-hidden="true"></a><span class="w">    </span><span class="k">height</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="kt">%</span><span class="p">;</span><span class="w">       </span><span class="c">/* to match the height of the parent */</span>
 </div><div id="demo4.12" class="line"><a href="#demo4.12" aria-hidden="true"></a><span class="w">    </span><span class="k">top</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 </div><div id="demo4.13" class="line"><a href="#demo4.13" aria-hidden="true"></a><span class="w">    </span><span class="k">right</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="kt">em</span><span class="p">;</span>
-</div><div id="demo4.14" class="line"><a href="#demo4.14" aria-hidden="true"></a><span class="w">    </span><span class="k">background-image</span><span class="p">:</span>
-</div><div id="demo4.15" class="line"><a href="#demo4.15" aria-hidden="true"></a><span class="w">        </span><span class="nb">url</span><span class="p">(</span><span class="sx">data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==</span><span class="p">)</span>
-</div><div id="demo4.16" class="line"><a href="#demo4.16" aria-hidden="true"></a><span class="w">        </span><span class="kc">no-repeat</span><span class="w"> </span><span class="kc">repeat</span><span class="p">;</span>
-</div><div id="demo4.17" class="line"><a href="#demo4.17" aria-hidden="true"></a><span class="w">    </span><span class="k">background-size</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">em</span><span class="w"> </span><span class="mi">1</span><span class="kt">em</span><span class="p">;</span>
-</div><div id="demo4.18" class="line"><a href="#demo4.18" aria-hidden="true"></a><span class="p">}</span></div></code></pre>
+</div><div id="demo4.14" class="line"><a href="#demo4.14" aria-hidden="true"></a><span class="w">    </span><span class="k">background-image</span><span class="p">:</span><span class="w"> </span><span class="nb">url</span><span class="p">(</span><span class="sx">data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==</span><span class="p">);</span>
+</div><div id="demo4.15" class="line"><a href="#demo4.15" aria-hidden="true"></a><span class="w">    </span><span class="k">background-size</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">em</span><span class="w"> </span><span class="mi">1</span><span class="kt">em</span><span class="p">;</span>
+</div><div id="demo4.16" class="line"><a href="#demo4.16" aria-hidden="true"></a><span class="p">}</span></div></code></pre>
 <div class="demo4 resizable">
     <style>
         div.demo4 pre div.line {
@@ -413,9 +411,7 @@ to <code>background-image</code>) and added dimensions for the background itself
             height: 100%;
             top: 0;
             right: -1em;
-            background:
-                url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
-                no-repeat repeat;
+            background-image: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==);
             background-size: 1em 1em;
         }
     </style>
@@ -439,7 +435,7 @@ our lines (reading documentation you may find that the default value is
 <code>normal</code> and you can also find that <code>normal</code> equals <code>1.2</code> for the majority of
 browsers, but relying on that, I think is a bad idea).  We also need to adjust
 our markers with the new information we have got:</p>
-<pre id="demo5" class="highlight"><input type="radio" name="code_menu451962ea33efa34185be6ae13309738b6beb2d3f" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu451962ea33efa34185be6ae13309738b6beb2d3f" class="line-numbers icon list-numbered"><code class="language-css"><div id="demo5.1" class="line"><a href="#demo5.1" aria-hidden="true"></a><span class="nt">pre</span><span class="w"> </span><span class="nt">div</span><span class="p">.</span><span class="nc">line</span><span class="w"> </span><span class="p">{</span>
+<pre id="demo5" class="highlight"><input type="radio" name="code_menu436fb738fed6ebf17c9e81f4fa5d1894083bad2a" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu436fb738fed6ebf17c9e81f4fa5d1894083bad2a" class="line-numbers icon list-numbered"><code class="language-css"><div id="demo5.1" class="line"><a href="#demo5.1" aria-hidden="true"></a><span class="nt">pre</span><span class="w"> </span><span class="nt">div</span><span class="p">.</span><span class="nc">line</span><span class="w"> </span><span class="p">{</span>
 </div><div id="demo5.2" class="line"><a href="#demo5.2" aria-hidden="true"></a><span class="w">    </span><span class="k">position</span><span class="p">:</span><span class="w"> </span><span class="kc">relative</span><span class="p">;</span><span class="w"> </span><span class="c">/* so we could position the child */</span>
 </div><div id="demo5.3" class="line"><a href="#demo5.3" aria-hidden="true"></a><span class="w">    </span><span class="k">min-height</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">em</span><span class="p">;</span><span class="w">    </span><span class="c">/* to avoid collapsing empty lines */</span>
 </div><div id="demo5.4" class="line"><a href="#demo5.4" aria-hidden="true"></a><span class="w">    </span><span class="k">line-height</span><span class="p">:</span><span class="w"> </span><span class="mf">1.2</span><span class="p">;</span><span class="w">   </span><span class="c">/* set the height explicitly */</span>
@@ -453,11 +449,9 @@ our markers with the new information we have got:</p>
 </div><div id="demo5.12" class="line"><a href="#demo5.12" aria-hidden="true"></a><span class="w">    </span><span class="k">height</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="kt">%</span><span class="p">;</span><span class="w">       </span><span class="c">/* to match the height of the parent */</span>
 </div><div id="demo5.13" class="line"><a href="#demo5.13" aria-hidden="true"></a><span class="w">    </span><span class="k">top</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 </div><div id="demo5.14" class="line"><a href="#demo5.14" aria-hidden="true"></a><span class="w">    </span><span class="k">right</span><span class="p">:</span><span class="w"> </span><span class="mf">-1.2</span><span class="kt">em</span><span class="p">;</span>
-</div><div id="demo5.15" class="line"><a href="#demo5.15" aria-hidden="true"></a><span class="w">    </span><span class="k">background-image</span><span class="p">:</span>
-</div><div id="demo5.16" class="line"><a href="#demo5.16" aria-hidden="true"></a><span class="w">        </span><span class="nb">url</span><span class="p">(</span><span class="sx">data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==</span><span class="p">)</span>
-</div><div id="demo5.17" class="line"><a href="#demo5.17" aria-hidden="true"></a><span class="w">        </span><span class="kc">no-repeat</span><span class="w"> </span><span class="kc">repeat</span><span class="p">;</span>
-</div><div id="demo5.18" class="line"><a href="#demo5.18" aria-hidden="true"></a><span class="w">    </span><span class="k">background-size</span><span class="p">:</span><span class="w"> </span><span class="mf">1.2</span><span class="kt">em</span><span class="w"> </span><span class="mf">1.2</span><span class="kt">em</span><span class="p">;</span>
-</div><div id="demo5.19" class="line"><a href="#demo5.19" aria-hidden="true"></a><span class="p">}</span></div></code></pre>
+</div><div id="demo5.15" class="line"><a href="#demo5.15" aria-hidden="true"></a><span class="w">    </span><span class="k">background-image</span><span class="p">:</span><span class="w"> </span><span class="nb">url</span><span class="p">(</span><span class="sx">data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==</span><span class="p">);</span>
+</div><div id="demo5.16" class="line"><a href="#demo5.16" aria-hidden="true"></a><span class="w">    </span><span class="k">background-size</span><span class="p">:</span><span class="w"> </span><span class="mf">1.2</span><span class="kt">em</span><span class="w"> </span><span class="mf">1.2</span><span class="kt">em</span><span class="p">;</span>
+</div><div id="demo5.17" class="line"><a href="#demo5.17" aria-hidden="true"></a><span class="p">}</span></div></code></pre>
 <div class="demo5 resizable">
     <style>
         div.demo5 pre div.line {
@@ -474,9 +468,7 @@ our markers with the new information we have got:</p>
             height: 100%;
             top: 0;
             right: -1.2em;
-            background:
-                url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
-                no-repeat repeat;
+            background-image: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==);
             background-size: 1.2em 1.2em;
         }
     </style>
@@ -492,7 +484,7 @@ it done:</p>
 <p>To address the latter a simple play with the <code>opacity</code> attribute will suffice,
 e.g. I think 50% transparency should make the marker less distracting.</p>
 <p>The former, however, requires some thinking.  Given that the post is already too long, I will just state that out of multiple options I had I chose the following: raise the background image by one <code>line-height</code> from the bottom, and clip a square 1x1 <code>line-height</code> at the top to compensate, as follows:</p>
-<pre id="demo6" class="highlight"><input type="radio" name="code_menu78ad04f9eba57879fcbfbd4e0dcb90ee9c139788" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu78ad04f9eba57879fcbfbd4e0dcb90ee9c139788" class="line-numbers icon list-numbered"><code class="language-css"><div id="demo6.1" class="line"><a href="#demo6.1" aria-hidden="true"></a><span class="nt">pre</span><span class="w"> </span><span class="nt">div</span><span class="p">.</span><span class="nc">line</span><span class="w"> </span><span class="p">{</span>
+<pre id="demo6" class="highlight"><input type="radio" name="code_menueba6608f600a759cba636ea37c6888e1319bef2d" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menueba6608f600a759cba636ea37c6888e1319bef2d" class="line-numbers icon list-numbered"><code class="language-css"><div id="demo6.1" class="line"><a href="#demo6.1" aria-hidden="true"></a><span class="nt">pre</span><span class="w"> </span><span class="nt">div</span><span class="p">.</span><span class="nc">line</span><span class="w"> </span><span class="p">{</span>
 </div><div id="demo6.2" class="line"><a href="#demo6.2" aria-hidden="true"></a><span class="w">    </span><span class="k">position</span><span class="p">:</span><span class="w"> </span><span class="kc">relative</span><span class="p">;</span><span class="w"> </span><span class="c">/* so we could position the child */</span>
 </div><div id="demo6.3" class="line"><a href="#demo6.3" aria-hidden="true"></a><span class="w">    </span><span class="k">min-height</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">em</span><span class="p">;</span><span class="w">    </span><span class="c">/* to avoid collapsing empty lines */</span>
 </div><div id="demo6.4" class="line"><a href="#demo6.4" aria-hidden="true"></a><span class="w">    </span><span class="k">line-height</span><span class="p">:</span><span class="w"> </span><span class="mf">1.2</span><span class="p">;</span><span class="w">   </span><span class="c">/* set the height explicitly */</span>
@@ -506,14 +498,12 @@ e.g. I think 50% transparency should make the marker less distracting.</p>
 </div><div id="demo6.12" class="line"><a href="#demo6.12" aria-hidden="true"></a><span class="w">    </span><span class="k">height</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="kt">%</span><span class="p">;</span><span class="w">       </span><span class="c">/* to match the height of the parent */</span>
 </div><div id="demo6.13" class="line"><a href="#demo6.13" aria-hidden="true"></a><span class="w">    </span><span class="k">bottom</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 </div><div id="demo6.14" class="line"><a href="#demo6.14" aria-hidden="true"></a><span class="w">    </span><span class="k">right</span><span class="p">:</span><span class="w"> </span><span class="mf">-1.2</span><span class="kt">em</span><span class="p">;</span>
-</div><div id="demo6.15" class="line"><a href="#demo6.15" aria-hidden="true"></a><span class="w">    </span><span class="k">background-image</span><span class="p">:</span>
-</div><div id="demo6.16" class="line"><a href="#demo6.16" aria-hidden="true"></a><span class="w">        </span><span class="nb">url</span><span class="p">(</span><span class="sx">data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==</span><span class="p">)</span>
-</div><div id="demo6.17" class="line"><a href="#demo6.17" aria-hidden="true"></a><span class="w">        </span><span class="kc">no-repeat</span><span class="w"> </span><span class="kc">repeat</span><span class="p">;</span>
-</div><div id="demo6.18" class="line"><a href="#demo6.18" aria-hidden="true"></a><span class="w">    </span><span class="k">background-size</span><span class="p">:</span><span class="w"> </span><span class="mf">1.2</span><span class="kt">em</span><span class="w"> </span><span class="mf">1.2</span><span class="kt">em</span><span class="p">;</span>
-</div><div id="demo6.19" class="line"><a href="#demo6.19" aria-hidden="true"></a><span class="w">    </span><span class="k">margin-bottom</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-</div><div id="demo6.20" class="line"><a href="#demo6.20" aria-hidden="true"></a><span class="w">    </span><span class="k">clip</span><span class="p">:</span><span class="w"> </span><span class="nb">rect</span><span class="p">(</span><span class="mf">1.2</span><span class="kt">em</span><span class="w"> </span><span class="mf">1.2</span><span class="kt">em</span><span class="w"> </span><span class="mi">100</span><span class="kt">vh</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
-</div><div id="demo6.21" class="line"><a href="#demo6.21" aria-hidden="true"></a><span class="w">    </span><span class="k">opacity</span><span class="p">:</span><span class="w"> </span><span class="mf">.5</span><span class="p">;</span>
-</div><div id="demo6.22" class="line"><a href="#demo6.22" aria-hidden="true"></a><span class="p">}</span></div></code></pre>
+</div><div id="demo6.15" class="line"><a href="#demo6.15" aria-hidden="true"></a><span class="w">    </span><span class="k">background-image</span><span class="p">:</span><span class="w"> </span><span class="nb">url</span><span class="p">(</span><span class="sx">data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==</span><span class="p">);</span>
+</div><div id="demo6.16" class="line"><a href="#demo6.16" aria-hidden="true"></a><span class="w">    </span><span class="k">background-size</span><span class="p">:</span><span class="w"> </span><span class="mf">1.2</span><span class="kt">em</span><span class="w"> </span><span class="mf">1.2</span><span class="kt">em</span><span class="p">;</span>
+</div><div id="demo6.17" class="line"><a href="#demo6.17" aria-hidden="true"></a><span class="w">    </span><span class="k">margin-bottom</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</div><div id="demo6.18" class="line"><a href="#demo6.18" aria-hidden="true"></a><span class="w">    </span><span class="k">clip</span><span class="p">:</span><span class="w"> </span><span class="nb">rect</span><span class="p">(</span><span class="mf">1.2</span><span class="kt">em</span><span class="w"> </span><span class="mf">1.2</span><span class="kt">em</span><span class="w"> </span><span class="mi">100</span><span class="kt">vh</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+</div><div id="demo6.19" class="line"><a href="#demo6.19" aria-hidden="true"></a><span class="w">    </span><span class="k">opacity</span><span class="p">:</span><span class="w"> </span><span class="mf">.5</span><span class="p">;</span>
+</div><div id="demo6.20" class="line"><a href="#demo6.20" aria-hidden="true"></a><span class="p">}</span></div></code></pre>
 <p>The only tricky part in the added lines is the <code>clip: rect(1.2em 1.2em 100vh
 0)</code> line.  The <code>clip</code> property defines the visible rectangle the browser should
 preserve, but there is a conundrum: the height of the wrapped line is variable,
@@ -543,9 +533,7 @@ this is exactly what we want :).</p>
             height: 100%;
             bottom: 0;
             right: -1.2em;
-            background:
-                url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
-                no-repeat repeat;
+            background-image: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==);
             background-size: 1.2em 1.2em;
             margin-bottom: 1.2em;
             clip: rect(1.2em 1.2em 100vh 0);
@@ -558,31 +546,29 @@ this is exactly what we want :).</p>
 <h2 id="bonus-round">Bonus Round</h2>
 <p>It should be mentioned, it is also possible to apply the same approach to the
 left side of the lines with a bit of a twist.</p>
-<pre id="demo7" class="highlight"><input type="radio" name="code_menu08db25fe8d44448b5296c43a86d619517a29222a" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu08db25fe8d44448b5296c43a86d619517a29222a" class="line-numbers icon list-numbered"><code class="language-css"><div id="demo7.1" class="line"><a href="#demo7.1" aria-hidden="true"></a><span class="nt">pre</span><span class="w"> </span><span class="nt">div</span><span class="p">.</span><span class="nc">line</span><span class="w"> </span><span class="p">{</span>
-</div><div id="demo7.2" class="line"><a href="#demo7.2" aria-hidden="true"></a><span class="w">    </span><span class="k">position</span><span class="p">:</span><span class="w"> </span><span class="kc">relative</span><span class="p">;</span><span class="w"> </span><span class="c">/* so we could position the child */</span>
-</div><div id="demo7.3" class="line"><a href="#demo7.3" aria-hidden="true"></a><span class="w">    </span><span class="k">min-height</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">em</span><span class="p">;</span><span class="w">    </span><span class="c">/* to avoid collapsing empty lines */</span>
-</div><div id="demo7.4" class="line"><a href="#demo7.4" aria-hidden="true"></a><span class="w">    </span><span class="k">line-height</span><span class="p">:</span><span class="w"> </span><span class="mf">1.2</span><span class="p">;</span><span class="w">   </span><span class="c">/* set the height explicitly */</span>
+<pre id="demo7" class="highlight"><input type="radio" name="code_menub5d7c2883c078cf8c978c201b2bcd22b93fcee42" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menub5d7c2883c078cf8c978c201b2bcd22b93fcee42" class="line-numbers icon list-numbered"><code class="language-css"><div id="demo7.1" class="line"><a href="#demo7.1" aria-hidden="true"></a><span class="nt">pre</span><span class="w"> </span><span class="nt">div</span><span class="p">.</span><span class="nc">line</span><span class="w"> </span><span class="p">{</span>
+</div><div id="demo7.2" class="line"><a href="#demo7.2" aria-hidden="true"></a><span class="w">    </span><span class="k">position</span><span class="p">:</span><span class="w"> </span><span class="kc">relative</span><span class="p">;</span><span class="w">     </span><span class="c">/* so we could position the child */</span>
+</div><div id="demo7.3" class="line"><a href="#demo7.3" aria-hidden="true"></a><span class="w">    </span><span class="k">min-height</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">em</span><span class="p">;</span><span class="w">        </span><span class="c">/* to avoid collapsing empty lines */</span>
+</div><div id="demo7.4" class="line"><a href="#demo7.4" aria-hidden="true"></a><span class="w">    </span><span class="k">line-height</span><span class="p">:</span><span class="w"> </span><span class="mf">1.2</span><span class="p">;</span><span class="w">       </span><span class="c">/* set the height explicitly */</span>
 </div><div id="demo7.5" class="line"><a href="#demo7.5" aria-hidden="true"></a><span class="w">    </span><span class="k">text-indent</span><span class="p">:</span><span class="w"> </span><span class="mf">-1.2</span><span class="kt">em</span><span class="p">;</span><span class="w">    </span><span class="c">/* first line indent */</span>
 </div><div id="demo7.6" class="line"><a href="#demo7.6" aria-hidden="true"></a><span class="w">    </span><span class="k">padding-left</span><span class="p">:</span><span class="w"> </span><span class="mf">1.2</span><span class="kt">em</span><span class="p">;</span><span class="w">    </span><span class="c">/* padding for the line */</span>
 </div><div id="demo7.7" class="line"><a href="#demo7.7" aria-hidden="true"></a><span class="p">}</span>
 </div><div id="demo7.8" class="line"><a href="#demo7.8" aria-hidden="true"></a>
 </div><div id="demo7.9" class="line"><a href="#demo7.9" aria-hidden="true"></a><span class="nt">pre</span><span class="w"> </span><span class="nt">div</span><span class="p">.</span><span class="nc">line</span><span class="p">::</span><span class="nd">before</span><span class="w"> </span><span class="p">{</span>
-</div><div id="demo7.10" class="line"><a href="#demo7.10" aria-hidden="true"></a><span class="w">    </span><span class="k">content</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">;</span><span class="w">        </span><span class="c">/* we need content for pseudo elements */</span>
+</div><div id="demo7.10" class="line"><a href="#demo7.10" aria-hidden="true"></a><span class="w">    </span><span class="k">content</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">;</span><span class="w">            </span><span class="c">/* we need content for pseudo elements */</span>
 </div><div id="demo7.11" class="line"><a href="#demo7.11" aria-hidden="true"></a><span class="w">    </span><span class="k">position</span><span class="p">:</span><span class="w"> </span><span class="kc">absolute</span><span class="p">;</span>
 </div><div id="demo7.12" class="line"><a href="#demo7.12" aria-hidden="true"></a><span class="w">    </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">block</span><span class="p">;</span>
-</div><div id="demo7.13" class="line"><a href="#demo7.13" aria-hidden="true"></a><span class="w">    </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="mf">1.2</span><span class="kt">em</span><span class="p">;</span><span class="w">       </span><span class="c">/* without width it will be invisible */</span>
-</div><div id="demo7.14" class="line"><a href="#demo7.14" aria-hidden="true"></a><span class="w">    </span><span class="k">height</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="kt">%</span><span class="p">;</span><span class="w">       </span><span class="c">/* to match the height of the parent */</span>
+</div><div id="demo7.13" class="line"><a href="#demo7.13" aria-hidden="true"></a><span class="w">    </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="mf">1.2</span><span class="kt">em</span><span class="p">;</span><span class="w">           </span><span class="c">/* without width it will be invisible */</span>
+</div><div id="demo7.14" class="line"><a href="#demo7.14" aria-hidden="true"></a><span class="w">    </span><span class="k">height</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="kt">%</span><span class="p">;</span><span class="w">           </span><span class="c">/* to match the height of the parent */</span>
 </div><div id="demo7.15" class="line"><a href="#demo7.15" aria-hidden="true"></a><span class="w">    </span><span class="k">top</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 </div><div id="demo7.16" class="line"><a href="#demo7.16" aria-hidden="true"></a><span class="w">    </span><span class="k">left</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-</div><div id="demo7.17" class="line"><a href="#demo7.17" aria-hidden="true"></a><span class="w">    </span><span class="k">background</span><span class="p">:</span>
-</div><div id="demo7.18" class="line"><a href="#demo7.18" aria-hidden="true"></a><span class="w">        </span><span class="nb">url</span><span class="p">(</span><span class="sx">data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==</span><span class="p">)</span>
-</div><div id="demo7.19" class="line"><a href="#demo7.19" aria-hidden="true"></a><span class="w">        </span><span class="kc">no-repeat</span><span class="w"> </span><span class="kc">repeat</span><span class="p">;</span>
-</div><div id="demo7.20" class="line"><a href="#demo7.20" aria-hidden="true"></a><span class="w">    </span><span class="k">background-size</span><span class="p">:</span><span class="w"> </span><span class="mf">1.2</span><span class="kt">em</span><span class="w"> </span><span class="mf">1.2</span><span class="kt">em</span><span class="p">;</span>
-</div><div id="demo7.21" class="line"><a href="#demo7.21" aria-hidden="true"></a><span class="w">    </span><span class="k">clip</span><span class="p">:</span><span class="w"> </span><span class="nb">rect</span><span class="p">(</span><span class="mf">1.2</span><span class="kt">em</span><span class="w"> </span><span class="mf">1.2</span><span class="kt">em</span><span class="w"> </span><span class="mi">100</span><span class="kt">vh</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
-</div><div id="demo7.22" class="line"><a href="#demo7.22" aria-hidden="true"></a><span class="w">    </span><span class="k">opacity</span><span class="p">:</span><span class="w"> </span><span class="mf">.5</span><span class="p">;</span>
-</div><div id="demo7.23" class="line"><a href="#demo7.23" aria-hidden="true"></a><span class="w">    </span><span class="k">transform</span><span class="p">:</span><span class="w"> </span><span class="nb">rotateY</span><span class="p">(</span><span class="mi">180</span><span class="kt">deg</span><span class="p">);</span><span class="w"> </span><span class="c">/* mirror the arrow */</span>
-</div><div id="demo7.24" class="line"><a href="#demo7.24" aria-hidden="true"></a><span class="w">    </span><span class="k">transform-origin</span><span class="p">:</span><span class="w"> </span><span class="kc">left</span><span class="p">;</span>
-</div><div id="demo7.25" class="line"><a href="#demo7.25" aria-hidden="true"></a><span class="p">}</span></div></code></pre>
+</div><div id="demo7.17" class="line"><a href="#demo7.17" aria-hidden="true"></a><span class="w">    </span><span class="k">background-image</span><span class="p">:</span><span class="w"> </span><span class="nb">url</span><span class="p">(</span><span class="sx">data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==</span><span class="p">);</span>
+</div><div id="demo7.18" class="line"><a href="#demo7.18" aria-hidden="true"></a><span class="w">    </span><span class="k">background-size</span><span class="p">:</span><span class="w"> </span><span class="mf">1.2</span><span class="kt">em</span><span class="w"> </span><span class="mf">1.2</span><span class="kt">em</span><span class="p">;</span>
+</div><div id="demo7.19" class="line"><a href="#demo7.19" aria-hidden="true"></a><span class="w">    </span><span class="k">clip</span><span class="p">:</span><span class="w"> </span><span class="nb">rect</span><span class="p">(</span><span class="mf">1.2</span><span class="kt">em</span><span class="w"> </span><span class="mf">1.2</span><span class="kt">em</span><span class="w"> </span><span class="mi">100</span><span class="kt">vh</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+</div><div id="demo7.20" class="line"><a href="#demo7.20" aria-hidden="true"></a><span class="w">    </span><span class="k">opacity</span><span class="p">:</span><span class="w"> </span><span class="mf">.5</span><span class="p">;</span>
+</div><div id="demo7.21" class="line"><a href="#demo7.21" aria-hidden="true"></a><span class="w">    </span><span class="k">transform</span><span class="p">:</span><span class="w"> </span><span class="nb">rotateY</span><span class="p">(</span><span class="mi">180</span><span class="kt">deg</span><span class="p">);</span><span class="w"> </span><span class="c">/* mirror the arrow */</span>
+</div><div id="demo7.22" class="line"><a href="#demo7.22" aria-hidden="true"></a><span class="w">    </span><span class="k">transform-origin</span><span class="p">:</span><span class="w"> </span><span class="kc">left</span><span class="p">;</span>
+</div><div id="demo7.23" class="line"><a href="#demo7.23" aria-hidden="true"></a><span class="p">}</span></div></code></pre>
 <p>The trick here is the play between <code>padding-left</code> and <code>text-indent</code> for the
 <code>&lt;div&gt;</code> element since <code>text-indent</code> will be applied to the first line only
 (effectively negating the padding set for the whole element), thus the rest of
@@ -609,9 +595,7 @@ so, maybe, for my blog I may just go with the left-side solution):</p>
             height: 100%;
             top: 0;
             left: 1em;
-            background:
-                url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==)
-                no-repeat repeat;
+            background-image: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI0IDI0Ij48dGV4dCB4PSIwIiB5PSIxOSI+JiN4MjNjZTs8L3RleHQ+PC9zdmc+Cg==);
             background-size: 1.2em 1.2em;
             clip: rect(1.2em 1.2em 100vh 0);
             opacity: .5;
@@ -627,7 +611,7 @@ so, maybe, for my blog I may just go with the left-side solution):</p>
 the wrap indicators</a> on Stack
 Overflow (I am sure that it was known before, but this is where I learnt it).</p>
 <h2 id="assessment-of-the-result">Assessment of the result</h2>
-<p>We started with the following requirement:</p>
+<p>We started with the following requirements:</p>
 <ul>
 <li>
 <p>these code blocks may have continuous white space that we want to preserve;</p>

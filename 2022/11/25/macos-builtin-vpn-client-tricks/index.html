@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Mind Drops :: assorted bits of wit</title>
+		<meta http-equiv="Content-Security-Policy" content="	default-src 'self';object-src 'none';script-src 'self' https://www.googletagmanager.com/gtag/js 'sha256-TelA7VsuYAMqhOKGk7CHgJyuqSJdmqZEp+hn6PWVRwQ=' https://www.google-analytics.com/analytics.js https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194;img-src 'self' data: https://www.google-analytics.com/r/collect https://www.google-analytics.com/collect https://stats.g.doubleclick.net/r/collect https://*/ads/ga-audiences https://www.googletagmanager.com/a;style-src 'self' 'sha256-fszvBX/J9dhPxFSJ5wUrq/Pvg6HrnTkWyshMZpaxSQY=';connect-src 'self' https://www.google-analytics.com/j/collect https://stats.g.doubleclick.net/j/collect; " />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1" />	<link rel="preload" href="/theme/fonts/Oswald/Oswald-VariableFont_wght.woff2" crossorigin="anonymous" as="font" type="font/woff2">
+	<link rel="preload" href="/theme/fonts/Exo2/Exo2-VariableFont_wght.woff2" crossorigin="anonymous" as="font" type="font/woff2">	<link rel="stylesheet" href="/theme/css/fonts/Icons.css" />
+	<link rel="stylesheet" href="/theme/css/fonts/Exo2.css" />
+	<link rel="stylesheet" href="/theme/css/fonts/Oswald.css" />
+	<link rel="stylesheet" href="/theme/css/fonts/DancingScript.css" />
+	<link rel="stylesheet" href="/theme/css/base.css" />
+	<link rel="stylesheet" href="/theme/css/pygments/default.css" />
+	<link rel="canonical" href="/2022/11/25/macos-builtin-vpn-client-tricks/" />
+
+	<script type="application/ld+json">
+	{
+		"@context" : "https://schema.org",
+		"@type" : "Article",
+		"author": "(GalaxyMaster)",
+		"name" : "macOS builtin VPN client tricks",
+		"datePublished" : "2022-11-25T13:33:00+11:00",
+		"dateModified" : "2023-02-21T20:45:01+11:00",
+		"image" : "https://dmitry.khlebnikov.net/2020/06/14/truly-responsive-pagination/images/paginator-sketch.png",
+		"headline" : "headline",
+		"abstract": "abstract goes here",
+		"articleSection": "macos",
+		"interactionStatistic":
+		[
+			{
+				"@type": "InteractionCounter",
+				"interactionService":
+				{
+					"@type": "WebSite",
+					"name": "Twitter",
+					"url": "http://www.twitter.com"
+				},
+				"interactionType": "http://schema.org/ShareAction",
+				"userInteractionCount": "1203"
+			},
+			{
+				"@type": "InteractionCounter",
+				"interactionType": "http://schema.org/CommentAction",
+				"userInteractionCount": "78"
+			}
+		],
+		"discussionUrl": "https://github.com/"
+	}
+	</script>
+</head>
+
+<body>
+	<header>
+		<span class="flex">
+			<!--
+			<button class="menu-toggle" type="button" tabindex="0" aria-label="Menu Toggle"><div></div></button>
+			-->
+			<div class="menu-toggle" tabindex="0" aria-label="Menu Toggle"><div></div></div>
+			<a href="/" class="logo">
+				<picture>
+					<source srcset="/images/logo.svg" type="image/svg+xml">
+					<source srcset="/images/.svg" type="image/svg+xml">
+					<source srcset="/images/.webp" type="image/webp">
+					<img width="100%" height="100%" src="/images/" alt="Logo">
+				</picture>
+				<span class="title">Mind Drops</span>
+			</a>
+			<nav>
+				<ul>
+					<li><a class="icon home" href="/">Home</a></li>
+					<li><a class="icon user" href="/about">About</a></li>
+					<li><a class="icon phone" href="/contact">Contact</a></li>
+				</ul>
+			</nav>
+			<form id="search" role="search" autocomplete="off" method="get" action="/search">
+				<label for="q" class="icon search">Search</label>
+				<input type="text" name="q" id="q" placeholder="Search..." />
+				<div class="help" aria-label="Search ">
+					<dl>
+						<dt>"search terms"</dt><dd>exact-match</dd>
+						<dt>term1 | term2</dt><dd>term1 or term2</dd>
+						<dt>term1 * term2</dt><dd>term1 followed by term2</dd>
+						<dt>-term</dt><dd>exclude term</dd>
+						<dt>(search terms)</dt><dd>groups terms</dd>
+						<dt>ext:pdf</dt><dd>file type</dd>
+					</dl>
+				</div>
+			</form>
+			<ul class="taskbar">
+				<li class="search-toggle"><label for="q" class="icon search offscreen" title="Toggle the search bar">Search</label></li>
+				<!-- Not Implemented Yet
+				<li><a href="#bug-report" class="icon bug offscreen" title="Report a spotted bug on the page">Report a bug</a></li>
+				<li><a href="#preferences" class="icon cog offscreen" title="Configure personal preferences">Preferences</a></li>
+				 -->
+			</ul>
+		</span>
+	</header>
+<!--
+	<aside class="modal">
+		<div id="bug-report">
+			<a href="#" class="close"></a>
+			<div class="content">
+				<h1>Bug report</h1>
+				<form id="bug-report-form" autocomplete="off">
+					<textarea id="bug-report-body" name="bug-report-body">
+					</textarea>
+					<input type="submit" value="Submit">
+				</form>
+			</div>
+		</div>
+		<div id="preferences">
+		</div>
+	</aside>
+ -->
+	<main>
+			<article id="macos-builtin-vpn-client-tricks">
+				<header>
+					<h1><a href="/2022/11/25/macos-builtin-vpn-client-tricks/" rel="bookmark" title="Permalink to macOS builtin VPN client tricks">macOS builtin VPN client tricks</a></h1>
+				</header>
+				<aside>
+				</aside>
+				<p>I think everyone would agree that when it comes to the VPN configuration macOS
+builtin VPN client lacks any flexibility and its GUI exposes a fraction of
+supported features.  This is one of the reasons why there are so many third
+party VPN clients for macOS in the world, I believe.  However, I found that the
+majority of the time I can get away by using the standard macOS VPN client to
+connect to the desired VPN endpoint.</p>
+<p>In this article I am going to describe my journey of configuring macOS VPN
+client to support Windscribe VPN, but the described approach applies to vast
+majority of the VPN service providers who support IKEv2.</p>
+<p>XXX: This article is still work in progress, but I thought an example published
+is better than nothing at all.</p>
+<p>I happen to be a customer of Windscribe VPN service.</p>
+<p>The macOS client is terrible
+The native builtin VPN client is good enough for me.
+GUI configuration produces unworkable result.</p>
+<p>Apple Configuration Profile Reference <a href="https://developer.apple.com/business/documentation/Configuration-Profile-Reference.pdf#43">VPN Payload</a></p>
+<pre class="highlight"><input type="radio" name="code_menu5d8c5e39df20b844c3474818bc8109bf3c9d6997" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu5d8c5e39df20b844c3474818bc8109bf3c9d6997" class="line-numbers icon list-numbered"><code class="language-xml"><div class="line"><a></a><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+</div><div class="line"><a></a><span class="cp">&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;</span>
+</div><div class="line"><a></a><span class="nt">&lt;plist</span><span class="w"> </span><span class="na">version=</span><span class="s">&quot;1.0&quot;</span><span class="nt">&gt;</span>
+</div><div class="line"><a></a><span class="nt">&lt;dict&gt;</span>
+</div><div class="line"><a></a><span class="w">    </span><span class="nt">&lt;key&gt;</span>PayloadContent<span class="nt">&lt;/key&gt;</span>
+</div><div class="line"><a></a><span class="w">    </span><span class="nt">&lt;array&gt;</span>
+</div><div class="line"><a></a><span class="w">        </span><span class="nt">&lt;dict&gt;</span>
+</div><div class="line"><a></a><span class="w">            </span><span class="nt">&lt;key&gt;</span>IKEv2<span class="nt">&lt;/key&gt;</span>
+</div><div class="line"><a></a><span class="w">            </span><span class="nt">&lt;dict&gt;</span>
+</div><div class="line"><a></a><span class="w">                </span><span class="nt">&lt;key&gt;</span>AuthName<span class="nt">&lt;/key&gt;</span>
+</div><div class="line"><a></a><span class="w">                </span><span class="nt">&lt;string&gt;</span>@@LOGIN@@<span class="nt">&lt;/string&gt;</span>
+</div><div class="line"><a></a><span class="w">                </span><span class="nt">&lt;key&gt;</span>AuthPassword<span class="nt">&lt;/key&gt;</span>
+</div><div class="line"><a></a><span class="w">                </span><span class="nt">&lt;string&gt;</span>@@PASSWORD@@<span class="nt">&lt;/string&gt;</span>
+</div><div class="line"><a></a><span class="w">                </span><span class="nt">&lt;key&gt;</span>AuthenticationMethod<span class="nt">&lt;/key&gt;</span>
+</div><div class="line"><a></a><span class="w">                </span><span class="nt">&lt;string&gt;</span>None<span class="nt">&lt;/string&gt;</span>
+</div><div class="line"><a></a><span class="w">                </span><span class="nt">&lt;key&gt;</span>DeadPeerDetectionRate<span class="nt">&lt;/key&gt;</span>
+</div><div class="line"><a></a><span class="w">                </span><span class="nt">&lt;string&gt;</span>High<span class="nt">&lt;/string&gt;</span>
+</div><div class="line"><a></a><span class="w">                </span><span class="nt">&lt;key&gt;</span>ExtendedAuthEnabled<span class="nt">&lt;/key&gt;</span>
+</div><div class="line"><a></a><span class="w">                </span><span class="nt">&lt;integer&gt;</span>1<span class="nt">&lt;/integer&gt;</span>
+</div><div class="line"><a></a><span class="w">                </span><span class="nt">&lt;key&gt;</span>IKESecurityAssociationParameters<span class="nt">&lt;/key&gt;</span>
+</div><div class="line"><a></a><span class="w">                </span><span class="nt">&lt;dict&gt;</span>
+</div><div class="line"><a></a><span class="w">                    </span><span class="nt">&lt;key&gt;</span>DiffieHellmanGroup<span class="nt">&lt;/key&gt;</span>
+</div><div class="line"><a></a><span class="w">                    </span><span class="nt">&lt;integer&gt;</span>20<span class="nt">&lt;/integer&gt;</span>
+</div><div class="line"><a></a><span class="w">                    </span><span class="nt">&lt;key&gt;</span>EncryptionAlgorithm<span class="nt">&lt;/key&gt;</span>
+</div><div class="line"><a></a><span class="w">                    </span><span class="nt">&lt;string&gt;</span>AES-256-GCM<span class="nt">&lt;/string&gt;</span>
+</div><div class="line"><a></a><span class="w">                </span><span class="nt">&lt;/dict&gt;</span>
+</div><div class="line"><a></a><span class="w">                </span><span class="nt">&lt;key&gt;</span>LocalIdentifier<span class="nt">&lt;/key&gt;</span>
+</div><div class="line"><a></a><span class="w">                </span><span class="nt">&lt;string&gt;&lt;/string&gt;</span>
+</div><div class="line"><a></a><span class="w">                </span><span class="nt">&lt;key&gt;</span>RemoteAddress<span class="nt">&lt;/key&gt;</span>
+</div><div class="line"><a></a><span class="w">                </span><span class="nt">&lt;string&gt;</span>@@REMOTE_SERVER@@<span class="nt">&lt;/string&gt;</span>
+</div><div class="line"><a></a><span class="w">                </span><span class="nt">&lt;key&gt;</span>RemoteIdentifier<span class="nt">&lt;/key&gt;</span>
+</div><div class="line"><a></a><span class="w">                </span><span class="nt">&lt;string&gt;</span>@@REMOTE_SERVER@@<span class="nt">&lt;/string&gt;</span>
+</div><div class="line"><a></a><span class="w">            </span><span class="nt">&lt;/dict&gt;</span>
+</div><div class="line"><a></a><span class="w">            </span><span class="nt">&lt;key&gt;</span>PayloadDisplayName<span class="nt">&lt;/key&gt;</span>
+</div><div class="line"><a></a><span class="w">            </span><span class="nt">&lt;string&gt;</span>@@DISPLAY_NAME@@<span class="nt">&lt;/string&gt;</span>
+</div><div class="line"><a></a><span class="w">            </span><span class="nt">&lt;key&gt;</span>PayloadIdentifier<span class="nt">&lt;/key&gt;</span>
+</div><div class="line"><a></a><span class="w">            </span><span class="nt">&lt;string&gt;</span>com.apple.vpn.managed.@@UUID1@@<span class="nt">&lt;/string&gt;</span>
+</div><div class="line"><a></a><span class="w">            </span><span class="nt">&lt;key&gt;</span>PayloadType<span class="nt">&lt;/key&gt;</span>
+</div><div class="line"><a></a><span class="w">            </span><span class="nt">&lt;string&gt;</span>com.apple.vpn.managed<span class="nt">&lt;/string&gt;</span>
+</div><div class="line"><a></a><span class="w">            </span><span class="nt">&lt;key&gt;</span>PayloadUUID<span class="nt">&lt;/key&gt;</span>
+</div><div class="line"><a></a><span class="w">            </span><span class="nt">&lt;string&gt;</span>@@UUID1@@<span class="nt">&lt;/string&gt;</span>
+</div><div class="line"><a></a><span class="w">            </span><span class="nt">&lt;key&gt;</span>PayloadVersion<span class="nt">&lt;/key&gt;</span>
+</div><div class="line"><a></a><span class="w">            </span><span class="nt">&lt;integer&gt;</span>1<span class="nt">&lt;/integer&gt;</span>
+</div><div class="line"><a></a><span class="w">            </span><span class="nt">&lt;key&gt;</span>UserDefinedName<span class="nt">&lt;/key&gt;</span>
+</div><div class="line"><a></a><span class="w">            </span><span class="nt">&lt;string&gt;</span>@@DISPLAY_NAME@@<span class="nt">&lt;/string&gt;</span>
+</div><div class="line"><a></a><span class="w">            </span><span class="nt">&lt;key&gt;</span>VPNType<span class="nt">&lt;/key&gt;</span>
+</div><div class="line"><a></a><span class="w">            </span><span class="nt">&lt;string&gt;</span>IKEv2<span class="nt">&lt;/string&gt;</span>
+</div><div class="line"><a></a><span class="w">        </span><span class="nt">&lt;/dict&gt;</span>
+</div><div class="line"><a></a><span class="w">    </span><span class="nt">&lt;/array&gt;</span>
+</div><div class="line"><a></a><span class="w">    </span><span class="nt">&lt;key&gt;</span>PayloadDisplayName<span class="nt">&lt;/key&gt;</span>
+</div><div class="line"><a></a><span class="w">    </span><span class="nt">&lt;string&gt;</span>@@DISPLAY_NAME@@<span class="nt">&lt;/string&gt;</span>
+</div><div class="line"><a></a><span class="w">    </span><span class="nt">&lt;key&gt;</span>PayloadIdentifier<span class="nt">&lt;/key&gt;</span>
+</div><div class="line"><a></a><span class="w">    </span><span class="nt">&lt;string&gt;</span>VPN.@@UUID2@@<span class="nt">&lt;/string&gt;</span>
+</div><div class="line"><a></a><span class="w">    </span><span class="nt">&lt;key&gt;</span>PayloadType<span class="nt">&lt;/key&gt;</span>
+</div><div class="line"><a></a><span class="w">    </span><span class="nt">&lt;string&gt;</span>Configuration<span class="nt">&lt;/string&gt;</span>
+</div><div class="line"><a></a><span class="w">    </span><span class="nt">&lt;key&gt;</span>PayloadUUID<span class="nt">&lt;/key&gt;</span>
+</div><div class="line"><a></a><span class="w">    </span><span class="nt">&lt;string&gt;</span>@@UUID2@@<span class="nt">&lt;/string&gt;</span>
+</div><div class="line"><a></a><span class="w">    </span><span class="nt">&lt;key&gt;</span>PayloadVersion<span class="nt">&lt;/key&gt;</span>
+</div><div class="line"><a></a><span class="w">    </span><span class="nt">&lt;integer&gt;</span>1<span class="nt">&lt;/integer&gt;</span>
+</div><div class="line"><a></a><span class="nt">&lt;/dict&gt;</span>
+</div><div class="line"><a></a><span class="nt">&lt;/plist&gt;</span></div></code></pre>
+				<footer>
+					<span><span class="contextual">Offloaded on </span><time datetime="2022-11-25T13:33:00+11:00">
+						<span class="month"><a href="/2022/11/" title="A link to the archives for November of 2022">Nov<span class="month full">ember</span></a></span>
+						<span class="day">25</span>
+						<span class="year"><a href="/2022/" title="A link to the archives for the year of 2022">2022</a></span>
+					</time></span>
+						<span class="contextual">into </span><span class="category"><a href="/category/macos/" title="A link to a collection of articles in the 'macos' category">macos</a></span>
+					<span class="contextual">and tagged with:</span>
+					<ul class="tags">
+						<li class="tag">
+							<span>
+								<a href="/tag/macos/" rel="tag" title="A link to the collection tagged with 'macos'" data-count="1" ><span>macos</span></a>
+							</span>
+						</li>
+						<li class="tag">
+							<span>
+								<a href="/tag/howto/" rel="tag" title="A link to the collection tagged with 'howto'" data-count="5" ><span>howto</span></a>
+							</span>
+						</li>
+						<li class="tag">
+							<span>
+								<a href="/tag/vpn/" rel="tag" title="A link to the collection tagged with 'vpn'" data-count="1" ><span>vpn</span></a>
+							</span>
+						</li>
+						</ul>
+				</footer>
+			</article>
+		<footer>
+		</footer>
+	</main>
+	<footer>
+	</footer>
+</body>
+</html>
