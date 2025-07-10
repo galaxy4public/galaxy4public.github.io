@@ -316,9 +316,9 @@ from just one article file we created.&lt;/p&gt;
 keeping first, e.g. create the &lt;code&gt;.gitignore&lt;/code&gt; file and list the temporary
 things we do not want Git to track.  A good enough version of the &lt;code&gt;.gitignore&lt;/code&gt;
 file I am using for my code repository is the following:&lt;/p&gt;
-&lt;pre id="code7" class="highlight"&gt;&lt;input type="radio" name="code_menub885b7c27c7e3fead0f5e573205278529da5c6c1" class="no-line-numbers icon list-numbered"&gt;&lt;input type="radio" name="code_menub885b7c27c7e3fead0f5e573205278529da5c6c1" class="line-numbers icon list-numbered"&gt;&lt;code class="language-txt" data-file=".gitignore"&gt;&lt;div id="code7.1" class="line"&gt;&lt;a href="#code7.1" aria-hidden="true"&gt;&lt;/a&gt;*~
-&lt;/div&gt;&lt;div id="code7.2" class="line"&gt;&lt;a href="#code7.2" aria-hidden="true"&gt;&lt;/a&gt;*.pyc
-&lt;/div&gt;&lt;div id="code7.3" class="line"&gt;&lt;a href="#code7.3" aria-hidden="true"&gt;&lt;/a&gt;.*.swp
+&lt;pre id="code7" class="highlight"&gt;&lt;input type="radio" name="code_menu7f4cf7b3cc8f2931067f3492b670d7935d5d410b" class="no-line-numbers icon list-numbered"&gt;&lt;input type="radio" name="code_menu7f4cf7b3cc8f2931067f3492b670d7935d5d410b" class="line-numbers icon list-numbered"&gt;&lt;code class="language-txt" data-file=".gitignore"&gt;&lt;div id="code7.1" class="line"&gt;&lt;a href="#code7.1" aria-hidden="true"&gt;&lt;/a&gt;*~
+&lt;/div&gt;&lt;div id="code7.2" class="line"&gt;&lt;a href="#code7.2" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="gs"&gt;*.pyc&lt;/span&gt;
+&lt;/div&gt;&lt;div id="code7.3" class="line"&gt;&lt;a href="#code7.3" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="gs"&gt;.*&lt;/span&gt;.swp
 &lt;/div&gt;&lt;div id="code7.4" class="line"&gt;&lt;a href="#code7.4" aria-hidden="true"&gt;&lt;/a&gt;
 &lt;/div&gt;&lt;div id="code7.5" class="line"&gt;&lt;a href="#code7.5" aria-hidden="true"&gt;&lt;/a&gt;**/__pycache__
 &lt;/div&gt;&lt;div id="code7.6" class="line"&gt;&lt;a href="#code7.6" aria-hidden="true"&gt;&lt;/a&gt;

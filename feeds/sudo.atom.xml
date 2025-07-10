@@ -146,7 +146,7 @@ through all of them and see if they are real benefits at all:&lt;/p&gt;
 &lt;p&gt;and then types &amp;ldquo;!&amp;rdquo; followed by the Enter/Return key — the user effectively
  now in the root shell and what &lt;code&gt;sudo&lt;/code&gt; will log into its logs has nothing
  to do with what user actually did.&lt;/p&gt;
-&lt;p&gt;Instead of relying on &lt;code&gt;sudo&lt;/code&gt;&amp;lsquo;s logging abilities, one should configure
+&lt;p&gt;Instead of relying on &lt;code&gt;sudo&lt;/code&gt;&amp;rsquo;s logging abilities, one should configure
  &lt;code&gt;auditd&lt;/code&gt; and send events to a centralised log aggregator to get audit logs
  that can be trusted.&lt;/p&gt;
 &lt;/li&gt;

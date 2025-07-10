@@ -20,7 +20,7 @@
 		"author": "(GalaxyMaster)",
 		"name" : "nginx + a backend with a dynamic IP (e.g. AWS ELB)",
 		"datePublished" : "2017-01-13T10:00:00+11:00",
-		"dateModified" : "2020-05-17T20:25:15+10:00",
+		"dateModified" : "2025-07-10T11:52:03+10:00",
 		"image" : "https://dmitry.khlebnikov.net/2020/06/14/truly-responsive-pagination/images/paginator-sketch.png",
 		"headline" : "headline",
 		"abstract": "abstract goes here",
@@ -276,58 +276,58 @@ loadable policy for the <code>systemd-socket-proxyd</code> service.</p>
 support file too, but for the purposes of this article we should be fine with
 the automatically generated one.</p>
 <p>The content of the systemd-socket-proxy.te file is listed below:</p>
-<pre class="highlight"><input type="radio" name="code_menu6ee807126d5ecaf22bfa3bcc78cbac941663035a" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu6ee807126d5ecaf22bfa3bcc78cbac941663035a" class="line-numbers icon list-numbered"><code class="language-selinux" data-file="systemd-socket-proxy.te"><div class="line"><a></a><span class="nt">policy_module</span><span class="o">(</span><span class="nt">systemd-socket-proxyd</span><span class="o">,</span><span class="w"> </span><span class="nt">1</span><span class="p">.</span><span class="nc">0</span><span class="o">)</span>
+<pre class="highlight"><input type="radio" name="code_menu303ae941afb9ed879e7e4742c6cd6bfb379781de" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu303ae941afb9ed879e7e4742c6cd6bfb379781de" class="line-numbers icon list-numbered"><code class="language-selinux" data-file="systemd-socket-proxy.te"><div class="line"><a></a><span class="nx">policy_module</span><span class="p">(</span><span class="nx">systemd</span><span class="o">-</span><span class="nx">socket</span><span class="o">-</span><span class="nx">proxyd</span><span class="p">,</span><span class="w"> </span><span class="m m-Double">1.0</span><span class="p">)</span>
 </div><div class="line"><a></a>
-</div><div class="line"><a></a><span class="err">##</span><span class="w"> </span><span class="o">&lt;</span><span class="nt">desc</span><span class="o">&gt;</span>
-</div><div class="line"><a></a><span class="err">##</span><span class="w">  </span><span class="o">&lt;</span><span class="nt">p</span><span class="o">&gt;</span>
-</div><div class="line"><a></a><span class="err">##</span><span class="w">  </span><span class="nt">Allow</span><span class="w"> </span><span class="nt">systemd-socket-proxyd</span><span class="w"> </span><span class="nt">to</span><span class="w"> </span><span class="nt">bind</span><span class="w"> </span><span class="nt">any</span><span class="w"> </span><span class="nt">port</span><span class="w"> </span><span class="nt">instead</span><span class="w"> </span><span class="nt">of</span><span class="w"> </span><span class="nt">one</span><span class="w"> </span><span class="nt">labelled</span>
-</div><div class="line"><a></a><span class="err">##</span><span class="w"> </span><span class="nt">with</span><span class="w"> </span><span class="nt">systemd_socket_proxyd_port_t</span><span class="o">.</span>
-</div><div class="line"><a></a><span class="err">##</span><span class="w">  </span><span class="o">&lt;/</span><span class="nt">p</span><span class="o">&gt;</span>
-</div><div class="line"><a></a><span class="err">##</span><span class="w"> </span><span class="o">&lt;/</span><span class="nt">desc</span><span class="o">&gt;</span>
-</div><div class="line"><a></a><span class="nt">gen_tunable</span><span class="o">(</span><span class="nt">systemd_socket_proxyd_bind_any</span><span class="o">,</span><span class="w"> </span><span class="nt">false</span><span class="o">)</span>
+</div><div class="line"><a></a><span class="err">##</span><span class="w"> </span><span class="p">&lt;</span><span class="nx">desc</span><span class="p">&gt;</span>
+</div><div class="line"><a></a><span class="err">##</span><span class="w">  </span><span class="p">&lt;</span><span class="nx">p</span><span class="p">&gt;</span>
+</div><div class="line"><a></a><span class="err">##</span><span class="w">  </span><span class="nx">Allow</span><span class="w"> </span><span class="nx">systemd</span><span class="o">-</span><span class="nx">socket</span><span class="o">-</span><span class="nx">proxyd</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">bind</span><span class="w"> </span><span class="nx">any</span><span class="w"> </span><span class="nx">port</span><span class="w"> </span><span class="nx">instead</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">one</span><span class="w"> </span><span class="nx">labelled</span>
+</div><div class="line"><a></a><span class="err">##</span><span class="w"> </span><span class="nx">with</span><span class="w"> </span><span class="nx">systemd_socket_proxyd_port_t</span><span class="p">.</span>
+</div><div class="line"><a></a><span class="err">##</span><span class="w">  </span><span class="p">&lt;</span><span class="o">/</span><span class="nx">p</span><span class="p">&gt;</span>
+</div><div class="line"><a></a><span class="err">##</span><span class="w"> </span><span class="p">&lt;</span><span class="o">/</span><span class="nx">desc</span><span class="p">&gt;</span>
+</div><div class="line"><a></a><span class="nx">gen_tunable</span><span class="p">(</span><span class="nx">systemd_socket_proxyd_bind_any</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span>
 </div><div class="line"><a></a>
-</div><div class="line"><a></a><span class="err">##</span><span class="w"> </span><span class="o">&lt;</span><span class="nt">desc</span><span class="o">&gt;</span>
-</div><div class="line"><a></a><span class="err">##</span><span class="w"> </span><span class="o">&lt;</span><span class="nt">p</span><span class="o">&gt;</span>
-</div><div class="line"><a></a><span class="err">##</span><span class="w"> </span><span class="nt">Allow</span><span class="w"> </span><span class="nt">systemd-socket-proxyd</span><span class="w"> </span><span class="nt">to</span><span class="w"> </span><span class="nt">connect</span><span class="w"> </span><span class="nt">to</span><span class="w"> </span><span class="nt">any</span><span class="w"> </span><span class="nt">port</span><span class="w"> </span><span class="nt">instead</span><span class="w"> </span><span class="nt">of</span>
-</div><div class="line"><a></a><span class="err">##</span><span class="w"> </span><span class="nt">labelled</span><span class="w"> </span><span class="nt">ones</span><span class="o">.</span>
-</div><div class="line"><a></a><span class="err">##</span><span class="w"> </span><span class="o">&lt;/</span><span class="nt">p</span><span class="o">&gt;</span>
-</div><div class="line"><a></a><span class="err">##</span><span class="w"> </span><span class="o">&lt;/</span><span class="nt">desc</span><span class="o">&gt;</span>
-</div><div class="line"><a></a><span class="nt">gen_tunable</span><span class="o">(</span><span class="nt">systemd_socket_proxyd_connect_any</span><span class="o">,</span><span class="w"> </span><span class="nt">false</span><span class="o">)</span>
+</div><div class="line"><a></a><span class="err">##</span><span class="w"> </span><span class="p">&lt;</span><span class="nx">desc</span><span class="p">&gt;</span>
+</div><div class="line"><a></a><span class="err">##</span><span class="w"> </span><span class="p">&lt;</span><span class="nx">p</span><span class="p">&gt;</span>
+</div><div class="line"><a></a><span class="err">##</span><span class="w"> </span><span class="nx">Allow</span><span class="w"> </span><span class="nx">systemd</span><span class="o">-</span><span class="nx">socket</span><span class="o">-</span><span class="nx">proxyd</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">connect</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">any</span><span class="w"> </span><span class="nx">port</span><span class="w"> </span><span class="nx">instead</span><span class="w"> </span><span class="nx">of</span>
+</div><div class="line"><a></a><span class="err">##</span><span class="w"> </span><span class="nx">labelled</span><span class="w"> </span><span class="nx">ones</span><span class="p">.</span>
+</div><div class="line"><a></a><span class="err">##</span><span class="w"> </span><span class="p">&lt;</span><span class="o">/</span><span class="nx">p</span><span class="p">&gt;</span>
+</div><div class="line"><a></a><span class="err">##</span><span class="w"> </span><span class="p">&lt;</span><span class="o">/</span><span class="nx">desc</span><span class="p">&gt;</span>
+</div><div class="line"><a></a><span class="nx">gen_tunable</span><span class="p">(</span><span class="nx">systemd_socket_proxyd_connect_any</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span>
 </div><div class="line"><a></a>
-</div><div class="line"><a></a><span class="nt">systemd_domain_template</span><span class="o">(</span><span class="nt">systemd_socket_proxyd</span><span class="o">)</span>
+</div><div class="line"><a></a><span class="nx">systemd_domain_template</span><span class="p">(</span><span class="nx">systemd_socket_proxyd</span><span class="p">)</span>
 </div><div class="line"><a></a>
-</div><div class="line"><a></a><span class="nt">type</span><span class="w"> </span><span class="nt">systemd_socket_proxyd_unit_file_t</span><span class="o">;</span>
-</div><div class="line"><a></a><span class="nt">systemd_unit_file</span><span class="o">(</span><span class="nt">systemd_socket_proxyd_unit_file_t</span><span class="o">)</span>
+</div><div class="line"><a></a><span class="k">type</span><span class="w"> </span><span class="nx">systemd_socket_proxyd_unit_file_t</span><span class="p">;</span>
+</div><div class="line"><a></a><span class="nx">systemd_unit_file</span><span class="p">(</span><span class="nx">systemd_socket_proxyd_unit_file_t</span><span class="p">)</span>
 </div><div class="line"><a></a>
-</div><div class="line"><a></a><span class="nt">sysnet_dns_name_resolve</span><span class="o">(</span><span class="nt">systemd_socket_proxyd_t</span><span class="o">)</span>
+</div><div class="line"><a></a><span class="nx">sysnet_dns_name_resolve</span><span class="p">(</span><span class="nx">systemd_socket_proxyd_t</span><span class="p">)</span>
 </div><div class="line"><a></a>
-</div><div class="line"><a></a><span class="err">#</span><span class="w"> </span><span class="nt">resolver</span>
-</div><div class="line"><a></a><span class="nt">allow</span><span class="w"> </span><span class="nt">systemd_socket_proxyd_t</span><span class="w"> </span><span class="nt">self</span><span class="p">:</span><span class="nd">unix_dgram_socket</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">create</span><span class="w"> </span><span class="err">getopt</span><span class="w"> </span><span class="err">setopt</span><span class="w"> </span><span class="err">sendto</span><span class="w"> </span><span class="err">read</span><span class="w"> </span><span class="err">write</span><span class="w"> </span><span class="p">}</span><span class="o">;</span>
+</div><div class="line"><a></a><span class="err">#</span><span class="w"> </span><span class="nx">resolver</span>
+</div><div class="line"><a></a><span class="nx">allow</span><span class="w"> </span><span class="nx">systemd_socket_proxyd_t</span><span class="w"> </span><span class="kp">self</span><span class="p">:</span><span class="nx">unix_dgram_socket</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">create</span><span class="w"> </span><span class="nx">getopt</span><span class="w"> </span><span class="nx">setopt</span><span class="w"> </span><span class="nx">sendto</span><span class="w"> </span><span class="nx">read</span><span class="w"> </span><span class="nx">write</span><span class="w"> </span><span class="p">};</span>
 </div><div class="line"><a></a>
-</div><div class="line"><a></a><span class="err">#</span><span class="w"> </span><span class="nt">listener</span>
-</div><div class="line"><a></a><span class="nt">type</span><span class="w"> </span><span class="nt">systemd_socket_proxyd_port_t</span><span class="o">;</span>
-</div><div class="line"><a></a><span class="nt">corenet_port</span><span class="o">(</span><span class="nt">systemd_socket_proxyd_port_t</span><span class="o">);</span>
-</div><div class="line"><a></a><span class="nt">allow</span><span class="w"> </span><span class="nt">systemd_socket_proxyd_t</span><span class="w"> </span><span class="nt">self</span><span class="p">:</span><span class="nd">tcp_socket</span><span class="w"> </span><span class="nt">accept</span><span class="o">;</span>
+</div><div class="line"><a></a><span class="err">#</span><span class="w"> </span><span class="nx">listener</span>
+</div><div class="line"><a></a><span class="k">type</span><span class="w"> </span><span class="nx">systemd_socket_proxyd_port_t</span><span class="p">;</span>
+</div><div class="line"><a></a><span class="nx">corenet_port</span><span class="p">(</span><span class="nx">systemd_socket_proxyd_port_t</span><span class="p">);</span>
+</div><div class="line"><a></a><span class="nx">allow</span><span class="w"> </span><span class="nx">systemd_socket_proxyd_t</span><span class="w"> </span><span class="kp">self</span><span class="p">:</span><span class="nx">tcp_socket</span><span class="w"> </span><span class="nx">accept</span><span class="p">;</span>
 </div><div class="line"><a></a>
-</div><div class="line"><a></a><span class="nt">tunable_policy</span><span class="o">(</span><span class="err">`</span><span class="o">!</span><span class="nt">systemd_socket_proxyd_bind_any</span><span class="s1">&#39;,`</span>
-</div><div class="line"><a></a><span class="s1"> allow systemd_socket_proxyd_t systemd_socket_proxyd_port_t:tcp_socket name_bind;</span>
-</div><div class="line"><a></a><span class="s1">&#39;</span><span class="o">)</span>
+</div><div class="line"><a></a><span class="nx">tunable_policy</span><span class="p">(</span><span class="err">`</span><span class="p">!</span><span class="nx">systemd_socket_proxyd_bind_any</span><span class="err">&#39;</span><span class="p">,</span><span class="err">`</span>
+</div><div class="line"><a></a><span class="w"> </span><span class="nx">allow</span><span class="w"> </span><span class="nx">systemd_socket_proxyd_t</span><span class="w"> </span><span class="nx">systemd_socket_proxyd_port_t</span><span class="p">:</span><span class="nx">tcp_socket</span><span class="w"> </span><span class="nx">name_bind</span><span class="p">;</span>
+</div><div class="line"><a></a><span class="err">&#39;</span><span class="p">)</span>
 </div><div class="line"><a></a>
-</div><div class="line"><a></a><span class="nt">tunable_policy</span><span class="o">(</span><span class="err">`</span><span class="nt">systemd_socket_proxyd_bind_any</span><span class="s1">&#39;,`</span>
-</div><div class="line"><a></a><span class="s1"> corenet_tcp_bind_all_ports(systemd_socket_proxyd_t)</span>
-</div><div class="line"><a></a><span class="s1">&#39;</span><span class="o">)</span>
+</div><div class="line"><a></a><span class="nx">tunable_policy</span><span class="p">(</span><span class="err">`</span><span class="nx">systemd_socket_proxyd_bind_any</span><span class="err">&#39;</span><span class="p">,</span><span class="err">`</span>
+</div><div class="line"><a></a><span class="w"> </span><span class="nx">corenet_tcp_bind_all_ports</span><span class="p">(</span><span class="nx">systemd_socket_proxyd_t</span><span class="p">)</span>
+</div><div class="line"><a></a><span class="err">&#39;</span><span class="p">)</span>
 </div><div class="line"><a></a>
-</div><div class="line"><a></a><span class="err">#</span><span class="w"> </span><span class="nt">target</span>
-</div><div class="line"><a></a><span class="nt">tunable_policy</span><span class="o">(</span><span class="err">`</span><span class="o">!</span><span class="nt">systemd_socket_proxyd_connect_any</span><span class="s1">&#39;,`</span>
-</div><div class="line"><a></a><span class="s1"> allow systemd_socket_proxyd_t port_type:tcp_socket name_connect;</span>
-</div><div class="line"><a></a><span class="s1">&#39;</span><span class="o">)</span>
+</div><div class="line"><a></a><span class="err">#</span><span class="w"> </span><span class="nx">target</span>
+</div><div class="line"><a></a><span class="nx">tunable_policy</span><span class="p">(</span><span class="err">`</span><span class="p">!</span><span class="nx">systemd_socket_proxyd_connect_any</span><span class="err">&#39;</span><span class="p">,</span><span class="err">`</span>
+</div><div class="line"><a></a><span class="w"> </span><span class="nx">allow</span><span class="w"> </span><span class="nx">systemd_socket_proxyd_t</span><span class="w"> </span><span class="nx">port_type</span><span class="p">:</span><span class="nx">tcp_socket</span><span class="w"> </span><span class="nx">name_connect</span><span class="p">;</span>
+</div><div class="line"><a></a><span class="err">&#39;</span><span class="p">)</span>
 </div><div class="line"><a></a>
-</div><div class="line"><a></a><span class="nt">tunable_policy</span><span class="o">(</span><span class="err">`</span><span class="nt">systemd_socket_proxyd_connect_any</span><span class="s1">&#39;,`</span>
-</div><div class="line"><a></a><span class="s1"> corenet_tcp_connect_all_ports(systemd_socket_proxyd_t)</span>
-</div><div class="line"><a></a><span class="s1">&#39;</span><span class="o">)</span>
+</div><div class="line"><a></a><span class="nx">tunable_policy</span><span class="p">(</span><span class="err">`</span><span class="nx">systemd_socket_proxyd_connect_any</span><span class="err">&#39;</span><span class="p">,</span><span class="err">`</span>
+</div><div class="line"><a></a><span class="w"> </span><span class="nx">corenet_tcp_connect_all_ports</span><span class="p">(</span><span class="nx">systemd_socket_proxyd_t</span><span class="p">)</span>
+</div><div class="line"><a></a><span class="err">&#39;</span><span class="p">)</span>
 </div><div class="line"><a></a>
-</div><div class="line"><a></a><span class="err">#</span><span class="w"> </span><span class="nt">consumer</span>
-</div><div class="line"><a></a><span class="nt">allow</span><span class="w"> </span><span class="nt">daemon</span><span class="w"> </span><span class="nt">systemd_socket_proxyd_t</span><span class="p">:</span><span class="nd">unix_stream_socket</span><span class="w"> </span><span class="nt">connectto</span><span class="o">;</span></div></code></pre>
+</div><div class="line"><a></a><span class="err">#</span><span class="w"> </span><span class="nx">consumer</span>
+</div><div class="line"><a></a><span class="nx">allow</span><span class="w"> </span><span class="nx">daemon</span><span class="w"> </span><span class="nx">systemd_socket_proxyd_t</span><span class="p">:</span><span class="nx">unix_stream_socket</span><span class="w"> </span><span class="nx">connectto</span><span class="p">;</span></div></code></pre>
 <p>This is still work in progress, but so far it works at least for my projects.
 Note that there are two SELinux booleans defined which affect the behaviour of
 the policy:</p>
@@ -460,7 +460,7 @@ I am running on the same VM:</p>
 <p>Works as expected :).</p>
 <p>There is one thing one needs to be aware of: when I started to work on this I
 discovered that <code>systemd-socket-proxyd</code> had a hard-coded limit for the number
-of connections set to 256 (I <a href="../../../../2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/">introduced the <code>-c</code> parameter</a> to
+of connections set to 256 (I <a href="https://github.com/systemd/systemd/commit/dc3b8afb93f188f212218487ab62fd3f12a2b58f">introduced the <code>-c</code> parameter</a> to
 <code>systemd-socket-proxyd</code>, so one could dynamically set the limit, however it
 would take some time until this change is propagated to all major distros).</p>
 <p>Also, it is worth it to mention that the provided configuration is not

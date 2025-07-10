@@ -747,7 +747,7 @@ pseudo-element:&lt;/p&gt;
 &lt;/div&gt;&lt;div id="demo3.13" class="line"&gt;&lt;a href="#demo3.13" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;right&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;-1&lt;/span&gt;&lt;span class="kt"&gt;em&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/div&gt;&lt;div id="demo3.14" class="line"&gt;&lt;a href="#demo3.14" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;background-color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;blue&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c"&gt;/* temporary, to make it visible */&lt;/span&gt;
 &lt;/div&gt;&lt;div id="demo3.15" class="line"&gt;&lt;a href="#demo3.15" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Note that we also introduced &lt;code&gt;position: relative&lt;/code&gt; to our &lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt;&amp;lsquo;s.  It is
+&lt;p&gt;Note that we also introduced &lt;code&gt;position: relative&lt;/code&gt; to our &lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt;&amp;rsquo;s.  It is
 needed since if we want to position our pseudo-element relative to its parent,
 the parent needs to have the position attribute set to anything but &lt;code&gt;static&lt;/code&gt;.
 In our context, &lt;code&gt;relative&lt;/code&gt; is the desired positioning for the &lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt; element.
