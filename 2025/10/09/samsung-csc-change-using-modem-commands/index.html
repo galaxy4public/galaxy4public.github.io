@@ -20,7 +20,7 @@
 		"author": "(GalaxyMaster)",
 		"name" : "Samsung CSC Change Using Modem Commands",
 		"datePublished" : "2025-10-09T15:30:00+11:00",
-		"dateModified" : "2025-10-09T16:25:40+11:00",
+		"dateModified" : "2025-10-09T16:37:05+11:00",
 		"image" : "https://dmitry.khlebnikov.net/2020/06/14/truly-responsive-pagination/images/paginator-sketch.png",
 		"headline" : "headline",
 		"abstract": "abstract goes here",
@@ -167,48 +167,56 @@ to <code>XID</code> (Indonesia).</p>
 </li>
 <li>
 <p>Now is the magic :).  Below is my terminal session on macOS with my comments after the snippet:</p>
-<p>:::bash
-galaxy@galaxy ~ $ sudo -i          <br>
-Password:</p>
-<p>root@galaxy ~ # ls -la /dev/cu.*                  <br>
-crw-rw-rw-  1 root  wheel  0x9000003 Aug 26 10:39 /dev/cu.Bluetooth-Incoming-Port
-crw-rw-rw-  1 root  wheel  0x9000001 Aug 26 10:38 /dev/cu.debug-console
-crw-rw-rw-  1 root  wheel  0x9000005 Oct  9 14:03 /dev/cu.usbmodemXXXXXXXXXXXX
-Eris:~ root# cu -l /dev/cu.usbmodemXXXXXXXXXXXX -s 115200
-Connected.
-AT
-OK
-ATI
-Manufacturer: SAMSUNG ELECTRONICS CORPORATION
-Model: SM-F966B
-Revision: F966BXXU4AYI1
-SVN: 01
-IMEI: IIIIIIIIIIIIIII
-+GCAP: +CGSM</p>
-<p>OK
-AT+DUMPCTRL=1,0</p>
-<p>+CME Error:PACM(AP),PROTECTED_NO_TOK</p>
-<p>OK
-AT+SWATD=0
-[DR]: CHANGE TO DDEXE[ATD]: CHANGE TO DDEXE</p>
-<p>OK
-AT+ACTIVATE=0,0,0</p>
-<p>+CME Error:PACM(AP),UNREGISTED</p>
-<p>OK
-AT+SWATD=1
-[DR]: CHANGE TO ATD[ATD]: CHANGE TO ATD</p>
-<p>OK
-AT+PRECONFG=2,XID
-+PRECONFG:2,OK</p>
-<p>OK
-AT+CFUN=1,1
-+CFUN=1,1:NA</p>
-<p>OK
-~.</p>
-<p>Disconnected.
-root@galaxy ~ #</p>
-</li>
-</ol>
+<pre class="highlight"><input type="radio" name="code_menu9ad25de3e40b2237a346bf138d57e8d6e38dc347" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu9ad25de3e40b2237a346bf138d57e8d6e38dc347" class="line-numbers icon list-numbered"><code class="language-bash"><div class="line"><a></a>galaxy@galaxy<span class="w"> </span>~<span class="w"> </span>$<span class="w"> </span>sudo<span class="w"> </span>-i<span class="w">            </span>
+</div><div class="line"><a></a>Password:
+</div><div class="line"><a></a>
+</div><div class="line"><a></a>root@galaxy<span class="w"> </span>~<span class="w"> </span><span class="c1"># ls -la /dev/cu.*                    </span>
+</div><div class="line"><a></a>crw-rw-rw-<span class="w">  </span><span class="m">1</span><span class="w"> </span>root<span class="w">  </span>wheel<span class="w">  </span>0x9000003<span class="w"> </span>Aug<span class="w"> </span><span class="m">26</span><span class="w"> </span><span class="m">10</span>:39<span class="w"> </span>/dev/cu.Bluetooth-Incoming-Port
+</div><div class="line"><a></a>crw-rw-rw-<span class="w">  </span><span class="m">1</span><span class="w"> </span>root<span class="w">  </span>wheel<span class="w">  </span>0x9000001<span class="w"> </span>Aug<span class="w"> </span><span class="m">26</span><span class="w"> </span><span class="m">10</span>:38<span class="w"> </span>/dev/cu.debug-console
+</div><div class="line"><a></a>crw-rw-rw-<span class="w">  </span><span class="m">1</span><span class="w"> </span>root<span class="w">  </span>wheel<span class="w">  </span>0x9000005<span class="w"> </span>Oct<span class="w">  </span><span class="m">9</span><span class="w"> </span><span class="m">14</span>:03<span class="w"> </span>/dev/cu.usbmodemXXXXXXXXXXXX
+</div><div class="line"><a></a>Eris:~<span class="w"> </span>root#<span class="w"> </span>cu<span class="w"> </span>-l<span class="w"> </span>/dev/cu.usbmodemXXXXXXXXXXXX<span class="w"> </span>-s<span class="w"> </span><span class="m">115200</span>
+</div><div class="line"><a></a>Connected.
+</div><div class="line"><a></a>AT
+</div><div class="line"><a></a>OK
+</div><div class="line"><a></a>ATI
+</div><div class="line"><a></a>Manufacturer:<span class="w"> </span>SAMSUNG<span class="w"> </span>ELECTRONICS<span class="w"> </span>CORPORATION
+</div><div class="line"><a></a>Model:<span class="w"> </span>SM-F966B
+</div><div class="line"><a></a>Revision:<span class="w"> </span>F966BXXU4AYI1
+</div><div class="line"><a></a>SVN:<span class="w"> </span><span class="m">01</span>
+</div><div class="line"><a></a>IMEI:<span class="w"> </span>IIIIIIIIIIIIIII
+</div><div class="line"><a></a>+GCAP:<span class="w"> </span>+CGSM
+</div><div class="line"><a></a>
+</div><div class="line"><a></a>OK
+</div><div class="line"><a></a>AT+DUMPCTRL<span class="o">=</span><span class="m">1</span>,0
+</div><div class="line"><a></a>
+</div><div class="line"><a></a>+CME<span class="w"> </span>Error:PACM<span class="o">(</span>AP<span class="o">)</span>,PROTECTED_NO_TOK
+</div><div class="line"><a></a>
+</div><div class="line"><a></a>OK
+</div><div class="line"><a></a>AT+SWATD<span class="o">=</span><span class="m">0</span>
+</div><div class="line"><a></a><span class="o">[</span>DR<span class="o">]</span>:<span class="w"> </span>CHANGE<span class="w"> </span>TO<span class="w"> </span>DDEXE<span class="o">[</span>ATD<span class="o">]</span>:<span class="w"> </span>CHANGE<span class="w"> </span>TO<span class="w"> </span>DDEXE
+</div><div class="line"><a></a>
+</div><div class="line"><a></a>OK
+</div><div class="line"><a></a>AT+ACTIVATE<span class="o">=</span><span class="m">0</span>,0,0
+</div><div class="line"><a></a>
+</div><div class="line"><a></a>+CME<span class="w"> </span>Error:PACM<span class="o">(</span>AP<span class="o">)</span>,UNREGISTED
+</div><div class="line"><a></a>
+</div><div class="line"><a></a>OK
+</div><div class="line"><a></a>AT+SWATD<span class="o">=</span><span class="m">1</span>
+</div><div class="line"><a></a><span class="o">[</span>DR<span class="o">]</span>:<span class="w"> </span>CHANGE<span class="w"> </span>TO<span class="w"> </span>ATD<span class="o">[</span>ATD<span class="o">]</span>:<span class="w"> </span>CHANGE<span class="w"> </span>TO<span class="w"> </span>ATD
+</div><div class="line"><a></a>
+</div><div class="line"><a></a>OK
+</div><div class="line"><a></a>AT+PRECONFG<span class="o">=</span><span class="m">2</span>,XID
+</div><div class="line"><a></a>+PRECONFG:2,OK
+</div><div class="line"><a></a>
+</div><div class="line"><a></a>OK
+</div><div class="line"><a></a>AT+CFUN<span class="o">=</span><span class="m">1</span>,1
+</div><div class="line"><a></a>+CFUN<span class="o">=</span><span class="m">1</span>,1:NA
+</div><div class="line"><a></a>
+</div><div class="line"><a></a>OK
+</div><div class="line"><a></a>~.
+</div><div class="line"><a></a>
+</div><div class="line"><a></a>Disconnected.
+</div><div class="line"><a></a>root@galaxy<span class="w"> </span>~<span class="w"> </span><span class="c1">#</span></div></code></pre>
 <p>I used <code>AT</code> at the beginning of the session to confirm that the modem interface
 is active (I got an <code>OK</code>, so it was active). Then I used <code>ATI</code> to ensure that I
 am actually talking to the desired device (it was indeed <code>SM-F966B</code>).</p>
@@ -223,6 +231,8 @@ case it was <code>XID</code> for Indonesia.  You can get a list of all available
 from <a href="https://samfw.com/">SamFW</a> (the site is really heavy on ads, though, so beware).</p>
 <p><code>AT+CFUN=1,1</code> is supposed to reboot the device.  In my case, it did not, so I
 rebooted it manually.</p>
+</li>
+<li>
 <p>Once you rebooted your device, go to Settings -&gt; About phone -&gt; Software
 information and look at the &ldquo;Service prvider software version&rdquo; section.  Mine
 looks like the following (after the change):</p>
@@ -232,6 +242,8 @@ means that I have a dual-SIM enabled device with XID (Indonesia) CSC enabled
 for both SIMs, that the custom CSC is XID, but factory one is XSA (Australia).
 In your case, you should see your selected CSC in that line, if everything
 worked out correctly.</p>
+</li>
+</ol>
 <p>This is basically it. Enjoy! :)</p>
 				<footer>
 					<span><span class="contextual">Offloaded on </span><time datetime="2025-10-09T15:30:00+11:00">

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - hacks</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"/><link href="https://dmitry.khlebnikov.net/feeds/hacks.atom.xml" rel="self"/><id>https://dmitry.khlebnikov.net/</id><updated>2025-10-09T16:25:40+11:00</updated><subtitle>assorted bits of wit</subtitle><entry><title>Samsung CSC Change Using Modem Commands</title><link href="https://dmitry.khlebnikov.net/2025/10/09/samsung-csc-change-using-modem-commands/" rel="alternate"/><published>2025-10-09T15:30:00+11:00</published><updated>2025-10-09T16:25:40+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2025-10-09:/2025/10/09/samsung-csc-change-using-modem-commands/</id><summary type="html">&lt;p&gt;This is a brief brain dump, so I can recall it when needed.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - hacks</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"/><link href="https://dmitry.khlebnikov.net/feeds/hacks.atom.xml" rel="self"/><id>https://dmitry.khlebnikov.net/</id><updated>2025-10-09T16:37:05+11:00</updated><subtitle>assorted bits of wit</subtitle><entry><title>Samsung CSC Change Using Modem Commands</title><link href="https://dmitry.khlebnikov.net/2025/10/09/samsung-csc-change-using-modem-commands/" rel="alternate"/><published>2025-10-09T15:30:00+11:00</published><updated>2025-10-09T16:37:05+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2025-10-09:/2025/10/09/samsung-csc-change-using-modem-commands/</id><summary type="html">&lt;p&gt;This is a brief brain dump, so I can recall it when needed.&lt;/p&gt;
 &lt;p&gt;Each time I get a new Samsung phone I have to figure out a way to change the
 Country Service Code (CSC) to a country that allows automated call recordings,
 for example, Indonesia (XID).  Previously, approximately 5 years ago, it was
@@ -54,48 +54,56 @@ to &lt;code&gt;XID&lt;/code&gt; (Indonesia).&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Now is the magic :).  Below is my terminal session on macOS with my comments after the snippet:&lt;/p&gt;
-&lt;p&gt;:::bash
-galaxy@galaxy ~ $ sudo -i          &lt;br&gt;
-Password:&lt;/p&gt;
-&lt;p&gt;root@galaxy ~ # ls -la /dev/cu.*                  &lt;br&gt;
-crw-rw-rw-  1 root  wheel  0x9000003 Aug 26 10:39 /dev/cu.Bluetooth-Incoming-Port
-crw-rw-rw-  1 root  wheel  0x9000001 Aug 26 10:38 /dev/cu.debug-console
-crw-rw-rw-  1 root  wheel  0x9000005 Oct  9 14:03 /dev/cu.usbmodemXXXXXXXXXXXX
-Eris:~ root# cu -l /dev/cu.usbmodemXXXXXXXXXXXX -s 115200
-Connected.
-AT
-OK
-ATI
-Manufacturer: SAMSUNG ELECTRONICS CORPORATION
-Model: SM-F966B
-Revision: F966BXXU4AYI1
-SVN: 01
-IMEI: IIIIIIIIIIIIIII
-+GCAP: +CGSM&lt;/p&gt;
-&lt;p&gt;OK
-AT+DUMPCTRL=1,0&lt;/p&gt;
-&lt;p&gt;+CME Error:PACM(AP),PROTECTED_NO_TOK&lt;/p&gt;
-&lt;p&gt;OK
-AT+SWATD=0
-[DR]: CHANGE TO DDEXE[ATD]: CHANGE TO DDEXE&lt;/p&gt;
-&lt;p&gt;OK
-AT+ACTIVATE=0,0,0&lt;/p&gt;
-&lt;p&gt;+CME Error:PACM(AP),UNREGISTED&lt;/p&gt;
-&lt;p&gt;OK
-AT+SWATD=1
-[DR]: CHANGE TO ATD[ATD]: CHANGE TO ATD&lt;/p&gt;
-&lt;p&gt;OK
-AT+PRECONFG=2,XID
-+PRECONFG:2,OK&lt;/p&gt;
-&lt;p&gt;OK
-AT+CFUN=1,1
-+CFUN=1,1:NA&lt;/p&gt;
-&lt;p&gt;OK
-~.&lt;/p&gt;
-&lt;p&gt;Disconnected.
-root@galaxy ~ #&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
+&lt;pre class="highlight"&gt;&lt;input type="radio" name="code_menu9ad25de3e40b2237a346bf138d57e8d6e38dc347" class="no-line-numbers icon list-numbered"&gt;&lt;input type="radio" name="code_menu9ad25de3e40b2237a346bf138d57e8d6e38dc347" class="line-numbers icon list-numbered"&gt;&lt;code class="language-bash"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;galaxy@galaxy&lt;span class="w"&gt; &lt;/span&gt;~&lt;span class="w"&gt; &lt;/span&gt;$&lt;span class="w"&gt; &lt;/span&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;-i&lt;span class="w"&gt;            &lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;Password:
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;root@galaxy&lt;span class="w"&gt; &lt;/span&gt;~&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;# ls -la /dev/cu.*                    &lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;crw-rw-rw-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;root&lt;span class="w"&gt;  &lt;/span&gt;wheel&lt;span class="w"&gt;  &lt;/span&gt;0x9000003&lt;span class="w"&gt; &lt;/span&gt;Aug&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;26&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;10&lt;/span&gt;:39&lt;span class="w"&gt; &lt;/span&gt;/dev/cu.Bluetooth-Incoming-Port
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;crw-rw-rw-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;root&lt;span class="w"&gt;  &lt;/span&gt;wheel&lt;span class="w"&gt;  &lt;/span&gt;0x9000001&lt;span class="w"&gt; &lt;/span&gt;Aug&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;26&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;10&lt;/span&gt;:38&lt;span class="w"&gt; &lt;/span&gt;/dev/cu.debug-console
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;crw-rw-rw-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;root&lt;span class="w"&gt;  &lt;/span&gt;wheel&lt;span class="w"&gt;  &lt;/span&gt;0x9000005&lt;span class="w"&gt; &lt;/span&gt;Oct&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="m"&gt;9&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;14&lt;/span&gt;:03&lt;span class="w"&gt; &lt;/span&gt;/dev/cu.usbmodemXXXXXXXXXXXX
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;Eris:~&lt;span class="w"&gt; &lt;/span&gt;root#&lt;span class="w"&gt; &lt;/span&gt;cu&lt;span class="w"&gt; &lt;/span&gt;-l&lt;span class="w"&gt; &lt;/span&gt;/dev/cu.usbmodemXXXXXXXXXXXX&lt;span class="w"&gt; &lt;/span&gt;-s&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;115200&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;Connected.
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;AT
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;OK
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;ATI
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;Manufacturer:&lt;span class="w"&gt; &lt;/span&gt;SAMSUNG&lt;span class="w"&gt; &lt;/span&gt;ELECTRONICS&lt;span class="w"&gt; &lt;/span&gt;CORPORATION
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;Model:&lt;span class="w"&gt; &lt;/span&gt;SM-F966B
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;Revision:&lt;span class="w"&gt; &lt;/span&gt;F966BXXU4AYI1
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;SVN:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;01&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;IMEI:&lt;span class="w"&gt; &lt;/span&gt;IIIIIIIIIIIIIII
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;+GCAP:&lt;span class="w"&gt; &lt;/span&gt;+CGSM
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;OK
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;AT+DUMPCTRL&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;,0
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;+CME&lt;span class="w"&gt; &lt;/span&gt;Error:PACM&lt;span class="o"&gt;(&lt;/span&gt;AP&lt;span class="o"&gt;)&lt;/span&gt;,PROTECTED_NO_TOK
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;OK
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;AT+SWATD&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="o"&gt;[&lt;/span&gt;DR&lt;span class="o"&gt;]&lt;/span&gt;:&lt;span class="w"&gt; &lt;/span&gt;CHANGE&lt;span class="w"&gt; &lt;/span&gt;TO&lt;span class="w"&gt; &lt;/span&gt;DDEXE&lt;span class="o"&gt;[&lt;/span&gt;ATD&lt;span class="o"&gt;]&lt;/span&gt;:&lt;span class="w"&gt; &lt;/span&gt;CHANGE&lt;span class="w"&gt; &lt;/span&gt;TO&lt;span class="w"&gt; &lt;/span&gt;DDEXE
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;OK
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;AT+ACTIVATE&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;,0,0
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;+CME&lt;span class="w"&gt; &lt;/span&gt;Error:PACM&lt;span class="o"&gt;(&lt;/span&gt;AP&lt;span class="o"&gt;)&lt;/span&gt;,UNREGISTED
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;OK
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;AT+SWATD&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="o"&gt;[&lt;/span&gt;DR&lt;span class="o"&gt;]&lt;/span&gt;:&lt;span class="w"&gt; &lt;/span&gt;CHANGE&lt;span class="w"&gt; &lt;/span&gt;TO&lt;span class="w"&gt; &lt;/span&gt;ATD&lt;span class="o"&gt;[&lt;/span&gt;ATD&lt;span class="o"&gt;]&lt;/span&gt;:&lt;span class="w"&gt; &lt;/span&gt;CHANGE&lt;span class="w"&gt; &lt;/span&gt;TO&lt;span class="w"&gt; &lt;/span&gt;ATD
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;OK
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;AT+PRECONFG&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;,XID
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;+PRECONFG:2,OK
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;OK
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;AT+CFUN&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;,1
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;+CFUN&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;,1:NA
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;OK
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;~.
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;Disconnected.
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;root@galaxy&lt;span class="w"&gt; &lt;/span&gt;~&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;#&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;I used &lt;code&gt;AT&lt;/code&gt; at the beginning of the session to confirm that the modem interface
 is active (I got an &lt;code&gt;OK&lt;/code&gt;, so it was active). Then I used &lt;code&gt;ATI&lt;/code&gt; to ensure that I
 am actually talking to the desired device (it was indeed &lt;code&gt;SM-F966B&lt;/code&gt;).&lt;/p&gt;
@@ -110,6 +118,8 @@ case it was &lt;code&gt;XID&lt;/code&gt; for Indonesia.  You can get a list of a
 from &lt;a href="https://samfw.com/"&gt;SamFW&lt;/a&gt; (the site is really heavy on ads, though, so beware).&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;AT+CFUN=1,1&lt;/code&gt; is supposed to reboot the device.  In my case, it did not, so I
 rebooted it manually.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
 &lt;p&gt;Once you rebooted your device, go to Settings -&amp;gt; About phone -&amp;gt; Software
 information and look at the &amp;ldquo;Service prvider software version&amp;rdquo; section.  Mine
 looks like the following (after the change):&lt;/p&gt;
@@ -119,4 +129,6 @@ means that I have a dual-SIM enabled device with XID (Indonesia) CSC enabled
 for both SIMs, that the custom CSC is XID, but factory one is XSA (Australia).
 In your case, you should see your selected CSC in that line, if everything
 worked out correctly.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
 &lt;p&gt;This is basically it. Enjoy! :)&lt;/p&gt;</content><category term="hacks"/><category term="hacks"/><category term="howto"/><category term="console"/></entry></feed>
