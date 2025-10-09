@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - hacks</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"/><link href="https://dmitry.khlebnikov.net/feeds/hacks.atom.xml" rel="self"/><id>https://dmitry.khlebnikov.net/</id><updated>2025-10-09T16:25:40+11:00</updated><subtitle>assorted bits of wit</subtitle><entry><title>Samsung CSC Change Using Modem Commands</title><link href="https://dmitry.khlebnikov.net/2025/10/09/samsung-csc-change-using-modem-commands/" rel="alternate"/><published>2025-10-09T15:30:00+11:00</published><updated>2025-10-09T16:25:40+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2025-10-09:/2025/10/09/samsung-csc-change-using-modem-commands/</id><summary type="html">&lt;p&gt;This is a brief brain dump, so I can recall it when needed.&lt;/p&gt;
+&lt;p&gt;Each time I get a new Samsung phone I have to figure out a way to change the
+Country Service Code (CSC) to a country that allows automated call recordings,
+for example, Indonesia (XID).  Previously, approximately 5 years ago, it was
+quite straight forward: you needed to download the HOME_CSC image for the
+region you are interested in, ensure that it was for the same bootloader
+version, and flash it to the CSC partition.&lt;/p&gt;
+&lt;p&gt;However, something changed in recent years (and I was not paying attention to …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This is a brief brain dump, so I can recall it when needed.&lt;/p&gt;
+&lt;p&gt;Each time I get a new Samsung phone I have to figure out a way to change the
+Country Service Code (CSC) to a country that allows automated call recordings,
+for example, Indonesia (XID).  Previously, approximately 5 years ago, it was
+quite straight forward: you needed to download the HOME_CSC image for the
+region you are interested in, ensure that it was for the same bootloader
+version, and flash it to the CSC partition.&lt;/p&gt;
+&lt;p&gt;However, something changed in recent years (and I was not paying attention to
+the developments in Samsung world).  I just recently purchased Samsung ZFold 7
+and the trick with flashing did not work, so I started to investigate.
+Firstly, I discovered that the modern Samsung devces come with a multi-CSC
+configuration, so everything is already pre-installed on the device &amp;ndash; one just
+needs to change the setting to set the desired CSC for the device.  Secondly,
+the articles on the net on the change of CSC were all pointing to the SamFW
+tool, but I do have an issue with using that tool: for starters, it is a
+Windows x86_64 tool and I don&amp;rsquo;t have any Intel based devices to run Windows
+x86_64.  So, I started to research on how SamFW was doing the change of the
+CSC.  According to what I gathered, the tool was using the Serial-over-USB to
+perform the change.&lt;/p&gt;
+&lt;p&gt;Below are the steps I took to change the CSC on my phone from &lt;code&gt;XSA&lt;/code&gt; (Australia)
+to &lt;code&gt;XID&lt;/code&gt; (Indonesia).&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;You need to &lt;a href="https://www.samsung.com/uk/support/mobile-devices/how-do-i-turn-on-the-developer-options-menu-on-my-samsung-galaxy-device/"&gt;enable the &amp;ldquo;Developer options&amp;rdquo; menu&lt;/a&gt; on your Samsung device: go to Settings -&amp;gt; About phone -&amp;gt; Software information and tap on the &amp;ldquo;Build number&amp;rdquo; line 7 times.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;In the &amp;ldquo;Developer options&amp;rdquo; menu make sure that you enable the following options:&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;a) &amp;ldquo;Stay awake&amp;rdquo; &amp;ndash; this is optional, but you need to ensure that the phone is awake and not locked while you are going to communicate with it via USB, so it is easier to turn this option on and once the changes are done to turn it back off;&lt;/p&gt;
+&lt;p&gt;b) &amp;ldquo;USB debugging&amp;rdquo; &amp;ndash; I am not really sure whether this is strictly needed, but in my session it was enabled;&lt;/p&gt;
+&lt;p&gt;c) &amp;ldquo;3GPP AT commands&amp;rdquo; &amp;ndash; This will enable the interface we are going to use to issue modem commands;&lt;/p&gt;
+&lt;p&gt;d) &amp;ldquo;Default USB configuration&amp;rdquo;, select &amp;ldquo;Transferring files&amp;rdquo; &amp;ndash; this is important since we are going to land on the debug screen that would not allow us to access notifications, so there is no way to change the USB configuration on the fly.  You may want to change to your prefered setting after the CSC change is applied, though.&lt;/p&gt;
+&lt;ol start="3"&gt;
+&lt;li&gt;
+&lt;p&gt;Launch the dialer application and enter &lt;code&gt;*#0*#&lt;/code&gt;, the screen will change to a white background with lots of square buttons for diagmostic purposes.  I believe this step is essential to enable some of the proprietary commands in the modem interface.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Connect your phone to your computer.  Mine is Apple Macbook M4, so it runs macOS.  Yours may run Linux or Windows.  It does not really matter, except with Windows you will need to install serial drivers for Samsung (e.g. if you install any official Samsung tools like KIES, you already should have the necessary drivers installed).  For macOS and Linux, it is much easier &amp;ndash; you don&amp;rsquo;t need to install anything, the Serial-over-USB should be supported out of the box.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Locate the modem endpoint on your operating system.  On macOS, use &lt;code&gt;ls -l /dev/cu.usbmodem*&lt;/code&gt; to locate it.  On Linux, I would suggest to do &lt;code&gt;dmesg | tail -30&lt;/code&gt; after connecting the device, you should be able to see which &lt;code&gt;/dev/tty*&lt;/code&gt; has been assigned for the Serial-over-USB.  For Windows, check your Device Manager to see which &lt;code&gt;COM*&lt;/code&gt; port was assigned.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Use your favorite communication program to connect to the endpoint.  On macOS, I prefer to use &lt;code&gt;cu&lt;/code&gt;, which is included with the operating system and my examples below will use it.  On Linux, you have myriad of options, but I would use either &lt;code&gt;screen&lt;/code&gt; or &lt;code&gt;minicom&lt;/code&gt;.  On Windows, I think, HyperTerminal is still included with the operating system by default, but last time I have seen Windows up close was years ago.  Anyhow, you need to connect your communication program to the located endpoint, set the baudrate to 115200, and you should be all set.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Now is the magic :).  Below is my terminal session on macOS with my comments after the snippet:&lt;/p&gt;
+&lt;p&gt;:::bash
+galaxy@galaxy ~ $ sudo -i          &lt;br&gt;
+Password:&lt;/p&gt;
+&lt;p&gt;root@galaxy ~ # ls -la /dev/cu.*                  &lt;br&gt;
+crw-rw-rw-  1 root  wheel  0x9000003 Aug 26 10:39 /dev/cu.Bluetooth-Incoming-Port
+crw-rw-rw-  1 root  wheel  0x9000001 Aug 26 10:38 /dev/cu.debug-console
+crw-rw-rw-  1 root  wheel  0x9000005 Oct  9 14:03 /dev/cu.usbmodemXXXXXXXXXXXX
+Eris:~ root# cu -l /dev/cu.usbmodemXXXXXXXXXXXX -s 115200
+Connected.
+AT
+OK
+ATI
+Manufacturer: SAMSUNG ELECTRONICS CORPORATION
+Model: SM-F966B
+Revision: F966BXXU4AYI1
+SVN: 01
+IMEI: IIIIIIIIIIIIIII
++GCAP: +CGSM&lt;/p&gt;
+&lt;p&gt;OK
+AT+DUMPCTRL=1,0&lt;/p&gt;
+&lt;p&gt;+CME Error:PACM(AP),PROTECTED_NO_TOK&lt;/p&gt;
+&lt;p&gt;OK
+AT+SWATD=0
+[DR]: CHANGE TO DDEXE[ATD]: CHANGE TO DDEXE&lt;/p&gt;
+&lt;p&gt;OK
+AT+ACTIVATE=0,0,0&lt;/p&gt;
+&lt;p&gt;+CME Error:PACM(AP),UNREGISTED&lt;/p&gt;
+&lt;p&gt;OK
+AT+SWATD=1
+[DR]: CHANGE TO ATD[ATD]: CHANGE TO ATD&lt;/p&gt;
+&lt;p&gt;OK
+AT+PRECONFG=2,XID
++PRECONFG:2,OK&lt;/p&gt;
+&lt;p&gt;OK
+AT+CFUN=1,1
++CFUN=1,1:NA&lt;/p&gt;
+&lt;p&gt;OK
+~.&lt;/p&gt;
+&lt;p&gt;Disconnected.
+root@galaxy ~ #&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;I used &lt;code&gt;AT&lt;/code&gt; at the beginning of the session to confirm that the modem interface
+is active (I got an &lt;code&gt;OK&lt;/code&gt;, so it was active). Then I used &lt;code&gt;ATI&lt;/code&gt; to ensure that I
+am actually talking to the desired device (it was indeed &lt;code&gt;SM-F966B&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;AT+DUMPCTRL=1,0&lt;/code&gt; is needed to enable the following &lt;code&gt;AT+SWATD=&lt;/code&gt; commands to work.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;AT+ACTIVATE=0,0,0&lt;/code&gt; is a weird one.  There is not too much information on the
+net regarding this command, but it seems that every single occurence is related
+to enabling something in the firmware to allow the privileged settings to be
+changed, like we do with the very next command.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;AT+PRECONF=2,nnn&lt;/code&gt; is the primary command we want to execute.  The command sets
+the CSC of the device, where &lt;code&gt;nnn&lt;/code&gt; is a three leter CSC used by Samsung.  In my
+case it was &lt;code&gt;XID&lt;/code&gt; for Indonesia.  You can get a list of all available/known CSC
+from &lt;a href="https://samfw.com/"&gt;SamFW&lt;/a&gt; (the site is really heavy on ads, though, so beware).&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;AT+CFUN=1,1&lt;/code&gt; is supposed to reboot the device.  In my case, it did not, so I
+rebooted it manually.&lt;/p&gt;
+&lt;p&gt;Once you rebooted your device, go to Settings -&amp;gt; About phone -&amp;gt; Software
+information and look at the &amp;ldquo;Service prvider software version&amp;rdquo; section.  Mine
+looks like the following (after the change):&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;input type="radio" name="code_menuc64a97b1bb913fff857131a02eb6925efec44a31" class="no-line-numbers icon list-numbered"&gt;&lt;input type="radio" name="code_menuc64a97b1bb913fff857131a02eb6925efec44a31" class="line-numbers icon list-numbered"&gt;&lt;code class="language-text"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;XID/XID,XID/XSA,OPS&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Somewhere on the net you could find the format of this string, but basically it
+means that I have a dual-SIM enabled device with XID (Indonesia) CSC enabled
+for both SIMs, that the custom CSC is XID, but factory one is XSA (Australia).
+In your case, you should see your selected CSC in that line, if everything
+worked out correctly.&lt;/p&gt;
+&lt;p&gt;This is basically it. Enjoy! :)&lt;/p&gt;</content><category term="hacks"/><category term="hacks"/><category term="howto"/><category term="console"/></entry></feed>

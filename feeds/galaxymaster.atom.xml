@@ -1,5 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - (GalaxyMaster)</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"></link><link href="https://dmitry.khlebnikov.net/feeds/galaxymaster.atom.xml" rel="self"></link><id>https://dmitry.khlebnikov.net/</id><updated>2025-07-10T11:52:03+10:00</updated><subtitle>assorted bits of wit</subtitle><entry><title>macOS builtin VPN client tricks</title><link href="https://dmitry.khlebnikov.net/2022/11/25/macos-builtin-vpn-client-tricks/" rel="alternate"></link><published>2022-11-25T13:33:00+11:00</published><updated>2023-02-21T20:45:01+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2022-11-25:/2022/11/25/macos-builtin-vpn-client-tricks/</id><summary type="html">&lt;p&gt;I think everyone would agree that when it comes to the VPN configuration macOS
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - (GalaxyMaster)</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"/><link href="https://dmitry.khlebnikov.net/feeds/galaxymaster.atom.xml" rel="self"/><id>https://dmitry.khlebnikov.net/</id><updated>2025-10-09T16:25:40+11:00</updated><subtitle>assorted bits of wit</subtitle><entry><title>Samsung CSC Change Using Modem Commands</title><link href="https://dmitry.khlebnikov.net/2025/10/09/samsung-csc-change-using-modem-commands/" rel="alternate"/><published>2025-10-09T15:30:00+11:00</published><updated>2025-10-09T16:25:40+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2025-10-09:/2025/10/09/samsung-csc-change-using-modem-commands/</id><summary type="html">&lt;p&gt;This is a brief brain dump, so I can recall it when needed.&lt;/p&gt;
+&lt;p&gt;Each time I get a new Samsung phone I have to figure out a way to change the
+Country Service Code (CSC) to a country that allows automated call recordings,
+for example, Indonesia (XID).  Previously, approximately 5 years ago, it was
+quite straight forward: you needed to download the HOME_CSC image for the
+region you are interested in, ensure that it was for the same bootloader
+version, and flash it to the CSC partition.&lt;/p&gt;
+&lt;p&gt;However, something changed in recent years (and I was not paying attention to …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This is a brief brain dump, so I can recall it when needed.&lt;/p&gt;
+&lt;p&gt;Each time I get a new Samsung phone I have to figure out a way to change the
+Country Service Code (CSC) to a country that allows automated call recordings,
+for example, Indonesia (XID).  Previously, approximately 5 years ago, it was
+quite straight forward: you needed to download the HOME_CSC image for the
+region you are interested in, ensure that it was for the same bootloader
+version, and flash it to the CSC partition.&lt;/p&gt;
+&lt;p&gt;However, something changed in recent years (and I was not paying attention to
+the developments in Samsung world).  I just recently purchased Samsung ZFold 7
+and the trick with flashing did not work, so I started to investigate.
+Firstly, I discovered that the modern Samsung devces come with a multi-CSC
+configuration, so everything is already pre-installed on the device &amp;ndash; one just
+needs to change the setting to set the desired CSC for the device.  Secondly,
+the articles on the net on the change of CSC were all pointing to the SamFW
+tool, but I do have an issue with using that tool: for starters, it is a
+Windows x86_64 tool and I don&amp;rsquo;t have any Intel based devices to run Windows
+x86_64.  So, I started to research on how SamFW was doing the change of the
+CSC.  According to what I gathered, the tool was using the Serial-over-USB to
+perform the change.&lt;/p&gt;
+&lt;p&gt;Below are the steps I took to change the CSC on my phone from &lt;code&gt;XSA&lt;/code&gt; (Australia)
+to &lt;code&gt;XID&lt;/code&gt; (Indonesia).&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;You need to &lt;a href="https://www.samsung.com/uk/support/mobile-devices/how-do-i-turn-on-the-developer-options-menu-on-my-samsung-galaxy-device/"&gt;enable the &amp;ldquo;Developer options&amp;rdquo; menu&lt;/a&gt; on your Samsung device: go to Settings -&amp;gt; About phone -&amp;gt; Software information and tap on the &amp;ldquo;Build number&amp;rdquo; line 7 times.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;In the &amp;ldquo;Developer options&amp;rdquo; menu make sure that you enable the following options:&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;a) &amp;ldquo;Stay awake&amp;rdquo; &amp;ndash; this is optional, but you need to ensure that the phone is awake and not locked while you are going to communicate with it via USB, so it is easier to turn this option on and once the changes are done to turn it back off;&lt;/p&gt;
+&lt;p&gt;b) &amp;ldquo;USB debugging&amp;rdquo; &amp;ndash; I am not really sure whether this is strictly needed, but in my session it was enabled;&lt;/p&gt;
+&lt;p&gt;c) &amp;ldquo;3GPP AT commands&amp;rdquo; &amp;ndash; This will enable the interface we are going to use to issue modem commands;&lt;/p&gt;
+&lt;p&gt;d) &amp;ldquo;Default USB configuration&amp;rdquo;, select &amp;ldquo;Transferring files&amp;rdquo; &amp;ndash; this is important since we are going to land on the debug screen that would not allow us to access notifications, so there is no way to change the USB configuration on the fly.  You may want to change to your prefered setting after the CSC change is applied, though.&lt;/p&gt;
+&lt;ol start="3"&gt;
+&lt;li&gt;
+&lt;p&gt;Launch the dialer application and enter &lt;code&gt;*#0*#&lt;/code&gt;, the screen will change to a white background with lots of square buttons for diagmostic purposes.  I believe this step is essential to enable some of the proprietary commands in the modem interface.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Connect your phone to your computer.  Mine is Apple Macbook M4, so it runs macOS.  Yours may run Linux or Windows.  It does not really matter, except with Windows you will need to install serial drivers for Samsung (e.g. if you install any official Samsung tools like KIES, you already should have the necessary drivers installed).  For macOS and Linux, it is much easier &amp;ndash; you don&amp;rsquo;t need to install anything, the Serial-over-USB should be supported out of the box.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Locate the modem endpoint on your operating system.  On macOS, use &lt;code&gt;ls -l /dev/cu.usbmodem*&lt;/code&gt; to locate it.  On Linux, I would suggest to do &lt;code&gt;dmesg | tail -30&lt;/code&gt; after connecting the device, you should be able to see which &lt;code&gt;/dev/tty*&lt;/code&gt; has been assigned for the Serial-over-USB.  For Windows, check your Device Manager to see which &lt;code&gt;COM*&lt;/code&gt; port was assigned.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Use your favorite communication program to connect to the endpoint.  On macOS, I prefer to use &lt;code&gt;cu&lt;/code&gt;, which is included with the operating system and my examples below will use it.  On Linux, you have myriad of options, but I would use either &lt;code&gt;screen&lt;/code&gt; or &lt;code&gt;minicom&lt;/code&gt;.  On Windows, I think, HyperTerminal is still included with the operating system by default, but last time I have seen Windows up close was years ago.  Anyhow, you need to connect your communication program to the located endpoint, set the baudrate to 115200, and you should be all set.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Now is the magic :).  Below is my terminal session on macOS with my comments after the snippet:&lt;/p&gt;
+&lt;p&gt;:::bash
+galaxy@galaxy ~ $ sudo -i          &lt;br&gt;
+Password:&lt;/p&gt;
+&lt;p&gt;root@galaxy ~ # ls -la /dev/cu.*                  &lt;br&gt;
+crw-rw-rw-  1 root  wheel  0x9000003 Aug 26 10:39 /dev/cu.Bluetooth-Incoming-Port
+crw-rw-rw-  1 root  wheel  0x9000001 Aug 26 10:38 /dev/cu.debug-console
+crw-rw-rw-  1 root  wheel  0x9000005 Oct  9 14:03 /dev/cu.usbmodemXXXXXXXXXXXX
+Eris:~ root# cu -l /dev/cu.usbmodemXXXXXXXXXXXX -s 115200
+Connected.
+AT
+OK
+ATI
+Manufacturer: SAMSUNG ELECTRONICS CORPORATION
+Model: SM-F966B
+Revision: F966BXXU4AYI1
+SVN: 01
+IMEI: IIIIIIIIIIIIIII
++GCAP: +CGSM&lt;/p&gt;
+&lt;p&gt;OK
+AT+DUMPCTRL=1,0&lt;/p&gt;
+&lt;p&gt;+CME Error:PACM(AP),PROTECTED_NO_TOK&lt;/p&gt;
+&lt;p&gt;OK
+AT+SWATD=0
+[DR]: CHANGE TO DDEXE[ATD]: CHANGE TO DDEXE&lt;/p&gt;
+&lt;p&gt;OK
+AT+ACTIVATE=0,0,0&lt;/p&gt;
+&lt;p&gt;+CME Error:PACM(AP),UNREGISTED&lt;/p&gt;
+&lt;p&gt;OK
+AT+SWATD=1
+[DR]: CHANGE TO ATD[ATD]: CHANGE TO ATD&lt;/p&gt;
+&lt;p&gt;OK
+AT+PRECONFG=2,XID
++PRECONFG:2,OK&lt;/p&gt;
+&lt;p&gt;OK
+AT+CFUN=1,1
++CFUN=1,1:NA&lt;/p&gt;
+&lt;p&gt;OK
+~.&lt;/p&gt;
+&lt;p&gt;Disconnected.
+root@galaxy ~ #&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;I used &lt;code&gt;AT&lt;/code&gt; at the beginning of the session to confirm that the modem interface
+is active (I got an &lt;code&gt;OK&lt;/code&gt;, so it was active). Then I used &lt;code&gt;ATI&lt;/code&gt; to ensure that I
+am actually talking to the desired device (it was indeed &lt;code&gt;SM-F966B&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;AT+DUMPCTRL=1,0&lt;/code&gt; is needed to enable the following &lt;code&gt;AT+SWATD=&lt;/code&gt; commands to work.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;AT+ACTIVATE=0,0,0&lt;/code&gt; is a weird one.  There is not too much information on the
+net regarding this command, but it seems that every single occurence is related
+to enabling something in the firmware to allow the privileged settings to be
+changed, like we do with the very next command.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;AT+PRECONF=2,nnn&lt;/code&gt; is the primary command we want to execute.  The command sets
+the CSC of the device, where &lt;code&gt;nnn&lt;/code&gt; is a three leter CSC used by Samsung.  In my
+case it was &lt;code&gt;XID&lt;/code&gt; for Indonesia.  You can get a list of all available/known CSC
+from &lt;a href="https://samfw.com/"&gt;SamFW&lt;/a&gt; (the site is really heavy on ads, though, so beware).&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;AT+CFUN=1,1&lt;/code&gt; is supposed to reboot the device.  In my case, it did not, so I
+rebooted it manually.&lt;/p&gt;
+&lt;p&gt;Once you rebooted your device, go to Settings -&amp;gt; About phone -&amp;gt; Software
+information and look at the &amp;ldquo;Service prvider software version&amp;rdquo; section.  Mine
+looks like the following (after the change):&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;input type="radio" name="code_menuc64a97b1bb913fff857131a02eb6925efec44a31" class="no-line-numbers icon list-numbered"&gt;&lt;input type="radio" name="code_menuc64a97b1bb913fff857131a02eb6925efec44a31" class="line-numbers icon list-numbered"&gt;&lt;code class="language-text"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;XID/XID,XID/XSA,OPS&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Somewhere on the net you could find the format of this string, but basically it
+means that I have a dual-SIM enabled device with XID (Indonesia) CSC enabled
+for both SIMs, that the custom CSC is XID, but factory one is XSA (Australia).
+In your case, you should see your selected CSC in that line, if everything
+worked out correctly.&lt;/p&gt;
+&lt;p&gt;This is basically it. Enjoy! :)&lt;/p&gt;</content><category term="hacks"/><category term="hacks"/><category term="howto"/><category term="console"/></entry><entry><title>macOS builtin VPN client tricks</title><link href="https://dmitry.khlebnikov.net/2022/11/25/macos-builtin-vpn-client-tricks/" rel="alternate"/><published>2022-11-25T13:33:00+11:00</published><updated>2023-02-21T20:45:01+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2022-11-25:/2022/11/25/macos-builtin-vpn-client-tricks/</id><summary type="html">&lt;p&gt;I think everyone would agree that when it comes to the VPN configuration macOS
 builtin VPN client lacks any flexibility and its GUI exposes a fraction of
 supported features.  This is one of the reasons why there are so many third
 party VPN clients for macOS in the world, I believe.  However, I found that the
@@ -82,7 +202,7 @@ GUI configuration produces unworkable result.&lt;/p&gt;
 &lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;key&amp;gt;&lt;/span&gt;PayloadVersion&lt;span class="nt"&gt;&amp;lt;/key&amp;gt;&lt;/span&gt;
 &lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;integer&amp;gt;&lt;/span&gt;1&lt;span class="nt"&gt;&amp;lt;/integer&amp;gt;&lt;/span&gt;
 &lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="nt"&gt;&amp;lt;/dict&amp;gt;&lt;/span&gt;
-&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="nt"&gt;&amp;lt;/plist&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;</content><category term="macos"></category><category term="macos"></category><category term="howto"></category><category term="vpn"></category></entry><entry><title>Fixing "Content wider than screen"</title><link href="https://dmitry.khlebnikov.net/2021/09/03/fixing-content-wider-than-screen/" rel="alternate"></link><published>2021-09-03T13:00:00+10:00</published><updated>2021-09-07T22:52:31+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2021-09-03:/2021/09/03/fixing-content-wider-than-screen/</id><summary type="html">&lt;p&gt;Recently, I started to get notifications from my &lt;a class="external" href="https://search.google.com/search-console" rel="nofollow"&gt;Google Search Console&lt;/a&gt; that
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="nt"&gt;&amp;lt;/plist&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;</content><category term="macos"/><category term="macos"/><category term="howto"/><category term="vpn"/></entry><entry><title>Fixing "Content wider than screen"</title><link href="https://dmitry.khlebnikov.net/2021/09/03/fixing-content-wider-than-screen/" rel="alternate"/><published>2021-09-03T13:00:00+10:00</published><updated>2021-09-07T22:52:31+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2021-09-03:/2021/09/03/fixing-content-wider-than-screen/</id><summary type="html">&lt;p&gt;Recently, I started to get notifications from my &lt;a class="external" href="https://search.google.com/search-console" rel="nofollow"&gt;Google Search Console&lt;/a&gt; that
 some pages have their &lt;a class="external" href="https://support.google.com/webmasters/answer/9063469#content_not_sized_to_viewport" rel="nofollow"&gt;content wider than screen&lt;/a&gt; and that impacts Mobile
 Usability.  However, when I went to the affected pages and performed a test
 through &amp;ldquo;&lt;a class="external" href="https://search.google.com/test/mobile-friendly?url=https://dmitry.khlebnikov.net/2021/09/03/fixing-content-wider-than-screen/" rel="nofollow"&gt;TEST LIVE PAGE&lt;/a&gt;&amp;rdquo; no
@@ -182,7 +302,7 @@ in this instance was to cut the overflowing label off using &lt;code&gt;overflow
 and &lt;code&gt;white-space: nowrap&lt;/code&gt;. I also used &lt;code&gt;opacity: 0&lt;/code&gt; for the &amp;ldquo;contextual&amp;rdquo; class,
 which was used by some static, non-interactive elements on the page.&lt;/p&gt;
 &lt;p&gt;I hope this small tutorial helped you to hunt down the source of your Google
-Search Console errors related to the content being outside the viewport.&lt;/p&gt;</content><category term="web design"></category><category term="html"></category><category term="css"></category><category term="design"></category></entry><entry><title>Truly Responsive Pagination</title><link href="https://dmitry.khlebnikov.net/2020/06/14/truly-responsive-pagination/" rel="alternate"></link><published>2020-06-14T20:07:00+10:00</published><updated>2020-06-14T20:15:57+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-06-14:/2020/06/14/truly-responsive-pagination/</id><summary type="html">&lt;p&gt;Searching the web for an example of a fully responsive pagination widget I
+Search Console errors related to the content being outside the viewport.&lt;/p&gt;</content><category term="web design"/><category term="html"/><category term="css"/><category term="design"/></entry><entry><title>Truly Responsive Pagination</title><link href="https://dmitry.khlebnikov.net/2020/06/14/truly-responsive-pagination/" rel="alternate"/><published>2020-06-14T20:07:00+10:00</published><updated>2020-06-14T20:15:57+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-06-14:/2020/06/14/truly-responsive-pagination/</id><summary type="html">&lt;p&gt;Searching the web for an example of a fully responsive pagination widget I
 found that either people consider &amp;ldquo;responsive&amp;rdquo; to be something else or that it
 is a non-trivial problem to solve.  In any case, I decided to have a crack at
 it myself.&lt;/p&gt;
@@ -637,7 +757,7 @@ visually pleasing widget hidden from the screen readers.&lt;/p&gt;
 not want to go that route for my blog.  Most likely, since my blog is
 statically generated I will address it using the logic of the generator itself.&lt;/p&gt;
 &lt;p&gt;Still, I think the techniques I demonstrated here may be quite useful to some
-people who are designing pure HTML and CSS adaptive widgets.&lt;/p&gt;</content><category term="web design"></category><category term="html"></category><category term="css"></category><category term="design"></category></entry><entry><title>Automating Static Website Deployment</title><link href="https://dmitry.khlebnikov.net/2020/05/17/automating-static-website-deployment/" rel="alternate"></link><published>2020-05-17T21:32:00+10:00</published><updated>2021-08-30T00:09:47+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-17:/2020/05/17/automating-static-website-deployment/</id><summary type="html">&lt;div class="toc"&gt;&lt;span class="toctitle"&gt;Table of Contents&lt;/span&gt;&lt;ul&gt;
+people who are designing pure HTML and CSS adaptive widgets.&lt;/p&gt;</content><category term="web design"/><category term="html"/><category term="css"/><category term="design"/></entry><entry><title>Automating Static Website Deployment</title><link href="https://dmitry.khlebnikov.net/2020/05/17/automating-static-website-deployment/" rel="alternate"/><published>2020-05-17T21:32:00+10:00</published><updated>2021-08-30T00:09:47+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-17:/2020/05/17/automating-static-website-deployment/</id><summary type="html">&lt;div class="toc"&gt;&lt;span class="toctitle"&gt;Table of Contents&lt;/span&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a href="#setting-up-github-pages"&gt;Setting up GitHub Pages&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#setting-up-the-private-code-repository"&gt;Setting up the private, code repository&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#configuring-the-github-action-for-publishing"&gt;Configuring the GitHub Action for publishing&lt;/a&gt;&lt;/li&gt;
@@ -1212,7 +1332,7 @@ the GitHub Action and if the change has resulted in any updated content such
 content will be published to GitHub Pages!&lt;/p&gt;
 &lt;p&gt;There are quite a few things we could improve: such as introducing a broken
 links check, doing some sanity checks, etc. &amp;ndash; but this would be for another
-article, I guess. :)&lt;/p&gt;</content><category term="blog"></category><category term="pelican"></category><category term="blog"></category><category term="github"></category></entry><entry><title>Wrap indicator in &lt;pre&gt; blocks</title><link href="https://dmitry.khlebnikov.net/2020/05/10/wrap-indicator-in-pre-blocks/" rel="alternate"></link><published>2020-05-10T21:00:00+10:00</published><updated>2023-02-21T20:44:20+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-10:/2020/05/10/wrap-indicator-in-pre-blocks/</id><summary type="html">&lt;p&gt;I am not a front-end developer, not a UI designer, nor a UX guru, but I am an
+article, I guess. :)&lt;/p&gt;</content><category term="blog"/><category term="pelican"/><category term="blog"/><category term="github"/></entry><entry><title>Wrap indicator in &lt;pre&gt; blocks</title><link href="https://dmitry.khlebnikov.net/2020/05/10/wrap-indicator-in-pre-blocks/" rel="alternate"/><published>2020-05-10T21:00:00+10:00</published><updated>2023-02-21T20:44:20+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-10:/2020/05/10/wrap-indicator-in-pre-blocks/</id><summary type="html">&lt;p&gt;I am not a front-end developer, not a UI designer, nor a UX guru, but I am an
 engineer, so when I face a puzzle worth solving my brain switches on and I
 cannot let it go until I find a satisfactory solution to the puzzle.&lt;/p&gt;
 &lt;p&gt;My blog heavily relies on me sharing session dumps and file excerpts using the
@@ -1761,7 +1881,7 @@ highlighted blocks on this site (so you have already seen it in action).&lt;/p&g
 &lt;/ul&gt;
 &lt;p&gt;I hope this helped you and you learnt something :).  If you have any
 constructive feedback, I would appreciate it, specifically if you have ideas on
-how to improve the presented solution.&lt;/p&gt;</content><category term="web design"></category><category term="html"></category><category term="css"></category><category term="design"></category></entry><entry><title>Migrating blog to Pelican</title><link href="https://dmitry.khlebnikov.net/2020/05/01/migrating-blog-to-pelican/" rel="alternate"></link><published>2020-05-01T20:00:00+10:00</published><updated>2023-02-21T20:42:47+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-01:/2020/05/01/migrating-blog-to-pelican/</id><summary type="html">&lt;p&gt;I had my blog site for more than a decade now, but until now I was not putting
+how to improve the presented solution.&lt;/p&gt;</content><category term="web design"/><category term="html"/><category term="css"/><category term="design"/></entry><entry><title>Migrating blog to Pelican</title><link href="https://dmitry.khlebnikov.net/2020/05/01/migrating-blog-to-pelican/" rel="alternate"/><published>2020-05-01T20:00:00+10:00</published><updated>2023-02-21T20:42:47+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-01:/2020/05/01/migrating-blog-to-pelican/</id><summary type="html">&lt;p&gt;I had my blog site for more than a decade now, but until now I was not putting
 any effort or thoughts into maintaining my audience or promoting the site.  It
 was dormant for nearly a decade so I decided to rejuvenate it and start using
 it as a platform I could leverage to share some ideas I think are worth
@@ -1897,7 +2017,7 @@ infrastructure supporting the site and its deployment process in detail.&lt;/p&g
 &lt;p&gt;All blog posts related to these topics will be tagged with the &amp;ldquo;&lt;a href="/tag/blog/"&gt;blog&lt;/a&gt;&amp;rdquo; tag, so
 you should be able to find them easily (or even subscribe to the &lt;a href="/feeds/blog.atom.xml"&gt;blog RSS feed&lt;/a&gt;
 (you may need to copy the link into your RSS Reader) to get the latest updates
-as soon as I publish them).&lt;/p&gt;</content><category term="blog"></category><category term="pelican"></category><category term="blog"></category></entry><entry><title>nginx + a backend with a dynamic IP (e.g. AWS ELB)</title><link href="https://dmitry.khlebnikov.net/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/" rel="alternate"></link><published>2017-01-13T10:00:00+11:00</published><updated>2025-07-10T11:52:03+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2017-01-13:/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/</id><summary type="html">&lt;p&gt;Recently, I wrote about &lt;a href="https://dmitry.khlebnikov.net/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/"&gt;the dynamic resolution of upstream servers&lt;/a&gt; in
+as soon as I publish them).&lt;/p&gt;</content><category term="blog"/><category term="pelican"/><category term="blog"/></entry><entry><title>nginx + a backend with a dynamic IP (e.g. AWS ELB)</title><link href="https://dmitry.khlebnikov.net/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/" rel="alternate"/><published>2017-01-13T10:00:00+11:00</published><updated>2025-07-10T11:52:03+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2017-01-13:/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/</id><summary type="html">&lt;p&gt;Recently, I wrote about &lt;a href="https://dmitry.khlebnikov.net/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/"&gt;the dynamic resolution of upstream servers&lt;/a&gt; in
 nginx which was achieved by quite an intrusive patch to the core nginx module.
 The patch was invented a while ago and was working very well up until recent
 nginx versions were released.&lt;/p&gt;
@@ -2254,7 +2374,7 @@ would take some time until this change is propagated to all major distros).&lt;/
 efficient if you are using a domain name for the target endpoint for the proxy,
 so if this is the case I would advise to run a local DNS caching service (e.g.
 &lt;code&gt;dnsmasq&lt;/code&gt;) so you would not spend time on the DNS queries.&lt;/p&gt;
-&lt;p&gt;As always, I would appreciate any feedback you may have.&lt;/p&gt;</content><category term="hacking"></category><category term="nginx"></category><category term="patch"></category></entry><entry><title>Dynamic resolution of upstream servers in nginx</title><link href="https://dmitry.khlebnikov.net/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/" rel="alternate"></link><published>2016-09-20T10:00:00+10:00</published><updated>2020-05-17T20:25:15+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2016-09-20:/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/</id><summary type="html">&lt;p&gt;UPDATE: This approach was superseded by the &lt;a href="https://dmitry.khlebnikov.net/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/"&gt;proxying through
+&lt;p&gt;As always, I would appreciate any feedback you may have.&lt;/p&gt;</content><category term="hacking"/><category term="nginx"/><category term="patch"/></entry><entry><title>Dynamic resolution of upstream servers in nginx</title><link href="https://dmitry.khlebnikov.net/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/" rel="alternate"/><published>2016-09-20T10:00:00+10:00</published><updated>2020-05-17T20:25:15+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2016-09-20:/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/</id><summary type="html">&lt;p&gt;UPDATE: This approach was superseded by the &lt;a href="https://dmitry.khlebnikov.net/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/"&gt;proxying through
 systemd-socket-proxyd&lt;/a&gt; approach.&lt;/p&gt;
 &lt;p&gt;Many of my clients are running application stacks consisting of nginx plus some
 kind of scripting engine behind it (be it PHP, Ruby, or something else).&lt;/p&gt;
@@ -2300,7 +2420,7 @@ need to change your configs.&lt;/p&gt;
 production for the last couple of years. The work on the patch was sponsored by
 &lt;a href="https://openwall.com.au"&gt;Openwall (Australia)&lt;/a&gt; and &lt;a href="https://withriley.com"&gt;Data Solutions
 Group&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Enjoy! :)&lt;/p&gt;</content><category term="hacking"></category><category term="nginx"></category><category term="patch"></category></entry><entry><title>Transparent SSH host-jumping (Expert)</title><link href="https://dmitry.khlebnikov.net/2016/07/26/transparent-ssh-host-jumping-expert/" rel="alternate"></link><published>2016-07-26T10:00:00+10:00</published><updated>2020-05-17T04:45:11+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2016-07-26:/2016/07/26/transparent-ssh-host-jumping-expert/</id><summary type="html">&lt;p&gt;A while ago in the &lt;a href="https://dmitry.khlebnikov.net/2015/08/06/transparent-ssh-host-jumping-advanced/"&gt;Transparent SSH host-jumping (Advanced)&lt;/a&gt; post I
+&lt;p&gt;Enjoy! :)&lt;/p&gt;</content><category term="hacking"/><category term="nginx"/><category term="patch"/></entry><entry><title>Transparent SSH host-jumping (Expert)</title><link href="https://dmitry.khlebnikov.net/2016/07/26/transparent-ssh-host-jumping-expert/" rel="alternate"/><published>2016-07-26T10:00:00+10:00</published><updated>2020-05-17T04:45:11+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2016-07-26:/2016/07/26/transparent-ssh-host-jumping-expert/</id><summary type="html">&lt;p&gt;A while ago in the &lt;a href="https://dmitry.khlebnikov.net/2015/08/06/transparent-ssh-host-jumping-advanced/"&gt;Transparent SSH host-jumping (Advanced)&lt;/a&gt; post I
 described a technique on how one could jump quite effortlessly through a chain
 of intermediate hosts. However, there was a catch: the user names and ports
 across the whole chain should be the same and there was no easy way to change
@@ -2394,7 +2514,7 @@ shared with me).&lt;/p&gt;
 &lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;ProxyCommand&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="nt"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;ssh-helper&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;sh&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="nt"&gt;r&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="nt"&gt;h&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="nt"&gt;p&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Well, this is a bit messy since OpenSSH introduced the &lt;code&gt;%C&lt;/code&gt; macro in version 6.7
 and without &lt;code&gt;%C&lt;/code&gt; the &lt;code&gt;ControlPath&lt;/code&gt; string gets too long for OpenSSH to create a
-socket on the filesystem for long chains of hosts.&lt;/p&gt;</content><category term="ssh"></category><category term="console"></category><category term="ssh"></category><category term="howto"></category></entry><entry><title>SSH: Interactive ProxyCommand</title><link href="https://dmitry.khlebnikov.net/2016/07/25/ssh-interactive-proxycommand/" rel="alternate"></link><published>2016-07-25T10:00:00+10:00</published><updated>2020-05-17T04:45:11+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2016-07-25:/2016/07/25/ssh-interactive-proxycommand/</id><summary type="html">&lt;p&gt;I was involved in the creation of the &lt;a href="https://github.com/realestate-com-au/sshephalopod"&gt;sshephalopod&lt;/a&gt; project, which was an
+socket on the filesystem for long chains of hosts.&lt;/p&gt;</content><category term="ssh"/><category term="console"/><category term="ssh"/><category term="howto"/></entry><entry><title>SSH: Interactive ProxyCommand</title><link href="https://dmitry.khlebnikov.net/2016/07/25/ssh-interactive-proxycommand/" rel="alternate"/><published>2016-07-25T10:00:00+10:00</published><updated>2020-05-17T04:45:11+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2016-07-25:/2016/07/25/ssh-interactive-proxycommand/</id><summary type="html">&lt;p&gt;I was involved in the creation of the &lt;a href="https://github.com/realestate-com-au/sshephalopod"&gt;sshephalopod&lt;/a&gt; project, which was an
 attempt to build an enterprise level authentication framework for SSH
 authentication using the SSH &lt;abbr title="Certificate Authority"&gt;CA&lt;/abbr&gt; feature.&lt;/p&gt;
 &lt;p&gt;The project is based on a wrapper script that signs a user via a &lt;abbr title="Security Assertion Markup Language"&gt;SAML&lt;/abbr&gt; identity
@@ -2520,7 +2640,7 @@ versions of OpenSSH support passing of a file descriptor from the ProxyCommand
 script, so if you have a decent netcat tool that supports the &amp;ldquo;-F&amp;rdquo; option
 (fdpass) you could get native performance for the ssh communication link with
 no proxy process hanging around.&lt;/p&gt;
-&lt;p&gt;P.S. if you have any questions do not hesitate to comment.&lt;/p&gt;</content><category term="ssh"></category><category term="ssh"></category><category term="console"></category></entry><entry><title>Raspberry Pi 3 toolchain on CentOS 7</title><link href="https://dmitry.khlebnikov.net/2016/05/22/raspberry-pi-3-toolchain-on-centos-7/" rel="alternate"></link><published>2016-05-22T12:00:00+10:00</published><updated>2020-05-17T04:45:11+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2016-05-22:/2016/05/22/raspberry-pi-3-toolchain-on-centos-7/</id><summary type="html">&lt;p&gt;I heard a lot about Raspberry Pi boards but until now I had no need nor time to
+&lt;p&gt;P.S. if you have any questions do not hesitate to comment.&lt;/p&gt;</content><category term="ssh"/><category term="ssh"/><category term="console"/></entry><entry><title>Raspberry Pi 3 toolchain on CentOS 7</title><link href="https://dmitry.khlebnikov.net/2016/05/22/raspberry-pi-3-toolchain-on-centos-7/" rel="alternate"/><published>2016-05-22T12:00:00+10:00</published><updated>2020-05-17T04:45:11+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2016-05-22:/2016/05/22/raspberry-pi-3-toolchain-on-centos-7/</id><summary type="html">&lt;p&gt;I heard a lot about Raspberry Pi boards but until now I had no need nor time to
 work with one.&lt;/p&gt;
 &lt;p&gt;However, recently I purchased a Dodge Journey R/T and found that although I
 love the car I am so disappointed with its software and hard-wired logic that I
@@ -2693,7 +2813,7 @@ something and see how it goes:&lt;/p&gt;
 &lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp"&gt;[build@localhost ~]$ &lt;/span&gt;file&lt;span class="w"&gt; &lt;/span&gt;sample
 &lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;sample: ELF 64-bit LSB executable, ARM aarch64, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 4.3.0, not stripped&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Well, it is time to build some awesome stuff for Raspberry Pi 3, I guess, but
-this will be in another post. :)&lt;/p&gt;</content><category term="linux"></category><category term="console"></category><category term="howto"></category><category term="linux"></category><category term="raspberry pi"></category></entry><entry><title>Building a firewall? Simple and easy!</title><link href="https://dmitry.khlebnikov.net/2016/05/22/building-a-firewall-simple-and-easy/" rel="alternate"></link><published>2016-05-22T10:00:00+10:00</published><updated>2021-08-29T22:26:10+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2016-05-22:/2016/05/22/building-a-firewall-simple-and-easy/</id><summary type="html">&lt;p&gt;I strive for simplicity since I am a strong believer that achieving a goal with
+this will be in another post. :)&lt;/p&gt;</content><category term="linux"/><category term="console"/><category term="howto"/><category term="linux"/><category term="raspberry pi"/></entry><entry><title>Building a firewall? Simple and easy!</title><link href="https://dmitry.khlebnikov.net/2016/05/22/building-a-firewall-simple-and-easy/" rel="alternate"/><published>2016-05-22T10:00:00+10:00</published><updated>2021-08-29T22:26:10+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2016-05-22:/2016/05/22/building-a-firewall-simple-and-easy/</id><summary type="html">&lt;p&gt;I strive for simplicity since I am a strong believer that achieving a goal with
 the most simplest solution looks elegant, proves that you have deep knowledge
 on the subject, and overall is beautiful by itself.  Additionally to this, a
 simple solution is easier to comprehend and to audit, hence it is much easier
@@ -2901,7 +3021,7 @@ installed on the NAT instance which is a gateway to the Internet):&lt;/p&gt;
     11 (time exceeded), and 30 (traceroute) to pass through the firewall.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;So, here you have it a solid firewall ruleset consisting of just 13 rules.&lt;/p&gt;</content><category term="linux"></category><category term="console"></category><category term="howto"></category><category term="iptables"></category><category term="linux"></category><category term="security"></category></entry><entry><title>Transparent SSH host-jumping (Advanced)</title><link href="https://dmitry.khlebnikov.net/2015/08/06/transparent-ssh-host-jumping-advanced/" rel="alternate"></link><published>2015-08-06T10:00:00+10:00</published><updated>2020-05-17T20:25:15+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2015-08-06:/2015/08/06/transparent-ssh-host-jumping-advanced/</id><summary type="html">&lt;p&gt;In this brief article I am going to describe how I resolved a nagging issue I
+&lt;p&gt;So, here you have it a solid firewall ruleset consisting of just 13 rules.&lt;/p&gt;</content><category term="linux"/><category term="console"/><category term="howto"/><category term="iptables"/><category term="linux"/><category term="security"/></entry><entry><title>Transparent SSH host-jumping (Advanced)</title><link href="https://dmitry.khlebnikov.net/2015/08/06/transparent-ssh-host-jumping-advanced/" rel="alternate"/><published>2015-08-06T10:00:00+10:00</published><updated>2020-05-17T20:25:15+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2015-08-06:/2015/08/06/transparent-ssh-host-jumping-advanced/</id><summary type="html">&lt;p&gt;In this brief article I am going to describe how I resolved a nagging issue I
 had with setting up access to hosts which are not directly reachable, but where
 you need to forward your connection through an intermediate host.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://dmitry.khlebnikov.net/2010/12/10/ssh-port-forwarding-intermediate/"&gt;Previously&lt;/a&gt;, I was using the local SSH port-forwarding technique (although I
@@ -3067,7 +3187,7 @@ following:&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;I hope this little trick will save you some time and will make your life
-easier. :)&lt;/p&gt;</content><category term="ssh"></category><category term="console"></category><category term="ssh"></category><category term="howto"></category></entry><entry><title>Should we use "sudo" for day-to-day activities?</title><link href="https://dmitry.khlebnikov.net/2015/07/18/should-we-use-sudo-for-day-to-day-activities/" rel="alternate"></link><published>2015-07-18T20:04:00+10:00</published><updated>2023-02-21T19:48:39+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2015-07-18:/2015/07/18/should-we-use-sudo-for-day-to-day-activities/</id><summary type="html">&lt;div class="toc"&gt;&lt;span class="toctitle"&gt;Table of Contents&lt;/span&gt;&lt;ul&gt;
+easier. :)&lt;/p&gt;</content><category term="ssh"/><category term="console"/><category term="ssh"/><category term="howto"/></entry><entry><title>Should we use "sudo" for day-to-day activities?</title><link href="https://dmitry.khlebnikov.net/2015/07/18/should-we-use-sudo-for-day-to-day-activities/" rel="alternate"/><published>2015-07-18T20:04:00+10:00</published><updated>2023-02-21T19:48:39+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2015-07-18:/2015/07/18/should-we-use-sudo-for-day-to-day-activities/</id><summary type="html">&lt;div class="toc"&gt;&lt;span class="toctitle"&gt;Table of Contents&lt;/span&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a href="#history"&gt;History&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#people-are-saying-sudo-is-good-is-it-true"&gt;People are saying &amp;ldquo;sudo&amp;rdquo; is good. Is it true?&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#what-is-the-problem-with-the-sudo-approach"&gt;What is the problem with the &amp;ldquo;sudo&amp;rdquo; approach?&lt;/a&gt;&lt;/li&gt;
@@ -3469,7 +3589,7 @@ generally it should be assumed&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;I would be really happy to answer any question in regard to this article and
 provide any possible help in making our everyday system level activities more
-secure, so do not hesitate to comment or &lt;a href="/contact"&gt;contact me&lt;/a&gt;.&lt;/p&gt;</content><category term="sudo"></category><category term="sudo"></category><category term="console"></category></entry><entry><title>SSH port-forwarding (Intermediate)</title><link href="https://dmitry.khlebnikov.net/2010/12/10/ssh-port-forwarding-intermediate/" rel="alternate"></link><published>2010-12-10T10:00:00+11:00</published><updated>2020-05-17T04:45:11+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2010-12-10:/2010/12/10/ssh-port-forwarding-intermediate/</id><summary type="html">&lt;p&gt;In my previous blog entry I described some basic functionality of SSH in terms
+secure, so do not hesitate to comment or &lt;a href="/contact"&gt;contact me&lt;/a&gt;.&lt;/p&gt;</content><category term="sudo"/><category term="sudo"/><category term="console"/></entry><entry><title>SSH port-forwarding (Intermediate)</title><link href="https://dmitry.khlebnikov.net/2010/12/10/ssh-port-forwarding-intermediate/" rel="alternate"/><published>2010-12-10T10:00:00+11:00</published><updated>2020-05-17T04:45:11+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2010-12-10:/2010/12/10/ssh-port-forwarding-intermediate/</id><summary type="html">&lt;p&gt;In my previous blog entry I described some basic functionality of SSH in terms
 of port-forwarding. Now it&amp;rsquo;s time for a little bit more complex stuff.&lt;/p&gt;
 &lt;p&gt;In this article I will highlight:&lt;/p&gt;
 &lt;ul&gt;
@@ -3565,7 +3685,7 @@ forward firewall piercing technique described at the beginning of this post:&lt;
 via SSH on your &lt;code&gt;localhost:60000&lt;/code&gt;, e.g.&lt;/p&gt;
 &lt;pre class="highlight" data-user="user"&gt;&lt;input type="radio" name="code_menu002709e21abf8c28749cf117ba70a46c05e3ab4a" class="no-line-numbers icon list-numbered"&gt;&lt;input type="radio" name="code_menu002709e21abf8c28749cf117ba70a46c05e3ab4a" class="line-numbers icon list-numbered"&gt;&lt;code class="language-console"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;[user@localhost ~] ssh -p6000 my_account@localhost&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Where &lt;code&gt;my_account&lt;/code&gt; is a user allowed to SSH into your computer in the highly
-secure network.&lt;/p&gt;</content><category term="ssh"></category></entry><entry><title>SSH port-forwarding (Basic)</title><link href="https://dmitry.khlebnikov.net/2010/11/29/ssh-port-forwarding-basic/" rel="alternate"></link><published>2010-11-29T10:00:00+11:00</published><updated>2020-05-17T04:45:11+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2010-11-29:/2010/11/29/ssh-port-forwarding-basic/</id><summary type="html">&lt;p&gt;I think all of you are using SSH in your daily routines. However, do you use
+secure network.&lt;/p&gt;</content><category term="ssh"/></entry><entry><title>SSH port-forwarding (Basic)</title><link href="https://dmitry.khlebnikov.net/2010/11/29/ssh-port-forwarding-basic/" rel="alternate"/><published>2010-11-29T10:00:00+11:00</published><updated>2020-05-17T04:45:11+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2010-11-29:/2010/11/29/ssh-port-forwarding-basic/</id><summary type="html">&lt;p&gt;I think all of you are using SSH in your daily routines. However, do you use
 its full potential? Today&amp;rsquo;s topic is the SSH port-forwarding feature and how
 it can be use to achieve some interesting configurations.&lt;/p&gt;
 &lt;p&gt;I&amp;rsquo;m sure most of you are aware of the feature, but how many of you are using
@@ -3616,7 +3736,7 @@ the Internet, but I decided to write this article as a foundation for my
 further articles on this topic which will cover more advanced usage of the SSH
 port-forwarding feature. For example, I intend to document a configuration of
 the MySQL replication setup between two servers located at two different data
-centres where each server is a part of a server farm protected by a firewall.&lt;/p&gt;</content><category term="ssh"></category><category term="ssh"></category><category term="console"></category><category term="bastion"></category></entry><entry><title>HOWTO: VMware Player as a remote console (VNC)</title><link href="https://dmitry.khlebnikov.net/2010/11/24/howto-vmware-player-as-a-remote-console-vnc/" rel="alternate"></link><published>2010-11-24T10:00:00+11:00</published><updated>2020-06-14T20:08:33+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2010-11-24:/2010/11/24/howto-vmware-player-as-a-remote-console-vnc/</id><summary type="html">&lt;p&gt;Turning VMware Player into a non-privileged VNC client to access VMware VMs from a Linux-based PC&lt;/p&gt;</summary><content type="html">&lt;p&gt;Since I am doing a lot of remote systems administration tasks due to the nature
+centres where each server is a part of a server farm protected by a firewall.&lt;/p&gt;</content><category term="ssh"/><category term="ssh"/><category term="console"/><category term="bastion"/></entry><entry><title>HOWTO: VMware Player as a remote console (VNC)</title><link href="https://dmitry.khlebnikov.net/2010/11/24/howto-vmware-player-as-a-remote-console-vnc/" rel="alternate"/><published>2010-11-24T10:00:00+11:00</published><updated>2020-06-14T20:08:33+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2010-11-24:/2010/11/24/howto-vmware-player-as-a-remote-console-vnc/</id><summary type="html">&lt;p&gt;Turning VMware Player into a non-privileged VNC client to access VMware VMs from a Linux-based PC&lt;/p&gt;</summary><content type="html">&lt;p&gt;Since I am doing a lot of remote systems administration tasks due to the nature
 of my IT consulting work and since I am also running Linux on all my computers
 I was looking for a native way how to get a remote console to VMware VMs from
 linux.&lt;/p&gt;
@@ -4054,4 +4174,4 @@ new tool when the right time comes:&lt;/p&gt;
 &lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;-rw-r--r-- 1 vmware vmware 13M Nov 24 07:06 vmrconsole-3.1.3.324285.i386.tar.bz2&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;P.S. Oh, boy, it takes 2 hours to investigate and to come up with a solution,
 then 8 hours to write an article to describe steps to reproduce! I hope that
-somebody has found this article useful and I would appreciate any comments.&lt;/p&gt;</content><category term="hacking"></category></entry></feed>
+somebody has found this article useful and I would appreciate any comments.&lt;/p&gt;</content><category term="hacking"/></entry></feed>
