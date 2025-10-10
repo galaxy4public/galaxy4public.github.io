@@ -6,14 +6,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://dmitry.khlebnikov.net/</loc>
-<lastmod>2025-10-10T14:39:41-00:00</lastmod>
+<lastmod>2025-10-10T14:52:04-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.75</priority>
 </url>
 
 <url>
 <loc>https://dmitry.khlebnikov.net/2/</loc>
-<lastmod>2025-10-10T14:39:41-00:00</lastmod>
+<lastmod>2025-10-10T14:52:04-00:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.75</priority>
+</url>
+
+<url>
+<loc>https://dmitry.khlebnikov.net/2010/</loc>
+<lastmod>2025-10-10T14:52:04-00:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.75</priority>
+</url>
+
+<url>
+<loc>https://dmitry.khlebnikov.net/2010/11/</loc>
+<lastmod>2025-10-10T14:52:04-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.75</priority>
 </url>
@@ -33,10 +47,31 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>https://dmitry.khlebnikov.net/2010/12/</loc>
+<lastmod>2025-10-10T14:52:04-00:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.75</priority>
+</url>
+
+<url>
 <loc>https://dmitry.khlebnikov.net/2010/12/10/ssh-port-forwarding-intermediate/</loc>
 <lastmod>2020-05-17T04:45:11+10:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://dmitry.khlebnikov.net/2015/</loc>
+<lastmod>2025-10-10T14:52:04-00:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.75</priority>
+</url>
+
+<url>
+<loc>https://dmitry.khlebnikov.net/2015/07/</loc>
+<lastmod>2025-10-10T14:52:04-00:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.75</priority>
 </url>
 
 <url>
@@ -47,10 +82,31 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>https://dmitry.khlebnikov.net/2015/08/</loc>
+<lastmod>2025-10-10T14:52:04-00:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.75</priority>
+</url>
+
+<url>
 <loc>https://dmitry.khlebnikov.net/2015/08/06/transparent-ssh-host-jumping-advanced/</loc>
 <lastmod>2020-05-17T20:25:15+10:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://dmitry.khlebnikov.net/2016/</loc>
+<lastmod>2025-10-10T14:52:04-00:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.75</priority>
+</url>
+
+<url>
+<loc>https://dmitry.khlebnikov.net/2016/05/</loc>
+<lastmod>2025-10-10T14:52:04-00:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.75</priority>
 </url>
 
 <url>
@@ -68,6 +124,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>https://dmitry.khlebnikov.net/2016/07/</loc>
+<lastmod>2025-10-10T14:52:04-00:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.75</priority>
+</url>
+
+<url>
 <loc>https://dmitry.khlebnikov.net/2016/07/25/ssh-interactive-proxycommand/</loc>
 <lastmod>2020-05-17T04:45:11+10:00</lastmod>
 <changefreq>weekly</changefreq>
@@ -82,6 +145,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>https://dmitry.khlebnikov.net/2016/09/</loc>
+<lastmod>2025-10-10T14:52:04-00:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.75</priority>
+</url>
+
+<url>
 <loc>https://dmitry.khlebnikov.net/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/</loc>
 <lastmod>2020-05-17T20:25:15+10:00</lastmod>
 <changefreq>weekly</changefreq>
@@ -89,10 +159,38 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>https://dmitry.khlebnikov.net/2017/</loc>
+<lastmod>2025-10-10T14:52:04-00:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.75</priority>
+</url>
+
+<url>
+<loc>https://dmitry.khlebnikov.net/2017/01/</loc>
+<lastmod>2025-10-10T14:52:04-00:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.75</priority>
+</url>
+
+<url>
 <loc>https://dmitry.khlebnikov.net/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/</loc>
 <lastmod>2025-07-10T11:52:03+10:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://dmitry.khlebnikov.net/2020/</loc>
+<lastmod>2025-10-10T14:52:04-00:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.75</priority>
+</url>
+
+<url>
+<loc>https://dmitry.khlebnikov.net/2020/05/</loc>
+<lastmod>2025-10-10T14:52:04-00:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.75</priority>
 </url>
 
 <url>
@@ -117,10 +215,31 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>https://dmitry.khlebnikov.net/2020/06/</loc>
+<lastmod>2025-10-10T14:52:04-00:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.75</priority>
+</url>
+
+<url>
 <loc>https://dmitry.khlebnikov.net/2020/06/14/truly-responsive-pagination/</loc>
 <lastmod>2020-06-14T20:15:57+10:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://dmitry.khlebnikov.net/2021/</loc>
+<lastmod>2025-10-10T14:52:04-00:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.75</priority>
+</url>
+
+<url>
+<loc>https://dmitry.khlebnikov.net/2021/09/</loc>
+<lastmod>2025-10-10T14:52:04-00:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.75</priority>
 </url>
 
 <url>
@@ -131,10 +250,38 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>https://dmitry.khlebnikov.net/2022/</loc>
+<lastmod>2025-10-10T14:52:04-00:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.75</priority>
+</url>
+
+<url>
+<loc>https://dmitry.khlebnikov.net/2022/11/</loc>
+<lastmod>2025-10-10T14:52:04-00:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.75</priority>
+</url>
+
+<url>
 <loc>https://dmitry.khlebnikov.net/2022/11/25/macos-builtin-vpn-client-tricks/</loc>
 <lastmod>2023-02-21T20:45:01+11:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://dmitry.khlebnikov.net/2025/</loc>
+<lastmod>2025-10-10T14:52:04-00:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.75</priority>
+</url>
+
+<url>
+<loc>https://dmitry.khlebnikov.net/2025/10/</loc>
+<lastmod>2025-10-10T14:52:04-00:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.75</priority>
 </url>
 
 <url>
@@ -153,14 +300,14 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://dmitry.khlebnikov.net/archives.html</loc>
-<lastmod>2025-10-10T14:39:41-00:00</lastmod>
+<lastmod>2025-10-10T14:52:04-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.75</priority>
 </url>
 
 <url>
 <loc>https://dmitry.khlebnikov.net/categories.html</loc>
-<lastmod>2025-10-10T14:39:41-00:00</lastmod>
+<lastmod>2025-10-10T14:52:04-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.75</priority>
 </url>
@@ -195,7 +342,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://dmitry.khlebnikov.net/tags.html</loc>
-<lastmod>2025-10-10T14:39:41-00:00</lastmod>
+<lastmod>2025-10-10T14:52:04-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.75</priority>
 </url>
