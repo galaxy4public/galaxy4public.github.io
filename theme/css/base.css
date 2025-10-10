@@ -30,6 +30,7 @@ html {
 
 .contextual {
 	opacity: 0;
+	z-index: -999; /* to put it below any potential hyperlinks */
 }
 /*
 .contextual,
