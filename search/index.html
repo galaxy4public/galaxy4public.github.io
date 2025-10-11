@@ -107,7 +107,7 @@
 						class EmbeddedWebview extends HTMLElement {
 							connectedCallback() {
 								fetch(this.getAttribute('src'))
-									.then(response => response.html())
+									.then(response => response.text())
 									.then(html => {
 										const shadow = this.attachShadow({ mode: 'closed' });
 										shadow.innerHTML = html;
