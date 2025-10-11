@@ -108,29 +108,26 @@
 					<header>
 						<h1>Search</h1>
 					</header>
-					<form name="google search" method="get" action="/search">
+					<form method="get" id="ddgSearch" action="https://duckduckgo.com/">
+						<input type="hidden" name="sites" value="dmitry.khlebnikov.net"/>
+						<input type="hidden" name="k7" value="#ffffff"/>
+						<input type="hidden" name="k8" value="#222222"/>
+						<input type="hidden" name="k9" value="#00278e"/>
+						<input type="hidden" name="kx" value="#20692b"/>
+						<input type="hidden" name="kj" value="#fafafa"/>
+						<input type="hidden" name="kt" value="p"/>
+						<!-- Result Settings -->
+						<input type="hidden" name="kz" value="-1"/> <!-- Related searches -- 1:On, -1:Off -->
+						<!-- Interface -->
+						<input type="hidden" name="k1" value="-1"/> <!-- Ads -- 1:On, -1:Off -->
+						<input type="hidden" name="ko" value="-2"/> <!-- Header -- 1:Floating, s:Scrolling (default), -1:Off, -2:Completely Off -->
 						<label for="search_long" class="offscreen">Search field on the top of the search page</label>
-						<input id="search_long" type="text" class="text" name="q" placeholder="Enter your search parameters here ..." />
+						<input id="search_long" type="text" name="q" placeholder="Enter your search parameters here ..." aria-label="Search the blog"/>
+						<button type="submit" style="visibility: hidden">Search</button>
 					</form>
-					<script>
-						function hrefValue(k)
-						{
-							h = window.location.search.substring(1);
-							p = h.split("&");
-
-							for (i=0; i<p.length; i++)
-							{
-								kv = p[i].split("=");
-								if (kv[0] == k)
-									return decodeURI(kv[1].replace(/\+/g, '%20'));
-							}
-							return '';
-						};
-						document.getElementById('search').value = document.getElementById('search_long').value = hrefValue('q');
-					</script>
 				</section>
 				<section class="box search-results">
-					<div class="gcse-searchresults-only" data-linkTarget="_top" data-personalizedAds="false"></div>
+					<iframe title="Search Results" name="results" loading="lazy" src="about:blank"></iframe>
 				</section>
 	</main>
 	<footer>
