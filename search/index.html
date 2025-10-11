@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<title>Mind Drops :: Search Results</title>
-		<meta http-equiv="Content-Security-Policy" content="default-src 'self' *.khlebnikov.net; script-src 'self' 'unsafe-eval'; script-src-elem 'self' 'sha256-WmUJoJNRfL/Sf4ma0odhQp0u96lMFj/yTIfk7WEMs7w=' 'sha256-Nh1WQbmRSQvyew+XXIrSx/vEFwVvy9UjWRGPWcRe5q4=' https://cse.google.com/cse.js https://cse.google.com/cse/element/ https://www.google.com/cse/static/element/; style-src 'self'; style-src-elem 'self' 'unsafe-inline' https://www.google.com/cse/static/element/ https://www.google.com/cse/static/style/; img-src 'self' https: https://*.gstatic.com/ https://www.google.com/cse/static/css/ https://ssl.gstatic.com/ui/; " />
+		<meta http-equiv="Content-Security-Policy" content="default-src 'self' *.khlebnikov.net; script-src 'self' 'unsafe-eval'; script-src-elem 'self' 'sha256-WmUJoJNRfL/Sf4ma0odhQp0u96lMFj/yTIfk7WEMs7w=' 'sha256-Nh1WQbmRSQvyew+XXIrSx/vEFwVvy9UjWRGPWcRe5q4='; style-src 'self'; style-src-elem 'self' 'unsafe-inline'; img-src 'self'; " />
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1" />	<link rel="preload" href="/theme/fonts/Oswald/Oswald-VariableFont_wght.woff2" crossorigin="anonymous" as="font" type="font/woff2">
 	<link rel="preload" href="/theme/fonts/Exo2/Exo2-VariableFont_wght.woff2" crossorigin="anonymous" as="font" type="font/woff2">	<link rel="stylesheet" href="/theme/css/fonts/Icons.css" />
@@ -13,31 +13,6 @@
 	<link rel="stylesheet" href="/theme/css/pygments/default.css" />
 		<meta name="robots" content="noindex,nofollow" />
 		<link rel="stylesheet" type="text/css" href="/theme/css/search.css" />
-		<script defer src="https://cse.google.com/cse.js?cx=005305758315431243651:leqbp5helyl"></script>
-		<script>
-			const resultsReadyCustomStylesCallback = function(name, q, promos, results, resultsDiv)
-			{
-				var cssId = 'CseCustomCss';
-				if (!document.getElementById(cssId))
-				{
-					var head  = document.getElementsByTagName('head')[0];
-					var link  = document.createElement('link');
-					link.id   = cssId;
-					link.rel  = 'stylesheet';
-					link.type = 'text/css';
-					link.href = '/theme/css/cse_custom.css';
-					link.media = 'all';
-					head.appendChild(link);
-				}
-			};
-
-			window.__gcse || (window.__gcse = {});
-			window.__gcse.searchCallbacks = {
-				web: {
-					ready: resultsReadyCustomStylesCallback,
-				},
-			};
-		</script>
 </head>
 
 <body>
@@ -108,7 +83,7 @@
 					<header>
 						<h1>Search</h1>
 					</header>
-					<form method="get" id="ddgSearch" action="https://duckduckgo.com/">
+					<form method="get" id="ddgSearch" action="https://duckduckgo.com/" target="results">
 						<input type="hidden" name="sites" value="dmitry.khlebnikov.net"/>
 						<input type="hidden" name="k7" value="#ffffff"/>
 						<input type="hidden" name="k8" value="#222222"/>
