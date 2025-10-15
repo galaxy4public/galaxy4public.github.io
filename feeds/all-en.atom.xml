@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"/><link href="https://dmitry.khlebnikov.net/feeds/all-en.atom.xml" rel="self"/><id>https://dmitry.khlebnikov.net/</id><updated>2025-10-09T16:37:05+11:00</updated><subtitle>assorted bits of wit</subtitle><entry><title>Samsung CSC Change Using Modem Commands</title><link href="https://dmitry.khlebnikov.net/2025/10/09/samsung-csc-change-using-modem-commands/" rel="alternate"/><published>2025-10-09T15:30:00+11:00</published><updated>2025-10-09T16:37:05+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2025-10-09:/2025/10/09/samsung-csc-change-using-modem-commands/</id><summary type="html">&lt;p&gt;This is a brief brain dump, so I can recall it when needed.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"/><link href="https://dmitry.khlebnikov.net/feeds/all-en.atom.xml" rel="self"/><id>https://dmitry.khlebnikov.net/</id><updated>2025-10-15T12:16:11+11:00</updated><subtitle>assorted bits of wit</subtitle><entry><title>Samsung CSC Change Using Modem Commands</title><link href="https://dmitry.khlebnikov.net/2025/10/09/samsung-csc-change-using-modem-commands/" rel="alternate"/><published>2025-10-09T15:30:00+11:00</published><updated>2025-10-09T16:37:05+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2025-10-09:/2025/10/09/samsung-csc-change-using-modem-commands/</id><summary type="html">&lt;p&gt;This is a brief brain dump, so I can recall it when needed.&lt;/p&gt;
 &lt;p&gt;Each time I get a new Samsung phone I have to figure out a way to change the
 Country Service Code (CSC) to a country that allows automated call recordings,
 for example, Indonesia (XID).  Previously, approximately 5 years ago, it was
@@ -2386,21 +2386,7 @@ would take some time until this change is propagated to all major distros).&lt;/
 efficient if you are using a domain name for the target endpoint for the proxy,
 so if this is the case I would advise to run a local DNS caching service (e.g.
 &lt;code&gt;dnsmasq&lt;/code&gt;) so you would not spend time on the DNS queries.&lt;/p&gt;
-&lt;p&gt;As always, I would appreciate any feedback you may have.&lt;/p&gt;</content><category term="hacking"/><category term="nginx"/><category term="patch"/></entry><entry><title>Dynamic resolution of upstream servers in nginx</title><link href="https://dmitry.khlebnikov.net/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/" rel="alternate"/><published>2016-09-20T10:00:00+10:00</published><updated>2020-05-17T20:25:15+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2016-09-20:/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/</id><summary type="html">&lt;p&gt;UPDATE: This approach was superseded by the &lt;a href="https://dmitry.khlebnikov.net/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/"&gt;proxying through
-systemd-socket-proxyd&lt;/a&gt; approach.&lt;/p&gt;
-&lt;p&gt;Many of my clients are running application stacks consisting of nginx plus some
-kind of scripting engine behind it (be it PHP, Ruby, or something else).&lt;/p&gt;
-&lt;p&gt;The architecture I designed for this kind of workload involves at least two
-load balancers:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;an external, frontend load balancer that serves the web requests from
-    visitors; and&lt;/li&gt;
-&lt;li&gt;an internal, backend load balancer that distributes load between the
-    backends.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Everything looks great when you implement this using &amp;ldquo;in-house&amp;rdquo; infrastructure
-where you control most of the networking aspects.&lt;/p&gt;
-&lt;p&gt;However, the tendency is that most …&lt;/p&gt;</summary><content type="html">&lt;p&gt;UPDATE: This approach was superseded by the &lt;a href="https://dmitry.khlebnikov.net/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/"&gt;proxying through
+&lt;p&gt;As always, I would appreciate any feedback you may have.&lt;/p&gt;</content><category term="hacking"/><category term="nginx"/><category term="patch"/></entry><entry><title>Dynamic resolution of upstream servers in nginx</title><link href="https://dmitry.khlebnikov.net/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/" rel="alternate"/><published>2016-09-20T10:00:00+10:00</published><updated>2025-10-15T12:16:11+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2016-09-20:/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/</id><summary type="html">&lt;p&gt;A &amp;ldquo;howto&amp;rdquo; article which details a custom patch created for the community version of NGINX to enable the dynamic DNS resolution of upstream servers. This functionality addresses the challenge of working with cloud load balancers, whose IP addresses can change automatically, a feature not supported in the free version. The patch implements a resolve keyword compatible with the commercial NGINX version, ensuring seamless configuration if a user decides to upgrade. While used successfully in production, the author notes this approach is now outdated and has been superseded by a method using systemd-socket-proxyd.&lt;/p&gt;</summary><content type="html">&lt;p&gt;UPDATE: This approach was superseded by the &lt;a href="https://dmitry.khlebnikov.net/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/"&gt;proxying through
 systemd-socket-proxyd&lt;/a&gt; approach.&lt;/p&gt;
 &lt;p&gt;Many of my clients are running application stacks consisting of nginx plus some
 kind of scripting engine behind it (be it PHP, Ruby, or something else).&lt;/p&gt;
