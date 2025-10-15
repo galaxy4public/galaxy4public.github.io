@@ -251,7 +251,7 @@ body > header .logo .title {
 	color: grey;
 }
 
-body > header nav {
+body > header nav ~ nav {
 	max-height: 0;
 	position: fixed;
 	display:block;
@@ -268,22 +268,22 @@ body > header nav {
 }
 
 @media only screen and (min-width: 107em) {
-	body > header nav {
+	body > header nav ~ nav {
 		left: unset;
 		transform: translateX(calc(-1em - var(--grid-menu-width-min,13em)));
 	}
 }
 
-header nav ul {
+header nav ~ nav ul {
 	font-size: 1.25em;
 }
 
-header nav ul li.current {
+header nav ~ nav ul li.current {
 	background-color: hsl(0,0%,62.5%);	/* XXX: use variable */
 	background-image: linear-gradient(to right, #673AB7, transparent);
 }
 
-header nav ul li.current a {
+header nav ~ nav ul li.current a {
 	color: whitesmoke;
 	pointer-events: none;
 }
@@ -1361,22 +1361,22 @@ a.figure:target > img {
 		display: block;
 	}
 
-	body > header nav {
+	body > header nav ~ nav {
 		height: unset;
 		max-height: 0;
 		background: var(--header-bg);
 		padding: 0;
 	}
 
-	header nav ul li.current {
+	header nav ~ nav ul li.current {
 		background: inherit;
 	}
 
-	header nav ul li.current a {
+	header nav ~ nav ul li.current a {
 		color: inherit;
 	}
 
-	nav:hover,
+	nav ~ nav:hover,
 	body > header .menu-toggle:focus ~ nav {
 		max-height: 100%;
 		padding: 1.25em;

@@ -2,25 +2,18 @@
 <html lang="en">
 <head>
 	<title>Mind Drops :: Raspberry Pi 3 toolchain on CentOS 7</title>
-		<meta http-equiv="Content-Security-Policy" content="	default-src 'self';object-src 'none';script-src 'self' https://www.googletagmanager.com/gtag/js 'sha256-TelA7VsuYAMqhOKGk7CHgJyuqSJdmqZEp+hn6PWVRwQ=' https://www.google-analytics.com/analytics.js https://static.cloudflareinsights.com/beacon.min.js;img-src 'self' data: https://www.google-analytics.com/r/collect https://www.google-analytics.com/collect https://stats.g.doubleclick.net/r/collect https://*/ads/ga-audiences https://www.googletagmanager.com/a;style-src 'self' 'sha256-fszvBX/J9dhPxFSJ5wUrq/Pvg6HrnTkWyshMZpaxSQY=';connect-src 'self' https://www.google-analytics.com/j/collect https://stats.g.doubleclick.net/j/collect; " />
+	<meta name="description" content="This post provides a detailed walkthrough of building a cross-compilation toolchain for a Raspberry Pi 3 on a CentOS 7 server to accelerate software development. Motivated by a project to modify his car’s CAN bus system using a Raspberry Pi, the author found on-device compilation to be too slow and opted to create a toolchain on a more powerful AWS EC2 instance. The process involves using the crosstool-ng project to configure and build the toolchain, with specific configuration adjustments detailed for targeting the ARMv8-A architecture and Cortex-A53 CPU of the Raspberry Pi 3. After the hour-long build process, the author demonstrates the toolchain’s success by compiling a simple “Hello” world program and verifying that the resulting binary is a 64-bit ARM executable, ready for use on the target device." />
+	<meta http-equiv="Content-Security-Policy" content="	default-src 'self';object-src 'none';script-src 'self' https://www.googletagmanager.com/gtag/js 'sha256-TelA7VsuYAMqhOKGk7CHgJyuqSJdmqZEp+hn6PWVRwQ=' https://www.google-analytics.com/analytics.js https://static.cloudflareinsights.com/beacon.min.js;img-src 'self' data: https://www.google-analytics.com/r/collect https://www.google-analytics.com/collect https://stats.g.doubleclick.net/r/collect https://*/ads/ga-audiences https://www.googletagmanager.com/a;style-src 'self' 'sha256-fszvBX/J9dhPxFSJ5wUrq/Pvg6HrnTkWyshMZpaxSQY=';connect-src 'self' https://www.google-analytics.com/j/collect https://stats.g.doubleclick.net/j/collect; " />
 	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1" />	<link rel="preload" href="/theme/fonts/Oswald/Oswald-VariableFont_wght.woff2" crossorigin="anonymous" as="font" type="font/woff2">
+	<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1" />
+	<link rel="preload" href="/theme/fonts/Oswald/Oswald-VariableFont_wght.woff2" crossorigin="anonymous" as="font" type="font/woff2">
 	<link rel="preload" href="/theme/fonts/Exo2/Exo2-VariableFont_wght.woff2" crossorigin="anonymous" as="font" type="font/woff2">	<link rel="stylesheet" href="/theme/css/fonts/Icons.css" />
 	<link rel="stylesheet" href="/theme/css/fonts/Exo2.css" />
 	<link rel="stylesheet" href="/theme/css/fonts/Oswald.css" />
 	<link rel="stylesheet" href="/theme/css/fonts/DancingScript.css" />
 	<link rel="stylesheet" href="/theme/css/base.css" />
 	<link rel="stylesheet" href="/theme/css/pygments/default.css" />
-	<link rel="canonical" href="../../../..//2016/05/22/raspberry-pi-3-toolchain-on-centos-7/" />
-	<link name="description" content="&lt;p&gt;I heard a lot about Raspberry Pi boards but until now I had no need nor time to
-work with one.&lt;/p&gt;
-&lt;p&gt;However, recently I purchased a Dodge Journey R/T and found that although I
-love the car I am so disappointed with its software and hard-wired logic that I
-decided to experiment a bit and fix the most annoying things.&lt;/p&gt;
-&lt;p&gt;Since almost everything inside the car is talking over the CAN bus I needed
-some kind of a enclave inside the car where I could run my code and
-inject/intercept CAN messages.&lt;/p&gt;
-&lt;p&gt;I looked around and found that …&lt;/p&gt;" />
+	<link rel="canonical" href="https://dmitry.khlebnikov.net/2016/05/22/raspberry-pi-3-toolchain-on-centos-7/" />
 
 	<script type="application/ld+json">
 	{
@@ -29,11 +22,11 @@ inject/intercept CAN messages.&lt;/p&gt;
 		"author": [{
 			"@type": "Person",
 			"name": "(GalaxyMaster)",
-			"url": "../../../..//about"
+			"url": "https://dmitry.khlebnikov.net/about"
 		}],
 		"headline" : "Raspberry Pi 3 toolchain on CentOS 7",
 		"datePublished" : "2016-05-22T12:00:00+10:00",
-		"dateModified" : "2020-05-17T04:45:11+10:00",
+		"dateModified" : "2025-10-15T23:06:20+11:00",
 	}
 	</script>
 </head>
@@ -44,7 +37,7 @@ inject/intercept CAN messages.&lt;/p&gt;
 			<!--
 			<button class="menu-toggle" type="button" tabindex="0" aria-label="Menu Toggle"><div></div></button>
 			-->
-			<div class="menu-toggle" tabindex="0" aria-label="Menu Toggle"><div></div></div>
+			<nav class="menu-toggle" tabindex="0" aria-label="Menu Toggle"><div></div></nav>
 			<a href="/" class="logo">
 				<picture>
 					<source srcset="/images/logo.svg" type="image/svg+xml">
@@ -285,7 +278,7 @@ this will be in another post. :)</p>
 					<ul class="tags">
 						<li class="tag">
 							<span>
-								<a href="/tag/console/" rel="tag" title="A link to the collection tagged with 'console'" data-count="8" ><span>console</span></a>
+								<a href="/tag/console/" rel="tag" title="A link to the collection tagged with 'console'" data-count="9" ><span>console</span></a>
 							</span>
 						</li>
 						<li class="tag">

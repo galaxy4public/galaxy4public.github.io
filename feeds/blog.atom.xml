@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - blog</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"/><link href="https://dmitry.khlebnikov.net/feeds/blog.atom.xml" rel="self"/><id>https://dmitry.khlebnikov.net/</id><updated>2023-02-21T20:42:47+11:00</updated><subtitle>assorted bits of wit</subtitle><entry><title>Automating Static Website Deployment</title><link href="https://dmitry.khlebnikov.net/2020/05/17/automating-static-website-deployment/" rel="alternate"/><published>2020-05-17T21:32:00+10:00</published><updated>2021-08-30T00:09:47+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-17:/2020/05/17/automating-static-website-deployment/</id><summary type="html">&lt;div class="toc"&gt;&lt;span class="toctitle"&gt;Table of Contents&lt;/span&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#setting-up-github-pages"&gt;Setting up GitHub Pages&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#setting-up-the-private-code-repository"&gt;Setting up the private, code repository&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#configuring-the-github-action-for-publishing"&gt;Configuring the GitHub Action for publishing&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;p&gt;In this post I am going to document the steps I took to implement a fully
-automated deployment of my blog using GitHub Actions and GitHub Pages.&lt;/p&gt;
-&lt;p&gt;As always, I started my journey with the definition of what I really wanted to
-get at the end:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;The website is published on GitHub pages&lt;/p&gt;
-&lt;p&gt;Since the website is static and all of its content can be easily downloaded
-using a web crawler (like &lt;code&gt;wget --mirror https://website.tld&lt;/code&gt;) I was OK
-with …&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;div class="toc"&gt;&lt;span class="toctitle"&gt;Table of Contents&lt;/span&gt;&lt;ul&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - blog</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"/><link href="https://dmitry.khlebnikov.net/feeds/blog.atom.xml" rel="self"/><id>https://dmitry.khlebnikov.net/</id><updated>2025-10-15T23:06:20+11:00</updated><subtitle>assorted bits of wit</subtitle><entry><title>Automating Static Website Deployment</title><link href="https://dmitry.khlebnikov.net/2020/05/17/automating-static-website-deployment/" rel="alternate"/><published>2020-05-17T21:32:00+10:00</published><updated>2025-10-15T23:06:20+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-17:/2020/05/17/automating-static-website-deployment/</id><summary type="html">&lt;p&gt;A comprehensive guide to setting up a fully automated deployment
+pipeline for a static website using a private source repository and a
+public GitHub Pages repository. The author details a process that
+leverages GitHub Actions to build a Pelican-based site from a private
+repository — keeping API tokens and experimental code secure—and then deploys the
+generated static files to a public repository for hosting. Key steps include
+configuring separate public and private repositories, using a deploy key for
+secure authentication instead of a personal access token, and creating a
+detailed GitHub Action workflow. This workflow automates checking out both
+repositories, restoring file modification times for accurate content
+generation, installing dependencies, building the site with Pelican, and
+committing the changes to the public GitHub Pages repository only if new
+content has been generated.&lt;/p&gt;</summary><content type="html">&lt;div class="toc"&gt;&lt;span class="toctitle"&gt;Table of Contents&lt;/span&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a href="#setting-up-github-pages"&gt;Setting up GitHub Pages&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#setting-up-the-private-code-repository"&gt;Setting up the private, code repository&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#configuring-the-github-action-for-publishing"&gt;Configuring the GitHub Action for publishing&lt;/a&gt;&lt;/li&gt;
@@ -574,14 +571,17 @@ the GitHub Action and if the change has resulted in any updated content such
 content will be published to GitHub Pages!&lt;/p&gt;
 &lt;p&gt;There are quite a few things we could improve: such as introducing a broken
 links check, doing some sanity checks, etc. &amp;ndash; but this would be for another
-article, I guess. :)&lt;/p&gt;</content><category term="blog"/><category term="pelican"/><category term="blog"/><category term="github"/></entry><entry><title>Migrating blog to Pelican</title><link href="https://dmitry.khlebnikov.net/2020/05/01/migrating-blog-to-pelican/" rel="alternate"/><published>2020-05-01T20:00:00+10:00</published><updated>2023-02-21T20:42:47+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-01:/2020/05/01/migrating-blog-to-pelican/</id><summary type="html">&lt;p&gt;I had my blog site for more than a decade now, but until now I was not putting
-any effort or thoughts into maintaining my audience or promoting the site.  It
-was dormant for nearly a decade so I decided to rejuvenate it and start using
-it as a platform I could leverage to share some ideas I think are worth
-sharing.&lt;/p&gt;
-&lt;p&gt;Before I embarked on the journey of renovating the blog site I needed to set
-some goals and requirements up, so I would be able to assess my progress and
-estimate how much effort is required.  The primary …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I had my blog site for more than a decade now, but until now I was not putting
+article, I guess. :)&lt;/p&gt;</content><category term="blog"/><category term="pelican"/><category term="blog"/><category term="github"/></entry><entry><title>Migrating blog to Pelican</title><link href="https://dmitry.khlebnikov.net/2020/05/01/migrating-blog-to-pelican/" rel="alternate"/><published>2020-05-01T20:00:00+10:00</published><updated>2025-10-15T23:06:20+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-01:/2020/05/01/migrating-blog-to-pelican/</id><summary type="html">&lt;p&gt;Dissatisfied with the Blogger platform&amp;rsquo;s changing features and lack of
+control, the author decided to migrate their decade-old blog to a self-hosted,
+low-maintenance solution. After researching static site generators (SSGs) that
+aligned with Jamstack principles and met their requirements for stability,
+extensibility, and language (preferring Python), they chose Pelican over
+contenders like Jekyll and Gatsby. The author then undertook a significant
+theme development project, initially attempting to port an existing HTML theme
+called &amp;ldquo;Striped&amp;rdquo; but ultimately deciding to recreate a similar theme from
+scratch due to inconsistencies in the original code. The resulting website is
+the foundation for a planned series of posts about the development process and
+infrastructure.&lt;/p&gt;</summary><content type="html">&lt;p&gt;I had my blog site for more than a decade now, but until now I was not putting
 any effort or thoughts into maintaining my audience or promoting the site.  It
 was dormant for nearly a decade so I decided to rejuvenate it and start using
 it as a platform I could leverage to share some ideas I think are worth

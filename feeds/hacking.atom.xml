@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - hacking</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"/><link href="https://dmitry.khlebnikov.net/feeds/hacking.atom.xml" rel="self"/><id>https://dmitry.khlebnikov.net/</id><updated>2025-10-15T12:16:11+11:00</updated><subtitle>assorted bits of wit</subtitle><entry><title>nginx + a backend with a dynamic IP (e.g. AWS ELB)</title><link href="https://dmitry.khlebnikov.net/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/" rel="alternate"/><published>2017-01-13T10:00:00+11:00</published><updated>2025-07-10T11:52:03+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2017-01-13:/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/</id><summary type="html">&lt;p&gt;Recently, I wrote about &lt;a href="https://dmitry.khlebnikov.net/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/"&gt;the dynamic resolution of upstream servers&lt;/a&gt; in
-nginx which was achieved by quite an intrusive patch to the core nginx module.
-The patch was invented a while ago and was working very well up until recent
-nginx versions were released.&lt;/p&gt;
-&lt;p&gt;With the release of nginx 1.10 it was noticed that the patch crashes some
-workers under heavy load and this was unacceptable for the production load,
-hence a new approach was implemented.&lt;/p&gt;
-&lt;p&gt;The beauty of the new solution is that it is non-intrusive and works with any
-services that communicate via sockets.&lt;/p&gt;
-&lt;p&gt;In a nutshell …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Recently, I wrote about &lt;a href="https://dmitry.khlebnikov.net/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/"&gt;the dynamic resolution of upstream servers&lt;/a&gt; in
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - hacking</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"/><link href="https://dmitry.khlebnikov.net/feeds/hacking.atom.xml" rel="self"/><id>https://dmitry.khlebnikov.net/</id><updated>2025-10-15T23:06:20+11:00</updated><subtitle>assorted bits of wit</subtitle><entry><title>nginx + a backend with a dynamic IP (e.g. AWS ELB)</title><link href="https://dmitry.khlebnikov.net/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/" rel="alternate"/><published>2017-01-13T10:00:00+11:00</published><updated>2025-10-15T23:06:20+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2017-01-13:/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/</id><summary type="html">&lt;p&gt;This post presents a non-intrusive solution for NGINX to connect to
+backend servers with dynamic IP addresses, such as an AWS ELB, replacing a
+previous method that involved a now-unstable patch. The new approach uses
+systemd-socket-proxyd, a utility that forwards traffic from a local socket to a
+remote target. The configuration involves setting up NGINX to pass FastCGI
+requests to a local Unix socket, which is then monitored by a systemd socket
+unit. When a request arrives, systemd activates the systemd-socket-proxyd
+service, which resolves the backend&amp;rsquo;s dynamic domain name and proxies the
+connection. The author also provides template unit files for reusability and a
+custom SELinux policy to ensure the proxy service runs securely with the least
+privilege principle.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Recently, I wrote about &lt;a href="https://dmitry.khlebnikov.net/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/"&gt;the dynamic resolution of upstream servers&lt;/a&gt; in
 nginx which was achieved by quite an intrusive patch to the core nginx module.
 The patch was invented a while ago and was working very well up until recent
 nginx versions were released.&lt;/p&gt;
@@ -356,7 +357,15 @@ would take some time until this change is propagated to all major distros).&lt;/
 efficient if you are using a domain name for the target endpoint for the proxy,
 so if this is the case I would advise to run a local DNS caching service (e.g.
 &lt;code&gt;dnsmasq&lt;/code&gt;) so you would not spend time on the DNS queries.&lt;/p&gt;
-&lt;p&gt;As always, I would appreciate any feedback you may have.&lt;/p&gt;</content><category term="hacking"/><category term="nginx"/><category term="patch"/></entry><entry><title>Dynamic resolution of upstream servers in nginx</title><link href="https://dmitry.khlebnikov.net/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/" rel="alternate"/><published>2016-09-20T10:00:00+10:00</published><updated>2025-10-15T12:16:11+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2016-09-20:/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/</id><summary type="html">&lt;p&gt;A &amp;ldquo;howto&amp;rdquo; article which details a custom patch created for the community version of NGINX to enable the dynamic DNS resolution of upstream servers. This functionality addresses the challenge of working with cloud load balancers, whose IP addresses can change automatically, a feature not supported in the free version. The patch implements a resolve keyword compatible with the commercial NGINX version, ensuring seamless configuration if a user decides to upgrade. While used successfully in production, the author notes this approach is now outdated and has been superseded by a method using systemd-socket-proxyd.&lt;/p&gt;</summary><content type="html">&lt;p&gt;UPDATE: This approach was superseded by the &lt;a href="https://dmitry.khlebnikov.net/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/"&gt;proxying through
+&lt;p&gt;As always, I would appreciate any feedback you may have.&lt;/p&gt;</content><category term="hacking"/><category term="nginx"/><category term="patch"/></entry><entry><title>Dynamic resolution of upstream servers in nginx</title><link href="https://dmitry.khlebnikov.net/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/" rel="alternate"/><published>2016-09-20T10:00:00+10:00</published><updated>2025-10-15T23:06:20+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2016-09-20:/2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/</id><summary type="html">&lt;p&gt;A &amp;ldquo;howto&amp;rdquo; post which details a custom patch created for the community
+version of NGINX to enable the dynamic DNS resolution of upstream servers. This
+functionality addresses the challenge of working with cloud load balancers,
+whose IP addresses can change automatically, a feature not supported in the
+free version. The patch implements a resolve keyword compatible with the
+commercial NGINX version, ensuring seamless configuration if a user decides to
+upgrade. While used successfully in production, the author notes this approach
+is now outdated and has been superseded by a method using
+systemd-socket-proxyd.&lt;/p&gt;</summary><content type="html">&lt;p&gt;UPDATE: This approach was superseded by the &lt;a href="https://dmitry.khlebnikov.net/2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/"&gt;proxying through
 systemd-socket-proxyd&lt;/a&gt; approach.&lt;/p&gt;
 &lt;p&gt;Many of my clients are running application stacks consisting of nginx plus some
 kind of scripting engine behind it (be it PHP, Ruby, or something else).&lt;/p&gt;
@@ -388,7 +397,10 @@ need to change your configs.&lt;/p&gt;
 production for the last couple of years. The work on the patch was sponsored by
 &lt;a href="https://openwall.com.au"&gt;Openwall (Australia)&lt;/a&gt; and &lt;a href="https://withriley.com"&gt;Data Solutions
 Group&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Enjoy! :)&lt;/p&gt;</content><category term="hacking"/><category term="nginx"/><category term="patch"/></entry><entry><title>HOWTO: VMware Player as a remote console (VNC)</title><link href="https://dmitry.khlebnikov.net/2010/11/24/howto-vmware-player-as-a-remote-console-vnc/" rel="alternate"/><published>2010-11-24T10:00:00+11:00</published><updated>2020-06-14T20:08:33+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2010-11-24:/2010/11/24/howto-vmware-player-as-a-remote-console-vnc/</id><summary type="html">&lt;p&gt;Turning VMware Player into a non-privileged VNC client to access VMware VMs from a Linux-based PC&lt;/p&gt;</summary><content type="html">&lt;p&gt;Since I am doing a lot of remote systems administration tasks due to the nature
+&lt;p&gt;Enjoy! :)&lt;/p&gt;</content><category term="hacking"/><category term="nginx"/><category term="patch"/></entry><entry><title>HOWTO: VMware Player as a remote console (VNC)</title><link href="https://dmitry.khlebnikov.net/2010/11/24/howto-vmware-player-as-a-remote-console-vnc/" rel="alternate"/><published>2010-11-24T10:00:00+11:00</published><updated>2025-10-15T23:06:20+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2010-11-24:/2010/11/24/howto-vmware-player-as-a-remote-console-vnc/</id><summary type="html">&lt;p&gt;Turning VMware Player into a non-privileged VNC client to access&lt;/p&gt;</summary><content type="html">&lt;p&gt;VMware VMs from a Linux-based PC.
+Tags: howto, hack
+Alias: /2010/11/howto-vmware-player-as-remote-console.html&lt;/p&gt;
+&lt;p&gt;Since I am doing a lot of remote systems administration tasks due to the nature
 of my IT consulting work and since I am also running Linux on all my computers
 I was looking for a native way how to get a remote console to VMware VMs from
 linux.&lt;/p&gt;

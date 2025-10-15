@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - hacks</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"/><link href="https://dmitry.khlebnikov.net/feeds/hacks.atom.xml" rel="self"/><id>https://dmitry.khlebnikov.net/</id><updated>2025-10-09T16:37:05+11:00</updated><subtitle>assorted bits of wit</subtitle><entry><title>Samsung CSC Change Using Modem Commands</title><link href="https://dmitry.khlebnikov.net/2025/10/09/samsung-csc-change-using-modem-commands/" rel="alternate"/><published>2025-10-09T15:30:00+11:00</published><updated>2025-10-09T16:37:05+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2025-10-09:/2025/10/09/samsung-csc-change-using-modem-commands/</id><summary type="html">&lt;p&gt;This is a brief brain dump, so I can recall it when needed.&lt;/p&gt;
-&lt;p&gt;Each time I get a new Samsung phone I have to figure out a way to change the
-Country Service Code (CSC) to a country that allows automated call recordings,
-for example, Indonesia (XID).  Previously, approximately 5 years ago, it was
-quite straight forward: you needed to download the HOME_CSC image for the
-region you are interested in, ensure that it was for the same bootloader
-version, and flash it to the CSC partition.&lt;/p&gt;
-&lt;p&gt;However, something changed in recent years (and I was not paying attention to …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This is a brief brain dump, so I can recall it when needed.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - hacks</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"/><link href="https://dmitry.khlebnikov.net/feeds/hacks.atom.xml" rel="self"/><id>https://dmitry.khlebnikov.net/</id><updated>2025-10-15T23:06:20+11:00</updated><subtitle>assorted bits of wit</subtitle><entry><title>Samsung CSC Change Using Modem Commands</title><link href="https://dmitry.khlebnikov.net/2025/10/09/samsung-csc-change-using-modem-commands/" rel="alternate"/><published>2025-10-09T15:30:00+11:00</published><updated>2025-10-15T23:06:20+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2025-10-09:/2025/10/09/samsung-csc-change-using-modem-commands/</id><summary type="html">&lt;p&gt;A technical guide for manually changing the Country Service Code (CSC)
+on modern Samsung phones, motivated by author&amp;rsquo;s need to switch from
+Australia (XSA) to a region like Indonesia (XID) to enable features such as
+automated call recording. The author notes that older methods of flashing
+CSC images were no longer effective on new devices and sought an
+alternative to the popular Windows-only SamFW tool, as they use macOS. The
+solution involves replicating the tool&amp;rsquo;s method of sending modem AT commands
+over a Serial-over-USB connection. The process requires enabling specific
+developer options on the phone, entering a diagnostic mode through the dialer,
+connecting to the device&amp;rsquo;s modem endpoint with a terminal program, and issuing
+a sequence of AT commands to set the new CSC before rebooting the phone.&lt;/p&gt;</summary><content type="html">&lt;p&gt;This is a brief brain dump, so I can recall it when needed.&lt;/p&gt;
 &lt;p&gt;Each time I get a new Samsung phone I have to figure out a way to change the
 Country Service Code (CSC) to a country that allows automated call recordings,
 for example, Indonesia (XID).  Previously, approximately 5 years ago, it was

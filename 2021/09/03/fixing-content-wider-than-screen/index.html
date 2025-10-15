@@ -2,26 +2,18 @@
 <html lang="en">
 <head>
 	<title>Mind Drops :: Fixing "Content wider than screen"</title>
-		<meta http-equiv="Content-Security-Policy" content="	default-src 'self';object-src 'none';script-src 'self' https://www.googletagmanager.com/gtag/js 'sha256-TelA7VsuYAMqhOKGk7CHgJyuqSJdmqZEp+hn6PWVRwQ=' https://www.google-analytics.com/analytics.js https://static.cloudflareinsights.com/beacon.min.js;img-src 'self' data: https://www.google-analytics.com/r/collect https://www.google-analytics.com/collect https://stats.g.doubleclick.net/r/collect https://*/ads/ga-audiences https://www.googletagmanager.com/a;style-src 'self' 'sha256-fszvBX/J9dhPxFSJ5wUrq/Pvg6HrnTkWyshMZpaxSQY=';connect-src 'self' https://www.google-analytics.com/j/collect https://stats.g.doubleclick.net/j/collect; " />
+	<meta name="description" content="The post provides a step-by-step guide for debugging the “Content wider than screen” mobile usability error reported by Google Search Console, even when the issue isn’t visually apparent. The author demonstrates how to use Chrome DevTools, specifically the “Layers” view, to identify the root cause. By inspecting the layer hierarchy, one can spot elements with unusually large dimensions that extend far beyond the document’s viewport, causing the error. The process involves finding these oversized layers, locating the corresponding element in the DOM tree, and analyzing its CSS to understand why it’s being rendered off-screen. In the author’s case, the problem was caused by a CSS technique intended to hide a label for screen readers by pushing it far to the left, which was fixed by applying overflow: hidden and opacity: 0 to contain the element without affecting its accessibility." />
+	<meta http-equiv="Content-Security-Policy" content="	default-src 'self';object-src 'none';script-src 'self' https://www.googletagmanager.com/gtag/js 'sha256-TelA7VsuYAMqhOKGk7CHgJyuqSJdmqZEp+hn6PWVRwQ=' https://www.google-analytics.com/analytics.js https://static.cloudflareinsights.com/beacon.min.js;img-src 'self' data: https://www.google-analytics.com/r/collect https://www.google-analytics.com/collect https://stats.g.doubleclick.net/r/collect https://*/ads/ga-audiences https://www.googletagmanager.com/a;style-src 'self' 'sha256-fszvBX/J9dhPxFSJ5wUrq/Pvg6HrnTkWyshMZpaxSQY=';connect-src 'self' https://www.google-analytics.com/j/collect https://stats.g.doubleclick.net/j/collect; " />
 	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1" />	<link rel="preload" href="/theme/fonts/Oswald/Oswald-VariableFont_wght.woff2" crossorigin="anonymous" as="font" type="font/woff2">
+	<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1" />
+	<link rel="preload" href="/theme/fonts/Oswald/Oswald-VariableFont_wght.woff2" crossorigin="anonymous" as="font" type="font/woff2">
 	<link rel="preload" href="/theme/fonts/Exo2/Exo2-VariableFont_wght.woff2" crossorigin="anonymous" as="font" type="font/woff2">	<link rel="stylesheet" href="/theme/css/fonts/Icons.css" />
 	<link rel="stylesheet" href="/theme/css/fonts/Exo2.css" />
 	<link rel="stylesheet" href="/theme/css/fonts/Oswald.css" />
 	<link rel="stylesheet" href="/theme/css/fonts/DancingScript.css" />
 	<link rel="stylesheet" href="/theme/css/base.css" />
 	<link rel="stylesheet" href="/theme/css/pygments/default.css" />
-	<link rel="canonical" href="../../../..//2021/09/03/fixing-content-wider-than-screen/" />
-	<link name="description" content="&lt;p&gt;Recently, I started to get notifications from my &lt;a class=&#34;external&#34; href=&#34;https://search.google.com/search-console&#34; rel=&#34;nofollow&#34;&gt;Google Search Console&lt;/a&gt; that
-some pages have their &lt;a class=&#34;external&#34; href=&#34;https://support.google.com/webmasters/answer/9063469#content_not_sized_to_viewport&#34; rel=&#34;nofollow&#34;&gt;content wider than screen&lt;/a&gt; and that impacts Mobile
-Usability.  However, when I went to the affected pages and performed a test
-through &amp;ldquo;&lt;a class=&#34;external&#34; href=&#34;https://search.google.com/test/mobile-friendly?url=https://dmitry.khlebnikov.net/2021/09/03/fixing-content-wider-than-screen/&#34; rel=&#34;nofollow&#34;&gt;TEST LIVE PAGE&lt;/a&gt;&amp;rdquo; no
-Mobile Usability issues were found.  Yet, the re-validation requests through
-Google Search Console were returning the error again and again.&lt;/p&gt;
-&lt;p&gt;I searched for possible root cause and suggested fixes on forums, but did not
-find any satisfactory approaches for investigating and fixing the issue.
-Below, is my process of hunting the root cause down, which resulted in
-resolving …&lt;/p&gt;" />
+	<link rel="canonical" href="https://dmitry.khlebnikov.net/2021/09/03/fixing-content-wider-than-screen/" />
 
 	<script type="application/ld+json">
 	{
@@ -30,11 +22,11 @@ resolving …&lt;/p&gt;" />
 		"author": [{
 			"@type": "Person",
 			"name": "(GalaxyMaster)",
-			"url": "../../../..//about"
+			"url": "https://dmitry.khlebnikov.net/about"
 		}],
 		"headline" : "Fixing &#34;Content wider than screen&#34;",
 		"datePublished" : "2021-09-03T13:00:00+10:00",
-		"dateModified" : "2021-09-07T22:52:31+10:00",
+		"dateModified" : "2025-10-15T23:06:20+11:00",
 	}
 	</script>
 </head>
@@ -45,7 +37,7 @@ resolving …&lt;/p&gt;" />
 			<!--
 			<button class="menu-toggle" type="button" tabindex="0" aria-label="Menu Toggle"><div></div></button>
 			-->
-			<div class="menu-toggle" tabindex="0" aria-label="Menu Toggle"><div></div></div>
+			<nav class="menu-toggle" tabindex="0" aria-label="Menu Toggle"><div></div></nav>
 			<a href="/" class="logo">
 				<picture>
 					<source srcset="/images/logo.svg" type="image/svg+xml">

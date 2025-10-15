@@ -2,26 +2,18 @@
 <html lang="en">
 <head>
 	<title>Mind Drops :: Truly Responsive Pagination</title>
-		<meta http-equiv="Content-Security-Policy" content="	default-src 'self';object-src 'none';script-src 'self' https://www.googletagmanager.com/gtag/js 'sha256-TelA7VsuYAMqhOKGk7CHgJyuqSJdmqZEp+hn6PWVRwQ=' https://www.google-analytics.com/analytics.js https://static.cloudflareinsights.com/beacon.min.js;img-src 'self' data: https://www.google-analytics.com/r/collect https://www.google-analytics.com/collect https://stats.g.doubleclick.net/r/collect https://*/ads/ga-audiences https://www.googletagmanager.com/a;style-src 'self' 'sha256-fszvBX/J9dhPxFSJ5wUrq/Pvg6HrnTkWyshMZpaxSQY=' 'sha256-X63tsLxZ666HvGjs1YuRyp7HYdYx/wyORGXIpJm3m8c=' 'sha256-Fhm1+nBYn8lYU7dBqxHnbjm4L3ZuERi+2Yy3EfIK8GE=' 'sha256-+VXdhoFi9H+UeLqew9Z/G5N2QpjFHXKjtWmrRzMmPw0=';connect-src 'self' https://www.google-analytics.com/j/collect https://stats.g.doubleclick.net/j/collect; " />
+	<meta name="description" content="This post details author’s process for creating a truly responsive pagination widget using only HTML and CSS. The goal was to build a widget that maintains its appearance across different viewport sizes by omitting middle page numbers when space is limited, without compromising accessibility for screen readers. After exploring flexbox, the author developed a solution that divides the pagination list into three parts (“head,” “middle,” and “tail”) and uses row-reverse on the “tail” section to ensure the first and last page numbers remain visible during resizing. A pseudo-element with a dotted border is used to visually indicate omitted pages. Despite creating a workable solution, the author notes remaining challenges, including accessibility issues caused by reversing the list order in the HTML and an edge case where omission indicators appear incorrectly." />
+	<meta http-equiv="Content-Security-Policy" content="	default-src 'self';object-src 'none';script-src 'self' https://www.googletagmanager.com/gtag/js 'sha256-TelA7VsuYAMqhOKGk7CHgJyuqSJdmqZEp+hn6PWVRwQ=' https://www.google-analytics.com/analytics.js https://static.cloudflareinsights.com/beacon.min.js;img-src 'self' data: https://www.google-analytics.com/r/collect https://www.google-analytics.com/collect https://stats.g.doubleclick.net/r/collect https://*/ads/ga-audiences https://www.googletagmanager.com/a;style-src 'self' 'sha256-fszvBX/J9dhPxFSJ5wUrq/Pvg6HrnTkWyshMZpaxSQY=' 'sha256-X63tsLxZ666HvGjs1YuRyp7HYdYx/wyORGXIpJm3m8c=' 'sha256-Fhm1+nBYn8lYU7dBqxHnbjm4L3ZuERi+2Yy3EfIK8GE=' 'sha256-+VXdhoFi9H+UeLqew9Z/G5N2QpjFHXKjtWmrRzMmPw0=';connect-src 'self' https://www.google-analytics.com/j/collect https://stats.g.doubleclick.net/j/collect; " />
 	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1" />	<link rel="preload" href="/theme/fonts/Oswald/Oswald-VariableFont_wght.woff2" crossorigin="anonymous" as="font" type="font/woff2">
+	<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1" />
+	<link rel="preload" href="/theme/fonts/Oswald/Oswald-VariableFont_wght.woff2" crossorigin="anonymous" as="font" type="font/woff2">
 	<link rel="preload" href="/theme/fonts/Exo2/Exo2-VariableFont_wght.woff2" crossorigin="anonymous" as="font" type="font/woff2">	<link rel="stylesheet" href="/theme/css/fonts/Icons.css" />
 	<link rel="stylesheet" href="/theme/css/fonts/Exo2.css" />
 	<link rel="stylesheet" href="/theme/css/fonts/Oswald.css" />
 	<link rel="stylesheet" href="/theme/css/fonts/DancingScript.css" />
 	<link rel="stylesheet" href="/theme/css/base.css" />
 	<link rel="stylesheet" href="/theme/css/pygments/default.css" />
-	<link rel="canonical" href="../../../..//2020/06/14/truly-responsive-pagination/" />
-	<link name="description" content="&lt;p&gt;Searching the web for an example of a fully responsive pagination widget I
-found that either people consider &amp;ldquo;responsive&amp;rdquo; to be something else or that it
-is a non-trivial problem to solve.  In any case, I decided to have a crack at
-it myself.&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;A sketch of how pagination widget should work&#34; class=&#34;figure&#34; src=&#34;../../../../2020/06/14/truly-responsive-pagination/images/paginator-sketch.png&#34;&gt;&lt;/p&gt;
-&lt;p&gt;My definition of a responsive pagination widget is pretty simple: such a widget
-should maintain its look and feel when the viewport (or a window) changes the
-size, yet the excessive information such as page numbers in the middle should
-be omitted if there is no space for them.&lt;/p&gt;
-&lt;p&gt;In this post I am going to …&lt;/p&gt;" />
+	<link rel="canonical" href="https://dmitry.khlebnikov.net/2020/06/14/truly-responsive-pagination/" />
 
 	<script type="application/ld+json">
 	{
@@ -30,11 +22,11 @@ be omitted if there is no space for them.&lt;/p&gt;
 		"author": [{
 			"@type": "Person",
 			"name": "(GalaxyMaster)",
-			"url": "../../../..//about"
+			"url": "https://dmitry.khlebnikov.net/about"
 		}],
 		"headline" : "Truly Responsive Pagination",
 		"datePublished" : "2020-06-14T20:07:00+10:00",
-		"dateModified" : "2020-06-14T20:15:57+10:00",
+		"dateModified" : "2025-10-15T23:06:20+11:00",
 	}
 	</script>
 </head>
@@ -45,7 +37,7 @@ be omitted if there is no space for them.&lt;/p&gt;
 			<!--
 			<button class="menu-toggle" type="button" tabindex="0" aria-label="Menu Toggle"><div></div></button>
 			-->
-			<div class="menu-toggle" tabindex="0" aria-label="Menu Toggle"><div></div></div>
+			<nav class="menu-toggle" tabindex="0" aria-label="Menu Toggle"><div></div></nav>
 			<a href="/" class="logo">
 				<picture>
 					<source srcset="/images/logo.svg" type="image/svg+xml">

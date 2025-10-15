@@ -2,24 +2,18 @@
 <html lang="en">
 <head>
 	<title>Mind Drops :: Transparent SSH host-jumping (Advanced)</title>
-		<meta http-equiv="Content-Security-Policy" content="	default-src 'self';object-src 'none';script-src 'self' https://www.googletagmanager.com/gtag/js 'sha256-TelA7VsuYAMqhOKGk7CHgJyuqSJdmqZEp+hn6PWVRwQ=' https://www.google-analytics.com/analytics.js https://static.cloudflareinsights.com/beacon.min.js;img-src 'self' data: https://www.google-analytics.com/r/collect https://www.google-analytics.com/collect https://stats.g.doubleclick.net/r/collect https://*/ads/ga-audiences https://www.googletagmanager.com/a;style-src 'self' 'sha256-fszvBX/J9dhPxFSJ5wUrq/Pvg6HrnTkWyshMZpaxSQY=';connect-src 'self' https://www.google-analytics.com/j/collect https://stats.g.doubleclick.net/j/collect; " />
+	<meta name="description" content="This post presents an advanced SSH configuration to transparently connect to a target host through one or more intermediate “jump” hosts, addressing the inconvenience of managing numerous LocalForward entries in the ~/.ssh/config file. The solution uses a “Host /” pattern and a ProxyCommand directive, allowing a user to connect with a simple command like ssh user@hostA/hostB/hostC. To overcome the inefficiency of creating new connections for every session, the author further refines the ProxyCommand to leverage SSH’s connection multiplexing features, ControlMaster, ControlPath, and ControlPersist. This improved setup reuses already established connections, significantly speeding up subsequent logins and keeping idle background connections alive for a set period, which optimises the workflow for accessing hosts in complex, non-directly reachable network environments." />
+	<meta http-equiv="Content-Security-Policy" content="	default-src 'self';object-src 'none';script-src 'self' https://www.googletagmanager.com/gtag/js 'sha256-TelA7VsuYAMqhOKGk7CHgJyuqSJdmqZEp+hn6PWVRwQ=' https://www.google-analytics.com/analytics.js https://static.cloudflareinsights.com/beacon.min.js;img-src 'self' data: https://www.google-analytics.com/r/collect https://www.google-analytics.com/collect https://stats.g.doubleclick.net/r/collect https://*/ads/ga-audiences https://www.googletagmanager.com/a;style-src 'self' 'sha256-fszvBX/J9dhPxFSJ5wUrq/Pvg6HrnTkWyshMZpaxSQY=';connect-src 'self' https://www.google-analytics.com/j/collect https://stats.g.doubleclick.net/j/collect; " />
 	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1" />	<link rel="preload" href="/theme/fonts/Oswald/Oswald-VariableFont_wght.woff2" crossorigin="anonymous" as="font" type="font/woff2">
+	<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1" />
+	<link rel="preload" href="/theme/fonts/Oswald/Oswald-VariableFont_wght.woff2" crossorigin="anonymous" as="font" type="font/woff2">
 	<link rel="preload" href="/theme/fonts/Exo2/Exo2-VariableFont_wght.woff2" crossorigin="anonymous" as="font" type="font/woff2">	<link rel="stylesheet" href="/theme/css/fonts/Icons.css" />
 	<link rel="stylesheet" href="/theme/css/fonts/Exo2.css" />
 	<link rel="stylesheet" href="/theme/css/fonts/Oswald.css" />
 	<link rel="stylesheet" href="/theme/css/fonts/DancingScript.css" />
 	<link rel="stylesheet" href="/theme/css/base.css" />
 	<link rel="stylesheet" href="/theme/css/pygments/default.css" />
-	<link rel="canonical" href="../../../..//2015/08/06/transparent-ssh-host-jumping-advanced/" />
-	<link name="description" content="&lt;p&gt;In this brief article I am going to describe how I resolved a nagging issue I
-had with setting up access to hosts which are not directly reachable, but where
-you need to forward your connection through an intermediate host.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;../../../../2010/12/10/ssh-port-forwarding-intermediate/&#34;&gt;Previously&lt;/a&gt;, I was using the local SSH port-forwarding technique (although I
-was configuring hosts I connect to in the &lt;code&gt;~/.ssh/config&lt;/code&gt; file instead of
-using the command-line options). However, this approach turned out to be quite
-inconvenient since every time I wanted to connect to a new host (and, possibly,
-through a new intermediate host) I had to edit my …&lt;/p&gt;" />
+	<link rel="canonical" href="https://dmitry.khlebnikov.net/2015/08/06/transparent-ssh-host-jumping-advanced/" />
 
 	<script type="application/ld+json">
 	{
@@ -28,11 +22,11 @@ through a new intermediate host) I had to edit my …&lt;/p&gt;" />
 		"author": [{
 			"@type": "Person",
 			"name": "(GalaxyMaster)",
-			"url": "../../../..//about"
+			"url": "https://dmitry.khlebnikov.net/about"
 		}],
 		"headline" : "Transparent SSH host-jumping (Advanced)",
 		"datePublished" : "2015-08-06T10:00:00+10:00",
-		"dateModified" : "2020-05-17T20:25:15+10:00",
+		"dateModified" : "2025-10-15T23:06:20+11:00",
 	}
 	</script>
 </head>
@@ -43,7 +37,7 @@ through a new intermediate host) I had to edit my …&lt;/p&gt;" />
 			<!--
 			<button class="menu-toggle" type="button" tabindex="0" aria-label="Menu Toggle"><div></div></button>
 			-->
-			<div class="menu-toggle" tabindex="0" aria-label="Menu Toggle"><div></div></div>
+			<nav class="menu-toggle" tabindex="0" aria-label="Menu Toggle"><div></div></nav>
 			<a href="/" class="logo">
 				<picture>
 					<source srcset="/images/logo.svg" type="image/svg+xml">
@@ -278,12 +272,12 @@ easier. :)</p>
 					<ul class="tags">
 						<li class="tag">
 							<span>
-								<a href="/tag/console/" rel="tag" title="A link to the collection tagged with 'console'" data-count="8" ><span>console</span></a>
+								<a href="/tag/console/" rel="tag" title="A link to the collection tagged with 'console'" data-count="9" ><span>console</span></a>
 							</span>
 						</li>
 						<li class="tag">
 							<span>
-								<a href="/tag/ssh/" rel="tag" title="A link to the collection tagged with 'ssh'" data-count="4" ><span>ssh</span></a>
+								<a href="/tag/ssh/" rel="tag" title="A link to the collection tagged with 'ssh'" data-count="5" ><span>ssh</span></a>
 							</span>
 						</li>
 						<li class="tag">

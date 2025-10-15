@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - web design</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"/><link href="https://dmitry.khlebnikov.net/feeds/web-design.atom.xml" rel="self"/><id>https://dmitry.khlebnikov.net/</id><updated>2023-02-21T20:44:20+11:00</updated><subtitle>assorted bits of wit</subtitle><entry><title>Fixing "Content wider than screen"</title><link href="https://dmitry.khlebnikov.net/2021/09/03/fixing-content-wider-than-screen/" rel="alternate"/><published>2021-09-03T13:00:00+10:00</published><updated>2021-09-07T22:52:31+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2021-09-03:/2021/09/03/fixing-content-wider-than-screen/</id><summary type="html">&lt;p&gt;Recently, I started to get notifications from my &lt;a class="external" href="https://search.google.com/search-console" rel="nofollow"&gt;Google Search Console&lt;/a&gt; that
-some pages have their &lt;a class="external" href="https://support.google.com/webmasters/answer/9063469#content_not_sized_to_viewport" rel="nofollow"&gt;content wider than screen&lt;/a&gt; and that impacts Mobile
-Usability.  However, when I went to the affected pages and performed a test
-through &amp;ldquo;&lt;a class="external" href="https://search.google.com/test/mobile-friendly?url=https://dmitry.khlebnikov.net/2021/09/03/fixing-content-wider-than-screen/" rel="nofollow"&gt;TEST LIVE PAGE&lt;/a&gt;&amp;rdquo; no
-Mobile Usability issues were found.  Yet, the re-validation requests through
-Google Search Console were returning the error again and again.&lt;/p&gt;
-&lt;p&gt;I searched for possible root cause and suggested fixes on forums, but did not
-find any satisfactory approaches for investigating and fixing the issue.
-Below, is my process of hunting the root cause down, which resulted in
-resolving …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Recently, I started to get notifications from my &lt;a class="external" href="https://search.google.com/search-console" rel="nofollow"&gt;Google Search Console&lt;/a&gt; that
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - web design</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"/><link href="https://dmitry.khlebnikov.net/feeds/web-design.atom.xml" rel="self"/><id>https://dmitry.khlebnikov.net/</id><updated>2025-10-15T23:06:20+11:00</updated><subtitle>assorted bits of wit</subtitle><entry><title>Fixing "Content wider than screen"</title><link href="https://dmitry.khlebnikov.net/2021/09/03/fixing-content-wider-than-screen/" rel="alternate"/><published>2021-09-03T13:00:00+10:00</published><updated>2025-10-15T23:06:20+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2021-09-03:/2021/09/03/fixing-content-wider-than-screen/</id><summary type="html">&lt;p&gt;The post provides a step-by-step guide for debugging the &amp;ldquo;Content
+wider than screen&amp;rdquo; mobile usability error reported by Google Search Console,
+even when the issue isn&amp;rsquo;t visually apparent. The author demonstrates how to use
+Chrome DevTools, specifically the &amp;ldquo;Layers&amp;rdquo; view, to identify the root cause. By
+inspecting the layer hierarchy, one can spot elements with unusually large
+dimensions that extend far beyond the document&amp;rsquo;s viewport, causing the error.
+The process involves finding these oversized layers, locating the corresponding
+element in the DOM tree, and analyzing its CSS to understand why it&amp;rsquo;s being
+rendered off-screen. In the author&amp;rsquo;s case, the problem was caused by a CSS
+technique intended to hide a label for screen readers by pushing it far to the
+left, which was fixed by applying overflow: hidden and opacity: 0 to contain
+the element without affecting its accessibility.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Recently, I started to get notifications from my &lt;a class="external" href="https://search.google.com/search-console" rel="nofollow"&gt;Google Search Console&lt;/a&gt; that
 some pages have their &lt;a class="external" href="https://support.google.com/webmasters/answer/9063469#content_not_sized_to_viewport" rel="nofollow"&gt;content wider than screen&lt;/a&gt; and that impacts Mobile
 Usability.  However, when I went to the affected pages and performed a test
 through &amp;ldquo;&lt;a class="external" href="https://search.google.com/test/mobile-friendly?url=https://dmitry.khlebnikov.net/2021/09/03/fixing-content-wider-than-screen/" rel="nofollow"&gt;TEST LIVE PAGE&lt;/a&gt;&amp;rdquo; no
@@ -99,16 +101,18 @@ in this instance was to cut the overflowing label off using &lt;code&gt;overflow
 and &lt;code&gt;white-space: nowrap&lt;/code&gt;. I also used &lt;code&gt;opacity: 0&lt;/code&gt; for the &amp;ldquo;contextual&amp;rdquo; class,
 which was used by some static, non-interactive elements on the page.&lt;/p&gt;
 &lt;p&gt;I hope this small tutorial helped you to hunt down the source of your Google
-Search Console errors related to the content being outside the viewport.&lt;/p&gt;</content><category term="web design"/><category term="html"/><category term="css"/><category term="design"/></entry><entry><title>Truly Responsive Pagination</title><link href="https://dmitry.khlebnikov.net/2020/06/14/truly-responsive-pagination/" rel="alternate"/><published>2020-06-14T20:07:00+10:00</published><updated>2020-06-14T20:15:57+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-06-14:/2020/06/14/truly-responsive-pagination/</id><summary type="html">&lt;p&gt;Searching the web for an example of a fully responsive pagination widget I
-found that either people consider &amp;ldquo;responsive&amp;rdquo; to be something else or that it
-is a non-trivial problem to solve.  In any case, I decided to have a crack at
-it myself.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="A sketch of how pagination widget should work" class="figure" src="https://dmitry.khlebnikov.net/2020/06/14/truly-responsive-pagination/images/paginator-sketch.png"&gt;&lt;/p&gt;
-&lt;p&gt;My definition of a responsive pagination widget is pretty simple: such a widget
-should maintain its look and feel when the viewport (or a window) changes the
-size, yet the excessive information such as page numbers in the middle should
-be omitted if there is no space for them.&lt;/p&gt;
-&lt;p&gt;In this post I am going to …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Searching the web for an example of a fully responsive pagination widget I
+Search Console errors related to the content being outside the viewport.&lt;/p&gt;</content><category term="web design"/><category term="html"/><category term="css"/><category term="design"/></entry><entry><title>Truly Responsive Pagination</title><link href="https://dmitry.khlebnikov.net/2020/06/14/truly-responsive-pagination/" rel="alternate"/><published>2020-06-14T20:07:00+10:00</published><updated>2025-10-15T23:06:20+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-06-14:/2020/06/14/truly-responsive-pagination/</id><summary type="html">&lt;p&gt;This post details author&amp;rsquo;s process for creating a truly responsive
+pagination widget using only HTML and CSS. The goal was to build a widget that
+maintains its appearance across different viewport sizes by omitting middle
+page numbers when space is limited, without compromising accessibility for
+screen readers. After exploring flexbox, the author developed a solution that
+divides the pagination list into three parts (&amp;ldquo;head,&amp;rdquo; &amp;ldquo;middle,&amp;rdquo; and &amp;ldquo;tail&amp;rdquo;) and
+uses row-reverse on the &amp;ldquo;tail&amp;rdquo; section to ensure the first and last page
+numbers remain visible during resizing. A pseudo-element with a dotted border
+is used to visually indicate omitted pages. Despite creating a workable
+solution, the author notes remaining challenges, including accessibility issues
+caused by reversing the list order in the HTML and an edge case where omission
+indicators appear incorrectly.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Searching the web for an example of a fully responsive pagination widget I
 found that either people consider &amp;ldquo;responsive&amp;rdquo; to be something else or that it
 is a non-trivial problem to solve.  In any case, I decided to have a crack at
 it myself.&lt;/p&gt;
@@ -554,13 +558,18 @@ visually pleasing widget hidden from the screen readers.&lt;/p&gt;
 not want to go that route for my blog.  Most likely, since my blog is
 statically generated I will address it using the logic of the generator itself.&lt;/p&gt;
 &lt;p&gt;Still, I think the techniques I demonstrated here may be quite useful to some
-people who are designing pure HTML and CSS adaptive widgets.&lt;/p&gt;</content><category term="web design"/><category term="html"/><category term="css"/><category term="design"/></entry><entry><title>Wrap indicator in &lt;pre&gt; blocks</title><link href="https://dmitry.khlebnikov.net/2020/05/10/wrap-indicator-in-pre-blocks/" rel="alternate"/><published>2020-05-10T21:00:00+10:00</published><updated>2023-02-21T20:44:20+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-10:/2020/05/10/wrap-indicator-in-pre-blocks/</id><summary type="html">&lt;p&gt;I am not a front-end developer, not a UI designer, nor a UX guru, but I am an
-engineer, so when I face a puzzle worth solving my brain switches on and I
-cannot let it go until I find a satisfactory solution to the puzzle.&lt;/p&gt;
-&lt;p&gt;My blog heavily relies on me sharing session dumps and file excerpts using the
-code blocks.  I am using &lt;a href="https://prismjs.com"&gt;PrismJS&lt;/a&gt; to highlight syntax in these blocks.  However,
-after a while I found that there is one thing that really irritates me: these
-code blocks are not designed to be truly responsive, for instance &amp;ndash; when …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I am not a front-end developer, not a UI designer, nor a UX guru, but I am an
+people who are designing pure HTML and CSS adaptive widgets.&lt;/p&gt;</content><category term="web design"/><category term="html"/><category term="css"/><category term="design"/></entry><entry><title>Wrap indicator in &lt;pre&gt; blocks</title><link href="https://dmitry.khlebnikov.net/2020/05/10/wrap-indicator-in-pre-blocks/" rel="alternate"/><published>2020-05-10T21:00:00+10:00</published><updated>2025-10-15T23:06:20+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-10:/2020/05/10/wrap-indicator-in-pre-blocks/</id><summary type="html">&lt;p&gt;This post presents a pure CSS-based solution for adding a visual wrap
+indicator to lines within &lt;pre&gt; code blocks to improve responsiveness and
+readability. The author was annoyed that long lines wrap without any clear
+indication, making code blocks difficult to read. The method involves wrapping
+each physical line of text within the &lt;pre&gt; tag in its own &lt;div&gt;. Using the
+::after pseudo-element on these divs, a repeating background image is
+positioned just outside the text block. A clever CSS clip trick is then used
+to hide the indicator on the last segment of a wrapped line, creating a clean
+and intuitive visual cue. The author also details a &amp;ldquo;bonus round&amp;rdquo; method for
+placing the indicator on the left side and notes the challenges of
+integrating this semantic HTML structure with syntax highlighters like
+PrismJS, for which they developed a custom plugin.&lt;/p&gt;</summary><content type="html">&lt;p&gt;I am not a front-end developer, not a UI designer, nor a UX guru, but I am an
 engineer, so when I face a puzzle worth solving my brain switches on and I
 cannot let it go until I find a satisfactory solution to the puzzle.&lt;/p&gt;
 &lt;p&gt;My blog heavily relies on me sharing session dumps and file excerpts using the

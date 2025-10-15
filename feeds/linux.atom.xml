@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - linux</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"/><link href="https://dmitry.khlebnikov.net/feeds/linux.atom.xml" rel="self"/><id>https://dmitry.khlebnikov.net/</id><updated>2021-08-29T22:26:10+10:00</updated><subtitle>assorted bits of wit</subtitle><entry><title>Raspberry Pi 3 toolchain on CentOS 7</title><link href="https://dmitry.khlebnikov.net/2016/05/22/raspberry-pi-3-toolchain-on-centos-7/" rel="alternate"/><published>2016-05-22T12:00:00+10:00</published><updated>2020-05-17T04:45:11+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2016-05-22:/2016/05/22/raspberry-pi-3-toolchain-on-centos-7/</id><summary type="html">&lt;p&gt;I heard a lot about Raspberry Pi boards but until now I had no need nor time to
-work with one.&lt;/p&gt;
-&lt;p&gt;However, recently I purchased a Dodge Journey R/T and found that although I
-love the car I am so disappointed with its software and hard-wired logic that I
-decided to experiment a bit and fix the most annoying things.&lt;/p&gt;
-&lt;p&gt;Since almost everything inside the car is talking over the CAN bus I needed
-some kind of a enclave inside the car where I could run my code and
-inject/intercept CAN messages.&lt;/p&gt;
-&lt;p&gt;I looked around and found that …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I heard a lot about Raspberry Pi boards but until now I had no need nor time to
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - linux</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"/><link href="https://dmitry.khlebnikov.net/feeds/linux.atom.xml" rel="self"/><id>https://dmitry.khlebnikov.net/</id><updated>2025-10-15T23:06:20+11:00</updated><subtitle>assorted bits of wit</subtitle><entry><title>Raspberry Pi 3 toolchain on CentOS 7</title><link href="https://dmitry.khlebnikov.net/2016/05/22/raspberry-pi-3-toolchain-on-centos-7/" rel="alternate"/><published>2016-05-22T12:00:00+10:00</published><updated>2025-10-15T23:06:20+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2016-05-22:/2016/05/22/raspberry-pi-3-toolchain-on-centos-7/</id><summary type="html">&lt;p&gt;This post provides a detailed walkthrough of building a
+cross-compilation toolchain for a Raspberry Pi 3 on a CentOS 7 server to
+accelerate software development. Motivated by a project to modify his car&amp;rsquo;s CAN
+bus system using a Raspberry Pi, the author found on-device compilation to be
+too slow and opted to create a toolchain on a more powerful AWS EC2 instance.
+The process involves using the crosstool-ng project to configure and build the
+toolchain, with specific configuration adjustments detailed for targeting the
+ARMv8-A architecture and Cortex-A53 CPU of the Raspberry Pi 3. After the
+hour-long build process, the author demonstrates the toolchain&amp;rsquo;s success by
+compiling a simple &amp;ldquo;Hello&amp;rdquo; world program and verifying that the resulting
+binary is a 64-bit ARM executable, ready for use on the target device.&lt;/p&gt;</summary><content type="html">&lt;p&gt;I heard a lot about Raspberry Pi boards but until now I had no need nor time to
 work with one.&lt;/p&gt;
 &lt;p&gt;However, recently I purchased a Dodge Journey R/T and found that although I
 love the car I am so disappointed with its software and hard-wired logic that I
@@ -172,14 +174,18 @@ something and see how it goes:&lt;/p&gt;
 &lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp"&gt;[build@localhost ~]$ &lt;/span&gt;file&lt;span class="w"&gt; &lt;/span&gt;sample
 &lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;sample: ELF 64-bit LSB executable, ARM aarch64, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 4.3.0, not stripped&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Well, it is time to build some awesome stuff for Raspberry Pi 3, I guess, but
-this will be in another post. :)&lt;/p&gt;</content><category term="linux"/><category term="console"/><category term="howto"/><category term="linux"/><category term="raspberry pi"/></entry><entry><title>Building a firewall? Simple and easy!</title><link href="https://dmitry.khlebnikov.net/2016/05/22/building-a-firewall-simple-and-easy/" rel="alternate"/><published>2016-05-22T10:00:00+10:00</published><updated>2021-08-29T22:26:10+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2016-05-22:/2016/05/22/building-a-firewall-simple-and-easy/</id><summary type="html">&lt;p&gt;I strive for simplicity since I am a strong believer that achieving a goal with
-the most simplest solution looks elegant, proves that you have deep knowledge
-on the subject, and overall is beautiful by itself.  Additionally to this, a
-simple solution is easier to comprehend and to audit, hence it is much easier
-to ensure the security of such a solution.&lt;/p&gt;
-&lt;p&gt;Over the last decade, I stumbled upon numerous complicated firewalls erected on
-the NAT boxes with tens (sometimes, hundreds!) of rules describing the traffic
-flows and punched holes for some edge cases.  Every time I wondered: what kind …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I strive for simplicity since I am a strong believer that achieving a goal with
+this will be in another post. :)&lt;/p&gt;</content><category term="linux"/><category term="console"/><category term="howto"/><category term="linux"/><category term="raspberry pi"/></entry><entry><title>Building a firewall? Simple and easy!</title><link href="https://dmitry.khlebnikov.net/2016/05/22/building-a-firewall-simple-and-easy/" rel="alternate"/><published>2016-05-22T10:00:00+10:00</published><updated>2025-10-15T23:06:20+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2016-05-22:/2016/05/22/building-a-firewall-simple-and-easy/</id><summary type="html">&lt;p&gt;This post advocates for building simple, elegant, and secure firewall
+rulesets, arguing that overly complex configurations are difficult to manage
+and audit. The author suggests that most firewall needs can be met with fewer
+than 20 well-defined rules by focusing on four key prerequisites: understanding
+networking fundamentals, mapping traffic flows with diagrams, clearly defining
+firewall goals (e.g., allowing inbound access and restricting outbound), and
+knowing the specific firewall toolset, like iptables. A real-world example is
+provided with a 13-rule iptables configuration for a NAT gateway, which
+establishes a default-deny policy for incoming traffic while allowing
+established connections, essential ICMP traffic, and specific services like
+SSH, demonstrating that a secure and effective firewall doesn&amp;rsquo;t need to be
+convoluted.&lt;/p&gt;</summary><content type="html">&lt;p&gt;I strive for simplicity since I am a strong believer that achieving a goal with
 the most simplest solution looks elegant, proves that you have deep knowledge
 on the subject, and overall is beautiful by itself.  Additionally to this, a
 simple solution is easier to comprehend and to audit, hence it is much easier

@@ -2,24 +2,18 @@
 <html lang="en">
 <head>
 	<title>Mind Drops :: SSH: Interactive ProxyCommand</title>
-		<meta http-equiv="Content-Security-Policy" content="	default-src 'self';object-src 'none';script-src 'self' https://www.googletagmanager.com/gtag/js 'sha256-TelA7VsuYAMqhOKGk7CHgJyuqSJdmqZEp+hn6PWVRwQ=' https://www.google-analytics.com/analytics.js https://static.cloudflareinsights.com/beacon.min.js;img-src 'self' data: https://www.google-analytics.com/r/collect https://www.google-analytics.com/collect https://stats.g.doubleclick.net/r/collect https://*/ads/ga-audiences https://www.googletagmanager.com/a;style-src 'self' 'sha256-fszvBX/J9dhPxFSJ5wUrq/Pvg6HrnTkWyshMZpaxSQY=';connect-src 'self' https://www.google-analytics.com/j/collect https://stats.g.doubleclick.net/j/collect; " />
+	<meta name="description" content="This post demonstrates a solution to a common misconception that SSH’s ProxyCommand does not support interactive scripts, a problem the author encountered while working on the sshephalopod authentication project. The author proves interactivity is possible by creating a wrapper script that cleverly manipulates file descriptors. The script first saves the original standard input (descriptor 0) and standard output (descriptor 1), which are used for the SSH protocol, to new descriptors (10 and 11). It then redirects standard input and output to the user’s terminal (via standard error, descriptor 2), allowing for interactive prompts. After the interaction is complete, the script restores the original file descriptors before executing the final command (like nc) to establish the proxied SSH connection, thus enabling interactive authentication or other user inputs within the ProxyCommand workflow." />
+	<meta http-equiv="Content-Security-Policy" content="	default-src 'self';object-src 'none';script-src 'self' https://www.googletagmanager.com/gtag/js 'sha256-TelA7VsuYAMqhOKGk7CHgJyuqSJdmqZEp+hn6PWVRwQ=' https://www.google-analytics.com/analytics.js https://static.cloudflareinsights.com/beacon.min.js;img-src 'self' data: https://www.google-analytics.com/r/collect https://www.google-analytics.com/collect https://stats.g.doubleclick.net/r/collect https://*/ads/ga-audiences https://www.googletagmanager.com/a;style-src 'self' 'sha256-fszvBX/J9dhPxFSJ5wUrq/Pvg6HrnTkWyshMZpaxSQY=';connect-src 'self' https://www.google-analytics.com/j/collect https://stats.g.doubleclick.net/j/collect; " />
 	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1" />	<link rel="preload" href="/theme/fonts/Oswald/Oswald-VariableFont_wght.woff2" crossorigin="anonymous" as="font" type="font/woff2">
+	<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1" />
+	<link rel="preload" href="/theme/fonts/Oswald/Oswald-VariableFont_wght.woff2" crossorigin="anonymous" as="font" type="font/woff2">
 	<link rel="preload" href="/theme/fonts/Exo2/Exo2-VariableFont_wght.woff2" crossorigin="anonymous" as="font" type="font/woff2">	<link rel="stylesheet" href="/theme/css/fonts/Icons.css" />
 	<link rel="stylesheet" href="/theme/css/fonts/Exo2.css" />
 	<link rel="stylesheet" href="/theme/css/fonts/Oswald.css" />
 	<link rel="stylesheet" href="/theme/css/fonts/DancingScript.css" />
 	<link rel="stylesheet" href="/theme/css/base.css" />
 	<link rel="stylesheet" href="/theme/css/pygments/default.css" />
-	<link rel="canonical" href="../../../..//2016/07/25/ssh-interactive-proxycommand/" />
-	<link name="description" content="&lt;p&gt;I was involved in the creation of the &lt;a href=&#34;https://github.com/realestate-com-au/sshephalopod&#34;&gt;sshephalopod&lt;/a&gt; project, which was an
-attempt to build an enterprise level authentication framework for SSH
-authentication using the SSH &lt;abbr title=&#34;Certificate Authority&#34;&gt;CA&lt;/abbr&gt; feature.&lt;/p&gt;
-&lt;p&gt;The project is based on a wrapper script that signs a user via a &lt;abbr title=&#34;Security Assertion Markup Language&#34;&gt;SAML&lt;/abbr&gt; identity
-provider and gets user&amp;rsquo;s public key signed for the further usage.&lt;/p&gt;
-&lt;p&gt;In one of the discussions I pointed out that such a wrapper script is not good
-for the end user experience and I proposed to provide the users with an excerpt
-for their ssh config file, so the functionality of sshephalopod would be …&lt;/p&gt;" />
+	<link rel="canonical" href="https://dmitry.khlebnikov.net/2016/07/25/ssh-interactive-proxycommand/" />
 
 	<script type="application/ld+json">
 	{
@@ -28,11 +22,11 @@ for their ssh config file, so the functionality of sshephalopod would be …&lt;
 		"author": [{
 			"@type": "Person",
 			"name": "(GalaxyMaster)",
-			"url": "../../../..//about"
+			"url": "https://dmitry.khlebnikov.net/about"
 		}],
 		"headline" : "SSH: Interactive ProxyCommand",
 		"datePublished" : "2016-07-25T10:00:00+10:00",
-		"dateModified" : "2020-05-17T04:45:11+10:00",
+		"dateModified" : "2025-10-15T23:06:20+11:00",
 	}
 	</script>
 </head>
@@ -43,7 +37,7 @@ for their ssh config file, so the functionality of sshephalopod would be …&lt;
 			<!--
 			<button class="menu-toggle" type="button" tabindex="0" aria-label="Menu Toggle"><div></div></button>
 			-->
-			<div class="menu-toggle" tabindex="0" aria-label="Menu Toggle"><div></div></div>
+			<nav class="menu-toggle" tabindex="0" aria-label="Menu Toggle"><div></div></nav>
 			<a href="/" class="logo">
 				<picture>
 					<source srcset="/images/logo.svg" type="image/svg+xml">
@@ -238,12 +232,12 @@ no proxy process hanging around.</p>
 					<ul class="tags">
 						<li class="tag">
 							<span>
-								<a href="/tag/ssh/" rel="tag" title="A link to the collection tagged with 'ssh'" data-count="4" ><span>ssh</span></a>
+								<a href="/tag/ssh/" rel="tag" title="A link to the collection tagged with 'ssh'" data-count="5" ><span>ssh</span></a>
 							</span>
 						</li>
 						<li class="tag">
 							<span>
-								<a href="/tag/console/" rel="tag" title="A link to the collection tagged with 'console'" data-count="8" ><span>console</span></a>
+								<a href="/tag/console/" rel="tag" title="A link to the collection tagged with 'console'" data-count="9" ><span>console</span></a>
 							</span>
 						</li>
 						</ul>

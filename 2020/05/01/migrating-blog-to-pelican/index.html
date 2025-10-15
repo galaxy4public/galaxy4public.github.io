@@ -2,24 +2,18 @@
 <html lang="en">
 <head>
 	<title>Mind Drops :: Migrating blog to Pelican</title>
-		<meta http-equiv="Content-Security-Policy" content="	default-src 'self';object-src 'none';script-src 'self' https://www.googletagmanager.com/gtag/js 'sha256-TelA7VsuYAMqhOKGk7CHgJyuqSJdmqZEp+hn6PWVRwQ=' https://www.google-analytics.com/analytics.js https://static.cloudflareinsights.com/beacon.min.js;img-src 'self' data: https://www.google-analytics.com/r/collect https://www.google-analytics.com/collect https://stats.g.doubleclick.net/r/collect https://*/ads/ga-audiences https://www.googletagmanager.com/a;style-src 'self' 'sha256-fszvBX/J9dhPxFSJ5wUrq/Pvg6HrnTkWyshMZpaxSQY=';connect-src 'self' https://www.google-analytics.com/j/collect https://stats.g.doubleclick.net/j/collect; " />
+	<meta name="description" content="Dissatisfied with the Blogger platform’s changing features and lack of control, the author decided to migrate their decade-old blog to a self-hosted, low-maintenance solution. After researching static site generators (SSGs) that aligned with Jamstack principles and met their requirements for stability, extensibility, and language (preferring Python), they chose Pelican over contenders like Jekyll and Gatsby. The author then undertook a significant theme development project, initially attempting to port an existing HTML theme called “Striped” but ultimately deciding to recreate a similar theme from scratch due to inconsistencies in the original code. The resulting website is the foundation for a planned series of posts about the development process and infrastructure." />
+	<meta http-equiv="Content-Security-Policy" content="	default-src 'self';object-src 'none';script-src 'self' https://www.googletagmanager.com/gtag/js 'sha256-TelA7VsuYAMqhOKGk7CHgJyuqSJdmqZEp+hn6PWVRwQ=' https://www.google-analytics.com/analytics.js https://static.cloudflareinsights.com/beacon.min.js;img-src 'self' data: https://www.google-analytics.com/r/collect https://www.google-analytics.com/collect https://stats.g.doubleclick.net/r/collect https://*/ads/ga-audiences https://www.googletagmanager.com/a;style-src 'self' 'sha256-fszvBX/J9dhPxFSJ5wUrq/Pvg6HrnTkWyshMZpaxSQY=';connect-src 'self' https://www.google-analytics.com/j/collect https://stats.g.doubleclick.net/j/collect; " />
 	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1" />	<link rel="preload" href="/theme/fonts/Oswald/Oswald-VariableFont_wght.woff2" crossorigin="anonymous" as="font" type="font/woff2">
+	<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1" />
+	<link rel="preload" href="/theme/fonts/Oswald/Oswald-VariableFont_wght.woff2" crossorigin="anonymous" as="font" type="font/woff2">
 	<link rel="preload" href="/theme/fonts/Exo2/Exo2-VariableFont_wght.woff2" crossorigin="anonymous" as="font" type="font/woff2">	<link rel="stylesheet" href="/theme/css/fonts/Icons.css" />
 	<link rel="stylesheet" href="/theme/css/fonts/Exo2.css" />
 	<link rel="stylesheet" href="/theme/css/fonts/Oswald.css" />
 	<link rel="stylesheet" href="/theme/css/fonts/DancingScript.css" />
 	<link rel="stylesheet" href="/theme/css/base.css" />
 	<link rel="stylesheet" href="/theme/css/pygments/default.css" />
-	<link rel="canonical" href="../../../..//2020/05/01/migrating-blog-to-pelican/" />
-	<link name="description" content="&lt;p&gt;I had my blog site for more than a decade now, but until now I was not putting
-any effort or thoughts into maintaining my audience or promoting the site.  It
-was dormant for nearly a decade so I decided to rejuvenate it and start using
-it as a platform I could leverage to share some ideas I think are worth
-sharing.&lt;/p&gt;
-&lt;p&gt;Before I embarked on the journey of renovating the blog site I needed to set
-some goals and requirements up, so I would be able to assess my progress and
-estimate how much effort is required.  The primary …&lt;/p&gt;" />
+	<link rel="canonical" href="https://dmitry.khlebnikov.net/2020/05/01/migrating-blog-to-pelican/" />
 
 	<script type="application/ld+json">
 	{
@@ -28,11 +22,11 @@ estimate how much effort is required.  The primary …&lt;/p&gt;" />
 		"author": [{
 			"@type": "Person",
 			"name": "(GalaxyMaster)",
-			"url": "../../../..//about"
+			"url": "https://dmitry.khlebnikov.net/about"
 		}],
 		"headline" : "Migrating blog to Pelican",
 		"datePublished" : "2020-05-01T20:00:00+10:00",
-		"dateModified" : "2023-02-21T20:42:47+11:00",
+		"dateModified" : "2025-10-15T23:06:20+11:00",
 	}
 	</script>
 </head>
@@ -43,7 +37,7 @@ estimate how much effort is required.  The primary …&lt;/p&gt;" />
 			<!--
 			<button class="menu-toggle" type="button" tabindex="0" aria-label="Menu Toggle"><div></div></button>
 			-->
-			<div class="menu-toggle" tabindex="0" aria-label="Menu Toggle"><div></div></div>
+			<nav class="menu-toggle" tabindex="0" aria-label="Menu Toggle"><div></div></nav>
 			<a href="/" class="logo">
 				<picture>
 					<source srcset="/images/logo.svg" type="image/svg+xml">

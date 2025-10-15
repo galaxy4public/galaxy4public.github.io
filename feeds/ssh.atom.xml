@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - ssh</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"/><link href="https://dmitry.khlebnikov.net/feeds/ssh.atom.xml" rel="self"/><id>https://dmitry.khlebnikov.net/</id><updated>2020-05-17T20:25:15+10:00</updated><subtitle>assorted bits of wit</subtitle><entry><title>Transparent SSH host-jumping (Expert)</title><link href="https://dmitry.khlebnikov.net/2016/07/26/transparent-ssh-host-jumping-expert/" rel="alternate"/><published>2016-07-26T10:00:00+10:00</published><updated>2020-05-17T04:45:11+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2016-07-26:/2016/07/26/transparent-ssh-host-jumping-expert/</id><summary type="html">&lt;p&gt;A while ago in the &lt;a href="https://dmitry.khlebnikov.net/2015/08/06/transparent-ssh-host-jumping-advanced/"&gt;Transparent SSH host-jumping (Advanced)&lt;/a&gt; post I
-described a technique on how one could jump quite effortlessly through a chain
-of intermediate hosts. However, there was a catch: the user names and ports
-across the whole chain should be the same and there was no easy way to change
-that.&lt;/p&gt;
-&lt;p&gt;Given that I &lt;a href="https://dmitry.khlebnikov.net/2016/07/25/ssh-interactive-proxycommand/"&gt;recently&lt;/a&gt; paid quite a lot of attention to the ProxyCommand
-directive I decided to look into the implementation of the helper script that
-will allow one to tweak parameters for the hosts in the chain.&lt;/p&gt;
-&lt;p&gt;You can read the &lt;a href="https://dmitry.khlebnikov.net/2015/08/06/transparent-ssh-host-jumping-advanced/"&gt;original&lt;/a&gt; post for the …&lt;/p&gt;</summary><content type="html">&lt;p&gt;A while ago in the &lt;a href="https://dmitry.khlebnikov.net/2015/08/06/transparent-ssh-host-jumping-advanced/"&gt;Transparent SSH host-jumping (Advanced)&lt;/a&gt; post I
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - ssh</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"/><link href="https://dmitry.khlebnikov.net/feeds/ssh.atom.xml" rel="self"/><id>https://dmitry.khlebnikov.net/</id><updated>2025-10-15T23:06:20+11:00</updated><subtitle>assorted bits of wit</subtitle><entry><title>Transparent SSH host-jumping (Expert)</title><link href="https://dmitry.khlebnikov.net/2016/07/26/transparent-ssh-host-jumping-expert/" rel="alternate"/><published>2016-07-26T10:00:00+10:00</published><updated>2025-10-15T23:06:20+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2016-07-26:/2016/07/26/transparent-ssh-host-jumping-expert/</id><summary type="html">&lt;p&gt;This post presents an expert-level solution for transparent SSH
+host-jumping that enhances a previous method by allowing different usernames
+and ports for each host in the connection chain. The author created a custom
+Bash script to be used with the ProxyCommand directive in the SSH config, which
+parses a new connection syntax like userA^hostA/userB^hostB:port/hostC. This
+script dynamically handles the unique credentials for each intermediate host
+while still leveraging SSH&amp;rsquo;s connection multiplexing features like
+ControlMaster and ControlPersist to reuse connections and improve performance.
+The solution addresses the limitations of the prior &amp;ldquo;Advanced&amp;rdquo; method, offering
+greater flexibility for navigating complex network environments with varied
+host configurations.&lt;/p&gt;</summary><content type="html">&lt;p&gt;A while ago in the &lt;a href="https://dmitry.khlebnikov.net/2015/08/06/transparent-ssh-host-jumping-advanced/"&gt;Transparent SSH host-jumping (Advanced)&lt;/a&gt; post I
 described a technique on how one could jump quite effortlessly through a chain
 of intermediate hosts. However, there was a catch: the user names and ports
 across the whole chain should be the same and there was no easy way to change
@@ -93,14 +95,19 @@ shared with me).&lt;/p&gt;
 &lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;ProxyCommand&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="nt"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;ssh-helper&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;sh&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="nt"&gt;r&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="nt"&gt;h&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="nt"&gt;p&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Well, this is a bit messy since OpenSSH introduced the &lt;code&gt;%C&lt;/code&gt; macro in version 6.7
 and without &lt;code&gt;%C&lt;/code&gt; the &lt;code&gt;ControlPath&lt;/code&gt; string gets too long for OpenSSH to create a
-socket on the filesystem for long chains of hosts.&lt;/p&gt;</content><category term="ssh"/><category term="console"/><category term="ssh"/><category term="howto"/></entry><entry><title>SSH: Interactive ProxyCommand</title><link href="https://dmitry.khlebnikov.net/2016/07/25/ssh-interactive-proxycommand/" rel="alternate"/><published>2016-07-25T10:00:00+10:00</published><updated>2020-05-17T04:45:11+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2016-07-25:/2016/07/25/ssh-interactive-proxycommand/</id><summary type="html">&lt;p&gt;I was involved in the creation of the &lt;a href="https://github.com/realestate-com-au/sshephalopod"&gt;sshephalopod&lt;/a&gt; project, which was an
-attempt to build an enterprise level authentication framework for SSH
-authentication using the SSH &lt;abbr title="Certificate Authority"&gt;CA&lt;/abbr&gt; feature.&lt;/p&gt;
-&lt;p&gt;The project is based on a wrapper script that signs a user via a &lt;abbr title="Security Assertion Markup Language"&gt;SAML&lt;/abbr&gt; identity
-provider and gets user&amp;rsquo;s public key signed for the further usage.&lt;/p&gt;
-&lt;p&gt;In one of the discussions I pointed out that such a wrapper script is not good
-for the end user experience and I proposed to provide the users with an excerpt
-for their ssh config file, so the functionality of sshephalopod would be …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I was involved in the creation of the &lt;a href="https://github.com/realestate-com-au/sshephalopod"&gt;sshephalopod&lt;/a&gt; project, which was an
+socket on the filesystem for long chains of hosts.&lt;/p&gt;</content><category term="ssh"/><category term="console"/><category term="ssh"/><category term="howto"/></entry><entry><title>SSH: Interactive ProxyCommand</title><link href="https://dmitry.khlebnikov.net/2016/07/25/ssh-interactive-proxycommand/" rel="alternate"/><published>2016-07-25T10:00:00+10:00</published><updated>2025-10-15T23:06:20+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2016-07-25:/2016/07/25/ssh-interactive-proxycommand/</id><summary type="html">&lt;p&gt;This post demonstrates a solution to a common misconception that SSH&amp;rsquo;s
+ProxyCommand does not support interactive scripts, a problem the author
+encountered while working on the sshephalopod authentication project. The
+author proves interactivity is possible by creating a wrapper script that
+cleverly manipulates file descriptors. The script first saves the original
+standard input (descriptor 0) and standard output (descriptor 1), which are
+used for the SSH protocol, to new descriptors (10 and 11). It then redirects
+standard input and output to the user&amp;rsquo;s terminal (via standard error,
+descriptor 2), allowing for interactive prompts. After the interaction is
+complete, the script restores the original file descriptors before executing
+the final command (like nc) to establish the proxied SSH connection, thus
+enabling interactive authentication or other user inputs within the
+ProxyCommand workflow.&lt;/p&gt;</summary><content type="html">&lt;p&gt;I was involved in the creation of the &lt;a href="https://github.com/realestate-com-au/sshephalopod"&gt;sshephalopod&lt;/a&gt; project, which was an
 attempt to build an enterprise level authentication framework for SSH
 authentication using the SSH &lt;abbr title="Certificate Authority"&gt;CA&lt;/abbr&gt; feature.&lt;/p&gt;
 &lt;p&gt;The project is based on a wrapper script that signs a user via a &lt;abbr title="Security Assertion Markup Language"&gt;SAML&lt;/abbr&gt; identity
@@ -219,14 +226,18 @@ versions of OpenSSH support passing of a file descriptor from the ProxyCommand
 script, so if you have a decent netcat tool that supports the &amp;ldquo;-F&amp;rdquo; option
 (fdpass) you could get native performance for the ssh communication link with
 no proxy process hanging around.&lt;/p&gt;
-&lt;p&gt;P.S. if you have any questions do not hesitate to comment.&lt;/p&gt;</content><category term="ssh"/><category term="ssh"/><category term="console"/></entry><entry><title>Transparent SSH host-jumping (Advanced)</title><link href="https://dmitry.khlebnikov.net/2015/08/06/transparent-ssh-host-jumping-advanced/" rel="alternate"/><published>2015-08-06T10:00:00+10:00</published><updated>2020-05-17T20:25:15+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2015-08-06:/2015/08/06/transparent-ssh-host-jumping-advanced/</id><summary type="html">&lt;p&gt;In this brief article I am going to describe how I resolved a nagging issue I
-had with setting up access to hosts which are not directly reachable, but where
-you need to forward your connection through an intermediate host.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://dmitry.khlebnikov.net/2010/12/10/ssh-port-forwarding-intermediate/"&gt;Previously&lt;/a&gt;, I was using the local SSH port-forwarding technique (although I
-was configuring hosts I connect to in the &lt;code&gt;~/.ssh/config&lt;/code&gt; file instead of
-using the command-line options). However, this approach turned out to be quite
-inconvenient since every time I wanted to connect to a new host (and, possibly,
-through a new intermediate host) I had to edit my …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this brief article I am going to describe how I resolved a nagging issue I
+&lt;p&gt;P.S. if you have any questions do not hesitate to comment.&lt;/p&gt;</content><category term="ssh"/><category term="ssh"/><category term="console"/></entry><entry><title>Transparent SSH host-jumping (Advanced)</title><link href="https://dmitry.khlebnikov.net/2015/08/06/transparent-ssh-host-jumping-advanced/" rel="alternate"/><published>2015-08-06T10:00:00+10:00</published><updated>2025-10-15T23:06:20+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2015-08-06:/2015/08/06/transparent-ssh-host-jumping-advanced/</id><summary type="html">&lt;p&gt;This post presents an advanced SSH configuration to transparently
+connect to a target host through one or more intermediate &amp;ldquo;jump&amp;rdquo; hosts,
+addressing the inconvenience of managing numerous LocalForward entries in the
+~/.ssh/config file. The solution uses a &amp;ldquo;Host &lt;em&gt;/&lt;/em&gt;&amp;rdquo; pattern and a ProxyCommand
+directive, allowing a user to connect with a simple command like ssh
+user@hostA/hostB/hostC. To overcome the inefficiency of creating new
+connections for every session, the author further refines the ProxyCommand to
+leverage SSH&amp;rsquo;s connection multiplexing features, ControlMaster, ControlPath,
+and ControlPersist. This improved setup reuses already established connections,
+significantly speeding up subsequent logins and keeping idle background
+connections alive for a set period, which optimises the workflow for accessing
+hosts in complex, non-directly reachable network environments.&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this brief article I am going to describe how I resolved a nagging issue I
 had with setting up access to hosts which are not directly reachable, but where
 you need to forward your connection through an intermediate host.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://dmitry.khlebnikov.net/2010/12/10/ssh-port-forwarding-intermediate/"&gt;Previously&lt;/a&gt;, I was using the local SSH port-forwarding technique (although I
@@ -385,18 +396,16 @@ following:&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;I hope this little trick will save you some time and will make your life
-easier. :)&lt;/p&gt;</content><category term="ssh"/><category term="console"/><category term="ssh"/><category term="howto"/></entry><entry><title>SSH port-forwarding (Intermediate)</title><link href="https://dmitry.khlebnikov.net/2010/12/10/ssh-port-forwarding-intermediate/" rel="alternate"/><published>2010-12-10T10:00:00+11:00</published><updated>2020-05-17T04:45:11+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2010-12-10:/2010/12/10/ssh-port-forwarding-intermediate/</id><summary type="html">&lt;p&gt;In my previous blog entry I described some basic functionality of SSH in terms
-of port-forwarding. Now it&amp;rsquo;s time for a little bit more complex stuff.&lt;/p&gt;
-&lt;p&gt;In this article I will highlight:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;(forward) piercing of a firewall (getting access to resources behind it);&lt;/li&gt;
-&lt;li&gt;dynamic port-forwarding (AKA proxy);&lt;/li&gt;
-&lt;li&gt;(reverse) piercing of a firewall (exposing your local services on the remote side).&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="forward-firewall-piercing"&gt;Forward firewall piercing&lt;/h2&gt;
-&lt;p&gt;Let&amp;rsquo;s start with the forward firewall piercing, since it is the easiest and was
-somewhat already described in my previous blog entry on this topic. Now,
-imagine that you already have SSH access to some …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In my previous blog entry I described some basic functionality of SSH in terms
+easier. :)&lt;/p&gt;</content><category term="ssh"/><category term="console"/><category term="ssh"/><category term="howto"/></entry><entry><title>SSH port-forwarding (Intermediate)</title><link href="https://dmitry.khlebnikov.net/2010/12/10/ssh-port-forwarding-intermediate/" rel="alternate"/><published>2010-12-10T10:00:00+11:00</published><updated>2025-10-15T23:06:20+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2010-12-10:/2010/12/10/ssh-port-forwarding-intermediate/</id><summary type="html">&lt;p&gt;This post introduces the basics of SSH port forwarding as a secure
+alternative to exposing services like a MySQL database to the public internet.
+The author explains that instead of binding a database to a public IP address,
+which poses security risks, one can keep it running on a private or loopback
+interface (like 127.0.0.1:3306) on the remote server. By using a local port
+forwarding command, such as ssh -L3306:127.0.0.1:3306 user@server, a secure
+tunnel is created over the SSH connection. This makes the remote database
+accessible on the user&amp;rsquo;s local machine as if it were running locally, allowing
+the use of local database management tools like MySQL WorkBench without
+compromising security.&lt;/p&gt;</summary><content type="html">&lt;p&gt;In my previous blog entry I described some basic functionality of SSH in terms
 of port-forwarding. Now it&amp;rsquo;s time for a little bit more complex stuff.&lt;/p&gt;
 &lt;p&gt;In this article I will highlight:&lt;/p&gt;
 &lt;ul&gt;
@@ -481,14 +490,8 @@ forward firewall piercing technique described at the beginning of this post:&lt;
 via SSH on your &lt;code&gt;localhost:60000&lt;/code&gt;, e.g.&lt;/p&gt;
 &lt;pre class="highlight" data-user="user"&gt;&lt;input type="radio" name="code_menu002709e21abf8c28749cf117ba70a46c05e3ab4a" class="no-line-numbers icon list-numbered"&gt;&lt;input type="radio" name="code_menu002709e21abf8c28749cf117ba70a46c05e3ab4a" class="line-numbers icon list-numbered"&gt;&lt;code class="language-console"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;[user@localhost ~] ssh -p6000 my_account@localhost&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Where &lt;code&gt;my_account&lt;/code&gt; is a user allowed to SSH into your computer in the highly
-secure network.&lt;/p&gt;</content><category term="ssh"/></entry><entry><title>SSH port-forwarding (Basic)</title><link href="https://dmitry.khlebnikov.net/2010/11/29/ssh-port-forwarding-basic/" rel="alternate"/><published>2010-11-29T10:00:00+11:00</published><updated>2020-05-17T04:45:11+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2010-11-29:/2010/11/29/ssh-port-forwarding-basic/</id><summary type="html">&lt;p&gt;I think all of you are using SSH in your daily routines. However, do you use
-its full potential? Today&amp;rsquo;s topic is the SSH port-forwarding feature and how
-it can be use to achieve some interesting configurations.&lt;/p&gt;
-&lt;p&gt;I&amp;rsquo;m sure most of you are aware of the feature, but how many of you are using
-it? Personally, I&amp;rsquo;m a bit obsessed with it and have found numerous cases where
-this feature of SSH is a real life saver.&lt;/p&gt;
-&lt;p&gt;Let&amp;rsquo;s start with simple things and imagine that you have a server where you
-are running MySQL (as a …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I think all of you are using SSH in your daily routines. However, do you use
+secure network.&lt;/p&gt;</content><category term="ssh"/><category term="ssh"/><category term="console"/></entry><entry><title>SSH port-forwarding (Basic)</title><link href="https://dmitry.khlebnikov.net/2010/11/29/ssh-port-forwarding-basic/" rel="alternate"/><published>2010-11-29T10:00:00+11:00</published><updated>2025-10-15T23:06:20+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2010-11-29:/2010/11/29/ssh-port-forwarding-basic/</id><summary type="html">&lt;p&gt;An introduction into the world of SSH port-forwarding and how to
+leverage it to access resources in private subnets&lt;/p&gt;</summary><content type="html">&lt;p&gt;I think all of you are using SSH in your daily routines. However, do you use
 its full potential? Today&amp;rsquo;s topic is the SSH port-forwarding feature and how
 it can be use to achieve some interesting configurations.&lt;/p&gt;
 &lt;p&gt;I&amp;rsquo;m sure most of you are aware of the feature, but how many of you are using

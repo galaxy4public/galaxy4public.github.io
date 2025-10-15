@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - macos</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"/><link href="https://dmitry.khlebnikov.net/feeds/macos.atom.xml" rel="self"/><id>https://dmitry.khlebnikov.net/</id><updated>2023-02-21T20:45:01+11:00</updated><subtitle>assorted bits of wit</subtitle><entry><title>macOS builtin VPN client tricks</title><link href="https://dmitry.khlebnikov.net/2022/11/25/macos-builtin-vpn-client-tricks/" rel="alternate"/><published>2022-11-25T13:33:00+11:00</published><updated>2023-02-21T20:45:01+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2022-11-25:/2022/11/25/macos-builtin-vpn-client-tricks/</id><summary type="html">&lt;p&gt;I think everyone would agree that when it comes to the VPN configuration macOS
-builtin VPN client lacks any flexibility and its GUI exposes a fraction of
-supported features.  This is one of the reasons why there are so many third
-party VPN clients for macOS in the world, I believe.  However, I found that the
-majority of the time I can get away by using the standard macOS VPN client to
-connect to the desired VPN endpoint.&lt;/p&gt;
-&lt;p&gt;In this article I am going to describe my journey of configuring macOS VPN
-client to support Windscribe VPN, but the described …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I think everyone would agree that when it comes to the VPN configuration macOS
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - macos</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"/><link href="https://dmitry.khlebnikov.net/feeds/macos.atom.xml" rel="self"/><id>https://dmitry.khlebnikov.net/</id><updated>2025-10-15T23:06:20+11:00</updated><subtitle>assorted bits of wit</subtitle><entry><title>macOS builtin VPN client tricks</title><link href="https://dmitry.khlebnikov.net/2022/11/25/macos-builtin-vpn-client-tricks/" rel="alternate"/><published>2022-11-25T13:33:00+11:00</published><updated>2025-10-15T23:06:20+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2022-11-25:/2022/11/25/macos-builtin-vpn-client-tricks/</id><summary type="html">&lt;p&gt;A post that explains how to overcome the limitations of the macOS
+built-in VPN client, which the author finds lacks flexibility in its GUI and
+exposes only a fraction of its supported features. Despite these issues often
+leading users to third-party apps, the author finds the native client is
+usually sufficient. The work-in-progress guide uses Windscribe VPN as an
+example to demonstrate how to configure the client for most IKEv2 VPN services.
+This is achieved by using an Apple Configuration Profile with custom XML
+settings, which can produce a working connection where the standard GUI
+configuration fails.&lt;/p&gt;</summary><content type="html">&lt;p&gt;I think everyone would agree that when it comes to the VPN configuration macOS
 builtin VPN client lacks any flexibility and its GUI exposes a fraction of
 supported features.  This is one of the reasons why there are so many third
 party VPN clients for macOS in the world, I believe.  However, I found that the
