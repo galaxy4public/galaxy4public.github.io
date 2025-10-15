@@ -12,6 +12,16 @@
 	<link rel="stylesheet" href="/theme/css/base.css" />
 	<link rel="stylesheet" href="/theme/css/pygments/default.css" />
 	<link rel="canonical" href="../../../..//2017/01/13/nginx-a-backend-with-a-dynamic-ip-eg-aws-elb/" />
+	<link name="description" content="&lt;p&gt;Recently, I wrote about &lt;a href=&#34;../../../../2016/09/20/dynamic-resolution-of-upstream-servers-in-nginx/&#34;&gt;the dynamic resolution of upstream servers&lt;/a&gt; in
+nginx which was achieved by quite an intrusive patch to the core nginx module.
+The patch was invented a while ago and was working very well up until recent
+nginx versions were released.&lt;/p&gt;
+&lt;p&gt;With the release of nginx 1.10 it was noticed that the patch crashes some
+workers under heavy load and this was unacceptable for the production load,
+hence a new approach was implemented.&lt;/p&gt;
+&lt;p&gt;The beauty of the new solution is that it is non-intrusive and works with any
+services that communicate via sockets.&lt;/p&gt;
+&lt;p&gt;In a nutshell …&lt;/p&gt;" />
 
 	<script type="application/ld+json">
 	{
