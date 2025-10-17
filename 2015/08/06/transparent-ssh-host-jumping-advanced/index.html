@@ -26,7 +26,7 @@
 		}],
 		"headline" : "Transparent SSH host-jumping (Advanced)",
 		"datePublished" : "2015-08-06T10:00:00+10:00",
-		"dateModified" : "2025-10-15T23:06:20+11:00"
+		"dateModified" : "2025-10-18T02:45:38+11:00"
 	}
 	</script>
 </head>
@@ -136,13 +136,13 @@ file just before the <code>Host *</code> section:</p>
 </div><div class="line"><a></a>    ProxyCommand ssh $(dirname %h) -W $(basename %h):%p</div></code></pre>
 <p>From that point on, I could connect to a target host via an intermediate one
 by simply executing the following command:</p>
-<pre class="highlight"><input type="radio" name="code_menue0b846c26223f5caa81e95cbe96d9cc730b6d022" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menue0b846c26223f5caa81e95cbe96d9cc730b6d022" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="go">ssh user@intemediate/target</span></div></code></pre>
+<pre class="highlight"><input type="radio" name="code_menu5f7eb05b3740384784e4230f2b3cd7102e9cb7b5" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu5f7eb05b3740384784e4230f2b3cd7102e9cb7b5" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[user@localhost ~]$ </span>ssh<span class="w"> </span>user@intemediate/target</div></code></pre>
 <p>The configuration with the <code>ProxyCommand</code> directive was spawning two <code>ssh</code>
 processes with one connected to the intermediate host in the background and the
 other proxied through the intermediate host and connected to the target running
 in the foreground, so from my point of view I had just one terminal session
 open. The configuration allowed to chain as many hosts as I wanted, e.g.:</p>
-<pre class="highlight"><input type="radio" name="code_menub840f57ec8c69d240b1ba96571f6d5b522fec332" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menub840f57ec8c69d240b1ba96571f6d5b522fec332" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="go">ssh user@hostA/hostB/hostC/hostD</span></div></code></pre>
+<pre class="highlight"><input type="radio" name="code_menu91c3ba8826a1b4a89bc536b4fd741ca30f83f28c" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu91c3ba8826a1b4a89bc536b4fd741ca30f83f28c" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[user@localhost ~]$ </span>ssh<span class="w"> </span>user@hostA/hostB/hostC/hostD</div></code></pre>
 <p>The above would result in three <code>ssh</code> processes running in the background (the
 first connected to hostA, the second connected to <em>hostB</em> proxied through <em>hostA</em>,
 and the third connected to <em>hostC</em> proxied through <em>hostB</em>) and one foreground
@@ -204,7 +204,7 @@ need a redundant shell hanging around in the process tree. In this recursive
 channels created by the parent connections (they are &ldquo;parent&rdquo; since this is the
 connection that established first and which enables access to the hosts further
 down the specified chain) as well as we explicitly specify the location of the
-control channel (note that since it is a parrent connection we are stripping
+control channel (note that since it is a parent connection we are stripping
 the rest of host names from the <code>%h</code> macro using <code>dirname</code>.</p>
 <p>Finally, the third explicitly specified directive is <code>ControlPersist</code> which is
 set to <code>120s</code>. This directive instructs <code>ssh</code> to stay in the background and

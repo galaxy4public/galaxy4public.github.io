@@ -26,7 +26,7 @@
 		}],
 		"headline" : "SSH port-forwarding (Basic)",
 		"datePublished" : "2010-11-29T10:00:00+11:00",
-		"dateModified" : "2025-10-15T23:06:20+11:00"
+		"dateModified" : "2025-10-18T02:45:38+11:00"
 	}
 	</script>
 </head>
@@ -129,7 +129,7 @@ another machine, you may want to bind MySQL to some internal interface &ndash; t
 network that links your servers only, e.g. 192.168.1.1:3306), and then use the
 SSH port-forwarding feature to setup a tunnel between your remote database and
 your local computer:</p>
-<pre class="highlight" data-user="root"><input type="radio" name="code_menu126a95001ab1b631846af7ff8e73bc7c64253921" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu126a95001ab1b631846af7ff8e73bc7c64253921" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>ssh<span class="w"> </span>-L3306:127.0.0.1:3306<span class="w"> </span>user@server</div></code></pre>
+<pre class="highlight"><input type="radio" name="code_menu4257876e24f7e442b77692efa962d9b97da0e477" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu4257876e24f7e442b77692efa962d9b97da0e477" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[user@localhost ~]$ </span>ssh<span class="w"> </span>-L3306:127.0.0.1:3306<span class="w"> </span>user@server</div></code></pre>
 <p>Here, <code>-L3306:127.0.0.1:3306</code> says that we want <code>127.0.0.1:3306</code> to be &ldquo;mapped&rdquo;
 to our local host to port <code>3306</code>. While the SSH session is active any packet
 sent to <code>localhost:3306</code> (on your computer) will be forwarded over the SSH
@@ -137,8 +137,8 @@ encrypted channel to the remote server and then will be fed to remote&rsquo;s
 <code>127.0.0.1:3306</code>.  This means that as long as your SSH session is alive you
 will be able to work with the remote MySQL server like it&rsquo;s running on your
 local computer and you can use any MySQL tools locally.</p>
-<p>Well, the above command was given for Linux, Mac OSX, and other Unix-based
-systems. For Windows, you can use PuTTY to achive the same. I found the
+<p>Well, the above command was given for Linux, macOS, and other Unix-based
+systems. For Windows, you can use PuTTY to archive the same. I found the
 following <a href="https://www.akadia.com/services/ssh_putty.html">instructions for PuTTY</a>.</p>
 <p>OK, this is not a new topic and it was described many times here and there on
 the Internet, but I decided to write this article as a foundation for my

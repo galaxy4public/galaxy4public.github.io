@@ -26,7 +26,7 @@
 		}],
 		"headline" : "SSH: Interactive ProxyCommand",
 		"datePublished" : "2016-07-25T10:00:00+10:00",
-		"dateModified" : "2025-10-15T23:06:20+11:00"
+		"dateModified" : "2025-10-18T02:45:38+11:00"
 	}
 	</script>
 </head>
@@ -122,7 +122,7 @@ running on the local host would be sufficient), then we needed an interactive
 script, and a configuration block for the connection.</p>
 <p>The configuration block is pretty simple (%h expands to localhost and %p
 expands to the port specified on the command line or to &ldquo;22&rdquo; otherwise):</p>
-<pre class="highlight" data-user="user"><input type="radio" name="code_menu8cc48c5311c9933fb2d44c79dbfc6754794aa621" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu8cc48c5311c9933fb2d44c79dbfc6754794aa621" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[user@localhost ~]$ </span>fgrep<span class="w"> </span>-A1<span class="w"> </span><span class="s1">&#39;Host localhost&#39;</span><span class="w"> </span>~/.ssh/config
+<pre class="highlight"><input type="radio" name="code_menu8cc48c5311c9933fb2d44c79dbfc6754794aa621" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu8cc48c5311c9933fb2d44c79dbfc6754794aa621" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[user@localhost ~]$ </span>fgrep<span class="w"> </span>-A1<span class="w"> </span><span class="s1">&#39;Host localhost&#39;</span><span class="w"> </span>~/.ssh/config
 </div><div class="line"><a></a><span class="go">Host localhost</span>
 </div><div class="line"><a></a><span class="go"> ProxyCommand ~/bin/interactive.script.sh %h %p</span></div></code></pre>
 <p>Since most of our research is going to be inside the interactive script you
@@ -135,7 +135,7 @@ expected &ndash; the ssh session should be proxied through the nc command and we
 should be able to login under our own account via ssh to the localhost (my
 private key was added to the key manager with ssh-add, hence no password prompt
 was displayed):</p>
-<pre class="highlight" data-user="user"><input type="radio" name="code_menu8256b384d892095c2be72f12aa50e341fba35d2e" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu8256b384d892095c2be72f12aa50e341fba35d2e" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[user@localhost ~]$ </span>ssh<span class="w"> </span>galaxy@localhost
+<pre class="highlight"><input type="radio" name="code_menu8256b384d892095c2be72f12aa50e341fba35d2e" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu8256b384d892095c2be72f12aa50e341fba35d2e" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[user@localhost ~]$ </span>ssh<span class="w"> </span>galaxy@localhost
 </div><div class="line"><a></a><span class="go">Last login: Thu Jul 21 01:30:21 2016</span>
 </div><div class="line"><a></a><span class="gp">$</span></div></code></pre>
 <p>OK, we confirmed that we can establish a proxied connection and tunnel our ssh
@@ -153,7 +153,7 @@ so let&rsquo;s check what descriptors are available for our script:</p>
 <p>If we try to connect now we should see something like the following (I am
 writing this article on an OS X machine so I provide the output from OS X,
 however this also works for Linux):</p>
-<pre class="highlight" data-user="user"><input type="radio" name="code_menu0428b03b95771df5b5bf252202c8f28e18b0839d" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu0428b03b95771df5b5bf252202c8f28e18b0839d" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[user@localhost ~]$ </span>ssh<span class="w"> </span>galaxy@localhost
+<pre class="highlight"><input type="radio" name="code_menu0428b03b95771df5b5bf252202c8f28e18b0839d" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu0428b03b95771df5b5bf252202c8f28e18b0839d" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[user@localhost ~]$ </span>ssh<span class="w"> </span>galaxy@localhost
 </div><div class="line"><a></a><span class="go">COMMAND   PID   USER   FD   TYPE             DEVICE  SIZE/OFF     NODE NAME</span>
 </div><div class="line"><a></a><span class="go">bash    45225   user  cwd    DIR                1,2       612   893854 /Users/user/.ssh</span>
 </div><div class="line"><a></a><span class="go">bash    45225   user  txt    REG                1,2    628640  2329236 /bin/bash</span>
@@ -196,7 +196,7 @@ above logic:</p>
 </div><div class="line"><a></a><span class="nb">exec</span><span class="w"> </span><span class="m">0</span>&lt;<span class="p">&amp;</span><span class="m">10</span><span class="w"> </span><span class="m">1</span>&gt;<span class="p">&amp;</span><span class="m">11</span>
 </div><div class="line"><a></a><span class="nb">exec</span><span class="w"> </span>nc<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span></div></code></pre>
 <p>I think it is time to test it :) :</p>
-<pre class="highlight" data-user="user"><input type="radio" name="code_menu5f0e59480f98ee3b556f16d6f341317f85ac7260" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu5f0e59480f98ee3b556f16d6f341317f85ac7260" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[user@localhost ~]$ </span>ssh<span class="w"> </span>galaxy@localhost
+<pre class="highlight"><input type="radio" name="code_menu5f0e59480f98ee3b556f16d6f341317f85ac7260" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu5f0e59480f98ee3b556f16d6f341317f85ac7260" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[user@localhost ~]$ </span>ssh<span class="w"> </span>galaxy@localhost
 </div><div class="line"><a></a><span class="go">COMMAND   PID   USER   FD   TYPE             DEVICE  SIZE/OFF     NODE NAME</span>
 </div><div class="line"><a></a><span class="go">bash    45238   user  cwd    DIR                1,2       612   893854 /Users/user/.ssh</span>
 </div><div class="line"><a></a><span class="go">bash    45238   user  txt    REG                1,2    628640  2329236 /bin/bash</span>

@@ -26,7 +26,7 @@
 		}],
 		"headline" : "Raspberry Pi 3 toolchain on CentOS 7",
 		"datePublished" : "2016-05-22T12:00:00+10:00",
-		"dateModified" : "2025-10-15T23:06:20+11:00"
+		"dateModified" : "2025-10-18T02:45:38+11:00"
 	}
 	</script>
 </head>
@@ -121,7 +121,7 @@ on an AWS EC2 instance which was running a minimal CentOS 7 as its OS.</p>
 <p>I spawned an EC2 instance (you need at least 8GB of free space there to be able
 to build the toolchain), logged in, and ensured that my system is up to date
 (and update it if it was not):</p>
-<pre class="highlight" data-user="root"><input type="radio" name="code_menuc93f6e2dbc100543f60023f66ff1161af7c43f2c" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menuc93f6e2dbc100543f60023f66ff1161af7c43f2c" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>yum<span class="w"> </span>-y<span class="w"> </span>update
+<pre class="highlight"><input type="radio" name="code_menuc93f6e2dbc100543f60023f66ff1161af7c43f2c" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menuc93f6e2dbc100543f60023f66ff1161af7c43f2c" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>yum<span class="w"> </span>-y<span class="w"> </span>update
 </div><div class="line"><a></a><span class="go">Loaded plugins: at-exit, fastestmirror, post-transaction-actions</span>
 </div><div class="line"><a></a><span class="go">Loading mirror speeds from cached hostfile</span>
 </div><div class="line"><a></a><span class="go"> * base: mirror.domain.tld</span>
@@ -134,7 +134,7 @@ signature, verified the signature (although the verification was very
 superficial since Bryan Hundven is not in my Web of Trust and the crosstool-ng
 website was not providing an HTTPS page to confirm the fingerprint of the key),
 and unpacked the sources:</p>
-<pre class="highlight" data-user="root"><input type="radio" name="code_menu19c6c0f19f8844fd6be4ab3cb10034ad5a0ca697" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu19c6c0f19f8844fd6be4ab3cb10034ad5a0ca697" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>yum<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span>bison<span class="w"> </span>bzip2<span class="w"> </span>flex<span class="w"> </span>gcc<span class="w"> </span>gcc-c++<span class="w"> </span>glibc-static<span class="w"> </span>gperf<span class="w"> </span>help2man<span class="w"> </span>libstdc++-static<span class="w"> </span>libtool<span class="w"> </span>make<span class="w"> </span>ncurses-devel<span class="w"> </span>texinfo<span class="w"> </span>wget
+<pre class="highlight"><input type="radio" name="code_menu19c6c0f19f8844fd6be4ab3cb10034ad5a0ca697" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu19c6c0f19f8844fd6be4ab3cb10034ad5a0ca697" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>yum<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span>bison<span class="w"> </span>bzip2<span class="w"> </span>flex<span class="w"> </span>gcc<span class="w"> </span>gcc-c++<span class="w"> </span>glibc-static<span class="w"> </span>gperf<span class="w"> </span>help2man<span class="w"> </span>libstdc++-static<span class="w"> </span>libtool<span class="w"> </span>make<span class="w"> </span>ncurses-devel<span class="w"> </span>texinfo<span class="w"> </span>wget
 </div><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>useradd<span class="w"> </span>-m<span class="w"> </span>build
 </div><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>su<span class="w"> </span>-<span class="w"> </span>build
 </div><div class="line"><a></a><span class="gp">[build@localhost ~]$ </span>wget<span class="w"> </span>-q<span class="w"> </span><span class="s1">&#39;http://crosstool-ng.org/download/crosstool-ng/crosstool-ng-1.22.0.tar.xz&#39;</span>
@@ -161,7 +161,7 @@ and unpacked the sources:</p>
 </div><div class="line"><a></a><span class="gp">[build@localhost ~]$ </span>tar<span class="w"> </span>xJSf<span class="w"> </span>crosstool-ng-1.22.0.tar.xz
 </div><div class="line"><a></a><span class="gp">[build@localhost ~]$ </span>rm<span class="w"> </span>crosstool-ng-1.22.0.tar.xz*</div></code></pre>
 <p>The next step was to prepare the environment for the crosstool-ng build process:</p>
-<pre class="highlight" data-user="build"><input type="radio" name="code_menuff3fa604b25a6641bfc22d2486f1821222b11e99" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menuff3fa604b25a6641bfc22d2486f1821222b11e99" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[build@localhost ~]$ </span><span class="nb">cd</span><span class="w"> </span>crosstool-ng
+<pre class="highlight"><input type="radio" name="code_menuff3fa604b25a6641bfc22d2486f1821222b11e99" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menuff3fa604b25a6641bfc22d2486f1821222b11e99" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[build@localhost ~]$ </span><span class="nb">cd</span><span class="w"> </span>crosstool-ng
 </div><div class="line"><a></a><span class="gp">[build@localhost ~]$ </span>/configure<span class="w"> </span>--prefix<span class="o">=</span><span class="nv">$HOME</span>/ct-ng
 </div><div class="line"><a></a><span class="go">checking build system type... x86_64-pc-linux-gnu</span>
 </div><div class="line"><a></a><span class="go">[skipped]</span>
@@ -177,10 +177,10 @@ and unpacked the sources:</p>
 </div><div class="line"><a></a><span class="go">[skipped]</span></div></code></pre>
 <p>For auto-completion, do not forget to install <code>ct-ng.comp</code> into your <code>bash</code>
 completion directory (usually <code>/etc/bash_completion.d/</code>)</p>
-<pre class="highlight" data-user="build"><input type="radio" name="code_menucbcff75052f939b1b7ac98e44d83026b0c57e899" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menucbcff75052f939b1b7ac98e44d83026b0c57e899" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[build@localhost ~]$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$HOME</span>/ct-ng/bin:<span class="nv">$PATH</span>
+<pre class="highlight"><input type="radio" name="code_menucbcff75052f939b1b7ac98e44d83026b0c57e899" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menucbcff75052f939b1b7ac98e44d83026b0c57e899" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[build@localhost ~]$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$HOME</span>/ct-ng/bin:<span class="nv">$PATH</span>
 </div><div class="line"><a></a><span class="gp">[build@localhost ~]$ </span><span class="nb">cd</span></div></code></pre>
 <p>Once the above was done we are ready to actually configure and build our toolchain:</p>
-<pre class="highlight" data-user="build"><input type="radio" name="code_menu1eef3216b0f049c03b4e18e9e96fe071fd92de56" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu1eef3216b0f049c03b4e18e9e96fe071fd92de56" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[build@localhost ~]$ </span>mkdir<span class="w"> </span>~/builddir
+<pre class="highlight"><input type="radio" name="code_menu1eef3216b0f049c03b4e18e9e96fe071fd92de56" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu1eef3216b0f049c03b4e18e9e96fe071fd92de56" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[build@localhost ~]$ </span>mkdir<span class="w"> </span>~/builddir
 </div><div class="line"><a></a><span class="gp">[build@localhost ~]$ </span><span class="nb">cd</span><span class="w"> </span>~/builddir
 </div><div class="line"><a></a><span class="gp">[build@localhost ~]$ </span>ct-ng<span class="w"> </span>menuconfig</div></code></pre>
 <p>I was quite happy with the defaults and the only changes I made were the
@@ -237,7 +237,7 @@ binaries would not be properly linked to work with the OS on the board</p>
 <p>Once we are comfortable with the configuration of the future toolchain we exit
 the configuration menu (saving the changes) and launch the build process (it
 would take approximately an hour on AWS t2.small instance):</p>
-<pre class="highlight" data-user="build" data-prompt=""[build@localhost"><input type="radio" name="code_menudba6bf8d5ce39bd085750bdc4c3125f36b88e6e0" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menudba6bf8d5ce39bd085750bdc4c3125f36b88e6e0" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="go">configuration written to .config</span>
+<pre class="highlight"><input type="radio" name="code_menudba6bf8d5ce39bd085750bdc4c3125f36b88e6e0" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menudba6bf8d5ce39bd085750bdc4c3125f36b88e6e0" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="go">configuration written to .config</span>
 </div><div class="line"><a></a>
 </div><div class="line"><a></a><span class="go">*** End of the configuration.</span>
 </div><div class="line"><a></a><span class="go">*** Execute &#39;ct-ng build&#39; to start the build or try &#39;ct-ng help&#39;.</span>
@@ -252,7 +252,7 @@ would take approximately an hour on AWS t2.small instance):</p>
 </div><div class="line"><a></a><span class="go">[57:15] /</span></div></code></pre>
 <p>Seems that our Raspberry Pi 3 toolchain is ready to be used. Let&rsquo;s compile
 something and see how it goes:</p>
-<pre class="highlight" data-user="build"><input type="radio" name="code_menu8a0e371575d812d74f66a9d57b40ed84983420a5" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu8a0e371575d812d74f66a9d57b40ed84983420a5" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[build@localhost ~]$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$HOME</span>/x-tools/aarch64-rpi3-linux-gnueabi/bin:<span class="nv">$PATH</span>
+<pre class="highlight"><input type="radio" name="code_menu8a0e371575d812d74f66a9d57b40ed84983420a5" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu8a0e371575d812d74f66a9d57b40ed84983420a5" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[build@localhost ~]$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$HOME</span>/x-tools/aarch64-rpi3-linux-gnueabi/bin:<span class="nv">$PATH</span>
 </div><div class="line"><a></a><span class="gp">[build@localhost ~]$ </span>aarch64-rpi3-linux-gnueabi-gcc<span class="w"> </span>--version
 </div><div class="line"><a></a><span class="go">aarch64-rpi3-linux-gnueabi-gcc (crosstool-NG crosstool-ng-1.22.0) 5.2.0</span>
 </div><div class="line"><a></a><span class="go">Copyright (C) 2015 Free Software Foundation, Inc.</span>

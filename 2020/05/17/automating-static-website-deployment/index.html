@@ -26,7 +26,7 @@
 		}],
 		"headline" : "Automating Static Website Deployment",
 		"datePublished" : "2020-05-17T21:32:00+10:00",
-		"dateModified" : "2025-10-15T23:06:20+11:00"
+		"dateModified" : "2025-10-18T02:45:38+11:00"
 	}
 	</script>
 </head>
@@ -188,13 +188,13 @@ while for GitHub to retry.</p>
 will get the quickest validation response from GitHub, e.g. I set up my
 <code>CNAME</code> records and then verified it from the command line (before)
 submitting the request to GitHub:</p>
-<pre id="code1" class="highlight" data-user="user"><input type="radio" name="code_menu7b7d79f5964a012ca92dac47c79d82161c28b82f" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu7b7d79f5964a012ca92dac47c79d82161c28b82f" class="line-numbers icon list-numbered"><code class="language-console"><div id="code1.1" class="line"><a href="#code1.1" aria-hidden="true"></a><span class="gp">[user@localhost ~]$ </span>host<span class="w"> </span>-t<span class="w"> </span>cname<span class="w"> </span>dmitry.khlebnikov.net<span class="w"> </span><span class="m">8</span>.8.8.8
-</div><div id="code1.2" class="line"><a href="#code1.2" aria-hidden="true"></a><span class="go">Using domain server:</span>
-</div><div id="code1.3" class="line"><a href="#code1.3" aria-hidden="true"></a><span class="go">Name: 8.8.8.8</span>
-</div><div id="code1.4" class="line"><a href="#code1.4" aria-hidden="true"></a><span class="go">Address: 8.8.8.8#53</span>
-</div><div id="code1.5" class="line"><a href="#code1.5" aria-hidden="true"></a><span class="go">Aliases:</span>
-</div><div id="code1.6" class="line"><a href="#code1.6" aria-hidden="true"></a>
-</div><div id="code1.7" class="line"><a href="#code1.7" aria-hidden="true"></a><span class="go">dmitry.khlebnikov.net is an alias for galaxy4public.github.io.</span></div></code></pre>
+<pre class="highlight"><input type="radio" name="code_menub3624fa5c401a8f42a9ad178012f88e626ac6471" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menub3624fa5c401a8f42a9ad178012f88e626ac6471" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[user@localhost ~]$ </span>host<span class="w"> </span>-t<span class="w"> </span>cname<span class="w"> </span>dmitry.khlebnikov.net<span class="w"> </span><span class="m">8</span>.8.8.8
+</div><div class="line"><a></a><span class="go">Using domain server:</span>
+</div><div class="line"><a></a><span class="go">Name: 8.8.8.8</span>
+</div><div class="line"><a></a><span class="go">Address: 8.8.8.8#53</span>
+</div><div class="line"><a></a><span class="go">Aliases:</span>
+</div><div class="line"><a></a>
+</div><div class="line"><a></a><span class="go">dmitry.khlebnikov.net is an alias for galaxy4public.github.io.</span></div></code></pre>
 </li>
 <li>
 <p>There are some shenanigans with the &ldquo;Enforce HTTPS&rdquo; option.</p>
@@ -251,24 +251,24 @@ look like <em>you</em> are executing them.</p>
 <ol>
 <li>
 <p>Generate an <abbr title="Secure Shell">SSH</abbr> key pair, e.g.:</p>
-<pre id="code2" class="highlight" data-user="user"><input type="radio" name="code_menu581af6fe2fefabfde633963ec7c488a7e624832f" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu581af6fe2fefabfde633963ec7c488a7e624832f" class="line-numbers icon list-numbered"><code class="language-console"><div id="code2.1" class="line"><a href="#code2.1" aria-hidden="true"></a><span class="gp">[user@localhost ~]$ </span>ssh-keygen<span class="w"> </span>-t<span class="w"> </span>ed25519<span class="w"> </span>-N<span class="w"> </span><span class="s1">&#39;&#39;</span><span class="w"> </span>-C<span class="w"> </span><span class="s1">&#39;Updating the blog from GH Action&#39;</span><span class="w"> </span>-f<span class="w"> </span>~/gh-action
-</div><div id="code2.2" class="line"><a href="#code2.2" aria-hidden="true"></a><span class="go">Generating public/private ed25519 key pair.</span>
-</div><div id="code2.3" class="line"><a href="#code2.3" aria-hidden="true"></a><span class="go">Your identification has been saved in /home/user/gh-action</span>
-</div><div id="code2.4" class="line"><a href="#code2.4" aria-hidden="true"></a><span class="go">Your public key has been saved in /home/user/gh-action.pub</span>
-</div><div id="code2.5" class="line"><a href="#code2.5" aria-hidden="true"></a><span class="go">The key fingerprint is:</span>
-</div><div id="code2.6" class="line"><a href="#code2.6" aria-hidden="true"></a><span class="go">SHA256:7W9pUV5IlrRVE0RAVkjLgKJz4RdtVbH7GKQu8AfYITw Updating the blog from GH Action</span>
-</div><div id="code2.7" class="line"><a href="#code2.7" aria-hidden="true"></a><span class="go">The key&#39;s randomart image is:</span>
-</div><div id="code2.8" class="line"><a href="#code2.8" aria-hidden="true"></a><span class="go">+--[ED25519 256]--+</span>
-</div><div id="code2.9" class="line"><a href="#code2.9" aria-hidden="true"></a><span class="go">|          o.+BOX*|</span>
-</div><div id="code2.10" class="line"><a href="#code2.10" aria-hidden="true"></a><span class="go">|       + o o+.=oo|</span>
-</div><div id="code2.11" class="line"><a href="#code2.11" aria-hidden="true"></a><span class="go">|      o E +  =oo |</span>
-</div><div id="code2.12" class="line"><a href="#code2.12" aria-hidden="true"></a><span class="go">|     o o B . oo o|</span>
-</div><div id="code2.13" class="line"><a href="#code2.13" aria-hidden="true"></a><span class="go">|      o S + .o.o |</span>
-</div><div id="code2.14" class="line"><a href="#code2.14" aria-hidden="true"></a><span class="go">|         + o. .o.|</span>
-</div><div id="code2.15" class="line"><a href="#code2.15" aria-hidden="true"></a><span class="go">|          + oo. .|</span>
-</div><div id="code2.16" class="line"><a href="#code2.16" aria-hidden="true"></a><span class="go">|           ++    |</span>
-</div><div id="code2.17" class="line"><a href="#code2.17" aria-hidden="true"></a><span class="go">|           o.    |</span>
-</div><div id="code2.18" class="line"><a href="#code2.18" aria-hidden="true"></a><span class="go">+----[SHA256]-----+</span></div></code></pre>
+<pre class="highlight"><input type="radio" name="code_menuaa92d79e6e51ac7ad98647c1edb2562d3fd2f3f6" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menuaa92d79e6e51ac7ad98647c1edb2562d3fd2f3f6" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[user@localhost ~]$ </span>ssh-keygen<span class="w"> </span>-t<span class="w"> </span>ed25519<span class="w"> </span>-N<span class="w"> </span><span class="s1">&#39;&#39;</span><span class="w"> </span>-C<span class="w"> </span><span class="s1">&#39;Updating the blog from GH Action&#39;</span><span class="w"> </span>-f<span class="w"> </span>~/gh-action
+</div><div class="line"><a></a><span class="go">Generating public/private ed25519 key pair.</span>
+</div><div class="line"><a></a><span class="go">Your identification has been saved in /home/user/gh-action</span>
+</div><div class="line"><a></a><span class="go">Your public key has been saved in /home/user/gh-action.pub</span>
+</div><div class="line"><a></a><span class="go">The key fingerprint is:</span>
+</div><div class="line"><a></a><span class="go">SHA256:7W9pUV5IlrRVE0RAVkjLgKJz4RdtVbH7GKQu8AfYITw Updating the blog from GH Action</span>
+</div><div class="line"><a></a><span class="go">The key&#39;s randomart image is:</span>
+</div><div class="line"><a></a><span class="go">+--[ED25519 256]--+</span>
+</div><div class="line"><a></a><span class="go">|          o.+BOX*|</span>
+</div><div class="line"><a></a><span class="go">|       + o o+.=oo|</span>
+</div><div class="line"><a></a><span class="go">|      o E +  =oo |</span>
+</div><div class="line"><a></a><span class="go">|     o o B . oo o|</span>
+</div><div class="line"><a></a><span class="go">|      o S + .o.o |</span>
+</div><div class="line"><a></a><span class="go">|         + o. .o.|</span>
+</div><div class="line"><a></a><span class="go">|          + oo. .|</span>
+</div><div class="line"><a></a><span class="go">|           ++    |</span>
+</div><div class="line"><a></a><span class="go">|           o.    |</span>
+</div><div class="line"><a></a><span class="go">+----[SHA256]-----+</span></div></code></pre>
 <p>Here, I chose the <code>ed25519</code> key type since it is the shortest from the
 GitHub supported key types at the moment, yet it is strong enough.</p>
 <p>I also made the key pair passphrase-less (<code>-N ''</code>) since the purpose of the
@@ -317,49 +317,49 @@ The name of the configuration file can be also anything you like, however, I
 suggest to stick with the default for now.</p>
 <p>Basically, you can quickly start by following the Pelican documentation and
 doing something as follows:</p>
-<pre id="code4" class="highlight" data-user="user"><input type="radio" name="code_menu4e3d0d353455bb070e13d4f240c48f1a94002886" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu4e3d0d353455bb070e13d4f240c48f1a94002886" class="line-numbers icon list-numbered"><code class="language-console"><div id="code4.1" class="line"><a href="#code4.1" aria-hidden="true"></a><span class="gp">[user@localhost ~]$ </span>virtualenv<span class="w"> </span>~/venv/pelican
-</div><div id="code4.2" class="line"><a href="#code4.2" aria-hidden="true"></a><span class="go">created virtual environment CPython3.8.2.final.0-64 in 477ms</span>
-</div><div id="code4.3" class="line"><a href="#code4.3" aria-hidden="true"></a><span class="go">  creator CPython3Posix(dest=/home/user/venv/pelican, clear=False, global=False)</span>
-</div><div id="code4.4" class="line"><a href="#code4.4" aria-hidden="true"></a><span class="go">  seeder FromAppData(download=False, pip=latest, setuptools=latest, wheel=latest, via=copy, app_data_dir=/home/user/.local/share/virtualenv/seed-app-data/v1.0.1)</span>
-</div><div id="code4.5" class="line"><a href="#code4.5" aria-hidden="true"></a><span class="go">  activators BashActivator,CShellActivator,FishActivator,PowerShellActivator,PythonActivator,XonshActivator</span>
-</div><div id="code4.6" class="line"><a href="#code4.6" aria-hidden="true"></a><span class="gp">[user@localhost ~]$ </span>.<span class="w"> </span>~/venv/pelican/bin/activate
-</div><div id="code4.7" class="line"><a href="#code4.7" aria-hidden="true"></a><span class="gp gp-VirtualEnv">(pelican)</span> <span class="gp">$ </span>mkdir<span class="w"> </span>~/blog
-</div><div id="code4.8" class="line"><a href="#code4.8" aria-hidden="true"></a><span class="gp gp-VirtualEnv">(pelican)</span> <span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>~/blog
-</div><div id="code4.9" class="line"><a href="#code4.9" aria-hidden="true"></a><span class="gp gp-VirtualEnv">(pelican)</span> <span class="gp">$ </span>git<span class="w"> </span>init
-</div><div id="code4.10" class="line"><a href="#code4.10" aria-hidden="true"></a><span class="go">Initialized empty Git repository in /home/user/blog/.git/</span>
-</div><div id="code4.11" class="line"><a href="#code4.11" aria-hidden="true"></a><span class="gp gp-VirtualEnv">(pelican)</span> <span class="gp">$ </span>git<span class="w"> </span>config<span class="w"> </span>--local<span class="w"> </span>user.email<span class="w"> </span><span class="s2">&quot;your@github-email.here&quot;</span>
-</div><div id="code4.12" class="line"><a href="#code4.12" aria-hidden="true"></a><span class="gp gp-VirtualEnv">(pelican)</span> <span class="gp">$ </span>git<span class="w"> </span>config<span class="w"> </span>--local<span class="w"> </span>user.name<span class="w"> </span><span class="s2">&quot;Joe Happy&quot;</span>
-</div><div id="code4.13" class="line"><a href="#code4.13" aria-hidden="true"></a><span class="gp gp-VirtualEnv">(pelican)</span> <span class="gp">$ </span>pelican-quickstart<span class="w"> </span>
-</div><div id="code4.14" class="line"><a href="#code4.14" aria-hidden="true"></a><span class="go">Welcome to pelican-quickstart v4.2.0.</span>
-</div><div id="code4.15" class="line"><a href="#code4.15" aria-hidden="true"></a>
-</div><div id="code4.16" class="line"><a href="#code4.16" aria-hidden="true"></a><span class="go">This script will help you create a new Pelican-based website.</span>
-</div><div id="code4.17" class="line"><a href="#code4.17" aria-hidden="true"></a>
-</div><div id="code4.18" class="line"><a href="#code4.18" aria-hidden="true"></a><span class="go">Please answer the following questions so this script can generate the files</span>
-</div><div id="code4.19" class="line"><a href="#code4.19" aria-hidden="true"></a><span class="go">needed by Pelican.</span>
-</div><div id="code4.20" class="line"><a href="#code4.20" aria-hidden="true"></a>
-</div><div id="code4.21" class="line"><a href="#code4.21" aria-hidden="true"></a>
-</div><div id="code4.22" class="line"><a href="#code4.22" aria-hidden="true"></a><span class="go">&gt; Where do you want to create your new web site? [.] </span>
-</div><div id="code4.23" class="line"><a href="#code4.23" aria-hidden="true"></a><span class="go">&gt; What will be the title of this web site? My Awesome Blog</span>
-</div><div id="code4.24" class="line"><a href="#code4.24" aria-hidden="true"></a><span class="go">&gt; Who will be the author of this web site? Joe Happy</span>
-</div><div id="code4.25" class="line"><a href="#code4.25" aria-hidden="true"></a><span class="go">&gt; What will be the default language of this web site? [en] </span>
-</div><div id="code4.26" class="line"><a href="#code4.26" aria-hidden="true"></a><span class="go">&gt; Do you want to specify a URL prefix? e.g., https://example.com   (Y/n) n</span>
-</div><div id="code4.27" class="line"><a href="#code4.27" aria-hidden="true"></a><span class="go">&gt; Do you want to enable article pagination? (Y/n) </span>
-</div><div id="code4.28" class="line"><a href="#code4.28" aria-hidden="true"></a><span class="go">&gt; How many articles per page do you want? [10] </span>
-</div><div id="code4.29" class="line"><a href="#code4.29" aria-hidden="true"></a><span class="go">&gt; What is your time zone? [Europe/Paris] Australia/Melbourne</span>
-</div><div id="code4.30" class="line"><a href="#code4.30" aria-hidden="true"></a><span class="go">&gt; Do you want to generate a tasks.py/Makefile to automate generation and publishing? (Y/n) n</span>
-</div><div id="code4.31" class="line"><a href="#code4.31" aria-hidden="true"></a><span class="go">Done. Your new project is available at /home/user/blog</span>
-</div><div id="code4.32" class="line"><a href="#code4.32" aria-hidden="true"></a><span class="gp gp-VirtualEnv">(pelican)</span> <span class="gp">$ </span>ls<span class="w"> </span>-l
-</div><div id="code4.33" class="line"><a href="#code4.33" aria-hidden="true"></a><span class="go">total 16</span>
-</div><div id="code4.34" class="line"><a href="#code4.34" aria-hidden="true"></a><span class="go">drwxr-xr-x 2   user   user 4096 May 10 00:31 content</span>
-</div><div id="code4.35" class="line"><a href="#code4.35" aria-hidden="true"></a><span class="go">drwxr-xr-x 2   user   user 4096 May 10 00:31 output</span>
-</div><div id="code4.36" class="line"><a href="#code4.36" aria-hidden="true"></a><span class="go">-rw-r--r-- 1   user   user  869 May 10 00:31 pelicanconf.py</span>
-</div><div id="code4.37" class="line"><a href="#code4.37" aria-hidden="true"></a><span class="go">-rw-r--r-- 1   user   user  589 May 10 00:31 publishconf.py</span>
-</div><div id="code4.38" class="line"><a href="#code4.38" aria-hidden="true"></a><span class="gp gp-VirtualEnv">(pelican)</span> <span class="gp">$ </span>rm<span class="w"> </span>-rf<span class="w"> </span>output<span class="w"> </span>publishconf.py
-</div><div id="code4.39" class="line"><a href="#code4.39" aria-hidden="true"></a><span class="gp gp-VirtualEnv">(pelican)</span> <span class="gp">$ </span>git<span class="w"> </span>add<span class="w"> </span>content<span class="w"> </span>pelicanconf.py<span class="w"> </span>
-</div><div id="code4.40" class="line"><a href="#code4.40" aria-hidden="true"></a><span class="gp gp-VirtualEnv">(pelican)</span> <span class="gp">$ </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;Initial commit&#39;</span>
-</div><div id="code4.41" class="line"><a href="#code4.41" aria-hidden="true"></a><span class="go">[master (root-commit) f077002] Initial commit</span>
-</div><div id="code4.42" class="line"><a href="#code4.42" aria-hidden="true"></a><span class="go"> 1 file changed, 35 insertions(+)</span>
-</div><div id="code4.43" class="line"><a href="#code4.43" aria-hidden="true"></a><span class="go"> create mode 100644 pelicanconf.py</span></div></code></pre>
+<pre class="highlight"><input type="radio" name="code_menu660612c8263b4e0abe109b6ff3b7e08776303164" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu660612c8263b4e0abe109b6ff3b7e08776303164" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[user@localhost ~]$ </span>virtualenv<span class="w"> </span>~/venv/pelican
+</div><div class="line"><a></a><span class="go">created virtual environment CPython3.8.2.final.0-64 in 477ms</span>
+</div><div class="line"><a></a><span class="go">  creator CPython3Posix(dest=/home/user/venv/pelican, clear=False, global=False)</span>
+</div><div class="line"><a></a><span class="go">  seeder FromAppData(download=False, pip=latest, setuptools=latest, wheel=latest, via=copy, app_data_dir=/home/user/.local/share/virtualenv/seed-app-data/v1.0.1)</span>
+</div><div class="line"><a></a><span class="go">  activators BashActivator,CShellActivator,FishActivator,PowerShellActivator,PythonActivator,XonshActivator</span>
+</div><div class="line"><a></a><span class="gp">[user@localhost ~]$ </span>.<span class="w"> </span>~/venv/pelican/bin/activate
+</div><div class="line"><a></a><span class="gp gp-VirtualEnv">(pelican)</span> <span class="gp">$ </span>mkdir<span class="w"> </span>~/blog
+</div><div class="line"><a></a><span class="gp gp-VirtualEnv">(pelican)</span> <span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>~/blog
+</div><div class="line"><a></a><span class="gp gp-VirtualEnv">(pelican)</span> <span class="gp">$ </span>git<span class="w"> </span>init
+</div><div class="line"><a></a><span class="go">Initialized empty Git repository in /home/user/blog/.git/</span>
+</div><div class="line"><a></a><span class="gp gp-VirtualEnv">(pelican)</span> <span class="gp">$ </span>git<span class="w"> </span>config<span class="w"> </span>--local<span class="w"> </span>user.email<span class="w"> </span><span class="s2">&quot;your@github-email.here&quot;</span>
+</div><div class="line"><a></a><span class="gp gp-VirtualEnv">(pelican)</span> <span class="gp">$ </span>git<span class="w"> </span>config<span class="w"> </span>--local<span class="w"> </span>user.name<span class="w"> </span><span class="s2">&quot;Joe Happy&quot;</span>
+</div><div class="line"><a></a><span class="gp gp-VirtualEnv">(pelican)</span> <span class="gp">$ </span>pelican-quickstart<span class="w"> </span>
+</div><div class="line"><a></a><span class="go">Welcome to pelican-quickstart v4.2.0.</span>
+</div><div class="line"><a></a>
+</div><div class="line"><a></a><span class="go">This script will help you create a new Pelican-based website.</span>
+</div><div class="line"><a></a>
+</div><div class="line"><a></a><span class="go">Please answer the following questions so this script can generate the files</span>
+</div><div class="line"><a></a><span class="go">needed by Pelican.</span>
+</div><div class="line"><a></a>
+</div><div class="line"><a></a>
+</div><div class="line"><a></a><span class="go">&gt; Where do you want to create your new web site? [.] </span>
+</div><div class="line"><a></a><span class="go">&gt; What will be the title of this web site? My Awesome Blog</span>
+</div><div class="line"><a></a><span class="go">&gt; Who will be the author of this web site? Joe Happy</span>
+</div><div class="line"><a></a><span class="go">&gt; What will be the default language of this web site? [en] </span>
+</div><div class="line"><a></a><span class="go">&gt; Do you want to specify a URL prefix? e.g., https://example.com   (Y/n) n</span>
+</div><div class="line"><a></a><span class="go">&gt; Do you want to enable article pagination? (Y/n) </span>
+</div><div class="line"><a></a><span class="go">&gt; How many articles per page do you want? [10] </span>
+</div><div class="line"><a></a><span class="go">&gt; What is your time zone? [Europe/Paris] Australia/Melbourne</span>
+</div><div class="line"><a></a><span class="go">&gt; Do you want to generate a tasks.py/Makefile to automate generation and publishing? (Y/n) n</span>
+</div><div class="line"><a></a><span class="go">Done. Your new project is available at /home/user/blog</span>
+</div><div class="line"><a></a><span class="gp gp-VirtualEnv">(pelican)</span> <span class="gp">$ </span>ls<span class="w"> </span>-l
+</div><div class="line"><a></a><span class="go">total 16</span>
+</div><div class="line"><a></a><span class="go">drwxr-xr-x 2   user   user 4096 May 10 00:31 content</span>
+</div><div class="line"><a></a><span class="go">drwxr-xr-x 2   user   user 4096 May 10 00:31 output</span>
+</div><div class="line"><a></a><span class="go">-rw-r--r-- 1   user   user  869 May 10 00:31 pelicanconf.py</span>
+</div><div class="line"><a></a><span class="go">-rw-r--r-- 1   user   user  589 May 10 00:31 publishconf.py</span>
+</div><div class="line"><a></a><span class="gp gp-VirtualEnv">(pelican)</span> <span class="gp">$ </span>rm<span class="w"> </span>-rf<span class="w"> </span>output<span class="w"> </span>publishconf.py
+</div><div class="line"><a></a><span class="gp gp-VirtualEnv">(pelican)</span> <span class="gp">$ </span>git<span class="w"> </span>add<span class="w"> </span>content<span class="w"> </span>pelicanconf.py<span class="w"> </span>
+</div><div class="line"><a></a><span class="gp gp-VirtualEnv">(pelican)</span> <span class="gp">$ </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;Initial commit&#39;</span>
+</div><div class="line"><a></a><span class="go">[master (root-commit) f077002] Initial commit</span>
+</div><div class="line"><a></a><span class="go"> 1 file changed, 35 insertions(+)</span>
+</div><div class="line"><a></a><span class="go"> create mode 100644 pelicanconf.py</span></div></code></pre>
 <p>A short break down of the above session snippet is:</p>
 <ul>
 <li>On line 1 we create a virtual Python environment, so we could install Pelican locally;</li>
@@ -369,33 +369,33 @@ doing something as follows:</p>
 <li>Finally, we commit the generated skeleton to Git.</li>
 </ul>
 <p>A good test at this stage would be to ensure that Pelican is working and likes our structure:</p>
-<pre id="code5" class="highlight" data-user="user"><input type="radio" name="code_menu8a566a24f2ca636cc191c159bc82a32404f4e709" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu8a566a24f2ca636cc191c159bc82a32404f4e709" class="line-numbers icon list-numbered"><code class="language-console"><div id="code5.1" class="line"><a href="#code5.1" aria-hidden="true"></a><span class="gp">[user@localhost ~]$ </span>pelican
-</div><div id="code5.2" class="line"><a href="#code5.2" aria-hidden="true"></a><span class="go">WARNING: No valid files found in content for the active readers:</span>
-</div><div id="code5.3" class="line"><a href="#code5.3" aria-hidden="true"></a><span class="go">  | BaseReader (static)</span>
-</div><div id="code5.4" class="line"><a href="#code5.4" aria-hidden="true"></a><span class="go">  | HTMLReader (htm, html)</span>
-</div><div id="code5.5" class="line"><a href="#code5.5" aria-hidden="true"></a><span class="go">  | MarkdownReader (md, markdown, mkd, mdown)</span>
-</div><div id="code5.6" class="line"><a href="#code5.6" aria-hidden="true"></a><span class="go">  | RstReader (rst)</span>
-</div><div id="code5.7" class="line"><a href="#code5.7" aria-hidden="true"></a><span class="go">Done: Processed 0 articles, 0 drafts, 0 pages, 0 hidden pages and 0 draft pages in 0.07 seconds.</span></div></code></pre>
+<pre class="highlight"><input type="radio" name="code_menu9ed554635baab30f3cc4e84f924e332b17bf3d0e" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu9ed554635baab30f3cc4e84f924e332b17bf3d0e" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[user@localhost ~]$ </span>pelican
+</div><div class="line"><a></a><span class="go">WARNING: No valid files found in content for the active readers:</span>
+</div><div class="line"><a></a><span class="go">  | BaseReader (static)</span>
+</div><div class="line"><a></a><span class="go">  | HTMLReader (htm, html)</span>
+</div><div class="line"><a></a><span class="go">  | MarkdownReader (md, markdown, mkd, mdown)</span>
+</div><div class="line"><a></a><span class="go">  | RstReader (rst)</span>
+</div><div class="line"><a></a><span class="go">Done: Processed 0 articles, 0 drafts, 0 pages, 0 hidden pages and 0 draft pages in 0.07 seconds.</span></div></code></pre>
 <p>So far so good, but it is not a real test, since there are no source files to generate something from, so let&rsquo;s give Pelican something to work on:</p>
-<pre id="code6" class="highlight" data-user="user"><input type="radio" name="code_menuc0b5ea6abd49d4192e82ca1f3af9008e430a5c61" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menuc0b5ea6abd49d4192e82ca1f3af9008e430a5c61" class="line-numbers icon list-numbered"><code class="language-console"><div id="code6.1" class="line"><a href="#code6.1" aria-hidden="true"></a><span class="gp">[user@localhost ~]$ </span><span class="nb">printf</span><span class="w"> </span><span class="s1">&#39;Title: First Post\nDate: 2020-05-10\n\n#First post\nPelican is awesome!&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>content/first.md
-</div><div id="code6.2" class="line"><a href="#code6.2" aria-hidden="true"></a><span class="gp">[user@localhost ~]$ </span>pelican
-</div><div id="code6.3" class="line"><a href="#code6.3" aria-hidden="true"></a><span class="go">Done: Processed 1 article, 0 drafts, 0 pages, 0 hidden pages and 0 draft pages in 0.12 seconds.</span>
-</div><div id="code6.4" class="line"><a href="#code6.4" aria-hidden="true"></a><span class="gp">[user@localhost ~]$ </span>elinks<span class="w"> </span>-dump<span class="w"> </span>output/index.html<span class="w"> </span>
-</div><div id="code6.5" class="line"><a href="#code6.5" aria-hidden="true"></a><span class="go">                               [1]My Awesome Blog</span>
-</div><div id="code6.6" class="line"><a href="#code6.6" aria-hidden="true"></a>
-</div><div id="code6.7" class="line"><a href="#code6.7" aria-hidden="true"></a><span class="go">     • [2]misc</span>
-</div><div id="code6.8" class="line"><a href="#code6.8" aria-hidden="true"></a>
-</div><div id="code6.9" class="line"><a href="#code6.9" aria-hidden="true"></a><span class="go">                                 [3]First Post</span>
-</div><div id="code6.10" class="line"><a href="#code6.10" aria-hidden="true"></a>
-</div><div id="code6.11" class="line"><a href="#code6.11" aria-hidden="true"></a><span class="go">   Published: Sun 10 May 2020</span>
-</div><div id="code6.12" class="line"><a href="#code6.12" aria-hidden="true"></a>
-</div><div id="code6.13" class="line"><a href="#code6.13" aria-hidden="true"></a><span class="go">    By [4]Joe Happy</span>
-</div><div id="code6.14" class="line"><a href="#code6.14" aria-hidden="true"></a>
-</div><div id="code6.15" class="line"><a href="#code6.15" aria-hidden="true"></a><span class="go">   In [5]misc.</span>
-</div><div id="code6.16" class="line"><a href="#code6.16" aria-hidden="true"></a>
-</div><div id="code6.17" class="line"><a href="#code6.17" aria-hidden="true"></a><span class="go">                                   First post</span>
-</div><div id="code6.18" class="line"><a href="#code6.18" aria-hidden="true"></a>
-</div><div id="code6.19" class="line"><a href="#code6.19" aria-hidden="true"></a><span class="go">   Pelican is awesome!</span></div></code></pre>
+<pre class="highlight"><input type="radio" name="code_menuf690118aac4b259cb5f132a1d2aefc4155ddbd06" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menuf690118aac4b259cb5f132a1d2aefc4155ddbd06" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[user@localhost ~]$ </span><span class="nb">printf</span><span class="w"> </span><span class="s1">&#39;Title: First Post\nDate: 2020-05-10\n\n#First post\nPelican is awesome!&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>content/first.md
+</div><div class="line"><a></a><span class="gp">[user@localhost ~]$ </span>pelican
+</div><div class="line"><a></a><span class="go">Done: Processed 1 article, 0 drafts, 0 pages, 0 hidden pages and 0 draft pages in 0.12 seconds.</span>
+</div><div class="line"><a></a><span class="gp">[user@localhost ~]$ </span>elinks<span class="w"> </span>-dump<span class="w"> </span>output/index.html<span class="w"> </span>
+</div><div class="line"><a></a><span class="go">                               [1]My Awesome Blog</span>
+</div><div class="line"><a></a>
+</div><div class="line"><a></a><span class="go">     • [2]misc</span>
+</div><div class="line"><a></a>
+</div><div class="line"><a></a><span class="go">                                 [3]First Post</span>
+</div><div class="line"><a></a>
+</div><div class="line"><a></a><span class="go">   Published: Sun 10 May 2020</span>
+</div><div class="line"><a></a>
+</div><div class="line"><a></a><span class="go">    By [4]Joe Happy</span>
+</div><div class="line"><a></a>
+</div><div class="line"><a></a><span class="go">   In [5]misc.</span>
+</div><div class="line"><a></a>
+</div><div class="line"><a></a><span class="go">                                   First post</span>
+</div><div class="line"><a></a>
+</div><div class="line"><a></a><span class="go">   Pelican is awesome!</span></div></code></pre>
 <p>The output from <code>elinks</code> was truncated on purpose since I just wanted to
 showcase that Pelican has indeed generated the structure for a static website
 from just one article file we created.</p>
@@ -426,18 +426,18 @@ session dump of what you will need to do.  In the following session snippet
 <code>blog</code> is the repository name I chose for my private code repository and you
 will need to replace it with your private repository name (the working
 directory is our newly created local repository):</p>
-<pre id="code8" class="highlight" data-user="user"><input type="radio" name="code_menu7b580f92d15ee786ed72ac7b08c50a0d61b38d6f" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu7b580f92d15ee786ed72ac7b08c50a0d61b38d6f" class="line-numbers icon list-numbered"><code class="language-console"><div id="code8.1" class="line"><a href="#code8.1" aria-hidden="true"></a><span class="gp">[user@localhost ~]$ </span>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>origin<span class="w"> </span>git@github.com:galaxy4public/blog.git
-</div><div id="code8.2" class="line"><a href="#code8.2" aria-hidden="true"></a><span class="gp">[user@localhost ~]$ </span>git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>origin<span class="w"> </span>master
-</div><div id="code8.3" class="line"><a href="#code8.3" aria-hidden="true"></a><span class="go">Enter passphrase for key &#39;/home/user/.ssh/keys/github&#39;: </span>
-</div><div id="code8.4" class="line"><a href="#code8.4" aria-hidden="true"></a><span class="go">Enumerating objects: 6, done.</span>
-</div><div id="code8.5" class="line"><a href="#code8.5" aria-hidden="true"></a><span class="go">Counting objects: 100% (6/6), done.</span>
-</div><div id="code8.6" class="line"><a href="#code8.6" aria-hidden="true"></a><span class="go">Delta compression using up to 4 threads</span>
-</div><div id="code8.7" class="line"><a href="#code8.7" aria-hidden="true"></a><span class="go">Compressing objects: 100% (4/4), done.</span>
-</div><div id="code8.8" class="line"><a href="#code8.8" aria-hidden="true"></a><span class="go">Writing objects: 100% (6/6), 1008 bytes | 1008.00 KiB/s, done.</span>
-</div><div id="code8.9" class="line"><a href="#code8.9" aria-hidden="true"></a><span class="go">Total 6 (delta 0), reused 0 (delta 0), pack-reused 0</span>
-</div><div id="code8.10" class="line"><a href="#code8.10" aria-hidden="true"></a><span class="go">To github.com:galaxy4public/blog.git</span>
-</div><div id="code8.11" class="line"><a href="#code8.11" aria-hidden="true"></a><span class="go"> * [new branch]      master -&gt; master</span>
-</div><div id="code8.12" class="line"><a href="#code8.12" aria-hidden="true"></a><span class="go">Branch &#39;master&#39; set up to track remote branch &#39;master&#39; from &#39;origin&#39;.</span></div></code></pre>
+<pre class="highlight"><input type="radio" name="code_menu767b12e1270d9628ac06fe6c1271acf21d6806c8" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu767b12e1270d9628ac06fe6c1271acf21d6806c8" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[user@localhost ~]$ </span>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>origin<span class="w"> </span>git@github.com:galaxy4public/blog.git
+</div><div class="line"><a></a><span class="gp">[user@localhost ~]$ </span>git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>origin<span class="w"> </span>master
+</div><div class="line"><a></a><span class="go">Enter passphrase for key &#39;/home/user/.ssh/keys/github&#39;: </span>
+</div><div class="line"><a></a><span class="go">Enumerating objects: 6, done.</span>
+</div><div class="line"><a></a><span class="go">Counting objects: 100% (6/6), done.</span>
+</div><div class="line"><a></a><span class="go">Delta compression using up to 4 threads</span>
+</div><div class="line"><a></a><span class="go">Compressing objects: 100% (4/4), done.</span>
+</div><div class="line"><a></a><span class="go">Writing objects: 100% (6/6), 1008 bytes | 1008.00 KiB/s, done.</span>
+</div><div class="line"><a></a><span class="go">Total 6 (delta 0), reused 0 (delta 0), pack-reused 0</span>
+</div><div class="line"><a></a><span class="go">To github.com:galaxy4public/blog.git</span>
+</div><div class="line"><a></a><span class="go"> * [new branch]      master -&gt; master</span>
+</div><div class="line"><a></a><span class="go">Branch &#39;master&#39; set up to track remote branch &#39;master&#39; from &#39;origin&#39;.</span></div></code></pre>
 <p>Do you remember how we generated a deploy key pair earlier and installed the
 public key part into the public blog repository, so GitHub would allow the
 bearer of the private key to authenticate and deploy changes to the public blog

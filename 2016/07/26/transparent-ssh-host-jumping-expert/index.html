@@ -26,7 +26,7 @@
 		}],
 		"headline" : "Transparent SSH host-jumping (Expert)",
 		"datePublished" : "2016-07-26T10:00:00+10:00",
-		"dateModified" : "2025-10-15T23:06:20+11:00"
+		"dateModified" : "2025-10-18T02:45:38+11:00"
 	}
 	</script>
 </head>
@@ -113,7 +113,7 @@ will allow one to tweak parameters for the hosts in the chain.</p>
 technique works, here I am only going to provide the proxy script and the
 corresponding ssh config parameter block to use the script.</p>
 <p>The goal was to support the following syntax:</p>
-<pre class="highlight" data-user="user"><input type="radio" name="code_menu9a5c562a971348a0aaeed0ea6dd72f61a3000602" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu9a5c562a971348a0aaeed0ea6dd72f61a3000602" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[user@localhost ~]$ </span>ssh<span class="w"> </span>default_user@userA^hostA/userB^hostB:port/hostC</div></code></pre>
+<pre class="highlight"><input type="radio" name="code_menu9a5c562a971348a0aaeed0ea6dd72f61a3000602" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu9a5c562a971348a0aaeed0ea6dd72f61a3000602" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[user@localhost ~]$ </span>ssh<span class="w"> </span>default_user@userA^hostA/userB^hostB:port/hostC</div></code></pre>
 <p>It was a little challenge to come up with the character for identifying the
 user part for intermediate hosts:</p>
 <ul>

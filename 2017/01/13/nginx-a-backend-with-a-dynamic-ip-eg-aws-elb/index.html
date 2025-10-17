@@ -26,7 +26,7 @@
 		}],
 		"headline" : "nginx + a backend with a dynamic IP (e.g. AWS ELB)",
 		"datePublished" : "2017-01-13T10:00:00+11:00",
-		"dateModified" : "2025-10-15T23:06:20+11:00"
+		"dateModified" : "2025-10-18T02:45:38+11:00"
 	}
 	</script>
 </head>
@@ -228,7 +228,7 @@ unit, but here we overrode the <code>ExecStart</code> command to specify the tar
 for the proxy.</p>
 <p>OK, we are done with the configuration of <code>systemd</code>, so it would be a good time
 to reload the <code>systemd</code> daemon:</p>
-<pre class="highlight" data-user="root"><input type="radio" name="code_menu1890d918bbd740675f143763585069f1b474c11d" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu1890d918bbd740675f143763585069f1b474c11d" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>systemctl<span class="w"> </span>daemon-reload</div></code></pre>
+<pre class="highlight"><input type="radio" name="code_menu1890d918bbd740675f143763585069f1b474c11d" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu1890d918bbd740675f143763585069f1b474c11d" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>systemctl<span class="w"> </span>daemon-reload</div></code></pre>
 <p>If you run a system where SELinux is disabled (why?!) you don&rsquo;t need to do
 anything additional and should be good, but if you are security conscious and
 want to ensure that you follow the least privilege principle, then read on :)</p>
@@ -244,7 +244,7 @@ VM for building/compiling policies since the only time you need that
 development stuff is when you are compiling the module from sources).</p>
 <p>On CentOS, you can install all the necessary bits to build a loadable SELinux
 module by installing the <code>selinux-policy-devel</code> package using <code>yum</code>:</p>
-<pre class="highlight" data-user="root"><input type="radio" name="code_menu2b83652d42034e71d05d77d2b6901604f384fbe4" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu2b83652d42034e71d05d77d2b6901604f384fbe4" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>yum<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span>selinux-policy-devel</div></code></pre>
+<pre class="highlight"><input type="radio" name="code_menu2b83652d42034e71d05d77d2b6901604f384fbe4" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu2b83652d42034e71d05d77d2b6901604f384fbe4" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>yum<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span>selinux-policy-devel</div></code></pre>
 <p>Note, I skipped the output of the command since it does not provide any useful
 information for the purposes of this article.</p>
 <p>Once the SELinux development framework is installed we can start designing our
@@ -336,7 +336,7 @@ is as follows:</p>
 </div><div class="line"><a></a>/usr/lib/systemd/systemd-socket-proxyd -- gen_context(system_u:object_r:systemd_socket_proxyd_exec_t,s0)</div></code></pre>
 <p>At this point, we have everything we need to compile a policy module, so let&rsquo;s
 just do it now:</p>
-<pre class="highlight" data-user="root"><input type="radio" name="code_menu6b3a080fc62691c3c861fb8e0931c05e1bae25b8" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu6b3a080fc62691c3c861fb8e0931c05e1bae25b8" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>ls<span class="w"> </span>-l
+<pre class="highlight"><input type="radio" name="code_menu6b3a080fc62691c3c861fb8e0931c05e1bae25b8" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu6b3a080fc62691c3c861fb8e0931c05e1bae25b8" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>ls<span class="w"> </span>-l
 </div><div class="line"><a></a><span class="go">total 8</span>
 </div><div class="line"><a></a><span class="go">-rw-r--r--. 1 root root  235 Jan  5 05:21 systemd-socket-proxyd.fc</span>
 </div><div class="line"><a></a><span class="go">-rw-r--r--. 1 root root 1467 Jan  6 00:10 systemd-socket-proxyd.te</span>
@@ -359,18 +359,18 @@ where proxy is going to be running and only apply the last two commands
 <p>We approached the time when we need to perform the pre-flight checks before
 launching our new service :). First, we need to check whether the file context
 was applied to the <code>systemd-socket-proxyd binary</code>:</p>
-<pre class="highlight" data-user="root"><input type="radio" name="code_menub1bbacbfacf313ca72e5a1c097ed766eec8fecda" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menub1bbacbfacf313ca72e5a1c097ed766eec8fecda" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>ls<span class="w"> </span>-ldZ<span class="w"> </span>/usr/lib/systemd/systemd-socket-proxyd<span class="w"> </span>
+<pre class="highlight"><input type="radio" name="code_menub1bbacbfacf313ca72e5a1c097ed766eec8fecda" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menub1bbacbfacf313ca72e5a1c097ed766eec8fecda" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>ls<span class="w"> </span>-ldZ<span class="w"> </span>/usr/lib/systemd/systemd-socket-proxyd<span class="w"> </span>
 </div><div class="line"><a></a><span class="go">-rwxr-xr-x. root root system_u:object_r:systemd_socket_proxyd_exec_t:s0 /usr/lib/systemd/systemd-socket-proxyd</span></div></code></pre>
 <p>Looks good! Let&rsquo;s start the socket unit and check the permissions set on the
 socket file:</p>
-<pre class="highlight" data-user="root"><input type="radio" name="code_menu87c6c5d57435f9c9f2372ffb3f57ec33245e7d8c" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu87c6c5d57435f9c9f2372ffb3f57ec33245e7d8c" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>systemctl<span class="w"> </span>start<span class="w"> </span>systemd-socket-proxyd@fastcgi.socket
+<pre class="highlight"><input type="radio" name="code_menu87c6c5d57435f9c9f2372ffb3f57ec33245e7d8c" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu87c6c5d57435f9c9f2372ffb3f57ec33245e7d8c" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>systemctl<span class="w"> </span>start<span class="w"> </span>systemd-socket-proxyd@fastcgi.socket
 </div><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>ls<span class="w"> </span>-ldZ<span class="w"> </span>/run/systemd-socket-proxyd<span class="o">{</span>,/fastcgi.sock<span class="o">}</span>
 </div><div class="line"><a></a><span class="go">drwx--x--x. root root  system_u:object_r:var_run_t:s0   /run/systemd-socket-proxyd</span>
 </div><div class="line"><a></a><span class="go">srw-rw----. root nginx system_u:object_r:var_run_t:s0   /run/systemd-socket-proxyd/fastcgi.sock</span></div></code></pre>
 <p>This also looks as expected. The next test would be to check that our proxy
 service is running with the desired set of permissions and in the correct
 SELinux domain:</p>
-<pre class="highlight" data-user="root"><input type="radio" name="code_menu07c03a413ad1b729cc8096ea09fbd8bd611bc269" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu07c03a413ad1b729cc8096ea09fbd8bd611bc269" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>socat<span class="w"> </span>-v<span class="w"> </span>unix-client:/run/systemd-socket-proxyd/fastcgi.sock<span class="w"> </span>stdin
+<pre class="highlight"><input type="radio" name="code_menu07c03a413ad1b729cc8096ea09fbd8bd611bc269" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu07c03a413ad1b729cc8096ea09fbd8bd611bc269" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>socat<span class="w"> </span>-v<span class="w"> </span>unix-client:/run/systemd-socket-proxyd/fastcgi.sock<span class="w"> </span>stdin
 </div><div class="line"><a></a>
 </div><div class="line"><a></a><span class="go">&lt; 2017/01/13 00:59:22.987083  length=1 from=0 to=0</span>
 </div><div class="line"><a></a>
@@ -398,14 +398,14 @@ and within the <code>systemd_socket_proxyd_t</code> domain.</p>
 and there is no way the service could regain the escalated privileges back.</p>
 <p>Looks like we are all, so let&rsquo;s make our changes persistent. To achieve this we
 just need to enable the <code>systemd-socket-proxyd@fastcgi.socket</code> unit:</p>
-<pre class="highlight" data-user="root"><input type="radio" name="code_menu4bc6e9f8b4fbc7cbba74f2b6e15f15439bc13918" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu4bc6e9f8b4fbc7cbba74f2b6e15f15439bc13918" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>systemd-socket-proxyd@fastcgi.socket
+<pre class="highlight"><input type="radio" name="code_menu4bc6e9f8b4fbc7cbba74f2b6e15f15439bc13918" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu4bc6e9f8b4fbc7cbba74f2b6e15f15439bc13918" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>systemd-socket-proxyd@fastcgi.socket
 </div><div class="line"><a></a><span class="go">Created symlink from /etc/systemd/system/sockets.target.wants/systemd-socket-proxyd@fastcgi.socket to /etc/systemd/system/systemd-socket-proxyd@.socket.</span>
 </div><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>systemctl<span class="w"> </span>status<span class="w"> </span>systemd-socket-proxyd@fastcgi.socket<span class="w"> </span><span class="p">|</span><span class="w"> </span>fgrep<span class="w"> </span>Loaded:
 </div><div class="line"><a></a><span class="go">   Loaded: loaded (/etc/systemd/system/systemd-socket-proxyd@.socket; enabled; vendor preset: disabled)</span></div></code></pre>
 <p>Just to show that the configuration is working I set a simple lab up in a VM
 and followed this article with the only exception of the PHP/FPM location which
 I am running on the same VM:</p>
-<pre class="highlight" data-user="root"><input type="radio" name="code_menu41dd77b091a96cca9e70ff322531ec95f38d687d" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu41dd77b091a96cca9e70ff322531ec95f38d687d" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>cat<span class="w"> </span>/usr/share/nginx/html/test.php
+<pre class="highlight"><input type="radio" name="code_menu41dd77b091a96cca9e70ff322531ec95f38d687d" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu41dd77b091a96cca9e70ff322531ec95f38d687d" class="line-numbers icon list-numbered"><code class="language-console"><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>cat<span class="w"> </span>/usr/share/nginx/html/test.php
 </div><div class="line"><a></a><span class="go">&lt;?php echo &quot;This is the output from PHP\n&quot; ?&gt;</span>
 </div><div class="line"><a></a><span class="gp">[root@localhost ~]# </span>cat<span class="w"> </span>/etc/nginx/conf.d/php-upstream.conf<span class="w"> </span>
 </div><div class="line"><a></a><span class="go">upstream php {</span>

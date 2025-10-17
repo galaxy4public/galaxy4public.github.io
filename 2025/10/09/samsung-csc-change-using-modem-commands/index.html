@@ -26,7 +26,7 @@
 		}],
 		"headline" : "Samsung CSC Change Using Modem Commands",
 		"datePublished" : "2025-10-09T15:30:00+11:00",
-		"dateModified" : "2025-10-17T13:40:24+11:00"
+		"dateModified" : "2025-10-18T02:45:38+11:00"
 	}
 	</script>
 </head>
@@ -145,7 +145,7 @@ to <code>XID</code> (Indonesia).</p>
 <p>Locate the modem endpoint on your operating system.  On macOS, use <code>ls -l /dev/cu.usbmodem*</code> to locate it.  On Linux, I would suggest to do <code>dmesg | tail -30</code> after connecting the device, you should be able to see which <code>/dev/tty*</code> has been assigned for the Serial-over-USB.  For Windows, check your Device Manager to see which <code>COM*</code> port was assigned.</p>
 </li>
 <li>
-<p>Use your favorite communication program to connect to the endpoint.  On macOS, I prefer to use <code>cu</code>, which is included with the operating system and my examples below will use it.  On Linux, you have myriad of options, but I would use either <code>screen</code> or <code>minicom</code>.  On Windows, I think, HyperTerminal is still included with the operating system by default, but last time I have seen Windows up close was years ago.  Anyhow, you need to connect your communication program to the located endpoint, set the baudrate to 115200, and you should be all set.</p>
+<p>Use your favourite communication program to connect to the endpoint.  On macOS, I prefer to use <code>cu</code>, which is included with the operating system and my examples below will use it.  On Linux, you have myriad of options, but I would use either <code>screen</code> or <code>minicom</code>.  On Windows, I think, HyperTerminal is still included with the operating system by default, but last time I have seen Windows up close was years ago.  Anyhow, you need to connect your communication program to the located endpoint, set the baudrate to 115200, and you should be all set.</p>
 </li>
 <li>
 <p>Now is the magic :).  Below is my terminal session on macOS with my comments after the snippet:</p>

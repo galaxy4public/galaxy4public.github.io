@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - blog</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"/><link href="https://dmitry.khlebnikov.net/feeds/blog.atom.xml" rel="self"/><id>https://dmitry.khlebnikov.net/</id><updated>2025-10-15T23:06:20+11:00</updated><subtitle>assorted bits of wit</subtitle><entry><title>Automating Static Website Deployment</title><link href="https://dmitry.khlebnikov.net/2020/05/17/automating-static-website-deployment/" rel="alternate"/><published>2020-05-17T21:32:00+10:00</published><updated>2025-10-15T23:06:20+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-17:/2020/05/17/automating-static-website-deployment/</id><summary type="html">&lt;p&gt;A comprehensive guide to setting up a fully automated deployment
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - blog</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"/><link href="https://dmitry.khlebnikov.net/feeds/blog.atom.xml" rel="self"/><id>https://dmitry.khlebnikov.net/</id><updated>2025-10-18T02:45:38+11:00</updated><subtitle>assorted bits of wit</subtitle><entry><title>Automating Static Website Deployment</title><link href="https://dmitry.khlebnikov.net/2020/05/17/automating-static-website-deployment/" rel="alternate"/><published>2020-05-17T21:32:00+10:00</published><updated>2025-10-18T02:45:38+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-17:/2020/05/17/automating-static-website-deployment/</id><summary type="html">&lt;p&gt;A comprehensive guide to setting up a fully automated deployment
 pipeline for a static website using a private source repository and a
 public GitHub Pages repository. The author details a process that
 leverages GitHub Actions to build a Pelican-based site from a private
@@ -98,13 +98,13 @@ while for GitHub to retry.&lt;/p&gt;
 will get the quickest validation response from GitHub, e.g. I set up my
 &lt;code&gt;CNAME&lt;/code&gt; records and then verified it from the command line (before)
 submitting the request to GitHub:&lt;/p&gt;
-&lt;pre id="code1" class="highlight" data-user="user"&gt;&lt;input type="radio" name="code_menu7b7d79f5964a012ca92dac47c79d82161c28b82f" class="no-line-numbers icon list-numbered"&gt;&lt;input type="radio" name="code_menu7b7d79f5964a012ca92dac47c79d82161c28b82f" class="line-numbers icon list-numbered"&gt;&lt;code class="language-console"&gt;&lt;div id="code1.1" class="line"&gt;&lt;a href="#code1.1" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="gp"&gt;[user@localhost ~]$ &lt;/span&gt;host&lt;span class="w"&gt; &lt;/span&gt;-t&lt;span class="w"&gt; &lt;/span&gt;cname&lt;span class="w"&gt; &lt;/span&gt;dmitry.khlebnikov.net&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;8&lt;/span&gt;.8.8.8
-&lt;/div&gt;&lt;div id="code1.2" class="line"&gt;&lt;a href="#code1.2" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;Using domain server:&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code1.3" class="line"&gt;&lt;a href="#code1.3" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;Name: 8.8.8.8&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code1.4" class="line"&gt;&lt;a href="#code1.4" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;Address: 8.8.8.8#53&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code1.5" class="line"&gt;&lt;a href="#code1.5" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;Aliases:&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code1.6" class="line"&gt;&lt;a href="#code1.6" aria-hidden="true"&gt;&lt;/a&gt;
-&lt;/div&gt;&lt;div id="code1.7" class="line"&gt;&lt;a href="#code1.7" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;dmitry.khlebnikov.net is an alias for galaxy4public.github.io.&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;input type="radio" name="code_menub3624fa5c401a8f42a9ad178012f88e626ac6471" class="no-line-numbers icon list-numbered"&gt;&lt;input type="radio" name="code_menub3624fa5c401a8f42a9ad178012f88e626ac6471" class="line-numbers icon list-numbered"&gt;&lt;code class="language-console"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp"&gt;[user@localhost ~]$ &lt;/span&gt;host&lt;span class="w"&gt; &lt;/span&gt;-t&lt;span class="w"&gt; &lt;/span&gt;cname&lt;span class="w"&gt; &lt;/span&gt;dmitry.khlebnikov.net&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;8&lt;/span&gt;.8.8.8
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;Using domain server:&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;Name: 8.8.8.8&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;Address: 8.8.8.8#53&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;Aliases:&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;dmitry.khlebnikov.net is an alias for galaxy4public.github.io.&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;There are some shenanigans with the &amp;ldquo;Enforce HTTPS&amp;rdquo; option.&lt;/p&gt;
@@ -161,24 +161,24 @@ look like &lt;em&gt;you&lt;/em&gt; are executing them.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;Generate an &lt;abbr title="Secure Shell"&gt;SSH&lt;/abbr&gt; key pair, e.g.:&lt;/p&gt;
-&lt;pre id="code2" class="highlight" data-user="user"&gt;&lt;input type="radio" name="code_menu581af6fe2fefabfde633963ec7c488a7e624832f" class="no-line-numbers icon list-numbered"&gt;&lt;input type="radio" name="code_menu581af6fe2fefabfde633963ec7c488a7e624832f" class="line-numbers icon list-numbered"&gt;&lt;code class="language-console"&gt;&lt;div id="code2.1" class="line"&gt;&lt;a href="#code2.1" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="gp"&gt;[user@localhost ~]$ &lt;/span&gt;ssh-keygen&lt;span class="w"&gt; &lt;/span&gt;-t&lt;span class="w"&gt; &lt;/span&gt;ed25519&lt;span class="w"&gt; &lt;/span&gt;-N&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-C&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Updating the blog from GH Action&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-f&lt;span class="w"&gt; &lt;/span&gt;~/gh-action
-&lt;/div&gt;&lt;div id="code2.2" class="line"&gt;&lt;a href="#code2.2" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;Generating public/private ed25519 key pair.&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code2.3" class="line"&gt;&lt;a href="#code2.3" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;Your identification has been saved in /home/user/gh-action&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code2.4" class="line"&gt;&lt;a href="#code2.4" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;Your public key has been saved in /home/user/gh-action.pub&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code2.5" class="line"&gt;&lt;a href="#code2.5" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;The key fingerprint is:&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code2.6" class="line"&gt;&lt;a href="#code2.6" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;SHA256:7W9pUV5IlrRVE0RAVkjLgKJz4RdtVbH7GKQu8AfYITw Updating the blog from GH Action&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code2.7" class="line"&gt;&lt;a href="#code2.7" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;The key&amp;#39;s randomart image is:&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code2.8" class="line"&gt;&lt;a href="#code2.8" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;+--[ED25519 256]--+&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code2.9" class="line"&gt;&lt;a href="#code2.9" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;|          o.+BOX*|&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code2.10" class="line"&gt;&lt;a href="#code2.10" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;|       + o o+.=oo|&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code2.11" class="line"&gt;&lt;a href="#code2.11" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;|      o E +  =oo |&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code2.12" class="line"&gt;&lt;a href="#code2.12" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;|     o o B . oo o|&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code2.13" class="line"&gt;&lt;a href="#code2.13" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;|      o S + .o.o |&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code2.14" class="line"&gt;&lt;a href="#code2.14" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;|         + o. .o.|&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code2.15" class="line"&gt;&lt;a href="#code2.15" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;|          + oo. .|&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code2.16" class="line"&gt;&lt;a href="#code2.16" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;|           ++    |&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code2.17" class="line"&gt;&lt;a href="#code2.17" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;|           o.    |&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code2.18" class="line"&gt;&lt;a href="#code2.18" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;+----[SHA256]-----+&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;input type="radio" name="code_menuaa92d79e6e51ac7ad98647c1edb2562d3fd2f3f6" class="no-line-numbers icon list-numbered"&gt;&lt;input type="radio" name="code_menuaa92d79e6e51ac7ad98647c1edb2562d3fd2f3f6" class="line-numbers icon list-numbered"&gt;&lt;code class="language-console"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp"&gt;[user@localhost ~]$ &lt;/span&gt;ssh-keygen&lt;span class="w"&gt; &lt;/span&gt;-t&lt;span class="w"&gt; &lt;/span&gt;ed25519&lt;span class="w"&gt; &lt;/span&gt;-N&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-C&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Updating the blog from GH Action&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-f&lt;span class="w"&gt; &lt;/span&gt;~/gh-action
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;Generating public/private ed25519 key pair.&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;Your identification has been saved in /home/user/gh-action&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;Your public key has been saved in /home/user/gh-action.pub&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;The key fingerprint is:&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;SHA256:7W9pUV5IlrRVE0RAVkjLgKJz4RdtVbH7GKQu8AfYITw Updating the blog from GH Action&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;The key&amp;#39;s randomart image is:&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;+--[ED25519 256]--+&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;|          o.+BOX*|&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;|       + o o+.=oo|&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;|      o E +  =oo |&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;|     o o B . oo o|&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;|      o S + .o.o |&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;|         + o. .o.|&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;|          + oo. .|&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;|           ++    |&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;|           o.    |&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;+----[SHA256]-----+&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Here, I chose the &lt;code&gt;ed25519&lt;/code&gt; key type since it is the shortest from the
 GitHub supported key types at the moment, yet it is strong enough.&lt;/p&gt;
 &lt;p&gt;I also made the key pair passphrase-less (&lt;code&gt;-N ''&lt;/code&gt;) since the purpose of the
@@ -227,49 +227,49 @@ The name of the configuration file can be also anything you like, however, I
 suggest to stick with the default for now.&lt;/p&gt;
 &lt;p&gt;Basically, you can quickly start by following the Pelican documentation and
 doing something as follows:&lt;/p&gt;
-&lt;pre id="code4" class="highlight" data-user="user"&gt;&lt;input type="radio" name="code_menu4e3d0d353455bb070e13d4f240c48f1a94002886" class="no-line-numbers icon list-numbered"&gt;&lt;input type="radio" name="code_menu4e3d0d353455bb070e13d4f240c48f1a94002886" class="line-numbers icon list-numbered"&gt;&lt;code class="language-console"&gt;&lt;div id="code4.1" class="line"&gt;&lt;a href="#code4.1" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="gp"&gt;[user@localhost ~]$ &lt;/span&gt;virtualenv&lt;span class="w"&gt; &lt;/span&gt;~/venv/pelican
-&lt;/div&gt;&lt;div id="code4.2" class="line"&gt;&lt;a href="#code4.2" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;created virtual environment CPython3.8.2.final.0-64 in 477ms&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code4.3" class="line"&gt;&lt;a href="#code4.3" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;  creator CPython3Posix(dest=/home/user/venv/pelican, clear=False, global=False)&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code4.4" class="line"&gt;&lt;a href="#code4.4" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;  seeder FromAppData(download=False, pip=latest, setuptools=latest, wheel=latest, via=copy, app_data_dir=/home/user/.local/share/virtualenv/seed-app-data/v1.0.1)&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code4.5" class="line"&gt;&lt;a href="#code4.5" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;  activators BashActivator,CShellActivator,FishActivator,PowerShellActivator,PythonActivator,XonshActivator&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code4.6" class="line"&gt;&lt;a href="#code4.6" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="gp"&gt;[user@localhost ~]$ &lt;/span&gt;.&lt;span class="w"&gt; &lt;/span&gt;~/venv/pelican/bin/activate
-&lt;/div&gt;&lt;div id="code4.7" class="line"&gt;&lt;a href="#code4.7" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="gp gp-VirtualEnv"&gt;(pelican)&lt;/span&gt; &lt;span class="gp"&gt;$ &lt;/span&gt;mkdir&lt;span class="w"&gt; &lt;/span&gt;~/blog
-&lt;/div&gt;&lt;div id="code4.8" class="line"&gt;&lt;a href="#code4.8" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="gp gp-VirtualEnv"&gt;(pelican)&lt;/span&gt; &lt;span class="gp"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;~/blog
-&lt;/div&gt;&lt;div id="code4.9" class="line"&gt;&lt;a href="#code4.9" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="gp gp-VirtualEnv"&gt;(pelican)&lt;/span&gt; &lt;span class="gp"&gt;$ &lt;/span&gt;git&lt;span class="w"&gt; &lt;/span&gt;init
-&lt;/div&gt;&lt;div id="code4.10" class="line"&gt;&lt;a href="#code4.10" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;Initialized empty Git repository in /home/user/blog/.git/&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code4.11" class="line"&gt;&lt;a href="#code4.11" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="gp gp-VirtualEnv"&gt;(pelican)&lt;/span&gt; &lt;span class="gp"&gt;$ &lt;/span&gt;git&lt;span class="w"&gt; &lt;/span&gt;config&lt;span class="w"&gt; &lt;/span&gt;--local&lt;span class="w"&gt; &lt;/span&gt;user.email&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;your@github-email.here&amp;quot;&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code4.12" class="line"&gt;&lt;a href="#code4.12" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="gp gp-VirtualEnv"&gt;(pelican)&lt;/span&gt; &lt;span class="gp"&gt;$ &lt;/span&gt;git&lt;span class="w"&gt; &lt;/span&gt;config&lt;span class="w"&gt; &lt;/span&gt;--local&lt;span class="w"&gt; &lt;/span&gt;user.name&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Joe Happy&amp;quot;&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code4.13" class="line"&gt;&lt;a href="#code4.13" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="gp gp-VirtualEnv"&gt;(pelican)&lt;/span&gt; &lt;span class="gp"&gt;$ &lt;/span&gt;pelican-quickstart&lt;span class="w"&gt; &lt;/span&gt;
-&lt;/div&gt;&lt;div id="code4.14" class="line"&gt;&lt;a href="#code4.14" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;Welcome to pelican-quickstart v4.2.0.&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code4.15" class="line"&gt;&lt;a href="#code4.15" aria-hidden="true"&gt;&lt;/a&gt;
-&lt;/div&gt;&lt;div id="code4.16" class="line"&gt;&lt;a href="#code4.16" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;This script will help you create a new Pelican-based website.&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code4.17" class="line"&gt;&lt;a href="#code4.17" aria-hidden="true"&gt;&lt;/a&gt;
-&lt;/div&gt;&lt;div id="code4.18" class="line"&gt;&lt;a href="#code4.18" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;Please answer the following questions so this script can generate the files&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code4.19" class="line"&gt;&lt;a href="#code4.19" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;needed by Pelican.&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code4.20" class="line"&gt;&lt;a href="#code4.20" aria-hidden="true"&gt;&lt;/a&gt;
-&lt;/div&gt;&lt;div id="code4.21" class="line"&gt;&lt;a href="#code4.21" aria-hidden="true"&gt;&lt;/a&gt;
-&lt;/div&gt;&lt;div id="code4.22" class="line"&gt;&lt;a href="#code4.22" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;&amp;gt; Where do you want to create your new web site? [.] &lt;/span&gt;
-&lt;/div&gt;&lt;div id="code4.23" class="line"&gt;&lt;a href="#code4.23" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;&amp;gt; What will be the title of this web site? My Awesome Blog&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code4.24" class="line"&gt;&lt;a href="#code4.24" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;&amp;gt; Who will be the author of this web site? Joe Happy&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code4.25" class="line"&gt;&lt;a href="#code4.25" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;&amp;gt; What will be the default language of this web site? [en] &lt;/span&gt;
-&lt;/div&gt;&lt;div id="code4.26" class="line"&gt;&lt;a href="#code4.26" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;&amp;gt; Do you want to specify a URL prefix? e.g., https://example.com   (Y/n) n&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code4.27" class="line"&gt;&lt;a href="#code4.27" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;&amp;gt; Do you want to enable article pagination? (Y/n) &lt;/span&gt;
-&lt;/div&gt;&lt;div id="code4.28" class="line"&gt;&lt;a href="#code4.28" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;&amp;gt; How many articles per page do you want? [10] &lt;/span&gt;
-&lt;/div&gt;&lt;div id="code4.29" class="line"&gt;&lt;a href="#code4.29" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;&amp;gt; What is your time zone? [Europe/Paris] Australia/Melbourne&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code4.30" class="line"&gt;&lt;a href="#code4.30" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;&amp;gt; Do you want to generate a tasks.py/Makefile to automate generation and publishing? (Y/n) n&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code4.31" class="line"&gt;&lt;a href="#code4.31" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;Done. Your new project is available at /home/user/blog&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code4.32" class="line"&gt;&lt;a href="#code4.32" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="gp gp-VirtualEnv"&gt;(pelican)&lt;/span&gt; &lt;span class="gp"&gt;$ &lt;/span&gt;ls&lt;span class="w"&gt; &lt;/span&gt;-l
-&lt;/div&gt;&lt;div id="code4.33" class="line"&gt;&lt;a href="#code4.33" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;total 16&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code4.34" class="line"&gt;&lt;a href="#code4.34" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;drwxr-xr-x 2   user   user 4096 May 10 00:31 content&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code4.35" class="line"&gt;&lt;a href="#code4.35" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;drwxr-xr-x 2   user   user 4096 May 10 00:31 output&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code4.36" class="line"&gt;&lt;a href="#code4.36" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;-rw-r--r-- 1   user   user  869 May 10 00:31 pelicanconf.py&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code4.37" class="line"&gt;&lt;a href="#code4.37" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;-rw-r--r-- 1   user   user  589 May 10 00:31 publishconf.py&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code4.38" class="line"&gt;&lt;a href="#code4.38" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="gp gp-VirtualEnv"&gt;(pelican)&lt;/span&gt; &lt;span class="gp"&gt;$ &lt;/span&gt;rm&lt;span class="w"&gt; &lt;/span&gt;-rf&lt;span class="w"&gt; &lt;/span&gt;output&lt;span class="w"&gt; &lt;/span&gt;publishconf.py
-&lt;/div&gt;&lt;div id="code4.39" class="line"&gt;&lt;a href="#code4.39" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="gp gp-VirtualEnv"&gt;(pelican)&lt;/span&gt; &lt;span class="gp"&gt;$ &lt;/span&gt;git&lt;span class="w"&gt; &lt;/span&gt;add&lt;span class="w"&gt; &lt;/span&gt;content&lt;span class="w"&gt; &lt;/span&gt;pelicanconf.py&lt;span class="w"&gt; &lt;/span&gt;
-&lt;/div&gt;&lt;div id="code4.40" class="line"&gt;&lt;a href="#code4.40" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="gp gp-VirtualEnv"&gt;(pelican)&lt;/span&gt; &lt;span class="gp"&gt;$ &lt;/span&gt;git&lt;span class="w"&gt; &lt;/span&gt;commit&lt;span class="w"&gt; &lt;/span&gt;-m&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Initial commit&amp;#39;&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code4.41" class="line"&gt;&lt;a href="#code4.41" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;[master (root-commit) f077002] Initial commit&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code4.42" class="line"&gt;&lt;a href="#code4.42" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt; 1 file changed, 35 insertions(+)&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code4.43" class="line"&gt;&lt;a href="#code4.43" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt; create mode 100644 pelicanconf.py&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;input type="radio" name="code_menu660612c8263b4e0abe109b6ff3b7e08776303164" class="no-line-numbers icon list-numbered"&gt;&lt;input type="radio" name="code_menu660612c8263b4e0abe109b6ff3b7e08776303164" class="line-numbers icon list-numbered"&gt;&lt;code class="language-console"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp"&gt;[user@localhost ~]$ &lt;/span&gt;virtualenv&lt;span class="w"&gt; &lt;/span&gt;~/venv/pelican
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;created virtual environment CPython3.8.2.final.0-64 in 477ms&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;  creator CPython3Posix(dest=/home/user/venv/pelican, clear=False, global=False)&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;  seeder FromAppData(download=False, pip=latest, setuptools=latest, wheel=latest, via=copy, app_data_dir=/home/user/.local/share/virtualenv/seed-app-data/v1.0.1)&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;  activators BashActivator,CShellActivator,FishActivator,PowerShellActivator,PythonActivator,XonshActivator&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp"&gt;[user@localhost ~]$ &lt;/span&gt;.&lt;span class="w"&gt; &lt;/span&gt;~/venv/pelican/bin/activate
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp gp-VirtualEnv"&gt;(pelican)&lt;/span&gt; &lt;span class="gp"&gt;$ &lt;/span&gt;mkdir&lt;span class="w"&gt; &lt;/span&gt;~/blog
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp gp-VirtualEnv"&gt;(pelican)&lt;/span&gt; &lt;span class="gp"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;~/blog
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp gp-VirtualEnv"&gt;(pelican)&lt;/span&gt; &lt;span class="gp"&gt;$ &lt;/span&gt;git&lt;span class="w"&gt; &lt;/span&gt;init
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;Initialized empty Git repository in /home/user/blog/.git/&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp gp-VirtualEnv"&gt;(pelican)&lt;/span&gt; &lt;span class="gp"&gt;$ &lt;/span&gt;git&lt;span class="w"&gt; &lt;/span&gt;config&lt;span class="w"&gt; &lt;/span&gt;--local&lt;span class="w"&gt; &lt;/span&gt;user.email&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;your@github-email.here&amp;quot;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp gp-VirtualEnv"&gt;(pelican)&lt;/span&gt; &lt;span class="gp"&gt;$ &lt;/span&gt;git&lt;span class="w"&gt; &lt;/span&gt;config&lt;span class="w"&gt; &lt;/span&gt;--local&lt;span class="w"&gt; &lt;/span&gt;user.name&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Joe Happy&amp;quot;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp gp-VirtualEnv"&gt;(pelican)&lt;/span&gt; &lt;span class="gp"&gt;$ &lt;/span&gt;pelican-quickstart&lt;span class="w"&gt; &lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;Welcome to pelican-quickstart v4.2.0.&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;This script will help you create a new Pelican-based website.&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;Please answer the following questions so this script can generate the files&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;needed by Pelican.&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;&amp;gt; Where do you want to create your new web site? [.] &lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;&amp;gt; What will be the title of this web site? My Awesome Blog&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;&amp;gt; Who will be the author of this web site? Joe Happy&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;&amp;gt; What will be the default language of this web site? [en] &lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;&amp;gt; Do you want to specify a URL prefix? e.g., https://example.com   (Y/n) n&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;&amp;gt; Do you want to enable article pagination? (Y/n) &lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;&amp;gt; How many articles per page do you want? [10] &lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;&amp;gt; What is your time zone? [Europe/Paris] Australia/Melbourne&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;&amp;gt; Do you want to generate a tasks.py/Makefile to automate generation and publishing? (Y/n) n&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;Done. Your new project is available at /home/user/blog&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp gp-VirtualEnv"&gt;(pelican)&lt;/span&gt; &lt;span class="gp"&gt;$ &lt;/span&gt;ls&lt;span class="w"&gt; &lt;/span&gt;-l
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;total 16&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;drwxr-xr-x 2   user   user 4096 May 10 00:31 content&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;drwxr-xr-x 2   user   user 4096 May 10 00:31 output&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;-rw-r--r-- 1   user   user  869 May 10 00:31 pelicanconf.py&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;-rw-r--r-- 1   user   user  589 May 10 00:31 publishconf.py&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp gp-VirtualEnv"&gt;(pelican)&lt;/span&gt; &lt;span class="gp"&gt;$ &lt;/span&gt;rm&lt;span class="w"&gt; &lt;/span&gt;-rf&lt;span class="w"&gt; &lt;/span&gt;output&lt;span class="w"&gt; &lt;/span&gt;publishconf.py
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp gp-VirtualEnv"&gt;(pelican)&lt;/span&gt; &lt;span class="gp"&gt;$ &lt;/span&gt;git&lt;span class="w"&gt; &lt;/span&gt;add&lt;span class="w"&gt; &lt;/span&gt;content&lt;span class="w"&gt; &lt;/span&gt;pelicanconf.py&lt;span class="w"&gt; &lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp gp-VirtualEnv"&gt;(pelican)&lt;/span&gt; &lt;span class="gp"&gt;$ &lt;/span&gt;git&lt;span class="w"&gt; &lt;/span&gt;commit&lt;span class="w"&gt; &lt;/span&gt;-m&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Initial commit&amp;#39;&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;[master (root-commit) f077002] Initial commit&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt; 1 file changed, 35 insertions(+)&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt; create mode 100644 pelicanconf.py&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;A short break down of the above session snippet is:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;On line 1 we create a virtual Python environment, so we could install Pelican locally;&lt;/li&gt;
@@ -279,33 +279,33 @@ doing something as follows:&lt;/p&gt;
 &lt;li&gt;Finally, we commit the generated skeleton to Git.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;A good test at this stage would be to ensure that Pelican is working and likes our structure:&lt;/p&gt;
-&lt;pre id="code5" class="highlight" data-user="user"&gt;&lt;input type="radio" name="code_menu8a566a24f2ca636cc191c159bc82a32404f4e709" class="no-line-numbers icon list-numbered"&gt;&lt;input type="radio" name="code_menu8a566a24f2ca636cc191c159bc82a32404f4e709" class="line-numbers icon list-numbered"&gt;&lt;code class="language-console"&gt;&lt;div id="code5.1" class="line"&gt;&lt;a href="#code5.1" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="gp"&gt;[user@localhost ~]$ &lt;/span&gt;pelican
-&lt;/div&gt;&lt;div id="code5.2" class="line"&gt;&lt;a href="#code5.2" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;WARNING: No valid files found in content for the active readers:&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code5.3" class="line"&gt;&lt;a href="#code5.3" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;  | BaseReader (static)&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code5.4" class="line"&gt;&lt;a href="#code5.4" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;  | HTMLReader (htm, html)&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code5.5" class="line"&gt;&lt;a href="#code5.5" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;  | MarkdownReader (md, markdown, mkd, mdown)&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code5.6" class="line"&gt;&lt;a href="#code5.6" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;  | RstReader (rst)&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code5.7" class="line"&gt;&lt;a href="#code5.7" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;Done: Processed 0 articles, 0 drafts, 0 pages, 0 hidden pages and 0 draft pages in 0.07 seconds.&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;input type="radio" name="code_menu9ed554635baab30f3cc4e84f924e332b17bf3d0e" class="no-line-numbers icon list-numbered"&gt;&lt;input type="radio" name="code_menu9ed554635baab30f3cc4e84f924e332b17bf3d0e" class="line-numbers icon list-numbered"&gt;&lt;code class="language-console"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp"&gt;[user@localhost ~]$ &lt;/span&gt;pelican
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;WARNING: No valid files found in content for the active readers:&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;  | BaseReader (static)&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;  | HTMLReader (htm, html)&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;  | MarkdownReader (md, markdown, mkd, mdown)&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;  | RstReader (rst)&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;Done: Processed 0 articles, 0 drafts, 0 pages, 0 hidden pages and 0 draft pages in 0.07 seconds.&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;So far so good, but it is not a real test, since there are no source files to generate something from, so let&amp;rsquo;s give Pelican something to work on:&lt;/p&gt;
-&lt;pre id="code6" class="highlight" data-user="user"&gt;&lt;input type="radio" name="code_menuc0b5ea6abd49d4192e82ca1f3af9008e430a5c61" class="no-line-numbers icon list-numbered"&gt;&lt;input type="radio" name="code_menuc0b5ea6abd49d4192e82ca1f3af9008e430a5c61" class="line-numbers icon list-numbered"&gt;&lt;code class="language-console"&gt;&lt;div id="code6.1" class="line"&gt;&lt;a href="#code6.1" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="gp"&gt;[user@localhost ~]$ &lt;/span&gt;&lt;span class="nb"&gt;printf&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Title: First Post\nDate: 2020-05-10\n\n#First post\nPelican is awesome!&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;content/first.md
-&lt;/div&gt;&lt;div id="code6.2" class="line"&gt;&lt;a href="#code6.2" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="gp"&gt;[user@localhost ~]$ &lt;/span&gt;pelican
-&lt;/div&gt;&lt;div id="code6.3" class="line"&gt;&lt;a href="#code6.3" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;Done: Processed 1 article, 0 drafts, 0 pages, 0 hidden pages and 0 draft pages in 0.12 seconds.&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code6.4" class="line"&gt;&lt;a href="#code6.4" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="gp"&gt;[user@localhost ~]$ &lt;/span&gt;elinks&lt;span class="w"&gt; &lt;/span&gt;-dump&lt;span class="w"&gt; &lt;/span&gt;output/index.html&lt;span class="w"&gt; &lt;/span&gt;
-&lt;/div&gt;&lt;div id="code6.5" class="line"&gt;&lt;a href="#code6.5" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;                               [1]My Awesome Blog&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code6.6" class="line"&gt;&lt;a href="#code6.6" aria-hidden="true"&gt;&lt;/a&gt;
-&lt;/div&gt;&lt;div id="code6.7" class="line"&gt;&lt;a href="#code6.7" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;     • [2]misc&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code6.8" class="line"&gt;&lt;a href="#code6.8" aria-hidden="true"&gt;&lt;/a&gt;
-&lt;/div&gt;&lt;div id="code6.9" class="line"&gt;&lt;a href="#code6.9" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;                                 [3]First Post&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code6.10" class="line"&gt;&lt;a href="#code6.10" aria-hidden="true"&gt;&lt;/a&gt;
-&lt;/div&gt;&lt;div id="code6.11" class="line"&gt;&lt;a href="#code6.11" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;   Published: Sun 10 May 2020&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code6.12" class="line"&gt;&lt;a href="#code6.12" aria-hidden="true"&gt;&lt;/a&gt;
-&lt;/div&gt;&lt;div id="code6.13" class="line"&gt;&lt;a href="#code6.13" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;    By [4]Joe Happy&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code6.14" class="line"&gt;&lt;a href="#code6.14" aria-hidden="true"&gt;&lt;/a&gt;
-&lt;/div&gt;&lt;div id="code6.15" class="line"&gt;&lt;a href="#code6.15" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;   In [5]misc.&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code6.16" class="line"&gt;&lt;a href="#code6.16" aria-hidden="true"&gt;&lt;/a&gt;
-&lt;/div&gt;&lt;div id="code6.17" class="line"&gt;&lt;a href="#code6.17" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;                                   First post&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code6.18" class="line"&gt;&lt;a href="#code6.18" aria-hidden="true"&gt;&lt;/a&gt;
-&lt;/div&gt;&lt;div id="code6.19" class="line"&gt;&lt;a href="#code6.19" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;   Pelican is awesome!&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;input type="radio" name="code_menuf690118aac4b259cb5f132a1d2aefc4155ddbd06" class="no-line-numbers icon list-numbered"&gt;&lt;input type="radio" name="code_menuf690118aac4b259cb5f132a1d2aefc4155ddbd06" class="line-numbers icon list-numbered"&gt;&lt;code class="language-console"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp"&gt;[user@localhost ~]$ &lt;/span&gt;&lt;span class="nb"&gt;printf&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Title: First Post\nDate: 2020-05-10\n\n#First post\nPelican is awesome!&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;content/first.md
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp"&gt;[user@localhost ~]$ &lt;/span&gt;pelican
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;Done: Processed 1 article, 0 drafts, 0 pages, 0 hidden pages and 0 draft pages in 0.12 seconds.&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp"&gt;[user@localhost ~]$ &lt;/span&gt;elinks&lt;span class="w"&gt; &lt;/span&gt;-dump&lt;span class="w"&gt; &lt;/span&gt;output/index.html&lt;span class="w"&gt; &lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;                               [1]My Awesome Blog&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;     • [2]misc&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;                                 [3]First Post&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;   Published: Sun 10 May 2020&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;    By [4]Joe Happy&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;   In [5]misc.&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;                                   First post&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;   Pelican is awesome!&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The output from &lt;code&gt;elinks&lt;/code&gt; was truncated on purpose since I just wanted to
 showcase that Pelican has indeed generated the structure for a static website
 from just one article file we created.&lt;/p&gt;
@@ -336,18 +336,18 @@ session dump of what you will need to do.  In the following session snippet
 &lt;code&gt;blog&lt;/code&gt; is the repository name I chose for my private code repository and you
 will need to replace it with your private repository name (the working
 directory is our newly created local repository):&lt;/p&gt;
-&lt;pre id="code8" class="highlight" data-user="user"&gt;&lt;input type="radio" name="code_menu7b580f92d15ee786ed72ac7b08c50a0d61b38d6f" class="no-line-numbers icon list-numbered"&gt;&lt;input type="radio" name="code_menu7b580f92d15ee786ed72ac7b08c50a0d61b38d6f" class="line-numbers icon list-numbered"&gt;&lt;code class="language-console"&gt;&lt;div id="code8.1" class="line"&gt;&lt;a href="#code8.1" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="gp"&gt;[user@localhost ~]$ &lt;/span&gt;git&lt;span class="w"&gt; &lt;/span&gt;remote&lt;span class="w"&gt; &lt;/span&gt;add&lt;span class="w"&gt; &lt;/span&gt;origin&lt;span class="w"&gt; &lt;/span&gt;git@github.com:galaxy4public/blog.git
-&lt;/div&gt;&lt;div id="code8.2" class="line"&gt;&lt;a href="#code8.2" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="gp"&gt;[user@localhost ~]$ &lt;/span&gt;git&lt;span class="w"&gt; &lt;/span&gt;push&lt;span class="w"&gt; &lt;/span&gt;-u&lt;span class="w"&gt; &lt;/span&gt;origin&lt;span class="w"&gt; &lt;/span&gt;master
-&lt;/div&gt;&lt;div id="code8.3" class="line"&gt;&lt;a href="#code8.3" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;Enter passphrase for key &amp;#39;/home/user/.ssh/keys/github&amp;#39;: &lt;/span&gt;
-&lt;/div&gt;&lt;div id="code8.4" class="line"&gt;&lt;a href="#code8.4" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;Enumerating objects: 6, done.&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code8.5" class="line"&gt;&lt;a href="#code8.5" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;Counting objects: 100% (6/6), done.&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code8.6" class="line"&gt;&lt;a href="#code8.6" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;Delta compression using up to 4 threads&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code8.7" class="line"&gt;&lt;a href="#code8.7" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;Compressing objects: 100% (4/4), done.&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code8.8" class="line"&gt;&lt;a href="#code8.8" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;Writing objects: 100% (6/6), 1008 bytes | 1008.00 KiB/s, done.&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code8.9" class="line"&gt;&lt;a href="#code8.9" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;Total 6 (delta 0), reused 0 (delta 0), pack-reused 0&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code8.10" class="line"&gt;&lt;a href="#code8.10" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;To github.com:galaxy4public/blog.git&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code8.11" class="line"&gt;&lt;a href="#code8.11" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt; * [new branch]      master -&amp;gt; master&lt;/span&gt;
-&lt;/div&gt;&lt;div id="code8.12" class="line"&gt;&lt;a href="#code8.12" aria-hidden="true"&gt;&lt;/a&gt;&lt;span class="go"&gt;Branch &amp;#39;master&amp;#39; set up to track remote branch &amp;#39;master&amp;#39; from &amp;#39;origin&amp;#39;.&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;input type="radio" name="code_menu767b12e1270d9628ac06fe6c1271acf21d6806c8" class="no-line-numbers icon list-numbered"&gt;&lt;input type="radio" name="code_menu767b12e1270d9628ac06fe6c1271acf21d6806c8" class="line-numbers icon list-numbered"&gt;&lt;code class="language-console"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp"&gt;[user@localhost ~]$ &lt;/span&gt;git&lt;span class="w"&gt; &lt;/span&gt;remote&lt;span class="w"&gt; &lt;/span&gt;add&lt;span class="w"&gt; &lt;/span&gt;origin&lt;span class="w"&gt; &lt;/span&gt;git@github.com:galaxy4public/blog.git
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="gp"&gt;[user@localhost ~]$ &lt;/span&gt;git&lt;span class="w"&gt; &lt;/span&gt;push&lt;span class="w"&gt; &lt;/span&gt;-u&lt;span class="w"&gt; &lt;/span&gt;origin&lt;span class="w"&gt; &lt;/span&gt;master
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;Enter passphrase for key &amp;#39;/home/user/.ssh/keys/github&amp;#39;: &lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;Enumerating objects: 6, done.&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;Counting objects: 100% (6/6), done.&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;Delta compression using up to 4 threads&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;Compressing objects: 100% (4/4), done.&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;Writing objects: 100% (6/6), 1008 bytes | 1008.00 KiB/s, done.&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;Total 6 (delta 0), reused 0 (delta 0), pack-reused 0&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;To github.com:galaxy4public/blog.git&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt; * [new branch]      master -&amp;gt; master&lt;/span&gt;
+&lt;/div&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;&lt;span class="go"&gt;Branch &amp;#39;master&amp;#39; set up to track remote branch &amp;#39;master&amp;#39; from &amp;#39;origin&amp;#39;.&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Do you remember how we generated a deploy key pair earlier and installed the
 public key part into the public blog repository, so GitHub would allow the
 bearer of the private key to authenticate and deploy changes to the public blog
