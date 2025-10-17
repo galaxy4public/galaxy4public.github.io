@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"/><link href="https://dmitry.khlebnikov.net/feeds/all.atom.xml" rel="self"/><id>https://dmitry.khlebnikov.net/</id><updated>2025-10-15T23:06:20+11:00</updated><subtitle>assorted bits of wit</subtitle><entry><title>Samsung CSC Change Using Modem Commands</title><link href="https://dmitry.khlebnikov.net/2025/10/09/samsung-csc-change-using-modem-commands/" rel="alternate"/><published>2025-10-09T15:30:00+11:00</published><updated>2025-10-15T23:06:20+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2025-10-09:/2025/10/09/samsung-csc-change-using-modem-commands/</id><summary type="html">&lt;p&gt;A technical guide for manually changing the Country Service Code (CSC)
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"/><link href="https://dmitry.khlebnikov.net/feeds/all.atom.xml" rel="self"/><id>https://dmitry.khlebnikov.net/</id><updated>2025-10-17T13:40:24+11:00</updated><subtitle>assorted bits of wit</subtitle><entry><title>Samsung CSC Change Using Modem Commands</title><link href="https://dmitry.khlebnikov.net/2025/10/09/samsung-csc-change-using-modem-commands/" rel="alternate"/><published>2025-10-09T15:30:00+11:00</published><updated>2025-10-17T13:40:24+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2025-10-09:/2025/10/09/samsung-csc-change-using-modem-commands/</id><summary type="html">&lt;p&gt;A technical guide for manually changing the Country Service Code (CSC)
 on modern Samsung phones, motivated by author&amp;rsquo;s need to switch from
 Australia (XSA) to a region like Indonesia (XID) to enable features such as
 automated call recording. The author notes that older methods of flashing
@@ -7,7 +7,7 @@ CSC images were no longer effective on new devices and sought an
 alternative to the popular Windows-only SamFW tool, as they use macOS. The
 solution involves replicating the tool&amp;rsquo;s method of sending modem AT commands
 over a Serial-over-USB connection. The process requires enabling specific
-developer options on the phone, entering a diagnostic mode through the dialer,
+developer options on the phone, entering a diagnostic mode through the dialler,
 connecting to the device&amp;rsquo;s modem endpoint with a terminal program, and issuing
 a sequence of AT commands to set the new CSC before rebooting the phone.&lt;/p&gt;</summary><content type="html">&lt;p&gt;This is a brief brain dump, so I can recall it when needed.&lt;/p&gt;
 &lt;p&gt;Each time I get a new Samsung phone I have to figure out a way to change the
@@ -19,7 +19,7 @@ version, and flash it to the CSC partition.&lt;/p&gt;
 &lt;p&gt;However, something changed in recent years (and I was not paying attention to
 the developments in Samsung world).  I just recently purchased Samsung ZFold 7
 and the trick with flashing did not work, so I started to investigate.
-Firstly, I discovered that the modern Samsung devces come with a multi-CSC
+Firstly, I discovered that the modern Samsung devices come with a multi-CSC
 configuration, so everything is already pre-installed on the device &amp;ndash; one just
 needs to change the setting to set the desired CSC for the device.  Secondly,
 the articles on the net on the change of CSC were all pointing to the SamFW
@@ -41,10 +41,10 @@ to &lt;code&gt;XID&lt;/code&gt; (Indonesia).&lt;/p&gt;
 &lt;p&gt;a) &amp;ldquo;Stay awake&amp;rdquo; &amp;ndash; this is optional, but you need to ensure that the phone is awake and not locked while you are going to communicate with it via USB, so it is easier to turn this option on and once the changes are done to turn it back off;&lt;/p&gt;
 &lt;p&gt;b) &amp;ldquo;USB debugging&amp;rdquo; &amp;ndash; I am not really sure whether this is strictly needed, but in my session it was enabled;&lt;/p&gt;
 &lt;p&gt;c) &amp;ldquo;3GPP AT commands&amp;rdquo; &amp;ndash; This will enable the interface we are going to use to issue modem commands;&lt;/p&gt;
-&lt;p&gt;d) &amp;ldquo;Default USB configuration&amp;rdquo;, select &amp;ldquo;Transferring files&amp;rdquo; &amp;ndash; this is important since we are going to land on the debug screen that would not allow us to access notifications, so there is no way to change the USB configuration on the fly.  You may want to change to your prefered setting after the CSC change is applied, though.&lt;/p&gt;
+&lt;p&gt;d) &amp;ldquo;Default USB configuration&amp;rdquo;, select &amp;ldquo;Transferring files&amp;rdquo; &amp;ndash; this is important since we are going to land on the debug screen that would not allow us to access notifications, so there is no way to change the USB configuration on the fly.  You may want to change to your preferred setting after the CSC change is applied, though.&lt;/p&gt;
 &lt;ol start="3"&gt;
 &lt;li&gt;
-&lt;p&gt;Launch the dialer application and enter &lt;code&gt;*#0*#&lt;/code&gt;, the screen will change to a white background with lots of square buttons for diagmostic purposes.  I believe this step is essential to enable some of the proprietary commands in the modem interface.&lt;/p&gt;
+&lt;p&gt;Launch the dialler application and enter &lt;code&gt;*#0*#&lt;/code&gt;, the screen will change to a white background with lots of square buttons for diagnostic purposes.  I believe this step is essential to enable some of the proprietary commands in the modem interface.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Connect your phone to your computer.  Mine is Apple Macbook M4, so it runs macOS.  Yours may run Linux or Windows.  It does not really matter, except with Windows you will need to install serial drivers for Samsung (e.g. if you install any official Samsung tools like KIES, you already should have the necessary drivers installed).  For macOS and Linux, it is much easier &amp;ndash; you don&amp;rsquo;t need to install anything, the Serial-over-USB should be supported out of the box.&lt;/p&gt;
@@ -112,11 +112,11 @@ is active (I got an &lt;code&gt;OK&lt;/code&gt;, so it was active). Then I used 
 am actually talking to the desired device (it was indeed &lt;code&gt;SM-F966B&lt;/code&gt;).&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;AT+DUMPCTRL=1,0&lt;/code&gt; is needed to enable the following &lt;code&gt;AT+SWATD=&lt;/code&gt; commands to work.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;AT+ACTIVATE=0,0,0&lt;/code&gt; is a weird one.  There is not too much information on the
-net regarding this command, but it seems that every single occurence is related
+net regarding this command, but it seems that every single occurrence is related
 to enabling something in the firmware to allow the privileged settings to be
 changed, like we do with the very next command.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;AT+PRECONF=2,nnn&lt;/code&gt; is the primary command we want to execute.  The command sets
-the CSC of the device, where &lt;code&gt;nnn&lt;/code&gt; is a three leter CSC used by Samsung.  In my
+the CSC of the device, where &lt;code&gt;nnn&lt;/code&gt; is a three letter CSC used by Samsung.  In my
 case it was &lt;code&gt;XID&lt;/code&gt; for Indonesia.  You can get a list of all available/known CSC
 from &lt;a href="https://samfw.com/"&gt;SamFW&lt;/a&gt; (the site is really heavy on ads, though, so beware).&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;AT+CFUN=1,1&lt;/code&gt; is supposed to reboot the device.  In my case, it did not, so I
@@ -124,7 +124,7 @@ rebooted it manually.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Once you rebooted your device, go to Settings -&amp;gt; About phone -&amp;gt; Software
-information and look at the &amp;ldquo;Service prvider software version&amp;rdquo; section.  Mine
+information and look at the &amp;ldquo;Service provider software version&amp;rdquo; section.  Mine
 looks like the following (after the change):&lt;/p&gt;
 &lt;pre class="highlight"&gt;&lt;input type="radio" name="code_menuc64a97b1bb913fff857131a02eb6925efec44a31" class="no-line-numbers icon list-numbered"&gt;&lt;input type="radio" name="code_menuc64a97b1bb913fff857131a02eb6925efec44a31" class="line-numbers icon list-numbered"&gt;&lt;code class="language-text"&gt;&lt;div class="line"&gt;&lt;a&gt;&lt;/a&gt;XID/XID,XID/XSA,OPS&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Somewhere on the net you could find the format of this string, but basically it
