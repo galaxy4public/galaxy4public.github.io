@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - blog</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"/><link href="https://dmitry.khlebnikov.net/feeds/blog.atom.xml" rel="self"/><id>https://dmitry.khlebnikov.net/</id><updated>2025-10-18T02:45:38+11:00</updated><subtitle>assorted bits of wit</subtitle><entry><title>Automating Static Website Deployment</title><link href="https://dmitry.khlebnikov.net/2020/05/17/automating-static-website-deployment/" rel="alternate"/><published>2020-05-17T21:32:00+10:00</published><updated>2025-10-18T02:45:38+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-17:/2020/05/17/automating-static-website-deployment/</id><summary type="html">&lt;p&gt;A comprehensive guide to setting up a fully automated deployment
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - blog</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"/><link href="https://dmitry.khlebnikov.net/feeds/blog.atom.xml" rel="self"/><id>https://dmitry.khlebnikov.net/</id><updated>2025-10-18T02:54:24+11:00</updated><subtitle>assorted bits of wit</subtitle><entry><title>Automating Static Website Deployment</title><link href="https://dmitry.khlebnikov.net/2020/05/17/automating-static-website-deployment/" rel="alternate"/><published>2020-05-17T21:32:00+10:00</published><updated>2025-10-18T02:54:24+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-17:/2020/05/17/automating-static-website-deployment/</id><summary type="html">&lt;p&gt;A comprehensive guide to setting up a fully automated deployment
 pipeline for a static website using a private source repository and a
 public GitHub Pages repository. The author details a process that
 leverages GitHub Actions to build a Pelican-based site from a private
@@ -89,7 +89,7 @@ for example by pushing HTML files into your repository.&lt;/p&gt;
 &lt;p&gt;Pushing the &lt;code&gt;CNAME&lt;/code&gt; file with the name of your custom domain within will
 trigger a &lt;abbr title="Domain Name System"&gt;DNS&lt;/abbr&gt; check from GitHub to see that your custom domain name is
 pointing back to GitHub Pages.&lt;/p&gt;
-&lt;p&gt;&lt;abbr title="Domain Name System"&gt;DNS&lt;/abbr&gt; heavily relies on caching and depending on the &lt;abbr title="Time To Live"&gt;TTL&lt;/abbr&gt; settings in your
+&lt;p&gt;&lt;abbr title="Domain Name System"&gt;DNS&lt;/abbr&gt; heavily relies on caching and is depending on the &lt;abbr title="Time To Live"&gt;TTL&lt;/abbr&gt; settings in your
 zone: if a negative check is performed (that is, when GitHub fails to
 retrieve the corresponding record) you will likely need to wait for quite a
 while for GitHub to retry.&lt;/p&gt;

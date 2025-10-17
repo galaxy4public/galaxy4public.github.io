@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"/><link href="https://dmitry.khlebnikov.net/feeds/all.atom.xml" rel="self"/><id>https://dmitry.khlebnikov.net/</id><updated>2025-10-18T02:45:38+11:00</updated><subtitle>assorted bits of wit</subtitle><entry><title>Samsung CSC Change Using Modem Commands</title><link href="https://dmitry.khlebnikov.net/2025/10/09/samsung-csc-change-using-modem-commands/" rel="alternate"/><published>2025-10-09T15:30:00+11:00</published><updated>2025-10-18T02:45:38+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2025-10-09:/2025/10/09/samsung-csc-change-using-modem-commands/</id><summary type="html">&lt;p&gt;A technical guide for manually changing the Country Service Code (CSC)
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"/><link href="https://dmitry.khlebnikov.net/feeds/all.atom.xml" rel="self"/><id>https://dmitry.khlebnikov.net/</id><updated>2025-10-18T02:54:24+11:00</updated><subtitle>assorted bits of wit</subtitle><entry><title>Samsung CSC Change Using Modem Commands</title><link href="https://dmitry.khlebnikov.net/2025/10/09/samsung-csc-change-using-modem-commands/" rel="alternate"/><published>2025-10-09T15:30:00+11:00</published><updated>2025-10-18T02:45:38+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2025-10-09:/2025/10/09/samsung-csc-change-using-modem-commands/</id><summary type="html">&lt;p&gt;A technical guide for manually changing the Country Service Code (CSC)
 on modern Samsung phones, motivated by author&amp;rsquo;s need to switch from
 Australia (XSA) to a region like Indonesia (XID) to enable features such as
 automated call recording. The author notes that older methods of flashing
@@ -777,7 +777,7 @@ visually pleasing widget hidden from the screen readers.&lt;/p&gt;
 not want to go that route for my blog.  Most likely, since my blog is
 statically generated I will address it using the logic of the generator itself.&lt;/p&gt;
 &lt;p&gt;Still, I think the techniques I demonstrated here may be quite useful to some
-people who are designing pure HTML and CSS adaptive widgets.&lt;/p&gt;</content><category term="web design"/><category term="html"/><category term="css"/><category term="design"/></entry><entry><title>Automating Static Website Deployment</title><link href="https://dmitry.khlebnikov.net/2020/05/17/automating-static-website-deployment/" rel="alternate"/><published>2020-05-17T21:32:00+10:00</published><updated>2025-10-18T02:45:38+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-17:/2020/05/17/automating-static-website-deployment/</id><summary type="html">&lt;p&gt;A comprehensive guide to setting up a fully automated deployment
+people who are designing pure HTML and CSS adaptive widgets.&lt;/p&gt;</content><category term="web design"/><category term="html"/><category term="css"/><category term="design"/></entry><entry><title>Automating Static Website Deployment</title><link href="https://dmitry.khlebnikov.net/2020/05/17/automating-static-website-deployment/" rel="alternate"/><published>2020-05-17T21:32:00+10:00</published><updated>2025-10-18T02:54:24+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-17:/2020/05/17/automating-static-website-deployment/</id><summary type="html">&lt;p&gt;A comprehensive guide to setting up a fully automated deployment
 pipeline for a static website using a private source repository and a
 public GitHub Pages repository. The author details a process that
 leverages GitHub Actions to build a Pelican-based site from a private
@@ -867,7 +867,7 @@ for example by pushing HTML files into your repository.&lt;/p&gt;
 &lt;p&gt;Pushing the &lt;code&gt;CNAME&lt;/code&gt; file with the name of your custom domain within will
 trigger a &lt;abbr title="Domain Name System"&gt;DNS&lt;/abbr&gt; check from GitHub to see that your custom domain name is
 pointing back to GitHub Pages.&lt;/p&gt;
-&lt;p&gt;&lt;abbr title="Domain Name System"&gt;DNS&lt;/abbr&gt; heavily relies on caching and depending on the &lt;abbr title="Time To Live"&gt;TTL&lt;/abbr&gt; settings in your
+&lt;p&gt;&lt;abbr title="Domain Name System"&gt;DNS&lt;/abbr&gt; heavily relies on caching and is depending on the &lt;abbr title="Time To Live"&gt;TTL&lt;/abbr&gt; settings in your
 zone: if a negative check is performed (that is, when GitHub fails to
 retrieve the corresponding record) you will likely need to wait for quite a
 while for GitHub to retry.&lt;/p&gt;
