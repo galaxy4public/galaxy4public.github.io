@@ -26,7 +26,7 @@
 		}],
 		"headline" : "Samsung CSC Change Using Modem Commands",
 		"datePublished" : "2025-10-09T15:30:00+11:00",
-		"dateModified" : "2025-10-18T02:45:38+11:00"
+		"dateModified" : "2025-10-20T12:21:29+11:00"
 	}
 	</script>
 </head>
@@ -120,8 +120,8 @@ Windows x86_64 tool and I don&rsquo;t have any Intel based devices to run Window
 x86_64.  So, I started to research on how SamFW was doing the change of the
 CSC.  According to what I gathered, the tool was using the Serial-over-USB to
 perform the change.</p>
-<p>Below are the steps I took to change the CSC on my phone from <code>XSA</code> (Australia)
-to <code>XID</code> (Indonesia).</p>
+<p>Below are the steps I took to successfuly change the CSC on my phone from <code>XSA</code>
+(Australia) to <code>XID</code> (Indonesia).</p>
 <ol>
 <li>
 <p>You need to <a href="https://www.samsung.com/uk/support/mobile-devices/how-do-i-turn-on-the-developer-options-menu-on-my-samsung-galaxy-device/">enable the &ldquo;Developer options&rdquo; menu</a> on your Samsung device: go to Settings -&gt; About phone -&gt; Software information and tap on the &ldquo;Build number&rdquo; line 7 times.</p>
@@ -202,6 +202,8 @@ to <code>XID</code> (Indonesia).</p>
 <p>I used <code>AT</code> at the beginning of the session to confirm that the modem interface
 is active (I got an <code>OK</code>, so it was active). Then I used <code>ATI</code> to ensure that I
 am actually talking to the desired device (it was indeed <code>SM-F966B</code>).</p>
+<p>From this point on, all commands I am using are <code>AT+</code> and, moreover, they
+all come from the Application Processor (AP) module.</p>
 <p><code>AT+DUMPCTRL=1,0</code> is needed to enable the following <code>AT+SWATD=</code> commands to work.</p>
 <p><code>AT+ACTIVATE=0,0,0</code> is a weird one.  There is not too much information on the
 net regarding this command, but it seems that every single occurrence is related

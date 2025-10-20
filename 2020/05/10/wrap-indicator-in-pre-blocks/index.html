@@ -3,7 +3,7 @@
 <head>
 	<title>Mind Drops :: Wrap indicator in &lt;pre&gt; blocks</title>
 	<meta name="description" content="This post presents a pure CSS-based solution for adding a visual wrap indicator to lines within code blocks to improve responsiveness and readability. The author was annoyed that long lines wrap without any clear indication, making code blocks difficult to read. The method involves wrapping each physical line of text within the tag in its own . Using the ::after pseudo-element on these divs, a repeating background image is positioned just outside the text block. A clever CSS clip trick is then used to hide the indicator on the last segment of a wrapped line, creating a clean and intuitive visual cue. The author also details a “bonus round” method for placing the indicator on the left side and notes the challenges of integrating this semantic HTML structure with syntax highlighters like PrismJS, for which they developed a custom plugin." />
-	<meta http-equiv="Content-Security-Policy" content="	default-src 'self';object-src 'none';script-src 'self' https://www.googletagmanager.com/gtag/js 'sha256-TelA7VsuYAMqhOKGk7CHgJyuqSJdmqZEp+hn6PWVRwQ=' https://www.google-analytics.com/analytics.js https://static.cloudflareinsights.com/beacon.min.js;img-src 'self' data: https://www.google-analytics.com/r/collect https://www.google-analytics.com/collect https://stats.g.doubleclick.net/r/collect https://*/ads/ga-audiences https://www.googletagmanager.com/a data:;style-src 'self' 'sha256-fszvBX/J9dhPxFSJ5wUrq/Pvg6HrnTkWyshMZpaxSQY=' 'sha256-Fvx9M61e9e0u1bU/b4F/gvva+rsq9KRBqq6VvEBeC/A=' 'sha256-X9/7LgWmEw7NlPLxcc3SDr7+BAy0aPPPvaAWDaWFSg8=' 'sha256-qwQxpLFpY1RSbHcY3MelF07N45deGrhGoFCZJVyu4rQ=' 'sha256-Tmgyaho1GhddVxwLgWj7bKT7jjjBrIZQ6I8U2GvttJI=' 'sha256-8tl3rbL69gF7zbbflFNLOMNv50Jvvc6RFxYvwhDA5JA=' 'sha256-jgSB52jMr0ri6YSE+tSQ/V0+b0I9gAOCsZPJBDmfa/8=';connect-src 'self' https://www.google-analytics.com/j/collect https://stats.g.doubleclick.net/j/collect; " />
+	<meta http-equiv="Content-Security-Policy" content="	default-src 'self';object-src 'none';script-src 'self' https://www.googletagmanager.com/gtag/js 'sha256-TelA7VsuYAMqhOKGk7CHgJyuqSJdmqZEp+hn6PWVRwQ=' https://www.google-analytics.com/analytics.js https://static.cloudflareinsights.com/beacon.min.js;img-src 'self' data: https://www.google-analytics.com/r/collect https://www.google-analytics.com/collect https://stats.g.doubleclick.net/r/collect https://*/ads/ga-audiences https://www.googletagmanager.com/a data:;style-src 'self' 'sha256-fszvBX/J9dhPxFSJ5wUrq/Pvg6HrnTkWyshMZpaxSQY=' 'sha256-O8Q8l/OpLXcWCbW2boLJdEU7SZ+PPP16/e17PeDcpoA=' 'sha256-j7XRqAyimCQsJkQYMVLS82vV+NNZJm/OLha8xoMw1fI=' 'sha256-lbmEX+6XOdQHfsYsm9NidCO3TyDrtA/nKQSCNafcG5Q=' 'sha256-PcGw7Tl8+/pukeynCIrZAg/yJH1MTNrpHBsxJ7q18+g=';connect-src 'self' https://www.google-analytics.com/j/collect https://stats.g.doubleclick.net/j/collect; " />
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1" />
 	<link rel="preload" href="/theme/fonts/Oswald/Oswald-VariableFont_wght.woff2" crossorigin="anonymous" as="font" type="font/woff2">
@@ -26,7 +26,7 @@
 		}],
 		"headline" : "Wrap indicator in &amp;lt;pre&amp;gt; blocks",
 		"datePublished" : "2020-05-10T21:00:00+10:00",
-		"dateModified" : "2025-10-18T02:45:38+11:00"
+		"dateModified" : "2025-10-20T12:19:46+11:00"
 	}
 	</script>
 </head>

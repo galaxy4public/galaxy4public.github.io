@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - (GalaxyMaster)</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"/><link href="https://dmitry.khlebnikov.net/feeds/galaxymaster.atom.xml" rel="self"/><id>https://dmitry.khlebnikov.net/</id><updated>2025-10-18T02:54:24+11:00</updated><subtitle>assorted bits of wit</subtitle><entry><title>Samsung CSC Change Using Modem Commands</title><link href="https://dmitry.khlebnikov.net/2025/10/09/samsung-csc-change-using-modem-commands/" rel="alternate"/><published>2025-10-09T15:30:00+11:00</published><updated>2025-10-18T02:45:38+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2025-10-09:/2025/10/09/samsung-csc-change-using-modem-commands/</id><summary type="html">&lt;p&gt;A technical guide for manually changing the Country Service Code (CSC)
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - (GalaxyMaster)</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"/><link href="https://dmitry.khlebnikov.net/feeds/galaxymaster.atom.xml" rel="self"/><id>https://dmitry.khlebnikov.net/</id><updated>2025-10-20T12:21:29+11:00</updated><subtitle>assorted bits of wit</subtitle><entry><title>Samsung CSC Change Using Modem Commands</title><link href="https://dmitry.khlebnikov.net/2025/10/09/samsung-csc-change-using-modem-commands/" rel="alternate"/><published>2025-10-09T15:30:00+11:00</published><updated>2025-10-20T12:21:29+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2025-10-09:/2025/10/09/samsung-csc-change-using-modem-commands/</id><summary type="html">&lt;p&gt;A technical guide for manually changing the Country Service Code (CSC)
 on modern Samsung phones, motivated by author&amp;rsquo;s need to switch from
 Australia (XSA) to a region like Indonesia (XID) to enable features such as
 automated call recording. The author notes that older methods of flashing
@@ -28,8 +28,8 @@ Windows x86_64 tool and I don&amp;rsquo;t have any Intel based devices to run Wi
 x86_64.  So, I started to research on how SamFW was doing the change of the
 CSC.  According to what I gathered, the tool was using the Serial-over-USB to
 perform the change.&lt;/p&gt;
-&lt;p&gt;Below are the steps I took to change the CSC on my phone from &lt;code&gt;XSA&lt;/code&gt; (Australia)
-to &lt;code&gt;XID&lt;/code&gt; (Indonesia).&lt;/p&gt;
+&lt;p&gt;Below are the steps I took to successfuly change the CSC on my phone from &lt;code&gt;XSA&lt;/code&gt;
+(Australia) to &lt;code&gt;XID&lt;/code&gt; (Indonesia).&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;You need to &lt;a href="https://www.samsung.com/uk/support/mobile-devices/how-do-i-turn-on-the-developer-options-menu-on-my-samsung-galaxy-device/"&gt;enable the &amp;ldquo;Developer options&amp;rdquo; menu&lt;/a&gt; on your Samsung device: go to Settings -&amp;gt; About phone -&amp;gt; Software information and tap on the &amp;ldquo;Build number&amp;rdquo; line 7 times.&lt;/p&gt;
@@ -110,6 +110,8 @@ to &lt;code&gt;XID&lt;/code&gt; (Indonesia).&lt;/p&gt;
 &lt;p&gt;I used &lt;code&gt;AT&lt;/code&gt; at the beginning of the session to confirm that the modem interface
 is active (I got an &lt;code&gt;OK&lt;/code&gt;, so it was active). Then I used &lt;code&gt;ATI&lt;/code&gt; to ensure that I
 am actually talking to the desired device (it was indeed &lt;code&gt;SM-F966B&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;From this point on, all commands I am using are &lt;code&gt;AT+&lt;/code&gt; and, moreover, they
+all come from the Application Processor (AP) module.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;AT+DUMPCTRL=1,0&lt;/code&gt; is needed to enable the following &lt;code&gt;AT+SWATD=&lt;/code&gt; commands to work.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;AT+ACTIVATE=0,0,0&lt;/code&gt; is a weird one.  There is not too much information on the
 net regarding this command, but it seems that every single occurrence is related
@@ -1349,7 +1351,7 @@ the GitHub Action and if the change has resulted in any updated content such
 content will be published to GitHub Pages!&lt;/p&gt;
 &lt;p&gt;There are quite a few things we could improve: such as introducing a broken
 links check, doing some sanity checks, etc. &amp;ndash; but this would be for another
-article, I guess. :)&lt;/p&gt;</content><category term="blog"/><category term="pelican"/><category term="blog"/><category term="github"/></entry><entry><title>Wrap indicator in &lt;pre&gt; blocks</title><link href="https://dmitry.khlebnikov.net/2020/05/10/wrap-indicator-in-pre-blocks/" rel="alternate"/><published>2020-05-10T21:00:00+10:00</published><updated>2025-10-18T02:45:38+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-10:/2020/05/10/wrap-indicator-in-pre-blocks/</id><summary type="html">&lt;p&gt;This post presents a pure CSS-based solution for adding a visual wrap
+article, I guess. :)&lt;/p&gt;</content><category term="blog"/><category term="pelican"/><category term="blog"/><category term="github"/></entry><entry><title>Wrap indicator in &lt;pre&gt; blocks</title><link href="https://dmitry.khlebnikov.net/2020/05/10/wrap-indicator-in-pre-blocks/" rel="alternate"/><published>2020-05-10T21:00:00+10:00</published><updated>2025-10-20T12:19:46+11:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2020-05-10:/2020/05/10/wrap-indicator-in-pre-blocks/</id><summary type="html">&lt;p&gt;This post presents a pure CSS-based solution for adding a visual wrap
 indicator to lines within &lt;pre&gt; code blocks to improve responsiveness and
 readability. The author was annoyed that long lines wrap without any clear
 indication, making code blocks difficult to read. The method involves wrapping
