@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Mind Drops - (GalaxyMaster)</title><link>https://dmitry.khlebnikov.net/</link><description>assorted bits of wit</description><atom:link href="https://dmitry.khlebnikov.net/feeds/galaxymaster.rss.xml" rel="self"/><lastBuildDate>Tue, 21 Oct 2025 17:14:44 +1100</lastBuildDate><item><title>Samsung CSC Change Using Modem Commands</title><link>https://dmitry.khlebnikov.net/2025/10/09/samsung-csc-change-using-modem-commands/</link><description>&lt;p&gt;A technical guide for manually changing the Country Service Code (CSC)
-on modern Samsung phones, motivated by author&amp;rsquo;s need to switch from
-Australia (XSA) to a region like Indonesia (XID) to enable features such as
-automated call recording. The author notes that older methods of flashing
-CSC images were no longer effective on new devices and sought an
-alternative to the popular Windows-only SamFW tool, as they use macOS. The
-solution involves replicating the tool&amp;rsquo;s method of sending modem AT commands
-over a Serial-over-USB connection. The process requires enabling specific
-developer options on the phone, entering a diagnostic mode through the dialler,
-connecting to the device&amp;rsquo;s modem endpoint with a terminal program, and issuing
-a sequence of AT commands to set the new CSC before rebooting the phone.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">(GalaxyMaster)</dc:creator><pubDate>Thu, 09 Oct 2025 15:30:00 +1100</pubDate><guid>tag:dmitry.khlebnikov.net,2025-10-09:/2025/10/09/samsung-csc-change-using-modem-commands/</guid><category>hacks</category><category>hacks</category><category>howto</category><category>console</category></item><item><title>macOS builtin VPN client tricks</title><link>https://dmitry.khlebnikov.net/2022/11/25/macos-builtin-vpn-client-tricks/</link><description>&lt;p&gt;A post that explains how to overcome the limitations of the macOS
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Mind Drops - (GalaxyMaster)</title><link>https://dmitry.khlebnikov.net/</link><description>assorted bits of wit</description><atom:link href="https://dmitry.khlebnikov.net/feeds/galaxymaster.rss.xml" rel="self"/><lastBuildDate>Thu, 05 Mar 2026 18:25:34 +1100</lastBuildDate><item><title>Samsung CSC Change Using Modem Commands</title><link>https://dmitry.khlebnikov.net/2025/10/09/samsung-csc-change-using-modem-commands/</link><description>&lt;p&gt;A technical guide for manually changing the Country Service Code (CSC)
+on modern Samsung phones.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">(GalaxyMaster)</dc:creator><pubDate>Thu, 09 Oct 2025 15:30:00 +1100</pubDate><guid>tag:dmitry.khlebnikov.net,2025-10-09:/2025/10/09/samsung-csc-change-using-modem-commands/</guid><category>hacks</category><category>hacks</category><category>howto</category><category>console</category></item><item><title>macOS builtin VPN client tricks</title><link>https://dmitry.khlebnikov.net/2022/11/25/macos-builtin-vpn-client-tricks/</link><description>&lt;p&gt;A post that explains how to overcome the limitations of the macOS
 built-in VPN client, which the author finds lacks flexibility in its GUI and
 exposes only a fraction of its supported features. Despite these issues often
 leading users to third-party apps, the author finds the native client is
