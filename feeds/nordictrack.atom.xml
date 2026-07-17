@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mind Drops - nordictrack</title><link href="https://dmitry.khlebnikov.net/" rel="alternate"/><link href="https://dmitry.khlebnikov.net/feeds/nordictrack.atom.xml" rel="self"/><id>https://dmitry.khlebnikov.net/</id><updated>2026-07-17T14:00:00+10:00</updated><subtitle>assorted bits of wit</subtitle><entry><title>NordicTrack Commercial 1750 Treadmill</title><link href="https://dmitry.khlebnikov.net/2026/07/17/nordictrack-commercial-1750-treadmill/" rel="alternate"/><published>2026-07-17T14:00:00+10:00</published><updated>2026-07-17T13:49:23+10:00</updated><author><name>(GalaxyMaster)</name></author><id>tag:dmitry.khlebnikov.net,2026-07-17:/2026/07/17/nordictrack-commercial-1750-treadmill/</id><summary type="html">&lt;p&gt;The initial overview of the device and its customisation capabilities.&lt;/p&gt;</summary><content type="html">&lt;p&gt;My wife has convinced me to purchase on a treadmill.  Since I am quite picky
+when it comes to purchasing anything that contains some kind of technology, so
+I went into a rabbit hole of researching on the state of modern treadmills.
+After reading a lot of articles, watching reviews on YouTube, and looking into
+the issues people are encountering with their treadmills, I chose to go ahead
+and order NordicTrack Commercial 1750.&lt;/p&gt;
+&lt;p&gt;What I found in my research is that no matter how much a treadmill costs, it
+basically consists of the following components:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;A motor (we are only discussing the electric treadmills here).  There is a
+    variety of motors used in treadmills, but basically the industry standard
+    seems to be a brushless motor with two to four horse power with more
+    powerful being used on more premium models;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;A deck that supports the user and on top of which the belt is running.
+    Surprisingly, it turned out to be the cheapest and weakest part of even the
+    most premium treadmill models.  For example, the $4,000 treadmill such as
+    NordicTrack Commercial 1750 uses an Medium Density Fibreboard (MDF) deck,
+    which is basically compressed paper.  For this reason, NordicTrack refuses
+    to provide warranty for outdoor use: MDF absorbs water as a sponge;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;A belt that is the primary working surface of the treadmill.  This is where
+    the user is running on.  It seems that all existing treadmills settled on a
+    layered vinyl-based belts with some fabric underneath that absorbs
+    lubrication agent.  The idea is that the belt is slides on top of the deck,
+    so the lubrication in the fabric layer reduces the friction when there is
+    user&amp;rsquo;s step that presses the belt against the deck;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;A controller which is the &amp;ldquo;brain&amp;rdquo; of the machine.  Usually, located next to
+    the motor, it is quite a simple piece of electronics and usually controls
+    the speed of the motor (or motors, if the model supports changing the
+    treadmill inclination);&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;And finally, the control interface which allows the user to operate the
+    machine.  In low-end models, the interface is usually quite simplistic and
+    consists of segmented LED displays and buttons for changing the speed,
+    inclination, and program selectors.  In more premium models, it is usually
+    implemented as a touch screen with the addition of some physical buttons
+    for controlling speed and inclination.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;There is a myriad of quality of life options that can be present on a particular
+model.  For example, the rails may have integrated heartbeat sensors or there
+could be cooling fans installed.&lt;/p&gt;
+&lt;p&gt;Anyhow, when I was choosing the treadmill, my key criteria were to have more
+premium materials for the construction of the frame and to have a convenient
+interface for the user.  I also wanted to ensure that I am not purchasing some
+quite expensive equipment just to be then locked into the manufacturer&amp;rsquo;s
+subscription: it seems both NordicTrack and Pelaton are trying their best to
+hook you up on their respective memberships which are quite costly (around
+AUD$50 per month).&lt;/p&gt;
+&lt;p&gt;So, the NordicTrack Commercial 1750 has a touch screen that runs a custom
+Android build.  My initial analysis shows that one can get access to the
+underlying system by following a procedure known publicly: on a welcome screen
+tap ten times on a non-interactive background, wait approximately 7 seconds,
+and tap ten times again.  The interface will challenge you with a code to enter
+the privileged mode.  The code can be acquired by visiting
+https://getresponsecode.com (you may want to download the page locally, in case
+the person who is hosting that page decides to shut it down &amp;ndash; the logic of
+acquiring the code is implemented as the client Javascript, so you can have a
+local copy and it will work).&lt;/p&gt;
+&lt;p&gt;I was able to access the underlying system, so at least I should be able to do
+stuff other users have successfully achieved already, e.g. there is a &lt;a href="https://www.reddit.com/r/nordictrackandroid/wiki/index/"&gt;nice
+Wiki on Reddit&lt;/a&gt; for
+maintaining the privileged mode on the device.&lt;/p&gt;
+&lt;p&gt;It seems that Nordic Unchained was a one off attempt by somebody to &amp;ldquo;own&amp;rdquo; their
+device and the archive does not have a definitive home.  I downloaded it from
+the Reddit Wiki and looked at the installation script.  Basically, all it does
+is: disables the system iFit apps using adb and then installs a bunch of
+Android Package Kits (APKs) which the author of the script wanted to have on
+their device (like Chrome, Hulu, etc.).  I think, the most important part the
+script is doing can be summarised as follows:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;adb shell pm disable-user --user 0 com.ifit.eru
+adb shell pm disable-user --user 0 com.ifit.launcher
+adb shell pm disable-user --user 0 com.ifit.standalone
+...
+adb shell cmd package set-home-activity com.teslacoilsw.launcher/com.teslacoilsw.launcher.NovaLauncher
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So, the first three lines disable the system provided iFit apps, then a bunch
+of APKs (including iFit) are installed as a user.  One of the APKs is for the
+alternative launcher (Nova Launcher in this case) so the last line above is
+registering that launcher as the default.&lt;/p&gt;
+&lt;p&gt;So, what&amp;rsquo;s next?  I will most likely start the way Nordic Unchained did it,
+since my wife is using the treadmill every day and I can&amp;rsquo;t just disassemble and
+experiment with the stuff until I am happy with the results.&lt;/p&gt;
+&lt;p&gt;The ultimate goal is to have my own build of the firmware and to have the full
+control of the device. I also want to reverse-engineer how the metadata is
+incorporated in iFit&amp;rsquo;s training courses: I suspect they just add an additional
+track (like subtitles track) to their video containers and that track encodes
+speed and inclination, so when you are following the course the machine adjusts
+accordingly.  If I can figure that out, I would be able to create my own
+&amp;ldquo;exercises&amp;rdquo;, e.g. using OpenStreetMap, etc.&lt;/p&gt;
+&lt;p&gt;There is a camera in the touch screen device, but at least in my machine it was
+attached upside down.  I am still deciding whether I want to physically rotate
+it or do it virtually.  In any case, it would be nice to have it for video
+calls while you are exercising :).&lt;/p&gt;
+&lt;p&gt;I will try to update my blog with the progress on this topic.  Stay tuned!&lt;/p&gt;</content><category term="nordictrack"/><category term="hacks"/><category term="iot"/><category term="android"/><category term="embedded"/></entry></feed>
