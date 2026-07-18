@@ -26,7 +26,7 @@
 		}],
 		"headline" : "NordicTrack Commercial 1750 Treadmill",
 		"datePublished" : "2026-07-17T14:00:00+10:00",
-		"dateModified" : "2026-07-17T13:53:48+10:00"
+		"dateModified" : "2026-07-17T14:13:56+10:00"
 	}
 	</script>
 </head>
@@ -178,12 +178,11 @@ is: disables the system iFit apps using adb and then installs a bunch of
 Android Package Kits (APKs) which the author of the script wanted to have on
 their device (like Chrome, Hulu, etc.).  I think, the most important part the
 script is doing can be summarised as follows:</p>
-<pre class="highlight"><input type="radio" name="code_menu9588b794cfb92f77f349fb8c44da68a447ad8f54" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu9588b794cfb92f77f349fb8c44da68a447ad8f54" class="line-numbers icon list-numbered"><code><div class="line"><a></a><span class="w">    </span><span class="o">::</span><span class="p">:</span><span class="nx">bash</span>
-</div><div class="line"><a></a><span class="nx">adb</span><span class="w"> </span><span class="nx">shell</span><span class="w"> </span><span class="nx">pm</span><span class="w"> </span><span class="nx">disable</span><span class="o">-</span><span class="nx">user</span><span class="w"> </span><span class="o">--</span><span class="nx">user</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="nx">com</span><span class="p">.</span><span class="nx">ifit</span><span class="p">.</span><span class="nx">eru</span>
-</div><div class="line"><a></a><span class="nx">adb</span><span class="w"> </span><span class="nx">shell</span><span class="w"> </span><span class="nx">pm</span><span class="w"> </span><span class="nx">disable</span><span class="o">-</span><span class="nx">user</span><span class="w"> </span><span class="o">--</span><span class="nx">user</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="nx">com</span><span class="p">.</span><span class="nx">ifit</span><span class="p">.</span><span class="nx">launcher</span>
-</div><div class="line"><a></a><span class="nx">adb</span><span class="w"> </span><span class="nx">shell</span><span class="w"> </span><span class="nx">pm</span><span class="w"> </span><span class="nx">disable</span><span class="o">-</span><span class="nx">user</span><span class="w"> </span><span class="o">--</span><span class="nx">user</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="nx">com</span><span class="p">.</span><span class="nx">ifit</span><span class="p">.</span><span class="nx">standalone</span>
-</div><div class="line"><a></a><span class="o">...</span>
-</div><div class="line"><a></a><span class="nx">adb</span><span class="w"> </span><span class="nx">shell</span><span class="w"> </span><span class="nx">cmd</span><span class="w"> </span><span class="kn">package</span><span class="w"> </span><span class="nx">set</span><span class="o">-</span><span class="nx">home</span><span class="o">-</span><span class="nx">activity</span><span class="w"> </span><span class="nx">com</span><span class="p">.</span><span class="nx">teslacoilsw</span><span class="p">.</span><span class="nx">launcher</span><span class="o">/</span><span class="nx">com</span><span class="p">.</span><span class="nx">teslacoilsw</span><span class="p">.</span><span class="nx">launcher</span><span class="p">.</span><span class="nx">NovaLauncher</span></div></code></pre>
+<pre class="highlight"><input type="radio" name="code_menu4c345109ff4fedfe3d8e1147648cec52fb6ea21a" class="no-line-numbers icon list-numbered"><input type="radio" name="code_menu4c345109ff4fedfe3d8e1147648cec52fb6ea21a" class="line-numbers icon list-numbered"><code class="language-bash"><div class="line"><a></a>adb<span class="w"> </span>shell<span class="w"> </span>pm<span class="w"> </span>disable-user<span class="w"> </span>--user<span class="w"> </span><span class="m">0</span><span class="w"> </span>com.ifit.eru
+</div><div class="line"><a></a>adb<span class="w"> </span>shell<span class="w"> </span>pm<span class="w"> </span>disable-user<span class="w"> </span>--user<span class="w"> </span><span class="m">0</span><span class="w"> </span>com.ifit.launcher
+</div><div class="line"><a></a>adb<span class="w"> </span>shell<span class="w"> </span>pm<span class="w"> </span>disable-user<span class="w"> </span>--user<span class="w"> </span><span class="m">0</span><span class="w"> </span>com.ifit.standalone
+</div><div class="line"><a></a>...
+</div><div class="line"><a></a>adb<span class="w"> </span>shell<span class="w"> </span>cmd<span class="w"> </span>package<span class="w"> </span>set-home-activity<span class="w"> </span>com.teslacoilsw.launcher/com.teslacoilsw.launcher.NovaLauncher</div></code></pre>
 <p>So, the first three lines disable the system provided iFit apps, then a bunch
 of APKs (including iFit) are installed as a user.  One of the APKs is for the
 alternative launcher (Nova Launcher in this case) so the last line above is

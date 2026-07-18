@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<title>Mind Drops :: Should we use "sudo" for day-to-day activities?</title>
-	<meta name="description" content="This article challenges the common belief that using sudo for daily administrative tasks is more secure than directly logging in as a privileged user via SSH. The author argues that the practice of using sudo is a holdover from the pre-SSH era of insecure networks and that with modern key-based SSH authentication, its security benefits are largely misconceptions. A significant risk highlighted is that sudo expands the attack surface; if a user’s non-privileged account is compromised by malware (like a keylogger), the attacker can capture the user’s password during a sudo operation and gain full administrative access. The author contends that a more secure approach is to use separate, dedicated privileged accounts for administrative tasks, accessed directly via SSH from trusted machines, thereby enforcing a stronger separation of privileges and minimizing the risk of privilege escalation from a compromised user account." />
+	<meta name="description" content="This article challenges the common belief that using sudo for daily administrative tasks is more secure than directly logging in as a privileged user via SSH." />
 	<meta http-equiv="Content-Security-Policy" content="	default-src 'self';object-src 'none';script-src 'self' https://www.googletagmanager.com/gtag/js 'sha256-TelA7VsuYAMqhOKGk7CHgJyuqSJdmqZEp+hn6PWVRwQ=' https://www.google-analytics.com/analytics.js https://static.cloudflareinsights.com/beacon.min.js;img-src 'self' data: https://www.google-analytics.com/r/collect https://www.google-analytics.com/collect https://stats.g.doubleclick.net/r/collect https://*/ads/ga-audiences https://www.googletagmanager.com/a;style-src 'self' 'sha256-fszvBX/J9dhPxFSJ5wUrq/Pvg6HrnTkWyshMZpaxSQY=';connect-src 'self' https://www.google-analytics.com/j/collect https://stats.g.doubleclick.net/j/collect; " />
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1" />
@@ -26,7 +26,7 @@
 		}],
 		"headline" : "Should we use &#34;sudo&#34; for day-to-day activities?",
 		"datePublished" : "2015-07-18T20:04:00+10:00",
-		"dateModified" : "2025-10-18T02:45:38+11:00"
+		"dateModified" : "2026-07-19T06:11:02+10:00"
 	}
 	</script>
 </head>
